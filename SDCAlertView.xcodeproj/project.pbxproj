@@ -21,6 +21,7 @@
 		D25B3CC917ECE7A6004B32A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CAB17ECE7A6004B32A2 /* UIKit.framework */; };
 		D25B3CD117ECE7A6004B32A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D25B3CCF17ECE7A6004B32A2 /* InfoPlist.strings */; };
 		D25B3CD317ECE7A6004B32A2 /* SDCAlertViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B3CD217ECE7A6004B32A2 /* SDCAlertViewTests.m */; };
+		D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		D25B3CCE17ECE7A6004B32A2 /* SDCAlertViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SDCAlertViewTests-Info.plist"; sourceTree = "<group>"; };
 		D25B3CD017ECE7A6004B32A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D25B3CD217ECE7A6004B32A2 /* SDCAlertViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewTests.m; sourceTree = "<group>"; };
+		D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertView.h; sourceTree = "<group>"; };
+		D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,8 @@
 		D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
+				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
 				D25B3CB617ECE7A6004B32A2 /* SDCAppDelegate.h */,
 				D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */,
 				D25B3CB917ECE7A6004B32A2 /* Main.storyboard */,
@@ -252,6 +257,7 @@
 			files = (
 				D25B3CBE17ECE7A6004B32A2 /* SDCViewController.m in Sources */,
 				D25B3CB417ECE7A6004B32A2 /* main.m in Sources */,
+				D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */,
 				D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
