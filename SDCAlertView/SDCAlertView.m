@@ -90,6 +90,11 @@
 		_otherButtonTitles = buttonTitles;
 		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
+		self.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+		self.layer.masksToBounds = YES;
+		self.layer.cornerRadius = 7;
+		self.layer.borderColor = [[UIColor colorWithRed:190/255.0 green:190/255.0 blue:190/255.0 alpha:1] CGColor];
+		self.layer.borderWidth = 0.5;
 	}
 	
 	return self;
@@ -134,11 +139,13 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	cell.backgroundColor = [UIColor clearColor];
+	cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
+	cell.textLabel.textColor = [UIColor colorWithRed:16/255.0 green:144/255.0 blue:248/255.0 alpha:1];
+	cell.textLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-	cell.textLabel.textAlignment = NSTextAlignmentCenter;
 	cell.textLabel.text = self.otherButtonTitles[indexPath.row];
 	return cell;
 }
