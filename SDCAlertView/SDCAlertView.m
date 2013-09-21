@@ -185,7 +185,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (tableView == self.mainTableView)
+	if ((tableView == self.mainTableView && [self numberOfTableViewsToDisplay] == 2) ||
+		(tableView == self.mainTableView && [self numberOfTableViewsToDisplay] == 1 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1))
 		cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
 	else
 		cell.textLabel.font = [UIFont systemFontOfSize:17];
