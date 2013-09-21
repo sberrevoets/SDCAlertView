@@ -170,10 +170,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (tableView == self.mainTableView)
-		return [self.otherButtonTitles count];
-	else
+	if (tableView == self.mainTableView) {
+		if ([self numberOfTableViewsToDisplay] == 1) {
+			if (self.cancelButtonTitle)
+				return [self.otherButtonTitles count] + 1;
+			else
+				return [self.otherButtonTitles count];
+		} else {
+			return [self.otherButtonTitles count];
+		}
+	} else {
 		return 1;
+	}
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -190,10 +198,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 	
-	if (tableView == self.mainTableView)
-		cell.textLabel.text = self.otherButtonTitles[indexPath.row];
-	else
+	if (tableView == self.mainTableView) {
+		if ([self numberOfTableViewsToDisplay] == 1) {
+			if (indexPath.row < [tableView numberOfRowsInSection:indexPath.section] - 1)
+				cell.textLabel.text = self.otherButtonTitles[indexPath.row];
+			else
+				cell.textLabel.text = self.cancelButtonTitle;
+		} else {
+			cell.textLabel.text = self.otherButtonTitles[indexPath.row];
+		}
+	} else {
 		cell.textLabel.text = self.cancelButtonTitle;
+	}
 	
 	return cell;
 }
