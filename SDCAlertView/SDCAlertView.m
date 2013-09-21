@@ -11,6 +11,7 @@
 @interface SDCAlertView () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *message;
+@property (nonatomic, strong) NSArray *otherButtonTitles;
 
 @property (nonatomic, strong) UIScrollView *contentScrollView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -72,12 +73,23 @@
 					  message:(NSString *)message
 					 delegate:(id)delegate
 			cancelButtonTitle:(NSString *)cancelButtonTitle
-			otherButtonTitles:(NSString *)otherButtonTitles {
+			otherButtonTitles:(NSString *)otherButtonTitles, ... {
 	self = [super init];
 	
 	if (self) {
 		_title = title;
 		_message = message;
+		
+		NSMutableArray *buttonTitles = [NSMutableArray array];
+		
+		va_list argumentList;
+		va_start(argumentList, otherButtonTitles);
+		for (NSString *buttonTitle = otherButtonTitles; buttonTitle != nil; buttonTitle = va_arg(argumentList, NSString *))
+			[buttonTitles addObject:buttonTitle];
+		
+		_otherButtonTitles = buttonTitles;
+		
+		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
 	
 	return self;
@@ -127,7 +139,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
-	cell.textLabel.text = @"Button";
+	cell.textLabel.text = self.otherButtonTitles[indexPath.row];
 	return cell;
 }
 
