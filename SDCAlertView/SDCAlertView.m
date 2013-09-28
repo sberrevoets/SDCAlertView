@@ -8,6 +8,15 @@
 
 #import "SDCAlertView.h"
 
+static CGFloat SDCAlertViewWidth = 270;
+static UIEdgeInsets SDCAlertViewContentPadding = {20, 15, 20, 15};
+static CGFloat SDCAlertViewLabelSpacing = 4;
+static CGFloat SDCAlertViewSeparatorThickness = 1;
+
+CGFloat SDCAlertViewGetSeparatorThickness() {
+	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];
+}
+
 @interface SDCAlertView () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *message;
@@ -35,6 +44,8 @@
 			label.text = self.title;
 			label.font = [UIFont boldSystemFontOfSize:17];
 			label.textAlignment = NSTextAlignmentCenter;
+			label.numberOfLines = 0;
+			label.preferredMaxLayoutWidth = SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right;
 			label;
 		});
 	}
@@ -50,6 +61,8 @@
 			label.text = self.message;
 			label.font = [UIFont systemFontOfSize:14];
 			label.textAlignment = NSTextAlignmentCenter;
+			label.numberOfLines = 0;
+			label.preferredMaxLayoutWidth = SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right;
 			label;
 		});
 	}
@@ -128,7 +141,7 @@
 		self.layer.masksToBounds = YES;
 		self.layer.cornerRadius = 7;
 		self.layer.borderColor = [[UIColor colorWithRed:190/255.0 green:190/255.0 blue:190/255.0 alpha:1] CGColor];
-		self.layer.borderWidth = 0.5;
+		self.layer.borderWidth = SDCAlertViewGetSeparatorThickness();
 	}
 	
 	return self;
@@ -150,7 +163,7 @@
 	
 	[self addSubview:self.buttonTopSeparatorView];
 	
-	[self.buttonTopSeparatorView addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonTopSeparatorView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0.5]];
+	[self.buttonTopSeparatorView addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonTopSeparatorView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:SDCAlertViewGetSeparatorThickness()]];
 	[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonTopSeparatorView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
 	
 	[[[UIApplication sharedApplication] keyWindow] addSubview:self];
@@ -232,14 +245,25 @@
 
 - (void)positionLabels {
 	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:-30]];
+	 [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:-(SDCAlertViewContentPadding.left + SDCAlertViewContentPadding.right)]];
 	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.messageLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:-30]];
+	 [NSLayoutConstraint constraintWithItem:self.messageLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:-(SDCAlertViewContentPadding.left + SDCAlertViewContentPadding.right)]];
 	
 	NSDictionary *mapping = @{@"titleLabel": self.titleLabel, @"messageLabel": self.messageLabel};
-	[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[titleLabel]-15-|" options:0 metrics:nil views:mapping]];
-	[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[messageLabel]-15-|" options:0 metrics:nil views:mapping]];
-	[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[titleLabel]-4-[messageLabel]|" options:0 metrics:nil views:mapping]];
+	NSDictionary *metrics = @{@"leftPadding": @(SDCAlertViewContentPadding.left), @"rightPadding": @(SDCAlertViewContentPadding.right), @"labelSpacing": @(SDCAlertViewLabelSpacing)};
+	
+	[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==leftPadding)-[titleLabel]-(==rightPadding)-|"
+																				   options:0
+																				   metrics:metrics
+																					 views:mapping]];
+	[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==leftPadding)-[messageLabel]-(==rightPadding)-|"
+																				   options:0
+																				   metrics:metrics
+																					 views:mapping]];
+	[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[titleLabel]-(==labelSpacing)-[messageLabel]|"
+																				   options:0
+																				   metrics:metrics
+																					 views:mapping]];
 }
 
 - (void)positionTableViews {
@@ -250,12 +274,17 @@
 		
 		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
 		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0.5]];
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:SDCAlertViewGetSeparatorThickness()]];
 	}
 }
 
 - (void)positionAlertElements {
-	[self.contentScrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentScrollView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.titleLabel attribute:NSLayoutAttributeHeight multiplier:1 constant:66-21]];
+	CGFloat titleLabelHeight = [self.titleLabel intrinsicContentSize].height;
+	CGFloat messageLabelHeight = [self.messageLabel intrinsicContentSize].height;
+	CGFloat scrollViewHeight = SDCAlertViewContentPadding.top + titleLabelHeight + SDCAlertViewLabelSpacing + messageLabelHeight + SDCAlertViewContentPadding.bottom;
+	CGFloat trueHeight = MIN(scrollViewHeight, CGRectGetHeight(self.superview.bounds) - self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0] - SDCAlertViewContentPadding.bottom - SDCAlertViewGetSeparatorThickness());
+	
+	[self.contentScrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentScrollView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:trueHeight]];
 	
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[scrollView]|" options:0 metrics:nil views:@{@"scrollView": self.contentScrollView}]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[buttonTopSeparatorView]|" options:0 metrics:nil views:@{@"buttonTopSeparatorView": self.buttonTopSeparatorView}]];
@@ -263,15 +292,16 @@
 	if ([self numberOfTableViewsToDisplay] == 2) {
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[secondaryTableView(==half)][mainTableView(==half)]|" options:0 metrics:@{@"half": @(270/2)} views:@{@"mainTableView": self.mainTableView, @"secondaryTableView": self.secondaryTableView}]];
 		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
-	}
-	else
+	} else {
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[mainTableView]|" options:0 metrics:nil views:@{@"mainTableView": self.mainTableView}]];
+	}
 	
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[scrollView]-[buttonTopSeparatorView][mainTableView]|" options:0 metrics:nil views:@{@"scrollView": self.contentScrollView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView}]];
 }
 
 - (void)positionSelf {
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:270]];
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:SDCAlertViewWidth]];
+	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
 	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
 	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
 }
