@@ -10,6 +10,8 @@
 
 @interface SDCAlertView : UIView
 
+@property (nonatomic, strong) UIView *contentView;
+
 - (instancetype)initWithTitle:(NSString *)title
 					  message:(NSString *)message
 					 delegate:(id)delegate

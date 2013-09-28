@@ -75,6 +75,12 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	return _messageLabel;
 }
 
+- (UIView *)contentView {
+	if (!_contentView)
+		_contentView = [[UIView alloc] init];
+	return _contentView;
+}
+
 - (UIView *)separatorView {
 	UIView *separatorView = [[UIView alloc] init];
 	separatorView.backgroundColor = [UIColor colorWithRed:189/255.0 green:189/255.0 blue:189/255.0 alpha:1];
