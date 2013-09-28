@@ -9,12 +9,17 @@
 #import "SDCAlertView.h"
 
 static CGFloat SDCAlertViewWidth = 270;
-static UIEdgeInsets SDCAlertViewContentPadding = {20, 15, 20, 15};
 static CGFloat SDCAlertViewLabelSpacing = 4;
 static CGFloat SDCAlertViewSeparatorThickness = 1;
 
-CGFloat SDCAlertViewGetSeparatorThickness() {
+static UIEdgeInsets SDCAlertViewContentPadding = {20, 15, 20, 15};
+
+static CGFloat SDCAlertViewGetSeparatorThickness() {
 	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];
+}
+
+static UIColor *SDCAlertViewGetButtonTextColor() {
+	return [UIColor colorWithRed:16/255.0 green:144/255.0 blue:248/255.0 alpha:1];
 }
 
 @interface SDCAlertView () <UITableViewDelegate, UITableViewDataSource>
@@ -172,10 +177,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 #pragma mark - UITableView
 
 - (NSInteger)numberOfTableViewsToDisplay {
-	if ([self.otherButtonTitles count] == 1 && self.cancelButtonTitle)
-		return 2;
-	else
-		return 1;
+	return ([self.otherButtonTitles count] == 1 && self.cancelButtonTitle) ? 2 : 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -205,7 +207,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 		cell.textLabel.font = [UIFont systemFontOfSize:17];
 	
 	cell.backgroundColor = [UIColor clearColor];
-	cell.textLabel.textColor = [UIColor colorWithRed:16/255.0 green:144/255.0 blue:248/255.0 alpha:1];
+	cell.textLabel.textColor = SDCAlertViewGetButtonTextColor();
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
 }
 
@@ -290,7 +292,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[buttonTopSeparatorView]|" options:0 metrics:nil views:@{@"buttonTopSeparatorView": self.buttonTopSeparatorView}]];
 	
 	if ([self numberOfTableViewsToDisplay] == 2) {
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[secondaryTableView(==half)][mainTableView(==half)]|" options:0 metrics:@{@"half": @(270/2)} views:@{@"mainTableView": self.mainTableView, @"secondaryTableView": self.secondaryTableView}]];
+		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[secondaryTableView(==half)][mainTableView(==half)]|" options:0 metrics:@{@"half": @(SDCAlertViewWidth / 2)} views:@{@"mainTableView": self.mainTableView, @"secondaryTableView": self.secondaryTableView}]];
 		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
 	} else {
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[mainTableView]|" options:0 metrics:nil views:@{@"mainTableView": self.mainTableView}]];
