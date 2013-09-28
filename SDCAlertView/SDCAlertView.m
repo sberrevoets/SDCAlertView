@@ -246,11 +246,6 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 }
 
 - (void)positionLabels {
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:-(SDCAlertViewContentPadding.left + SDCAlertViewContentPadding.right)]];
-	[self addConstraint:
-	 [NSLayoutConstraint constraintWithItem:self.messageLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:-(SDCAlertViewContentPadding.left + SDCAlertViewContentPadding.right)]];
-	
 	NSDictionary *mapping = @{@"titleLabel": self.titleLabel, @"messageLabel": self.messageLabel};
 	NSDictionary *metrics = @{@"leftPadding": @(SDCAlertViewContentPadding.left), @"rightPadding": @(SDCAlertViewContentPadding.right), @"labelSpacing": @(SDCAlertViewLabelSpacing)};
 	
@@ -270,6 +265,7 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 
 - (void)positionTableViews {
 	[self.mainTableView addConstraint:[NSLayoutConstraint constraintWithItem:self.mainTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0]]];
+	
 	if ([self numberOfTableViewsToDisplay] == 2) {
 		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.secondaryTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
 		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.secondaryTableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
@@ -280,13 +276,16 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	}
 }
 
-- (void)positionAlertElements {
+- (CGFloat)heightForContentScrollView {
 	CGFloat titleLabelHeight = [self.titleLabel intrinsicContentSize].height;
 	CGFloat messageLabelHeight = [self.messageLabel intrinsicContentSize].height;
 	CGFloat scrollViewHeight = SDCAlertViewContentPadding.top + titleLabelHeight + SDCAlertViewLabelSpacing + messageLabelHeight + SDCAlertViewContentPadding.bottom;
-	CGFloat trueHeight = MIN(scrollViewHeight, CGRectGetHeight(self.superview.bounds) - self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0] - SDCAlertViewContentPadding.bottom - SDCAlertViewGetSeparatorThickness());
-	
-	[self.contentScrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentScrollView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:trueHeight]];
+	return MIN(scrollViewHeight, CGRectGetHeight(self.superview.bounds) - self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0] - SDCAlertViewContentPadding.bottom - SDCAlertViewGetSeparatorThickness());
+}
+
+- (void)positionAlertElements {
+	CGFloat scrollViewHeight = [self heightForContentScrollView];
+	[self.contentScrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentScrollView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:scrollViewHeight]];
 	
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[scrollView]|" options:0 metrics:nil views:@{@"scrollView": self.contentScrollView}]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[buttonTopSeparatorView]|" options:0 metrics:nil views:@{@"buttonTopSeparatorView": self.buttonTopSeparatorView}]];
