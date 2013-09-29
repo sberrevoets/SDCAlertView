@@ -81,6 +81,14 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	return _contentView;
 }
 
+- (UIScrollView *)contentScrollView {
+	if (!_contentScrollView) {
+		_contentScrollView = [[UIScrollView alloc] init];
+		[_contentScrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	}
+	return _contentScrollView;
+}
+
 - (UIView *)separatorView {
 	UIView *separatorView = [[UIView alloc] init];
 	separatorView.backgroundColor = [UIColor colorWithRed:189/255.0 green:189/255.0 blue:189/255.0 alpha:1];
@@ -179,8 +187,6 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 }
 
 - (void)show {
-	self.contentScrollView = [[UIScrollView alloc] init];
-	[self.contentScrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
 	if ([elements containsObject:self.titleLabel])			[self.contentScrollView addSubview:self.titleLabel];
