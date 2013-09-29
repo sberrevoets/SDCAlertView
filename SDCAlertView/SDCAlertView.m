@@ -181,7 +181,7 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 		[elements addObject:self.buttonTopSeparatorView];
 	}
 	
-	if ([self.otherButtonTitles count] == 0 && self.cancelButtonTitle) {
+	if ([self.otherButtonTitles count] == 1 && self.cancelButtonTitle) {
 		[elements addObject:self.secondaryTableView];
 		[elements addObject:self.buttonSeparatorView];
 	}
@@ -232,8 +232,8 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSArray *elements = [self alertViewElementsToDisplay];
-	if ((tableView == self.mainTableView && [elements containsObject:self.secondaryTableView] == 2) ||
-		(tableView == self.mainTableView && ![elements containsObject:self.secondaryTableView] == 1 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1))
+	if ((tableView == self.mainTableView && [elements containsObject:self.secondaryTableView]) ||
+		(tableView == self.mainTableView && ![elements containsObject:self.secondaryTableView] && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1))
 		cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
 	else
 		cell.textLabel.font = [UIFont systemFontOfSize:17];
@@ -348,11 +348,11 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	}
 	
 	if ([elements containsObject:self.mainTableView]) {
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[mainTableView]|" options:0 metrics:nil views:@{@"mainTableView": self.mainTableView}]];
-		
 		if ([elements containsObject:self.secondaryTableView]) {
 			[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[secondaryTableView(==half)][mainTableView(==half)]|" options:0 metrics:@{@"half": @(SDCAlertViewWidth / 2)} views:@{@"mainTableView": self.mainTableView, @"secondaryTableView": self.secondaryTableView}]];
 			[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
+		} else {
+			[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[mainTableView]|" options:0 metrics:nil views:@{@"mainTableView": self.mainTableView}]];
 		}
 		
 		[verticalVFL appendString:@"-[buttonTopSeparatorView][mainTableView]"];
