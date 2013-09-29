@@ -12,7 +12,7 @@ static CGFloat SDCAlertViewWidth = 270;
 static CGFloat SDCAlertViewLabelSpacing = 4;
 static CGFloat SDCAlertViewSeparatorThickness = 1;
 
-static UIEdgeInsets SDCAlertViewContentPadding = {20, 15, 20, 15};
+static UIEdgeInsets SDCAlertViewContentPadding = {19, 15, 18.5, 15};
 
 static CGFloat SDCAlertViewGetSeparatorThickness() {
 	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];
@@ -282,14 +282,14 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 
 - (void)positionContentScrollView {
 	NSDictionary *mapping = @{@"titleLabel": self.titleLabel, @"messageLabel": self.messageLabel, @"contentView": self.contentView};
-	NSDictionary *metrics = @{@"leftPadding": @(SDCAlertViewContentPadding.left), @"labelWidth": @(SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right), @"rightPadding": @(SDCAlertViewContentPadding.right), @"labelSpacing": @(SDCAlertViewLabelSpacing)};
+	NSDictionary *metrics = @{@"leftPadding": @(SDCAlertViewContentPadding.left), @"labelWidth": @(SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right), @"topPadding": @(SDCAlertViewContentPadding.top), @"rightPadding": @(SDCAlertViewContentPadding.right), @"labelSpacing": @(SDCAlertViewLabelSpacing)};
 	
 	NSMutableString *verticalVFL = [@"V:|" mutableCopy];
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
 	if ([elements containsObject:self.titleLabel]) {
 		[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==leftPadding)-[titleLabel(==labelWidth)]-(==rightPadding)-|" options:0 metrics:metrics views:mapping]];
-		[verticalVFL appendString:@"-[titleLabel]"];
+		[verticalVFL appendString:@"-(==topPadding)-[titleLabel]"];
 	}
 	
 	if ([elements containsObject:self.messageLabel]) {
@@ -329,7 +329,7 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	CGFloat titleLabelHeight = [self.titleLabel intrinsicContentSize].height;
 	CGFloat messageLabelHeight = [self.messageLabel intrinsicContentSize].height;
 	CGFloat contentViewHeight = [self.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-	CGFloat scrollViewHeight = SDCAlertViewContentPadding.top + titleLabelHeight + SDCAlertViewLabelSpacing + messageLabelHeight + contentViewHeight + SDCAlertViewContentPadding.bottom;
+	CGFloat scrollViewHeight = SDCAlertViewContentPadding.top + titleLabelHeight + SDCAlertViewLabelSpacing + messageLabelHeight + contentViewHeight;
 	return MIN(scrollViewHeight, CGRectGetHeight(self.superview.bounds) - self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0] - SDCAlertViewContentPadding.bottom - SDCAlertViewGetSeparatorThickness());
 }
 
@@ -355,12 +355,12 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 			[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[mainTableView]|" options:0 metrics:nil views:@{@"mainTableView": self.mainTableView}]];
 		}
 		
-		[verticalVFL appendString:@"-[buttonTopSeparatorView][mainTableView]"];
+		[verticalVFL appendString:@"-(==bottomSpacing)-[buttonTopSeparatorView][mainTableView]"];
 	}
 	
 	[verticalVFL appendString:@"|"];
 	
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:nil views:@{@"scrollView": self.contentScrollView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView}]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:@{@"bottomSpacing": @(SDCAlertViewContentPadding.bottom)} views:@{@"scrollView": self.contentScrollView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView}]];
 }
 
 - (void)positionSelf {
