@@ -17,6 +17,7 @@ static CGFloat SDCAlertViewLabelSpacing = 4;
 
 static UIEdgeInsets SDCAlertViewTextFieldBackgroundViewPadding = {22, 15, 0, 15};
 static UIEdgeInsets SDCAlertViewTextFieldBackgroundViewInsets = {0, 2, 0, 2};
+static UIEdgeInsets SDCAlertViewTextFieldTextInsets = {0, 4, 0, 4};
 static CGFloat SDCAlertViewPrimaryTextFieldHeight = 30;
 static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 
@@ -27,6 +28,10 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 static UIColor *SDCAlertViewGetButtonTextColor() {
 	return [UIColor colorWithRed:16/255.0 green:144/255.0 blue:248/255.0 alpha:1];
 }
+
+@interface SDCAlertViewTextField : UITextField
+@property (nonatomic) UIEdgeInsets textInsets;
+@end
 
 @interface SDCAlertView () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSString *title;
@@ -39,9 +44,9 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 @property (nonatomic, strong) UILabel *messageLabel;
 
 @property (nonatomic, strong) UIView *textFieldBackgroundView;
-@property (nonatomic, strong) UITextField *primaryTextField;
+@property (nonatomic, strong) SDCAlertViewTextField *primaryTextField;
 @property (nonatomic, strong) UIView *textFieldSeparatorView;
-@property (nonatomic, strong) UITextField *secondaryTextField;
+@property (nonatomic, strong) SDCAlertViewTextField *secondaryTextField;
 
 @property (nonatomic, strong) UIView *buttonTopSeparatorView;
 @property (nonatomic, strong) UIView *buttonSeparatorView;
@@ -120,22 +125,24 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	return _textFieldBackgroundView;
 }
 
-- (UITextField *)primaryTextField {
+- (SDCAlertViewTextField *)primaryTextField {
 	if (!_primaryTextField) {
-		_primaryTextField = [[UITextField alloc] init];
+		_primaryTextField = [[SDCAlertViewTextField alloc] init];
 		[_primaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
 		_primaryTextField.font = [UIFont systemFontOfSize:13];
+		_primaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
 		_primaryTextField.secureTextEntry = self.alertViewStyle == SDCAlertViewStyleSecureTextInput;
 	}
 	
 	return _primaryTextField;
 }
 
-- (UITextField *)secondaryTextField {
+- (SDCAlertViewTextField *)secondaryTextField {
 	if (!_secondaryTextField) {
-		_secondaryTextField = [[UITextField alloc] init];
+		_secondaryTextField = [[SDCAlertViewTextField alloc] init];
 		[_secondaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
 		_secondaryTextField.font = [UIFont systemFontOfSize:13];
+		_secondaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
 		_secondaryTextField.secureTextEntry = YES;
 	}
 	
@@ -471,6 +478,18 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
 	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
 	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+}
+
+@end
+
+@implementation SDCAlertViewTextField
+
+- (CGRect)textRectForBounds:(CGRect)bounds {
+	return [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, self.textInsets)];
+}
+
+- (CGRect)editingRectForBounds:(CGRect)bounds {
+	return [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, self.textInsets)];
 }
 
 @end
