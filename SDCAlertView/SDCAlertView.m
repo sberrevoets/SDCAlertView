@@ -9,10 +9,16 @@
 #import "SDCAlertView.h"
 
 static CGFloat SDCAlertViewWidth = 270;
-static CGFloat SDCAlertViewLabelSpacing = 4;
 static CGFloat SDCAlertViewSeparatorThickness = 1;
 
 static UIEdgeInsets SDCAlertViewContentPadding = {19, 15, 18.5, 15};
+
+static CGFloat SDCAlertViewLabelSpacing = 4;
+
+static UIEdgeInsets SDCAlertViewTextFieldBackgroundViewPadding = {22, 15, 0, 15};
+static UIEdgeInsets SDCAlertViewTextFieldBackgroundViewInsets = {0, 2, 0, 2};
+static CGFloat SDCAlertViewPrimaryTextFieldHeight = 30;
+static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 
 static CGFloat SDCAlertViewGetSeparatorThickness() {
 	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];
@@ -31,6 +37,12 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 @property (nonatomic, strong) UIScrollView *contentScrollView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
+
+@property (nonatomic, strong) UIView *textFieldBackgroundView;
+@property (nonatomic, strong) UITextField *primaryTextField;
+@property (nonatomic, strong) UIView *textFieldSeparatorView;
+@property (nonatomic, strong) UITextField *secondaryTextField;
+
 @property (nonatomic, strong) UIView *buttonTopSeparatorView;
 @property (nonatomic, strong) UIView *buttonSeparatorView;
 @property (nonatomic, strong) UITableView *mainTableView;
@@ -89,6 +101,51 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 		[_contentScrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
 	return _contentScrollView;
+}
+
+- (UIView *)textFieldBackgroundView {
+	if (!_textFieldBackgroundView) {
+		_textFieldBackgroundView = ({
+			UIView *view = [[UIView alloc] init];
+			[view setTranslatesAutoresizingMaskIntoConstraints:NO];
+			view.backgroundColor = [UIColor whiteColor];
+			view.layer.borderColor = [[UIColor colorWithWhite:0.5 alpha:0.5] CGColor];
+			view.layer.borderWidth = SDCAlertViewGetSeparatorThickness();
+			view.layer.masksToBounds = YES;
+			view.layer.cornerRadius = 5;
+			view;
+		});
+	}
+	
+	return _textFieldBackgroundView;
+}
+
+- (UITextField *)primaryTextField {
+	if (!_primaryTextField) {
+		_primaryTextField = [[UITextField alloc] init];
+		[_primaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
+		_primaryTextField.font = [UIFont systemFontOfSize:13];
+		_primaryTextField.secureTextEntry = self.alertViewStyle == SDCAlertViewStyleSecureTextInput;
+	}
+	
+	return _primaryTextField;
+}
+
+- (UITextField *)secondaryTextField {
+	if (!_secondaryTextField) {
+		_secondaryTextField = [[UITextField alloc] init];
+		[_secondaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
+		_secondaryTextField.font = [UIFont systemFontOfSize:13];
+		_secondaryTextField.secureTextEntry = YES;
+	}
+	
+	return _secondaryTextField;
+}
+
+- (UIView *)textFieldSeparatorView {
+	if (!_textFieldSeparatorView)
+		_textFieldSeparatorView = [self separatorView];
+	return _textFieldSeparatorView;
 }
 
 - (UIView *)separatorView {
@@ -171,10 +228,19 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 - (NSArray *)alertViewElementsToDisplay {
 	NSMutableArray *elements = [NSMutableArray array];
 	
-	if ([self.titleLabel.text length] > 0)			[elements addObject:self.titleLabel];
-	if ([self.messageLabel.text length] > 0)		[elements addObject:self.messageLabel];
-	if ([[self.contentView subviews] count] > 0)	[elements addObject:self.contentView];
-	if ([elements count] > 0)						[elements addObject:self.contentScrollView];
+	if ([self.titleLabel.text length] > 0)					[elements addObject:self.titleLabel];
+	if ([self.messageLabel.text length] > 0)				[elements addObject:self.messageLabel];
+	if ([[self.contentView subviews] count] > 0)			[elements addObject:self.contentView];
+	if ([elements count] > 0)								[elements addObject:self.contentScrollView];
+	
+	if (self.alertViewStyle != SDCAlertViewStyleDefault) {
+		[elements addObject:self.textFieldBackgroundView];
+		
+		if (self.alertViewStyle == SDCAlertViewStyleLoginAndPasswordInput) {
+			[elements addObject:self.textFieldSeparatorView];
+			[elements addObject:self.secondaryTextField];
+		}
+	}
 	
 	if ([self.otherButtonTitles count] > 0) {
 		[elements addObject:self.mainTableView];
@@ -196,6 +262,16 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	if ([elements containsObject:self.messageLabel])		[self.contentScrollView addSubview:self.messageLabel];
 	if ([elements containsObject:self.contentView])			[self.contentScrollView addSubview:self.contentView];
 	if ([elements containsObject:self.contentScrollView])	[self addSubview:self.contentScrollView];
+	
+	if ([elements containsObject:self.textFieldBackgroundView]) {
+		[self addSubview:self.textFieldBackgroundView];
+		[self.textFieldBackgroundView addSubview:self.primaryTextField];
+		
+		if (self.alertViewStyle == SDCAlertViewStyleLoginAndPasswordInput) {
+			[self.textFieldBackgroundView addSubview:self.textFieldSeparatorView];
+			[self.textFieldBackgroundView addSubview:self.secondaryTextField];
+		}
+	}
 	
 	if ([elements containsObject:self.mainTableView]) {
 		[self addSubview:self.mainTableView];
@@ -274,6 +350,7 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
 	if ([elements containsObject:self.contentScrollView])		[self positionContentScrollView];
+	if ([elements containsObject:self.textFieldBackgroundView])	[self positionTextFields];
 	if ([elements containsObject:self.mainTableView])			[self positionButtons];
 	
 	[self positionAlertElements];
@@ -304,6 +381,26 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 		
 	[verticalVFL appendString:@"|"];
 	[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:metrics views:mapping]];
+}
+
+- (void)positionTextFields {
+	NSDictionary *mapping = @{@"primaryTextField": self.primaryTextField, @"textFieldSeparator": self.textFieldSeparatorView, @"secondaryTextField": self.secondaryTextField};
+	NSDictionary *metrics = @{@"leftTextFieldSpace": @(SDCAlertViewTextFieldBackgroundViewInsets.left), @"rightTextFieldSpace": @(SDCAlertViewTextFieldBackgroundViewInsets.right), @"primaryTextFieldHeight": @(SDCAlertViewPrimaryTextFieldHeight), @"secondaryTextFieldHeight": @(SDCAlertViewSecondaryTextFieldHeight), @"separatorHeight": @(SDCAlertViewGetSeparatorThickness())};
+	
+	[self.textFieldBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==leftTextFieldSpace)-[primaryTextField]-(==rightTextFieldSpace)-|" options:0 metrics:metrics views:mapping]];
+	
+	NSMutableString *verticalVFL = [@"V:|[primaryTextField(==primaryTextFieldHeight)]" mutableCopy];
+	
+	if ([[self alertViewElementsToDisplay] containsObject:self.secondaryTextField]) {
+		[self.textFieldBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==leftTextFieldSpace)-[secondaryTextField]-(==rightTextFieldSpace)-|" options:0 metrics:metrics views:mapping]];
+		
+		[self.textFieldBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[textFieldSeparator]|" options:0 metrics:nil views:mapping]];
+		
+		[verticalVFL appendString:@"[textFieldSeparator(==separatorHeight)][secondaryTextField(==secondaryTextFieldHeight)]"];
+	}
+	
+	[verticalVFL appendString:@"|"];
+	[self.textFieldBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:metrics views:mapping]];
 }
 
 - (void)positionButtons {
@@ -347,6 +444,12 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 		[verticalVFL appendString:@"[scrollView]"];
 	}
 	
+	if ([elements containsObject:self.textFieldBackgroundView]) {
+		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(==leftPadding)-[textFieldBackgroundView(==textFieldWidth)]-(==rightPadding)-|" options:0 metrics:@{@"leftPadding": @(SDCAlertViewContentPadding.left), @"textFieldWidth": @(SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right), @"rightPadding": @(SDCAlertViewContentPadding.right)} views:@{@"textFieldBackgroundView": self.textFieldBackgroundView}]];
+		
+		[verticalVFL appendString:@"-(==textFieldBackgroundViewTopSpacing)-[textFieldBackgroundView]"];
+	}
+	
 	if ([elements containsObject:self.mainTableView]) {
 		if ([elements containsObject:self.secondaryTableView]) {
 			[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[secondaryTableView(==half)][mainTableView(==half)]|" options:0 metrics:@{@"half": @(SDCAlertViewWidth / 2)} views:@{@"mainTableView": self.mainTableView, @"secondaryTableView": self.secondaryTableView}]];
@@ -360,7 +463,7 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	
 	[verticalVFL appendString:@"|"];
 	
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:@{@"bottomSpacing": @(SDCAlertViewContentPadding.bottom)} views:@{@"scrollView": self.contentScrollView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView}]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:@{@"textFieldBackgroundViewTopSpacing": @(SDCAlertViewTextFieldBackgroundViewPadding.top), @"bottomSpacing": @(SDCAlertViewContentPadding.bottom - 4)} views:@{@"scrollView": self.contentScrollView, @"textFieldBackgroundView": self.textFieldBackgroundView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView}]];
 }
 
 - (void)positionSelf {

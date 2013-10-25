@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
+    SDCAlertViewStyleDefault = 0,
+    SDCAlertViewStyleSecureTextInput,
+    SDCAlertViewStylePlainTextInput,
+    SDCAlertViewStyleLoginAndPasswordInput
+};
+
 @interface SDCAlertView : UIView
 
+@property (nonatomic) SDCAlertViewStyle alertViewStyle;
 @property (nonatomic, strong) UIView *contentView;
 
 - (instancetype)initWithTitle:(NSString *)title
