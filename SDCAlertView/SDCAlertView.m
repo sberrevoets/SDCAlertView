@@ -132,6 +132,8 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 		_primaryTextField.font = [UIFont systemFontOfSize:13];
 		_primaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
 		_primaryTextField.secureTextEntry = self.alertViewStyle == SDCAlertViewStyleSecureTextInput;
+		
+		[_primaryTextField becomeFirstResponder];
 	}
 	
 	return _primaryTextField;
