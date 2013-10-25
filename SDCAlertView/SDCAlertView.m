@@ -274,9 +274,14 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 		[self addSubview:self.textFieldBackgroundView];
 		[self.textFieldBackgroundView addSubview:self.primaryTextField];
 		
+		
+		
 		if (self.alertViewStyle == SDCAlertViewStyleLoginAndPasswordInput) {
 			[self.textFieldBackgroundView addSubview:self.textFieldSeparatorView];
 			[self.textFieldBackgroundView addSubview:self.secondaryTextField];
+			
+			self.primaryTextField.placeholder = NSLocalizedString(@"Login", nil);
+			self.secondaryTextField.placeholder = NSLocalizedString(@"Password", nil);
 		}
 	}
 	
