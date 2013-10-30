@@ -29,6 +29,20 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	return [UIColor colorWithRed:16/255.0 green:144/255.0 blue:248/255.0 alpha:1];
 }
 
+@interface SDCAlertViewController : UIViewController
+
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) NSMutableArray *alertViews;
+
+- (instancetype)initWithWindow:(UIWindow *)window;
+- (void)addAlert:(SDCAlertView *)alert;
+
+@end
+
+@interface UIWindow (WindowLookup)
++ (UIWindow *)sdc_alertWindow;
+@end
+
 @interface SDCAlertViewTextField : UITextField
 @property (nonatomic) UIEdgeInsets textInsets;
 @end
@@ -276,8 +290,6 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 		[self addSubview:self.textFieldBackgroundView];
 		[self.textFieldBackgroundView addSubview:self.primaryTextField];
 		
-		
-		
 		if (self.alertViewStyle == SDCAlertViewStyleLoginAndPasswordInput) {
 			[self.textFieldBackgroundView addSubview:self.textFieldSeparatorView];
 			[self.textFieldBackgroundView addSubview:self.secondaryTextField];
@@ -297,8 +309,16 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 		[self insertSubview:self.buttonSeparatorView aboveSubview:self.secondaryTableView];
 	}
 	
-	[[[UIApplication sharedApplication] keyWindow] addSubview:self];
+	UIWindow *alertWindow = [UIWindow sdc_alertWindow];
+	if (!alertWindow) {
+		alertWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+		alertWindow.rootViewController = [[SDCAlertViewController alloc] initWithWindow:alertWindow];
+	}
+	
+	SDCAlertViewController *alertViewController = (SDCAlertViewController *)alertWindow.rootViewController;
+	[alertViewController addAlert:self];
 }
+
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -485,6 +505,46 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
 	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
 	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+}
+
+@end
+
+@implementation UIWindow (WindowLookup)
+
++ (UIWindow *)sdc_alertWindow {
+	NSArray *windows = [[UIApplication sharedApplication] windows];
+	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UIWindow *window, NSDictionary *bindings) {
+		return [window.rootViewController isKindOfClass:[SDCAlertViewController class]];
+	}];
+	
+	NSArray *alertWindows = [windows filteredArrayUsingPredicate:predicate];
+	NSAssert([alertWindows count] <= 1, @"At most one alert window should be active at any point");
+	
+	return [alertWindows firstObject];
+}
+
+@end
+
+@implementation SDCAlertViewController
+
+- (instancetype)initWithWindow:(UIWindow *)window {
+	self = [super init];
+	
+	if (self) {
+		_window = window;
+		_window.windowLevel = UIWindowLevelAlert;
+		_window.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
+		[self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+	}
+	
+	return self;
+}
+
+- (void)addAlert:(SDCAlertView *)alert {
+	[self.alertViews addObject:alert];
+	
+	[self.view addSubview:alert];
+	[self.window makeKeyAndVisible];
 }
 
 @end
