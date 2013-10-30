@@ -379,8 +379,6 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 #pragma mark - Auto-Layout
 
 - (void)updateConstraints {
-	[super updateConstraints];
-	
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
 	if ([elements containsObject:self.contentScrollView])		[self positionContentScrollView];
@@ -389,6 +387,8 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	
 	[self positionAlertElements];
 	[self positionSelf];
+	
+	[super updateConstraints];
 }
 
 - (void)positionContentScrollView {
