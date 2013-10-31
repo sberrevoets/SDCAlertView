@@ -35,7 +35,7 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 @property (nonatomic, strong) NSMutableArray *alertViews;
 
 - (instancetype)initWithWindow:(UIWindow *)window;
-- (void)addAlert:(SDCAlertView *)alert;
+- (void)showAlert:(SDCAlertView *)alert;
 
 @end
 
@@ -316,7 +316,7 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 	}
 	
 	SDCAlertViewController *alertViewController = (SDCAlertViewController *)alertWindow.rootViewController;
-	[alertViewController addAlert:self];
+	[alertViewController showAlert:self];
 }
 
 #pragma mark - UITableViewDelegate
@@ -530,21 +530,34 @@ static UIColor *SDCAlertViewGetButtonTextColor() {
 - (instancetype)initWithWindow:(UIWindow *)window {
 	self = [super init];
 	
-	if (self) {
-		_window = window;
-		_window.windowLevel = UIWindowLevelAlert;
-		_window.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
-		[self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
-	}
+	if (self)
+		[self initializeWindow:window];
 	
 	return self;
 }
 
-- (void)addAlert:(SDCAlertView *)alert {
+- (void)initializeWindow:(UIWindow *)window {
+	self.window = window;
+	window.windowLevel = UIWindowLevelAlert;
+	
+	UIView *rootView = [[UIView alloc] initWithFrame:window.bounds];
+	[window addSubview:rootView];
+	
+	UIView *backgroundColorView = [[UIView alloc] initWithFrame:rootView.bounds];
+	backgroundColorView.backgroundColor = [UIColor colorWithWhite:0 alpha:.4];
+	[rootView addSubview:backgroundColorView];
+}
+
+- (void)showAlert:(SDCAlertView *)alert {
 	[self.alertViews addObject:alert];
 	
+	[self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[self.view addSubview:alert];
-	[self.window makeKeyAndVisible];
+	
+	if ([[UIApplication sharedApplication] keyWindow] != self.window) {
+		[[[UIApplication sharedApplication] keyWindow] setTintAdjustmentMode:UIViewTintAdjustmentModeDimmed];
+		[self.window makeKeyAndVisible];
+	}
 }
 
 @end
