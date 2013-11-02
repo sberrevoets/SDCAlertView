@@ -10,6 +10,7 @@
 
 static CGFloat SDCAlertViewWidth = 270;
 static CGFloat SDCAlertViewSeparatorThickness = 1;
+static CGFloat SDCAlertViewCornerRadius = 7;
 
 static UIEdgeInsets SDCAlertViewContentPadding = {19, 15, 18.5, 15};
 
@@ -26,6 +27,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 }
 
 @interface UIColor (SDCAlertViewColors)
++ (UIColor *)sdc_alertBackgroundColor;
 + (UIColor *)buttonTextColor;
 + (UIColor *)separatorColor;
 @end
@@ -156,10 +158,10 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 		_otherButtonTitles = buttonTitles;
 		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
-		self.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+		self.backgroundColor = [UIColor sdc_alertBackgroundColor];
 		self.layer.masksToBounds = YES;
-		self.layer.cornerRadius = 7;
-		self.layer.borderColor = [[UIColor colorWithRed:190/255.0 green:190/255.0 blue:190/255.0 alpha:1] CGColor];
+		self.layer.cornerRadius = SDCAlertViewCornerRadius;
+		self.layer.borderColor = [[UIColor separatorColor] CGColor];
 		self.layer.borderWidth = SDCAlertViewGetSeparatorThickness();
 	}
 	
@@ -641,6 +643,10 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 @end
 
 @implementation UIColor (SDCAlertViewColors)
+
++ (UIColor *)sdc_alertBackgroundColor {
+	return [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1];
+}
 
 + (UIColor *)buttonTextColor {
 	return [UIColor colorWithRed:16/255.0 green:144/255.0 blue:248/255.0 alpha:1];
