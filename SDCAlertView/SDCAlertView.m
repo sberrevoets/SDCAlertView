@@ -45,6 +45,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 @interface SDCAlertViewController : UIViewController
 
 @property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) UIView *rootView;
 @property (nonatomic, strong) NSMutableArray *alertViews;
 
 - (instancetype)initWithWindow:(UIWindow *)window;
@@ -651,24 +652,29 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 	self.window = window;
 	window.windowLevel = UIWindowLevelAlert;
 	
-	UIView *rootView = [[UIView alloc] initWithFrame:window.bounds];
-	[window addSubview:rootView];
+	self.rootView = [[UIView alloc] initWithFrame:self.window.bounds];
+	[window addSubview:self.rootView];
 	
-	UIView *backgroundColorView = [[UIView alloc] initWithFrame:rootView.bounds];
+	UIView *backgroundColorView = [[UIView alloc] initWithFrame:self.rootView.bounds];
+	[backgroundColorView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	backgroundColorView.backgroundColor = [UIColor colorWithWhite:0 alpha:.4];
-	[rootView addSubview:backgroundColorView];
+	[self.rootView addSubview:backgroundColorView];
+	
+	NSDictionary *backgroundColorViewDictionary = @{@"backgroundColorView": backgroundColorView};
+	[self.rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[backgroundColorView]|" options:0 metrics:nil views:backgroundColorViewDictionary]];
+	[self.rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[backgroundColorView]|" options:0 metrics:nil views:backgroundColorViewDictionary]];
 }
 
 - (void)showAlert:(SDCAlertView *)alert {
 	[self.alertViews addObject:alert];
-	
-	[self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
-	[self.view addSubview:alert];
+	[self.rootView addSubview:alert];
 	
 	if ([[UIApplication sharedApplication] keyWindow] != self.window) {
 		[[[UIApplication sharedApplication] keyWindow] setTintAdjustmentMode:UIViewTintAdjustmentModeDimmed];
 		[self.window makeKeyAndVisible];
 	}
+	
+	[self.window bringSubviewToFront:self.rootView];
 }
 
 @end
