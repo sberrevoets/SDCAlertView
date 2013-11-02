@@ -44,12 +44,14 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 
 @interface SDCAlertViewController : UIViewController
 
+@property (nonatomic, strong) UIWindow *previousWindow;
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UIView *rootView;
-@property (nonatomic, strong) NSMutableArray *alertViews;
+@property (nonatomic, strong) NSMutableOrderedSet *alertViews;
 
-- (instancetype)initWithWindow:(UIWindow *)window;
+- (instancetype)initWithAlert:(SDCAlertView *)alert;
 - (void)showAlert:(SDCAlertView *)alert;
+- (void)removeAlert:(SDCAlertView *)alert;
 
 @end
 
@@ -108,6 +110,9 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 #pragma mark - SDCAlertView
 
 @interface SDCAlertView () <SDCAlertViewContentViewDataSource, SDCAlertViewContentViewDelegate>
+
+@property (nonatomic, strong) SDCAlertViewController *alertViewController;
+
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSString *cancelButtonTitle;
@@ -120,6 +125,12 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 @implementation SDCAlertView
 
 #pragma mark - Getters
+
+- (SDCAlertViewController *)alertViewController {
+	if (!_alertViewController)
+		_alertViewController = [[SDCAlertViewController alloc] initWithAlert:self];
+	return _alertViewController;
+}
 
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
 	if (!_alertBackgroundView) {
@@ -179,14 +190,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 
 
 - (void)show {
-	UIWindow *alertWindow = [UIWindow sdc_alertWindow];
-	if (!alertWindow) {
-		alertWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-		alertWindow.rootViewController = [[SDCAlertViewController alloc] initWithWindow:alertWindow];
-	}
-	
-	SDCAlertViewController *alertViewController = (SDCAlertViewController *)alertWindow.rootViewController;
-	[alertViewController showAlert:self];
+	[self.alertViewController showAlert:self];
 }
 
 #pragma mark - SDCAlertViewContentViewDataSource
@@ -227,12 +231,12 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index {
 	NSLog(@"Tapped %@", self.otherButtonTitles[index]);
-	[self removeFromSuperview];
+	[self.alertViewController removeAlert:self];
 }
 
 - (void)alertContentViewDidTapCancelButton:(SDCAlertViewContentView *)sender {
 	NSLog(@"Tapped cancel");
-	[self removeFromSuperview];
+	[self.alertViewController removeAlert:self];
 }
 
 #pragma mark - Auto-Layout
@@ -639,21 +643,32 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 
 @implementation SDCAlertViewController
 
-- (instancetype)initWithWindow:(UIWindow *)window {
+- (instancetype)initWithAlert:(SDCAlertView *)alert {
 	self = [super init];
 	
-	if (self)
-		[self initializeWindow:window];
+	if (self) {
+		_alertViews = [[NSMutableOrderedSet alloc] initWithObject:alert];
+		[self initializeWindow];
+	}
 	
 	return self;
 }
 
-- (void)initializeWindow:(UIWindow *)window {
-	self.window = window;
-	window.windowLevel = UIWindowLevelAlert;
+- (NSMutableOrderedSet *)alertViews {
+	if (!_alertViews)
+		_alertViews = [NSMutableOrderedSet orderedSet];
+	return _alertViews;
+}
+
+- (void)initializeWindow {
+	self.previousWindow = [[UIApplication sharedApplication] keyWindow];
+	
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	self.window.rootViewController = self;
+	self.window.windowLevel = UIWindowLevelAlert;
 	
 	self.rootView = [[UIView alloc] initWithFrame:self.window.bounds];
-	[window addSubview:self.rootView];
+	[self.window addSubview:self.rootView];
 	
 	UIView *backgroundColorView = [[UIView alloc] initWithFrame:self.rootView.bounds];
 	[backgroundColorView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -672,9 +687,20 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 	if ([[UIApplication sharedApplication] keyWindow] != self.window) {
 		[[[UIApplication sharedApplication] keyWindow] setTintAdjustmentMode:UIViewTintAdjustmentModeDimmed];
 		[self.window makeKeyAndVisible];
+		[self.window bringSubviewToFront:self.rootView];
 	}
+}
+
+- (void)removeAlert:(SDCAlertView *)alert {
+	[alert removeFromSuperview];
+	[self.alertViews removeObject:alert];
 	
-	[self.window bringSubviewToFront:self.rootView];
+	if ([self.alertViews count] == 0) {
+		self.window = nil;
+		
+		self.previousWindow.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
+		[self.previousWindow makeKeyAndVisible];
+	}
 }
 
 @end
