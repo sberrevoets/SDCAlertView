@@ -28,8 +28,8 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 
 @interface UIColor (SDCAlertViewColors)
 + (UIColor *)sdc_alertBackgroundColor;
-+ (UIColor *)buttonTextColor;
-+ (UIColor *)separatorColor;
++ (UIColor *)sdc_alertButtonTextColor;
++ (UIColor *)sdc_alertSeparatorColor;
 @end
 
 @interface SDCAlertViewController : UIViewController
@@ -161,7 +161,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 		self.backgroundColor = [UIColor sdc_alertBackgroundColor];
 		self.layer.masksToBounds = YES;
 		self.layer.cornerRadius = SDCAlertViewCornerRadius;
-		self.layer.borderColor = [[UIColor separatorColor] CGColor];
+		self.layer.borderColor = [[UIColor sdc_alertSeparatorColor] CGColor];
 		self.layer.borderWidth = SDCAlertViewGetSeparatorThickness();
 	}
 	
@@ -340,7 +340,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 - (UIView *)separatorView {
 	UIView *separatorView = [[UIView alloc] init];
 	[separatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
-	separatorView.backgroundColor = [UIColor separatorColor];
+	separatorView.backgroundColor = [UIColor sdc_alertSeparatorColor];
 	return separatorView;
 }
 
@@ -355,7 +355,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 	tableView.dataSource = self;
 	tableView.backgroundColor = [UIColor clearColor];
 	tableView.separatorInset = UIEdgeInsetsZero;
-	tableView.separatorColor = [UIColor separatorColor];
+	tableView.separatorColor = [UIColor sdc_alertSeparatorColor];
 	tableView.scrollEnabled = NO;
 	return tableView;
 }
@@ -409,7 +409,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 		cell.textLabel.font = [UIFont systemFontOfSize:17];
 	
 	cell.backgroundColor = [UIColor clearColor];
-	cell.textLabel.textColor = [UIColor buttonTextColor];
+	cell.textLabel.textColor = [UIColor sdc_alertButtonTextColor];
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
 }
 
@@ -648,11 +648,11 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 	return [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1];
 }
 
-+ (UIColor *)buttonTextColor {
++ (UIColor *)sdc_alertButtonTextColor {
 	return [UIColor colorWithRed:16/255.0 green:144/255.0 blue:248/255.0 alpha:1];
 }
 
-+ (UIColor *)separatorColor {
++ (UIColor *)sdc_alertSeparatorColor {
 	return [UIColor colorWithRed:189/255.0 green:189/255.0 blue:189/255.0 alpha:1];
 }
 
