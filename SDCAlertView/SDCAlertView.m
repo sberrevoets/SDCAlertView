@@ -49,7 +49,8 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 @property (nonatomic, strong) UIView *rootView;
 @property (nonatomic, strong) NSMutableOrderedSet *alertViews;
 
-- (instancetype)initWithAlert:(SDCAlertView *)alert;
++ (instancetype)currentController;
+
 - (void)showAlert:(SDCAlertView *)alert;
 - (void)removeAlert:(SDCAlertView *)alert;
 
@@ -128,7 +129,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (SDCAlertViewController *)alertViewController {
 	if (!_alertViewController)
-		_alertViewController = [[SDCAlertViewController alloc] initWithAlert:self];
+		_alertViewController = [SDCAlertViewController currentController];
 	return _alertViewController;
 }
 
@@ -643,11 +644,20 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 
 @implementation SDCAlertViewController
 
-- (instancetype)initWithAlert:(SDCAlertView *)alert {
++ (instancetype)currentController {
+	UIViewController *currentController = [[UIWindow sdc_alertWindow] rootViewController];
+	
+	if ([currentController isKindOfClass:[SDCAlertViewController class]])
+		return (SDCAlertViewController *)currentController;
+	else
+		return [[self alloc] init];
+}
+
+- (instancetype)init {
 	self = [super init];
 	
 	if (self) {
-		_alertViews = [[NSMutableOrderedSet alloc] initWithObject:alert];
+		_alertViews = [[NSMutableOrderedSet alloc] init];
 		[self initializeWindow];
 	}
 	
