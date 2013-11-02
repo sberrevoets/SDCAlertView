@@ -24,6 +24,8 @@ static UIEdgeInsets SDCAlertViewTextFieldTextInsets = {0, 4, 0, 4};
 static CGFloat SDCAlertViewPrimaryTextFieldHeight = 30;
 static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 
+static UIOffset SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
+
 static CGFloat SDCAlertViewGetSeparatorThickness() {
 	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];
 }
@@ -121,6 +123,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
+
 @end
 
 @implementation SDCAlertView
@@ -131,6 +134,24 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 	if (!_alertViewController)
 		_alertViewController = [SDCAlertViewController currentController];
 	return _alertViewController;
+}
+
+- (UIMotionEffectGroup *)parallaxEffect {
+	UIInterpolatingMotionEffect *horizontalParallax;
+	UIInterpolatingMotionEffect *verticalParallax;
+	
+	horizontalParallax = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+	horizontalParallax.minimumRelativeValue = @(-SDCAlertViewParallaxSlideMagnitude.horizontal);
+	horizontalParallax.maximumRelativeValue = @(SDCAlertViewParallaxSlideMagnitude.horizontal);
+	
+	verticalParallax = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+	verticalParallax.minimumRelativeValue = @(-SDCAlertViewParallaxSlideMagnitude.vertical);
+	verticalParallax.maximumRelativeValue = @(SDCAlertViewParallaxSlideMagnitude.vertical);
+	
+	UIMotionEffectGroup *group = [[UIMotionEffectGroup alloc] init];
+	group.motionEffects = @[horizontalParallax, verticalParallax];
+
+	return group;
 }
 
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
@@ -191,6 +212,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 
 
 - (void)show {
+	[self addMotionEffect:[self parallaxEffect]];
 	[self.alertViewController showAlert:self];
 }
 
