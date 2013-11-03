@@ -726,6 +726,9 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 	}
 	
 	[UIView animateWithDuration:SDCAlertViewShowingDismissingAnimationDuration delay:0 options:SDCAlertViewShowingDismissingAnimationOptions animations:^{
+		UIView *backgroundColorView = [[self.rootView subviews] firstObject];
+		backgroundColorView.alpha = 1.0;
+		
 		alert.transform = CGAffineTransformMakeScale(1.0, 1.0);
 	} completion:^(BOOL finished) {
 		alert.alpha = SDCAlertViewAlpha;
