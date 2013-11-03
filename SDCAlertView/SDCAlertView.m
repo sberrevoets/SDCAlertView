@@ -13,6 +13,11 @@
 static CGFloat SDCAlertViewWidth = 270;
 static CGFloat SDCAlertViewSeparatorThickness = 1;
 static CGFloat SDCAlertViewCornerRadius = 7;
+static CGFloat SDCAlertViewAlpha = 0.9;
+
+static CGFloat SDCAlertViewShowingAnimationScale = 1.15;
+static CGFloat SDCAlertViewShowingAnimationDuration = 0.25;
+static NSUInteger SDCAlertViewShowingAnimationOptions = UIViewAnimationOptionBeginFromCurrentState;
 
 static UIEdgeInsets SDCAlertViewContentPadding = {19, 15, 18.5, 15};
 
@@ -714,6 +719,8 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (void)showAlert:(SDCAlertView *)alert {
 	[self.alertViews addObject:alert];
+	
+	alert.transform = CGAffineTransformMakeScale(SDCAlertViewShowingAnimationScale, SDCAlertViewShowingAnimationScale);
 	[self.rootView addSubview:alert];
 	
 	if ([[UIApplication sharedApplication] keyWindow] != self.window) {
@@ -721,6 +728,12 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 		[self.window makeKeyAndVisible];
 		[self.window bringSubviewToFront:self.rootView];
 	}
+	
+	[UIView animateWithDuration:SDCAlertViewShowingAnimationDuration delay:0 options:SDCAlertViewShowingAnimationOptions animations:^{
+		alert.transform = CGAffineTransformMakeScale(1.0, 1.0);
+	} completion:^(BOOL finished) {
+		alert.alpha = SDCAlertViewAlpha;
+	}];
 }
 
 - (void)removeAlert:(SDCAlertView *)alert {
