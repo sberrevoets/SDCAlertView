@@ -16,8 +16,9 @@ static CGFloat SDCAlertViewCornerRadius = 7;
 static CGFloat SDCAlertViewAlpha = 0.9;
 
 static CGFloat SDCAlertViewShowingAnimationScale = 1.15;
-static CGFloat SDCAlertViewShowingAnimationDuration = 0.25;
-static NSUInteger SDCAlertViewShowingAnimationOptions = UIViewAnimationOptionBeginFromCurrentState;
+static CGFloat SDCAlertViewDismissingAnimationScale = 0.85;
+static CGFloat SDCAlertViewShowingDismissingAnimationDuration = 0.25;
+static NSUInteger SDCAlertViewShowingDismissingAnimationOptions = UIViewAnimationOptionBeginFromCurrentState;
 
 static UIEdgeInsets SDCAlertViewContentPadding = {19, 15, 18.5, 15};
 
@@ -691,12 +692,6 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 	return self;
 }
 
-- (NSMutableOrderedSet *)alertViews {
-	if (!_alertViews)
-		_alertViews = [NSMutableOrderedSet orderedSet];
-	return _alertViews;
-}
-
 - (void)initializeWindow {
 	self.previousWindow = [[UIApplication sharedApplication] keyWindow];
 	
@@ -708,8 +703,9 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 	[self.window addSubview:self.rootView];
 	
 	UIView *backgroundColorView = [[UIView alloc] initWithFrame:self.rootView.bounds];
-	[backgroundColorView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	backgroundColorView.backgroundColor = [UIColor colorWithWhite:0 alpha:.4];
+	backgroundColorView.alpha = 0;
+	[backgroundColorView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[self.rootView addSubview:backgroundColorView];
 	
 	NSDictionary *backgroundColorViewDictionary = @{@"backgroundColorView": backgroundColorView};
@@ -729,7 +725,7 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 		[self.window bringSubviewToFront:self.rootView];
 	}
 	
-	[UIView animateWithDuration:SDCAlertViewShowingAnimationDuration delay:0 options:SDCAlertViewShowingAnimationOptions animations:^{
+	[UIView animateWithDuration:SDCAlertViewShowingDismissingAnimationDuration delay:0 options:SDCAlertViewShowingDismissingAnimationOptions animations:^{
 		alert.transform = CGAffineTransformMakeScale(1.0, 1.0);
 	} completion:^(BOOL finished) {
 		alert.alpha = SDCAlertViewAlpha;
@@ -737,15 +733,26 @@ static CGFloat SDCAlertViewGetSeparatorThickness() {
 }
 
 - (void)removeAlert:(SDCAlertView *)alert {
-	[alert removeFromSuperview];
-	[self.alertViews removeObject:alert];
+	BOOL isLastAlert = [self.alertViews count] == 1;
 	
-	if ([self.alertViews count] == 0) {
-		self.window = nil;
-		
+	if (isLastAlert)
 		self.previousWindow.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
-		[self.previousWindow makeKeyAndVisible];
-	}
+		
+	[UIView animateWithDuration:SDCAlertViewShowingDismissingAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+		if (isLastAlert)
+			[[[self.rootView subviews] firstObject] setAlpha:0];
+		
+		alert.alpha = 0;
+		alert.transform = CGAffineTransformMakeScale(SDCAlertViewDismissingAnimationScale, SDCAlertViewDismissingAnimationScale);
+	} completion:^(BOOL finished) {
+		[alert removeFromSuperview];
+		[self.alertViews removeObject:alert];
+		
+		if (isLastAlert) {
+			self.window = nil;
+			[self.previousWindow makeKeyAndVisible];
+		}
+	}];
 }
 
 @end
