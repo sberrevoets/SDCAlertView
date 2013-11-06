@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+FOUNDATION_EXPORT CGFloat const SDCAlertViewWidth;
+
+CGFloat SDCAlertViewGetSeparatorThickness();
+
 typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
     SDCAlertViewStyleDefault = 0,
     SDCAlertViewStyleSecureTextInput,
@@ -27,4 +31,11 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 			otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 - (void)show;
+
+@end
+
+@interface UIColor (SDCAlertViewColors)
++ (UIColor *)sdc_alertBackgroundColor;
++ (UIColor *)sdc_alertButtonTextColor;
++ (UIColor *)sdc_alertSeparatorColor;
 @end

@@ -22,6 +22,9 @@
 		D25B3CD117ECE7A6004B32A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D25B3CCF17ECE7A6004B32A2 /* InfoPlist.strings */; };
 		D25B3CD317ECE7A6004B32A2 /* SDCAlertViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B3CD217ECE7A6004B32A2 /* SDCAlertViewTests.m */; };
 		D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */; };
+		D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */; };
+		D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */; };
+		D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,12 @@
 		D25B3CD217ECE7A6004B32A2 /* SDCAlertViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewTests.m; sourceTree = "<group>"; };
 		D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertView.h; sourceTree = "<group>"; };
 		D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertView.m; sourceTree = "<group>"; };
+		D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewController.h; sourceTree = "<group>"; };
+		D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewController.m; sourceTree = "<group>"; };
+		D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewBackgroundView.h; sourceTree = "<group>"; };
+		D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewBackgroundView.m; sourceTree = "<group>"; };
+		D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewContentView.h; sourceTree = "<group>"; };
+		D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewContentView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +124,14 @@
 		D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */,
+				D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */,
 				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
 				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
+				D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */,
+				D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */,
+				D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */,
+				D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */,
 				D25B3CB617ECE7A6004B32A2 /* SDCAppDelegate.h */,
 				D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */,
 				D25B3CB917ECE7A6004B32A2 /* Main.storyboard */,
@@ -258,7 +273,10 @@
 				D25B3CBE17ECE7A6004B32A2 /* SDCViewController.m in Sources */,
 				D25B3CB417ECE7A6004B32A2 /* main.m in Sources */,
 				D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */,
+				D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */,
+				D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */,
 				D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */,
+				D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
