@@ -113,13 +113,15 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 	BOOL isLastAlert = [self.alertViews count] == 1;
 	if (isLastAlert)
 		self.previousWindow.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
-	
+
 	[UIView animateWithDuration:SDCAlertViewShowingDismissingAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 		if (isLastAlert)
 			[[[self.rootView subviews] firstObject] setAlpha:0];
 		
 		alert.alpha = 0;
-		alert.transform = CGAffineTransformMakeScale(SDCAlertViewDismissingAnimationScale, SDCAlertViewDismissingAnimationScale);
+		
+		// We use a layer transformation here because setting the transform property on a UIView instance causes the view to trigger layout. updateConstraints is called, which adds constraints that in some cases causes conflicting constraints. Applying the transform to the layer does not trigger layout while keeping the same animation. See http://stackoverflow.com/a/14105757/751268 for more information.
+		alert.layer.transform = CATransform3DMakeScale(SDCAlertViewDismissingAnimationScale, SDCAlertViewDismissingAnimationScale, 1);
 	} completion:^(BOOL finished) {
 		[alert removeFromSuperview];
 		[self.alertViews removeObject:alert];
