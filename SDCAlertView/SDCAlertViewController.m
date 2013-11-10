@@ -10,6 +10,8 @@
 
 #import "SDCAlertView.h"
 
+#import "UIView+SDCAutoLayout.h"
+
 static CGFloat 		SDCAlertViewShowingAnimationScale = 1.15;
 static CGFloat 		SDCAlertViewDismissingAnimationScale = 0.85;
 static CGFloat 		SDCAlertViewShowingDismissingAnimationDuration = 0.25;
@@ -65,9 +67,7 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 	[backgroundColorView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[self.rootView addSubview:backgroundColorView];
 	
-	NSDictionary *backgroundColorViewDictionary = @{@"backgroundColorView": backgroundColorView};
-	[self.rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[backgroundColorView]|" options:0 metrics:nil views:backgroundColorViewDictionary]];
-	[self.rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[backgroundColorView]|" options:0 metrics:nil views:backgroundColorViewDictionary]];
+	[self.rootView sdc_centerInSuperview];
 }
 
 - (void)showAlert:(SDCAlertView *)alert {

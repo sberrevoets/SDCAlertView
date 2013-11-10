@@ -9,6 +9,7 @@
 #import "SDCAlertViewContentView.h"
 
 #import "SDCAlertView.h"
+#import "UIView+SDCAutoLayout.h"
 
 static UIEdgeInsets SDCAlertViewContentPadding = {19, 15, 18.5, 15};
 
@@ -302,40 +303,49 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 #pragma mark - Content View Layout
 
 - (void)positionContentScrollView {
-	NSDictionary *mapping = @{@"titleLabel": self.titleLabel, @"messageLabel": self.messageLabel};
-	NSDictionary *metrics = @{@"leftPadding": @(SDCAlertViewContentPadding.left), @"labelWidth": @(SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right), @"topPadding": @(SDCAlertViewContentPadding.top), @"rightPadding": @(SDCAlertViewContentPadding.right), @"labelSpacing": @(SDCAlertViewLabelSpacing)};
-	
 	NSMutableString *verticalVFL = [@"V:|" mutableCopy];
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
 	if ([elements containsObject:self.titleLabel]) {
-		[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==leftPadding)-[titleLabel(==labelWidth)]-(==rightPadding)-|" options:0 metrics:metrics views:mapping]];
+		[self.titleLabel sdc_pinWidthToWidthOfView:self.contentScrollView offset:-(SDCAlertViewContentPadding.left + SDCAlertViewContentPadding.right)];
+		[self.titleLabel sdc_horizontallyCenterInSuperview];
 		[verticalVFL appendString:@"-(==topPadding)-[titleLabel]"];
 	}
 	
 	if ([elements containsObject:self.messageLabel]) {
-		[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==leftPadding)-[messageLabel(==labelWidth)]-(==rightPadding)-|" options:0 metrics:metrics views:mapping]];
+		[self.messageLabel sdc_pinWidthToWidthOfView:self.contentScrollView offset:-(SDCAlertViewContentPadding.left + SDCAlertViewContentPadding.right)];
+		[self.messageLabel sdc_horizontallyCenterInSuperview];
 		[verticalVFL appendString:@"-(==labelSpacing)-[messageLabel]"];
 	}
 	
 	[verticalVFL appendString:@"|"];
+	
+	NSDictionary *mapping = @{@"titleLabel": self.titleLabel, @"messageLabel": self.messageLabel};
+	NSDictionary *metrics = @{@"topPadding": @(SDCAlertViewContentPadding.top), @"labelSpacing": @(SDCAlertViewLabelSpacing)};
 	[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:metrics views:mapping]];
 }
 
 - (void)positionTextFields {
 	NSDictionary *mapping = @{@"primaryTextField": self.primaryTextField, @"textFieldSeparator": self.textFieldSeparatorView, @"secondaryTextField": self.secondaryTextField};
-	NSDictionary *metrics = @{@"leftTextFieldSpace": @(SDCAlertViewTextFieldBackgroundViewInsets.left), @"rightTextFieldSpace": @(SDCAlertViewTextFieldBackgroundViewInsets.right), @"primaryTextFieldHeight": @(SDCAlertViewPrimaryTextFieldHeight), @"secondaryTextFieldHeight": @(SDCAlertViewSecondaryTextFieldHeight), @"separatorHeight": @(SDCAlertViewGetSeparatorThickness())};
+	NSDictionary *metrics = @{@"primaryTextFieldHeight": @(SDCAlertViewPrimaryTextFieldHeight), @"secondaryTextFieldHeight": @(SDCAlertViewSecondaryTextFieldHeight), @"separatorHeight": @(SDCAlertViewGetSeparatorThickness())};
 	
-	[self.textFieldBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==leftTextFieldSpace)-[primaryTextField]-(==rightTextFieldSpace)-|" options:0 metrics:metrics views:mapping]];
+	UIEdgeInsets insets = SDCAlertViewTextFieldBackgroundViewInsets;
+	insets.right = -insets.right;
+	
+	[self.primaryTextField sdc_pinWidthToWidthOfView:self.textFieldBackgroundView offset:insets.left + insets.right];
+	[self.primaryTextField sdc_horizontallyCenterInSuperview];
 	
 	NSMutableString *verticalVFL = [@"V:|[primaryTextField(==primaryTextFieldHeight)]" mutableCopy];
 	
 	if ([[self alertViewElementsToDisplay] containsObject:self.secondaryTextField]) {
-		[self.textFieldBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==leftTextFieldSpace)-[secondaryTextField]-(==rightTextFieldSpace)-|" options:0 metrics:metrics views:mapping]];
+		[self.secondaryTextField sdc_pinWidthToWidthOfView:self.textFieldBackgroundView offset:insets.left + insets.right];
+		[self.secondaryTextField sdc_horizontallyCenterInSuperview];
 		
-		[self.textFieldBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[textFieldSeparator]|" options:0 metrics:nil views:mapping]];
+		[self.textFieldSeparatorView sdc_pinHeight:SDCAlertViewGetSeparatorThickness()];
+		[self.textFieldSeparatorView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.textFieldBackgroundView];
+		[self.textFieldSeparatorView sdc_alignEdges:UIRectEdgeTop withView:self.secondaryTextField];
 		
-		[verticalVFL appendString:@"[textFieldSeparator(==separatorHeight)][secondaryTextField(==secondaryTextFieldHeight)]"];
+		[verticalVFL appendString:@"[secondaryTextField(==secondaryTextFieldHeight)]"];
 	}
 	
 	[verticalVFL appendString:@"|"];
@@ -343,21 +353,22 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 }
 
 - (void)positionButtons {
-	[self.mainTableView addConstraint:[NSLayoutConstraint constraintWithItem:self.mainTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0]]];
+	[self.mainTableView sdc_pinHeight:self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0]];
 	
 	NSArray *elements = [self alertViewElementsToDisplay];
 	if ([elements containsObject:self.secondaryTableView]) {
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.secondaryTableView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.secondaryTableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+		[self.secondaryTableView sdc_pinHeightToHeightOfView:self.mainTableView];
+		[self.secondaryTableView sdc_alignEdges:UIRectEdgeTop withView:self.mainTableView];
 		
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:SDCAlertViewGetSeparatorThickness()]];
+		[self.buttonSeparatorView sdc_pinHeightToHeightOfView:self.mainTableView];
+		[self.buttonSeparatorView sdc_alignEdges:UIRectEdgeTop withView:self.mainTableView];
+		[self.buttonSeparatorView sdc_pinWidth:SDCAlertViewGetSeparatorThickness()];
 	}
 	
 	if ([elements containsObject:self.contentScrollView]) {
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[buttonTopSeparatorView]|" options:0 metrics:nil views:@{@"buttonTopSeparatorView": self.buttonTopSeparatorView}]];
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonTopSeparatorView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:SDCAlertViewGetSeparatorThickness()]];
+		[self.buttonTopSeparatorView sdc_horizontallyCenterInSuperview];
+		[self.buttonTopSeparatorView sdc_pinWidthToWidthOfView:self];
+		[self.buttonTopSeparatorView sdc_pinHeight:SDCAlertViewGetSeparatorThickness()];
 	}
 }
 
@@ -377,26 +388,30 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	NSMutableString *verticalVFL = [@"V:|" mutableCopy];
 	
 	if ([elements containsObject:self.contentScrollView]) {
-		CGFloat scrollViewHeight = [self heightForContentScrollView];
-		[self.contentScrollView addConstraint:[NSLayoutConstraint constraintWithItem:self.contentScrollView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:scrollViewHeight]];
-		
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[scrollView]|" options:0 metrics:nil views:@{@"scrollView": self.contentScrollView}]];
+		[self.contentScrollView sdc_pinHeight:[self heightForContentScrollView]];
+		[self.contentScrollView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self];
 		
 		[verticalVFL appendString:@"[scrollView]"];
 	}
 	
 	if ([elements containsObject:self.textFieldBackgroundView]) {
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(==leftPadding)-[textFieldBackgroundView(==textFieldWidth)]-(==rightPadding)-|" options:0 metrics:@{@"leftPadding": @(SDCAlertViewContentPadding.left), @"textFieldWidth": @(SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right), @"rightPadding": @(SDCAlertViewContentPadding.right)} views:@{@"textFieldBackgroundView": self.textFieldBackgroundView}]];
+		UIEdgeInsets insets = SDCAlertViewTextFieldBackgroundViewPadding;
+		insets.right = -insets.right;
 		
+		[self.textFieldBackgroundView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self insets:insets];
 		[verticalVFL appendString:@"-(==textFieldBackgroundViewTopSpacing)-[textFieldBackgroundView]"];
 	}
 	
 	if ([elements containsObject:self.mainTableView]) {
 		if ([elements containsObject:self.secondaryTableView]) {
-			[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[secondaryTableView(==half)][mainTableView(==half)]|" options:0 metrics:@{@"half": @(SDCAlertViewWidth / 2)} views:@{@"mainTableView": self.mainTableView, @"secondaryTableView": self.secondaryTableView}]];
-			[self addConstraint:[NSLayoutConstraint constraintWithItem:self.buttonSeparatorView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.mainTableView attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
+			[self.secondaryTableView sdc_alignEdges:UIRectEdgeLeft withView:self];
+			[self.secondaryTableView sdc_pinWidth:SDCAlertViewWidth / 2];
+			[self.mainTableView sdc_alignEdges:UIRectEdgeRight withView:self];
+			[self.mainTableView sdc_pinWidth:SDCAlertViewWidth / 2];
+			
+			[self.buttonSeparatorView sdc_alignEdges:UIRectEdgeLeft withView:self.mainTableView];
 		} else {
-			[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[mainTableView]|" options:0 metrics:nil views:@{@"mainTableView": self.mainTableView}]];
+			[self.mainTableView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self];
 		}
 		
 		[verticalVFL appendString:@"-(==bottomSpacing)-[buttonTopSeparatorView][mainTableView]"];
@@ -404,7 +419,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	
 	[verticalVFL appendString:@"|"];
 	
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:@{@"textFieldBackgroundViewTopSpacing": @(SDCAlertViewTextFieldBackgroundViewPadding.top), @"bottomSpacing": @(SDCAlertViewContentPadding.bottom - 4)} views:@{@"scrollView": self.contentScrollView, @"textFieldBackgroundView": self.textFieldBackgroundView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView}]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:@{@"textFieldBackgroundViewTopSpacing": @(SDCAlertViewTextFieldBackgroundViewPadding.top), @"bottomSpacing": @(SDCAlertViewContentPadding.bottom)} views:@{@"scrollView": self.contentScrollView, @"textFieldBackgroundView": self.textFieldBackgroundView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView}]];
 }
 
 @end

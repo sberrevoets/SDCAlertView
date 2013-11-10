@@ -12,6 +12,8 @@
 #import "SDCAlertViewBackgroundView.h"
 #import "SDCAlertViewContentView.h"
 
+#import "UIView+SDCAutoLayout.h"
+
 CGFloat const SDCAlertViewWidth = 270;
 static CGFloat const SDCAlertViewSeparatorThickness = 1;
 static CGFloat SDCAlertViewCornerRadius = 7;
@@ -177,35 +179,26 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 #pragma mark - Auto-Layout
 
 - (void)updateConstraints {
-	[self positionBackgroundView];
-	[self positionAlertContentView];
+	[self.alertBackgroundView sdc_centerInSuperview];
+	[self.alertBackgroundView sdc_pinWidthToWidthOfView:self];
+	[self.alertBackgroundView sdc_pinHeightToHeightOfView:self];
+	
+	[self.alertContentView sdc_centerInSuperview];
+	[self.alertContentView sdc_pinWidthToWidthOfView:self];
+	[self.alertContentView sdc_pinHeightToHeightOfView:self];
+	
 	[self positionSelf];
 	
 	[super updateConstraints];
 }
 
-- (void)positionBackgroundView {
-	NSDictionary *views = @{@"backgroundView": self.alertBackgroundView};
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[backgroundView]|" options:0 metrics:nil views:views]];
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[backgroundView]|" options:0 metrics:nil views:views]];
-}
-
-- (void)positionAlertContentView {
-	NSDictionary *views = @{@"alertContentView": self.alertContentView};
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[alertContentView]|" options:0 metrics:nil views:views]];
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[alertContentView]|" options:0 metrics:nil views:views]];
-}
-
 - (void)positionSelf {
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:SDCAlertViewWidth]];
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-	[self.superview addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+	[self sdc_pinWidth:SDCAlertViewWidth];
+	[self sdc_centerInSuperview];
+	[self sdc_setMaximumHeightToSuperviewHeight];
 }
 
 @end
-
-#pragma mark - UIKit Category Implementations
 
 @implementation UIColor (SDCAlertViewColors)
 

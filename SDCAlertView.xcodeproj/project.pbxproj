@@ -25,6 +25,7 @@
 		D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */; };
 		D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */; };
 		D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */; };
+		D263F11C1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F11B1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewBackgroundView.m; sourceTree = "<group>"; };
 		D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewContentView.h; sourceTree = "<group>"; };
 		D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewContentView.m; sourceTree = "<group>"; };
+		D263F11A1829ED490001E4E0 /* UIView+SDCAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+SDCAutoLayout.h"; path = "../../SDCAutoLayout/AutoLayout/UIView+SDCAutoLayout.h"; sourceTree = "<group>"; };
+		D263F11B1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+SDCAutoLayout.m"; path = "../../SDCAutoLayout/AutoLayout/UIView+SDCAutoLayout.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 				D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */,
 				D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */,
 				D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */,
+				D263F11A1829ED490001E4E0 /* UIView+SDCAutoLayout.h */,
+				D263F11B1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m */,
 				D25B3CB617ECE7A6004B32A2 /* SDCAppDelegate.h */,
 				D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */,
 				D25B3CB917ECE7A6004B32A2 /* Main.storyboard */,
@@ -276,6 +281,7 @@
 				D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */,
 				D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */,
 				D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */,
+				D263F11C1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m in Sources */,
 				D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
