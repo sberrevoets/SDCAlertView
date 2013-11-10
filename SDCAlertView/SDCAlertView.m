@@ -80,10 +80,8 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (SDCAlertViewContentView *)alertContentView {
 	if (!_alertContentView) {
-		_alertContentView = [[SDCAlertViewContentView alloc] init];
+		_alertContentView = [[SDCAlertViewContentView alloc] initWithDelegate:self dataSource:self];
 		[_alertContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
-		_alertContentView.delegate = self;
-		_alertContentView.dataSource = self;
 		[self addSubview:_alertContentView];
 	}
 	
@@ -163,6 +161,10 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (BOOL)alertContentViewShouldShowPrimaryTextField:(SDCAlertViewContentView *)sender {
 	return self.alertViewStyle != SDCAlertViewStyleDefault;
+}
+
+- (BOOL)alertContentViewShouldUseSecureEntryForPrimaryTextField:(SDCAlertViewContentView *)sender {
+	return self.alertViewStyle == SDCAlertViewStyleSecureTextInput;
 }
 
 - (BOOL)alertContentViewShouldShowSecondaryTextField:(SDCAlertViewContentView *)sender {

@@ -45,15 +45,18 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 
 #pragma mark - Initialization
 
-- (id)initWithFrame:(CGRect)frame {
-	self = [super initWithFrame:frame];
+- (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate dataSource:(id<SDCAlertViewContentViewDataSource>)dataSource {
+	self = [super init];
 	
-	if (self)
+	if (self) {
+		_delegate = delegate;
+		_dataSource = dataSource;
+		
 		[self initializeSubviews];
+	}
 	
 	return self;
 }
-
 - (void)initializeSubviews {
 	[self initializeTitleLabel];
 	[self initializeMessageLabel];
@@ -106,6 +109,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	[self.primaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
 	self.primaryTextField.font = [UIFont systemFontOfSize:13];
 	self.primaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
+	self.primaryTextField.secureTextEntry = [self.delegate alertContentViewShouldUseSecureEntryForPrimaryTextField:self];
 	[self.primaryTextField becomeFirstResponder];
 }
 
@@ -232,6 +236,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	if ([elements count] > 0)								[elements addObject:self.contentScrollView];
 	
 	if ([self.delegate alertContentViewShouldShowPrimaryTextField:self]) {
+		
 		[elements addObject:self.textFieldBackgroundView];
 		
 		if ([self.delegate alertContentViewShouldShowSecondaryTextField:self]) {
@@ -279,6 +284,8 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	if ([elements containsObject:self.textFieldBackgroundView]) {
 		[self addSubview:self.textFieldBackgroundView];
 		[self.textFieldBackgroundView addSubview:self.primaryTextField];
+		
+		self.primaryTextField.secureTextEntry = [self.delegate alertContentViewShouldUseSecureEntryForPrimaryTextField:self];
 		
 		if ([self.delegate alertContentViewShouldShowSecondaryTextField:self]) {
 			[self.textFieldBackgroundView addSubview:self.textFieldSeparatorView];

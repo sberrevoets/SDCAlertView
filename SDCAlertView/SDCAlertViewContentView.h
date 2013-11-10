@@ -12,6 +12,7 @@
 
 @protocol SDCAlertViewContentViewDelegate <NSObject>
 - (BOOL)alertContentViewShouldShowPrimaryTextField:(SDCAlertViewContentView *)sender;
+- (BOOL)alertContentViewShouldUseSecureEntryForPrimaryTextField:(SDCAlertViewContentView *)sender;
 - (BOOL)alertContentViewShouldShowSecondaryTextField:(SDCAlertViewContentView *)sender;
 
 - (CGFloat)maximumHeightForAlertContentView:(SDCAlertViewContentView *)sender;
@@ -36,5 +37,7 @@
 
 @property (nonatomic, weak) id <SDCAlertViewContentViewDelegate> delegate;
 @property (nonatomic, weak) id <SDCAlertViewContentViewDataSource> dataSource;
+
+- (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate dataSource:(id <SDCAlertViewContentViewDataSource>)dataSource;
 
 @end
