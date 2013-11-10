@@ -422,6 +422,15 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:@{@"textFieldBackgroundViewTopSpacing": @(SDCAlertViewTextFieldBackgroundViewPadding.top), @"bottomSpacing": @(SDCAlertViewContentPadding.bottom)} views:@{@"scrollView": self.contentScrollView, @"textFieldBackgroundView": self.textFieldBackgroundView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView}]];
 }
 
+- (BOOL)resignFirstResponder {
+	[super resignFirstResponder];
+	
+	[self.primaryTextField resignFirstResponder];
+	[self.secondaryTextField resignFirstResponder];
+	
+	return YES;
+}
+
 @end
 
 @implementation SDCAlertViewTextField

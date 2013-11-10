@@ -130,6 +130,13 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	[self.alertViewController showAlert:self];
 }
 
+- (BOOL)resignFirstResponder {
+	[super resignFirstResponder];
+	[self.alertContentView resignFirstResponder];
+	
+	return YES;
+}
+
 #pragma mark - SDCAlertViewContentViewDataSource
 
 - (NSString *)alertTitleInAlertContentView:(SDCAlertViewContentView *)sender {

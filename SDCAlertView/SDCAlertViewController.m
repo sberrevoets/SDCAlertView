@@ -46,6 +46,9 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 	if (self) {
 		_alertViews = [[NSMutableOrderedSet alloc] init];
 		[self initializeWindow];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 	}
 	
 	return self;
@@ -67,7 +70,19 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 	[backgroundColorView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[self.rootView addSubview:backgroundColorView];
 	
-	[self.rootView sdc_centerInSuperview];
+	[self.rootView sdc_horizontallyCenterInSuperview];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+	NSDictionary *userInfo = [notification userInfo];
+	NSValue *keyboardFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey];
+	CGRect keyboardFrame = [keyboardFrameValue CGRectValue];
+	
+	self.rootView.frame = CGRectMake(0, 0, CGRectGetWidth(self.rootView.frame), CGRectGetHeight(self.rootView.frame) - CGRectGetHeight(keyboardFrame));
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification {
+	self.rootView.frame = self.window.frame;
 }
 
 - (void)showAlert:(SDCAlertView *)alert {
@@ -93,8 +108,9 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 }
 
 - (void)removeAlert:(SDCAlertView *)alert {
-	BOOL isLastAlert = [self.alertViews count] == 1;
+	[alert resignFirstResponder];
 	
+	BOOL isLastAlert = [self.alertViews count] == 1;
 	if (isLastAlert)
 		self.previousWindow.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
 	
@@ -113,6 +129,10 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 			[self.previousWindow makeKeyAndVisible];
 		}
 	}];
+}
+
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
