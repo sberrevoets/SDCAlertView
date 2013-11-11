@@ -345,6 +345,10 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	return YES;
 }
 
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Content View Layout
 
 - (void)positionContentScrollView {
