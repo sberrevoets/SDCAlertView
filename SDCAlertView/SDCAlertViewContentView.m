@@ -15,11 +15,18 @@ static UIEdgeInsets SDCAlertViewContentPadding = {19, 15, 18.5, 15};
 
 static CGFloat SDCAlertViewLabelSpacing = 4;
 
+static CGFloat SDCAlertViewTextFieldBackgroundViewCornerRadius = 5;
 static UIEdgeInsets SDCAlertViewTextFieldBackgroundViewPadding = {22, 15, 0, 15};
 static UIEdgeInsets SDCAlertViewTextFieldBackgroundViewInsets = {0, 2, 0, 2};
 static UIEdgeInsets SDCAlertViewTextFieldTextInsets = {0, 4, 0, 4};
 static CGFloat SDCAlertViewPrimaryTextFieldHeight = 30;
 static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
+
+@interface UIFont (SDCAlertViewFonts)
++ (UIFont *)sdc_titleLabelFont;
++ (UIFont *)sdc_messageLabelFont;
++ (UIFont *)sdc_textFieldFont;
+@end
 
 @interface SDCAlertViewTextField : UITextField
 @property (nonatomic) UIEdgeInsets textInsets;
@@ -76,7 +83,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 - (void)initializeTitleLabel {
 	self.titleLabel = [[UILabel alloc] init];
 	[self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+	self.titleLabel.font = [UIFont sdc_titleLabelFont];
 	self.titleLabel.textAlignment = NSTextAlignmentCenter;
 	self.titleLabel.numberOfLines = 0;
 	self.titleLabel.preferredMaxLayoutWidth = SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right;
@@ -85,7 +92,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 - (void)initializeMessageLabel {
 	self.messageLabel = [[UILabel alloc] init];
 	[self.messageLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.messageLabel.font = [UIFont systemFontOfSize:14];
+	self.messageLabel.font = [UIFont sdc_messageLabelFont];
 	self.messageLabel.textAlignment = NSTextAlignmentCenter;
 	self.messageLabel.numberOfLines = 0;
 	self.messageLabel.preferredMaxLayoutWidth = SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right;
@@ -100,16 +107,16 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	self.textFieldBackgroundView = [[UIView alloc] init];
 	[self.textFieldBackgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	self.textFieldBackgroundView.backgroundColor = [UIColor whiteColor];
-	self.textFieldBackgroundView.layer.borderColor = [[UIColor colorWithWhite:0.5 alpha:0.5] CGColor];
+	self.textFieldBackgroundView.layer.borderColor = [[UIColor sdc_textFieldBackgroundViewColor] CGColor];
 	self.textFieldBackgroundView.layer.borderWidth = SDCAlertViewGetSeparatorThickness();
 	self.textFieldBackgroundView.layer.masksToBounds = YES;
-	self.textFieldBackgroundView.layer.cornerRadius = 5;
+	self.textFieldBackgroundView.layer.cornerRadius = SDCAlertViewTextFieldBackgroundViewCornerRadius;
 }
 
 - (void)initializePrimaryTextField {
 	self.primaryTextField = [[SDCAlertViewTextField alloc] init];
 	[self.primaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.primaryTextField.font = [UIFont systemFontOfSize:13];
+	self.primaryTextField.font = [UIFont sdc_textFieldFont];
 	self.primaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
 	self.primaryTextField.secureTextEntry = [self.delegate alertContentViewShouldUseSecureEntryForPrimaryTextField:self];
 	[self.primaryTextField becomeFirstResponder];
@@ -122,7 +129,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 - (void)initializeSecondaryTextField {
 	self.secondaryTextField = [[SDCAlertViewTextField alloc] init];
 	[self.secondaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.secondaryTextField.font = [UIFont systemFontOfSize:13];
+	self.secondaryTextField.font = [UIFont sdc_textFieldFont];
 	self.secondaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
 	self.secondaryTextField.secureTextEntry = YES;
 }
@@ -470,6 +477,22 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
 	return [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, self.textInsets)];
+}
+
+@end
+
+@implementation UIFont (SDCAlertViewFonts)
+
++ (UIFont *)sdc_titleLabelFont {
+	return [UIFont boldSystemFontOfSize:17];
+}
+
++ (UIFont *)sdc_messageLabelFont {
+	return [UIFont systemFontOfSize:14];
+}
+
++ (UIFont *)sdc_textFieldFont {
+	return [UIFont systemFontOfSize:13];
 }
 
 @end

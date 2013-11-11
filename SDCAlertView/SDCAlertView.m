@@ -271,4 +271,8 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return [UIColor colorWithRed:189/255.0 green:189/255.0 blue:189/255.0 alpha:1];
 }
 
++ (UIColor *)sdc_textFieldBackgroundViewColor {
+	return [UIColor colorWithWhite:0.5 alpha:0.5];
+}
+
 @end
