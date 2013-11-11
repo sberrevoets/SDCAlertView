@@ -187,10 +187,10 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	if (tableView == self.mainTableView) {
 		NSUInteger otherButtonCount = [self.dataSource numberOfOtherButtonsInAlertContentView:self];
 		
-		if (otherButtonCount == 1 && [self.dataSource titleForCancelButtonInAlertContentView:self])
-			return otherButtonCount;
-		else
+		if (otherButtonCount != 1 && [self.dataSource titleForCancelButtonInAlertContentView:self])
 			return otherButtonCount + 1;
+		else
+			return otherButtonCount;
 	} else {
 		return 1;
 	}
@@ -273,7 +273,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 		[elements addObject:self.mainTableView];
 		[elements addObject:self.buttonTopSeparatorView];
 		
-		if (otherButtonCount == 1) {
+		if (otherButtonCount == 1 && cancelButtonTitle) {
 			[elements addObject:self.secondaryTableView];
 			[elements addObject:self.buttonSeparatorView];
 		}
