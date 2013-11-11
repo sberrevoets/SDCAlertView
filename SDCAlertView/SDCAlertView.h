@@ -43,9 +43,13 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 @property (nonatomic, weak) id <SDCAlertViewDelegate> delegate;
 
-// Setting the cancelButtonIndex is not yet supported.
+// TODO: Setting the cancelButtonIndex is not yet supported.
 @property (nonatomic) NSInteger cancelButtonIndex;
 @property (nonatomic, readonly) NSInteger firstOtherButtonIndex;
+
+// TODO: The semantics of this property are a little different than UIAlertView's visible property.
+// Currently, if the receiver has been presented (but then dismissed, but still in the heap), this property will be set to YES.
+@property (nonatomic, readonly, getter = isVisible) BOOL visible;
 
 @property (nonatomic) SDCAlertViewStyle alertViewStyle;
 
