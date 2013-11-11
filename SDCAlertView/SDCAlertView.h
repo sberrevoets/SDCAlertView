@@ -43,7 +43,9 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 @property (nonatomic, weak) id <SDCAlertViewDelegate> delegate;
 
+// Setting the cancelButtonIndex is not yet supported.
 @property (nonatomic) NSInteger cancelButtonIndex;
+@property (nonatomic, readonly) NSInteger firstOtherButtonIndex;
 
 @property (nonatomic) SDCAlertViewStyle alertViewStyle;
 

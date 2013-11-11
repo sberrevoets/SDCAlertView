@@ -21,7 +21,7 @@ static CGFloat SDCAlertViewCornerRadius = 7;
 static UIOffset SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 static NSInteger SDCAlertViewUnspecifiedButtonIndex = -1;
-static NSInteger SDCAlertViewDefaultCancelButtonIndex = 0;
+static NSInteger SDCAlertViewDefaultFirstButtonIndex = 0;
 
 CGFloat SDCAlertViewGetSeparatorThickness() {
 	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];
@@ -46,6 +46,15 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 @implementation SDCAlertView
 
 #pragma mark - Getters
+
+- (NSInteger)firstOtherButtonIndex {
+	if ([self.otherButtonTitles count] > 0 && self.cancelButtonIndex == 0)
+		return self.cancelButtonIndex + 1;
+	else if ([self.otherButtonTitles count] > 0 && !self.cancelButtonTitle)
+		return SDCAlertViewDefaultFirstButtonIndex;
+	
+	return SDCAlertViewUnspecifiedButtonIndex;
+}
 
 - (SDCAlertViewController *)alertViewController {
 	if (!_alertViewController)
@@ -107,7 +116,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 		
 		if (cancelButtonTitle) {
 			_cancelButtonTitle = cancelButtonTitle;
-			_cancelButtonIndex = SDCAlertViewDefaultCancelButtonIndex;
+			_cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
 		} else {
 			_cancelButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
 		}
