@@ -20,6 +20,9 @@ static CGFloat SDCAlertViewCornerRadius = 7;
 
 static UIOffset SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
+static NSInteger SDCAlertViewUnspecifiedButtonIndex = -1;
+static NSInteger SDCAlertViewDefaultCancelButtonIndex = 0;
+
 CGFloat SDCAlertViewGetSeparatorThickness() {
 	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];
 }
@@ -100,7 +103,14 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	if (self) {
 		_title = title;
 		_message = message;
-		_cancelButtonTitle = cancelButtonTitle;
+		_delegate = delegate;
+		
+		if (cancelButtonTitle) {
+			_cancelButtonTitle = cancelButtonTitle;
+			_cancelButtonIndex = SDCAlertViewDefaultCancelButtonIndex;
+		} else {
+			_cancelButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
+		}
 		
 		NSMutableArray *buttonTitles = [NSMutableArray array];
 		
@@ -125,7 +135,14 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (void)show {
 	[self addMotionEffect:[self parallaxEffect]];
-	[self.alertViewController showAlert:self];
+	
+	if ([self.delegate respondsToSelector:@selector(willPresentAlertView:)])
+		[self.delegate willPresentAlertView:self];
+	
+	[self.alertViewController showAlert:self completion:^{
+		if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
+			[self.delegate didPresentAlertView:self];
+	}];
 }
 
 - (BOOL)resignFirstResponder {
@@ -176,13 +193,34 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 }
 
 - (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index {
-	NSLog(@"Tapped %@", self.otherButtonTitles[index]);
-	[self.alertViewController removeAlert:self];
+	[self tappedButtonAtIndex:index];
+}
+
+- (BOOL)alertContentViewShouldEnableFirstOtherButton:(SDCAlertViewContentView *)sender {
+	if ([self.delegate respondsToSelector:@selector(alertViewShouldEnableFirstOtherButton:)])
+		return [self.delegate alertViewShouldEnableFirstOtherButton:self];
+	else
+		return YES;
 }
 
 - (void)alertContentViewDidTapCancelButton:(SDCAlertViewContentView *)sender {
-	NSLog(@"Tapped cancel");
-	[self.alertViewController removeAlert:self];
+	[self tappedButtonAtIndex:self.cancelButtonIndex];
+}
+
+- (void)tappedButtonAtIndex:(NSInteger)index {
+	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)])
+		[self.delegate alertView:self clickedButtonAtIndex:index];
+	
+	if (([self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)] && [self.delegate alertView:self shouldDismissWithButtonIndex:index]) || ![self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)]) {
+		
+		if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
+			[self.delegate alertView:self willDismissWithButtonIndex:index];
+		
+		[self.alertViewController dismissAlert:self completion:^{
+			if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
+				[self.delegate alertView:self didDismissWithButtonIndex:index];
+		}];
+	}
 }
 
 #pragma mark - Auto-Layout
@@ -207,6 +245,12 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	[self sdc_setMaximumHeightToSuperviewHeight];
 }
 
+#pragma mark - Cleanup
+
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end
 
 @implementation UIColor (SDCAlertViewColors)
@@ -217,6 +261,10 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 + (UIColor *)sdc_alertButtonTextColor {
 	return [UIColor colorWithRed:16/255.0 green:144/255.0 blue:248/255.0 alpha:1];
+}
+
++ (UIColor *)sdc_disabledAlertButtonTextColor {
+	return [UIColor colorWithRed:143/255.0 green:143/255.0 blue:143/255.0 alpha:1];
 }
 
 + (UIColor *)sdc_alertSeparatorColor {

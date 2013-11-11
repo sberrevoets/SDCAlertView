@@ -19,6 +19,8 @@
 
 - (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index;
 - (void)alertContentViewDidTapCancelButton:(SDCAlertViewContentView *)sender;
+
+- (BOOL)alertContentViewShouldEnableFirstOtherButton:(SDCAlertViewContentView *)sender;
 @end
 
 @protocol SDCAlertViewContentViewDataSource <NSObject>

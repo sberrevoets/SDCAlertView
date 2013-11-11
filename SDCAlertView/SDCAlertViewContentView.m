@@ -53,6 +53,8 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 		_dataSource = dataSource;
 		
 		[self initializeSubviews];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextChanged:) name:UITextFieldTextDidChangeNotification object:nil];
 	}
 	
 	return self;
@@ -187,6 +189,12 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	}
 }
 
+- (BOOL)isButtonAtIndexPathEnabled:(NSIndexPath *)indexPath {
+	NSInteger firstOtherButtonRow = [self.mainTableView numberOfRowsInSection:indexPath.section] - 1;
+	BOOL firstOtherButtonEnabled = [self.delegate alertContentViewShouldEnableFirstOtherButton:self];
+	return (firstOtherButtonEnabled || (!firstOtherButtonEnabled && indexPath.row != firstOtherButtonRow));
+}
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUInteger otherButtonCount = [self.dataSource numberOfOtherButtonsInAlertContentView:self];
 	
@@ -197,7 +205,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 		cell.textLabel.font = [UIFont systemFontOfSize:17];
 	
 	cell.backgroundColor = [UIColor clearColor];
-	cell.textLabel.textColor = [UIColor sdc_alertButtonTextColor];
+	cell.textLabel.textColor = (tableView == self.secondaryTableView || [self isButtonAtIndexPathEnabled:indexPath]) ? [UIColor sdc_alertButtonTextColor] : [UIColor sdc_disabledAlertButtonTextColor];
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
 }
 
@@ -217,6 +225,13 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 		[self.delegate alertContentViewDidTapCancelButton:self];
 	else
 		[self.delegate alertContentView:self didTapButtonAtIndex:indexPath.row];
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (tableView == self.secondaryTableView)
+		return YES;
+	
+	return [self isButtonAtIndexPathEnabled:indexPath];
 }
 
 #pragma mark - Layout
@@ -272,6 +287,8 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	[super updateConstraints];
 }
 
+#pragma mark - Custom Behavior
+
 - (void)willMoveToSuperview:(UIView *)newSuperview {
 	[super willMoveToSuperview:newSuperview];
 	
@@ -305,6 +322,20 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 		[self addSubview:self.secondaryTableView];
 		[self insertSubview:self.buttonSeparatorView aboveSubview:self.secondaryTableView];
 	}
+}
+
+- (void)textFieldTextChanged:(NSNotification *)notification {
+	if (notification.object == self.primaryTextField || notification.object == self.secondaryTextField)
+		[self.mainTableView reloadData];
+}
+
+- (BOOL)resignFirstResponder {
+	[super resignFirstResponder];
+	
+	[self.primaryTextField resignFirstResponder];
+	[self.secondaryTextField resignFirstResponder];
+	
+	return YES;
 }
 
 #pragma mark - Content View Layout
@@ -427,15 +458,6 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	[verticalVFL appendString:@"|"];
 	
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:@{@"textFieldBackgroundViewTopSpacing": @(SDCAlertViewTextFieldBackgroundViewPadding.top), @"bottomSpacing": @(SDCAlertViewContentPadding.bottom)} views:@{@"scrollView": self.contentScrollView, @"textFieldBackgroundView": self.textFieldBackgroundView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView}]];
-}
-
-- (BOOL)resignFirstResponder {
-	[super resignFirstResponder];
-	
-	[self.primaryTextField resignFirstResponder];
-	[self.secondaryTextField resignFirstResponder];
-	
-	return YES;
 }
 
 @end

@@ -85,7 +85,7 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 	self.rootView.frame = self.window.frame;
 }
 
-- (void)showAlert:(SDCAlertView *)alert {
+- (void)showAlert:(SDCAlertView *)alert completion:(void (^)(void))completionHandler {
 	[self.alertViews addObject:alert];
 	
 	alert.transform = CGAffineTransformMakeScale(SDCAlertViewShowingAnimationScale, SDCAlertViewShowingAnimationScale);
@@ -104,10 +104,12 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 		alert.transform = CGAffineTransformMakeScale(1.0, 1.0);
 	} completion:^(BOOL finished) {
 		alert.alpha = SDCAlertViewAlpha;
+		
+		completionHandler();
 	}];
 }
 
-- (void)removeAlert:(SDCAlertView *)alert {
+- (void)dismissAlert:(SDCAlertView *)alert completion:(void (^)(void))completionHandler {
 	[alert resignFirstResponder];
 	
 	BOOL isLastAlert = [self.alertViews count] == 1;
@@ -130,6 +132,8 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 			self.window = nil;
 			[self.previousWindow makeKeyAndVisible];
 		}
+		
+		completionHandler();
 	}];
 }
 

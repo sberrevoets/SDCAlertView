@@ -16,7 +16,7 @@
 
 + (instancetype)currentController;
 
-- (void)showAlert:(SDCAlertView *)alert;
-- (void)removeAlert:(SDCAlertView *)alert;
+- (void)showAlert:(SDCAlertView *)alert completion:(void(^)(void))completionHandler;
+- (void)dismissAlert:(SDCAlertView *)alert completion:(void(^)(void))completionHandler;
 
 @end
