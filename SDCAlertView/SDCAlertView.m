@@ -49,15 +49,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 #pragma mark - Getters
 
-- (NSInteger)firstOtherButtonIndex {
-	if ([self.otherButtonTitles count] > 0 && self.cancelButtonIndex == 0)
-		return self.cancelButtonIndex + 1;
-	else if ([self.otherButtonTitles count] > 0 && !self.cancelButtonTitle)
-		return SDCAlertViewDefaultFirstButtonIndex;
-	
-	return SDCAlertViewUnspecifiedButtonIndex;
-}
-
 - (SDCAlertViewController *)alertViewController {
 	if (!_alertViewController)
 		_alertViewController = [SDCAlertViewController currentController];
@@ -234,6 +225,24 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 				[self.delegate alertView:self didDismissWithButtonIndex:index];
 		}];
 	}
+}
+
+- (NSInteger)firstOtherButtonIndex {
+	if ([self.otherButtonTitles count] > 0 && self.cancelButtonIndex == 0)
+		return self.cancelButtonIndex + 1;
+	else if ([self.otherButtonTitles count] > 0 && !self.cancelButtonTitle)
+		return SDCAlertViewDefaultFirstButtonIndex;
+	
+	return SDCAlertViewUnspecifiedButtonIndex;
+}
+
+- (NSInteger)numberOfButtons {
+	NSInteger buttonCount = [self.otherButtonTitles count];
+	
+	if (self.cancelButtonTitle)
+		buttonCount++;
+	
+	return buttonCount;
 }
 
 #pragma mark - Buttons
