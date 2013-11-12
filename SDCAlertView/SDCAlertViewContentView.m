@@ -271,8 +271,8 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	if ([elements count] > 0)								[elements addObject:self.contentScrollView];
 	
 	if ([self.delegate alertContentViewShouldShowPrimaryTextField:self]) {
-		
 		[elements addObject:self.textFieldBackgroundView];
+		[elements addObject:self.primaryTextField];
 		
 		if ([self.delegate alertContentViewShouldShowSecondaryTextField:self]) {
 			[elements addObject:self.textFieldSeparatorView];
@@ -318,7 +318,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	if ([elements containsObject:self.messageLabel])		[self.contentScrollView addSubview:self.messageLabel];
 	if ([elements containsObject:self.contentScrollView])	[self addSubview:self.contentScrollView];
 	
-	if ([elements containsObject:self.textFieldBackgroundView]) {
+	if ([elements containsObject:self.primaryTextField]) {
 		[self addSubview:self.textFieldBackgroundView];
 		[self.textFieldBackgroundView addSubview:self.primaryTextField];
 		
