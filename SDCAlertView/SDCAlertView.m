@@ -134,6 +134,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return self;
 }
 
+#pragma mark - Visibility
 
 - (void)show {
 	[self addMotionEffect:[self parallaxEffect]];
@@ -147,6 +148,11 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 		if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
 			[self.delegate didPresentAlertView:self];
 	}];
+}
+
+
+- (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
+	[self tappedButtonAtIndex:buttonIndex];
 }
 
 - (BOOL)resignFirstResponder {
