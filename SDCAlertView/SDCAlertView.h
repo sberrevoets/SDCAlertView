@@ -69,6 +69,8 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 // All alerts are dismissed with animation, regardless of the animated argument
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
 
+- (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex;
+
 @end
 
 @interface UIColor (SDCAlertViewColors)

@@ -50,6 +50,19 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 
 @implementation SDCAlertViewContentView
 
+#pragma mark - Getter
+
+- (NSArray *)textFields {
+	NSArray *elements = [self alertViewElementsToDisplay];
+	
+	NSMutableArray *textFields = [NSMutableArray array];
+	
+	if ([elements containsObject:self.primaryTextField])	[textFields addObject:self.primaryTextField];
+	if ([elements containsObject:self.secondaryTextField])	[textFields addObject:self.secondaryTextField];
+	
+	return textFields;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate dataSource:(id<SDCAlertViewContentViewDataSource>)dataSource {

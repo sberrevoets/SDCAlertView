@@ -217,7 +217,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	[self tappedButtonAtIndex:self.cancelButtonIndex];
 }
 
-#pragma mark - Buttons
+#pragma mark - Buttons & Text Fields
 
 - (void)tappedButtonAtIndex:(NSInteger)index {
 	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)])
@@ -259,6 +259,10 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (NSString *)buttonTitleAtIndex:(NSInteger)index {
 	return self.otherButtonTitles[index];
+}
+
+- (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex {
+	return self.alertContentView.textFields[textFieldIndex];
 }
 
 #pragma mark - Auto-Layout
