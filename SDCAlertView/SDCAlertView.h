@@ -62,6 +62,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 - (void)show;
 
 - (void)addButtonWithTitle:(NSString *)title;
+- (NSString *)buttonTitleAtIndex:(NSInteger)index;
 
 @end
 

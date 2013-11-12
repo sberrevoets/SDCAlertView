@@ -236,8 +236,14 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	}
 }
 
+#pragma mark - Buttons
+
 - (void)addButtonWithTitle:(NSString *)title {
 	[self.otherButtonTitles addObject:title];
+}
+
+- (NSString *)buttonTitleAtIndex:(NSInteger)index {
+	return self.otherButtonTitles[index];
 }
 
 #pragma mark - Auto-Layout
