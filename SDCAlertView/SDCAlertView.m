@@ -217,6 +217,8 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	[self tappedButtonAtIndex:self.cancelButtonIndex];
 }
 
+#pragma mark - Buttons
+
 - (void)tappedButtonAtIndex:(NSInteger)index {
 	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)])
 		[self.delegate alertView:self clickedButtonAtIndex:index];
@@ -250,8 +252,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	
 	return buttonCount;
 }
-
-#pragma mark - Buttons
 
 - (void)addButtonWithTitle:(NSString *)title {
 	[self.otherButtonTitles addObject:title];
