@@ -36,7 +36,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSString *cancelButtonTitle;
-@property (nonatomic, strong) NSArray *otherButtonTitles;
+@property (nonatomic, strong) NSMutableArray *otherButtonTitles;
 
 @property (nonatomic, getter = isVisible) BOOL visible;
 
@@ -234,6 +234,10 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 				[self.delegate alertView:self didDismissWithButtonIndex:index];
 		}];
 	}
+}
+
+- (void)addButtonWithTitle:(NSString *)title {
+	[self.otherButtonTitles addObject:title];
 }
 
 #pragma mark - Auto-Layout
