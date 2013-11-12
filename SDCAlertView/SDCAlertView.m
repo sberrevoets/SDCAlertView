@@ -55,6 +55,10 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return _alertViewController;
 }
 
+- (UIView *)contentView {
+	return self.alertContentView.customContentView;
+}
+
 - (UIMotionEffectGroup *)parallaxEffect {
 	UIInterpolatingMotionEffect *horizontalParallax;
 	UIInterpolatingMotionEffect *verticalParallax;
@@ -77,7 +81,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	if (!_alertBackgroundView) {
 		_alertBackgroundView = [[SDCAlertViewBackgroundView alloc] init];
 		[_alertBackgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
-		[self insertSubview:_alertBackgroundView atIndex:0];
 	}
 	
 	return _alertBackgroundView;
@@ -87,7 +90,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	if (!_alertContentView) {
 		_alertContentView = [[SDCAlertViewContentView alloc] initWithDelegate:self dataSource:self];
 		[_alertContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
-		[self addSubview:_alertContentView];
 	}
 	
 	return _alertContentView;
@@ -138,6 +140,8 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (void)show {
 	[self addMotionEffect:[self parallaxEffect]];
+	[self insertSubview:self.alertBackgroundView atIndex:0];
+	[self addSubview:self.alertContentView];
 	
 	if ([self.delegate respondsToSelector:@selector(willPresentAlertView:)])
 		[self.delegate willPresentAlertView:self];

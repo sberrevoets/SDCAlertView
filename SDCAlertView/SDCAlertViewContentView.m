@@ -87,6 +87,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	[self initializePrimaryTextField];
 	[self initializeTextFieldSeparatorView];
 	[self initializeSecondaryTextField];
+	[self initializeCustomContentView];
 	[self initializeButtonTopSeparatorView];
 	[self initializeMainTableView];
 	[self initializeButtonSeparatorView];
@@ -137,6 +138,11 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 
 - (void)initializeTextFieldSeparatorView {
 	self.textFieldSeparatorView = [self separatorView];
+}
+
+- (void)initializeCustomContentView {
+	self.customContentView = [[UIView alloc] init];
+	[self.customContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 
 - (void)initializeSecondaryTextField {
@@ -280,6 +286,8 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 		}
 	}
 	
+	if ([[self.customContentView subviews] count] > 0)		[elements addObject:self.customContentView];
+	
 	NSUInteger otherButtonCount = [self.dataSource numberOfOtherButtonsInAlertContentView:self];
 	NSString *cancelButtonTitle = [self.dataSource titleForCancelButtonInAlertContentView:self];
 	if (otherButtonCount > 0 || cancelButtonTitle) {
@@ -300,6 +308,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	
 	if ([elements containsObject:self.contentScrollView])		[self positionContentScrollView];
 	if ([elements containsObject:self.textFieldBackgroundView])	[self positionTextFields];
+	if ([elements containsObject:self.customContentView])		[self positionCustomContentView];
 	if ([elements containsObject:self.mainTableView])			[self positionButtons];
 	
 	[self positionAlertElements];
@@ -332,6 +341,9 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 			self.secondaryTextField.placeholder = NSLocalizedString(@"Password", nil);
 		}
 	}
+	
+	if ([elements containsObject:self.customContentView])
+		[self addSubview:self.customContentView];
 	
 	if ([elements containsObject:self.mainTableView]) {
 		[self addSubview:self.mainTableView];
@@ -414,6 +426,11 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	[self.textFieldBackgroundView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:metrics views:mapping]];
 }
 
+- (void)positionCustomContentView {
+	[self.customContentView sdc_pinWidthToWidthOfView:self];
+	[self.customContentView sdc_horizontallyCenterInSuperview];
+}
+
 - (void)positionButtons {
 	[self.mainTableView sdc_pinHeight:self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0]];
 	
@@ -464,6 +481,9 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 		[verticalVFL appendString:@"-(==textFieldBackgroundViewTopSpacing)-[textFieldBackgroundView]"];
 	}
 	
+	if ([elements containsObject:self.customContentView])
+		[verticalVFL appendString:@"-[customContentView]"];
+	
 	if ([elements containsObject:self.mainTableView]) {
 		if ([elements containsObject:self.secondaryTableView]) {
 			[self.secondaryTableView sdc_alignEdges:UIRectEdgeLeft withView:self];
@@ -481,7 +501,9 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	
 	[verticalVFL appendString:@"|"];
 	
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:@{@"textFieldBackgroundViewTopSpacing": @(SDCAlertViewTextFieldBackgroundViewPadding.top), @"bottomSpacing": @(SDCAlertViewContentPadding.bottom)} views:@{@"scrollView": self.contentScrollView, @"textFieldBackgroundView": self.textFieldBackgroundView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView}]];
+	NSDictionary *metrics = @{@"textFieldBackgroundViewTopSpacing": @(SDCAlertViewTextFieldBackgroundViewPadding.top), @"bottomSpacing": @(SDCAlertViewContentPadding.bottom)};
+	NSDictionary *views = @{@"scrollView": self.contentScrollView, @"textFieldBackgroundView": self.textFieldBackgroundView, @"customContentView": self.customContentView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView};
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:metrics views:views]];
 }
 
 @end

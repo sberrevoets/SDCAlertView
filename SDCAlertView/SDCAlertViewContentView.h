@@ -41,6 +41,7 @@
 @property (nonatomic, weak) id <SDCAlertViewContentViewDataSource> dataSource;
 
 @property (nonatomic, readonly) NSArray *textFields;
+@property (nonatomic, strong) UIView *customContentView;
 
 - (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate dataSource:(id <SDCAlertViewContentViewDataSource>)dataSource;
 

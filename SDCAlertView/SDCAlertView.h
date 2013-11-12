@@ -54,6 +54,10 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 @property (nonatomic) SDCAlertViewStyle alertViewStyle;
 
+// The contentView property can be used to display any arbitrary view in an alert view by adding these views to the contentView.
+// SDCAlertView uses auto-layout to layout all its subviews, including the contentView. That means that you should not modify the contentView's frame property, as it will do nothing. Use NSLayoutConstraint or helper methods included in SDCAutoLayout to modify the contentView's dimensions. The contentView will take up the entire width of the alert. The height cannot be automatically determined and will need to be explicitly defined. If there are no subviews, the contentView will not be added to the alert. 
+@property (nonatomic, readonly) UIView *contentView;
+
 - (instancetype)initWithTitle:(NSString *)title
 					  message:(NSString *)message
 					 delegate:(id)delegate
