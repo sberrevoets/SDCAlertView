@@ -465,12 +465,14 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
 	NSMutableString *verticalVFL = [@"V:|" mutableCopy];
+	BOOL hasContentOtherThanButtons = NO;
 	
 	if ([elements containsObject:self.contentScrollView]) {
 		[self.contentScrollView sdc_pinHeight:[self heightForContentScrollView]];
 		[self.contentScrollView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self];
 		
 		[verticalVFL appendString:@"[scrollView]"];
+		hasContentOtherThanButtons = YES;
 	}
 	
 	if ([elements containsObject:self.textFieldBackgroundView]) {
@@ -479,10 +481,13 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 		
 		[self.textFieldBackgroundView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self insets:insets];
 		[verticalVFL appendString:@"-(==textFieldBackgroundViewTopSpacing)-[textFieldBackgroundView]"];
+		hasContentOtherThanButtons = YES;
 	}
 	
-	if ([elements containsObject:self.customContentView])
+	if ([elements containsObject:self.customContentView]) {
 		[verticalVFL appendString:@"-[customContentView]"];
+		hasContentOtherThanButtons = YES;
+	}
 	
 	if ([elements containsObject:self.mainTableView]) {
 		if ([elements containsObject:self.secondaryTableView]) {
@@ -496,7 +501,10 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 			[self.mainTableView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self];
 		}
 		
-		[verticalVFL appendString:@"-(==bottomSpacing)-[buttonTopSeparatorView][mainTableView]"];
+		if (hasContentOtherThanButtons)
+			[verticalVFL appendString:@"-(==bottomSpacing)-[buttonTopSeparatorView]"];
+		
+		[verticalVFL appendString:@"[mainTableView]"];
 	}
 	
 	[verticalVFL appendString:@"|"];
