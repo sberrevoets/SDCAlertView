@@ -112,7 +112,7 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 	
 	BOOL isLastAlert = [self.alertViews count] == 1;
 	if (isLastAlert)
-		self.previousWindow.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
+		self.previousWindow.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
 
 	[UIView animateWithDuration:SDCAlertViewShowingDismissingAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 		if (isLastAlert)
