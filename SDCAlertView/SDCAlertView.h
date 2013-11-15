@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 - (void)show;
 
-- (void)addButtonWithTitle:(NSString *)title;
+- (NSInteger)addButtonWithTitle:(NSString *)title;
 - (NSString *)buttonTitleAtIndex:(NSInteger)index;
 
 // TODO: The animated argument is currently ignored.

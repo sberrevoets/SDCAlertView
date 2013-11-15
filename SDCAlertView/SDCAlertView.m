@@ -257,8 +257,9 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return buttonCount;
 }
 
-- (void)addButtonWithTitle:(NSString *)title {
+- (NSInteger)addButtonWithTitle:(NSString *)title {
 	[self.otherButtonTitles addObject:title];
+	return [self.otherButtonTitles indexOfObject:title];
 }
 
 - (NSString *)buttonTitleAtIndex:(NSInteger)index {
