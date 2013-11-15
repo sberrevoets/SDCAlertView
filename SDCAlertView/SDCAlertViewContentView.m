@@ -184,6 +184,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	self.buttonSeparatorView = [self separatorView];
 }
 
+// TODO: Always use secondary table view for cancel button (even with three rows--like UIAlertView)
 - (void)initializeSecondaryTableView {
 	self.secondaryTableView = [self buttonTableView];
 }
@@ -224,7 +225,7 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUInteger otherButtonCount = [self.dataSource numberOfOtherButtonsInAlertContentView:self];
 	
-	if ((tableView == self.mainTableView && otherButtonCount) ||
+	if ((tableView == self.mainTableView && otherButtonCount == 1) ||
 		(tableView == self.mainTableView && otherButtonCount != 1 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1))
 		cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
 	else
@@ -272,9 +273,9 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 	
 	NSMutableArray *elements = [NSMutableArray array];
 	
-	if ([self.titleLabel.text length] > 0)					[elements addObject:self.titleLabel];
-	if ([self.messageLabel.text length] > 0)				[elements addObject:self.messageLabel];
-	if ([elements count] > 0)								[elements addObject:self.contentScrollView];
+	if ([self.titleLabel.text length] > 0)		[elements addObject:self.titleLabel];
+	if ([self.messageLabel.text length] > 0)	[elements addObject:self.messageLabel];
+	if ([elements count] > 0)					[elements addObject:self.contentScrollView];
 	
 	if ([self.delegate alertContentViewShouldShowPrimaryTextField:self]) {
 		[elements addObject:self.textFieldBackgroundView];
@@ -377,25 +378,32 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 #pragma mark - Content View Layout
 
 - (void)positionContentScrollView {
-	NSMutableString *verticalVFL = [@"V:|" mutableCopy];
+	NSMutableString *verticalVFL = [@"V:|-(==topSpace)" mutableCopy];
 	NSArray *elements = [self alertViewElementsToDisplay];
+	
+	CGFloat topSpace = SDCAlertViewContentPadding.top;
+	if (![elements containsObject:self.titleLabel]) topSpace += SDCAlertViewLabelSpacing;
 	
 	if ([elements containsObject:self.titleLabel]) {
 		[self.titleLabel sdc_pinWidthToWidthOfView:self.contentScrollView offset:-(SDCAlertViewContentPadding.left + SDCAlertViewContentPadding.right)];
 		[self.titleLabel sdc_horizontallyCenterInSuperview];
-		[verticalVFL appendString:@"-(==topPadding)-[titleLabel]"];
+		[verticalVFL appendString:@"-[titleLabel]"];
 	}
 	
 	if ([elements containsObject:self.messageLabel]) {
 		[self.messageLabel sdc_pinWidthToWidthOfView:self.contentScrollView offset:-(SDCAlertViewContentPadding.left + SDCAlertViewContentPadding.right)];
 		[self.messageLabel sdc_horizontallyCenterInSuperview];
-		[verticalVFL appendString:@"-(==labelSpacing)-[messageLabel]"];
+		
+		if ([elements containsObject:self.titleLabel])
+			[verticalVFL appendString:@"-(==labelSpace)"];
+		
+		[verticalVFL appendString:@"-[messageLabel]"];
 	}
 	
 	[verticalVFL appendString:@"|"];
 	
 	NSDictionary *mapping = @{@"titleLabel": self.titleLabel, @"messageLabel": self.messageLabel};
-	NSDictionary *metrics = @{@"topPadding": @(SDCAlertViewContentPadding.top), @"labelSpacing": @(SDCAlertViewLabelSpacing)};
+	NSDictionary *metrics = @{@"topSpace": @(topSpace), @"labelSpace": @(SDCAlertViewLabelSpacing)};
 	[self.contentScrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:metrics views:mapping]];
 }
 
@@ -452,10 +460,11 @@ static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
 }
 
 - (CGFloat)heightForContentScrollView {
-	CGFloat titleLabelHeight = [self.titleLabel intrinsicContentSize].height;
-	CGFloat messageLabelHeight = [self.messageLabel intrinsicContentSize].height;
-	CGFloat scrollViewHeight = SDCAlertViewContentPadding.top + titleLabelHeight + SDCAlertViewLabelSpacing + messageLabelHeight;
+	CGFloat scrollViewHeight = SDCAlertViewContentPadding.top;
+	scrollViewHeight += [self.titleLabel intrinsicContentSize].height + [self.messageLabel intrinsicContentSize].height;
 	
+	if ([[self alertViewElementsToDisplay] containsObject:self.messageLabel])	scrollViewHeight += SDCAlertViewLabelSpacing;
+		
 	CGFloat maximumScrollViewHeight = [self.delegate maximumHeightForAlertContentView:self] - self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0] - SDCAlertViewContentPadding.bottom - SDCAlertViewGetSeparatorThickness();
 	
 	return MIN(scrollViewHeight, maximumScrollViewHeight);
