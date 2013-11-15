@@ -103,8 +103,6 @@ static CGFloat 		SDCAlertViewAlpha = 0.9;
 		
 		alert.transform = CGAffineTransformMakeScale(1.0, 1.0);
 	} completion:^(BOOL finished) {
-		alert.alpha = SDCAlertViewAlpha;
-		
 		completionHandler();
 	}];
 }
