@@ -16,12 +16,12 @@
 
 CGFloat const SDCAlertViewWidth = 270;
 static CGFloat const SDCAlertViewSeparatorThickness = 1;
-static CGFloat SDCAlertViewCornerRadius = 7;
+static CGFloat const SDCAlertViewCornerRadius = 7;
 
-static UIOffset SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
+static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
-static NSInteger SDCAlertViewUnspecifiedButtonIndex = -1;
-static NSInteger SDCAlertViewDefaultFirstButtonIndex = 0;
+static NSInteger const SDCAlertViewUnspecifiedButtonIndex = -1;
+static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 CGFloat SDCAlertViewGetSeparatorThickness() {
 	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];

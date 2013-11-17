@@ -11,16 +11,16 @@
 #import "SDCAlertView.h"
 #import "UIView+SDCAutoLayout.h"
 
-static UIEdgeInsets SDCAlertViewContentPadding = {19, 15, 18.5, 15};
+static UIEdgeInsets const SDCAlertViewContentPadding = {19, 15, 18.5, 15};
 
-static CGFloat SDCAlertViewLabelSpacing = 4;
+static CGFloat const SDCAlertViewLabelSpacing = 4;
 
-static CGFloat SDCAlertViewTextFieldBackgroundViewCornerRadius = 5;
-static UIEdgeInsets SDCAlertViewTextFieldBackgroundViewPadding = {22, 15, 0, 15};
-static UIEdgeInsets SDCAlertViewTextFieldBackgroundViewInsets = {0, 2, 0, 2};
-static UIEdgeInsets SDCAlertViewTextFieldTextInsets = {0, 4, 0, 4};
-static CGFloat SDCAlertViewPrimaryTextFieldHeight = 30;
-static CGFloat SDCAlertViewSecondaryTextFieldHeight = 29;
+static CGFloat const SDCAlertViewTextFieldBackgroundViewCornerRadius = 5;
+static UIEdgeInsets const SDCAlertViewTextFieldBackgroundViewPadding = {20, 15, 0, 15};
+static UIEdgeInsets const SDCAlertViewTextFieldBackgroundViewInsets = {0, 2, 0, 2};
+static UIEdgeInsets const SDCAlertViewTextFieldTextInsets = {0, 4, 0, 4};
+static CGFloat const SDCAlertViewPrimaryTextFieldHeight = 30;
+static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 
 @interface UIFont (SDCAlertViewFonts)
 + (UIFont *)sdc_titleLabelFont;
