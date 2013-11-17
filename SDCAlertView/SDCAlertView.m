@@ -41,6 +41,8 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 @property (nonatomic, getter = isVisible) BOOL visible;
 
+@property (nonatomic, strong) UIToolbar *toolbar;
+
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
 
@@ -127,7 +129,8 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 		_otherButtonTitles = buttonTitles;
 		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
-		self.backgroundColor = [UIColor sdc_alertBackgroundColor];
+		//self.backgroundColor = [UIColor sdc_alertBackgroundColor];
+		
 		self.layer.masksToBounds = YES;
 		self.layer.cornerRadius = SDCAlertViewCornerRadius;
 		self.layer.borderColor = [[UIColor sdc_alertSeparatorColor] CGColor];
@@ -154,7 +157,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 			[self.delegate didPresentAlertView:self];
 	}];
 }
-
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
 	[self tappedButtonAtIndex:buttonIndex];
@@ -271,7 +273,14 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return self.alertContentView.textFields[textFieldIndex];
 }
 
-#pragma mark - Auto-Layout
+#pragma mark - Layout
+
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	
+	self.toolbar = [[UIToolbar alloc] initWithFrame:self.bounds];
+	[self.layer insertSublayer:self.toolbar.layer atIndex:0];
+}
 
 - (void)updateConstraints {
 	[self.alertBackgroundView sdc_centerInSuperview];
