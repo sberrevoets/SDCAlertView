@@ -15,6 +15,7 @@
 #import "UIView+SDCAutoLayout.h"
 
 CGFloat const SDCAlertViewWidth = 270;
+static UIEdgeInsets const SDCAlertViewPadding = {3, 0, 3, 0};
 static CGFloat const SDCAlertViewSeparatorThickness = 1;
 static CGFloat const SDCAlertViewCornerRadius = 7;
 
@@ -203,7 +204,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 }
 
 - (CGFloat)maximumHeightForAlertContentView:(SDCAlertViewContentView *)sender {
-	return CGRectGetHeight(self.superview.bounds);
+	return CGRectGetHeight(self.superview.bounds) - SDCAlertViewPadding.top - SDCAlertViewPadding.bottom;
 }
 
 - (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index {
@@ -289,7 +290,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 - (void)positionSelf {
 	[self sdc_pinWidth:SDCAlertViewWidth];
 	[self sdc_centerInSuperview];
-	[self sdc_setMaximumHeightToSuperviewHeight];
 }
 
 #pragma mark - Cleanup

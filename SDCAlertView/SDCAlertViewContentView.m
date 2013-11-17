@@ -460,12 +460,17 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 }
 
 - (CGFloat)heightForContentScrollView {
-	CGFloat scrollViewHeight = SDCAlertViewContentPadding.top;
-	scrollViewHeight += [self.titleLabel intrinsicContentSize].height + [self.messageLabel intrinsicContentSize].height;
+	NSArray *elements = [self alertViewElementsToDisplay];
 	
+	CGFloat scrollViewHeight = SDCAlertViewContentPadding.top + [self.titleLabel intrinsicContentSize].height + [self.messageLabel intrinsicContentSize].height;
 	if ([[self alertViewElementsToDisplay] containsObject:self.messageLabel])	scrollViewHeight += SDCAlertViewLabelSpacing;
 		
-	CGFloat maximumScrollViewHeight = [self.delegate maximumHeightForAlertContentView:self] - self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0] - SDCAlertViewContentPadding.bottom - SDCAlertViewGetSeparatorThickness();
+	CGFloat maximumScrollViewHeight = [self.delegate maximumHeightForAlertContentView:self] - SDCAlertViewContentPadding.bottom;
+	if ([elements containsObject:self.mainTableView])
+		maximumScrollViewHeight -= (self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0] + SDCAlertViewGetSeparatorThickness());
+	
+	if ([elements containsObject:self.primaryTextField])
+		maximumScrollViewHeight -= (SDCAlertViewTextFieldBackgroundViewPadding.top + SDCAlertViewTextFieldBackgroundViewPadding.bottom + SDCAlertViewPrimaryTextFieldHeight);
 	
 	return MIN(scrollViewHeight, maximumScrollViewHeight);
 }
