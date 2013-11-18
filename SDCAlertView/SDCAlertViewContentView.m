@@ -26,6 +26,8 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 + (UIFont *)sdc_titleLabelFont;
 + (UIFont *)sdc_messageLabelFont;
 + (UIFont *)sdc_textFieldFont;
++ (UIFont *)sdc_suggestedButtonFont;
++ (UIFont *)sdc_normalButtonFont;
 @end
 
 @interface SDCAlertViewTextField : UITextField
@@ -227,9 +229,9 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 	
 	if ((tableView == self.mainTableView && otherButtonCount == 1) ||
 		(tableView == self.mainTableView && otherButtonCount != 1 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1))
-		cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
+		cell.textLabel.font = [UIFont sdc_suggestedButtonFont];
 	else
-		cell.textLabel.font = [UIFont systemFontOfSize:17];
+		cell.textLabel.font = [UIFont sdc_normalButtonFont];
 	
 	cell.backgroundColor = [UIColor clearColor];
 	cell.textLabel.textColor = (tableView == self.secondaryTableView || [self isButtonAtIndexPathEnabled:indexPath]) ? [UIColor sdc_alertButtonTextColor] : [UIColor sdc_disabledAlertButtonTextColor];
@@ -554,6 +556,14 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 
 + (UIFont *)sdc_textFieldFont {
 	return [UIFont systemFontOfSize:13];
+}
+
++ (UIFont *)sdc_suggestedButtonFont {
+	return [UIFont boldSystemFontOfSize:17];
+}
+
++ (UIFont *)sdc_normalButtonFont {
+	return [UIFont systemFontOfSize:17];
 }
 
 @end
