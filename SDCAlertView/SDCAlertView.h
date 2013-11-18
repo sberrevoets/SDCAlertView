@@ -85,7 +85,6 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @end
 
 @interface UIColor (SDCAlertViewColors)
-+ (UIColor *)sdc_alertBackgroundColor;
 + (UIColor *)sdc_alertButtonTextColor;
 + (UIColor *)sdc_disabledAlertButtonTextColor;
 + (UIColor *)sdc_alertSeparatorColor;

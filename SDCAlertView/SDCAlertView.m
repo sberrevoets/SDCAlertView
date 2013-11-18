@@ -302,10 +302,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 @implementation UIColor (SDCAlertViewColors)
 
-+ (UIColor *)sdc_alertBackgroundColor {
-	return [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1];
-}
-
 + (UIColor *)sdc_alertButtonTextColor {
 	return [UIColor colorWithRed:16/255.0 green:144/255.0 blue:248/255.0 alpha:1];
 }
@@ -315,7 +311,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 }
 
 + (UIColor *)sdc_alertSeparatorColor {
-	return [UIColor colorWithRed:189/255.0 green:189/255.0 blue:189/255.0 alpha:1];
+	return [UIColor colorWithWhite:0.5 alpha:0.5];
 }
 
 + (UIColor *)sdc_textFieldBackgroundViewColor {
