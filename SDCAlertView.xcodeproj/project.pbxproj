@@ -26,6 +26,14 @@
 		D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */; };
 		D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */; };
 		D263F11C1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F11B1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m */; };
+		D2D2AB2E1838855200C0EA2C /* RBBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB1F1838855200C0EA2C /* RBBAnimation.m */; };
+		D2D2AB2F1838855200C0EA2C /* RBBBlockBasedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB211838855200C0EA2C /* RBBBlockBasedArray.m */; };
+		D2D2AB301838855200C0EA2C /* RBBCubicBezier.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB231838855200C0EA2C /* RBBCubicBezier.m */; };
+		D2D2AB311838855200C0EA2C /* RBBCustomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB251838855200C0EA2C /* RBBCustomAnimation.m */; };
+		D2D2AB321838855200C0EA2C /* RBBEasingFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB271838855200C0EA2C /* RBBEasingFunction.m */; };
+		D2D2AB331838855200C0EA2C /* RBBLinearInterpolation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB291838855200C0EA2C /* RBBLinearInterpolation.m */; };
+		D2D2AB341838855200C0EA2C /* RBBSpringAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB2B1838855200C0EA2C /* RBBSpringAnimation.m */; };
+		D2D2AB351838855200C0EA2C /* RBBTweenAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB2D1838855200C0EA2C /* RBBTweenAnimation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +76,23 @@
 		D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewContentView.m; sourceTree = "<group>"; };
 		D263F11A1829ED490001E4E0 /* UIView+SDCAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+SDCAutoLayout.h"; path = "../../SDCAutoLayout/AutoLayout/UIView+SDCAutoLayout.h"; sourceTree = "<group>"; };
 		D263F11B1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+SDCAutoLayout.m"; path = "../../SDCAutoLayout/AutoLayout/UIView+SDCAutoLayout.m"; sourceTree = "<group>"; };
+		D2D2AB1D1838855200C0EA2C /* RBBAnimation-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RBBAnimation-Prefix.pch"; sourceTree = "<group>"; };
+		D2D2AB1E1838855200C0EA2C /* RBBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBAnimation.h; sourceTree = "<group>"; };
+		D2D2AB1F1838855200C0EA2C /* RBBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBAnimation.m; sourceTree = "<group>"; };
+		D2D2AB201838855200C0EA2C /* RBBBlockBasedArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBBlockBasedArray.h; sourceTree = "<group>"; };
+		D2D2AB211838855200C0EA2C /* RBBBlockBasedArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBBlockBasedArray.m; sourceTree = "<group>"; };
+		D2D2AB221838855200C0EA2C /* RBBCubicBezier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBCubicBezier.h; sourceTree = "<group>"; };
+		D2D2AB231838855200C0EA2C /* RBBCubicBezier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBCubicBezier.m; sourceTree = "<group>"; };
+		D2D2AB241838855200C0EA2C /* RBBCustomAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBCustomAnimation.h; sourceTree = "<group>"; };
+		D2D2AB251838855200C0EA2C /* RBBCustomAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBCustomAnimation.m; sourceTree = "<group>"; };
+		D2D2AB261838855200C0EA2C /* RBBEasingFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBEasingFunction.h; sourceTree = "<group>"; };
+		D2D2AB271838855200C0EA2C /* RBBEasingFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBEasingFunction.m; sourceTree = "<group>"; };
+		D2D2AB281838855200C0EA2C /* RBBLinearInterpolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBLinearInterpolation.h; sourceTree = "<group>"; };
+		D2D2AB291838855200C0EA2C /* RBBLinearInterpolation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBLinearInterpolation.m; sourceTree = "<group>"; };
+		D2D2AB2A1838855200C0EA2C /* RBBSpringAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBSpringAnimation.h; sourceTree = "<group>"; };
+		D2D2AB2B1838855200C0EA2C /* RBBSpringAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBSpringAnimation.m; sourceTree = "<group>"; };
+		D2D2AB2C1838855200C0EA2C /* RBBTweenAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBTweenAnimation.h; sourceTree = "<group>"; };
+		D2D2AB2D1838855200C0EA2C /* RBBTweenAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBTweenAnimation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +152,7 @@
 		D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				D2D2AB1C1838855200C0EA2C /* RBBAnimation */,
 				D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */,
 				D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */,
 				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
@@ -175,6 +201,31 @@
 				D25B3CCF17ECE7A6004B32A2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D2D2AB1C1838855200C0EA2C /* RBBAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				D2D2AB1D1838855200C0EA2C /* RBBAnimation-Prefix.pch */,
+				D2D2AB1E1838855200C0EA2C /* RBBAnimation.h */,
+				D2D2AB1F1838855200C0EA2C /* RBBAnimation.m */,
+				D2D2AB201838855200C0EA2C /* RBBBlockBasedArray.h */,
+				D2D2AB211838855200C0EA2C /* RBBBlockBasedArray.m */,
+				D2D2AB221838855200C0EA2C /* RBBCubicBezier.h */,
+				D2D2AB231838855200C0EA2C /* RBBCubicBezier.m */,
+				D2D2AB241838855200C0EA2C /* RBBCustomAnimation.h */,
+				D2D2AB251838855200C0EA2C /* RBBCustomAnimation.m */,
+				D2D2AB261838855200C0EA2C /* RBBEasingFunction.h */,
+				D2D2AB271838855200C0EA2C /* RBBEasingFunction.m */,
+				D2D2AB281838855200C0EA2C /* RBBLinearInterpolation.h */,
+				D2D2AB291838855200C0EA2C /* RBBLinearInterpolation.m */,
+				D2D2AB2A1838855200C0EA2C /* RBBSpringAnimation.h */,
+				D2D2AB2B1838855200C0EA2C /* RBBSpringAnimation.m */,
+				D2D2AB2C1838855200C0EA2C /* RBBTweenAnimation.h */,
+				D2D2AB2D1838855200C0EA2C /* RBBTweenAnimation.m */,
+			);
+			name = RBBAnimation;
+			path = ../../RBBAnimation/RBBAnimation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,8 +327,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D25B3CBE17ECE7A6004B32A2 /* SDCViewController.m in Sources */,
+				D2D2AB301838855200C0EA2C /* RBBCubicBezier.m in Sources */,
 				D25B3CB417ECE7A6004B32A2 /* main.m in Sources */,
+				D2D2AB2F1838855200C0EA2C /* RBBBlockBasedArray.m in Sources */,
+				D2D2AB311838855200C0EA2C /* RBBCustomAnimation.m in Sources */,
+				D2D2AB2E1838855200C0EA2C /* RBBAnimation.m in Sources */,
 				D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */,
+				D2D2AB351838855200C0EA2C /* RBBTweenAnimation.m in Sources */,
+				D2D2AB321838855200C0EA2C /* RBBEasingFunction.m in Sources */,
+				D2D2AB341838855200C0EA2C /* RBBSpringAnimation.m in Sources */,
+				D2D2AB331838855200C0EA2C /* RBBLinearInterpolation.m in Sources */,
 				D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */,
 				D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */,
 				D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */,
@@ -491,6 +550,7 @@
 				D25B3CD817ECE7A6004B32A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D25B3CD917ECE7A6004B32A2 /* Build configuration list for PBXNativeTarget "SDCAlertViewTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +559,7 @@
 				D25B3CDB17ECE7A6004B32A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

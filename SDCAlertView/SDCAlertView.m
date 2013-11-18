@@ -40,12 +40,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 @property (nonatomic, strong) NSMutableArray *otherButtonTitles;
 
 @property (nonatomic, getter = isVisible) BOOL visible;
-
-@property (nonatomic, strong) UIToolbar *toolbar;
-
-@property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
-@property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
-
 @end
 
 @implementation SDCAlertView
@@ -129,12 +123,9 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 		_otherButtonTitles = buttonTitles;
 		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
-		//self.backgroundColor = [UIColor sdc_alertBackgroundColor];
 		
 		self.layer.masksToBounds = YES;
 		self.layer.cornerRadius = SDCAlertViewCornerRadius;
-		self.layer.borderColor = [[UIColor sdc_alertSeparatorColor] CGColor];
-		self.layer.borderWidth = SDCAlertViewGetSeparatorThickness();
 	}
 	
 	return self;
@@ -152,7 +143,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	
 	[self.alertViewController showAlert:self completion:^{
 		self.visible = YES;
-		
+
 		if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
 			[self.delegate didPresentAlertView:self];
 	}];

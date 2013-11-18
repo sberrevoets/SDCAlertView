@@ -19,6 +19,8 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 };
 
 @class SDCAlertView;
+@class SDCAlertViewBackgroundView;
+@class SDCAlertViewContentView;
 
 @protocol SDCAlertViewDelegate <NSObject>
 @optional
@@ -74,6 +76,11 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
 
 - (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex;
+
+// These views are considered private and should not be messed with
+@property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
+@property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
+@property (nonatomic, strong) UIToolbar *toolbar;
 
 @end
 
