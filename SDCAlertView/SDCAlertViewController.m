@@ -121,8 +121,8 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 		[self.alertViews removeObject:alert];
 		
 		if (isLastAlert) {
-			self.window = nil;
 			[self.previousWindow makeKeyAndVisible];
+			self.window = nil;
 		}
 		
 		completionHandler();
@@ -189,8 +189,10 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	[alert.toolbar.layer addAnimation:opacityAnimation forKey:@"opacity"];
 
 	// If the last alert is being dismissed, also animate the dimmed background back to normal
-	if ([self.alertViews count] == 1)
+	if ([self.alertViews count] == 1) {
+		self.backgroundColorView.layer.opacity = 0;
 		[self.backgroundColorView.layer addAnimation:opacityAnimation forKey:@"opacity"];
+	}
 }
 
 - (void)dealloc {
