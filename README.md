@@ -46,3 +46,29 @@ Usage
 The usage is exactly the same as it is for `UIAlertView`. Any documentation that applies to some `UIAlertView` API, also applies to the same `SDCAlertView` API.
 
 To use the `contentView` property, you have to apply auto-layout constraints to it and its subviews. The `contentView` property will be the same width as the alert, but the height is dependent on its content, so you have to set that too. See [SDCViewController](SDCViewController.m) for a few examples of how to use `contentView`. See [`SDCAutoLayout`](https://github.com/Scott90/SDCAutoLayout) for an `NSLayoutConstraint` category that makes creating constraints a little easier.
+
+Installation
+============
+The easiest way to install is, of course, by using Cocoapods. The name of the pod is `SDCAlertView`.
+
+If you're not using Cocoapods, you need at least:
+
+- SDCAlertView.{h,m}
+- SDCAlertViewViewController.{h,m}
+- SDCAlertViewContentView.{h,m}
+- SDCAlertViewBackgroundView.{h,m}
+- SDCAlertViewBackground.png (for older generation iPads)
+- SDCAlertViewBackground&#064;2x.png
+
+The project also depends on [RBBAnimation](https://github.com/robb/RBBAnimation) and [SDCAutoLayout](https://github.com/Scott90/SDCAutoLayout). These dependencies are handled for you if you use Cocoapods.
+
+
+Credits
+=======
+
+Some credits are in order:
+
+- Robert Böhnke ([@robb](https://github.com/robb)) - [RBBAnimation](https://github.com/robb/RBBAnimation)
+- Lee McDermott ([@lmcd](https://github.com/lmcd)) for reverse-engineering the showing and dismissing animations.
+
+Thanks both!
