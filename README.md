@@ -10,7 +10,9 @@ The class is a drop-in replacement for `UIAlertView`. All public APIs for `UIAle
 
 And you're sure it's the same?
 ==============================
-For 90% (which is an estimate and not actually measured), yes. Unfortunately, sometimes there was just no telling how certain methods were implemented, or private APIs whose implementations can only be guessed.
+Check for yourself:
+
+![Animated GIF showing alert](http://scott90.github.io/SDCAlertView/ProgressViewAlert.gif)
 
 What has been successfully duplicated:
 --------------------------------------
@@ -36,7 +38,7 @@ What is not implemented yet:
 - Setting the cancel button index
 - The `visible` property does not behave exactly the same as `UIAlertView`'s `visible` property
 - The `animated` argument in `-dismissWithClickedButtonIndex:animated:` is ignored; alert views will always dismiss with animation
-- Cocoapods support
+- Handle device rotations correctly
 - Block-based syntax
 - More customization of alert
 - Using autoresizing masks for content view
@@ -45,7 +47,7 @@ Usage
 =====
 The usage is exactly the same as it is for `UIAlertView`. Any documentation that applies to some `UIAlertView` API, also applies to the same `SDCAlertView` API.
 
-To use the `contentView` property, you have to apply auto-layout constraints to it and its subviews. The `contentView` property will be the same width as the alert, but the height is dependent on its content, so you have to set that too. See [SDCViewController](SDCViewController.m) for a few examples of how to use `contentView`. See [`SDCAutoLayout`](https://github.com/Scott90/SDCAutoLayout) for an `NSLayoutConstraint` category that makes creating constraints a little easier.
+To use the `contentView` property, you have to apply auto-layout constraints to it and its subviews. The `contentView` property will be the same width as the alert, but the height is dependent on its content, so you have to set that too. See [SDCViewController](SDCAlertView/SDCViewController.m) for a few examples of how to use `contentView`. See [`SDCAutoLayout`](https://github.com/Scott90/SDCAutoLayout) for an `NSLayoutConstraint` category that makes creating constraints a little easier.
 
 Installation
 ============
@@ -70,5 +72,4 @@ Some credits are in order:
 
 - Robert Böhnke ([@robb](https://github.com/robb)) - [RBBAnimation](https://github.com/robb/RBBAnimation)
 - Lee McDermott ([@lmcd](https://github.com/lmcd)) for reverse-engineering the showing and dismissing animations.
-
-Thanks both!
+- César Castillo ([@JagCesar](https://github.com/JagCesar)) for the great idea of using a `UIToolbar` for easy live blurring
