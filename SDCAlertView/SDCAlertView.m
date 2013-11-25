@@ -38,8 +38,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSString *cancelButtonTitle;
 @property (nonatomic, strong) NSMutableArray *otherButtonTitles;
-
-@property (nonatomic, getter = isVisible) BOOL visible;
 @end
 
 @implementation SDCAlertView
@@ -92,6 +90,10 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return _alertContentView;
 }
 
+- (BOOL)isVisible {
+	return [self.alertViewController currentAlert] == self;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithTitle:(NSString *)title
@@ -142,8 +144,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 		[self.delegate willPresentAlertView:self];
 	
 	[self.alertViewController showAlert:self animated:YES completion:^{
-		self.visible = YES;
-
 		if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
 			[self.delegate didPresentAlertView:self];
 	}];

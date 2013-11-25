@@ -19,4 +19,6 @@
 - (void)showAlert:(SDCAlertView *)alert animated:(BOOL)animated completion:(void(^)(void))completionHandler;
 - (void)dismissAlert:(SDCAlertView *)alert animated:(BOOL)animated completion:(void(^)(void))completionHandler;
 
+- (SDCAlertView *)currentAlert;
+
 @end

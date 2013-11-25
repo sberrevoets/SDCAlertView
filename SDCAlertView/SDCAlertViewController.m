@@ -141,6 +141,10 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	}
 }
 
+- (SDCAlertView *)currentAlert {
+	return [self.alertViews lastObject];
+}
+
 #pragma mark - Animations
 
 - (RBBSpringAnimation *)springAnimationForKey:(NSString *)key {

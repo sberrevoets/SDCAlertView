@@ -50,8 +50,6 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @property (nonatomic, readonly) NSInteger firstOtherButtonIndex;
 @property (nonatomic, readonly) NSInteger numberOfButtons;
 
-// TODO: The semantics of this property are a little different than UIAlertView's visible property.
-// Currently, if the receiver has been presented (and then dismissed, but still in the heap), this property will be set to YES.
 @property (nonatomic, readonly, getter = isVisible) BOOL visible;
 
 @property (nonatomic) SDCAlertViewStyle alertViewStyle;
