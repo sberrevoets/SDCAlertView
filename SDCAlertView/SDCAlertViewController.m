@@ -92,7 +92,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	self.rootView.frame = self.window.frame;
 }
 
-- (void)showAlert:(SDCAlertView *)alert completion:(void (^)(void))completionHandler {
+- (void)showAlert:(SDCAlertView *)alert animated:(BOOL)animated completion:(void (^)(void))completionHandler {
 	[self.alertViews addObject:alert];
 	[self.rootView addSubview:alert];
 	
@@ -102,21 +102,24 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 		[self.window bringSubviewToFront:self.rootView];
 	}
 	
-	[CATransaction begin];
-	[CATransaction setCompletionBlock:completionHandler];
-	[self applyAnimationsForShowingAlert:alert];
-	[CATransaction commit];
+	if (animated) {
+		[CATransaction begin];
+		[CATransaction setCompletionBlock:completionHandler];
+		[self applyAnimationsForShowingAlert:alert];
+		[CATransaction commit];
+	} else {
+		// do without animation
+	}
 }
 
-- (void)dismissAlert:(SDCAlertView *)alert completion:(void (^)(void))completionHandler {
+- (void)dismissAlert:(SDCAlertView *)alert animated:(BOOL)animated completion:(void (^)(void))completionHandler {
 	[alert resignFirstResponder];
 	
 	BOOL isLastAlert = [self.alertViews count] == 1;
 	if (isLastAlert)
 		self.previousWindow.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
 
-	[CATransaction begin];
-	[CATransaction setCompletionBlock:^{
+	void (^dismissBlock)() = ^{
 		[alert removeFromSuperview];
 		[self.alertViews removeObject:alert];
 		
@@ -126,9 +129,16 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 		}
 		
 		completionHandler();
-	}];
-	[self applyAnimationsForDismissingAlert:alert];
-	[CATransaction commit];
+	};
+	
+	if (animated) {
+		[CATransaction begin];
+		[CATransaction setCompletionBlock:dismissBlock];
+		[self applyAnimationsForDismissingAlert:alert];
+		[CATransaction commit];
+	} else {
+		dismissBlock();
+	}
 }
 
 #pragma mark - Animations

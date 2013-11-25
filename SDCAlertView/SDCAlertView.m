@@ -141,7 +141,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	if ([self.delegate respondsToSelector:@selector(willPresentAlertView:)])
 		[self.delegate willPresentAlertView:self];
 	
-	[self.alertViewController showAlert:self completion:^{
+	[self.alertViewController showAlert:self animated:YES completion:^{
 		self.visible = YES;
 
 		if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
@@ -150,7 +150,13 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 }
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
-	[self tappedButtonAtIndex:buttonIndex];
+	if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
+		[self.delegate alertView:self willDismissWithButtonIndex:buttonIndex];
+	
+	[self.alertViewController dismissAlert:self animated:animated completion:^{
+		if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
+			[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
+	}];
 }
 
 - (BOOL)resignFirstResponder {
@@ -222,14 +228,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 		[self.delegate alertView:self clickedButtonAtIndex:index];
 	
 	if (([self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)] && [self.delegate alertView:self shouldDismissWithButtonIndex:index]) || ![self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)]) {
-		
-		if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
-			[self.delegate alertView:self willDismissWithButtonIndex:index];
-		
-		[self.alertViewController dismissAlert:self completion:^{
-			if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
-				[self.delegate alertView:self didDismissWithButtonIndex:index];
-		}];
+		[self dismissWithClickedButtonIndex:index animated:YES];
 	}
 }
 

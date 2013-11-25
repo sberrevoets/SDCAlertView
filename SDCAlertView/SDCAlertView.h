@@ -80,8 +80,6 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 - (NSInteger)addButtonWithTitle:(NSString *)title;
 - (NSString *)buttonTitleAtIndex:(NSInteger)index;
 
-// TODO: The animated argument is currently ignored.
-// All alerts are dismissed with animation, regardless of the animated argument
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
 
 - (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex;
