@@ -25,18 +25,10 @@
 		D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */; };
 		D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */; };
 		D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */; };
-		D263F11C1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F11B1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m */; };
 		D2A520181840176300837A1A /* SDCAlertView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D2A520171840176300837A1A /* SDCAlertView.podspec */; };
-		D2D2AB2E1838855200C0EA2C /* RBBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB1F1838855200C0EA2C /* RBBAnimation.m */; };
-		D2D2AB2F1838855200C0EA2C /* RBBBlockBasedArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB211838855200C0EA2C /* RBBBlockBasedArray.m */; };
-		D2D2AB301838855200C0EA2C /* RBBCubicBezier.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB231838855200C0EA2C /* RBBCubicBezier.m */; };
-		D2D2AB311838855200C0EA2C /* RBBCustomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB251838855200C0EA2C /* RBBCustomAnimation.m */; };
-		D2D2AB321838855200C0EA2C /* RBBEasingFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB271838855200C0EA2C /* RBBEasingFunction.m */; };
-		D2D2AB331838855200C0EA2C /* RBBLinearInterpolation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB291838855200C0EA2C /* RBBLinearInterpolation.m */; };
-		D2D2AB341838855200C0EA2C /* RBBSpringAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB2B1838855200C0EA2C /* RBBSpringAnimation.m */; };
-		D2D2AB351838855200C0EA2C /* RBBTweenAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D2AB2D1838855200C0EA2C /* RBBTweenAnimation.m */; };
 		D2F9D2BD18400CD300F85B10 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BC18400CD200F85B10 /* README.md */; };
 		D2F9D2BF18400DAF00F85B10 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BE18400DAF00F85B10 /* LICENSE */; };
+		D70D28F12B224BE7919DADF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D8593FE42641CBBCB47F79 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50B67E8F6417468B9958F089 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		D25B3CA417ECE7A6004B32A2 /* SDCAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDCAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B3CA717ECE7A6004B32A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -77,28 +70,10 @@
 		D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewBackgroundView.m; sourceTree = "<group>"; };
 		D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewContentView.h; sourceTree = "<group>"; };
 		D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewContentView.m; sourceTree = "<group>"; };
-		D263F11A1829ED490001E4E0 /* UIView+SDCAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+SDCAutoLayout.h"; path = "../../SDCAutoLayout/AutoLayout/UIView+SDCAutoLayout.h"; sourceTree = "<group>"; };
-		D263F11B1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+SDCAutoLayout.m"; path = "../../SDCAutoLayout/AutoLayout/UIView+SDCAutoLayout.m"; sourceTree = "<group>"; };
 		D2A520171840176300837A1A /* SDCAlertView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SDCAlertView.podspec; sourceTree = "<group>"; };
-		D2D2AB1D1838855200C0EA2C /* RBBAnimation-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RBBAnimation-Prefix.pch"; sourceTree = "<group>"; };
-		D2D2AB1E1838855200C0EA2C /* RBBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBAnimation.h; sourceTree = "<group>"; };
-		D2D2AB1F1838855200C0EA2C /* RBBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBAnimation.m; sourceTree = "<group>"; };
-		D2D2AB201838855200C0EA2C /* RBBBlockBasedArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBBlockBasedArray.h; sourceTree = "<group>"; };
-		D2D2AB211838855200C0EA2C /* RBBBlockBasedArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBBlockBasedArray.m; sourceTree = "<group>"; };
-		D2D2AB221838855200C0EA2C /* RBBCubicBezier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBCubicBezier.h; sourceTree = "<group>"; };
-		D2D2AB231838855200C0EA2C /* RBBCubicBezier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBCubicBezier.m; sourceTree = "<group>"; };
-		D2D2AB241838855200C0EA2C /* RBBCustomAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBCustomAnimation.h; sourceTree = "<group>"; };
-		D2D2AB251838855200C0EA2C /* RBBCustomAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBCustomAnimation.m; sourceTree = "<group>"; };
-		D2D2AB261838855200C0EA2C /* RBBEasingFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBEasingFunction.h; sourceTree = "<group>"; };
-		D2D2AB271838855200C0EA2C /* RBBEasingFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBEasingFunction.m; sourceTree = "<group>"; };
-		D2D2AB281838855200C0EA2C /* RBBLinearInterpolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBLinearInterpolation.h; sourceTree = "<group>"; };
-		D2D2AB291838855200C0EA2C /* RBBLinearInterpolation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBLinearInterpolation.m; sourceTree = "<group>"; };
-		D2D2AB2A1838855200C0EA2C /* RBBSpringAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBSpringAnimation.h; sourceTree = "<group>"; };
-		D2D2AB2B1838855200C0EA2C /* RBBSpringAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBSpringAnimation.m; sourceTree = "<group>"; };
-		D2D2AB2C1838855200C0EA2C /* RBBTweenAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBBTweenAnimation.h; sourceTree = "<group>"; };
-		D2D2AB2D1838855200C0EA2C /* RBBTweenAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBBTweenAnimation.m; sourceTree = "<group>"; };
 		D2F9D2BC18400CD200F85B10 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D2F9D2BE18400DAF00F85B10 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		E8D8593FE42641CBBCB47F79 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +84,7 @@
 				D25B3CAA17ECE7A6004B32A2 /* CoreGraphics.framework in Frameworks */,
 				D25B3CAC17ECE7A6004B32A2 /* UIKit.framework in Frameworks */,
 				D25B3CA817ECE7A6004B32A2 /* Foundation.framework in Frameworks */,
+				D70D28F12B224BE7919DADF7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +111,7 @@
 				D25B3CCC17ECE7A6004B32A2 /* SDCAlertViewTests */,
 				D25B3CA617ECE7A6004B32A2 /* Frameworks */,
 				D25B3CA517ECE7A6004B32A2 /* Products */,
+				50B67E8F6417468B9958F089 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +131,7 @@
 				D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */,
 				D25B3CAB17ECE7A6004B32A2 /* UIKit.framework */,
 				D25B3CC617ECE7A6004B32A2 /* XCTest.framework */,
+				E8D8593FE42641CBBCB47F79 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -161,7 +139,6 @@
 		D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				D2D2AB1C1838855200C0EA2C /* RBBAnimation */,
 				D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */,
 				D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */,
 				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
@@ -170,8 +147,6 @@
 				D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */,
 				D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */,
 				D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */,
-				D263F11A1829ED490001E4E0 /* UIView+SDCAutoLayout.h */,
-				D263F11B1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m */,
 				D25B3CB617ECE7A6004B32A2 /* SDCAppDelegate.h */,
 				D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */,
 				D25B3CB917ECE7A6004B32A2 /* Main.storyboard */,
@@ -212,31 +187,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D2D2AB1C1838855200C0EA2C /* RBBAnimation */ = {
-			isa = PBXGroup;
-			children = (
-				D2D2AB1D1838855200C0EA2C /* RBBAnimation-Prefix.pch */,
-				D2D2AB1E1838855200C0EA2C /* RBBAnimation.h */,
-				D2D2AB1F1838855200C0EA2C /* RBBAnimation.m */,
-				D2D2AB201838855200C0EA2C /* RBBBlockBasedArray.h */,
-				D2D2AB211838855200C0EA2C /* RBBBlockBasedArray.m */,
-				D2D2AB221838855200C0EA2C /* RBBCubicBezier.h */,
-				D2D2AB231838855200C0EA2C /* RBBCubicBezier.m */,
-				D2D2AB241838855200C0EA2C /* RBBCustomAnimation.h */,
-				D2D2AB251838855200C0EA2C /* RBBCustomAnimation.m */,
-				D2D2AB261838855200C0EA2C /* RBBEasingFunction.h */,
-				D2D2AB271838855200C0EA2C /* RBBEasingFunction.m */,
-				D2D2AB281838855200C0EA2C /* RBBLinearInterpolation.h */,
-				D2D2AB291838855200C0EA2C /* RBBLinearInterpolation.m */,
-				D2D2AB2A1838855200C0EA2C /* RBBSpringAnimation.h */,
-				D2D2AB2B1838855200C0EA2C /* RBBSpringAnimation.m */,
-				D2D2AB2C1838855200C0EA2C /* RBBTweenAnimation.h */,
-				D2D2AB2D1838855200C0EA2C /* RBBTweenAnimation.m */,
-			);
-			name = RBBAnimation;
-			path = ../../RBBAnimation/RBBAnimation;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -244,9 +194,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D25B3CD617ECE7A6004B32A2 /* Build configuration list for PBXNativeTarget "SDCAlertView" */;
 			buildPhases = (
+				23A12E549D434E09BDB6E98D /* Check Pods Manifest.lock */,
 				D25B3CA017ECE7A6004B32A2 /* Sources */,
 				D25B3CA117ECE7A6004B32A2 /* Frameworks */,
 				D25B3CA217ECE7A6004B32A2 /* Resources */,
+				858BC639C445465CBB8B2137 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -333,26 +285,50 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		23A12E549D434E09BDB6E98D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		858BC639C445465CBB8B2137 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D25B3CA017ECE7A6004B32A2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D25B3CBE17ECE7A6004B32A2 /* SDCViewController.m in Sources */,
-				D2D2AB301838855200C0EA2C /* RBBCubicBezier.m in Sources */,
 				D25B3CB417ECE7A6004B32A2 /* main.m in Sources */,
-				D2D2AB2F1838855200C0EA2C /* RBBBlockBasedArray.m in Sources */,
-				D2D2AB311838855200C0EA2C /* RBBCustomAnimation.m in Sources */,
-				D2D2AB2E1838855200C0EA2C /* RBBAnimation.m in Sources */,
 				D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */,
-				D2D2AB351838855200C0EA2C /* RBBTweenAnimation.m in Sources */,
-				D2D2AB321838855200C0EA2C /* RBBEasingFunction.m in Sources */,
-				D2D2AB341838855200C0EA2C /* RBBSpringAnimation.m in Sources */,
-				D2D2AB331838855200C0EA2C /* RBBLinearInterpolation.m in Sources */,
 				D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */,
 				D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */,
 				D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */,
-				D263F11C1829ED4A0001E4E0 /* UIView+SDCAutoLayout.m in Sources */,
 				D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,6 +453,7 @@
 		};
 		D25B3CD717ECE7A6004B32A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50B67E8F6417468B9958F089 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -490,6 +467,7 @@
 		};
 		D25B3CD817ECE7A6004B32A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50B67E8F6417468B9958F089 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
