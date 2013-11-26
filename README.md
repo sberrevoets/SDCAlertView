@@ -35,10 +35,8 @@ What is not implemented yet:
 ----------------------------
 
 - Creating a "queue" of alerts and making sure they interact properly
-- Setting the cancel button index
-- The `visible` property does not behave exactly the same as `UIAlertView`'s `visible` property
-- The `animated` argument in `-dismissWithClickedButtonIndex:animated:` is ignored; alert views will always dismiss with animation
 - Handle device rotations correctly
+
 - Block-based syntax
 - More customization of alert
 - Using autoresizing masks for content view
