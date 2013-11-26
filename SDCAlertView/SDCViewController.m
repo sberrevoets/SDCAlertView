@@ -31,14 +31,14 @@
 			[[[SDCAlertView alloc] initWithTitle:@"Title"
 										 message:@"This is a message"
 										delegate:nil
-							   cancelButtonTitle:@"OK"
-							   otherButtonTitles:nil] show];
+							   cancelButtonTitle:@"Cancel"
+							   otherButtonTitles:@"OK", nil] show];
 		} else if (indexPath.row == 1) {
 			[[[SDCAlertView alloc] initWithTitle:@"Title"
 										 message:@"This is a message"
 										delegate:nil
 							   cancelButtonTitle:@"Cancel"
-							   otherButtonTitles:@"OK", nil] show];
+							   otherButtonTitles:@"OK", @"Whatever", nil] show];
 		} else if (indexPath.row == 2) {
 			SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:@"Title"
 															  message:@"This is a message"
@@ -130,6 +130,16 @@
 	}
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (BOOL)alertViewShouldEnableFirstOtherButton:(id)alertView {
+	return NO;
+}
+
+- (void)alertView:(id)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	NSLog(@"Clicked index: %d", buttonIndex);
+	NSLog(@"Cancel index: %d", [alertView cancelButtonIndex]);
+	NSLog(@"FOB index: %d", [alertView firstOtherButtonIndex]);
 }
 
 - (void)updateProgressView:(NSTimer *)timer {
