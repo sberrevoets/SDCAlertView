@@ -108,7 +108,8 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 		[self applyAnimationsForShowingAlert:alert];
 		[CATransaction commit];
 	} else {
-		// do without animation
+		if (completionHandler)
+			completionHandler();
 	}
 }
 
