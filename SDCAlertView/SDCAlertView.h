@@ -45,7 +45,22 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 @property (nonatomic, weak) id <SDCAlertViewDelegate> delegate;
 
-// TODO: Setting the cancelButtonIndex is not yet supported.
+/* 
+ * UIAlertView has a "bug" that was intentionally not duplicated in SDCAlertView.
+ * This code:
+ * 
+ *		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Title" message:@"This is a message" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"B1", @"B2", nil];
+ *		NSLog(@"%d", alert.firstOtherButtonIndex);
+ *
+ * will display 1 in the console, which is correct. When setting alert.cancelButtonIndex = 1, both cancelButtonIndex and firstOtherButtonIndex are 1 (B1). 
+ *
+ * Though it doesn't make much sense, it's not a big deal. However, when returning NO from the delegate method -alertViewShouldEnableFirstOtherButton:, the
+ * button with Cancel on it will be disabled. So, alert.firstOtherButtonIndex refers to B1, while the delegate method disables the button with title Cancel.
+ *
+ * That makes no sense, so when you do the same thing on SDCAlertView, firstOtherButtonIndex will return 0 and the delegate method will disable the Cancel button.
+ * In other words, the former Cancel button now got demoted to a normal button at index 0.
+ */
+
 @property (nonatomic) NSInteger cancelButtonIndex;
 @property (nonatomic, readonly) NSInteger firstOtherButtonIndex;
 @property (nonatomic, readonly) NSInteger numberOfButtons;

@@ -30,14 +30,14 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 #pragma mark - SDCAlertView
 
-@interface SDCAlertView () <SDCAlertViewContentViewDataSource, SDCAlertViewContentViewDelegate>
+@interface SDCAlertView () <SDCAlertViewContentViewDelegate>
 
 @property (nonatomic, strong) SDCAlertViewController *alertViewController;
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *message;
-@property (nonatomic, strong) NSString *cancelButtonTitle;
-@property (nonatomic, strong) NSMutableArray *otherButtonTitles;
+@property (nonatomic, strong) NSMutableArray *buttonTitles;
+@property (nonatomic) NSInteger firstOtherButtonIndex;
 @end
 
 @implementation SDCAlertView
@@ -54,24 +54,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return self.alertContentView.customContentView;
 }
 
-- (UIMotionEffectGroup *)parallaxEffect {
-	UIInterpolatingMotionEffect *horizontalParallax;
-	UIInterpolatingMotionEffect *verticalParallax;
-	
-	horizontalParallax = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-	horizontalParallax.minimumRelativeValue = @(-SDCAlertViewParallaxSlideMagnitude.horizontal);
-	horizontalParallax.maximumRelativeValue = @(SDCAlertViewParallaxSlideMagnitude.horizontal);
-	
-	verticalParallax = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
-	verticalParallax.minimumRelativeValue = @(-SDCAlertViewParallaxSlideMagnitude.vertical);
-	verticalParallax.maximumRelativeValue = @(SDCAlertViewParallaxSlideMagnitude.vertical);
-	
-	UIMotionEffectGroup *group = [[UIMotionEffectGroup alloc] init];
-	group.motionEffects = @[horizontalParallax, verticalParallax];
-
-	return group;
-}
-
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
 	if (!_alertBackgroundView) {
 		_alertBackgroundView = [[SDCAlertViewBackgroundView alloc] init];
@@ -83,7 +65,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (SDCAlertViewContentView *)alertContentView {
 	if (!_alertContentView) {
-		_alertContentView = [[SDCAlertViewContentView alloc] initWithDelegate:self dataSource:self];
+		_alertContentView = [[SDCAlertViewContentView alloc] initWithDelegate:self];
 		[_alertContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
 	
@@ -108,21 +90,20 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 		_message = message;
 		_delegate = delegate;
 		
-		if (cancelButtonTitle) {
-			_cancelButtonTitle = cancelButtonTitle;
-			_cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
-		} else {
-			_cancelButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
-		}
+		_cancelButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
+		_firstOtherButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
 		
-		NSMutableArray *buttonTitles = [NSMutableArray array];
+		_buttonTitles = [NSMutableArray array];
+		
+		if (cancelButtonTitle) {
+			_buttonTitles[0] = cancelButtonTitle;
+			_cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
+		}
 		
 		va_list argumentList;
 		va_start(argumentList, otherButtonTitles);
 		for (NSString *buttonTitle = otherButtonTitles; buttonTitle != nil; buttonTitle = va_arg(argumentList, NSString *))
-			[buttonTitles addObject:buttonTitle];
-		
-		_otherButtonTitles = buttonTitles;
+			[self addButtonWithTitle:buttonTitle];
 		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
 		
@@ -136,9 +117,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 #pragma mark - Visibility
 
 - (void)show {
-	[self addMotionEffect:[self parallaxEffect]];
-	[self insertSubview:self.alertBackgroundView atIndex:0];
-	[self addSubview:self.alertContentView];
+	[self configureForShowing];
 	
 	if ([self.delegate respondsToSelector:@selector(willPresentAlertView:)])
 		[self.delegate willPresentAlertView:self];
@@ -147,6 +126,28 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 		if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
 			[self.delegate didPresentAlertView:self];
 	}];
+}
+
+- (void)configureForShowing {
+	UIInterpolatingMotionEffect *horizontalParallax;
+	UIInterpolatingMotionEffect *verticalParallax;
+	
+	horizontalParallax = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+	horizontalParallax.minimumRelativeValue = @(-SDCAlertViewParallaxSlideMagnitude.horizontal);
+	horizontalParallax.maximumRelativeValue = @(SDCAlertViewParallaxSlideMagnitude.horizontal);
+	
+	verticalParallax = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+	verticalParallax.minimumRelativeValue = @(-SDCAlertViewParallaxSlideMagnitude.vertical);
+	verticalParallax.maximumRelativeValue = @(SDCAlertViewParallaxSlideMagnitude.vertical);
+	
+	UIMotionEffectGroup *groupMotionEffect = [[UIMotionEffectGroup alloc] init];
+	groupMotionEffect.motionEffects = @[horizontalParallax, verticalParallax];
+	[self addMotionEffect:groupMotionEffect];
+	
+	[self insertSubview:self.alertBackgroundView atIndex:0];
+	
+	[self configureContent];
+	[self addSubview:self.alertContentView];
 }
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
@@ -166,40 +167,60 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return YES;
 }
 
-#pragma mark - SDCAlertViewContentViewDataSource
+#pragma mark - Content
 
-- (NSString *)alertTitleInAlertContentView:(SDCAlertViewContentView *)sender {
-	return self.title;
+- (void)setTitle:(NSString *)title {
+	_title = title;
+	self.alertContentView.title = title;
 }
 
-- (NSString *)alertMessageInAlertContentView:(SDCAlertViewContentView *)sender {
-	return self.message;
+- (void)setMessage:(NSString *)message {
+	_message = message;
+	self.alertContentView.message = message;
 }
 
-- (NSUInteger)numberOfOtherButtonsInAlertContentView:(SDCAlertViewContentView *)sender {
-	return [self.otherButtonTitles count];
+- (void)setCancelButtonIndex:(NSInteger)cancelButtonIndex {
+	_cancelButtonIndex = cancelButtonIndex;
+	if (cancelButtonIndex != SDCAlertViewDefaultFirstButtonIndex)
+		self.firstOtherButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
 }
 
-- (NSString *)alertContentView:(SDCAlertViewContentView *)sender titleForButtonAtIndex:(NSUInteger)index {
-	return self.otherButtonTitles[index];
+- (NSArray *)buttonTitlesForAlertContentView {
+	NSMutableArray *buttonTitles = [self.buttonTitles mutableCopy];
+	
+	// The cancel button is always the last button, except when there are two buttons, then it is the first (or the one on the left)
+	if (self.cancelButtonIndex != SDCAlertViewUnspecifiedButtonIndex && self.numberOfButtons != 2) {
+		NSString *cancelButtonTitle = buttonTitles[self.cancelButtonIndex];
+		[buttonTitles removeObjectIdenticalTo:cancelButtonTitle];
+		[buttonTitles addObject:cancelButtonTitle];
+	}
+
+	return buttonTitles;
 }
 
-- (NSString *)titleForCancelButtonInAlertContentView:(SDCAlertViewContentView *)sender {
-	return self.cancelButtonTitle;
+- (NSInteger)convertAlertContentViewButtonIndexToRealButtonIndex:(NSInteger)buttonIndex {
+	NSMutableArray *buttonTitles = [self.alertContentView.buttonTitles mutableCopy];
+	return [self.buttonTitles indexOfObjectIdenticalTo:buttonTitles[buttonIndex]];
+}
+
+- (void)configureContent {
+	self.alertContentView.title = self.title;
+	self.alertContentView.message = self.message;
+	
+	switch (self.alertViewStyle) {
+		case SDCAlertViewStyleDefault:					self.alertContentView.numberOfTextFields = 0; break;
+		case SDCAlertViewStylePlainTextInput:
+		case SDCAlertViewStyleSecureTextInput:			self.alertContentView.numberOfTextFields = 1; break;
+		case SDCAlertViewStyleLoginAndPasswordInput:	self.alertContentView.numberOfTextFields = 2; break;
+	}
+	
+	self.alertContentView.buttonTitles = [self buttonTitlesForAlertContentView];
 }
 
 #pragma mark - SDCAlertViewContentViewDelegate
 
-- (BOOL)alertContentViewShouldShowPrimaryTextField:(SDCAlertViewContentView *)sender {
-	return self.alertViewStyle != SDCAlertViewStyleDefault;
-}
-
 - (BOOL)alertContentViewShouldUseSecureEntryForPrimaryTextField:(SDCAlertViewContentView *)sender {
 	return self.alertViewStyle == SDCAlertViewStyleSecureTextInput;
-}
-
-- (BOOL)alertContentViewShouldShowSecondaryTextField:(SDCAlertViewContentView *)sender {
-	return self.alertViewStyle == SDCAlertViewStyleLoginAndPasswordInput;
 }
 
 - (CGFloat)maximumHeightForAlertContentView:(SDCAlertViewContentView *)sender {
@@ -207,18 +228,16 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 }
 
 - (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index {
-	[self tappedButtonAtIndex:index];
+	[self tappedButtonAtIndex:[self convertAlertContentViewButtonIndexToRealButtonIndex:index]];
 }
 
-- (BOOL)alertContentViewShouldEnableFirstOtherButton:(SDCAlertViewContentView *)sender {
-	if ([self.delegate respondsToSelector:@selector(alertViewShouldEnableFirstOtherButton:)])
+- (BOOL)alertContentView:(SDCAlertViewContentView *)sender shouldEnableButtonAtIndex:(NSUInteger)index {
+	NSInteger convertedIndex = [self convertAlertContentViewButtonIndexToRealButtonIndex:index];
+	
+	if (convertedIndex == self.firstOtherButtonIndex && [self.delegate respondsToSelector:@selector(alertViewShouldEnableFirstOtherButton:)])
 		return [self.delegate alertViewShouldEnableFirstOtherButton:self];
-	else
-		return YES;
-}
-
-- (void)alertContentViewDidTapCancelButton:(SDCAlertViewContentView *)sender {
-	[self tappedButtonAtIndex:self.cancelButtonIndex];
+	
+	return YES;
 }
 
 #pragma mark - Buttons & Text Fields
@@ -232,31 +251,25 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	}
 }
 
-- (NSInteger)firstOtherButtonIndex {
-	if ([self.otherButtonTitles count] > 0 && self.cancelButtonIndex == 0)
-		return self.cancelButtonIndex + 1;
-	else if ([self.otherButtonTitles count] > 0 && !self.cancelButtonTitle)
-		return SDCAlertViewDefaultFirstButtonIndex;
+- (NSInteger)addButtonWithTitle:(NSString *)title {
+	[self.buttonTitles addObject:title];
 	
-	return SDCAlertViewUnspecifiedButtonIndex;
+	if (self.firstOtherButtonIndex == SDCAlertViewUnspecifiedButtonIndex) {
+		if (self.cancelButtonIndex == SDCAlertViewUnspecifiedButtonIndex)
+			self.firstOtherButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
+		else
+			self.firstOtherButtonIndex = self.cancelButtonIndex + 1;
+	}
+	
+	return [self.buttonTitles indexOfObject:title];
 }
 
 - (NSInteger)numberOfButtons {
-	NSInteger buttonCount = [self.otherButtonTitles count];
-	
-	if (self.cancelButtonTitle)
-		buttonCount++;
-	
-	return buttonCount;
-}
-
-- (NSInteger)addButtonWithTitle:(NSString *)title {
-	[self.otherButtonTitles addObject:title];
-	return [self.otherButtonTitles indexOfObject:title];
+	return [self.buttonTitles count];
 }
 
 - (NSString *)buttonTitleAtIndex:(NSInteger)index {
-	return self.otherButtonTitles[index];
+	return self.buttonTitles[index];
 }
 
 - (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex {

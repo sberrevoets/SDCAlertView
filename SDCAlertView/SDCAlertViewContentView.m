@@ -46,8 +46,8 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 
 @property (nonatomic, strong) UIView *buttonTopSeparatorView;
 @property (nonatomic, strong) UIView *buttonSeparatorView;
-@property (nonatomic, strong) UITableView *mainTableView;
-@property (nonatomic, strong) UITableView *secondaryTableView;
+@property (nonatomic, strong) UITableView *suggestedButtonTableView;
+@property (nonatomic, strong) UITableView *otherButtonsTableView;
 @end
 
 @implementation SDCAlertViewContentView
@@ -65,14 +65,25 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 	return textFields;
 }
 
+#pragma mark - Setters
+
+- (void)setTitle:(NSString *)title {
+	_title = title;
+	self.titleLabel.text = title;
+}
+
+- (void)setMessage:(NSString *)message {
+	_message = message;
+	self.messageLabel.text = message;
+}
+
 #pragma mark - Initialization
 
-- (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate dataSource:(id<SDCAlertViewContentViewDataSource>)dataSource {
+- (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate {
 	self = [super init];
 	
 	if (self) {
 		_delegate = delegate;
-		_dataSource = dataSource;
 		
 		[self initializeSubviews];
 		
@@ -179,16 +190,15 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 }
 
 - (void)initializeMainTableView {
-	self.mainTableView = [self buttonTableView];
+	self.suggestedButtonTableView = [self buttonTableView];
 }
 
 - (void)initializeButtonSeparatorView {
 	self.buttonSeparatorView = [self separatorView];
 }
 
-// TODO: Always use secondary table view for cancel button (even with three rows--like UIAlertView)
 - (void)initializeSecondaryTableView {
-	self.secondaryTableView = [self buttonTableView];
+	self.otherButtonsTableView = [self buttonTableView];
 }
 
 #pragma mark - UITableViewDataSource/Delegate
@@ -197,93 +207,67 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 	return 1;
 }
 
-- (BOOL)isCancelButtonAtIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
-	BOOL isMainTableView = tableView == self.mainTableView;
-	BOOL showsSecondaryTableView = [self.dataSource numberOfOtherButtonsInAlertContentView:self] == 1;
-	BOOL isLastRowOfTableView = indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1;
-	
-	return !isMainTableView || (isMainTableView && !showsSecondaryTableView && isLastRowOfTableView);
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (tableView == self.mainTableView) {
-		NSUInteger otherButtonCount = [self.dataSource numberOfOtherButtonsInAlertContentView:self];
-		
-		if (otherButtonCount != 1 && [self.dataSource titleForCancelButtonInAlertContentView:self])
-			return otherButtonCount + 1;
-		else
-			return otherButtonCount;
-	} else {
+	if (tableView == self.suggestedButtonTableView)
 		return 1;
-	}
+	else
+		return [self.buttonTitles count] - 1;
 }
 
-- (BOOL)isButtonAtIndexPathEnabled:(NSIndexPath *)indexPath {
-	NSInteger firstOtherButtonRow = [self.mainTableView numberOfRowsInSection:indexPath.section] - 1;
-	BOOL firstOtherButtonEnabled = [self.delegate alertContentViewShouldEnableFirstOtherButton:self];
-	return (firstOtherButtonEnabled || (!firstOtherButtonEnabled && indexPath.row != firstOtherButtonRow));
+- (BOOL)isButtonAtIndexPathEnabled:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
+	NSUInteger buttonIndex = (tableView == self.suggestedButtonTableView) ? [self.buttonTitles count] - 1 : indexPath.row;
+	return [self.delegate alertContentView:self shouldEnableButtonAtIndex:buttonIndex];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSUInteger otherButtonCount = [self.dataSource numberOfOtherButtonsInAlertContentView:self];
-	
-	if ((tableView == self.mainTableView && otherButtonCount == 1) ||
-		(tableView == self.mainTableView && otherButtonCount != 1 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1))
+	if (tableView == self.suggestedButtonTableView)
 		cell.textLabel.font = [UIFont sdc_suggestedButtonFont];
 	else
 		cell.textLabel.font = [UIFont sdc_normalButtonFont];
 	
 	cell.backgroundColor = [UIColor clearColor];
-	cell.textLabel.textColor = (tableView == self.secondaryTableView || [self isButtonAtIndexPathEnabled:indexPath]) ? [UIColor sdc_alertButtonTextColor] : [UIColor sdc_disabledAlertButtonTextColor];
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
+	
+	if ([self isButtonAtIndexPathEnabled:indexPath tableView:tableView])
+		cell.textLabel.textColor = [UIColor sdc_alertButtonTextColor];
+	else
+		cell.textLabel.textColor = [UIColor sdc_disabledAlertButtonTextColor];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-	if ([self isCancelButtonAtIndexPath:indexPath inTableView:tableView])
-		cell.textLabel.text = [self.dataSource titleForCancelButtonInAlertContentView:self];
+	
+	if (tableView == self.suggestedButtonTableView)
+		cell.textLabel.text = self.buttonTitles[[self.buttonTitles count] - 1];
 	else
-		cell.textLabel.text = [self.dataSource alertContentView:self titleForButtonAtIndex:indexPath.row];
+		cell.textLabel.text = self.buttonTitles[indexPath.row];
 	
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if ([self isCancelButtonAtIndexPath:indexPath inTableView:tableView])
-		[self.delegate alertContentViewDidTapCancelButton:self];
-	else
-		[self.delegate alertContentView:self didTapButtonAtIndex:indexPath.row];
+	NSUInteger buttonIndex = (tableView == self.suggestedButtonTableView) ? [self.buttonTitles count] - 1 : indexPath.row;
+	[self.delegate alertContentView:self didTapButtonAtIndex:buttonIndex];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (tableView == self.secondaryTableView)
-		return YES;
-	
-	return [self isButtonAtIndexPathEnabled:indexPath];
+	return [self isButtonAtIndexPathEnabled:indexPath tableView:tableView];
 }
 
 #pragma mark - Layout
 
-- (void)updateContentToReflectChanges {
-	self.titleLabel.text = [self.dataSource alertTitleInAlertContentView:self];
-	self.messageLabel.text = [self.dataSource alertMessageInAlertContentView:self];
-}
-
 - (NSArray *)alertViewElementsToDisplay {
-	[self updateContentToReflectChanges];
-	
 	NSMutableArray *elements = [NSMutableArray array];
 	
 	if ([self.titleLabel.text length] > 0)		[elements addObject:self.titleLabel];
 	if ([self.messageLabel.text length] > 0)	[elements addObject:self.messageLabel];
 	if ([elements count] > 0)					[elements addObject:self.contentScrollView];
 	
-	if ([self.delegate alertContentViewShouldShowPrimaryTextField:self]) {
+	if (self.numberOfTextFields > 0) {
 		[elements addObject:self.textFieldBackgroundView];
 		[elements addObject:self.primaryTextField];
 		
-		if ([self.delegate alertContentViewShouldShowSecondaryTextField:self]) {
+		if (self.numberOfTextFields == 2) {
 			[elements addObject:self.textFieldSeparatorView];
 			[elements addObject:self.secondaryTextField];
 		}
@@ -291,28 +275,32 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 	
 	if ([[self.customContentView subviews] count] > 0)		[elements addObject:self.customContentView];
 	
-	NSUInteger otherButtonCount = [self.dataSource numberOfOtherButtonsInAlertContentView:self];
-	NSString *cancelButtonTitle = [self.dataSource titleForCancelButtonInAlertContentView:self];
-	if (otherButtonCount > 0 || cancelButtonTitle) {
-		[elements addObject:self.mainTableView];
+	if ([self.buttonTitles count] > 0) {
+		// There is at least one button, so we want to display the top separator for sure
 		[elements addObject:self.buttonTopSeparatorView];
 		
-		if (otherButtonCount == 1 && cancelButtonTitle) {
-			[elements addObject:self.secondaryTableView];
-			[elements addObject:self.buttonSeparatorView];
+		if ([self.buttonTitles count] > 1) {
+			// There is more than one button, so also display the table view that holds the button(s) that is/are not suggested
+			[elements addObject:self.otherButtonsTableView];
+			
+			if ([self.buttonTitles count] == 2)
+				[elements addObject:self.buttonSeparatorView]; // There are exactly two buttons, display the thin separator
 		}
+
+		// And lastly, add the suggested button (this line is at the end because the suggested button is also at the "end" of the alert)
+		[elements addObject:self.suggestedButtonTableView];
 	}
-	
+		
 	return elements;
 }
 
 - (void)updateConstraints {
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
-	if ([elements containsObject:self.contentScrollView])		[self positionContentScrollView];
-	if ([elements containsObject:self.textFieldBackgroundView])	[self positionTextFields];
-	if ([elements containsObject:self.customContentView])		[self positionCustomContentView];
-	if ([elements containsObject:self.mainTableView])			[self positionButtons];
+	if ([elements containsObject:self.contentScrollView])			[self positionContentScrollView];
+	if ([elements containsObject:self.textFieldBackgroundView])		[self positionTextFields];
+	if ([elements containsObject:self.customContentView])			[self positionCustomContentView];
+	if ([elements containsObject:self.suggestedButtonTableView])	[self positionButtons];
 	
 	[self positionAlertElements];
 	
@@ -336,7 +324,7 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 		
 		self.primaryTextField.secureTextEntry = [self.delegate alertContentViewShouldUseSecureEntryForPrimaryTextField:self];
 		
-		if ([self.delegate alertContentViewShouldShowSecondaryTextField:self]) {
+		if ([elements containsObject:self.secondaryTextField]) {
 			[self.textFieldBackgroundView addSubview:self.textFieldSeparatorView];
 			[self.textFieldBackgroundView addSubview:self.secondaryTextField];
 			
@@ -348,20 +336,20 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 	if ([elements containsObject:self.customContentView])
 		[self addSubview:self.customContentView];
 	
-	if ([elements containsObject:self.mainTableView]) {
-		[self addSubview:self.mainTableView];
+	if ([elements containsObject:self.suggestedButtonTableView]) {
+		[self addSubview:self.suggestedButtonTableView];
 		[self addSubview:self.buttonTopSeparatorView];
 	}
 	
-	if ([elements containsObject:self.secondaryTableView]) {
-		[self addSubview:self.secondaryTableView];
-		[self insertSubview:self.buttonSeparatorView aboveSubview:self.secondaryTableView];
+	if ([elements containsObject:self.otherButtonsTableView]) {
+		[self addSubview:self.otherButtonsTableView];
+		[self insertSubview:self.buttonSeparatorView aboveSubview:self.otherButtonsTableView];
 	}
 }
 
 - (void)textFieldTextChanged:(NSNotification *)notification {
 	if (notification.object == self.primaryTextField || notification.object == self.secondaryTextField)
-		[self.mainTableView reloadData];
+		[self.suggestedButtonTableView reloadData];
 }
 
 - (BOOL)resignFirstResponder {
@@ -441,23 +429,42 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 	[self.customContentView sdc_horizontallyCenterInSuperview];
 }
 
+- (BOOL)showsTableViewsSideBySide {
+	// Returns YES when the two buttons are shown side by side, NO when they are stacked on top of each other
+	return [self.buttonTitles count] == 2;
+}
+
 - (void)positionButtons {
-	[self.mainTableView sdc_pinHeight:self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0]];
-	
 	NSArray *elements = [self alertViewElementsToDisplay];
-	if ([elements containsObject:self.secondaryTableView]) {
-		[self.secondaryTableView sdc_pinHeightToHeightOfView:self.mainTableView];
-		[self.secondaryTableView sdc_alignEdges:UIRectEdgeTop withView:self.mainTableView];
-		
-		[self.buttonSeparatorView sdc_pinHeightToHeightOfView:self.mainTableView];
-		[self.buttonSeparatorView sdc_alignEdges:UIRectEdgeTop withView:self.mainTableView];
-		[self.buttonSeparatorView sdc_pinWidth:SDCAlertViewGetSeparatorThickness()];
-	}
 	
 	if ([elements containsObject:self.contentScrollView]) {
 		[self.buttonTopSeparatorView sdc_horizontallyCenterInSuperview];
 		[self.buttonTopSeparatorView sdc_pinWidthToWidthOfView:self];
 		[self.buttonTopSeparatorView sdc_pinHeight:SDCAlertViewGetSeparatorThickness()];
+	}
+	
+	[self.suggestedButtonTableView sdc_pinHeight:self.suggestedButtonTableView.rowHeight];
+		
+	if ([elements containsObject:self.otherButtonsTableView]) {
+		[self.otherButtonsTableView sdc_pinHeight:self.otherButtonsTableView.rowHeight * [self.otherButtonsTableView numberOfRowsInSection:0]];
+		
+		if ([self showsTableViewsSideBySide]) {
+			[self.suggestedButtonTableView sdc_alignEdges:UIRectEdgeRight withView:self];
+			[self.suggestedButtonTableView sdc_pinWidth:SDCAlertViewWidth / 2];
+			
+			[self.otherButtonsTableView sdc_alignEdges:UIRectEdgeLeft withView:self];
+			[self.otherButtonsTableView sdc_pinWidth:SDCAlertViewWidth / 2];
+			[self.otherButtonsTableView sdc_alignEdges:UIRectEdgeTop withView:self.suggestedButtonTableView];
+			
+			[self.buttonSeparatorView sdc_pinHeightToHeightOfView:self.suggestedButtonTableView];
+			[self.buttonSeparatorView sdc_alignEdges:UIRectEdgeTop|UIRectEdgeLeft withView:self.suggestedButtonTableView];
+			[self.buttonSeparatorView sdc_pinWidth:SDCAlertViewGetSeparatorThickness()];
+		} else {
+			[self.suggestedButtonTableView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self];
+			[self.otherButtonsTableView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self];
+		}
+	} else {
+		[self.suggestedButtonTableView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self];
 	}
 }
 
@@ -468,8 +475,8 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 	if ([[self alertViewElementsToDisplay] containsObject:self.messageLabel])	scrollViewHeight += SDCAlertViewLabelSpacing;
 		
 	CGFloat maximumScrollViewHeight = [self.delegate maximumHeightForAlertContentView:self] - SDCAlertViewContentPadding.bottom;
-	if ([elements containsObject:self.mainTableView])
-		maximumScrollViewHeight -= (self.mainTableView.rowHeight * [self.mainTableView numberOfRowsInSection:0] + SDCAlertViewGetSeparatorThickness());
+	if ([elements containsObject:self.suggestedButtonTableView])
+		maximumScrollViewHeight -= (self.suggestedButtonTableView.rowHeight * [self.suggestedButtonTableView numberOfRowsInSection:0] + SDCAlertViewGetSeparatorThickness());
 	
 	if ([elements containsObject:self.primaryTextField])
 		maximumScrollViewHeight -= (SDCAlertViewTextFieldBackgroundViewPadding.top + SDCAlertViewTextFieldBackgroundViewPadding.bottom + SDCAlertViewPrimaryTextFieldHeight);
@@ -505,28 +512,21 @@ static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 		hasContentOtherThanButtons = YES;
 	}
 	
-	if ([elements containsObject:self.mainTableView]) {
-		if ([elements containsObject:self.secondaryTableView]) {
-			[self.secondaryTableView sdc_alignEdges:UIRectEdgeLeft withView:self];
-			[self.secondaryTableView sdc_pinWidth:SDCAlertViewWidth / 2];
-			[self.mainTableView sdc_alignEdges:UIRectEdgeRight withView:self];
-			[self.mainTableView sdc_pinWidth:SDCAlertViewWidth / 2];
-			
-			[self.buttonSeparatorView sdc_alignEdges:UIRectEdgeLeft withView:self.mainTableView];
-		} else {
-			[self.mainTableView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self];
-		}
-		
+	if ([elements containsObject:self.suggestedButtonTableView]) {
 		if (hasContentOtherThanButtons)
 			[verticalVFL appendString:@"-(==bottomSpacing)-[buttonTopSeparatorView]"];
 		
-		[verticalVFL appendString:@"[mainTableView]"];
+		if ([elements containsObject:self.otherButtonsTableView])
+			[verticalVFL appendString:@"[otherButtonsTableView]"];
+		
+		if (![self showsTableViewsSideBySide])
+			[verticalVFL appendString:@"[suggestedButtonTableView]"];
 	}
 	
 	[verticalVFL appendString:@"|"];
 	
 	NSDictionary *metrics = @{@"textFieldBackgroundViewTopSpacing": @(SDCAlertViewTextFieldBackgroundViewPadding.top), @"bottomSpacing": @(SDCAlertViewContentPadding.bottom)};
-	NSDictionary *views = @{@"scrollView": self.contentScrollView, @"textFieldBackgroundView": self.textFieldBackgroundView, @"customContentView": self.customContentView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"mainTableView": self.mainTableView};
+	NSDictionary *views = @{@"scrollView": self.contentScrollView, @"textFieldBackgroundView": self.textFieldBackgroundView, @"customContentView": self.customContentView, @"buttonTopSeparatorView": self.buttonTopSeparatorView, @"suggestedButtonTableView": self.suggestedButtonTableView, @"otherButtonsTableView": self.otherButtonsTableView};
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:metrics views:views]];
 }
 

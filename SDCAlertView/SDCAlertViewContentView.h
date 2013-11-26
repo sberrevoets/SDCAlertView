@@ -11,38 +11,27 @@
 @class SDCAlertViewContentView;
 
 @protocol SDCAlertViewContentViewDelegate <NSObject>
-- (BOOL)alertContentViewShouldShowPrimaryTextField:(SDCAlertViewContentView *)sender;
 - (BOOL)alertContentViewShouldUseSecureEntryForPrimaryTextField:(SDCAlertViewContentView *)sender;
-- (BOOL)alertContentViewShouldShowSecondaryTextField:(SDCAlertViewContentView *)sender;
 
 - (CGFloat)maximumHeightForAlertContentView:(SDCAlertViewContentView *)sender;
 
 - (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index;
-- (void)alertContentViewDidTapCancelButton:(SDCAlertViewContentView *)sender;
-
-- (BOOL)alertContentViewShouldEnableFirstOtherButton:(SDCAlertViewContentView *)sender;
-@end
-
-@protocol SDCAlertViewContentViewDataSource <NSObject>
-
-- (NSString *)alertTitleInAlertContentView:(SDCAlertViewContentView *)sender;
-- (NSString *)alertMessageInAlertContentView:(SDCAlertViewContentView *)sender;
-
-- (NSString *)titleForCancelButtonInAlertContentView:(SDCAlertViewContentView *)sender;
-
-- (NSUInteger)numberOfOtherButtonsInAlertContentView:(SDCAlertViewContentView *)sender;
-- (NSString *)alertContentView:(SDCAlertViewContentView *)sender titleForButtonAtIndex:(NSUInteger)index;
-
+- (BOOL)alertContentView:(SDCAlertViewContentView *)sender shouldEnableButtonAtIndex:(NSUInteger)index;
 @end
 
 @interface SDCAlertViewContentView : UIView <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, weak) id <SDCAlertViewContentViewDelegate> delegate;
-@property (nonatomic, weak) id <SDCAlertViewContentViewDataSource> dataSource;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *message;
 
+@property (nonatomic) NSInteger numberOfTextFields;
 @property (nonatomic, readonly) NSArray *textFields;
 @property (nonatomic, strong) UIView *customContentView;
 
-- (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate dataSource:(id <SDCAlertViewContentViewDataSource>)dataSource;
+@property (nonatomic, copy) NSArray *buttonTitles; // The last button title is always the "suggested" button
+
+@property (nonatomic, weak) id <SDCAlertViewContentViewDelegate> delegate;
+
+- (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate;
 
 @end
