@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-FOUNDATION_EXPORT CGFloat const SDCAlertViewWidth;
-CGFloat SDCAlertViewGetSeparatorThickness();
-
 typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
     SDCAlertViewStyleDefault = 0,
     SDCAlertViewStyleSecureTextInput,
@@ -106,3 +103,5 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 + (UIColor *)sdc_alertSeparatorColor;
 + (UIColor *)sdc_textFieldBackgroundViewColor;
 @end
+
+FOUNDATION_EXPORT CGFloat const SDCAlertViewWidth;

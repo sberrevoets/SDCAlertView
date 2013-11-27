@@ -22,6 +22,11 @@ static UIEdgeInsets const SDCAlertViewTextFieldTextInsets = {0, 4, 0, 4};
 static CGFloat const SDCAlertViewPrimaryTextFieldHeight = 30;
 static CGFloat const SDCAlertViewSecondaryTextFieldHeight = 29;
 
+static CGFloat const SDCAlertViewSeparatorThickness = 1;
+CGFloat SDCAlertViewGetSeparatorThickness() {
+	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];
+}
+
 @interface UIFont (SDCAlertViewFonts)
 + (UIFont *)sdc_titleLabelFont;
 + (UIFont *)sdc_messageLabelFont;
