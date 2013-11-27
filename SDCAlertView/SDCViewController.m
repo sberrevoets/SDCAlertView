@@ -132,16 +132,6 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (BOOL)alertViewShouldEnableFirstOtherButton:(id)alertView {
-	return NO;
-}
-
-- (void)alertView:(id)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	NSLog(@"Clicked index: %d", buttonIndex);
-	NSLog(@"Cancel index: %d", [alertView cancelButtonIndex]);
-	NSLog(@"FOB index: %d", [alertView firstOtherButtonIndex]);
-}
-
 - (void)updateProgressView:(NSTimer *)timer {
 	UIProgressView *progressView = [timer userInfo];
 	
