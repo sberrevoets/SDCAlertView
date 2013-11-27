@@ -33,6 +33,10 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
 @property (nonatomic, strong) SDCAlertViewController *alertViewController;
 
+@property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
+@property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
+@property (nonatomic, strong) UIToolbar *toolbar;
+
 @property (nonatomic, strong) NSMutableArray *buttonTitles;
 @property (nonatomic) NSInteger firstOtherButtonIndex;
 @end

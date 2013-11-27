@@ -27,6 +27,12 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 + (UIWindow *)sdc_alertWindow;
 @end
 
+@interface SDCAlertView (SDCAlertViewSubviews)
+@property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
+@property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
+@property (nonatomic, strong) UIToolbar *toolbar;
+@end
+
 @interface SDCAlertViewController ()
 @property (nonatomic, strong) UIWindow *previousWindow;
 @property (nonatomic, strong) UIView *rootView;
