@@ -46,10 +46,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return _alertViewController;
 }
 
-- (UIView *)contentView {
-	return self.alertContentView.customContentView;
-}
-
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
 	if (!_alertBackgroundView) {
 		_alertBackgroundView = [[SDCAlertViewBackgroundView alloc] init];
@@ -66,10 +62,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	}
 	
 	return _alertContentView;
-}
-
-- (BOOL)isVisible {
-	return [self.alertViewController currentAlert] == self;
 }
 
 #pragma mark - Initialization
@@ -111,6 +103,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 #pragma mark - Visibility
+
+- (BOOL)isVisible {
+	return [self.alertViewController currentAlert] == self;
+}
 
 - (void)show {
 	[self configureForShowing];
@@ -173,6 +169,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (void)setMessage:(NSString *)message {
 	_message = message;
 	self.alertContentView.message = message;
+}
+
+- (UIView *)contentView {
+	return self.alertContentView.customContentView;
 }
 
 - (void)setCancelButtonIndex:(NSInteger)cancelButtonIndex {
