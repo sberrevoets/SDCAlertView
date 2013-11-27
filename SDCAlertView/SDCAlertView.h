@@ -43,9 +43,10 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 @interface SDCAlertView : UIView
 
-@property (nonatomic, weak) id <SDCAlertViewDelegate> delegate;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *message;
 
-/* 
+/*
  * UIAlertView has a "bug" that was intentionally not duplicated in SDCAlertView.
  * This code:
  * 
@@ -81,6 +82,8 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
  * If there are no subviews, the contentView will not be added to the alert.
  */
 @property (nonatomic, readonly) UIView *contentView;
+
+@property (nonatomic, weak) id <SDCAlertViewDelegate> delegate;
 
 - (instancetype)initWithTitle:(NSString *)title
 					  message:(NSString *)message
