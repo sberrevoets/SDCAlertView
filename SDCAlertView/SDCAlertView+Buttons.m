@@ -54,12 +54,18 @@ static NSString * const PropertyKey_FirstOtherButtonIndex   = @"FirstOtherButton
     
     // If there is a block
     // then ask the block whether we should dissmiss or not
-    else if (self.shouldDissmissBlock ) {
+    else if (self.shouldDissmissBlock) {
         // Call the block afer we are sure it exists to avoid a crash
         if (self.shouldDissmissBlock(index)) {
             [self dismissWithClickedButtonIndex:index animated:YES];
         };
         
+    }
+    
+    // If we cannot ask a delegate or a block then default to always dismissing
+    else {
+        [self dismissWithClickedButtonIndex:index animated:YES];
+
     }
     
 }
