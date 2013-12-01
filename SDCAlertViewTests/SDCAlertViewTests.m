@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "SDCAlertView.h"
+#import "SDCAlertView+Buttons.h"
 
 @interface SDCAlertViewTests : XCTestCase
 
@@ -25,7 +25,6 @@
     
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    
     sut.shouldDissmissBlock = ^BOOL (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;

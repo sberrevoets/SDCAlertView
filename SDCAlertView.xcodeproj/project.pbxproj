@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3F8B5FB184B9E6200EB5438 /* SDCAlertView+Buttons.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8B5F9184B9E6200EB5438 /* SDCAlertView+Buttons.m */; };
 		D25B3CA817ECE7A6004B32A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CA717ECE7A6004B32A2 /* Foundation.framework */; };
 		D25B3CAA17ECE7A6004B32A2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */; };
 		D25B3CAC17ECE7A6004B32A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CAB17ECE7A6004B32A2 /* UIKit.framework */; };
@@ -43,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		50B67E8F6417468B9958F089 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		A3F8B5F9184B9E6200EB5438 /* SDCAlertView+Buttons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDCAlertView+Buttons.m"; sourceTree = "<group>"; };
+		A3F8B5FA184B9E6200EB5438 /* SDCAlertView+Buttons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDCAlertView+Buttons.h"; sourceTree = "<group>"; };
 		D25B3CA417ECE7A6004B32A2 /* SDCAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDCAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B3CA717ECE7A6004B32A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -143,6 +146,8 @@
 				D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */,
 				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
 				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
+				A3F8B5FA184B9E6200EB5438 /* SDCAlertView+Buttons.h */,
+				A3F8B5F9184B9E6200EB5438 /* SDCAlertView+Buttons.m */,
 				D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */,
 				D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */,
 				D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */,
@@ -323,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3F8B5FB184B9E6200EB5438 /* SDCAlertView+Buttons.m in Sources */,
 				D25B3CBE17ECE7A6004B32A2 /* SDCViewController.m in Sources */,
 				D25B3CB417ECE7A6004B32A2 /* main.m in Sources */,
 				D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */,

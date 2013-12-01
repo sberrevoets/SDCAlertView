@@ -14,14 +14,13 @@
 
 #import "UIView+SDCAutoLayout.h"
 
+#import "SDCAlertView+Buttons.h"
+
 CGFloat const SDCAlertViewWidth = 270;
 static UIEdgeInsets const SDCAlertViewPadding = {3, 0, 3, 0};
 static CGFloat const SDCAlertViewCornerRadius = 7;
 
 static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
-
-static NSInteger const SDCAlertViewUnspecifiedButtonIndex = -1;
-static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 #pragma mark - SDCAlertView
 
@@ -31,9 +30,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
 @property (nonatomic, strong) UIToolbar *toolbar;
-
-@property (nonatomic, strong) NSMutableArray *buttonTitles;
-@property (nonatomic) NSInteger firstOtherButtonIndex;
 @end
 
 @implementation SDCAlertView
@@ -81,10 +77,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 		_cancelButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
 		_firstOtherButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
 		
-		_buttonTitles = [NSMutableArray array];
+		self.buttonTitles = [NSMutableArray array];
 		
 		if (cancelButtonTitle) {
-			_buttonTitles[0] = cancelButtonTitle;
+			self.buttonTitles[0] = cancelButtonTitle;
 			_cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
 		}
 		
@@ -238,13 +234,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 #pragma mark - Buttons & Text Fields
 
-- (void)tappedButtonAtIndex:(NSInteger)index {
-	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)])
-		[self.delegate alertView:self clickedButtonAtIndex:index];
-	
-	if (([self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)] && [self.delegate alertView:self shouldDismissWithButtonIndex:index]) || ![self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)]) {
-		[self dismissWithClickedButtonIndex:index animated:YES];
-	}
+- (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex {
+	return self.alertContentView.textFields[textFieldIndex];
 }
 
 - (NSInteger)addButtonWithTitle:(NSString *)title {
@@ -260,17 +251,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return [self.buttonTitles indexOfObject:title];
 }
 
-- (NSInteger)numberOfButtons {
-	return [self.buttonTitles count];
-}
-
 - (NSString *)buttonTitleAtIndex:(NSInteger)index {
 	return self.buttonTitles[index];
 }
 
-- (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex {
-	return self.alertContentView.textFields[textFieldIndex];
-}
 
 #pragma mark - Layout
 
