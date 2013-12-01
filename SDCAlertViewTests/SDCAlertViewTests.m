@@ -40,7 +40,7 @@
     
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    _sut.shouldDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+    _sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
         return NO;
@@ -53,9 +53,9 @@
 
 }
 
-- (void)testDoesDissmissWhenSpecfiedInBlock {
+- (void)testDoesDismissWhenSpecfiedInBlock {
     
-    _sut.shouldDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+    _sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
         return YES;
     };
     
@@ -67,9 +67,9 @@
     [sutMock verify];
 }
 
-- (void)testDoesNotDissmissWhenSpecfiedInBlock {
+- (void)testDoesNotDismissWhenSpecfiedInBlock {
     
-    _sut.shouldDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+    _sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
         return NO;
     };
     
@@ -88,7 +88,7 @@
 
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    _sut.willDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+    _sut.willDismissBlock = ^BOOL (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
         return YES;
@@ -112,7 +112,7 @@
     
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    _sut.didDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+    _sut.didDismissBlock = ^BOOL (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
         return YES;

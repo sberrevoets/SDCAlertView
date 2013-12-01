@@ -48,7 +48,7 @@
 /* Begin PBXFileReference section */
 		50B67E8F6417468B9958F089 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		60539E244AB24FB7B725E24B /* Pods-SDCAlertViewTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDCAlertViewTests.xcconfig"; path = "Pods/Pods-SDCAlertViewTests.xcconfig"; sourceTree = "<group>"; };
-		A3F8B5F9184B9E6200EB5438 /* SDCAlertView+Buttons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDCAlertView+Buttons.m"; sourceTree = "<group>"; };
+		A3F8B5F9184B9E6200EB5438 /* SDCAlertView+Buttons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "SDCAlertView+Buttons.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A3F8B5FA184B9E6200EB5438 /* SDCAlertView+Buttons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDCAlertView+Buttons.h"; sourceTree = "<group>"; };
 		A3F8B5FC184BA94A00EB5438 /* SDCAlertView+SDCAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDCAlertView+SDCAlertViewController.h"; sourceTree = "<group>"; };
 		A3F8B5FD184BA94A00EB5438 /* SDCAlertView+SDCAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDCAlertView+SDCAlertViewController.m"; sourceTree = "<group>"; };
@@ -73,9 +73,9 @@
 		D25B3CC617ECE7A6004B32A2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D25B3CCE17ECE7A6004B32A2 /* SDCAlertViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SDCAlertViewTests-Info.plist"; sourceTree = "<group>"; };
 		D25B3CD017ECE7A6004B32A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D25B3CD217ECE7A6004B32A2 /* SDCAlertViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewTests.m; sourceTree = "<group>"; };
-		D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertView.h; sourceTree = "<group>"; };
-		D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertView.m; sourceTree = "<group>"; };
+		D25B3CD217ECE7A6004B32A2 /* SDCAlertViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SDCAlertViewTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SDCAlertView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SDCAlertView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewController.h; sourceTree = "<group>"; };
 		D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewController.m; sourceTree = "<group>"; };
 		D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewBackgroundView.h; sourceTree = "<group>"; };

@@ -139,8 +139,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
     }
     
     // Call block if there is one
-    if (self.willDissmissBlock) {
-        self.willDissmissBlock(buttonIndex);
+    if (self.willDismissBlock) {
+        self.willDismissBlock(buttonIndex);
     }
 	
 	[self.alertViewController dismissAlert:self animated:animated completion:^{
@@ -149,8 +149,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 			[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
         
         // Call block if there is one
-        if (self.didDissmissBlock) {
-            self.didDissmissBlock(buttonIndex);
+        if (self.didDismissBlock) {
+            self.didDismissBlock(buttonIndex);
         }
 	}];
 }
