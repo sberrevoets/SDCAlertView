@@ -67,6 +67,21 @@
     [sutMock verify];
 }
 
+- (void)testDoesNotDissmissWhenSpecfiedInBlock {
+    
+    _sut.shouldDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+        return NO;
+    };
+    
+    id sutMock = [OCMockObject partialMockForObject:_sut];
+    
+    [sutMock tappedButtonAtIndex:2];
+    
+    // Verfiy a mock not expecting any methods
+    // This in-effect verifies no methods were called
+    [sutMock verify];
+}
+
 
 #pragma mark - WillDissmis test cases
 - (void)testWillDismissBlockCalled {
