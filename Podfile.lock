@@ -1,15 +1,12 @@
 PODS:
-  - OCMock (2.2.1)
   - RBBAnimation (0.3.0)
   - SDCAutoLayout (1.0)
 
 DEPENDENCIES:
-  - OCMock (~> 2.2.1)
   - RBBAnimation
   - SDCAutoLayout
 
 SPEC CHECKSUMS:
-  OCMock: 80e4cfbc71a0e1bd28caf10a9fda27da7c4c8402
   RBBAnimation: e7f31ed62f760f3caf120b5d943267bd9a8e1f64
   SDCAutoLayout: 46af5acfbcfb1a0b1f81746a60cdd42deb752b02
 

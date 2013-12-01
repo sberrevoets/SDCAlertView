@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
 #import "SDCAlertView+Buttons.h"
 
 @interface SDCAlertViewTests : XCTestCase
@@ -32,7 +31,8 @@
     [super tearDown];
 }
 
-- (void)testCallsShouldDismissBlockWithoutDelegate {
+#pragma mark - ShouldDismiss test cases
+- (void)testShouldDismissBlockAndDelegateCalled {
     
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
@@ -47,30 +47,10 @@
     
     XCTAssertTrue(blockWasCalled, @"");
     XCTAssertEqual(capturedButtonIndex, simulatedClickButtonIndex, @"");
+
+    
 }
 
-- (void)testCallsShouldDismissBlockAndDelegate {
-    
-    id delegate = [OCMockObject niceMockForProtocol:@protocol(SDCAlertViewDelegate)];
-    [[delegate expect] alertView:_sut shouldDismissWithButtonIndex:2];
-    _sut.delegate = delegate;
-    
-    __block NSInteger capturedButtonIndex;
-    __block BOOL blockWasCalled = NO;
-    _sut.shouldDissmissBlock = ^BOOL (NSInteger buttonIndex) {
-        blockWasCalled = YES;
-        capturedButtonIndex = buttonIndex;
-        return NO;
-    };
-    
-    NSInteger simulatedClickButtonIndex = 2;
-    [_sut tappedButtonAtIndex:simulatedClickButtonIndex];
-    
-    XCTAssertTrue(blockWasCalled, @"");
-    XCTAssertEqual(capturedButtonIndex, simulatedClickButtonIndex, @"");
-    
-    [delegate verify];
-    
-}
+
 
 @end
