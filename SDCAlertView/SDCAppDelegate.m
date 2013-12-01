@@ -7,11 +7,12 @@
 //
 
 #import "SDCAppDelegate.h"
+#import "Bundle.h"
 
 @implementation SDCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+{    
     // Override point for customization after application launch.
     return YES;
 }

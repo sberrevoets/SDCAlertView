@@ -40,8 +40,15 @@ static NSString * const PropertyKey_FirstOtherButtonIndex   = @"FirstOtherButton
 
 #pragma mark - Public methods
 - (void)tappedButtonAtIndex:(NSInteger)index {
-	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)])
-		[self.delegate alertView:self clickedButtonAtIndex:index];
+    
+	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+         [self.delegate alertView:self clickedButtonAtIndex:index];
+    }
+    
+    if (self.clickedButtonBlock) {
+        self.clickedButtonBlock(index);
+    }
+
 	
     // If there is a delegate respodning to the correct selector
     // then ask the delegate whether we should dismiss or not

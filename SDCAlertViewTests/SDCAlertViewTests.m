@@ -35,6 +35,24 @@
     [super tearDown];
 }
 
+#pragma mark - ClickedButton test cases
+- (void)testClickedButtonBlockCalled {
+    
+    __block NSInteger capturedButtonIndex;
+    __block BOOL blockWasCalled = NO;
+    _sut.clickedButtonBlock = ^BOOL (NSInteger buttonIndex) {
+        blockWasCalled = YES;
+        capturedButtonIndex = buttonIndex;
+        return NO;
+    };
+    
+    [_sut tappedButtonAtIndex:2];
+    
+    XCTAssertTrue(blockWasCalled, @"");
+    XCTAssertEqual(capturedButtonIndex, 2, @"");
+
+}
+
 #pragma mark - ShouldDismiss test cases
 - (void)testShouldDismissBlockCalled {
     
