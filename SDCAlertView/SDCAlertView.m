@@ -15,6 +15,7 @@
 #import "UIView+SDCAutoLayout.h"
 
 #import "SDCAlertView+Buttons.h"
+#import "SDCAlertView+SDCAlertViewController.h"
 
 CGFloat const SDCAlertViewWidth = 270;
 static UIEdgeInsets const SDCAlertViewPadding = {3, 0, 3, 0};
@@ -25,7 +26,6 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 #pragma mark - SDCAlertView
 
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
-@property (nonatomic, strong) SDCAlertViewController *alertViewController;
 
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
@@ -35,12 +35,6 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 @implementation SDCAlertView
 
 #pragma mark - Getters
-
-- (SDCAlertViewController *)alertViewController {
-	if (!_alertViewController)
-		_alertViewController = [SDCAlertViewController currentController];
-	return _alertViewController;
-}
 
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
 	if (!_alertBackgroundView) {
@@ -150,8 +144,14 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
     }
 	
 	[self.alertViewController dismissAlert:self animated:animated completion:^{
+        // Call delegate if there is one
 		if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
 			[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
+        
+        // Call block if there is one
+        if (self.didDissmissBlock) {
+            self.didDissmissBlock(buttonIndex);
+        }
 	}];
 }
 
