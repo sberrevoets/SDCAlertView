@@ -7,37 +7,69 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "SDCAlertView+Buttons.h"
 
 @interface SDCAlertViewTests : XCTestCase
-
+@property (nonatomic, strong) SDCAlertView *sut;
 @end
 
 @implementation SDCAlertViewTests
 
+- (void)setUp {
+    [super setUp];
+    
+    _sut = [[SDCAlertView alloc]
+            initWithTitle:@"Title"
+            message:@"Message Here"
+            delegate:nil
+            cancelButtonTitle:@"Cancel"
+            otherButtonTitles:nil];
+}
+
+- (void)tearDown {
+    _sut = nil;
+    [super tearDown];
+}
+
 - (void)testCallsShouldDismissBlockWithoutDelegate {
-    SDCAlertView *sut = [[SDCAlertView alloc]
-                         initWithTitle:@"Title"
-                         message:@"Message Here"
-                         delegate:nil
-                         cancelButtonTitle:@"Cancel"
-                         otherButtonTitles:nil];
     
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    sut.shouldDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+    _sut.shouldDissmissBlock = ^BOOL (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
         return NO;
     };
     
-    [sut tappedButtonAtIndex:2];
+    NSInteger simulatedClickButtonIndex = 2;
+    [_sut tappedButtonAtIndex:simulatedClickButtonIndex];
     
     XCTAssertTrue(blockWasCalled, @"");
-    XCTAssertEqual(capturedButtonIndex, 2, @"");
+    XCTAssertEqual(capturedButtonIndex, simulatedClickButtonIndex, @"");
 }
 
 - (void)testCallsShouldDismissBlockAndDelegate {
+    
+    id delegate = [OCMockObject niceMockForProtocol:@protocol(SDCAlertViewDelegate)];
+    [[delegate expect] alertView:_sut shouldDismissWithButtonIndex:2];
+    _sut.delegate = delegate;
+    
+    __block NSInteger capturedButtonIndex;
+    __block BOOL blockWasCalled = NO;
+    _sut.shouldDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+        blockWasCalled = YES;
+        capturedButtonIndex = buttonIndex;
+        return NO;
+    };
+    
+    NSInteger simulatedClickButtonIndex = 2;
+    [_sut tappedButtonAtIndex:simulatedClickButtonIndex];
+    
+    XCTAssertTrue(blockWasCalled, @"");
+    XCTAssertEqual(capturedButtonIndex, simulatedClickButtonIndex, @"");
+    
+    [delegate verify];
     
 }
 
