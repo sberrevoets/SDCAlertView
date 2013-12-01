@@ -8,6 +8,8 @@
 
 #import <XCTest/XCTest.h>
 #import "SDCAlertView+Buttons.h"
+#import "SDCAlertView+SDCAlertViewController.h"
+#import "SDCAlertViewControllerMock.h"
 
 @interface SDCAlertViewTests : XCTestCase
 @property (nonatomic, strong) SDCAlertView *sut;
@@ -55,6 +57,30 @@
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
     _sut.willDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+        blockWasCalled = YES;
+        capturedButtonIndex = buttonIndex;
+        return YES;
+    };
+    
+    [_sut dismissWithClickedButtonIndex:2 animated:YES];
+    
+    XCTAssertTrue(blockWasCalled, @"");
+    XCTAssertEqual(capturedButtonIndex, 2, @"");
+    
+}
+
+
+#pragma mark - DidDissmis test cases
+
+- (void)testDidDismissBlockCalled {
+    
+    // Use a mock version of the SDCAlertViewController so the completionHandler is called immediately
+    SDCAlertViewController *alertViewControllerMock = [[SDCAlertViewControllerMock alloc] init];
+    _sut.alertViewController = alertViewControllerMock;
+    
+    __block NSInteger capturedButtonIndex;
+    __block BOOL blockWasCalled = NO;
+    _sut.didDissmissBlock = ^BOOL (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
         return YES;

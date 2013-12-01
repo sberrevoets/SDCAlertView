@@ -84,7 +84,6 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @property (nonatomic, copy) BOOL (^willDissmissBlock)(NSInteger buttonIndex);
 @property (nonatomic, copy) BOOL (^didDissmissBlock)(NSInteger buttonIndex);
 
-
 - (instancetype)initWithTitle:(NSString *)title
 					  message:(NSString *)message
 					 delegate:(id)delegate
