@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 @property (nonatomic, weak) id <SDCAlertViewDelegate> delegate;
 
-/**
+/*
  *  -------------------------------------------------------------------------
  *  Blocks as an alertnative to using the delegates method.
  *  Called as well as these delegate methods:
@@ -89,11 +89,11 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
  *  alertView:willDismissWithButtonIndex:
  *  alertView:didDismissWithButtonIndex:
  */
-@property (nonatomic, copy) BOOL (^clickedButtonBlock)(NSInteger buttonIndex);
+@property (nonatomic, copy) void (^clickedButtonBlock)(NSInteger buttonIndex);
 @property (nonatomic, copy) BOOL (^shouldDismissBlock)(NSInteger buttonIndex);
 @property (nonatomic, copy) void (^willDismissBlock)(NSInteger buttonIndex);
 @property (nonatomic, copy) void (^didDismissBlock)(NSInteger buttonIndex);
-/**
+/*
  *  -------------------------------------------------------------------------
  */
 
