@@ -139,14 +139,22 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 }
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
-	if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
+    // Call delegate if there is one
+	if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)]) {
 		[self.delegate alertView:self willDismissWithButtonIndex:buttonIndex];
+    }
+    
+    // Call block if there is one
+    if (self.willDissmissBlock) {
+        self.willDissmissBlock(buttonIndex);
+    }
 	
 	[self.alertViewController dismissAlert:self animated:animated completion:^{
 		if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
 			[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
 	}];
 }
+
 
 - (BOOL)resignFirstResponder {
 	[super resignFirstResponder];

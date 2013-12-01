@@ -42,12 +42,29 @@
         return NO;
     };
     
-    NSInteger simulatedClickButtonIndex = 2;
-    [_sut tappedButtonAtIndex:simulatedClickButtonIndex];
+    [_sut tappedButtonAtIndex:2];
     
     XCTAssertTrue(blockWasCalled, @"");
-    XCTAssertEqual(capturedButtonIndex, simulatedClickButtonIndex, @"");
+    XCTAssertEqual(capturedButtonIndex, 2, @"");
 
+}
+
+#pragma mark - WillDissmis test cases
+
+- (void)testWillDismissBlockAndDelegateCalled {
+
+    __block NSInteger capturedButtonIndex;
+    __block BOOL blockWasCalled = NO;
+    _sut.willDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+        blockWasCalled = YES;
+        capturedButtonIndex = buttonIndex;
+        return YES;
+    };
+    
+    [_sut dismissWithClickedButtonIndex:2 animated:YES];
+    
+    XCTAssertTrue(blockWasCalled, @"");
+    XCTAssertEqual(capturedButtonIndex, 2, @"");
     
 }
 
