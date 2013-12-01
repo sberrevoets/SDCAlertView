@@ -88,10 +88,9 @@
 
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    _sut.willDismissBlock = ^BOOL (NSInteger buttonIndex) {
+    _sut.willDismissBlock = ^void (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
-        return YES;
     };
     
     [_sut dismissWithClickedButtonIndex:2 animated:YES];
@@ -112,10 +111,9 @@
     
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    _sut.didDismissBlock = ^BOOL (NSInteger buttonIndex) {
+    _sut.didDismissBlock = ^void (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
-        return YES;
     };
     
     [_sut dismissWithClickedButtonIndex:2 animated:YES];
