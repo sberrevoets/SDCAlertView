@@ -32,7 +32,7 @@
 }
 
 #pragma mark - ShouldDismiss test cases
-- (void)testShouldDismissBlockAndDelegateCalled {
+- (void)testShouldDismissBlockCalled {
     
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
@@ -50,8 +50,7 @@
 }
 
 #pragma mark - WillDissmis test cases
-
-- (void)testWillDismissBlockAndDelegateCalled {
+- (void)testWillDismissBlockCalled {
 
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
@@ -67,7 +66,6 @@
     XCTAssertEqual(capturedButtonIndex, 2, @"");
     
 }
-
 
 
 @end
