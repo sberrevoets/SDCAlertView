@@ -48,6 +48,7 @@
 /* Begin PBXFileReference section */
 		50B67E8F6417468B9958F089 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		60539E244AB24FB7B725E24B /* Pods-SDCAlertViewTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDCAlertViewTests.xcconfig"; path = "Pods/Pods-SDCAlertViewTests.xcconfig"; sourceTree = "<group>"; };
+		A33BA71E184BCE480074EA13 /* Bundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bundle.h; sourceTree = "<group>"; };
 		A3F8B5F9184B9E6200EB5438 /* SDCAlertView+Buttons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "SDCAlertView+Buttons.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A3F8B5FA184B9E6200EB5438 /* SDCAlertView+Buttons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDCAlertView+Buttons.h"; sourceTree = "<group>"; };
 		A3F8B5FC184BA94A00EB5438 /* SDCAlertView+SDCAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDCAlertView+SDCAlertViewController.h"; sourceTree = "<group>"; };
@@ -132,6 +133,7 @@
 				A3F8B5FD184BA94A00EB5438 /* SDCAlertView+SDCAlertViewController.m */,
 				A3F8B5FA184B9E6200EB5438 /* SDCAlertView+Buttons.h */,
 				A3F8B5F9184B9E6200EB5438 /* SDCAlertView+Buttons.m */,
+				A33BA71E184BCE480074EA13 /* Bundle.h */,
 			);
 			name = "SDCAlertView & Categories";
 			sourceTree = "<group>";

@@ -15,6 +15,8 @@
 
 #import "UIView+SDCAutoLayout.h"
 
+#import "Bundle.h"
+
 static CGFloat 			const SDCAlertViewShowingAnimationScale = 1.26;
 static CGFloat 			const SDCAlertViewDismissingAnimationScale = 0.84;
 static CFTimeInterval	const SDCAlertViewSpringAnimationDuration = 0.5058237314224243;
@@ -231,7 +233,10 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	}];
 	
 	NSArray *alertWindows = [windows filteredArrayUsingPredicate:predicate];
-	NSAssert([alertWindows count] <= 1, @"At most one alert window should be active at any point");
+    
+    if (!isRunningFromTestBundle()) {
+        NSAssert([alertWindows count] <= 1, @"At most one alert window should be active at any point");
+    }
 	
 	return [alertWindows firstObject];
 }
