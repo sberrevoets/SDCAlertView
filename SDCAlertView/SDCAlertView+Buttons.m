@@ -43,13 +43,25 @@ static NSString * const PropertyKey_FirstOtherButtonIndex   = @"FirstOtherButton
 	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)])
 		[self.delegate alertView:self clickedButtonAtIndex:index];
 	
-	if (([self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)] && [self.delegate alertView:self shouldDismissWithButtonIndex:index]) || ![self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)]) {
-		[self dismissWithClickedButtonIndex:index animated:YES];
+    // If there is a delegate respodning to the correct selector
+    // then ask the delegate whether we should dissmiss or not
+	if ([self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)]) {
+        // Call the delegate afer we are sure it responds to the selector to avoid a crash
+        if ([self.delegate alertView:self shouldDismissWithButtonIndex:index]) {
+            [self dismissWithClickedButtonIndex:index animated:YES];
+        }
 	}
     
-    if (self.shouldDissmissBlock) {
-        self.shouldDissmissBlock(index);
+    // If there is a block
+    // then ask the block whether we should dissmiss or not
+    else if (self.shouldDissmissBlock ) {
+        // Call the block afer we are sure it exists to avoid a crash
+        if (self.shouldDissmissBlock(index)) {
+            [self dismissWithClickedButtonIndex:index animated:YES];
+        };
+        
     }
+    
 }
 
 - (NSInteger)numberOfButtons {

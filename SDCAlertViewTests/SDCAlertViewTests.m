@@ -7,6 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
+
 #import "SDCAlertView+Buttons.h"
 #import "SDCAlertView+SDCAlertViewController.h"
 #import "SDCAlertViewControllerMock.h"
@@ -50,6 +52,21 @@
     XCTAssertEqual(capturedButtonIndex, 2, @"");
 
 }
+
+- (void)testDoesDissmissWhenSpecfiedInBlock {
+    
+    _sut.shouldDissmissBlock = ^BOOL (NSInteger buttonIndex) {
+        return YES;
+    };
+    
+    id sutMock = [OCMockObject partialMockForObject:_sut];
+    [[sutMock expect] dismissWithClickedButtonIndex:2 animated:YES];
+    
+    [sutMock tappedButtonAtIndex:2];
+    
+    [sutMock verify];
+}
+
 
 #pragma mark - WillDissmis test cases
 - (void)testWillDismissBlockCalled {
