@@ -12,6 +12,4 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-static BOOL isRunningTests(void);
-
 @end
