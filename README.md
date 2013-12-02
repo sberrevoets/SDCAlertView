@@ -4,11 +4,7 @@ SDCAlertView
 
 `SDCAlertView` doesn't just look like a system alert in terms of user interface elements, it is the result of completely reverse-engineering `UIAlertView`. The view hierarchy, labels, table views, animations, everything has been looked at and incorporated as much as possible.
 
-How do I use it?
-================
-The class is a drop-in replacement for `UIAlertView`. All public APIs for `UIAlertView` have been duplicated and implemented, so all you need to do is import `SDCAlertView.h` and change any `UIAlertView` to `SDCAlertView`.
-
-And you're sure it's the same?
+Are you sure it's the same?
 ==============================
 Check for yourself:
 
@@ -33,17 +29,19 @@ What won't be duplicated:
 
 What is not implemented yet:
 ----------------------------
+`UIAlertView` features that are not yet implemented:
 
 - Creating a "queue" of alerts and making sure they interact properly
 - Handle device rotations correctly
 
+Features that will enhance `SDCAlertView`:
+
 - Block-based syntax
-- More customization of alert
-- Using autoresizing masks for content view
+- Easy creation/showing
 
 Usage
 =====
-The usage is exactly the same as it is for `UIAlertView`. Any documentation that applies to some `UIAlertView` API, also applies to the same `SDCAlertView` API.
+The usage is almost exactly the same as it is for `UIAlertView`. Most documentation that applies to some `UIAlertView` API, also applies to the same `SDCAlertView` API. There are a few exceptions, please see SDCAlertView.h for details.
 
 To use the `contentView` property, you have to apply auto-layout constraints to it and its subviews. The `contentView` property will be the same width as the alert, but the height is dependent on its content, so you have to set that too. See [SDCViewController](SDCAlertView/SDCViewController.m) for a few examples of how to use `contentView`. See [`SDCAutoLayout`](https://github.com/Scott90/SDCAutoLayout) for an `NSLayoutConstraint` category that makes creating constraints a little easier.
 
