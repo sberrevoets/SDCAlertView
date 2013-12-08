@@ -18,33 +18,25 @@ CGFloat const SDCAlertViewWidth = 270;
 static UIEdgeInsets const SDCAlertViewPadding = {3, 0, 3, 0};
 static CGFloat const SDCAlertViewCornerRadius = 7;
 
-static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
-
 static NSInteger const SDCAlertViewUnspecifiedButtonIndex = -1;
 static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
+
+static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 #pragma mark - SDCAlertView
 
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
-@property (nonatomic, strong) SDCAlertViewController *alertViewController;
-
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
 @property (nonatomic, strong) UIToolbar *toolbar;
-
+@property (nonatomic, strong) SDCAlertViewController *alertViewController;
 @property (nonatomic, strong) NSMutableArray *buttonTitles;
-@property (nonatomic) NSInteger firstOtherButtonIndex;
+@property (nonatomic, assign) NSInteger firstOtherButtonIndex;
 @end
 
 @implementation SDCAlertView
 
 #pragma mark - Getters
-
-- (SDCAlertViewController *)alertViewController {
-	if (!_alertViewController)
-		_alertViewController = [SDCAlertViewController currentController];
-	return _alertViewController;
-}
 
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
 	if (!_alertBackgroundView) {
@@ -81,10 +73,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 		_cancelButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
 		_firstOtherButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
 		
-		_buttonTitles = [NSMutableArray array];
+		self.buttonTitles = [NSMutableArray array];
 		
 		if (cancelButtonTitle) {
-			_buttonTitles[0] = cancelButtonTitle;
+			self.buttonTitles[0] = cancelButtonTitle;
 			_cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
 		}
 		
@@ -143,14 +135,28 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
-	if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
+    // Call delegate if there is one
+	if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)]) {
 		[self.delegate alertView:self willDismissWithButtonIndex:buttonIndex];
+    }
+    
+    // Call block if there is one
+    if (self.willDismissHandler) {
+        self.willDismissHandler(buttonIndex);
+    }
 	
 	[self.alertViewController dismissAlert:self animated:animated completion:^{
+        // Call delegate if there is one
 		if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
 			[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
+        
+        // Call block if there is one
+        if (self.didDismissHandler) {
+            self.didDismissHandler(buttonIndex);
+        }
 	}];
 }
+
 
 - (BOOL)resignFirstResponder {
 	[super resignFirstResponder];
@@ -238,13 +244,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 #pragma mark - Buttons & Text Fields
 
-- (void)tappedButtonAtIndex:(NSInteger)index {
-	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)])
-		[self.delegate alertView:self clickedButtonAtIndex:index];
-	
-	if (([self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)] && [self.delegate alertView:self shouldDismissWithButtonIndex:index]) || ![self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)]) {
-		[self dismissWithClickedButtonIndex:index animated:YES];
-	}
+- (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex {
+	return self.alertContentView.textFields[textFieldIndex];
 }
 
 - (NSInteger)addButtonWithTitle:(NSString *)title {
@@ -260,17 +261,38 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return [self.buttonTitles indexOfObject:title];
 }
 
+- (void)tappedButtonAtIndex:(NSInteger)index {
+	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+        [self.delegate alertView:self clickedButtonAtIndex:index];
+    }
+    if (self.clickedButtonHandler) {
+        self.clickedButtonHandler(index);
+    }
+    
+	if ([self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)]) {
+        if ([self.delegate alertView:self shouldDismissWithButtonIndex:index]) {
+            [self dismissWithClickedButtonIndex:index animated:YES];
+        }
+	}
+    else if (self.shouldDismissHandler) {
+        if (self.shouldDismissHandler(index)) {
+            [self dismissWithClickedButtonIndex:index animated:YES];
+        };
+    }
+    else {
+        [self dismissWithClickedButtonIndex:index animated:YES];
+    }
+}
+
 - (NSInteger)numberOfButtons {
 	return [self.buttonTitles count];
 }
+
 
 - (NSString *)buttonTitleAtIndex:(NSInteger)index {
 	return self.buttonTitles[index];
 }
 
-- (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex {
-	return self.alertContentView.textFields[textFieldIndex];
-}
 
 #pragma mark - Layout
 
