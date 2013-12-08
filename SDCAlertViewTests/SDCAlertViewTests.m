@@ -10,8 +10,11 @@
 #import <OCMock/OCMock.h>
 
 #import "SDCAlertView+Buttons.h"
-#import "SDCAlertView+SDCAlertViewController.h"
 #import "SDCAlertViewControllerMock.h"
+
+@interface SDCAlertView (TestVisibility)
+@property (nonatomic, strong) SDCAlertViewController *alertViewController;
+@end
 
 @interface SDCAlertViewTests : XCTestCase
 // 'sut' is the 'System Under Test'

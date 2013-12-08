@@ -15,7 +15,6 @@
 #import "UIView+SDCAutoLayout.h"
 
 #import "SDCAlertView+Buttons.h"
-#import "SDCAlertView+SDCAlertViewController.h"
 
 CGFloat const SDCAlertViewWidth = 270;
 static UIEdgeInsets const SDCAlertViewPadding = {3, 0, 3, 0};
@@ -26,10 +25,10 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 #pragma mark - SDCAlertView
 
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
-
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
 @property (nonatomic, strong) UIToolbar *toolbar;
+@property (nonatomic, strong) SDCAlertViewController *alertViewController;
 @end
 
 @implementation SDCAlertView
