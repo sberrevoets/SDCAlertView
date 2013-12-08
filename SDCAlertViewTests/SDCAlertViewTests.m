@@ -14,6 +14,7 @@
 #import "SDCAlertViewControllerMock.h"
 
 @interface SDCAlertViewTests : XCTestCase
+// 'sut' is the 'System Under Test'
 @property (nonatomic, strong) SDCAlertView *sut;
 @end
 
@@ -22,7 +23,7 @@
 - (void)setUp {
     [super setUp];
     
-    _sut = [[SDCAlertView alloc]
+    self.sut = [[SDCAlertView alloc]
             initWithTitle:@"Title"
             message:@"Message Here"
             delegate:nil
@@ -31,114 +32,104 @@
 }
 
 - (void)tearDown {
-    _sut = nil;
+    self.sut = nil;
     [super tearDown];
 }
 
 #pragma mark - ClickedButton test cases
 - (void)testClickedButtonBlockCalled {
-    
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    _sut.clickedButtonBlock = ^BOOL (NSInteger buttonIndex) {
+    self.sut.clickedButtonBlock = ^void (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
-        return NO;
     };
     
-    [_sut tappedButtonAtIndex:2];
+    [self.sut tappedButtonAtIndex:2];
     
     XCTAssertTrue(blockWasCalled, @"");
     XCTAssertEqual(capturedButtonIndex, 2, @"");
-
 }
 
 #pragma mark - ShouldDismiss test cases
 - (void)testShouldDismissBlockCalled {
-    
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    _sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
+    self.sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
         return NO;
     };
     
-    [_sut tappedButtonAtIndex:2];
+    [self.sut tappedButtonAtIndex:2];
     
     XCTAssertTrue(blockWasCalled, @"");
     XCTAssertEqual(capturedButtonIndex, 2, @"");
-
 }
 
 - (void)testDoesDismissWhenSpecfiedInBlock {
-    
-    _sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
+    self.sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
         return YES;
     };
     
-    id sutMock = [OCMockObject partialMockForObject:_sut];
-    [[sutMock expect] dismissWithClickedButtonIndex:2 animated:YES];
+    // Partially mock the alert view so we can verify correct message are sent to it
+    id sutPartialMock = [OCMockObject partialMockForObject:self.sut];
+    [[sutPartialMock expect] dismissWithClickedButtonIndex:2 animated:YES];
     
-    [sutMock tappedButtonAtIndex:2];
+    [sutPartialMock tappedButtonAtIndex:2];
     
-    [sutMock verify];
+    [sutPartialMock verify];
 }
 
 - (void)testDoesNotDismissWhenSpecfiedInBlock {
-    
-    _sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
+    self.sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
         return NO;
     };
     
-    id sutMock = [OCMockObject partialMockForObject:_sut];
+    // Partially mock the alert view so we can verify correct message are sent to it
+    id sutPartialMock = [OCMockObject partialMockForObject:self.sut];
+    [[sutPartialMock reject] dismissWithClickedButtonIndex:2 animated:YES];
     
-    [sutMock tappedButtonAtIndex:2];
-    
-    // Verfiy a mock not expecting any methods
-    // This in-effect verifies no methods were called
-    [sutMock verify];
+    [sutPartialMock tappedButtonAtIndex:2];
+
+    [sutPartialMock verify];
 }
 
 
 #pragma mark - WillDissmis test cases
 - (void)testWillDismissBlockCalled {
-
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    _sut.willDismissBlock = ^void (NSInteger buttonIndex) {
+    self.sut.willDismissBlock = ^void (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
     };
     
-    [_sut dismissWithClickedButtonIndex:2 animated:YES];
+    [self.sut dismissWithClickedButtonIndex:2 animated:YES];
     
     XCTAssertTrue(blockWasCalled, @"");
     XCTAssertEqual(capturedButtonIndex, 2, @"");
-    
 }
 
 
 #pragma mark - DidDissmis test cases
 
 - (void)testDidDismissBlockCalled {
-    
     // Use a mock version of the SDCAlertViewController so the completionHandler is called immediately
     SDCAlertViewController *alertViewControllerMock = [[SDCAlertViewControllerMock alloc] init];
-    _sut.alertViewController = alertViewControllerMock;
+    self.sut.alertViewController = alertViewControllerMock;
     
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    _sut.didDismissBlock = ^void (NSInteger buttonIndex) {
+    self.sut.didDismissBlock = ^void (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
     };
     
-    [_sut dismissWithClickedButtonIndex:2 animated:YES];
+    [self.sut dismissWithClickedButtonIndex:2 animated:YES];
     
     XCTAssertTrue(blockWasCalled, @"");
     XCTAssertEqual(capturedButtonIndex, 2, @"");
-    
 }
 
 
