@@ -10,7 +10,7 @@
 #define SDCAlertView_Bundle_h
 
 // Helper function to see if current bundle is the injected test bundle
-static BOOL isRunningFromTestBundle(void) {
+extern BOOL isRunningFromTestBundle(void) {
     NSDictionary* environment = [[NSProcessInfo processInfo] environment];
     NSString* injectBundle = environment[@"XCInjectBundle"];
     return ([[injectBundle pathExtension] isEqualToString:@"octest"] || [[injectBundle pathExtension] isEqualToString:@"xctest"]);

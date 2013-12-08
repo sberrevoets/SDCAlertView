@@ -262,8 +262,6 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 }
 
 - (void)tappedButtonAtIndex:(NSInteger)index {
-    
-    // Call delegate and block to let them know button was clicked
 	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
         [self.delegate alertView:self clickedButtonAtIndex:index];
     }
@@ -271,32 +269,19 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
         self.clickedButtonBlock(index);
     }
     
-	
-    // If there is a delegate respodning to the correct selector
-    // then ask the delegate whether we should dismiss or not
 	if ([self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)]) {
-        // Call the delegate afer we are sure it responds to the selector to avoid a crash
         if ([self.delegate alertView:self shouldDismissWithButtonIndex:index]) {
             [self dismissWithClickedButtonIndex:index animated:YES];
         }
 	}
-    
-    // If there is a block
-    // then ask the block whether we should dismiss or not
     else if (self.shouldDismissBlock) {
-        // Call the block afer we are sure it exists to avoid a crash
         if (self.shouldDismissBlock(index)) {
             [self dismissWithClickedButtonIndex:index animated:YES];
         };
-        
     }
-    
-    // If we cannot ask a delegate or a block then default to always dismissing
     else {
         [self dismissWithClickedButtonIndex:index animated:YES];
-        
     }
-    
 }
 
 - (NSInteger)numberOfButtons {

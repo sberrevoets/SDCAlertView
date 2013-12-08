@@ -7,7 +7,6 @@
 //
 
 #import "SDCAppDelegate.h"
-#import "Bundle.h"
 
 @implementation SDCAppDelegate
 
