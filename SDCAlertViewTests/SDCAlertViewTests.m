@@ -46,7 +46,7 @@
 - (void)testClickedButtonBlockCalled {
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    self.sut.clickedButtonBlock = ^void (NSInteger buttonIndex) {
+    self.sut.clickedButtonHandler = ^void (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
     };
@@ -61,7 +61,7 @@
 - (void)testShouldDismissBlockCalled {
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    self.sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
+    self.sut.shouldDismissHandler = ^BOOL (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
         return NO;
@@ -74,7 +74,7 @@
 }
 
 - (void)testDoesDismissWhenSpecfiedInBlock {
-    self.sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
+    self.sut.shouldDismissHandler = ^BOOL (NSInteger buttonIndex) {
         return YES;
     };
     
@@ -88,7 +88,7 @@
 }
 
 - (void)testDoesNotDismissWhenSpecfiedInBlock {
-    self.sut.shouldDismissBlock = ^BOOL (NSInteger buttonIndex) {
+    self.sut.shouldDismissHandler = ^BOOL (NSInteger buttonIndex) {
         return NO;
     };
     
@@ -106,7 +106,7 @@
 - (void)testWillDismissBlockCalled {
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    self.sut.willDismissBlock = ^void (NSInteger buttonIndex) {
+    self.sut.willDismissHandler = ^void (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
     };
@@ -127,7 +127,7 @@
     
     __block NSInteger capturedButtonIndex;
     __block BOOL blockWasCalled = NO;
-    self.sut.didDismissBlock = ^void (NSInteger buttonIndex) {
+    self.sut.didDismissHandler = ^void (NSInteger buttonIndex) {
         blockWasCalled = YES;
         capturedButtonIndex = buttonIndex;
     };

@@ -89,10 +89,10 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
  *  alertView:willDismissWithButtonIndex:
  *  alertView:didDismissWithButtonIndex:
  */
-@property (nonatomic, copy) void (^clickedButtonBlock)(NSInteger buttonIndex);
-@property (nonatomic, copy) BOOL (^shouldDismissBlock)(NSInteger buttonIndex);
-@property (nonatomic, copy) void (^willDismissBlock)(NSInteger buttonIndex);
-@property (nonatomic, copy) void (^didDismissBlock)(NSInteger buttonIndex);
+@property (nonatomic, copy) void (^clickedButtonHandler)(NSInteger buttonIndex);
+@property (nonatomic, copy) BOOL (^shouldDismissHandler)(NSInteger buttonIndex);
+@property (nonatomic, copy) void (^willDismissHandler)(NSInteger buttonIndex);
+@property (nonatomic, copy) void (^didDismissHandler)(NSInteger buttonIndex);
 /*
  *  -------------------------------------------------------------------------
  */

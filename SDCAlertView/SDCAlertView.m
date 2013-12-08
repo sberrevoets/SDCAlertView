@@ -141,8 +141,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
     }
     
     // Call block if there is one
-    if (self.willDismissBlock) {
-        self.willDismissBlock(buttonIndex);
+    if (self.willDismissHandler) {
+        self.willDismissHandler(buttonIndex);
     }
 	
 	[self.alertViewController dismissAlert:self animated:animated completion:^{
@@ -151,8 +151,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 			[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
         
         // Call block if there is one
-        if (self.didDismissBlock) {
-            self.didDismissBlock(buttonIndex);
+        if (self.didDismissHandler) {
+            self.didDismissHandler(buttonIndex);
         }
 	}];
 }
@@ -265,8 +265,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
         [self.delegate alertView:self clickedButtonAtIndex:index];
     }
-    if (self.clickedButtonBlock) {
-        self.clickedButtonBlock(index);
+    if (self.clickedButtonHandler) {
+        self.clickedButtonHandler(index);
     }
     
 	if ([self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)]) {
@@ -274,8 +274,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
             [self dismissWithClickedButtonIndex:index animated:YES];
         }
 	}
-    else if (self.shouldDismissBlock) {
-        if (self.shouldDismissBlock(index)) {
+    else if (self.shouldDismissHandler) {
+        if (self.shouldDismissHandler(index)) {
             [self dismissWithClickedButtonIndex:index animated:YES];
         };
     }
