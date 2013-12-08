@@ -14,11 +14,12 @@
 
 #import "UIView+SDCAutoLayout.h"
 
-#import "SDCAlertView+Buttons.h"
-
 CGFloat const SDCAlertViewWidth = 270;
 static UIEdgeInsets const SDCAlertViewPadding = {3, 0, 3, 0};
 static CGFloat const SDCAlertViewCornerRadius = 7;
+
+static NSInteger const SDCAlertViewUnspecifiedButtonIndex = -1;
+static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
@@ -29,6 +30,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
 @property (nonatomic, strong) UIToolbar *toolbar;
 @property (nonatomic, strong) SDCAlertViewController *alertViewController;
+@property (nonatomic, strong) NSMutableArray *buttonTitles;
+@property (nonatomic, assign) NSInteger firstOtherButtonIndex;
 @end
 
 @implementation SDCAlertView
@@ -257,6 +260,49 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	
 	return [self.buttonTitles indexOfObject:title];
 }
+
+- (void)tappedButtonAtIndex:(NSInteger)index {
+    
+    // Call delegate and block to let them know button was clicked
+	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+        [self.delegate alertView:self clickedButtonAtIndex:index];
+    }
+    if (self.clickedButtonBlock) {
+        self.clickedButtonBlock(index);
+    }
+    
+	
+    // If there is a delegate respodning to the correct selector
+    // then ask the delegate whether we should dismiss or not
+	if ([self.delegate respondsToSelector:@selector(alertView:shouldDismissWithButtonIndex:)]) {
+        // Call the delegate afer we are sure it responds to the selector to avoid a crash
+        if ([self.delegate alertView:self shouldDismissWithButtonIndex:index]) {
+            [self dismissWithClickedButtonIndex:index animated:YES];
+        }
+	}
+    
+    // If there is a block
+    // then ask the block whether we should dismiss or not
+    else if (self.shouldDismissBlock) {
+        // Call the block afer we are sure it exists to avoid a crash
+        if (self.shouldDismissBlock(index)) {
+            [self dismissWithClickedButtonIndex:index animated:YES];
+        };
+        
+    }
+    
+    // If we cannot ask a delegate or a block then default to always dismissing
+    else {
+        [self dismissWithClickedButtonIndex:index animated:YES];
+        
+    }
+    
+}
+
+- (NSInteger)numberOfButtons {
+	return [self.buttonTitles count];
+}
+
 
 - (NSString *)buttonTitleAtIndex:(NSInteger)index {
 	return self.buttonTitles[index];

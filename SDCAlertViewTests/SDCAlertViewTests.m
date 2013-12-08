@@ -9,15 +9,18 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
-#import "SDCAlertView+Buttons.h"
+#import "SDCAlertView.h"
 #import "SDCAlertViewControllerMock.h"
 
+// Category to expose internals of SDCAlertView necessary for testing
 @interface SDCAlertView (TestVisibility)
 @property (nonatomic, strong) SDCAlertViewController *alertViewController;
+- (void)tappedButtonAtIndex:(NSInteger)index;
 @end
 
+
 @interface SDCAlertViewTests : XCTestCase
-// 'sut' is the 'System Under Test'
+// 'sut' is the 'System Under Test', i.e. the SDCAlertView class
 @property (nonatomic, strong) SDCAlertView *sut;
 @end
 
