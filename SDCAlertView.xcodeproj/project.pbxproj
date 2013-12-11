@@ -555,8 +555,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SDCAlertView/SDCAlertView-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
+					"TESTING=1",
 				);
 				INFOPLIST_FILE = "SDCAlertViewTests/SDCAlertViewTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -578,6 +578,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SDCAlertView/SDCAlertView-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"TESTING=1",
+				);
 				INFOPLIST_FILE = "SDCAlertViewTests/SDCAlertViewTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
