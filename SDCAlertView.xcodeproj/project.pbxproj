@@ -45,8 +45,7 @@
 
 /* Begin PBXFileReference section */
 		50B67E8F6417468B9958F089 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		60539E244AB24FB7B725E24B /* Pods-SDCAlertViewTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDCAlertViewTests.xcconfig"; path = "Pods/Pods-SDCAlertViewTests.xcconfig"; sourceTree = "<group>"; };
-		A33BA71E184BCE480074EA13 /* Bundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bundle.h; sourceTree = "<group>"; };
+		60539E244AB24FB7B725E24B /* Pods-SDCAlertViewTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDCAlertViewTests.xcconfig"; path = "../Pods/Pods-SDCAlertViewTests.xcconfig"; sourceTree = "<group>"; };
 		A3F8B603184BAD1400EB5438 /* SDCAlertViewControllerMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewControllerMock.h; sourceTree = "<group>"; };
 		A3F8B604184BAD1400EB5438 /* SDCAlertViewControllerMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewControllerMock.m; sourceTree = "<group>"; };
 		CB28936541154BCF9C9B2F0C /* libPods-SDCAlertViewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDCAlertViewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,16 +117,6 @@
 			name = Mocks;
 			sourceTree = "<group>";
 		};
-		A3F8B607184BAE4400EB5438 /* SDCAlertView & Categories */ = {
-			isa = PBXGroup;
-			children = (
-				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
-				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
-				A33BA71E184BCE480074EA13 /* Bundle.h */,
-			);
-			name = "SDCAlertView & Categories";
-			sourceTree = "<group>";
-		};
 		D25B3C9B17ECE7A6004B32A2 = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +128,6 @@
 				D25B3CA617ECE7A6004B32A2 /* Frameworks */,
 				D25B3CA517ECE7A6004B32A2 /* Products */,
 				50B67E8F6417468B9958F089 /* Pods.xcconfig */,
-				60539E244AB24FB7B725E24B /* Pods-SDCAlertViewTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,7 +156,8 @@
 		D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				A3F8B607184BAE4400EB5438 /* SDCAlertView & Categories */,
+				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
+				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
 				D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */,
 				D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */,
 				D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */,
@@ -200,6 +189,7 @@
 		D25B3CCC17ECE7A6004B32A2 /* SDCAlertViewTests */ = {
 			isa = PBXGroup;
 			children = (
+				60539E244AB24FB7B725E24B /* Pods-SDCAlertViewTests.xcconfig */,
 				D25B3CD217ECE7A6004B32A2 /* SDCAlertViewTests.m */,
 				A3F8B602184BACA400EB5438 /* Mocks */,
 				D25B3CCD17ECE7A6004B32A2 /* Supporting Files */,
