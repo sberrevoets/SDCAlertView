@@ -38,6 +38,12 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 #pragma mark - Getters
 
+- (SDCAlertViewController *)alertViewController {
+	if (!_alertViewController)
+		_alertViewController = [SDCAlertViewController currentController];
+	return _alertViewController;
+}
+
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
 	if (!_alertBackgroundView) {
 		_alertBackgroundView = [[SDCAlertViewBackgroundView alloc] init];
