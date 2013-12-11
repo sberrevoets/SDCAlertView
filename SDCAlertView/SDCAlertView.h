@@ -66,36 +66,41 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @property (nonatomic) SDCAlertViewStyle alertViewStyle;
 
 /**
- * The contentView property can be used to display any arbitrary view in an alert view by adding these views to the contentView.
- * SDCAlertView uses auto-layout to layout all its subviews, including the contentView. That means that you should not modify
- * the contentView's frame property, as it will do nothing. Use NSLayoutConstraint or helper methods included in SDCAutoLayout
- * to modify the contentView's dimensions.
+ *  The contentView property can be used to display any arbitrary view in an alert view by adding these views to the contentView.
+ *  SDCAlertView uses auto-layout to layout all its subviews, including the contentView. That means that you should not modify
+ *  the contentView's frame property, as it will do nothing. Use NSLayoutConstraint or helper methods included in SDCAutoLayout
+ *  to modify the contentView's dimensions.
  *
- * The contentView will take up the entire width of the alert. The height cannot be automatically determined and will need to be
- * explicitly defined.
+ *  The contentView will take up the entire width of the alert. The height cannot be automatically determined and will need to be
+ *  explicitly defined.
  *
- * If there are no subviews, the contentView will not be added to the alert.
+ *  If there are no subviews, the contentView will not be added to the alert.
  */
 @property (nonatomic, readonly) UIView *contentView;
 
 @property (nonatomic, weak) id <SDCAlertViewDelegate> delegate;
 
 /*
- *  -------------------------------------------------------------------------
- *  Blocks as an alertnative to using the delegates method.
- *  Called as well as these delegate methods:
- *  alertView:clickedButtonAtIndex:
- *  alertView:shouldDismissWithButtonIndex:
- *  alertView:willDismissWithButtonIndex:
- *  alertView:didDismissWithButtonIndex:
+ *  The following properties are blocks as alternatives to using delegate methods.
+ *  It's possible to implement both the delegate and set its corresponding block. In
+ *  that case, the delegate will be called before the block will be executed.
+ *
+ *  In the case of alertView:shouldDismissWithButtonIndex:/shouldDismissHandler, the
+ *  delegate will always have precedence. That means that if the delegate is set,
+ *  the block will NOT be executed.
  */
+
+/// Alternative property for \c alertView:clickedButtonAtIndex:
 @property (nonatomic, copy) void (^clickedButtonHandler)(NSInteger buttonIndex);
+
+/// Alternative property for \c alertView:shouldDismissWithButtonIndex:
 @property (nonatomic, copy) BOOL (^shouldDismissHandler)(NSInteger buttonIndex);
+
+/// Alternative property for \c alertView:willDismissWithButtonIndex:
 @property (nonatomic, copy) void (^willDismissHandler)(NSInteger buttonIndex);
+
+/// Alternative property for \c alertView:didDismissWithButtonIndex:
 @property (nonatomic, copy) void (^didDismissHandler)(NSInteger buttonIndex);
-/*
- *  -------------------------------------------------------------------------
- */
 
 - (instancetype)initWithTitle:(NSString *)title
 					  message:(NSString *)message
