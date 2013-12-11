@@ -44,11 +44,11 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 /*
  * UIAlertView has a "bug" that was intentionally not duplicated in SDCAlertView.
  * This code:
- * 
+ *
  *		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Title" message:@"This is a message" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"B1", @"B2", nil];
  *		NSLog(@"%d", alert.firstOtherButtonIndex);
  *
- * will display 1 in the console, which is correct. When setting alert.cancelButtonIndex = 1, both cancelButtonIndex and firstOtherButtonIndex are 1 (B1). 
+ * will display 1 in the console, which is correct. When setting alert.cancelButtonIndex = 1, both cancelButtonIndex and firstOtherButtonIndex are 1 (B1).
  *
  * Though it doesn't make much sense, it's not a big deal. However, when returning NO from the delegate method -alertViewShouldEnableFirstOtherButton:, the
  * button with Cancel on it will be disabled. So, alert.firstOtherButtonIndex refers to B1, while the delegate method disables the button with title Cancel.
@@ -79,6 +79,23 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @property (nonatomic, readonly) UIView *contentView;
 
 @property (nonatomic, weak) id <SDCAlertViewDelegate> delegate;
+
+/*
+ *  -------------------------------------------------------------------------
+ *  Blocks as an alertnative to using the delegates method.
+ *  Called as well as these delegate methods:
+ *  alertView:clickedButtonAtIndex:
+ *  alertView:shouldDismissWithButtonIndex:
+ *  alertView:willDismissWithButtonIndex:
+ *  alertView:didDismissWithButtonIndex:
+ */
+@property (nonatomic, copy) void (^clickedButtonHandler)(NSInteger buttonIndex);
+@property (nonatomic, copy) BOOL (^shouldDismissHandler)(NSInteger buttonIndex);
+@property (nonatomic, copy) void (^willDismissHandler)(NSInteger buttonIndex);
+@property (nonatomic, copy) void (^didDismissHandler)(NSInteger buttonIndex);
+/*
+ *  -------------------------------------------------------------------------
+ */
 
 - (instancetype)initWithTitle:(NSString *)title
 					  message:(NSString *)message
