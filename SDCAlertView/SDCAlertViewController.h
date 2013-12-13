@@ -13,12 +13,11 @@
 @interface SDCAlertViewController : UIViewController
 
 @property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, readonly) SDCAlertView *visibleAlert;
 
 + (instancetype)currentController;
 
 - (void)showAlert:(SDCAlertView *)alert animated:(BOOL)animated completion:(void(^)(void))completionHandler;
 - (void)dismissAlert:(SDCAlertView *)alert animated:(BOOL)animated completion:(void(^)(void))completionHandler;
-
-- (SDCAlertView *)currentAlert;
 
 @end

@@ -105,7 +105,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 #pragma mark - Visibility
 
 - (BOOL)isVisible {
-	return [self.alertViewController currentAlert] == self;
+	return self.alertViewController.visibleAlert == self;
 }
 
 - (void)show {

@@ -148,7 +148,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	}
 }
 
-- (SDCAlertView *)currentAlert {
+- (SDCAlertView *)visibleAlert {
 	return [self.alertViews lastObject];
 }
 
