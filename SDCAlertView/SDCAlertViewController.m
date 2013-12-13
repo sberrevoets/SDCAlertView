@@ -69,13 +69,24 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	self.previousWindow = [[UIApplication sharedApplication] keyWindow];
 	
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	self.window.backgroundColor = [UIColor clearColor];
 	self.window.rootViewController = self;
 	self.window.windowLevel = UIWindowLevelAlert;
 	
+	/*
+	 *  When displaying a UIAlertView, the view that contains the dimmed background and alert view itself
+	 *  ("self.rootView") is added as a separate view to the UIWindow. The original implementation of 
+	 *  SDCAlertView did the same, but handling rotation is much easier when self.rootView is added to
+	 *  self.view. So, while it's implemented differently by Apple, this solution is probably easier
+	 *  with regards to auto-rotation, which is why self.rootView is now added to self.view instead of self.window.
+	 */
+	
 	self.rootView = [[UIView alloc] initWithFrame:self.window.bounds];
-	[self.window addSubview:self.rootView];
+	self.rootView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+	[self.view addSubview:self.rootView];
 	
 	self.backgroundColorView = [[UIView alloc] initWithFrame:self.rootView.bounds];
+	self.backgroundColorView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 	self.backgroundColorView.backgroundColor = [UIColor colorWithWhite:0 alpha:.4];
 	self.backgroundColorView.layer.opacity = 1.0;
 	[self.backgroundColorView setTranslatesAutoresizingMaskIntoConstraints:NO];
