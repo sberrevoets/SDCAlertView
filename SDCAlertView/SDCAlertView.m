@@ -120,6 +120,11 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	}];
 }
 
+- (void)showWithDismissHandler:(void (^)(NSInteger))dismissHandler {
+	self.didDismissHandler = dismissHandler;
+	[self show];
+}
+
 - (void)configureForShowing {
 	UIInterpolatingMotionEffect *horizontalParallax;
 	UIInterpolatingMotionEffect *verticalParallax;

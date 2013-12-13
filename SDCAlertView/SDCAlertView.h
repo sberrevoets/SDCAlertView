@@ -110,6 +110,11 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 - (void)show;
 
+/**
+ *  Convenience method that sets the dismiss block while simultaneously showing the alert.
+*/
+- (void)showWithDismissHandler:(void(^)(NSInteger buttonIndex))dismissHandler;
+
 - (NSInteger)addButtonWithTitle:(NSString *)title;
 - (NSString *)buttonTitleAtIndex:(NSInteger)index;
 
