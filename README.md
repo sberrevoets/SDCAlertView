@@ -29,10 +29,7 @@ What won't be duplicated:
 
 What is not implemented yet:
 ----------------------------
-`UIAlertView` features that are not yet implemented:
-
-- [Creating a "queue" of alerts and making sure they interact properly](https://github.com/Scott90/SDCAlertView/issues/3)
-- [Handle device rotations correctly](https://github.com/Scott90/SDCAlertView/issues/1)
+The only thing that is currently lacking in `SDCAlertView` is properly queueing and displaying multiple alert views (see [issue #3](https://github.com/Scott90/SDCAlertView/issues/3)). All other features are expected to work exactly like `UIAlertView`.
 
 Usage
 =====
