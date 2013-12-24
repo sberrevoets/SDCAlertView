@@ -87,7 +87,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	
 	self.backgroundColorView = [[UIView alloc] initWithFrame:self.rootView.bounds];
 	self.backgroundColorView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-	self.backgroundColorView.backgroundColor = [UIColor colorWithWhite:0 alpha:.4];
+	self.backgroundColorView.backgroundColor = [UIColor sdc_dimmedBackgroundColor];
 	self.backgroundColorView.layer.opacity = 1.0;
 	[self.backgroundColorView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[self.rootView addSubview:self.backgroundColorView];

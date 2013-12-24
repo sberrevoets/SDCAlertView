@@ -347,4 +347,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return [UIColor colorWithWhite:0.5 alpha:0.5];
 }
 
++ (UIColor *)sdc_dimmedBackgroundColor {
+	return [UIColor colorWithWhite:0 alpha:.4];
+}
+
 @end
