@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 - (BOOL)alertView:(SDCAlertView *)alertView shouldDismissWithButtonIndex:(NSInteger)buttonIndex;
 - (void)alertView:(SDCAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex;
 - (void)alertView:(SDCAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex;
+- (BOOL)alertView:(SDCAlertView *)alertView shouldDeselectButtonAtIndex:(NSInteger)buttonIndex;
 
 - (BOOL)alertViewShouldEnableFirstOtherButton:(SDCAlertView *)alertView;
 
@@ -101,6 +102,9 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 /// Alternative property for \c alertView:didDismissWithButtonIndex:
 @property (nonatomic, copy) void (^didDismissHandler)(NSInteger buttonIndex);
+
+/// Alternative property for \c alertView:shouldDeselectButtonAtIndex:
+@property (nonatomic, copy) BOOL (^shouldDeselectButtonHalder)(NSInteger buttonIndex);
 
 - (instancetype)initWithTitle:(NSString *)title
 					  message:(NSString *)message

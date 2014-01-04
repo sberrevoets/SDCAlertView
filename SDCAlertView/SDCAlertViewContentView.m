@@ -252,6 +252,13 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUInteger buttonIndex = (tableView == self.suggestedButtonTableView) ? [self.buttonTitles count] - 1 : indexPath.row;
+    
+    if ([self.delegate respondsToSelector:@selector(alertContentView:shouldDeselectButtonAtIndex:)]) {
+        if ([self.delegate alertContentView:self shouldDeselectButtonAtIndex:buttonIndex]) {
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
+    }
+    
 	[self.delegate alertContentView:self didTapButtonAtIndex:buttonIndex];
 }
 
