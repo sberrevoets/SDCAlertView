@@ -197,11 +197,10 @@
 		D25B3CCC17ECE7A6004B32A2 /* SDCAlertViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				60539E244AB24FB7B725E24B /* Pods-SDCAlertViewTests.xcconfig */,
 				D25B3CD217ECE7A6004B32A2 /* SDCAlertViewTests.m */,
+				A30DD28618785EED00DC9195 /* SDCAlertViewContentViewTests.m */,
 				A3F8B602184BACA400EB5438 /* Mocks */,
 				D25B3CCD17ECE7A6004B32A2 /* Supporting Files */,
-				A30DD28618785EED00DC9195 /* SDCAlertViewContentViewTests.m */,
 			);
 			path = SDCAlertViewTests;
 			sourceTree = "<group>";
@@ -209,6 +208,7 @@
 		D25B3CCD17ECE7A6004B32A2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				60539E244AB24FB7B725E24B /* Pods-SDCAlertViewTests.xcconfig */,
 				D25B3CCE17ECE7A6004B32A2 /* SDCAlertViewTests-Info.plist */,
 				D25B3CCF17ECE7A6004B32A2 /* InfoPlist.strings */,
 			);

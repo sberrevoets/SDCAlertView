@@ -11,10 +11,12 @@
 
 #import "SDCAlertView.h"
 #import "SDCAlertViewControllerMock.h"
+#import "SDCAlertViewContentView.h"
 
 // Category to expose internals of SDCAlertView necessary for testing
-@interface SDCAlertView (TestVisibility)
+@interface SDCAlertView (TestVisibility) <SDCAlertViewContentViewDelegate>
 @property (nonatomic, strong) SDCAlertViewController *alertViewController;
+@property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
 - (void)tappedButtonAtIndex:(NSInteger)index;
 @end
 
@@ -22,6 +24,7 @@
 // 'sut' is the 'System Under Test', i.e. the SDCAlertView class
 @property (nonatomic, strong) SDCAlertView *sut;
 @end
+
 
 @implementation SDCAlertViewTests
 
@@ -135,6 +138,35 @@
 	
 	XCTAssertTrue(blockWasCalled, @"");
 	XCTAssertEqual(capturedButtonIndex, 2, @"");
+}
+
+#pragma mark - ShouldDeselectButton test cases
+
+- (void)testShouldDeselectButtonDelegateMessageReceived {
+    id delegateMock = [OCMockObject niceMockForProtocol:@protocol(SDCAlertViewDelegate)];
+    self.sut.delegate = delegateMock;
+    
+    [[delegateMock expect] alertView:self.sut shouldDeselectButtonAtIndex:2];
+    
+    [self.sut alertContentView:self.sut.alertContentView shouldDeselectButtonAtIndex:2];
+    
+    [delegateMock verify];
+}
+
+- (void)testShouldDeselectButtonHandlerCalled {
+    __block NSInteger capturedButtonIndex;
+	__block BOOL blockWasCalled = NO;
+	self.sut.shouldDeselectButtonHalder = ^BOOL (NSInteger buttonIndex) {
+		blockWasCalled = YES;
+		capturedButtonIndex = buttonIndex;
+        return YES;
+	};
+	
+    [self.sut alertContentView:self.sut.alertContentView shouldDeselectButtonAtIndex:2];
+	
+	XCTAssertTrue(blockWasCalled, @"");
+	XCTAssertEqual(capturedButtonIndex, 2, @"");
+
 }
 
 @end
