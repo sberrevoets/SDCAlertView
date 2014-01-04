@@ -45,7 +45,7 @@
 
 #pragma mark - ClickedButton test cases
 
-- (void)testClickedButtonBlockCalled {
+- (void)testClickedButtonHandlerCalled {
 	__block NSInteger capturedButtonIndex;
 	__block BOOL blockWasCalled = NO;
 	self.sut.clickedButtonHandler = ^void (NSInteger buttonIndex) {
@@ -61,7 +61,7 @@
 
 #pragma mark - ShouldDismiss test cases
 
-- (void)testShouldDismissBlockCalled {
+- (void)testShouldDismissHandlerCalled {
 	__block NSInteger capturedButtonIndex;
 	__block BOOL blockWasCalled = NO;
 	self.sut.shouldDismissHandler = ^BOOL (NSInteger buttonIndex) {
@@ -105,7 +105,7 @@
 
 #pragma mark - WillDissmis test cases
 
-- (void)testWillDismissBlockCalled {
+- (void)testWillDismissHandlerCalled {
 	__block NSInteger capturedButtonIndex;
 	__block BOOL blockWasCalled = NO;
 	self.sut.willDismissHandler = ^void (NSInteger buttonIndex) {
@@ -122,7 +122,7 @@
 
 #pragma mark - DidDissmis test cases
 
-- (void)testDidDismissBlockCalled {
+- (void)testDidDismissHandlerCalled {
 	// Use a mock version of the SDCAlertViewController so the completionHandler is called immediately
 	SDCAlertViewController *alertViewControllerMock = [[SDCAlertViewControllerMock alloc] init];
 	self.sut.alertViewController = alertViewControllerMock;
@@ -166,7 +166,6 @@
 	
 	XCTAssertTrue(blockWasCalled, @"");
 	XCTAssertEqual(capturedButtonIndex, 2, @"");
-
 }
 
 @end
