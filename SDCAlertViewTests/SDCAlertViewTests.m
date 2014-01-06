@@ -43,6 +43,13 @@
 	[super tearDown];
 }
 
+- (NSInteger)simulateButtonTapped:(id)object {
+	NSInteger simulatedButtonTapped = 2;
+	[object tappedButtonAtIndex:simulatedButtonTapped];
+	
+	return simulatedButtonTapped;
+}
+
 #pragma mark - ClickedButton test cases
 
 - (void)testClickedButtonHandlerCalled {
@@ -53,10 +60,10 @@
 		capturedButtonIndex = buttonIndex;
 	};
 	
-	[self.sut tappedButtonAtIndex:2];
+	NSInteger simulatedButtonTapped = [self simulateButtonTapped:self.sut];
 	
 	XCTAssertTrue(blockWasCalled, @"");
-	XCTAssertEqual(capturedButtonIndex, 2, @"");
+	XCTAssertEqual(capturedButtonIndex, simulatedButtonTapped, @"");
 }
 
 #pragma mark - ShouldDismiss test cases
@@ -70,10 +77,10 @@
 		return NO;
 	};
 	
-	[self.sut tappedButtonAtIndex:2];
+	NSInteger simulatedButtonTapped = [self simulateButtonTapped:self.sut];
 	
 	XCTAssertTrue(blockWasCalled, @"");
-	XCTAssertEqual(capturedButtonIndex, 2, @"");
+	XCTAssertEqual(capturedButtonIndex, simulatedButtonTapped, @"");
 }
 
 - (void)testDoesDismissWhenSpecfiedInBlock {
@@ -85,7 +92,7 @@
 	id sutPartialMock = [OCMockObject partialMockForObject:self.sut];
 	[[sutPartialMock expect] dismissWithClickedButtonIndex:2 animated:YES];
 	
-	[sutPartialMock tappedButtonAtIndex:2];
+	[self simulateButtonTapped:sutPartialMock];
 	[sutPartialMock verify];
 }
 
@@ -98,7 +105,7 @@
 	id sutPartialMock = [OCMockObject partialMockForObject:self.sut];
 	[[sutPartialMock reject] dismissWithClickedButtonIndex:2 animated:YES];
 	
-	[sutPartialMock tappedButtonAtIndex:2];
+	[self simulateButtonTapped:sutPartialMock];
 	[sutPartialMock verify];
 }
 
@@ -113,10 +120,11 @@
 		capturedButtonIndex = buttonIndex;
 	};
 	
-	[self.sut dismissWithClickedButtonIndex:2 animated:YES];
+	NSInteger simulatedButtonIndex = 2;
+	[self.sut dismissWithClickedButtonIndex:simulatedButtonIndex animated:YES];
 	
 	XCTAssertTrue(blockWasCalled, @"");
-	XCTAssertEqual(capturedButtonIndex, 2, @"");
+	XCTAssertEqual(capturedButtonIndex, simulatedButtonIndex, @"");
 }
 
 
@@ -134,10 +142,11 @@
 		capturedButtonIndex = buttonIndex;
 	};
 	
-	[self.sut dismissWithClickedButtonIndex:2 animated:YES];
+	NSInteger simulatedButtonIndex = 2;
+	[self.sut dismissWithClickedButtonIndex:simulatedButtonIndex animated:YES];
 	
 	XCTAssertTrue(blockWasCalled, @"");
-	XCTAssertEqual(capturedButtonIndex, 2, @"");
+	XCTAssertEqual(capturedButtonIndex, simulatedButtonIndex, @"");
 }
 
 #pragma mark - ShouldDeselectButton test cases
@@ -154,7 +163,9 @@
 }
 
 - (void)testShouldDeselectButtonHandlerCalled {
-    __block NSInteger capturedButtonIndex;
+    NSInteger expectedButtonIndex = 2;
+	
+	__block NSInteger capturedButtonIndex;
 	__block BOOL blockWasCalled = NO;
 	self.sut.shouldDeselectButtonHandler = ^BOOL (NSInteger buttonIndex) {
 		blockWasCalled = YES;
@@ -162,10 +173,10 @@
         return YES;
 	};
 	
-    [self.sut alertContentView:self.sut.alertContentView shouldDeselectButtonAtIndex:2];
+    [self.sut alertContentView:self.sut.alertContentView shouldDeselectButtonAtIndex:expectedButtonIndex];
 	
 	XCTAssertTrue(blockWasCalled, @"");
-	XCTAssertEqual(capturedButtonIndex, 2, @"");
+	XCTAssertEqual(capturedButtonIndex, expectedButtonIndex, @"");
 }
 
 @end
