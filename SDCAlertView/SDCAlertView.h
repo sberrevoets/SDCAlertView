@@ -31,6 +31,14 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 - (BOOL)alertView:(SDCAlertView *)alertView shouldDismissWithButtonIndex:(NSInteger)buttonIndex;
 - (void)alertView:(SDCAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex;
 - (void)alertView:(SDCAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex;
+
+/**
+ *  This method is sent when the user presses a button, but the alert is prevented from being dismissed using either
+ *  the \c alertView:shouldDismissWithButtonIndex: delegate method, or the \c shouldDismissHandler property. The return
+ *  value of this method (or its corresponding block property \c shouldDeselectButtonHandler) determines whether
+ *  the button stays selected after it has been tapped. The default value, which is returned if neither the delegate method is
+ *  implemented or the block property set, is YES.
+ */
 - (BOOL)alertView:(SDCAlertView *)alertView shouldDeselectButtonAtIndex:(NSInteger)buttonIndex;
 
 - (BOOL)alertViewShouldEnableFirstOtherButton:(SDCAlertView *)alertView;
@@ -86,7 +94,8 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
  *  It's possible to implement both the delegate and set its corresponding block. In
  *  that case, the delegate will be called before the block will be executed.
  *
- *  In the case of alertView:shouldDismissWithButtonIndex:/shouldDismissHandler, the
+ *  In the case of alertView:shouldDismissWithButtonIndex:/shouldDismissHandler and 
+ *  alertView:shouldDeselectButtonAtIndex:/shouldDeselectButtonHandler, the
  *  delegate will always have precedence. That means that if the delegate is set,
  *  the block will NOT be executed.
  */
