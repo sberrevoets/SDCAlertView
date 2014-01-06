@@ -250,12 +250,12 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (BOOL)alertContentView:(SDCAlertViewContentView *)sender shouldDeselectButtonAtIndex:(NSUInteger)index {
     if ([self.delegate respondsToSelector:@selector(alertView:shouldDeselectButtonAtIndex:)]) {
-        return [self.delegate alertView:self shouldDeselectButtonAtIndex:index];
+		return [self.delegate alertView:self shouldDeselectButtonAtIndex:index];
     }
     else if (self.shouldDeselectButtonHalder){
         return self.shouldDeselectButtonHalder(index);
     }
-    return NO;
+    return YES;
 }
 
 #pragma mark - Buttons & Text Fields
