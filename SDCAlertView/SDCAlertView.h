@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @property (nonatomic, copy) void (^didDismissHandler)(NSInteger buttonIndex);
 
 /// Alternative property for \c alertView:shouldDeselectButtonAtIndex:
-@property (nonatomic, copy) BOOL (^shouldDeselectButtonHalder)(NSInteger buttonIndex);
+@property (nonatomic, copy) BOOL (^shouldDeselectButtonHandler)(NSInteger buttonIndex);
 
 - (instancetype)initWithTitle:(NSString *)title
 					  message:(NSString *)message

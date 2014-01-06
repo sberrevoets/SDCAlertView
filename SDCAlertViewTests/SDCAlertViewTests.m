@@ -156,7 +156,7 @@
 - (void)testShouldDeselectButtonHandlerCalled {
     __block NSInteger capturedButtonIndex;
 	__block BOOL blockWasCalled = NO;
-	self.sut.shouldDeselectButtonHalder = ^BOOL (NSInteger buttonIndex) {
+	self.sut.shouldDeselectButtonHandler = ^BOOL (NSInteger buttonIndex) {
 		blockWasCalled = YES;
 		capturedButtonIndex = buttonIndex;
         return YES;
