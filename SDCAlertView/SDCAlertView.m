@@ -9,6 +9,7 @@
 #import "SDCAlertView.h"
 
 #import "SDCAlertViewController.h"
+#import "SDCAlertViewCoordinator.h"
 #import "SDCAlertViewBackgroundView.h"
 #import "SDCAlertViewContentView.h"
 
@@ -26,8 +27,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 #pragma mark - SDCAlertView
 
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
-@property (nonatomic, strong) SDCAlertViewController *alertViewController;
-
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
 @property (nonatomic, strong) UIToolbar *toolbar;
@@ -39,12 +38,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 @implementation SDCAlertView
 
 #pragma mark - Getters
-
-- (SDCAlertViewController *)alertViewController {
-	if (!_alertViewController)
-		_alertViewController = [SDCAlertViewController currentController];
-	return _alertViewController;
-}
 
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
 	if (!_alertBackgroundView) {
@@ -105,7 +98,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 #pragma mark - Visibility
 
 - (BOOL)isVisible {
-	return self.alertViewController.visibleAlert == self;
+	return [[SDCAlertViewCoordinator sharedCoordinator] visibleAlert] == self;
 }
 
 - (void)show {
@@ -114,9 +107,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	if ([self.delegate respondsToSelector:@selector(willPresentAlertView:)])
 		[self.delegate willPresentAlertView:self];
 	
-	[self.alertViewController showAlert:self animated:YES completion:^{
+	[[SDCAlertViewCoordinator sharedCoordinator] presentAlert:self completion:^{
 		if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
 			[self.delegate didPresentAlertView:self];
+
 	}];
 }
 
@@ -154,7 +148,9 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
     if (self.willDismissHandler)
         self.willDismissHandler(buttonIndex);
 	
-	[self.alertViewController dismissAlert:self animated:animated completion:^{
+	[self resignFirstResponder];
+	
+	[[SDCAlertViewCoordinator sharedCoordinator] dismissAlert:self completion:^{
 		if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
 			[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
         
