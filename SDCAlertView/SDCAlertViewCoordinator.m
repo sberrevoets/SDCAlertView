@@ -15,6 +15,9 @@
 @property (nonatomic, strong) UIWindow *userWindow;
 @property (nonatomic, strong) UIWindow *alertWindow;
 @property (nonatomic, strong) NSMutableArray *alerts;
+@property (nonatomic, weak) SDCAlertView *presentingAlert;
+@property (nonatomic, weak) SDCAlertView *dismissingAlert;
+@property (nonatomic, weak) SDCAlertView *visibleAlert;
 @end
 
 @implementation SDCAlertViewCoordinator
@@ -55,10 +58,6 @@
 	return sharedCoordinator;
 }
 
-- (SDCAlertView *)visibleAlert {
-	return [self.alerts lastObject];
-}
-
 - (void)presentAlert:(SDCAlertView *)alert {
 	SDCAlertView *oldAlert = [self.alerts lastObject];
 	[self.alerts addObject:alert];
@@ -66,36 +65,62 @@
 	if (!oldAlert)
 		[self makeAlertWindowKeyWindow];
 	
-	[alert willBePresented];
+	// If we're already presenting an alert, don't show this one yet. The completion handler
+	// for the alert that is currently presenting will take care of presenting this one.
+	if (self.presentingAlert)
+		return;
 	
+	[self showAlert:alert replacingAlert:oldAlert];
+}
+
+- (void)showAlert:(SDCAlertView *)newAlert replacingAlert:(SDCAlertView *)oldAlert {
+	[newAlert willBePresented];
+	
+	self.presentingAlert = newAlert;
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
 	[alertViewController replaceAlert:oldAlert
-							withAlert:alert
+							withAlert:newAlert
 					  showDimmingView:YES
 					hideOldCompletion:nil
 					showNewCompletion:^{
-						[alert wasPresented];
+						[newAlert wasPresented];
+						self.presentingAlert = nil;
+						self.visibleAlert = newAlert;
+						
+						[self showNextAlertIfNecessary];
 					}];
+}
+
+- (void)showNextAlertIfNecessary {
+	if (self.visibleAlert != [self.alerts lastObject])
+		[self showAlert:[self.alerts lastObject] replacingAlert:self.visibleAlert];
 }
 
 - (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
 	[self.alerts removeObject:alert];
-	SDCAlertView *dequeuedAlert = [self.alerts lastObject];
+	SDCAlertView *nextAlert = [self.alerts lastObject];
 	
+	// UIAlertView doesn't send willPresentAlert: when it's taken off the queue, so we don't do that either:
+	// [nextAlert willBePresented];
 	[alert willBeDismissedWithButtonIndex:buttonIndex];
+	
+	self.dismissingAlert = alert;
+	self.presentingAlert = nextAlert;
 	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
 	[alertViewController replaceAlert:alert
-							withAlert:dequeuedAlert
-					  showDimmingView:(dequeuedAlert != nil)
+							withAlert:nextAlert
+					  showDimmingView:(nextAlert != nil)
 					hideOldCompletion:^{
-						if (!dequeuedAlert)
+						if (!nextAlert)
 							[self returnToUserWindow];
 						
 						[alert wasDismissedWithButtonIndex:buttonIndex];
+						self.dismissingAlert = nil;
 					}
 					showNewCompletion:^{
-						[dequeuedAlert wasPresented];
+						[nextAlert wasPresented];
+						self.presentingAlert = nil;
 					}];
 }
 
