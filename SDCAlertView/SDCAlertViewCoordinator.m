@@ -8,6 +8,7 @@
 
 #import "SDCAlertViewCoordinator.h"
 
+#import "SDCAlertView_Private.h"
 #import "SDCAlertViewController.h"
 
 @interface SDCAlertViewCoordinator ()
@@ -58,32 +59,44 @@
 	return [self.alerts lastObject];
 }
 
-- (void)presentAlert:(SDCAlertView *)alert completion:(void (^)(void))completionHandler {
+- (void)presentAlert:(SDCAlertView *)alert {
 	SDCAlertView *oldAlert = [self.alerts lastObject];
 	[self.alerts addObject:alert];
 	
 	if (!oldAlert)
 		[self makeAlertWindowKeyWindow];
 	
+	[alert willBePresented];
+	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
-	[alertViewController replaceAlert:oldAlert withAlert:alert animated:YES showDimmingView:YES completion:completionHandler];
+	[alertViewController replaceAlert:oldAlert
+							withAlert:alert
+					  showDimmingView:YES
+					hideOldCompletion:nil
+					showNewCompletion:^{
+						[alert wasPresented];
+					}];
 }
 
-- (void)dismissAlert:(SDCAlertView *)alert completion:(void (^)(void))completionHandler {
+- (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
 	[self.alerts removeObject:alert];
 	SDCAlertView *dequeuedAlert = [self.alerts lastObject];
+	
+	[alert willBeDismissedWithButtonIndex:buttonIndex];
 	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
 	[alertViewController replaceAlert:alert
 							withAlert:dequeuedAlert
-							 animated:YES
 					  showDimmingView:(dequeuedAlert != nil)
-						   completion:^{
-		if (!dequeuedAlert)
-			[self returnToUserWindow];
-		
-		completionHandler();
-	}];
+					hideOldCompletion:^{
+						if (!dequeuedAlert)
+							[self returnToUserWindow];
+						
+						[alert wasDismissedWithButtonIndex:buttonIndex];
+					}
+					showNewCompletion:^{
+						[dequeuedAlert wasPresented];
+					}];
 }
 
 - (void)makeAlertWindowKeyWindow {

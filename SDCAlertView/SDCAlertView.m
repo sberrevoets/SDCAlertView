@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Scotty Doesn't Code. All rights reserved.
 //
 
-#import "SDCAlertView.h"
+#import "SDCAlertView_Private.h"
 
 #import "SDCAlertViewController.h"
 #import "SDCAlertViewCoordinator.h"
@@ -101,17 +101,11 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return [[SDCAlertViewCoordinator sharedCoordinator] visibleAlert] == self;
 }
 
+#pragma mark - Presenting
+
 - (void)show {
 	[self configureForShowing];
-	
-	if ([self.delegate respondsToSelector:@selector(willPresentAlertView:)])
-		[self.delegate willPresentAlertView:self];
-	
-	[[SDCAlertViewCoordinator sharedCoordinator] presentAlert:self completion:^{
-		if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
-			[self.delegate didPresentAlertView:self];
-
-	}];
+	[[SDCAlertViewCoordinator sharedCoordinator] presentAlert:self];
 }
 
 - (void)showWithDismissHandler:(void (^)(NSInteger))dismissHandler {
@@ -141,7 +135,30 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	[self addSubview:self.alertContentView];
 }
 
+- (void)willBePresented {
+	if ([self.delegate respondsToSelector:@selector(willPresentAlertView:)])
+		[self.delegate willPresentAlertView:self];
+}
+
+- (void)wasPresented {
+	if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
+		[self.delegate didPresentAlertView:self];
+}
+
+#pragma mark - Dismissing
+
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
+	[[SDCAlertViewCoordinator sharedCoordinator] dismissAlert:self withButtonIndex:buttonIndex];
+}
+
+- (BOOL)resignFirstResponder {
+	[super resignFirstResponder];
+	[self.alertContentView resignFirstResponder];
+	
+	return YES;
+}
+
+- (void)willBeDismissedWithButtonIndex:(NSInteger)buttonIndex {
 	if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
 		[self.delegate alertView:self willDismissWithButtonIndex:buttonIndex];
     
@@ -149,22 +166,14 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
         self.willDismissHandler(buttonIndex);
 	
 	[self resignFirstResponder];
-	
-	[[SDCAlertViewCoordinator sharedCoordinator] dismissAlert:self completion:^{
-		if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
-			[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
-        
-        if (self.didDismissHandler)
-            self.didDismissHandler(buttonIndex);
-	}];
 }
 
-
-- (BOOL)resignFirstResponder {
-	[super resignFirstResponder];
-	[self.alertContentView resignFirstResponder];
+- (void)wasDismissedWithButtonIndex:(NSInteger)buttonIndex {
+	if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
+		[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
 	
-	return YES;
+	if (self.didDismissHandler)
+		self.didDismissHandler(buttonIndex);
 }
 
 #pragma mark - Content

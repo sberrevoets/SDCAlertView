@@ -16,7 +16,7 @@
 
 + (instancetype)sharedCoordinator;
 
-- (void)presentAlert:(SDCAlertView *)alert completion:(void (^)(void))completionHandler;
-- (void)dismissAlert:(SDCAlertView *)alert completion:(void (^)(void))completionHandler;
+- (void)presentAlert:(SDCAlertView *)alert;
+- (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex;
 
 @end

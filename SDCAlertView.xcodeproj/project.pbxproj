@@ -52,6 +52,7 @@
 		A3F8B603184BAD1400EB5438 /* SDCAlertViewControllerMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewControllerMock.h; sourceTree = "<group>"; };
 		A3F8B604184BAD1400EB5438 /* SDCAlertViewControllerMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewControllerMock.m; sourceTree = "<group>"; };
 		CB28936541154BCF9C9B2F0C /* libPods-SDCAlertViewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDCAlertViewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D23205491898709600ADF458 /* SDCAlertView_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCAlertView_Private.h; sourceTree = "<group>"; };
 		D25B3CA417ECE7A6004B32A2 /* SDCAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDCAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B3CA717ECE7A6004B32A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -165,6 +166,7 @@
 			children = (
 				D2FA54921894AFB4006FAB5E /* SDCAlertViewCoordinator.h */,
 				D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */,
+				D23205491898709600ADF458 /* SDCAlertView_Private.h */,
 				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
 				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
 				D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */,
