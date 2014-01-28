@@ -37,6 +37,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 @property (nonatomic, strong) UIView *rootView;
 @property (nonatomic, strong) UIView *backgroundColorView;
 @property (nonatomic, strong) void(^alertTransitionCompletion)(void);
+@property (nonatomic) BOOL showsDimmingView;
 @end
 
 @implementation SDCAlertViewController
@@ -123,7 +124,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	
 	[self applyPresentingAnimationsToAlert:alert];
 	
-	if (showDimmingView)
+	if (showDimmingView && !self.showsDimmingView)
 		[self showDimmingView];
 	
 	[CATransaction commit];
@@ -140,7 +141,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 
 	[self applyDismissingAnimationsToAlert:alert];
 	
-	if (!keepDimmingView)
+	if (!keepDimmingView && self.showsDimmingView)
 		[self hideDimmingView];
 	
 	[CATransaction commit];
@@ -149,11 +150,15 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 - (void)showDimmingView {
 	RBBSpringAnimation *animation = [self opacityAnimationForPresenting];
 	[self.backgroundColorView.layer addAnimation:animation forKey:@"opacity"];
+	
+	self.showsDimmingView = YES;
 }
 
 - (void)hideDimmingView {
 	RBBSpringAnimation *animation = [self opacityAnimationForDismissing];
 	[self.backgroundColorView.layer addAnimation:animation forKey:@"opacity"];
+	
+	self.showsDimmingView = NO;
 }
 
 #pragma mark - Animations

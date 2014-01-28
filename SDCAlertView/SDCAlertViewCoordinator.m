@@ -66,7 +66,7 @@
 		[self makeAlertWindowKeyWindow];
 	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
-	[alertViewController replaceAlert:oldAlert withAlert:alert animated:YES showDimmingView:!oldAlert completion:completionHandler];
+	[alertViewController replaceAlert:oldAlert withAlert:alert animated:YES showDimmingView:YES completion:completionHandler];
 }
 
 - (void)dismissAlert:(SDCAlertView *)alert completion:(void (^)(void))completionHandler {
