@@ -104,27 +104,46 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 - (void)replaceAlert:(SDCAlertView *)oldAlert
 		   withAlert:(SDCAlertView *)newAlert
 			animated:(BOOL)animated
+	 showDimmingView:(BOOL)showDimmingView
 		  completion:(void (^)(void))completionHandler {
-	self.alertTransitionCompletion = completionHandler;
 	
-	if (!oldAlert) {
+	if (oldAlert)
+		[self dismissAlert:oldAlert keepDimmingView:showDimmingView];
+	
+	if (newAlert)
+		[self showAlert:newAlert withDimmingView:showDimmingView completion:completionHandler];
+}
+
+- (void)showAlert:(SDCAlertView *)alert withDimmingView:(BOOL)showDimmingView completion:(void(^)(void))completionHandler {
+	[self.rootView addSubview:alert];
+	[alert setNeedsUpdateConstraints];
+
+	[CATransaction begin];
+	[CATransaction setCompletionBlock:completionHandler];
+	
+	[self applyPresentingAnimationsToAlert:alert];
+	
+	if (showDimmingView)
 		[self showDimmingView];
-	} else {
-		if (!newAlert)
-			[self hideDimmingView];
-			
-		self.alertTransitionCompletion = ^{
-			[oldAlert removeFromSuperview];
-			completionHandler();
-		};
+	
+	[CATransaction commit];
+}
+
+- (void)dismissAlert:(SDCAlertView *)alert keepDimmingView:(BOOL)keepDimmingView {
+	[CATransaction begin];
+	[CATransaction setCompletionBlock:^{
+		[alert removeFromSuperview];
 		
-		[self applyDismissingAnimationsToAlert:oldAlert];
-	}
+		if (!keepDimmingView)
+			[self.backgroundColorView removeFromSuperview];
+	}];
+
+	[self applyDismissingAnimationsToAlert:alert];
 	
-	[self.rootView addSubview:newAlert];
-	[newAlert setNeedsUpdateConstraints];
+	if (!keepDimmingView)
+		[self hideDimmingView];
 	
-	[self applyPresentingAnimationsToAlert:newAlert];
+	[CATransaction commit];
 }
 
 - (void)showDimmingView {
@@ -144,9 +163,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 		self.alertTransitionCompletion();
 		self.alertTransitionCompletion = nil;
 	}
-	
-	if ([anim valueForKey:@"name"])
-		NSLog(@"%@", [anim valueForKey:@"name"]);
 }
 
 - (RBBSpringAnimation *)springAnimationForKey:(NSString *)key {

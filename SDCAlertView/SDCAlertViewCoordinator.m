@@ -66,7 +66,7 @@
 		[self makeAlertWindowKeyWindow];
 	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
-	[alertViewController replaceAlert:oldAlert withAlert:alert animated:YES completion:completionHandler];
+	[alertViewController replaceAlert:oldAlert withAlert:alert animated:YES showDimmingView:!oldAlert completion:completionHandler];
 }
 
 - (void)dismissAlert:(SDCAlertView *)alert completion:(void (^)(void))completionHandler {
@@ -74,7 +74,11 @@
 	SDCAlertView *dequeuedAlert = [self.alerts lastObject];
 	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
-	[alertViewController replaceAlert:alert withAlert:dequeuedAlert animated:YES completion:^{
+	[alertViewController replaceAlert:alert
+							withAlert:dequeuedAlert
+							 animated:YES
+					  showDimmingView:(dequeuedAlert != nil)
+						   completion:^{
 		if (!dequeuedAlert)
 			[self returnToUserWindow];
 		
