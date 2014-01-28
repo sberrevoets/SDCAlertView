@@ -97,6 +97,10 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	self.rootView.frame = CGRectMake(0, 0, CGRectGetWidth(self.rootView.frame), CGRectGetHeight(self.rootView.frame) - CGRectGetHeight(keyboardFrame));
 }
 
+- (void)keyboardDidHide:(NSNotification *)notification {
+	self.rootView.frame = [[UIWindow sdc_alertWindow] frame];
+}
+
 - (void)replaceAlert:(SDCAlertView *)oldAlert
 		   withAlert:(SDCAlertView *)newAlert
 			animated:(BOOL)animated
@@ -109,10 +113,17 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 		if (!newAlert)
 			[self hideDimmingView];
 			
+		self.alertTransitionCompletion = ^{
+			[oldAlert removeFromSuperview];
+			completionHandler();
+		};
+		
 		[self applyDismissingAnimationsToAlert:oldAlert];
 	}
 	
 	[self.rootView addSubview:newAlert];
+	[newAlert setNeedsUpdateConstraints];
+	
 	[self applyPresentingAnimationsToAlert:newAlert];
 }
 
@@ -133,6 +144,9 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 		self.alertTransitionCompletion();
 		self.alertTransitionCompletion = nil;
 	}
+	
+	if ([anim valueForKey:@"name"])
+		NSLog(@"%@", [anim valueForKey:@"name"]);
 }
 
 - (RBBSpringAnimation *)springAnimationForKey:(NSString *)key {
@@ -193,6 +207,10 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 - (void)applyPresentingAnimationsToAlert:(SDCAlertView *)alert {
 	RBBSpringAnimation *opacityAnimation = [self opacityAnimationForPresenting];
 	RBBSpringAnimation *transformAnimation = [self transformAnimationForPresenting];
+	
+	alert.alertBackgroundView.layer.opacity = 1;
+	alert.alertContentView.layer.opacity = 1;
+	alert.toolbar.layer.opacity = 1;
 	
 	[alert.alertBackgroundView.layer addAnimation:opacityAnimation forKey:@"opacity"];
 	[alert.alertContentView.layer addAnimation:opacityAnimation forKey:@"opacity"];

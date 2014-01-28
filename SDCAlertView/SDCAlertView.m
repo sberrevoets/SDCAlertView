@@ -299,6 +299,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (void)updateConstraints {
+	[self removeConstraints:[self constraints]];
+	
 	[self.alertBackgroundView sdc_centerInSuperview];
 	[self.alertBackgroundView sdc_pinWidthToWidthOfView:self];
 	[self.alertBackgroundView sdc_pinHeightToHeightOfView:self];
