@@ -36,7 +36,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 @interface SDCAlertViewController ()
 @property (nonatomic, strong) UIView *alertContainerView;
 @property (nonatomic, strong) UIView *dimmingView;
-@property (nonatomic, strong) void(^alertTransitionCompletion)(void);
 @property (nonatomic) BOOL showsDimmingView;
 @end
 
@@ -166,13 +165,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 }
 
 #pragma mark - Animations
-
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-	if (self.alertTransitionCompletion) {
-		self.alertTransitionCompletion();
-		self.alertTransitionCompletion = nil;
-	}
-}
 
 - (RBBSpringAnimation *)springAnimationForKey:(NSString *)key {
 	RBBSpringAnimation *animation = [[RBBSpringAnimation alloc] init];
