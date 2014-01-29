@@ -68,26 +68,23 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 }
 
 - (void)createViewHierarchy {
-	
-	/*
-	 *  When displaying a UIAlertView, the view that contains the dimmed background and alert view itself
-	 *  ("self.rootView") is added as a separate view to the UIWindow. The original implementation of 
-	 *  SDCAlertView did the same, but handling rotation is much easier when self.rootView is added to
-	 *  self.view. So, while it's implemented differently by Apple, this solution is probably easier
-	 *  with regards to auto-rotation, which is why self.rootView is now added to self.view instead of self.window.
-	 */
-	
-	self.alertContainerView = [[UIView alloc] initWithFrame:self.view.bounds];
-	self.alertContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-	[self.view addSubview:self.alertContainerView];
-	
+	[self createDimmingView];
+	[self createAlertContainer];
+}
+
+- (void)createDimmingView {
 	self.dimmingView = [[UIView alloc] initWithFrame:self.alertContainerView.bounds];
-	self.dimmingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-	self.dimmingView.backgroundColor = [UIColor sdc_dimmedBackgroundColor];
 	[self.dimmingView setTranslatesAutoresizingMaskIntoConstraints:NO];
-	[self.alertContainerView addSubview:self.dimmingView];
-	
-	[self.alertContainerView sdc_horizontallyCenterInSuperview];
+	self.dimmingView.backgroundColor = [UIColor sdc_dimmedBackgroundColor];
+	[self.view addSubview:self.dimmingView];
+	[self.dimmingView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
+}
+
+- (void)createAlertContainer {
+	self.alertContainerView = [[UIView alloc] initWithFrame:self.view.bounds];
+	[self.alertContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[self.view addSubview:self.alertContainerView];
+	[self.alertContainerView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
 }
 
 #pragma mark - Showing/Hiding
