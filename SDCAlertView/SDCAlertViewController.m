@@ -34,13 +34,16 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 @end
 
 @interface SDCAlertViewController ()
-@property (nonatomic, strong) UIView *rootView;
-@property (nonatomic, strong) UIView *backgroundColorView;
+@property (nonatomic, strong) UIView *alertContainerView;
+@property (nonatomic, strong) UIView *dimmingView;
 @property (nonatomic, strong) void(^alertTransitionCompletion)(void);
 @property (nonatomic) BOOL showsDimmingView;
 @end
 
 @implementation SDCAlertViewController
+
+// UIViewController has a private instance variable named dimmingView. Divert from the convention...
+@synthesize dimmingView = dimmingView_;
 
 + (instancetype)currentController {
 	UIViewController *currentController = [[UIWindow sdc_alertWindow] rootViewController];
@@ -74,18 +77,18 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	 *  with regards to auto-rotation, which is why self.rootView is now added to self.view instead of self.window.
 	 */
 	
-	self.rootView = [[UIView alloc] initWithFrame:self.view.bounds];
-	self.rootView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-	[self.view addSubview:self.rootView];
+	self.alertContainerView = [[UIView alloc] initWithFrame:self.view.bounds];
+	self.alertContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+	[self.view addSubview:self.alertContainerView];
 	
-	self.backgroundColorView = [[UIView alloc] initWithFrame:self.rootView.bounds];
-	self.backgroundColorView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-	self.backgroundColorView.backgroundColor = [UIColor sdc_dimmedBackgroundColor];
-	self.backgroundColorView.layer.opacity = 1.0;
-	[self.backgroundColorView setTranslatesAutoresizingMaskIntoConstraints:NO];
-	[self.rootView addSubview:self.backgroundColorView];
+	self.dimmingView = [[UIView alloc] initWithFrame:self.alertContainerView.bounds];
+	self.dimmingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+	self.dimmingView.backgroundColor = [UIColor sdc_dimmedBackgroundColor];
+	self.dimmingView.layer.opacity = 1.0;
+	[self.dimmingView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[self.alertContainerView addSubview:self.dimmingView];
 	
-	[self.rootView sdc_horizontallyCenterInSuperview];
+	[self.alertContainerView sdc_horizontallyCenterInSuperview];
 }
 
 #pragma mark - Showing/Hiding
@@ -95,11 +98,11 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	NSValue *keyboardFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey];
 	CGRect keyboardFrame = [keyboardFrameValue CGRectValue];
 	
-	self.rootView.frame = CGRectMake(0, 0, CGRectGetWidth(self.rootView.frame), CGRectGetHeight(self.rootView.frame) - CGRectGetHeight(keyboardFrame));
+	self.alertContainerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.alertContainerView.frame), CGRectGetHeight(self.alertContainerView.frame) - CGRectGetHeight(keyboardFrame));
 }
 
 - (void)keyboardDidHide:(NSNotification *)notification {
-	self.rootView.frame = [[UIWindow sdc_alertWindow] frame];
+	self.alertContainerView.frame = [[UIWindow sdc_alertWindow] frame];
 }
 
 - (void)replaceAlert:(SDCAlertView *)oldAlert
@@ -116,7 +119,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 }
 
 - (void)showAlert:(SDCAlertView *)alert withDimmingView:(BOOL)showDimmingView completion:(void(^)(void))completionHandler {
-	[self.rootView addSubview:alert];
+	[self.alertContainerView addSubview:alert];
 	[alert setNeedsUpdateConstraints];
 
 	[CATransaction begin];
@@ -136,7 +139,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 		[alert removeFromSuperview];
 		
 		if (!keepDimmingView)
-			[self.backgroundColorView removeFromSuperview];
+			[self.dimmingView removeFromSuperview];
 		
 		if (completionHandler)
 			completionHandler();
@@ -152,14 +155,14 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 
 - (void)showDimmingView {
 	RBBSpringAnimation *animation = [self opacityAnimationForPresenting];
-	[self.backgroundColorView.layer addAnimation:animation forKey:@"opacity"];
+	[self.dimmingView.layer addAnimation:animation forKey:@"opacity"];
 	
 	self.showsDimmingView = YES;
 }
 
 - (void)hideDimmingView {
 	RBBSpringAnimation *animation = [self opacityAnimationForDismissing];
-	[self.backgroundColorView.layer addAnimation:animation forKey:@"opacity"];
+	[self.dimmingView.layer addAnimation:animation forKey:@"opacity"];
 	
 	self.showsDimmingView = NO;
 }
