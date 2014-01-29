@@ -84,7 +84,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	self.dimmingView = [[UIView alloc] initWithFrame:self.alertContainerView.bounds];
 	self.dimmingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 	self.dimmingView.backgroundColor = [UIColor sdc_dimmedBackgroundColor];
-	self.dimmingView.layer.opacity = 1.0;
 	[self.dimmingView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[self.alertContainerView addSubview:self.dimmingView];
 	
@@ -155,6 +154,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 
 - (void)showDimmingView {
 	RBBSpringAnimation *animation = [self opacityAnimationForPresenting];
+	self.dimmingView.layer.opacity = 1;
 	[self.dimmingView.layer addAnimation:animation forKey:@"opacity"];
 	
 	self.showsDimmingView = YES;
@@ -162,6 +162,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 
 - (void)hideDimmingView {
 	RBBSpringAnimation *animation = [self opacityAnimationForDismissing];
+	self.dimmingView.layer.opacity = 0;
 	[self.dimmingView.layer addAnimation:animation forKey:@"opacity"];
 	
 	self.showsDimmingView = NO;
