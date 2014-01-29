@@ -6,9 +6,10 @@
 //  Copyright (c) 2013 Scotty Doesn't Code. All rights reserved.
 //
 
-#import "SDCAlertView.h"
+#import "SDCAlertView_Private.h"
 
 #import "SDCAlertViewController.h"
+#import "SDCAlertViewCoordinator.h"
 #import "SDCAlertViewBackgroundView.h"
 #import "SDCAlertViewContentView.h"
 
@@ -26,8 +27,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 #pragma mark - SDCAlertView
 
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
-@property (nonatomic, strong) SDCAlertViewController *alertViewController;
-
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
 @property (nonatomic, strong) UIToolbar *toolbar;
@@ -39,12 +38,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 @implementation SDCAlertView
 
 #pragma mark - Getters
-
-- (SDCAlertViewController *)alertViewController {
-	if (!_alertViewController)
-		_alertViewController = [SDCAlertViewController currentController];
-	return _alertViewController;
-}
 
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
 	if (!_alertBackgroundView) {
@@ -105,19 +98,14 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 #pragma mark - Visibility
 
 - (BOOL)isVisible {
-	return self.alertViewController.visibleAlert == self;
+	return [[SDCAlertViewCoordinator sharedCoordinator] visibleAlert] == self;
 }
+
+#pragma mark - Presenting
 
 - (void)show {
 	[self configureForShowing];
-	
-	if ([self.delegate respondsToSelector:@selector(willPresentAlertView:)])
-		[self.delegate willPresentAlertView:self];
-	
-	[self.alertViewController showAlert:self animated:YES completion:^{
-		if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
-			[self.delegate didPresentAlertView:self];
-	}];
+	[[SDCAlertViewCoordinator sharedCoordinator] presentAlert:self];
 }
 
 - (void)showWithDismissHandler:(void (^)(NSInteger))dismissHandler {
@@ -147,28 +135,45 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	[self addSubview:self.alertContentView];
 }
 
-- (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
-	if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
-		[self.delegate alertView:self willDismissWithButtonIndex:buttonIndex];
-    
-    if (self.willDismissHandler)
-        self.willDismissHandler(buttonIndex);
-	
-	[self.alertViewController dismissAlert:self animated:animated completion:^{
-		if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
-			[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
-        
-        if (self.didDismissHandler)
-            self.didDismissHandler(buttonIndex);
-	}];
+- (void)willBePresented {
+	if ([self.delegate respondsToSelector:@selector(willPresentAlertView:)])
+		[self.delegate willPresentAlertView:self];
 }
 
+- (void)wasPresented {
+	if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
+		[self.delegate didPresentAlertView:self];
+}
+
+#pragma mark - Dismissing
+
+- (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
+	[[SDCAlertViewCoordinator sharedCoordinator] dismissAlert:self withButtonIndex:buttonIndex];
+}
 
 - (BOOL)resignFirstResponder {
 	[super resignFirstResponder];
 	[self.alertContentView resignFirstResponder];
 	
 	return YES;
+}
+
+- (void)willBeDismissedWithButtonIndex:(NSInteger)buttonIndex {
+	if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
+		[self.delegate alertView:self willDismissWithButtonIndex:buttonIndex];
+    
+    if (self.willDismissHandler)
+        self.willDismissHandler(buttonIndex);
+	
+	[self resignFirstResponder];
+}
+
+- (void)wasDismissedWithButtonIndex:(NSInteger)buttonIndex {
+	if ([self.delegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
+		[self.delegate alertView:self didDismissWithButtonIndex:buttonIndex];
+	
+	if (self.didDismissHandler)
+		self.didDismissHandler(buttonIndex);
 }
 
 #pragma mark - Content
@@ -312,6 +317,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (void)updateConstraints {
+	[self removeConstraints:[self constraints]];
+	
 	[self.alertBackgroundView sdc_centerInSuperview];
 	[self.alertBackgroundView sdc_pinWidthToWidthOfView:self];
 	[self.alertBackgroundView sdc_pinHeightToHeightOfView:self];

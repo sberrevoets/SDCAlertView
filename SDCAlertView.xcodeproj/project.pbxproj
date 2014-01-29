@@ -33,6 +33,7 @@
 		D2E1E2C9186107B600ADC90A /* SDCAlertViewBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2E1E2C7186107B600ADC90A /* SDCAlertViewBackground@2x.png */; };
 		D2F9D2BD18400CD300F85B10 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BC18400CD200F85B10 /* README.md */; };
 		D2F9D2BF18400DAF00F85B10 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BE18400DAF00F85B10 /* LICENSE */; };
+		D2FA54941894AFB5006FAB5E /* SDCAlertViewCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */; };
 		D70D28F12B224BE7919DADF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D8593FE42641CBBCB47F79 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		A3F8B603184BAD1400EB5438 /* SDCAlertViewControllerMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewControllerMock.h; sourceTree = "<group>"; };
 		A3F8B604184BAD1400EB5438 /* SDCAlertViewControllerMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewControllerMock.m; sourceTree = "<group>"; };
 		CB28936541154BCF9C9B2F0C /* libPods-SDCAlertViewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDCAlertViewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D23205491898709600ADF458 /* SDCAlertView_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCAlertView_Private.h; sourceTree = "<group>"; };
 		D25B3CA417ECE7A6004B32A2 /* SDCAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDCAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B3CA717ECE7A6004B32A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -85,6 +87,8 @@
 		D2E1E2C7186107B600ADC90A /* SDCAlertViewBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDCAlertViewBackground@2x.png"; sourceTree = "<group>"; };
 		D2F9D2BC18400CD200F85B10 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D2F9D2BE18400DAF00F85B10 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D2FA54921894AFB4006FAB5E /* SDCAlertViewCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewCoordinator.h; sourceTree = "<group>"; };
+		D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewCoordinator.m; sourceTree = "<group>"; };
 		E8D8593FE42641CBBCB47F79 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -162,6 +166,9 @@
 		D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				D2FA54921894AFB4006FAB5E /* SDCAlertViewCoordinator.h */,
+				D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */,
+				D23205491898709600ADF458 /* SDCAlertView_Private.h */,
 				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
 				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
 				D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */,
@@ -390,6 +397,7 @@
 				D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */,
 				D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */,
 				D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */,
+				D2FA54941894AFB5006FAB5E /* SDCAlertViewCoordinator.m in Sources */,
 				D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */,
 				D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */,
 			);
