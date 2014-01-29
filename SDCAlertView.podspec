@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 # Source Info
   s.platform     =  :ios, '7.0'
   s.source       =  { :git => 'https://github.com/Scott90/SDCAlertView.git', :tag => "v#{s.version}" }
-  s.source_files = 'SDCAlertView/SDCAlertView.{h,m}', 'SDCAlertView/SDCAlertViewController.{h,m}', 'SDCAlertView/SDCAlertViewContentView.{h,m}', 'SDCAlertView/SDCAlertViewBackgroundView.{h,m}', 'SDCAlertView/SDCAlertViewBackground.png', 'SDCAlertView/SDCAlertViewBackground@2x.png'
+  s.source_files = 'SDCAlertView/SDCAlertView.{h,m}', 'SDCAlertView/SDCAlertView_Private.h', 'SDCAlertView/SDCAlertViewController.{h,m}', 'SDCAlertView/SDCAlertViewContentView.{h,m}', 'SDCAlertView/SDCAlertViewBackgroundView.{h,m}', 'SDCAlertView/SDCAlertViewBackground.png', 'SDCAlertView/SDCAlertViewBackground@2x.png'
 
   s.requires_arc = true
   
