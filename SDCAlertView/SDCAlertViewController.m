@@ -150,6 +150,8 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	if (!newAlert)
 		self.dismissingLastAlert = YES;
 	
+	[self updateDimmingViewVisibility:showDimmingView];
+	
 	if (oldAlert)
 		[self dismissAlert:oldAlert keepDimmingView:showDimmingView completionHandler:hideOldCompletionHandler];
 	
@@ -170,10 +172,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	}];
 	
 	[self applyPresentingAnimationsToAlert:alert];
-	
-	if (showDimmingView && !self.showsDimmingView)
-		[self showDimmingView];
-	
 	[CATransaction commit];
 }
 
@@ -192,11 +190,16 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	}];
 
 	[self applyDismissingAnimationsToAlert:alert];
-	
-	if (!keepDimmingView && self.showsDimmingView)
-		[self hideDimmingView];
-	
 	[CATransaction commit];
+}
+
+#pragma mark - Dimming View
+
+- (void)updateDimmingViewVisibility:(BOOL)show {
+	if (show && !self.showsDimmingView)
+		[self showDimmingView];
+	else if (!show && self.showsDimmingView)
+		[self hideDimmingView];
 }
 
 - (void)showDimmingView {
