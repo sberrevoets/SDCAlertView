@@ -151,21 +151,12 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	[[SDCAlertViewCoordinator sharedCoordinator] dismissAlert:self withButtonIndex:buttonIndex];
 }
 
-- (BOOL)resignFirstResponder {
-	[super resignFirstResponder];
-	[self.alertContentView resignFirstResponder];
-	
-	return YES;
-}
-
 - (void)willBeDismissedWithButtonIndex:(NSInteger)buttonIndex {
 	if ([self.delegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
 		[self.delegate alertView:self willDismissWithButtonIndex:buttonIndex];
     
     if (self.willDismissHandler)
         self.willDismissHandler(buttonIndex);
-	
-	[self resignFirstResponder];
 }
 
 - (void)wasDismissedWithButtonIndex:(NSInteger)buttonIndex {
@@ -174,6 +165,22 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	
 	if (self.didDismissHandler)
 		self.didDismissHandler(buttonIndex);
+}
+
+#pragma mark - First Responder
+
+- (BOOL)becomeFirstResponder {
+	[super becomeFirstResponder];
+	[self.alertContentView becomeFirstResponder];
+	
+	return YES;
+}
+
+- (BOOL)resignFirstResponder {
+	[super resignFirstResponder];
+	[self.alertContentView resignFirstResponder];
+	
+	return YES;
 }
 
 #pragma mark - Content

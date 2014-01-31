@@ -320,6 +320,13 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 #pragma mark - Custom Behavior
 
+- (BOOL)becomeFirstResponder {
+	[super becomeFirstResponder];
+	[self.primaryTextField becomeFirstResponder];
+	
+	return YES;
+}
+
 - (void)willMoveToSuperview:(UIView *)newSuperview {
 	[super willMoveToSuperview:newSuperview];
 	

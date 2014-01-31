@@ -37,6 +37,9 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 @property (nonatomic, strong) UIView *alertContainerView;
 @property (nonatomic, strong) UIView *dimmingView;
 @property (nonatomic) BOOL showsDimmingView;
+@property (nonatomic, strong) NSLayoutConstraint *bottomSpacingConstraint;
+@property (nonatomic, getter = isPresentingFirstAlert) BOOL presentingFirstAlert;
+@property (nonatomic, getter = isDismissingLastAlert) BOOL dismissingLastAlert;
 @end
 
 @implementation SDCAlertViewController
@@ -59,8 +62,10 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	if (self) {
 		[self createViewHierarchy];
 		
+		_presentingFirstAlert = YES;
+		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	}
 	
 	return self;
@@ -83,21 +88,58 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	self.alertContainerView = [[UIView alloc] initWithFrame:self.view.bounds];
 	[self.alertContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[self.view addSubview:self.alertContainerView];
-	[self.alertContainerView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
+	[self.alertContainerView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];
+	self.bottomSpacingConstraint = [[self.alertContainerView sdc_alignEdgesWithSuperview:UIRectEdgeBottom] firstObject];
 }
 
 #pragma mark - Showing/Hiding
 
-- (void)keyboardWillShow:(NSNotification *)notification {
-	NSDictionary *userInfo = [notification userInfo];
-	NSValue *keyboardFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey];
-	CGRect keyboardFrame = [keyboardFrameValue CGRectValue];
-	
-	self.alertContainerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.alertContainerView.frame), CGRectGetHeight(self.alertContainerView.frame) - CGRectGetHeight(keyboardFrame));
+- (void)animateAlertContainerForKeyboardChangeWithDuration:(NSTimeInterval)duration {
+	[UIView animateWithDuration:duration animations:^{
+		[self.view layoutIfNeeded];
+	}];
 }
 
-- (void)keyboardDidHide:(NSNotification *)notification {
-	self.alertContainerView.frame = [[UIWindow sdc_alertWindow] frame];
+- (void)keyboardWillShow:(NSNotification *)notification {
+	CGRect keyboardFrame = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+	
+	/*
+	 *  Normally, the keyboard's frame would have to be converted using a convertRect: method to get
+	 *  the frame in the right orientation. This works in both portrait and landscape if the orientation
+	 *  stays the same, but not if the device is rotated when an alert is shown. So we directly check
+	 *  the orientation and use either the keyboard frame's width or height based on that. Nast, but it works.
+	 */
+	
+	CGFloat keyboardHeight = UIInterfaceOrientationIsPortrait(orientation) ? CGRectGetHeight(keyboardFrame) : CGRectGetWidth(keyboardFrame);
+	self.bottomSpacingConstraint.constant = -keyboardHeight;
+	
+	// No need to animate the resizing of the alert container when the first alert is presented
+	if (!self.isPresentingFirstAlert) {
+		NSTimeInterval animationDuration = [[notification userInfo][UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+		[self animateAlertContainerForKeyboardChangeWithDuration:animationDuration];
+	}
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+	/*
+	 *  Don't resize the alert container if we're animating the last alert that was going to
+	 *  be shown. If an alert showed a keyboard, that keyboard will animate away when the alert
+	 *  is dismissed. To make sure the next alert is shown centered, we normally resize the alert
+	 *  container so that the next alert is centered. This causes the previous alert's dismissing
+	 *  animation to be "warped"--it fades out toward the center of the screen. If a new alert is
+	 *  showing, that effect is barely visible due to the new alert covering the old alert. However,
+	 *  if there is no new alert, that effect is visible pretty well. That's why we don't resize
+	 *  the container if there is no new alert.
+	 */
+	
+	if (!self.isDismissingLastAlert) {
+		NSDictionary *userInfo = [notification userInfo];
+		NSTimeInterval animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+		
+		self.bottomSpacingConstraint.constant = 0;
+		[self animateAlertContainerForKeyboardChangeWithDuration:animationDuration];
+	}
 }
 
 - (void)replaceAlert:(SDCAlertView *)oldAlert
@@ -105,6 +147,8 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	 showDimmingView:(BOOL)showDimmingView
    hideOldCompletion:(void (^)(void))hideOldCompletionHandler
    showNewCompletion:(void (^)(void))showNewCompletionHandler {
+	if (!newAlert)
+		self.dismissingLastAlert = YES;
 	
 	if (oldAlert)
 		[self dismissAlert:oldAlert keepDimmingView:showDimmingView completionHandler:hideOldCompletionHandler];
@@ -114,11 +158,16 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 }
 
 - (void)showAlert:(SDCAlertView *)alert withDimmingView:(BOOL)showDimmingView completion:(void(^)(void))completionHandler {
+	[alert becomeFirstResponder];
+	
 	[self.alertContainerView addSubview:alert];
 	[alert setNeedsUpdateConstraints];
-
+	
 	[CATransaction begin];
-	[CATransaction setCompletionBlock:completionHandler];
+	[CATransaction setCompletionBlock:^{
+		self.presentingFirstAlert = NO;
+		completionHandler();
+	}];
 	
 	[self applyPresentingAnimationsToAlert:alert];
 	
@@ -129,6 +178,8 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 }
 
 - (void)dismissAlert:(SDCAlertView *)alert keepDimmingView:(BOOL)keepDimmingView completionHandler:(void(^)(void))completionHandler {
+	[alert resignFirstResponder];
+	
 	[CATransaction begin];
 	[CATransaction setCompletionBlock:^{
 		[alert removeFromSuperview];
