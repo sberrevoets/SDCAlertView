@@ -4,9 +4,9 @@ PODS:
   - SDCAutoLayout (2.0)
 
 DEPENDENCIES:
-  - OCMock (~> 2.2.1)
-  - RBBAnimation
-  - SDCAutoLayout
+  - OCMock (~> 2.2)
+  - RBBAnimation (~> 0.3)
+  - SDCAutoLayout (~> 2.0)
 
 SPEC CHECKSUMS:
   OCMock: ffba68873fd32cfd35d885bddad23bfa816da4a3
