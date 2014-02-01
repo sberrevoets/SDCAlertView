@@ -8,7 +8,14 @@
 
 #import "SDCAlertView.h"
 
+@class SDCAlertViewBackgroundView;
+@class SDCAlertViewContentView;
+
 @interface SDCAlertView (Private)
+
+@property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
+@property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
+@property (nonatomic, strong) UIToolbar *toolbar;
 
 - (void)willBePresented;
 - (void)wasPresented;

@@ -9,7 +9,7 @@
 #import "SDCAlertViewController.h"
 
 #import "RBBSpringAnimation.h"
-#import "SDCAlertView.h"
+#import "SDCAlertView_Private.h"
 #import "SDCAlertViewContentView.h"
 #import "SDCAlertViewBackgroundView.h"
 
@@ -25,12 +25,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 
 @interface UIWindow (SDCAlertView)
 + (UIWindow *)sdc_alertWindow;
-@end
-
-@interface SDCAlertView (SDCAlertViewSubviews)
-@property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
-@property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
-@property (nonatomic, strong) UIToolbar *toolbar;
 @end
 
 @interface SDCAlertViewController ()
