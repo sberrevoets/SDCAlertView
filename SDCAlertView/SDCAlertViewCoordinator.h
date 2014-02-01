@@ -12,7 +12,7 @@
 
 @interface SDCAlertViewCoordinator : NSObject
 
-@property (nonatomic, readonly) SDCAlertView *visibleAlert;
+@property (nonatomic, weak, readonly) SDCAlertView *visibleAlert;
 
 + (instancetype)sharedCoordinator;
 
