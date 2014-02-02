@@ -8,7 +8,7 @@
 
 #import "SDCAlertViewContentView.h"
 
-#import "SDCAlertView.h"
+#import "SDCAlertView_Private.h"
 #import "UIView+SDCAutoLayout.h"
 
 static UIEdgeInsets const SDCAlertViewContentPadding = {19, 15, 18.5, 15};

@@ -11,6 +11,8 @@
 @class SDCAlertViewBackgroundView;
 @class SDCAlertViewContentView;
 
+FOUNDATION_EXPORT CGFloat const SDCAlertViewWidth;
+
 @interface SDCAlertView (Private)
 
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
@@ -23,4 +25,12 @@
 - (void)willBeDismissedWithButtonIndex:(NSInteger)buttonIndex;
 - (void)wasDismissedWithButtonIndex:(NSInteger)buttonIndex;
 
+@end
+
+@interface UIColor (SDCAlertViewColors)
++ (UIColor *)sdc_alertButtonTextColor;
++ (UIColor *)sdc_disabledAlertButtonTextColor;
++ (UIColor *)sdc_alertSeparatorColor;
++ (UIColor *)sdc_textFieldBackgroundViewColor;
++ (UIColor *)sdc_dimmedBackgroundColor;
 @end
