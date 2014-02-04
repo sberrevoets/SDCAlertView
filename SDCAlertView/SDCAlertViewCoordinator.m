@@ -107,6 +107,9 @@
 	self.dismissingAlert = alert;
 	self.presentingAlert = nextAlert;
 	
+	if (!nextAlert)
+		[self resaturateUI];
+	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
 	[alertViewController replaceAlert:alert
 							withAlert:nextAlert
@@ -117,11 +120,14 @@
 						
 						[alert wasDismissedWithButtonIndex:buttonIndex];
 						self.dismissingAlert = nil;
-					}
-					showNewCompletion:^{
+					} showNewCompletion:^{
 						[nextAlert wasPresented];
 						self.presentingAlert = nil;
 					}];
+}
+
+- (void)resaturateUI {
+	self.userWindow.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
 }
 
 - (void)makeAlertWindowKeyWindow {
@@ -130,9 +136,7 @@
 }
 
 - (void)returnToUserWindow {
-	self.userWindow.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
 	[self.userWindow makeKeyAndVisible];
-	
 	self.alertWindow = nil;
 }
 
