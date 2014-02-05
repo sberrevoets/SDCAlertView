@@ -3,7 +3,7 @@
 //  SDCAlertView
 //
 //  Created by Scott Berrevoets on 11/5/13.
-//  Initial drawRect: implementation/revision by Chris Stroud on 4/2/2014
+//  Initial drawRect: implementation/revision by Chris Stroud on 5/2/2014
 //
 //  Copyright (c) 2013 Scotty Doesn't Code. All rights reserved.
 //
@@ -23,20 +23,43 @@
 	
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
+	// Make sure the context is cleared
+	CGContextClearRect(context, rect);
+	
+	//
+	// Set the closest matching blend mode for the context. It's really
+	// difficult (if possible at all) to discern what Apple is using for this
+	// but it produces a nearly identical effect, which serves our needs.
+	//
+	CGContextSetBlendMode(context, kCGBlendModeOverlay);
+	
 	// Gray colorspace used for the background color
 	CGColorSpaceRef grayColorSpace = CGColorSpaceCreateDeviceGray();
+	
+	
+	// Compensate for whatever the other layer Apple has in the hierachy (or perhaps a color-fill somewhere?) that's darkening the alert:
+	//
+	// [<CALayer: 0x155faec0> backgroundColor]: <CGColor 0x17551e00> [<CGColorSpace 0x175af850> (kCGColorSpaceDeviceGray)] ( 0.5 0.5 )
+	//
+	// Darken the alert background prior to filling in the actual background color
+	//
+	// NOTE: Had to manually tweak this value to compensate for subtle brightness differences. % Grayscale is -0.6f from
+	//       Apple's apparent value.
+	//
+	CGContextSetGrayFillColor(context, 0.44, 0.5);
+	CGContextFillRect(context, rect);
+	
 	
 	// Background color components:
 	//
 	// [<CALayer: 0x155faec0> backgroundColor]: <CGColor 0x15541550> [<CGColorSpace 0x1558f4c0> (kCGColorSpaceDeviceGray)] ( 0.97 0.96 )
 	//
-	CGFloat backgroundColorComponents[2] = {0.97f, 0.96f};
-	
-	// Fill the BG color
-	CGColorRef alertBackgroundColor = CGColorCreate(grayColorSpace, backgroundColorComponents);
-	CGContextSetFillColorWithColor(context, alertBackgroundColor);
+	// NOTE: Had to manually tweak this value to compensate for almost-negligible transparency discrepancies.
+	//       Alpha value is now +0.1f from Apple's apparent value.
+	//
+	CGContextSetGrayFillColor(context, 0.97f, 0.97f);
 	CGContextFillRect(context, rect);
-	
+
 	//
 	// Gradient color components:
 	//
@@ -76,13 +99,11 @@
     // Draw the gradient with the scale transform on the context
     CGContextScaleCTM(context, scaleT.a, scaleT.d);
     CGContextDrawRadialGradient(context, gradient, center, 0, center, radius, kCGGradientDrawsBeforeStartLocation);
-	
     // Reset the context
     CGContextScaleCTM(context, invS.x, invS.y);
 	
     // Clean up the memory used by Quartz
     CGGradientRelease(gradient);
 	CGColorSpaceRelease(grayColorSpace);
-	CGColorRelease(alertBackgroundColor);
 }
 @end
