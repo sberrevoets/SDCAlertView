@@ -17,7 +17,6 @@ FOUNDATION_EXPORT CGFloat const SDCAlertViewWidth;
 
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
-@property (nonatomic, strong) UIToolbar *toolbar;
 
 - (void)willBePresented;
 - (void)wasPresented;
