@@ -275,11 +275,9 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	
 	alert.alertBackgroundView.layer.opacity = 1;
 	alert.alertContentView.layer.opacity = 1;
-	alert.toolbar.layer.opacity = 1;
 	
 	[alert.alertBackgroundView.layer addAnimation:opacityAnimation forKey:@"opacity"];
 	[alert.alertContentView.layer addAnimation:opacityAnimation forKey:@"opacity"];
-	[alert.toolbar.layer addAnimation:opacityAnimation forKey:@"opacity"];
 	
 	alert.layer.transform = [transformAnimation.toValue CATransform3DValue];
 	[alert.layer addAnimation:transformAnimation forKey:@"transform"];
@@ -291,11 +289,9 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	
 	alert.alertBackgroundView.layer.opacity = 0;
 	alert.alertContentView.layer.opacity = 0;
-	alert.toolbar.layer.opacity = 0;
 	
 	[alert.alertBackgroundView.layer addAnimation:opacityAnimation forKey:@"opacity"];
 	[alert.alertContentView.layer addAnimation:opacityAnimation forKey:@"opacity"];
-	[alert.toolbar.layer addAnimation:opacityAnimation forKey:@"opacity"];
 
 	alert.layer.transform = [transformAnimation.toValue CATransform3DValue];
 	[alert.layer addAnimation:transformAnimation forKey:@"transform"];

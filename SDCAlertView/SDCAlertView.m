@@ -29,7 +29,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
-@property (nonatomic, strong) UIToolbar *toolbar;
 
 @property (nonatomic, strong) NSMutableArray *buttonTitles;
 @property (nonatomic) NSInteger firstOtherButtonIndex;
@@ -318,14 +317,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	[self applyBlurEffect];
-	[super layoutSubviews];
-}
-
-- (void)applyBlurEffect {
-	self.toolbar = [[UIToolbar alloc] initWithFrame:self.bounds];
-	self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-	[self insertSubview:self.toolbar atIndex:0];
 }
 
 - (void)updateConstraints {
