@@ -271,28 +271,20 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 
 - (void)applyPresentingAnimationsToAlert:(SDCAlertView *)alert {
 	RBBSpringAnimation *opacityAnimation = [self opacityAnimationForPresenting];
+	alert.layer.opacity = 1;
+	[alert.layer addAnimation:opacityAnimation forKey:@"opacity"];
+	
 	RBBSpringAnimation *transformAnimation = [self transformAnimationForPresenting];
-	
-	alert.alertBackgroundView.layer.opacity = 1;
-	alert.alertContentView.layer.opacity = 1;
-	
-	[alert.alertBackgroundView.layer addAnimation:opacityAnimation forKey:@"opacity"];
-	[alert.alertContentView.layer addAnimation:opacityAnimation forKey:@"opacity"];
-	
 	alert.layer.transform = [transformAnimation.toValue CATransform3DValue];
 	[alert.layer addAnimation:transformAnimation forKey:@"transform"];
 }
 
 - (void)applyDismissingAnimationsToAlert:(SDCAlertView *)alert {
 	RBBSpringAnimation *opacityAnimation = [self opacityAnimationForDismissing];
-	RBBSpringAnimation *transformAnimation = [self transformAnimationForDismissing];
-	
-	alert.alertBackgroundView.layer.opacity = 0;
-	alert.alertContentView.layer.opacity = 0;
-	
-	[alert.alertBackgroundView.layer addAnimation:opacityAnimation forKey:@"opacity"];
-	[alert.alertContentView.layer addAnimation:opacityAnimation forKey:@"opacity"];
+	alert.layer.opacity = 0;
+	[alert.layer addAnimation:opacityAnimation forKey:@"opacity"];
 
+	RBBSpringAnimation *transformAnimation = [self transformAnimationForDismissing];
 	alert.layer.transform = [transformAnimation.toValue CATransform3DValue];
 	[alert.layer addAnimation:transformAnimation forKey:@"transform"];
 }

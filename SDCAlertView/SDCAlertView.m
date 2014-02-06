@@ -315,10 +315,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 #pragma mark - Layout
 
-- (void)layoutSubviews {
-	[super layoutSubviews];
-}
-
 - (void)updateConstraints {
 	[self removeConstraints:[self constraints]];
 	
