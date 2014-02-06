@@ -351,7 +351,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 @implementation UIColor (SDCAlertViewColors)
 
 + (UIColor *)sdc_alertButtonTextColor {
-	return [UIColor colorWithRed:16/255.0 green:144/255.0 blue:248/255.0 alpha:1];
+	return [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1];
 }
 
 + (UIColor *)sdc_disabledAlertButtonTextColor {
