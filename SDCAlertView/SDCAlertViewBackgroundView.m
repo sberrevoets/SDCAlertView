@@ -12,13 +12,11 @@
 
 @implementation SDCAlertViewBackgroundView
 
-- (BOOL)isOpaque
-{
+- (BOOL)isOpaque {
 	return NO;
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
 	[super drawRect:rect];
 	
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -26,11 +24,9 @@
 	// Make sure the context is cleared
 	CGContextClearRect(context, rect);
 	
-	//
 	// Set the closest matching blend mode for the context. It's really
 	// difficult (if possible at all) to discern what Apple is using for this
 	// but it produces a nearly identical effect, which serves our needs.
-	//
 	CGContextSetBlendMode(context, kCGBlendModeOverlay);
 	
 	// Gray colorspace used for the background color
@@ -45,7 +41,6 @@
 	//
 	// NOTE: Had to manually tweak this value to compensate for subtle brightness differences. % Grayscale is -0.6f from
 	//       Apple's apparent value.
-	//
 	CGContextSetGrayFillColor(context, 0.44, 0.5);
 	CGContextFillRect(context, rect);
 	
@@ -56,54 +51,50 @@
 	//
 	// NOTE: Had to manually tweak this value to compensate for almost-negligible transparency discrepancies.
 	//       Alpha value is now +0.1f from Apple's apparent value.
-	//
 	CGContextSetGrayFillColor(context, 0.97f, 0.97f);
 	CGContextFillRect(context, rect);
 
-	//
 	// Gradient color components:
 	//
 	// [<_UIModalItemAlertBackgroundView: 0x15763a60> _gradientImageForBoundsSize:-- withInnerColor:UIDeviceWhiteColorSpace 1 0.5 outerColor:UIDeviceWhiteColorSpace 1 0]
-	//
 	CGColorRef startColor = [[UIColor colorWithWhite:1.0f alpha:0.5f] CGColor];
 	CGColorRef endColor   = [[UIColor colorWithWhite:1.0f alpha:0.0f] CGColor];
 	
 	// Gradient colors
-	NSArray * colors = @[(__bridge id)startColor, (__bridge id)endColor];
+	NSArray *colors = @[(__bridge id)startColor, (__bridge id)endColor];
 	
 	// Gradient locations
 	CGFloat locations[2] = {0.0f, 1.0f};
 	
-	// This gradient will default to the +[UIColor colorWithWhite: alpha:] colorspace
+	// This gradient will default to the +[UIColor colorWithWhite:alpha:] colorspace
 	// since UIDeviceWhiteColorSpace is seemingly private
 	CGGradientRef gradient = CGGradientCreateWithColors(CGColorGetColorSpace(startColor), (__bridge CFArrayRef)colors, locations);
 	
 	/*
-	 *
 	 * This trick for transforming the circular gradient is great and is largely derived from: http://stackoverflow.com/a/12665177
-	 *
 	 */
 	
 	// Scaling transformation and keeping track of the inverse
-    CGAffineTransform scaleT = CGAffineTransformMakeScale(1.0, CGRectGetHeight(rect) / CGRectGetWidth(rect));
-    CGAffineTransform invScaleT = CGAffineTransformInvert(scaleT);
+    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(1.0, CGRectGetHeight(rect) / CGRectGetWidth(rect));
+    CGAffineTransform inverseScaleTransform = CGAffineTransformInvert(scaleTransform);
 	
     // Extract the Sx and Sy elements from the inverse matrix
     // (See the Quartz documentation for the math behind the matrices)
-    CGPoint invS = CGPointMake(invScaleT.a, invScaleT.d);
+    CGPoint inverseScale = CGPointMake(inverseScaleTransform.a, inverseScaleTransform.d);
 	
     // Transform center and radius of gradient with the inverse
-    CGPoint center = CGPointMake(CGRectGetMidX(rect) * invS.x, CGRectGetMidY(rect) * invS.y);
-    CGFloat radius = CGRectGetMidX(rect) * invS.x;
+    CGPoint center = CGPointMake(CGRectGetMidX(rect) * inverseScale.x, CGRectGetMidY(rect) * inverseScale.y);
+    CGFloat radius = CGRectGetMidX(rect) * inverseScale.x;
 	
     // Draw the gradient with the scale transform on the context
-    CGContextScaleCTM(context, scaleT.a, scaleT.d);
+    CGContextScaleCTM(context, scaleTransform.a, scaleTransform.d);
     CGContextDrawRadialGradient(context, gradient, center, 0, center, radius, kCGGradientDrawsBeforeStartLocation);
     // Reset the context
-    CGContextScaleCTM(context, invS.x, invS.y);
+    CGContextScaleCTM(context, inverseScale.x, inverseScale.y);
 	
     // Clean up the memory used by Quartz
     CGGradientRelease(gradient);
 	CGColorSpaceRelease(grayColorSpace);
 }
+
 @end
