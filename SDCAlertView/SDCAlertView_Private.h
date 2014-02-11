@@ -27,8 +27,7 @@ FOUNDATION_EXPORT CGFloat const SDCAlertViewWidth;
 @end
 
 @interface UIColor (SDCAlertViewColors)
-+ (UIColor *)sdc_alertButtonTextColor;
-+ (UIColor *)sdc_disabledAlertButtonTextColor;
++ (UIColor *)sdc_defaultTintColor;
 + (UIColor *)sdc_alertSeparatorColor;
 + (UIColor *)sdc_textFieldBackgroundViewColor;
 + (UIColor *)sdc_dimmedBackgroundColor;

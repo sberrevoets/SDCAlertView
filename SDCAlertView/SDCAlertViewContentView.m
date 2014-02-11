@@ -230,13 +230,10 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	else
 		cell.textLabel.font = [UIFont sdc_normalButtonFont];
 	
+	cell.textLabel.textColor = [UIColor sdc_defaultTintColor];
 	cell.backgroundColor = [UIColor clearColor];
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
-	
-	if ([self isButtonAtIndexPathEnabled:indexPath tableView:tableView])
-		cell.textLabel.textColor = [UIColor sdc_alertButtonTextColor];
-	else
-		cell.textLabel.textColor = [UIColor sdc_disabledAlertButtonTextColor];
+	cell.textLabel.enabled = [self isButtonAtIndexPathEnabled:indexPath tableView:tableView];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
