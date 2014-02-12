@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19A17F90416B89E4841A4372 /* SDCNativeTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A171C2F99A36232751E0E8 /* SDCNativeTheme.m */; };
 		4B64D41583994B9C9C59A4E3 /* libPods-SDCAlertViewTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB28936541154BCF9C9B2F0C /* libPods-SDCAlertViewTests.a */; };
 		A30DD28718785EED00DC9195 /* SDCAlertViewContentViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A30DD28618785EED00DC9195 /* SDCAlertViewContentViewTests.m */; };
 		A3F8B605184BAD1400EB5438 /* SDCAlertViewControllerMock.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8B604184BAD1400EB5438 /* SDCAlertViewControllerMock.m */; };
@@ -46,6 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19A1716083A43C27EF50C90D /* SDCTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCTheme.h; sourceTree = "<group>"; };
+		19A171C2F99A36232751E0E8 /* SDCNativeTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCNativeTheme.m; sourceTree = "<group>"; };
+		19A17A03C30E63B9EACA64EE /* SDCNativeTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCNativeTheme.h; sourceTree = "<group>"; };
 		50B67E8F6417468B9958F089 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		60539E244AB24FB7B725E24B /* Pods-SDCAlertViewTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDCAlertViewTests.xcconfig"; path = "../Pods/Pods-SDCAlertViewTests.xcconfig"; sourceTree = "<group>"; };
 		A30DD28618785EED00DC9195 /* SDCAlertViewContentViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewContentViewTests.m; sourceTree = "<group>"; };
@@ -180,6 +184,9 @@
 				D25B3CBD17ECE7A6004B32A2 /* SDCViewController.m */,
 				D25B3CBF17ECE7A6004B32A2 /* Images.xcassets */,
 				D25B3CAE17ECE7A6004B32A2 /* Supporting Files */,
+				19A1716083A43C27EF50C90D /* SDCTheme.h */,
+				19A171C2F99A36232751E0E8 /* SDCNativeTheme.m */,
+				19A17A03C30E63B9EACA64EE /* SDCNativeTheme.h */,
 			);
 			path = SDCAlertView;
 			sourceTree = "<group>";
@@ -392,6 +399,7 @@
 				D2FA54941894AFB5006FAB5E /* SDCAlertViewCoordinator.m in Sources */,
 				D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */,
 				D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */,
+				19A17F90416B89E4841A4372 /* SDCNativeTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
