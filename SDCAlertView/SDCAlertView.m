@@ -49,8 +49,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (SDCAlertViewContentView *)alertContentView {
 	if (!_alertContentView) {
-		_alertContentView = [[SDCAlertViewContentView alloc] initWithDelegate:self];
-		[_alertContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+		_alertContentView = [[SDCAlertViewContentView alloc] initWithDelegate:self theme:self.theme];
+        [_alertContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
 	
 	return _alertContentView;
@@ -225,7 +225,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (void)configureContent {
 	self.alertContentView.title = self.title;
 	self.alertContentView.message = self.message;
-	
+
+
 	switch (self.alertViewStyle) {
 		case SDCAlertViewStyleDefault:					self.alertContentView.numberOfTextFields = 0; break;
 		case SDCAlertViewStylePlainTextInput:
@@ -344,26 +345,4 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 @end
 
-@implementation UIColor (SDCAlertViewColors)
 
-+ (UIColor *)sdc_alertButtonTextColor {
-	return [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1];
-}
-
-+ (UIColor *)sdc_disabledAlertButtonTextColor {
-	return [UIColor colorWithRed:143/255.0 green:143/255.0 blue:143/255.0 alpha:1];
-}
-
-+ (UIColor *)sdc_alertSeparatorColor {
-	return [UIColor colorWithWhite:0.5 alpha:0.5];
-}
-
-+ (UIColor *)sdc_textFieldBackgroundViewColor {
-	return [UIColor colorWithWhite:0.5 alpha:0.5];
-}
-
-+ (UIColor *)sdc_dimmedBackgroundColor {
-	return [UIColor colorWithWhite:0 alpha:.4];
-}
-
-@end

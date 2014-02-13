@@ -14,6 +14,7 @@
 #import "SDCAlertViewBackgroundView.h"
 
 #import "UIView+SDCAutoLayout.h"
+#import "SDCNativeTheme.h"
 
 static CGFloat 			const SDCAlertViewShowingAnimationScale = 1.26;
 static CGFloat 			const SDCAlertViewDismissingAnimationScale = 0.84;
@@ -73,7 +74,10 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 - (void)createDimmingView {
 	self.dimmingView = [[UIView alloc] initWithFrame:self.alertContainerView.bounds];
 	[self.dimmingView setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.dimmingView.backgroundColor = [UIColor sdc_dimmedBackgroundColor];
+
+    //todo
+    id<SDCTheme> theme = [[SDCNativeTheme alloc] init];
+    self.dimmingView.backgroundColor = [theme dimmedBackgroundColor];
 	[self.view addSubview:self.dimmingView];
 	[self.dimmingView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
 }

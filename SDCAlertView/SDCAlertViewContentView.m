@@ -10,6 +10,8 @@
 
 #import "SDCAlertView_Private.h"
 #import "UIView+SDCAutoLayout.h"
+#import "SDCTheme.h"
+#import "SDCNativeTheme.h"
 
 static UIEdgeInsets const SDCAlertViewContentPadding = {19, 15, 18.5, 15};
 
@@ -27,13 +29,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];
 }
 
-@interface UIFont (SDCAlertViewFonts)
-+ (UIFont *)sdc_titleLabelFont;
-+ (UIFont *)sdc_messageLabelFont;
-+ (UIFont *)sdc_textFieldFont;
-+ (UIFont *)sdc_suggestedButtonFont;
-+ (UIFont *)sdc_normalButtonFont;
-@end
+
 
 @interface SDCAlertViewTextField : UITextField
 @property (nonatomic) UIEdgeInsets textInsets;
@@ -53,6 +49,8 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 @property (nonatomic, strong) UIView *buttonSeparatorView;
 @property (nonatomic, strong) UITableView *suggestedButtonTableView;
 @property (nonatomic, strong) UITableView *otherButtonsTableView;
+
+@property (nonatomic, strong) id<SDCTheme> defaultTheme;
 @end
 
 @implementation SDCAlertViewContentView
@@ -84,13 +82,20 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 #pragma mark - Initialization
 
+
 - (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate {
+    return [self initWithDelegate:delegate theme:nil];
+
+}
+- (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate theme:(id<SDCTheme>) theme {
 	self = [super init];
 	
 	if (self) {
 		_delegate = delegate;
-		
-		[self initializeSubviews];
+        _theme = theme;
+        _defaultTheme = [[SDCNativeTheme alloc] init];
+
+        [self initializeSubviews];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextChanged:) name:UITextFieldTextDidChangeNotification object:nil];
 	}
@@ -115,7 +120,8 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 - (void)initializeTitleLabel {
 	self.titleLabel = [[UILabel alloc] init];
 	[self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.titleLabel.font = [UIFont sdc_titleLabelFont];
+	self.titleLabel.font = [self.theme respondsToSelector:@selector(titleLabelFont)] ? [self.theme titleLabelFont] : [self.defaultTheme titleLabelFont];
+	self.titleLabel.textColor = [self.theme respondsToSelector:@selector(titleLabelTextColor)] ? [self.theme titleLabelTextColor] : [self.defaultTheme titleLabelTextColor];
 	self.titleLabel.textAlignment = NSTextAlignmentCenter;
 	self.titleLabel.numberOfLines = 0;
 	self.titleLabel.preferredMaxLayoutWidth = SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right;
@@ -124,7 +130,8 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 - (void)initializeMessageLabel {
 	self.messageLabel = [[UILabel alloc] init];
 	[self.messageLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.messageLabel.font = [UIFont sdc_messageLabelFont];
+	self.messageLabel.font = [self.theme respondsToSelector:@selector(messageLabelFont)] ? [self.theme messageLabelFont] : [self.defaultTheme messageLabelFont];
+	self.messageLabel.textColor = [self.theme respondsToSelector:@selector(messageLabelTextColor)] ? [self.theme messageLabelTextColor] : [self.defaultTheme messageLabelTextColor];
 	self.messageLabel.textAlignment = NSTextAlignmentCenter;
 	self.messageLabel.numberOfLines = 0;
 	self.messageLabel.preferredMaxLayoutWidth = SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right;
@@ -139,7 +146,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	self.textFieldBackgroundView = [[UIView alloc] init];
 	[self.textFieldBackgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	self.textFieldBackgroundView.backgroundColor = [UIColor whiteColor];
-	self.textFieldBackgroundView.layer.borderColor = [[UIColor sdc_textFieldBackgroundViewColor] CGColor];
+	self.textFieldBackgroundView.layer.borderColor = [self.theme respondsToSelector:@selector(textFieldBackgroundViewColor)] ? [[self.theme textFieldBackgroundViewColor]CGColor] : [[self.defaultTheme textFieldBackgroundViewColor] CGColor];
 	self.textFieldBackgroundView.layer.borderWidth = SDCAlertViewGetSeparatorThickness();
 	self.textFieldBackgroundView.layer.masksToBounds = YES;
 	self.textFieldBackgroundView.layer.cornerRadius = SDCAlertViewTextFieldBackgroundViewCornerRadius;
@@ -148,7 +155,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 - (void)initializePrimaryTextField {
 	self.primaryTextField = [[SDCAlertViewTextField alloc] init];
 	[self.primaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.primaryTextField.font = [UIFont sdc_textFieldFont];
+	self.primaryTextField.font = [self.theme respondsToSelector:@selector(textFieldFont)] ? [self.theme textFieldFont] : [self.defaultTheme textFieldFont];
 	self.primaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
 	self.primaryTextField.secureTextEntry = [self.delegate alertContentViewShouldUseSecureEntryForPrimaryTextField:self];
 	[self.primaryTextField becomeFirstResponder];
@@ -166,7 +173,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 - (void)initializeSecondaryTextField {
 	self.secondaryTextField = [[SDCAlertViewTextField alloc] init];
 	[self.secondaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.secondaryTextField.font = [UIFont sdc_textFieldFont];
+	self.secondaryTextField.font = [self.theme respondsToSelector:@selector(textFieldFont)] ? [self.theme textFieldFont] : [self.defaultTheme textFieldFont];
 	self.secondaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
 	self.secondaryTextField.secureTextEntry = YES;
 }
@@ -174,7 +181,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 - (UIView *)separatorView {
 	UIView *separatorView = [[UIView alloc] init];
 	[separatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
-	separatorView.backgroundColor = [UIColor sdc_alertSeparatorColor];
+	separatorView.backgroundColor = [self.theme respondsToSelector:@selector(alertSeparatorColor)] ? [self.theme alertSeparatorColor] : [self.defaultTheme alertSeparatorColor];
 	return separatorView;
 }
 
@@ -189,7 +196,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	tableView.dataSource = self;
 	tableView.backgroundColor = [UIColor clearColor];
 	tableView.separatorInset = UIEdgeInsetsZero;
-	tableView.separatorColor = [UIColor sdc_alertSeparatorColor];
+	tableView.separatorColor = [self.theme respondsToSelector:@selector(alertSeparatorColor)] ? [self.theme alertSeparatorColor] : [self.defaultTheme alertSeparatorColor];
 	tableView.scrollEnabled = NO;
 	return tableView;
 }
@@ -226,17 +233,18 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (tableView == self.suggestedButtonTableView)
-		cell.textLabel.font = [UIFont sdc_suggestedButtonFont];
+		cell.textLabel.font = [self.theme respondsToSelector:@selector(suggestedButtonFont)] ? [self.theme suggestedButtonFont] : [self.defaultTheme suggestedButtonFont];
 	else
-		cell.textLabel.font = [UIFont sdc_normalButtonFont];
+        cell.textLabel.font = [self.theme respondsToSelector:@selector(normalButtonFont)] ? [self.theme normalButtonFont] : [self.defaultTheme normalButtonFont];
 	
 	cell.backgroundColor = [UIColor clearColor];
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
-	
-	if ([self isButtonAtIndexPathEnabled:indexPath tableView:tableView])
-		cell.textLabel.textColor = [UIColor sdc_alertButtonTextColor];
+
+
+    if ([self isButtonAtIndexPathEnabled:indexPath tableView:tableView])
+		cell.textLabel.textColor = [self.theme respondsToSelector:@selector(alertButtonTextColor)] ? [self.theme alertButtonTextColor] : [self.defaultTheme alertButtonTextColor];
 	else
-		cell.textLabel.textColor = [UIColor sdc_disabledAlertButtonTextColor];
+        cell.textLabel.textColor = [self.theme respondsToSelector:@selector(disabledAlertButtonTextColor)] ? [self.theme alertButtonTextColor] : [self.defaultTheme disabledAlertButtonTextColor];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -562,26 +570,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 @end
 
-@implementation UIFont (SDCAlertViewFonts)
 
-+ (UIFont *)sdc_titleLabelFont {
-	return [UIFont boldSystemFontOfSize:17];
-}
 
-+ (UIFont *)sdc_messageLabelFont {
-	return [UIFont systemFontOfSize:14];
-}
 
-+ (UIFont *)sdc_textFieldFont {
-	return [UIFont systemFontOfSize:13];
-}
-
-+ (UIFont *)sdc_suggestedButtonFont {
-	return [UIFont boldSystemFontOfSize:17];
-}
-
-+ (UIFont *)sdc_normalButtonFont {
-	return [UIFont systemFontOfSize:17];
-}
-
-@end

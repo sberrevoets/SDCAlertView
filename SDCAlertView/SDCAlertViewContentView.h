@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class SDCAlertViewContentView;
+@protocol SDCTheme;
 
 @protocol SDCAlertViewContentViewDelegate <NSObject>
 - (BOOL)alertContentViewShouldUseSecureEntryForPrimaryTextField:(SDCAlertViewContentView *)sender;
@@ -24,6 +25,7 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *message;
+@property (nonatomic, strong) id<SDCTheme> theme;
 
 @property (nonatomic) NSInteger numberOfTextFields;
 @property (nonatomic, readonly) NSArray *textFields;
@@ -34,5 +36,6 @@
 @property (nonatomic, weak) id <SDCAlertViewContentViewDelegate> delegate;
 
 - (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate theme:(id<SDCTheme>) theme;
 
 @end

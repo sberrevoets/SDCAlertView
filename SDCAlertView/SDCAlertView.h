@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
     SDCAlertViewStyleDefault = 0,
     SDCAlertViewStyleSecureTextInput,
@@ -15,6 +16,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
     SDCAlertViewStyleLoginAndPasswordInput
 };
 
+@protocol SDCTheme;
 @class SDCAlertView;
 
 @protocol SDCAlertViewDelegate <NSObject>
@@ -73,6 +75,8 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @property (nonatomic, readonly, getter = isVisible) BOOL visible;
 
 @property (nonatomic) SDCAlertViewStyle alertViewStyle;
+
+@property (nonatomic, strong) id<SDCTheme> theme;
 
 /**
  *  The contentView property can be used to display any arbitrary view in an alert view by adding these views to the contentView.
