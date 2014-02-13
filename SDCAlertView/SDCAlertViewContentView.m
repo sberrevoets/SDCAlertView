@@ -82,11 +82,17 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 #pragma mark - Initialization
 
+
 - (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate {
+    return [self initWithDelegate:delegate theme:nil];
+
+}
+- (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate theme:(id<SDCTheme>) theme {
 	self = [super init];
 	
 	if (self) {
 		_delegate = delegate;
+        _theme = theme;
         _defaultTheme = [[SDCNativeTheme alloc] init];
 
         [self initializeSubviews];

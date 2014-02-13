@@ -12,6 +12,7 @@
 
 #import "SDCAlertView.h"
 #import "UIView+SDCAutoLayout.h"
+#import "SDCTestTheme.h"
 
 @interface SDCViewController () <UITableViewDelegate>
 
@@ -65,6 +66,17 @@
 													cancelButtonTitle:nil
 													otherButtonTitles:@"OK", nil];
 			alert.alertViewStyle = SDCAlertViewStyleLoginAndPasswordInput;
+			
+			[alert show];
+        } else if (indexPath.row == 4) {
+            
+			SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:@"Title"
+															  message:@"This is a message"
+															 delegate:nil
+													cancelButtonTitle:nil
+													otherButtonTitles:@"OK", nil];
+            alert.theme = [[SDCTestTheme alloc] init];
+
 			
 			[alert show];
 		}

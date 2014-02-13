@@ -34,6 +34,7 @@
 		D2F9D2BF18400DAF00F85B10 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BE18400DAF00F85B10 /* LICENSE */; };
 		D2FA54941894AFB5006FAB5E /* SDCAlertViewCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */; };
 		D70D28F12B224BE7919DADF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D8593FE42641CBBCB47F79 /* libPods.a */; };
+		D91FC04819A1393D1104812F /* SDCTestTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D91FC2E584BF7378B4CF371E /* SDCTestTheme.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,8 @@
 		D2F9D2BE18400DAF00F85B10 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D2FA54921894AFB4006FAB5E /* SDCAlertViewCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewCoordinator.h; sourceTree = "<group>"; };
 		D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewCoordinator.m; sourceTree = "<group>"; };
+		D91FC00FD0AC17F1B2D351D9 /* SDCTestTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCTestTheme.h; sourceTree = "<group>"; };
+		D91FC2E584BF7378B4CF371E /* SDCTestTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCTestTheme.m; sourceTree = "<group>"; };
 		E8D8593FE42641CBBCB47F79 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -187,6 +190,8 @@
 				19A1716083A43C27EF50C90D /* SDCTheme.h */,
 				19A171C2F99A36232751E0E8 /* SDCNativeTheme.m */,
 				19A17A03C30E63B9EACA64EE /* SDCNativeTheme.h */,
+				D91FC00FD0AC17F1B2D351D9 /* SDCTestTheme.h */,
+				D91FC2E584BF7378B4CF371E /* SDCTestTheme.m */,
 			);
 			path = SDCAlertView;
 			sourceTree = "<group>";
@@ -400,6 +405,7 @@
 				D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */,
 				D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */,
 				19A17F90416B89E4841A4372 /* SDCNativeTheme.m in Sources */,
+				D91FC04819A1393D1104812F /* SDCTestTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

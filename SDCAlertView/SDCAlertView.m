@@ -49,8 +49,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (SDCAlertViewContentView *)alertContentView {
 	if (!_alertContentView) {
-		_alertContentView = [[SDCAlertViewContentView alloc] initWithDelegate:self];
-		[_alertContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+		_alertContentView = [[SDCAlertViewContentView alloc] initWithDelegate:self theme:self.theme];
+        [_alertContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
 	
 	return _alertContentView;
@@ -225,7 +225,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (void)configureContent {
 	self.alertContentView.title = self.title;
 	self.alertContentView.message = self.message;
-	self.alertContentView.theme = self.theme;
+
 
 	switch (self.alertViewStyle) {
 		case SDCAlertViewStyleDefault:					self.alertContentView.numberOfTextFields = 0; break;

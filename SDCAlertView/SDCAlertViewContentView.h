@@ -36,5 +36,6 @@
 @property (nonatomic, weak) id <SDCAlertViewContentViewDelegate> delegate;
 
 - (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate theme:(id<SDCTheme>) theme;
 
 @end
