@@ -17,6 +17,12 @@
 - (UIColor *)disabledAlertButtonTextColor {
     return [UIColor colorWithRed:143/255.0 green:143/255.0 blue:143/255.0 alpha:1];
 }
+- (UIColor *)messageLabelTextColor {
+    return [UIColor blackColor];
+};
+- (UIColor *)titleLabelTextColor {
+    return [UIColor blackColor];
+}
 
 - (UIColor *)alertSeparatorColor {
     return [UIColor colorWithWhite:0.5 alpha:0.5];

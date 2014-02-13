@@ -121,6 +121,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	self.titleLabel = [[UILabel alloc] init];
 	[self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 	self.titleLabel.font = [self.theme respondsToSelector:@selector(titleLabelFont)] ? [self.theme titleLabelFont] : [self.defaultTheme titleLabelFont];
+	self.titleLabel.textColor = [self.theme respondsToSelector:@selector(titleLabelTextColor)] ? [self.theme titleLabelTextColor] : [self.defaultTheme titleLabelTextColor];
 	self.titleLabel.textAlignment = NSTextAlignmentCenter;
 	self.titleLabel.numberOfLines = 0;
 	self.titleLabel.preferredMaxLayoutWidth = SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right;
@@ -130,6 +131,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	self.messageLabel = [[UILabel alloc] init];
 	[self.messageLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 	self.messageLabel.font = [self.theme respondsToSelector:@selector(messageLabelFont)] ? [self.theme messageLabelFont] : [self.defaultTheme messageLabelFont];
+	self.messageLabel.textColor = [self.theme respondsToSelector:@selector(messageLabelTextColor)] ? [self.theme messageLabelTextColor] : [self.defaultTheme messageLabelTextColor];
 	self.messageLabel.textAlignment = NSTextAlignmentCenter;
 	self.messageLabel.numberOfLines = 0;
 	self.messageLabel.preferredMaxLayoutWidth = SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right;

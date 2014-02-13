@@ -24,6 +24,15 @@
     return [UIFont systemFontOfSize:13];
 }
 
+- (UIColor *)messageLabelTextColor {
+    return [UIColor redColor];
+}
+
+- (UIColor *)titleLabelTextColor {
+    return [UIColor purpleColor];
+}
+
+
 - (UIFont *)suggestedButtonFont {
     return [UIFont boldSystemFontOfSize:17];
 }

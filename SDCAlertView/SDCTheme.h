@@ -9,6 +9,8 @@
 
 @optional
 - (UIColor *)alertButtonTextColor;
+- (UIColor *)messageLabelTextColor;
+- (UIColor *)titleLabelTextColor;
 - (UIColor *)disabledAlertButtonTextColor;
 - (UIColor *)alertSeparatorColor;
 - (UIColor *)textFieldBackgroundViewColor;
