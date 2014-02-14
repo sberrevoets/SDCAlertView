@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 - (void)alertView:(SDCAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 
 // To make SDCAlertViewDelegate match all methods from UIAlertView, alertViewCancel: is added to this protocol. However, since SDCAlertView is not a system alert and this method will only be called if the system dismisses the alert, the delegate will never receive the alertViewCancel: message.
-- (void)alertViewCancel:(SDCAlertView *)alertView __attribute__((deprecated("This method will never be called--see SDCAlertView.h for more information.")));
+- (void)alertViewCancel:(SDCAlertView *)alertView DEPRECATED_MSG_ATTRIBUTE("This method will never be called--see SDCAlertView.h for more information.");
 
 - (void)willPresentAlertView:(SDCAlertView *)alertView;
 - (void)didPresentAlertView:(SDCAlertView *)alertView;
