@@ -122,9 +122,9 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 #pragma mark - Presenting
 
 - (void)show {
-	[self addSubview:self.alertBackgroundView];
+	[self.alertContentView layoutContent];
 	
-	self.alertContentView.buttonTitles = [self buttonTitlesForAlertContentView];
+	[self addSubview:self.alertBackgroundView];
 	[self addSubview:self.alertContentView];
 	
 	[[SDCAlertViewCoordinator sharedCoordinator] presentAlert:self];
@@ -184,6 +184,11 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 #pragma mark - Content
+
+- (void)setAlertViewStyle:(SDCAlertViewStyle)alertViewStyle {
+	_alertViewStyle = alertViewStyle;
+	[self updateAlertContentViewForStyle:alertViewStyle];
+}
 
 - (NSString *)title {
 	return self.alertContentView.title;
@@ -305,6 +310,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 		else
 			self.firstOtherButtonIndex = self.cancelButtonIndex + 1;
 	}
+	
+	self.alertContentView.buttonTitles = self.buttonTitles;
 	
 	return [self.buttonTitles indexOfObject:title];
 }
