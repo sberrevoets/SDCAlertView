@@ -151,7 +151,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	[self.primaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
 	self.primaryTextField.font = [UIFont sdc_textFieldFont];
 	self.primaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
-	self.primaryTextField.secureTextEntry = [self.delegate alertContentViewShouldUseSecureEntryForPrimaryTextField:self];
 	[self.primaryTextField becomeFirstResponder];
 }
 
@@ -267,10 +266,19 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 
 - (void)updateContentForStyle:(SDCAlertViewStyle)style {
 	switch (style) {
-		case SDCAlertViewStyleDefault:					self.numberOfTextFields = 0; break;
+		case SDCAlertViewStyleDefault:
+			self.numberOfTextFields = 0;
+			break;
 		case SDCAlertViewStylePlainTextInput:
-		case SDCAlertViewStyleSecureTextInput:			self.numberOfTextFields = 1; break;
-		case SDCAlertViewStyleLoginAndPasswordInput:	self.numberOfTextFields = 2; break;
+			self.numberOfTextFields = 1;
+			break;
+		case SDCAlertViewStyleSecureTextInput:
+			self.numberOfTextFields = 1;
+			self.primaryTextField.secureTextEntry = YES;
+			break;
+		case SDCAlertViewStyleLoginAndPasswordInput:
+			self.numberOfTextFields = 2;
+			break;
 	}
 }
 
@@ -351,8 +359,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	if ([elements containsObject:self.primaryTextField]) {
 		[self addSubview:self.textFieldBackgroundView];
 		[self.textFieldBackgroundView addSubview:self.primaryTextField];
-		
-		self.primaryTextField.secureTextEntry = [self.delegate alertContentViewShouldUseSecureEntryForPrimaryTextField:self];
 		
 		if ([elements containsObject:self.secondaryTextField]) {
 			[self.textFieldBackgroundView addSubview:self.textFieldSeparatorView];

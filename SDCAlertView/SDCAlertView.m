@@ -242,10 +242,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 #pragma mark - SDCAlertViewContentViewDelegate
 
-- (BOOL)alertContentViewShouldUseSecureEntryForPrimaryTextField:(SDCAlertViewContentView *)sender {
-	return self.alertViewStyle == SDCAlertViewStyleSecureTextInput;
-}
-
 - (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index {
 	[self tappedButtonAtIndex:[self convertAlertContentViewButtonIndexToRealButtonIndex:index]];
 }
