@@ -246,10 +246,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return self.alertViewStyle == SDCAlertViewStyleSecureTextInput;
 }
 
-- (CGFloat)maximumHeightForAlertContentView:(SDCAlertViewContentView *)sender {
-	return CGRectGetHeight(self.superview.bounds) - SDCAlertViewPadding.top - SDCAlertViewPadding.bottom;
-}
-
 - (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index {
 	[self tappedButtonAtIndex:[self convertAlertContentViewButtonIndexToRealButtonIndex:index]];
 }
@@ -323,6 +319,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
+	self.alertContentView.maximumSize = CGSizeMake(SDCAlertViewWidth, CGRectGetHeight(self.superview.bounds) - SDCAlertViewPadding.top - SDCAlertViewPadding.bottom);
+	[self.alertContentView setNeedsUpdateConstraints];
 }
 
 - (void)updateConstraints {

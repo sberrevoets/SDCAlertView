@@ -378,14 +378,17 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 }
 
 - (void)updateConstraints {
-	NSArray *elements = [self alertViewElementsToDisplay];
-	
-	if ([elements containsObject:self.contentScrollView])			[self positionContentScrollView];
-	if ([elements containsObject:self.textFieldBackgroundView])		[self positionTextFields];
-	if ([elements containsObject:self.customContentView])			[self positionCustomContentView];
-	if ([elements containsObject:self.suggestedButtonTableView])	[self positionButtons];
-	
-	[self positionAlertElements];
+	// If we don't have our maximum size yet, no need to create constraints. Auto-layout will even complain about a negative height for the scroll view.
+	if (!CGSizeEqualToSize(self.maximumSize, CGSizeZero)) {
+		NSArray *elements = [self alertViewElementsToDisplay];
+		
+		if ([elements containsObject:self.contentScrollView])			[self positionContentScrollView];
+		if ([elements containsObject:self.textFieldBackgroundView])		[self positionTextFields];
+		if ([elements containsObject:self.customContentView])			[self positionCustomContentView];
+		if ([elements containsObject:self.suggestedButtonTableView])	[self positionButtons];
+		
+		[self positionAlertElements];
+	}
 	
 	[super updateConstraints];
 }
@@ -491,20 +494,27 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	}
 }
 
+- (CGFloat)scrollViewContentHeight {
+	CGFloat titleLabelHeight = [self.titleLabel intrinsicContentSize].height;
+	CGFloat messageLabelHeight = [self.messageLabel intrinsicContentSize].height;
+	CGFloat scrollViewContentHeight = SDCAlertViewContentPadding.top + titleLabelHeight + messageLabelHeight;
+	scrollViewContentHeight += ([[self alertViewElementsToDisplay] containsObject:self.messageLabel] ? SDCAlertViewLabelSpacing : 0);
+
+	return scrollViewContentHeight;
+}
+
 - (CGFloat)heightForContentScrollView {
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
-	CGFloat scrollViewHeight = SDCAlertViewContentPadding.top + [self.titleLabel intrinsicContentSize].height + [self.messageLabel intrinsicContentSize].height;
-	if ([[self alertViewElementsToDisplay] containsObject:self.messageLabel])	scrollViewHeight += SDCAlertViewLabelSpacing;
-		
-	CGFloat maximumScrollViewHeight = [self.delegate maximumHeightForAlertContentView:self] - SDCAlertViewContentPadding.bottom;
+	CGFloat scrollViewHeight = self.maximumSize.height - SDCAlertViewContentPadding.bottom;
+	
 	if ([elements containsObject:self.suggestedButtonTableView])
-		maximumScrollViewHeight -= (self.suggestedButtonTableView.rowHeight * [self.suggestedButtonTableView numberOfRowsInSection:0] + SDCAlertViewGetSeparatorThickness());
+		scrollViewHeight -= (self.suggestedButtonTableView.rowHeight * [self.suggestedButtonTableView numberOfRowsInSection:0] + SDCAlertViewGetSeparatorThickness());
 	
 	if ([elements containsObject:self.primaryTextField])
-		maximumScrollViewHeight -= (SDCAlertViewTextFieldBackgroundViewPadding.top + SDCAlertViewTextFieldBackgroundViewPadding.bottom + SDCAlertViewPrimaryTextFieldHeight);
+		scrollViewHeight -= (SDCAlertViewTextFieldBackgroundViewPadding.top + SDCAlertViewTextFieldBackgroundViewPadding.bottom + SDCAlertViewPrimaryTextFieldHeight);
 	
-	return MIN(scrollViewHeight, maximumScrollViewHeight);
+	return MIN(scrollViewHeight, [self scrollViewContentHeight]);
 }
 
 - (void)positionAlertElements {

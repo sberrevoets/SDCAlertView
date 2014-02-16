@@ -15,8 +15,6 @@
 @protocol SDCAlertViewContentViewDelegate <NSObject>
 - (BOOL)alertContentViewShouldUseSecureEntryForPrimaryTextField:(SDCAlertViewContentView *)sender;
 
-- (CGFloat)maximumHeightForAlertContentView:(SDCAlertViewContentView *)sender;
-
 - (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index;
 - (BOOL)alertContentView:(SDCAlertViewContentView *)sender shouldEnableButtonAtIndex:(NSUInteger)index;
 - (BOOL)alertContentView:(SDCAlertViewContentView *)sender shouldDeselectButtonAtIndex:(NSUInteger)index;
@@ -31,6 +29,8 @@
 @property (nonatomic, strong) UIView *customContentView;
 
 @property (nonatomic, copy) NSArray *buttonTitles; // The last button title is always the "suggested" button
+
+@property (nonatomic) CGSize maximumSize;
 
 @property (nonatomic, weak) id <SDCAlertViewContentViewDelegate> delegate;
 
