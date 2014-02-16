@@ -66,24 +66,14 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	self = [super init];
 	
 	if (self) {
-		_title = title;
-		_message = message;
 		_delegate = delegate;
-		
 		_cancelButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
 		_firstOtherButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
-		
 		_buttonTitles = [NSMutableArray array];
 		
-		if (cancelButtonTitle) {
-			_buttonTitles[0] = cancelButtonTitle;
-			_cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
-		}
-		
-		va_list argumentList;
-		va_start(argumentList, otherButtonTitles);
-		for (NSString *buttonTitle = otherButtonTitles; buttonTitle != nil; buttonTitle = va_arg(argumentList, NSString *))
-			[self addButtonWithTitle:buttonTitle];
+		[self createContentViewWithTitle:title message:message];
+		[self updateButtonsWithCancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles];
+		[self addParallaxEffect];
 		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
 		
@@ -94,25 +84,19 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return self;
 }
 
-#pragma mark - Visibility
-
-- (BOOL)isVisible {
-	return [[SDCAlertViewCoordinator sharedCoordinator] visibleAlert] == self;
+- (void)updateButtonsWithCancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
+	if (cancelButtonTitle) {
+		_buttonTitles[SDCAlertViewDefaultFirstButtonIndex] = cancelButtonTitle;
+		_cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
+	}
+	
+	va_list argumentList;
+	va_start(argumentList, otherButtonTitles);
+	for (NSString *buttonTitle = otherButtonTitles; buttonTitle != nil; buttonTitle = va_arg(argumentList, NSString *))
+		[self addButtonWithTitle:buttonTitle];
 }
 
-#pragma mark - Presenting
-
-- (void)show {
-	[self configureForShowing];
-	[[SDCAlertViewCoordinator sharedCoordinator] presentAlert:self];
-}
-
-- (void)showWithDismissHandler:(void (^)(NSInteger))dismissHandler {
-	self.didDismissHandler = dismissHandler;
-	[self show];
-}
-
-- (void)configureForShowing {
+- (void)addParallaxEffect {
 	UIInterpolatingMotionEffect *horizontalParallax;
 	UIInterpolatingMotionEffect *verticalParallax;
 	
@@ -127,11 +111,28 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	UIMotionEffectGroup *groupMotionEffect = [[UIMotionEffectGroup alloc] init];
 	groupMotionEffect.motionEffects = @[horizontalParallax, verticalParallax];
 	[self addMotionEffect:groupMotionEffect];
+}
+
+#pragma mark - Visibility
+
+- (BOOL)isVisible {
+	return [[SDCAlertViewCoordinator sharedCoordinator] visibleAlert] == self;
+}
+
+#pragma mark - Presenting
+
+- (void)show {
+	[self addSubview:self.alertBackgroundView];
 	
-	[self insertSubview:self.alertBackgroundView atIndex:0];
-	
-	[self configureContent];
+	self.alertContentView.buttonTitles = [self buttonTitlesForAlertContentView];
 	[self addSubview:self.alertContentView];
+	
+	[[SDCAlertViewCoordinator sharedCoordinator] presentAlert:self];
+}
+
+- (void)showWithDismissHandler:(void (^)(NSInteger))dismissHandler {
+	self.didDismissHandler = dismissHandler;
+	[self show];
 }
 
 - (void)willBePresented {
@@ -184,13 +185,19 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 #pragma mark - Content
 
+- (NSString *)title {
+	return self.alertContentView.title;
+}
+
 - (void)setTitle:(NSString *)title {
-	_title = title;
 	self.alertContentView.title = title;
 }
 
+- (NSString *)message {
+	return self.alertContentView.message;
+}
+
 - (void)setMessage:(NSString *)message {
-	_message = message;
 	self.alertContentView.message = message;
 }
 
@@ -202,6 +209,21 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	_cancelButtonIndex = cancelButtonIndex;
 	if (cancelButtonIndex != SDCAlertViewDefaultFirstButtonIndex)
 		self.firstOtherButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
+}
+
+- (void)createContentViewWithTitle:(NSString *)title message:(NSString *)message {
+	self.alertContentView.title = title;
+	self.alertContentView.message = message;
+	[self updateAlertContentViewForStyle:self.alertViewStyle];
+}
+
+- (void)updateAlertContentViewForStyle:(SDCAlertViewStyle)style {
+	switch (style) {
+		case SDCAlertViewStyleDefault:					self.alertContentView.numberOfTextFields = 0; break;
+		case SDCAlertViewStylePlainTextInput:
+		case SDCAlertViewStyleSecureTextInput:			self.alertContentView.numberOfTextFields = 1; break;
+		case SDCAlertViewStyleLoginAndPasswordInput:	self.alertContentView.numberOfTextFields = 2; break;
+	}
 }
 
 - (NSArray *)buttonTitlesForAlertContentView {
@@ -220,20 +242,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (NSInteger)convertAlertContentViewButtonIndexToRealButtonIndex:(NSInteger)buttonIndex {
 	NSMutableArray *buttonTitles = [self.alertContentView.buttonTitles mutableCopy];
 	return [self.buttonTitles indexOfObjectIdenticalTo:buttonTitles[buttonIndex]];
-}
-
-- (void)configureContent {
-	self.alertContentView.title = self.title;
-	self.alertContentView.message = self.message;
-	
-	switch (self.alertViewStyle) {
-		case SDCAlertViewStyleDefault:					self.alertContentView.numberOfTextFields = 0; break;
-		case SDCAlertViewStylePlainTextInput:
-		case SDCAlertViewStyleSecureTextInput:			self.alertContentView.numberOfTextFields = 1; break;
-		case SDCAlertViewStyleLoginAndPasswordInput:	self.alertContentView.numberOfTextFields = 2; break;
-	}
-	
-	self.alertContentView.buttonTitles = [self buttonTitlesForAlertContentView];
 }
 
 #pragma mark - SDCAlertViewContentViewDelegate
