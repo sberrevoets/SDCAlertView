@@ -187,7 +187,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (void)setAlertViewStyle:(SDCAlertViewStyle)alertViewStyle {
 	_alertViewStyle = alertViewStyle;
-	[self updateAlertContentViewForStyle:alertViewStyle];
+	[self.alertContentView updateContentForStyle:alertViewStyle];
 }
 
 - (NSString *)title {
@@ -219,16 +219,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (void)createContentViewWithTitle:(NSString *)title message:(NSString *)message {
 	self.alertContentView.title = title;
 	self.alertContentView.message = message;
-	[self updateAlertContentViewForStyle:self.alertViewStyle];
-}
-
-- (void)updateAlertContentViewForStyle:(SDCAlertViewStyle)style {
-	switch (style) {
-		case SDCAlertViewStyleDefault:					self.alertContentView.numberOfTextFields = 0; break;
-		case SDCAlertViewStylePlainTextInput:
-		case SDCAlertViewStyleSecureTextInput:			self.alertContentView.numberOfTextFields = 1; break;
-		case SDCAlertViewStyleLoginAndPasswordInput:	self.alertContentView.numberOfTextFields = 2; break;
-	}
+	[self.alertContentView updateContentForStyle:self.alertViewStyle];
 }
 
 - (NSArray *)buttonTitlesForAlertContentView {

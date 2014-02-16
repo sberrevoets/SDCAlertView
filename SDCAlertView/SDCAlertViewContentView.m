@@ -44,6 +44,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
 
+@property (nonatomic) NSInteger numberOfTextFields;
 @property (nonatomic, strong) UIView *textFieldBackgroundView;
 @property (nonatomic, strong) SDCAlertViewTextField *primaryTextField;
 @property (nonatomic, strong) UIView *textFieldSeparatorView;
@@ -262,6 +263,44 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return [self isButtonAtIndexPathEnabled:indexPath tableView:tableView];
 }
 
+#pragma mark - Content
+
+- (void)updateContentForStyle:(SDCAlertViewStyle)style {
+	switch (style) {
+		case SDCAlertViewStyleDefault:					self.numberOfTextFields = 0; break;
+		case SDCAlertViewStylePlainTextInput:
+		case SDCAlertViewStyleSecureTextInput:			self.numberOfTextFields = 1; break;
+		case SDCAlertViewStyleLoginAndPasswordInput:	self.numberOfTextFields = 2; break;
+	}
+}
+
+#pragma mark - Custom Behavior
+
+- (BOOL)becomeFirstResponder {
+	[super becomeFirstResponder];
+	[self.primaryTextField becomeFirstResponder];
+	
+	return YES;
+}
+
+- (void)textFieldTextChanged:(NSNotification *)notification {
+	if (notification.object == self.primaryTextField || notification.object == self.secondaryTextField)
+		[self.suggestedButtonTableView reloadData];
+}
+
+- (BOOL)resignFirstResponder {
+	[super resignFirstResponder];
+	
+	[self.primaryTextField resignFirstResponder];
+	[self.secondaryTextField resignFirstResponder];
+	
+	return YES;
+}
+
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Layout
 
 - (NSArray *)alertViewElementsToDisplay {
@@ -294,39 +333,15 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 			if ([self.buttonTitles count] == 2)
 				[elements addObject:self.buttonSeparatorView]; // There are exactly two buttons, display the thin separator
 		}
-
+		
 		// And lastly, add the suggested button (this line is at the end because the suggested button is also at the "end" of the alert)
 		[elements addObject:self.suggestedButtonTableView];
 	}
-		
+	
 	return elements;
 }
 
-- (void)updateConstraints {
-	NSArray *elements = [self alertViewElementsToDisplay];
-	
-	if ([elements containsObject:self.contentScrollView])			[self positionContentScrollView];
-	if ([elements containsObject:self.textFieldBackgroundView])		[self positionTextFields];
-	if ([elements containsObject:self.customContentView])			[self positionCustomContentView];
-	if ([elements containsObject:self.suggestedButtonTableView])	[self positionButtons];
-	
-	[self positionAlertElements];
-	
-	[super updateConstraints];
-}
-
-#pragma mark - Custom Behavior
-
-- (BOOL)becomeFirstResponder {
-	[super becomeFirstResponder];
-	[self.primaryTextField becomeFirstResponder];
-	
-	return YES;
-}
-
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-	[super willMoveToSuperview:newSuperview];
-	
+- (void)layoutContent {
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
 	if ([elements containsObject:self.titleLabel])			[self.contentScrollView addSubview:self.titleLabel];
@@ -362,25 +377,18 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	}
 }
 
-- (void)textFieldTextChanged:(NSNotification *)notification {
-	if (notification.object == self.primaryTextField || notification.object == self.secondaryTextField)
-		[self.suggestedButtonTableView reloadData];
-}
-
-- (BOOL)resignFirstResponder {
-	[super resignFirstResponder];
+- (void)updateConstraints {
+	NSArray *elements = [self alertViewElementsToDisplay];
 	
-	[self.primaryTextField resignFirstResponder];
-	[self.secondaryTextField resignFirstResponder];
+	if ([elements containsObject:self.contentScrollView])			[self positionContentScrollView];
+	if ([elements containsObject:self.textFieldBackgroundView])		[self positionTextFields];
+	if ([elements containsObject:self.customContentView])			[self positionCustomContentView];
+	if ([elements containsObject:self.suggestedButtonTableView])	[self positionButtons];
 	
-	return YES;
+	[self positionAlertElements];
+	
+	[super updateConstraints];
 }
-
-- (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - Content View Layout
 
 - (void)positionContentScrollView {
 	NSMutableString *verticalVFL = [@"V:|-(==topSpace)" mutableCopy];

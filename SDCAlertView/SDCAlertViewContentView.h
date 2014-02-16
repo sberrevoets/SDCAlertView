@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "SDCAlertView.h" // Required for SDCAlertViewStyle
+
 @class SDCAlertViewContentView;
 
 @protocol SDCAlertViewContentViewDelegate <NSObject>
@@ -25,7 +27,6 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *message;
 
-@property (nonatomic) NSInteger numberOfTextFields;
 @property (nonatomic, readonly) NSArray *textFields;
 @property (nonatomic, strong) UIView *customContentView;
 
@@ -34,5 +35,8 @@
 @property (nonatomic, weak) id <SDCAlertViewContentViewDelegate> delegate;
 
 - (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate;
+
+- (void)layoutContent;
+- (void)updateContentForStyle:(SDCAlertViewStyle)style;
 
 @end
