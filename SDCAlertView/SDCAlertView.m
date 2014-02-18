@@ -113,6 +113,9 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 #pragma mark - Presenting
 
 - (void)show {
+	[self updateFirstButtonEnabledStatus];
+	[self monitorChangesForTextFields:self.alertContentView.textFields];
+	
 	[self.alertContentView layoutContent];
 	
 	[self addSubview:self.alertBackgroundView];
@@ -205,6 +208,17 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	self.alertContentView.title = title;
 	self.alertContentView.message = message;
 	[self.alertContentView updateContentForStyle:self.alertViewStyle];
+}
+
+- (void)monitorChangesForTextFields:(NSArray *)textFields {
+	[textFields enumerateObjectsUsingBlock:^(UITextField *textField, NSUInteger idx, BOOL *stop) {
+		[textField addTarget:self action:@selector(updateFirstButtonEnabledStatus) forControlEvents:UIControlEventEditingChanged];
+	}];
+}
+
+- (void)updateFirstButtonEnabledStatus {
+	if ([self.delegate respondsToSelector:@selector(alertViewShouldEnableFirstOtherButton:)])
+		self.alertContentView.firstOtherButtonEnabled = [self.delegate alertViewShouldEnableFirstOtherButton:self];
 }
 
 #pragma mark - SDCAlertViewContentViewDelegate

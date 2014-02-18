@@ -63,31 +63,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 @implementation SDCAlertViewContentView
 
-#pragma mark - Getter
-
-- (NSArray *)textFields {
-	NSArray *elements = [self alertViewElementsToDisplay];
-	
-	NSMutableArray *textFields = [NSMutableArray array];
-	
-	if ([elements containsObject:self.primaryTextField])	[textFields addObject:self.primaryTextField];
-	if ([elements containsObject:self.secondaryTextField])	[textFields addObject:self.secondaryTextField];
-	
-	return textFields;
-}
-
-#pragma mark - Setters
-
-- (void)setTitle:(NSString *)title {
-	_title = title;
-	self.titleLabel.text = title;
-}
-
-- (void)setMessage:(NSString *)message {
-	_message = message;
-	self.messageLabel.text = message;
-}
-
 #pragma mark - Initialization
 
 - (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate {
@@ -100,8 +75,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 		_firstOtherButtonEnabled = YES;
 		
 		[self initializeSubviews];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextChanged:) name:UITextFieldTextDidChangeNotification object:nil];
 	}
 	
 	return self;
@@ -243,6 +216,14 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 		return SDCAlertViewDefaultFirstButtonIndex;
 }
 
+- (void)setFirstOtherButtonEnabled:(BOOL)firstOtherButtonEnabled {
+	_firstOtherButtonEnabled = firstOtherButtonEnabled;
+	
+	// Reload both tables. We could try figuring out which exact tableView/indexPath combination to reload, but this is just easier...
+	[self.suggestedButtonTableView reloadData];
+	[self.otherButtonsTableView reloadData];
+}
+
 - (NSInteger)addButtonWithTitle:(NSString *)buttonTitle {
 	[self.otherButtonTitles addObject:buttonTitle];
 	return [self.otherButtonTitles indexOfObject:buttonTitle];
@@ -338,6 +319,16 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 #pragma mark - Content
 
+- (void)setTitle:(NSString *)title {
+	_title = title;
+	self.titleLabel.text = title;
+}
+
+- (void)setMessage:(NSString *)message {
+	_message = message;
+	self.messageLabel.text = message;
+}
+
 - (void)updateContentForStyle:(SDCAlertViewStyle)style {
 	switch (style) {
 		case SDCAlertViewStyleDefault:
@@ -356,18 +347,24 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	}
 }
 
-#pragma mark - Custom Behavior
+- (NSArray *)textFields {
+	NSArray *elements = [self alertViewElementsToDisplay];
+	
+	NSMutableArray *textFields = [NSMutableArray array];
+	
+	if ([elements containsObject:self.primaryTextField])	[textFields addObject:self.primaryTextField];
+	if ([elements containsObject:self.secondaryTextField])	[textFields addObject:self.secondaryTextField];
+	
+	return textFields;
+}
+
+#pragma mark - First Responder
 
 - (BOOL)becomeFirstResponder {
 	[super becomeFirstResponder];
 	[self.primaryTextField becomeFirstResponder];
 	
 	return YES;
-}
-
-- (void)textFieldTextChanged:(NSNotification *)notification {
-	if (notification.object == self.primaryTextField || notification.object == self.secondaryTextField)
-		[self.suggestedButtonTableView reloadData];
 }
 
 - (BOOL)resignFirstResponder {
@@ -377,10 +374,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	[self.secondaryTextField resignFirstResponder];
 	
 	return YES;
-}
-
-- (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Layout
