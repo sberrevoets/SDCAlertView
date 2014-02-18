@@ -232,6 +232,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return YES;
 }
 
+- (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index {
+	[self tappedButtonAtIndex:index];
+}
+
 #pragma mark - Buttons & Text Fields
 
 - (NSInteger)cancelButtonIndex {
