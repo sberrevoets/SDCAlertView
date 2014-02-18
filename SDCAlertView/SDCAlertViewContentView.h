@@ -26,7 +26,11 @@
 @property (nonatomic, readonly) NSArray *textFields;
 @property (nonatomic, strong) UIView *customContentView;
 
-@property (nonatomic, copy) NSArray *buttonTitles; // The last button title is always the "suggested" button
+@property (nonatomic, readonly) NSInteger numberOfButtons;
+@property (nonatomic) NSInteger cancelButtonIndex;
+@property (nonatomic, copy) NSString *cancelButtonTitle;
+@property (nonatomic, readonly) NSInteger firstOtherButtonIndex;
+@property (nonatomic, getter = isFirstOtherButtonEnabled) BOOL firstOtherButtonEnabled;
 
 @property (nonatomic) CGSize maximumSize;
 
@@ -36,5 +40,8 @@
 
 - (void)layoutContent;
 - (void)updateContentForStyle:(SDCAlertViewStyle)style;
+
+- (NSInteger)addButtonWithTitle:(NSString *)buttonTitle;
+- (NSString *)buttonTitleAtIndex:(NSInteger)buttonIndex;
 
 @end

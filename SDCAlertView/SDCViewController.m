@@ -19,28 +19,29 @@
 
 @implementation SDCViewController
 
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alert {
+	return NO;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0) {
-		[[[UIAlertView alloc] initWithTitle:@"Title"
+		UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Title"
 									message:@"This is a message"
-								   delegate:nil
+								   delegate:self
 						  cancelButtonTitle:@"Cancel"
-						  otherButtonTitles:@"OK", nil] show];
+						  otherButtonTitles:@"Button 1", @"Button 2", nil];
+		al.cancelButtonIndex = 2;
+		[al show];
 		
-		double delayInSeconds = 2.0;
-		dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-		dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-			[[[UIAlertView alloc] initWithTitle:@"Title"
-										message:@"This is a message"
-									   delegate:nil
-							  cancelButtonTitle:@"Cancel"
-							  otherButtonTitles:@"OK", nil] show];
-		});
-	} else if (indexPath.section == 1) {
+		NSLog(@"%d", (int)al.cancelButtonIndex);
+		NSLog(@"%d", (int)al.firstOtherButtonIndex);
+		
+
+		} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
 			[[[SDCAlertView alloc] initWithTitle:@"Title"
 										 message:@"This is a message"
-										delegate:nil
+										delegate:self
 							   cancelButtonTitle:@"Cancel"
 							   otherButtonTitles:@"OK", nil] show];
 		} else if (indexPath.row == 1) {

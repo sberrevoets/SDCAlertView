@@ -29,9 +29,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
-
-@property (nonatomic, strong) NSMutableArray *buttonTitles;
-@property (nonatomic) NSInteger firstOtherButtonIndex;
 @end
 
 @implementation SDCAlertView
@@ -67,9 +64,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	
 	if (self) {
 		_delegate = delegate;
-		_cancelButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
-		_firstOtherButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
-		_buttonTitles = [NSMutableArray array];
 		
 		[self createContentViewWithTitle:title message:message];
 		[self updateButtonsWithCancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles];
@@ -85,15 +79,12 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (void)updateButtonsWithCancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
-	if (cancelButtonTitle) {
-		_buttonTitles[SDCAlertViewDefaultFirstButtonIndex] = cancelButtonTitle;
-		_cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
-	}
+	self.alertContentView.cancelButtonTitle = cancelButtonTitle;
 	
 	va_list argumentList;
 	va_start(argumentList, otherButtonTitles);
 	for (NSString *buttonTitle = otherButtonTitles; buttonTitle != nil; buttonTitle = va_arg(argumentList, NSString *))
-		[self addButtonWithTitle:buttonTitle];
+		[self.alertContentView addButtonWithTitle:buttonTitle];
 }
 
 - (void)addParallaxEffect {
@@ -210,50 +201,13 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return self.alertContentView.customContentView;
 }
 
-- (void)setCancelButtonIndex:(NSInteger)cancelButtonIndex {
-	_cancelButtonIndex = cancelButtonIndex;
-	if (cancelButtonIndex != SDCAlertViewDefaultFirstButtonIndex)
-		self.firstOtherButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
-}
-
 - (void)createContentViewWithTitle:(NSString *)title message:(NSString *)message {
 	self.alertContentView.title = title;
 	self.alertContentView.message = message;
 	[self.alertContentView updateContentForStyle:self.alertViewStyle];
 }
 
-- (NSArray *)buttonTitlesForAlertContentView {
-	NSMutableArray *buttonTitles = [self.buttonTitles mutableCopy];
-	
-	// The cancel button is always the last button, except when there are two buttons, then it is the first (or the one on the left)
-	if (self.cancelButtonIndex != SDCAlertViewUnspecifiedButtonIndex && self.numberOfButtons != 2) {
-		NSString *cancelButtonTitle = buttonTitles[self.cancelButtonIndex];
-		[buttonTitles removeObjectIdenticalTo:cancelButtonTitle];
-		[buttonTitles addObject:cancelButtonTitle];
-	}
-	
-	return buttonTitles;
-}
-
-- (NSInteger)convertAlertContentViewButtonIndexToRealButtonIndex:(NSInteger)buttonIndex {
-	NSMutableArray *buttonTitles = [self.alertContentView.buttonTitles mutableCopy];
-	return [self.buttonTitles indexOfObjectIdenticalTo:buttonTitles[buttonIndex]];
-}
-
 #pragma mark - SDCAlertViewContentViewDelegate
-
-- (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index {
-	[self tappedButtonAtIndex:[self convertAlertContentViewButtonIndexToRealButtonIndex:index]];
-}
-
-- (BOOL)alertContentView:(SDCAlertViewContentView *)sender shouldEnableButtonAtIndex:(NSUInteger)index {
-	NSInteger convertedIndex = [self convertAlertContentViewButtonIndexToRealButtonIndex:index];
-	
-	if (convertedIndex == self.firstOtherButtonIndex && [self.delegate respondsToSelector:@selector(alertViewShouldEnableFirstOtherButton:)])
-		return [self.delegate alertViewShouldEnableFirstOtherButton:self];
-	
-	return YES;
-}
 
 - (BOOL)alertContentView:(SDCAlertViewContentView *)sender shouldDeselectButtonAtIndex:(NSUInteger)index {
 	if ([self.delegate respondsToSelector:@selector(alertView:shouldDeselectButtonAtIndex:)])
@@ -265,6 +219,22 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 #pragma mark - Buttons & Text Fields
+
+- (NSInteger)cancelButtonIndex {
+	return self.alertContentView.cancelButtonIndex;
+}
+
+- (void)setCancelButtonIndex:(NSInteger)cancelButtonIndex {
+	self.alertContentView.cancelButtonIndex = cancelButtonIndex;
+}
+
+- (NSInteger)firstOtherButtonIndex {
+	return self.alertContentView.firstOtherButtonIndex;
+}
+
+- (NSInteger)numberOfButtons {
+	return self.alertContentView.numberOfButtons;
+}
 
 - (void)tappedButtonAtIndex:(NSInteger)index {
 	if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)])
@@ -285,26 +255,11 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (NSInteger)addButtonWithTitle:(NSString *)title {
-	[self.buttonTitles addObject:title];
-	
-	if (self.firstOtherButtonIndex == SDCAlertViewUnspecifiedButtonIndex) {
-		if (self.cancelButtonIndex == SDCAlertViewUnspecifiedButtonIndex)
-			self.firstOtherButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
-		else
-			self.firstOtherButtonIndex = self.cancelButtonIndex + 1;
-	}
-	
-	self.alertContentView.buttonTitles = self.buttonTitles;
-	
-	return [self.buttonTitles indexOfObject:title];
-}
-
-- (NSInteger)numberOfButtons {
-	return [self.buttonTitles count];
+	return [self.alertContentView addButtonWithTitle:title];
 }
 
 - (NSString *)buttonTitleAtIndex:(NSInteger)index {
-	return self.buttonTitles[index];
+	return [self.alertContentView buttonTitleAtIndex:index];
 }
 
 - (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex {

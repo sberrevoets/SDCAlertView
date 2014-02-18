@@ -27,6 +27,9 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	return SDCAlertViewSeparatorThickness / [[UIScreen mainScreen] scale];
 }
 
+static NSInteger const SDCAlertViewUnspecifiedButtonIndex = -1;
+static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
+
 @interface UIFont (SDCAlertViewFonts)
 + (UIFont *)sdc_titleLabelFont;
 + (UIFont *)sdc_messageLabelFont;
@@ -49,6 +52,8 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 @property (nonatomic, strong) SDCAlertViewTextField *primaryTextField;
 @property (nonatomic, strong) UIView *textFieldSeparatorView;
 @property (nonatomic, strong) SDCAlertViewTextField *secondaryTextField;
+
+@property (nonatomic, copy) NSMutableArray *otherButtonTitles;
 
 @property (nonatomic, strong) UIView *buttonTopSeparatorView;
 @property (nonatomic, strong) UIView *buttonSeparatorView;
@@ -90,6 +95,9 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	
 	if (self) {
 		_delegate = delegate;
+		_cancelButtonIndex = SDCAlertViewUnspecifiedButtonIndex;
+		
+		_firstOtherButtonEnabled = YES;
 		
 		[self initializeSubviews];
 		
@@ -206,6 +214,77 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	self.otherButtonsTableView = [self buttonTableView];
 }
 
+#pragma mark - Buttons
+
+- (NSMutableArray *)otherButtonTitles {
+	if (!_otherButtonTitles)
+		_otherButtonTitles = [NSMutableArray array];
+	return _otherButtonTitles;
+}
+
+- (NSInteger)numberOfButtons {
+	NSInteger numberOfButtons = [self.otherButtonTitles count];
+	if (self.cancelButtonTitle)
+		return numberOfButtons + 1;
+	else
+		return numberOfButtons;
+}
+
+- (void)setCancelButtonTitle:(NSString *)cancelButtonTitle {
+	_cancelButtonTitle = cancelButtonTitle;
+	if (self.cancelButtonIndex == SDCAlertViewUnspecifiedButtonIndex)
+		self.cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
+}
+
+- (NSInteger)firstOtherButtonIndex {
+	if (self.cancelButtonTitle)
+		return SDCAlertViewDefaultFirstButtonIndex + 1;
+	else
+		return SDCAlertViewDefaultFirstButtonIndex;
+}
+
+- (NSInteger)addButtonWithTitle:(NSString *)buttonTitle {
+	[self.otherButtonTitles addObject:buttonTitle];
+	return [self.otherButtonTitles indexOfObject:buttonTitle];
+}
+
+- (NSString *)buttonTitleAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex == self.cancelButtonIndex)
+		return self.cancelButtonTitle;
+
+	return self.otherButtonTitles[buttonIndex - 1];
+}
+
+- (NSInteger)suggestedButtonIndex {
+	// The suggested button is always the cancel button, except if there are two buttons, then it's the other button
+	if ([self showsTableViewsSideBySide])
+		return self.firstOtherButtonIndex;
+	else
+		return self.cancelButtonIndex;
+}
+
+- (NSInteger)buttonIndexForButtonAtIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
+	if (tableView == self.suggestedButtonTableView) {
+		return [self suggestedButtonIndex];
+	} else {
+		if ([self showsTableViewsSideBySide]) {
+			return self.cancelButtonIndex;
+		} else {
+			if (self.cancelButtonTitle)
+				return self.firstOtherButtonIndex + indexPath.row;
+			else
+				return self.firstOtherButtonIndex + 1 + indexPath.row; // No cancel button means the first other button is suggested and at the bottom
+		}
+	}
+}
+
+- (BOOL)isButtonAtIndexPathEnabled:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
+	if ([self buttonIndexForButtonAtIndexPath:indexPath inTableView:tableView] == self.firstOtherButtonIndex)
+		return self.isFirstOtherButtonEnabled;
+	
+	return YES;
+}
+
 #pragma mark - UITableViewDataSource/Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -215,13 +294,12 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (tableView == self.suggestedButtonTableView)
 		return 1;
-	else
-		return [self.buttonTitles count] - 1;
-}
-
-- (BOOL)isButtonAtIndexPathEnabled:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
-	NSUInteger buttonIndex = (tableView == self.suggestedButtonTableView) ? [self.buttonTitles count] - 1 : indexPath.row;
-	return [self.delegate alertContentView:self shouldEnableButtonAtIndex:buttonIndex];
+	else {
+		if (self.cancelButtonTitle)
+			return [self.otherButtonTitles count];
+		else
+			return [self.otherButtonTitles count] - 1;
+	}
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -233,22 +311,18 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	cell.textLabel.textColor = [UIColor sdc_defaultTintColor];
 	cell.backgroundColor = [UIColor clearColor];
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
-	cell.textLabel.enabled = [self isButtonAtIndexPathEnabled:indexPath tableView:tableView];
+	cell.textLabel.enabled = [self isButtonAtIndexPathEnabled:indexPath inTableView:tableView];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-	
-	if (tableView == self.suggestedButtonTableView)
-		cell.textLabel.text = self.buttonTitles[[self.buttonTitles count] - 1];
-	else
-		cell.textLabel.text = self.buttonTitles[indexPath.row];
+	cell.textLabel.text = [self buttonTitleAtIndex:[self buttonIndexForButtonAtIndexPath:indexPath inTableView:tableView]];
 	
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSUInteger buttonIndex = (tableView == self.suggestedButtonTableView) ? [self.buttonTitles count] - 1 : indexPath.row;
+	NSUInteger buttonIndex = [self buttonIndexForButtonAtIndexPath:indexPath inTableView:tableView];
 	
 	if ([self.delegate respondsToSelector:@selector(alertContentView:shouldDeselectButtonAtIndex:)]) {
 		if ([self.delegate alertContentView:self shouldDeselectButtonAtIndex:buttonIndex])
@@ -259,7 +333,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-	return [self isButtonAtIndexPathEnabled:indexPath tableView:tableView];
+	return [self isButtonAtIndexPathEnabled:indexPath inTableView:tableView];
 }
 
 #pragma mark - Content
@@ -330,15 +404,15 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 	
 	if ([[self.customContentView subviews] count] > 0)		[elements addObject:self.customContentView];
 	
-	if ([self.buttonTitles count] > 0) {
+	if (self.numberOfButtons > 0) {
 		// There is at least one button, so we want to display the top separator for sure
 		[elements addObject:self.buttonTopSeparatorView];
 		
-		if ([self.buttonTitles count] > 1) {
+		if (self.numberOfButtons > 1) {
 			// There is more than one button, so also display the table view that holds the button(s) that is/are not suggested
 			[elements addObject:self.otherButtonsTableView];
 			
-			if ([self.buttonTitles count] == 2)
+			if (self.numberOfButtons == 2)
 				[elements addObject:self.buttonSeparatorView]; // There are exactly two buttons, display the thin separator
 		}
 		
@@ -462,8 +536,7 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 }
 
 - (BOOL)showsTableViewsSideBySide {
-	// Returns YES when the two buttons are shown side by side, NO when they are stacked on top of each other
-	return [self.buttonTitles count] == 2;
+	return self.numberOfButtons == 2;
 }
 
 - (void)positionButtons {
