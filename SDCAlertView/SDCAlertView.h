@@ -47,6 +47,23 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 @interface SDCAlertView : UIView
 
+/*
+ * UIAppearance methods
+ *
+ *
+ */
+@property (nonatomic, strong) UIFont *titleLabelFont UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *titleLabelTextColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIFont *messageLabelFont UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *messageLabelTextColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIFont *textFieldFont UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *textFieldTextColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIFont *suggestedButtonFont UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIFont *normalButtonFont UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *buttonTextColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *disabledButtonTextColor UI_APPEARANCE_SELECTOR;
+
+
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *message;
 

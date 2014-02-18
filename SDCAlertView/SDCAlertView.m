@@ -36,6 +36,24 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 @implementation SDCAlertView
 
++ (void) initialize {
+	[super initialize];
+	
+	SDCAlertView *appearance = [[self class] appearance];
+	
+	[appearance setTitleLabelFont:[UIFont boldSystemFontOfSize:17]];
+	[appearance setMessageLabelFont:[UIFont systemFontOfSize:14]];
+	[appearance setTextFieldFont:[UIFont systemFontOfSize:13]];
+	[appearance setSuggestedButtonFont:[UIFont boldSystemFontOfSize:17]];
+	[appearance setNormalButtonFont:[UIFont systemFontOfSize:17]];
+	[appearance setButtonTextColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1]];
+	[appearance setDisabledButtonTextColor:[UIColor colorWithRed:143/255.0 green:143/255.0 blue:143/255.0 alpha:1]];
+	[appearance setTextFieldTextColor:[UIColor blackColor]];
+	[appearance setTitleLabelTextColor:[UIColor blackColor]];
+	[appearance setMessageLabelTextColor:[UIColor blackColor]];
+	
+}
+
 #pragma mark - Getters
 
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
@@ -268,6 +286,59 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return YES;
 }
 
+#pragma mark UIAppearance method pass thrus
+
+- (void) setTitleLabelFont:(UIFont *)titleLabelFont {
+	_titleLabelFont = titleLabelFont;
+	self.alertContentView.titleLabelFont = titleLabelFont;
+}
+
+- (void) setTitleLabelTextColor:(UIColor *)titleLabelTextColor {
+	_titleLabelTextColor = titleLabelTextColor;
+	self.alertContentView.titleLabelTextColor = titleLabelTextColor;
+	
+}
+
+- (void) setMessageLabelFont:(UIFont *)messageLabelFont {
+	_messageLabelFont = messageLabelFont;
+	self.alertContentView.messageLabelFont = messageLabelFont;
+}
+
+- (void) setMessageLabelTextColor:(UIColor *)messageLabelTextColor {
+	_messageLabelTextColor = messageLabelTextColor;
+	self.alertContentView.messageLabelTextColor = messageLabelTextColor;
+}
+
+- (void) setTextFieldFont:(UIFont *)textFieldFont {
+	_textFieldFont = textFieldFont;
+	self.alertContentView.textFieldFont = textFieldFont;
+}
+
+- (void) setTextFieldTextColor:(UIColor *)textFieldTextColor {
+	_textFieldTextColor = textFieldTextColor;
+	self.alertContentView.textFieldTextColor = textFieldTextColor;
+}
+
+- (void) setNormalButtonFont:(UIFont *)normalButtonFont {
+	_normalButtonFont = normalButtonFont;
+	self.alertContentView.normalButtonFont = normalButtonFont;
+}
+
+- (void) setSuggestedButtonFont:(UIFont *)suggestedButtonFont {
+	_suggestedButtonFont = suggestedButtonFont;
+	self.alertContentView.normalButtonFont = suggestedButtonFont;
+}
+
+- (void) setButtonTextColor:(UIColor *)buttonTextColor {
+	_buttonTextColor = buttonTextColor;
+	self.alertContentView.buttonTextColor = buttonTextColor;
+}
+
+- (void) setDisabledButtonTextColor:(UIColor *)disabledButtonTextColor {
+	_disabledButtonTextColor = disabledButtonTextColor;
+	self.alertContentView.disabledButtonTextColor = disabledButtonTextColor;
+}
+
 #pragma mark - Buttons & Text Fields
 
 - (void)tappedButtonAtIndex:(NSInteger)index {
@@ -345,14 +416,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 @end
 
 @implementation UIColor (SDCAlertViewColors)
-
-+ (UIColor *)sdc_alertButtonTextColor {
-	return [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1];
-}
-
-+ (UIColor *)sdc_disabledAlertButtonTextColor {
-	return [UIColor colorWithRed:143/255.0 green:143/255.0 blue:143/255.0 alpha:1];
-}
 
 + (UIColor *)sdc_alertSeparatorColor {
 	return [UIColor colorWithWhite:0.5 alpha:0.5];
