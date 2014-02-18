@@ -36,7 +36,37 @@
 							  cancelButtonTitle:@"Cancel"
 							  otherButtonTitles:@"OK", nil] show];
 		});
-	} else if (indexPath.section == 1) {
+	} else if(indexPath.section == 1) {
+		if (indexPath.row == 0) {
+			SDCAlertView *appearance = [SDCAlertView appearance];
+			
+			[appearance setTitleLabelFont:[UIFont boldSystemFontOfSize:17]];
+			[appearance setMessageLabelFont:[UIFont systemFontOfSize:14]];
+			[appearance setTextFieldFont:[UIFont systemFontOfSize:13]];
+			[appearance setSuggestedButtonFont:[UIFont boldSystemFontOfSize:17]];
+			[appearance setNormalButtonFont:[UIFont systemFontOfSize:17]];
+			[appearance setButtonTextColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1]];
+			[appearance setDisabledButtonTextColor:[UIColor colorWithRed:143/255.0 green:143/255.0 blue:143/255.0 alpha:1]];
+			[appearance setTextFieldTextColor:[UIColor blackColor]];
+			[appearance setTitleLabelTextColor:[UIColor blackColor]];
+			[appearance setMessageLabelTextColor:[UIColor blackColor]];
+
+		}
+		else {
+			[[SDCAlertView appearance] setTitleLabelFont:[UIFont boldSystemFontOfSize:22]];
+			[[SDCAlertView appearance] setMessageLabelFont:[UIFont italicSystemFontOfSize:14]];
+			[[SDCAlertView appearance] setNormalButtonFont:[UIFont boldSystemFontOfSize:12]];
+			[[SDCAlertView appearance] setSuggestedButtonFont:[UIFont italicSystemFontOfSize:12]];
+			[[SDCAlertView appearance] setTextFieldFont:[UIFont italicSystemFontOfSize:12]];
+			[[SDCAlertView appearance] setButtonTextColor:[UIColor grayColor]];
+			[[SDCAlertView appearance] setDisabledButtonTextColor:[UIColor lightGrayColor]];
+			[[SDCAlertView appearance] setTextFieldTextColor:[UIColor purpleColor]];
+			[[SDCAlertView appearance] setTitleLabelTextColor:[UIColor greenColor]];
+			[[SDCAlertView appearance] setMessageLabelTextColor:[UIColor yellowColor]];
+
+		}
+		
+	} else if (indexPath.section == 2) {
 		if (indexPath.row == 0) {
 			[[[SDCAlertView alloc] initWithTitle:@"Title"
 										 message:@"This is a message"
@@ -68,7 +98,7 @@
 			
 			[alert show];
 		}
-	} else if (indexPath.section == 2) {
+	} else if (indexPath.section == 3) {
 		if (indexPath.row == 0) {
 			
 			SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:@"Please wait..."

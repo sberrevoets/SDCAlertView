@@ -18,6 +18,7 @@
 - (void)alertContentView:(SDCAlertViewContentView *)sender didTapButtonAtIndex:(NSUInteger)index;
 - (BOOL)alertContentView:(SDCAlertViewContentView *)sender shouldEnableButtonAtIndex:(NSUInteger)index;
 - (BOOL)alertContentView:(SDCAlertViewContentView *)sender shouldDeselectButtonAtIndex:(NSUInteger)index;
+
 @end
 
 @interface SDCAlertViewContentView : UIView <UITableViewDataSource, UITableViewDelegate>
@@ -34,5 +35,19 @@
 @property (nonatomic, weak) id <SDCAlertViewContentViewDelegate> delegate;
 
 - (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate;
+
+
+
+@property (nonatomic, strong) UIFont *titleLabelFont;
+@property (nonatomic, strong) UIColor *titleLabelTextColor;
+@property (nonatomic, strong) UIFont *messageLabelFont;
+@property (nonatomic, strong) UIColor *messageLabelTextColor;
+@property (nonatomic, strong) UIFont *textFieldFont;
+@property (nonatomic, strong) UIColor *textFieldTextColor;
+@property (nonatomic, strong) UIFont *suggestedButtonFont;
+@property (nonatomic, strong) UIFont *normalButtonFont;
+@property (nonatomic, strong) UIColor *buttonTextColor;
+@property (nonatomic, strong) UIColor *disabledButtonTextColor;
+
 
 @end
