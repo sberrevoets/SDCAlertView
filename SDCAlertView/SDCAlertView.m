@@ -66,7 +66,13 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 		_delegate = delegate;
 		
 		[self createContentViewWithTitle:title message:message];
-		[self updateButtonsWithCancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles];
+		self.alertContentView.cancelButtonTitle = cancelButtonTitle;
+		
+		va_list argumentList;
+		va_start(argumentList, otherButtonTitles);
+		for (NSString *buttonTitle = otherButtonTitles; buttonTitle != nil; buttonTitle = va_arg(argumentList, NSString *))
+			[self.alertContentView addButtonWithTitle:buttonTitle];
+		
 		[self addParallaxEffect];
 		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -76,15 +82,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	}
 	
 	return self;
-}
-
-- (void)updateButtonsWithCancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
-	self.alertContentView.cancelButtonTitle = cancelButtonTitle;
-	
-	va_list argumentList;
-	va_start(argumentList, otherButtonTitles);
-	for (NSString *buttonTitle = otherButtonTitles; buttonTitle != nil; buttonTitle = va_arg(argumentList, NSString *))
-		[self.alertContentView addButtonWithTitle:buttonTitle];
 }
 
 - (void)addParallaxEffect {

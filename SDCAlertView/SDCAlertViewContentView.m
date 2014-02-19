@@ -230,9 +230,11 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (NSString *)buttonTitleAtIndex:(NSInteger)buttonIndex {
-	if (buttonIndex == self.cancelButtonIndex)
+	if (buttonIndex == SDCAlertViewDefaultFirstButtonIndex && self.cancelButtonTitle)
 		return self.cancelButtonTitle;
-
+	else if (buttonIndex == SDCAlertViewDefaultFirstButtonIndex && !self.cancelButtonTitle)
+		return [self.otherButtonTitles firstObject];
+	
 	return self.otherButtonTitles[buttonIndex - 1];
 }
 
@@ -249,19 +251,29 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 		return [self suggestedButtonIndex];
 	} else {
 		if ([self showsTableViewsSideBySide]) {
-			return self.cancelButtonIndex;
+			return 0;
 		} else {
-			if (self.cancelButtonTitle)
+			if (self.cancelButtonIndex != SDCAlertViewDefaultFirstButtonIndex) {
+				NSInteger buttonIndex = self.firstOtherButtonIndex - 1 + indexPath.row;
+				if (buttonIndex >= self.cancelButtonIndex)
+					buttonIndex++;
+				
+				return buttonIndex;
+			} else {
 				return self.firstOtherButtonIndex + indexPath.row;
-			else
-				return self.firstOtherButtonIndex + 1 + indexPath.row; // No cancel button means the first other button is suggested and at the bottom
+			}
 		}
 	}
 }
 
 - (BOOL)isButtonAtIndexPathEnabled:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
-	if ([self buttonIndexForButtonAtIndexPath:indexPath inTableView:tableView] == self.firstOtherButtonIndex)
-		return self.isFirstOtherButtonEnabled;
+	if (self.cancelButtonIndex == SDCAlertViewDefaultFirstButtonIndex || [self showsTableViewsSideBySide]) {
+		if ([self buttonIndexForButtonAtIndexPath:indexPath inTableView:tableView] == self.firstOtherButtonIndex)
+			return self.isFirstOtherButtonEnabled;
+	} else {
+		if ([self buttonIndexForButtonAtIndexPath:indexPath inTableView:tableView] == SDCAlertViewDefaultFirstButtonIndex)
+			return self.isFirstOtherButtonEnabled;
+	}
 	
 	return YES;
 }
@@ -296,8 +308,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSInteger buttonIndex = [self buttonIndexForButtonAtIndexPath:indexPath inTableView:tableView];
+
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-	cell.textLabel.text = [self buttonTitleAtIndex:[self buttonIndexForButtonAtIndexPath:indexPath inTableView:tableView]];
+	cell.textLabel.text = [self buttonTitleAtIndex:buttonIndex];
 	
 	return cell;
 }
