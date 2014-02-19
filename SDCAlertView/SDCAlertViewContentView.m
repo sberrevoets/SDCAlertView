@@ -150,6 +150,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	self.secondaryTextField.font = [UIFont sdc_textFieldFont];
 	self.secondaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
 	self.secondaryTextField.secureTextEntry = YES;
+	self.secondaryTextField.placeholder = NSLocalizedString(@"Password", nil);
 }
 
 - (UIView *)separatorView {
@@ -354,9 +355,11 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 		case SDCAlertViewStyleSecureTextInput:
 			self.numberOfTextFields = 1;
 			self.primaryTextField.secureTextEntry = YES;
+			self.primaryTextField.placeholder = nil;
 			break;
 		case SDCAlertViewStyleLoginAndPasswordInput:
 			self.numberOfTextFields = 2;
+			self.primaryTextField.placeholder = NSLocalizedString(@"Login", nil);
 			break;
 	}
 }
@@ -444,9 +447,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 		if ([elements containsObject:self.secondaryTextField]) {
 			[self.textFieldBackgroundView addSubview:self.textFieldSeparatorView];
 			[self.textFieldBackgroundView addSubview:self.secondaryTextField];
-			
-			self.primaryTextField.placeholder = NSLocalizedString(@"Login", nil);
-			self.secondaryTextField.placeholder = NSLocalizedString(@"Password", nil);
 		}
 	}
 	
