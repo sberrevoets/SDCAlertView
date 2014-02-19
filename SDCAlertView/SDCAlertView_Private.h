@@ -14,16 +14,11 @@
 FOUNDATION_EXPORT CGFloat const SDCAlertViewWidth;
 
 @interface SDCAlertView (Private)
-
-@property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
-@property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
-
 - (void)willBePresented;
 - (void)wasPresented;
 
 - (void)willBeDismissedWithButtonIndex:(NSInteger)buttonIndex;
 - (void)wasDismissedWithButtonIndex:(NSInteger)buttonIndex;
-
 @end
 
 @interface UIColor (SDCAlertViewColors)
