@@ -171,7 +171,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	tableView.dataSource = self;
 	tableView.backgroundColor = [UIColor clearColor];
 	tableView.separatorInset = UIEdgeInsetsZero;
-	tableView.separatorColor = [UIColor sdc_alertSeparatorColor];
+	tableView.separatorColor = [UIColor clearColor];
 	tableView.scrollEnabled = NO;
 	return tableView;
 }
@@ -395,6 +395,16 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 #pragma mark - Layout
 
+- (void)prepareForShowing {
+	[self updateTableViewSeparatorVisibility];
+	[self createViewHierarchy];
+}
+
+- (void)updateTableViewSeparatorVisibility {
+	if (![self showsTableViewsSideBySide])
+		self.otherButtonsTableView.separatorColor = [UIColor sdc_alertSeparatorColor];
+}
+
 - (NSArray *)alertViewElementsToDisplay {
 	NSMutableArray *elements = [NSMutableArray array];
 	
@@ -433,7 +443,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return elements;
 }
 
-- (void)layoutContent {
+- (void)createViewHierarchy {
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
 	if ([elements containsObject:self.titleLabel])			[self.contentScrollView addSubview:self.titleLabel];

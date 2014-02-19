@@ -113,7 +113,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	[self updateFirstButtonEnabledStatus];
 	[self monitorChangesForTextFields:self.alertContentView.textFields];
 	
-	[self.alertContentView layoutContent];
+	[self.alertContentView prepareForShowing];
 	
 	[self addSubview:self.alertBackgroundView];
 	[self addSubview:self.alertContentView];

@@ -37,8 +37,8 @@
 
 - (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate;
 
-- (void)layoutContent;
 - (void)updateContentForStyle:(SDCAlertViewStyle)style;
+- (void)prepareForShowing;
 
 - (NSInteger)addButtonWithTitle:(NSString *)buttonTitle;
 - (NSString *)buttonTitleAtIndex:(NSInteger)buttonIndex;
