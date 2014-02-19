@@ -37,23 +37,24 @@ If you're not using Cocoapods, you need at least:
 
 - SDCAlertView.{h,m}
 - SDCAlertView_Private.h
-- SDCAlertViewViewController.{h,m}
+- SDCAlertViewCoordinator.{h,m}
+- SDCAlertViewController.{h,m}
 - SDCAlertViewContentView.{h,m}
 - SDCAlertViewBackgroundView.{h,m}
-- SDCAlertViewBackground.png (for older generation iPads)
-- SDCAlertViewBackground&#064;2x.png
 
 The project also depends on [RBBAnimation](https://github.com/robb/RBBAnimation) and [SDCAutoLayout](https://github.com/Scott90/SDCAutoLayout). These dependencies are handled for you if you use Cocoapods.
 
 Usage
 =====
-`SDCAlertView` is for use in iOS 7 only. It will not work properly on iOS 6.1 or below. sUsing `SDCAlertView` is simple: just import SDCAlertView.h and use it as you would `UIAlertView`. In addition to that, `SDCAlertView` has some added functionality, including:
+`SDCAlertView` is for use in iOS 7 only. It will not work properly on iOS 6.1 or below. Using `SDCAlertView` is simple: just import SDCAlertView.h and use it as you would `UIAlertView`. In addition to that, `SDCAlertView` has some added functionality, including:
 
 - `contentView`. The `contentView` property can be used to add custom views to the alert. See SDCAlertView.h for details on how to use this. For sample uses, see [SDCViewController](SDCAlertView/SDCViewController.m). To use the `contentView` property, you need to use AutoLayout. [`SDCAutoLayout`](https://github.com/Scott90/SDCAutoLayout), automatically included with this project, is an `NSLayoutConstraint` that makes creating constraints a little easier.
 
 - Block syntax. Some delegate methods have block alternatives as settable properties that you can use for simple implementations. There's also a convenient `showWithDismissHandler:` method to make handling a dismissal even easier.
 
 - Additional delegate methods: `alertView:shouldDismissWithButtonIndex:` and `alertView:shouldDeselectButtonWithIndex:`
+
+- Theme support (v1.1+). You can style (with limitations) your alert to your liking.
 
 Questions
 =========
@@ -64,6 +65,8 @@ Credits
 
 Some credits are in order:
 
-- Robert Böhnke ([@robb](https://github.com/robb)) - [RBBAnimation](https://github.com/robb/RBBAnimation)
+- Robert Böhnke ([@robb](https://github.com/robb)): [RBBAnimation](https://github.com/robb/RBBAnimation)
 - Lee McDermott ([@lmcd](https://github.com/lmcd)) for reverse-engineering the showing and dismissing animations.
-- César Castillo ([@JagCesar](https://github.com/JagCesar)) for the great idea of using a `UIToolbar` for easy live blurring
+- César Castillo ([@JagCesar](https://github.com/JagCesar)) for the great idea of using a `UIToolbar` for easy live blurring (used in earlier versions of SDCAlertView).
+
+And everyone else who contributed by reporting issues, creating pull requests, or in some other way!
