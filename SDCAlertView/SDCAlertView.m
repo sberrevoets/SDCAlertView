@@ -21,9 +21,6 @@ static CGFloat const SDCAlertViewCornerRadius = 7;
 
 static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
-static NSInteger const SDCAlertViewUnspecifiedButtonIndex = -1;
-static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
-
 #pragma mark - SDCAlertView
 
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
@@ -308,12 +305,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (void)positionSelf {
 	[self sdc_pinWidth:SDCAlertViewWidth];
 	[self sdc_centerInSuperview];
-}
-
-#pragma mark - Cleanup
-
-- (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
