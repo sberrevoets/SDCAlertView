@@ -13,37 +13,29 @@
 #import "SDCAlertView.h"
 #import "UIView+SDCAutoLayout.h"
 
-@interface SDCViewController () <UITableViewDelegate>
+@interface SDCViewController () <UITableViewDelegate, UIAlertViewDelegate, SDCAlertViewDelegate>
 
 @end
 
 @implementation SDCViewController
 
-- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alert {
-	return NO;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0) {
-		UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Title"
+		UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Title"
 									message:@"This is a message"
 								   delegate:self
 						  cancelButtonTitle:@"Cancel"
 						  otherButtonTitles:@"Button 1", @"Button 2", nil];
-		al.cancelButtonIndex = 2;
-		[al show];
+		[a show];
 		
-		NSLog(@"%d", (int)al.cancelButtonIndex);
-		NSLog(@"%d", (int)al.firstOtherButtonIndex);
-		
-
 		} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
-			[[[SDCAlertView alloc] initWithTitle:@"Title"
-										 message:@"This is a message"
-										delegate:self
-							   cancelButtonTitle:@"Cancel"
-							   otherButtonTitles:@"OK", nil] show];
+			SDCAlertView *a = [[SDCAlertView alloc] initWithTitle:@"Title"
+														  message:@"This is a message"
+														 delegate:self
+												cancelButtonTitle:@"Cancel"
+												otherButtonTitles:@"OK", nil];
+			[a show];
 		} else if (indexPath.row == 1) {
 			[[[SDCAlertView alloc] initWithTitle:@"Title"
 										 message:@"This is a message"
