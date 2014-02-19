@@ -30,14 +30,6 @@ CGFloat SDCAlertViewGetSeparatorThickness() {
 static NSInteger const SDCAlertViewUnspecifiedButtonIndex = -1;
 static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
-@interface UIFont (SDCAlertViewFonts)
-+ (UIFont *)sdc_titleLabelFont;
-+ (UIFont *)sdc_messageLabelFont;
-+ (UIFont *)sdc_textFieldFont;
-+ (UIFont *)sdc_suggestedButtonFont;
-+ (UIFont *)sdc_normalButtonFont;
-@end
-
 @interface SDCAlertViewTextField : UITextField
 @property (nonatomic) UIEdgeInsets textInsets;
 @end
@@ -97,7 +89,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (void)initializeTitleLabel {
 	self.titleLabel = [[UILabel alloc] init];
 	[self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.titleLabel.font = [UIFont sdc_titleLabelFont];
 	self.titleLabel.textAlignment = NSTextAlignmentCenter;
 	self.titleLabel.numberOfLines = 0;
 	self.titleLabel.preferredMaxLayoutWidth = SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right;
@@ -106,7 +97,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (void)initializeMessageLabel {
 	self.messageLabel = [[UILabel alloc] init];
 	[self.messageLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.messageLabel.font = [UIFont sdc_messageLabelFont];
 	self.messageLabel.textAlignment = NSTextAlignmentCenter;
 	self.messageLabel.numberOfLines = 0;
 	self.messageLabel.preferredMaxLayoutWidth = SDCAlertViewWidth - SDCAlertViewContentPadding.left - SDCAlertViewContentPadding.right;
@@ -130,7 +120,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (void)initializePrimaryTextField {
 	self.primaryTextField = [[SDCAlertViewTextField alloc] init];
 	[self.primaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.primaryTextField.font = [UIFont sdc_textFieldFont];
 	self.primaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
 	[self.primaryTextField becomeFirstResponder];
 }
@@ -147,7 +136,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (void)initializeSecondaryTextField {
 	self.secondaryTextField = [[SDCAlertViewTextField alloc] init];
 	[self.secondaryTextField setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.secondaryTextField.font = [UIFont sdc_textFieldFont];
 	self.secondaryTextField.textInsets = SDCAlertViewTextFieldTextInsets;
 	self.secondaryTextField.secureTextEntry = YES;
 	self.secondaryTextField.placeholder = NSLocalizedString(@"Password", nil);
@@ -298,11 +286,11 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (tableView == self.suggestedButtonTableView)
-		cell.textLabel.font = [UIFont sdc_suggestedButtonFont];
+		cell.textLabel.font = self.suggestedButtonFont;
 	else
-		cell.textLabel.font = [UIFont sdc_normalButtonFont];
+		cell.textLabel.font = self.normalButtonFont;
 	
-	cell.textLabel.textColor = [UIColor sdc_defaultTintColor];
+	cell.textLabel.textColor = self.buttonTextColor;
 	cell.backgroundColor = [UIColor clearColor];
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
 	cell.textLabel.enabled = [self isButtonAtIndexPathEnabled:indexPath inTableView:tableView];
@@ -659,6 +647,58 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalVFL options:0 metrics:metrics views:views]];
 }
 
+#pragma mark - UIAppearance
+
+- (UIFont *)titleLabelFont {
+	return self.titleLabel.font;
+}
+
+- (void)setTitleLabelFont:(UIFont *)titleLabelFont {
+	self.titleLabel.font = titleLabelFont;
+}
+
+- (UIColor *)titleLabelTextColor {
+	return self.titleLabel.textColor;
+}
+
+- (void)setTitleLabelTextColor:(UIColor *)titleLabelTextColor {
+	self.titleLabel.textColor = titleLabelTextColor;
+}
+
+- (UIFont *)messageLabelFont {
+	return self.messageLabel.font;
+}
+
+- (void)setMessageLabelFont:(UIFont *)messageLabelFont {
+	self.messageLabel.font = messageLabelFont;
+}
+
+- (UIColor *)messageLabelTextColor {
+	return self.messageLabel.textColor;
+}
+
+- (void)setMessageLabelTextColor:(UIColor *)messageLabelTextColor {
+	self.messageLabel.textColor = messageLabelTextColor;
+}
+
+- (UIFont *)textFieldFont {
+	return self.primaryTextField.font;
+}
+
+- (void)setTextFieldFont:(UIFont *)textFieldFont {
+	self.primaryTextField.font = textFieldFont;
+	self.secondaryTextField.font = textFieldFont;
+}
+
+- (UIColor *)textFieldTextColor {
+	return self.primaryTextField.textColor;
+}
+
+- (void)setTextFieldTextColor:(UIColor *)textFieldTextColor {
+	self.primaryTextField.textColor = textFieldTextColor;
+	self.secondaryTextField.textColor = textFieldTextColor;
+}
+
 @end
 
 @implementation SDCAlertViewTextField
@@ -669,30 +709,6 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
 	return [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, self.textInsets)];
-}
-
-@end
-
-@implementation UIFont (SDCAlertViewFonts)
-
-+ (UIFont *)sdc_titleLabelFont {
-	return [UIFont boldSystemFontOfSize:17];
-}
-
-+ (UIFont *)sdc_messageLabelFont {
-	return [UIFont systemFontOfSize:14];
-}
-
-+ (UIFont *)sdc_textFieldFont {
-	return [UIFont systemFontOfSize:13];
-}
-
-+ (UIFont *)sdc_suggestedButtonFont {
-	return [UIFont boldSystemFontOfSize:17];
-}
-
-+ (UIFont *)sdc_normalButtonFont {
-	return [UIFont systemFontOfSize:17];
 }
 
 @end

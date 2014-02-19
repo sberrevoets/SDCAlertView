@@ -30,6 +30,24 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 @implementation SDCAlertView
 
+#pragma mark - UIAppearance
+
++ (void)initialize {
+	[super initialize];
+	
+	SDCAlertView *appearance = [self appearance];
+	
+	[appearance setTitleLabelFont:[UIFont boldSystemFontOfSize:17]];
+	[appearance setMessageLabelFont:[UIFont systemFontOfSize:14]];
+	[appearance setTextFieldFont:[UIFont systemFontOfSize:13]];
+	[appearance setSuggestedButtonFont:[UIFont boldSystemFontOfSize:17]];
+	[appearance setNormalButtonFont:[UIFont systemFontOfSize:17]];
+	[appearance setButtonTextColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1]];
+	[appearance setTextFieldTextColor:[UIColor darkTextColor]];
+	[appearance setTitleLabelTextColor:[UIColor darkTextColor]];
+	[appearance setMessageLabelTextColor:[UIColor darkTextColor]];
+}
+
 #pragma mark - Getters
 
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
@@ -309,11 +327,83 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 @end
 
-@implementation UIColor (SDCAlertViewColors)
+@implementation SDCAlertView (UIAppearance)
 
-+ (UIColor *)sdc_defaultTintColor {
-	return [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1];
+- (UIFont *)titleLabelFont {
+	return self.alertContentView.titleLabelFont;
 }
+
+- (void)setTitleLabelFont:(UIFont *)titleLabelFont {
+	self.alertContentView.titleLabelFont = titleLabelFont;
+}
+
+- (UIColor *)titleLabelTextColor {
+	return self.alertContentView.titleLabelTextColor;
+}
+
+- (void)setTitleLabelTextColor:(UIColor *)titleLabelTextColor {
+	self.alertContentView.titleLabelTextColor = titleLabelTextColor;
+}
+
+- (UIFont *)messageLabelFont {
+	return self.alertContentView.messageLabelFont;
+}
+
+- (void)setMessageLabelFont:(UIFont *)messageLabelFont {
+	self.alertContentView.messageLabelFont = messageLabelFont;
+}
+
+- (UIColor *)messageLabelTextColor {
+	return self.alertContentView.messageLabelTextColor;
+}
+
+- (void)setMessageLabelTextColor:(UIColor *)messageLabelTextColor {
+	self.alertContentView.messageLabelTextColor = messageLabelTextColor;
+}
+
+- (UIFont *)textFieldFont {
+	return self.alertContentView.textFieldFont;
+}
+
+- (void)setTextFieldFont:(UIFont *)textFieldFont {
+	self.alertContentView.textFieldFont = textFieldFont;
+}
+
+- (UIColor *)textFieldTextColor {
+	return self.alertContentView.textFieldTextColor;
+}
+
+- (void)setTextFieldTextColor:(UIColor *)textFieldTextColor {
+	self.alertContentView.textFieldTextColor = textFieldTextColor;
+}
+
+- (UIFont *)suggestedButtonFont {
+	return self.alertContentView.suggestedButtonFont;
+}
+
+- (void)setSuggestedButtonFont:(UIFont *)suggestedButtonFont {
+	self.alertContentView.suggestedButtonFont = suggestedButtonFont;
+}
+
+- (UIFont *)normalButtonFont {
+	return self.alertContentView.normalButtonFont;
+}
+
+- (void)setNormalButtonFont:(UIFont *)normalButtonFont {
+	self.alertContentView.normalButtonFont = normalButtonFont;
+}
+
+- (UIColor *)buttonTextColor {
+	return self.alertContentView.buttonTextColor;
+}
+
+- (void)setButtonTextColor:(UIColor *)buttonTextColor {
+	self.alertContentView.buttonTextColor = buttonTextColor;
+}
+
+@end
+
+@implementation UIColor (SDCAlertViewColors)
 
 + (UIColor *)sdc_alertSeparatorColor {
 	return [UIColor colorWithWhite:0.5 alpha:0.5];

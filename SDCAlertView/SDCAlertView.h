@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 /**
  *  Convenience method that sets the dismiss block while simultaneously showing the alert.
-*/
+ */
 - (void)showWithDismissHandler:(void(^)(NSInteger buttonIndex))dismissHandler;
 
 - (NSInteger)addButtonWithTitle:(NSString *)title;
@@ -134,5 +134,19 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
 
 - (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex;
+
+@end
+
+@interface SDCAlertView (UIAppearance)
+
+@property (nonatomic, strong) UIFont *titleLabelFont			UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *titleLabelTextColor		UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIFont *messageLabelFont			UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *messageLabelTextColor	UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIFont *textFieldFont				UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *textFieldTextColor		UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIFont *suggestedButtonFont		UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIFont *normalButtonFont			UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *buttonTextColor			UI_APPEARANCE_SELECTOR;
 
 @end

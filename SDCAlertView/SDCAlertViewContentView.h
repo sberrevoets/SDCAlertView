@@ -43,4 +43,18 @@
 - (NSInteger)addButtonWithTitle:(NSString *)buttonTitle;
 - (NSString *)buttonTitleAtIndex:(NSInteger)buttonIndex;
 
+/*
+ * Appearance properties
+ */
+
+@property (nonatomic, strong) UIFont *titleLabelFont;
+@property (nonatomic, strong) UIColor *titleLabelTextColor;
+@property (nonatomic, strong) UIFont *messageLabelFont;
+@property (nonatomic, strong) UIColor *messageLabelTextColor;
+@property (nonatomic, strong) UIFont *textFieldFont;
+@property (nonatomic, strong) UIColor *textFieldTextColor;
+@property (nonatomic, strong) UIFont *suggestedButtonFont;
+@property (nonatomic, strong) UIFont *normalButtonFont;
+@property (nonatomic, strong) UIColor *buttonTextColor;
+
 @end

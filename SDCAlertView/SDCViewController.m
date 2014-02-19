@@ -144,4 +144,30 @@
 		[timer invalidate];
 }
 
+- (IBAction)changeAppearance:(UISegmentedControl *)sender {
+	if (sender.selectedSegmentIndex == 0) {
+		[[SDCAlertView appearance] setTitleLabelFont:[UIFont boldSystemFontOfSize:17]];
+		[[SDCAlertView appearance] setMessageLabelFont:[UIFont systemFontOfSize:14]];
+		[[SDCAlertView appearance] setTextFieldFont:[UIFont systemFontOfSize:13]];
+		[[SDCAlertView appearance] setSuggestedButtonFont:[UIFont boldSystemFontOfSize:17]];
+		[[SDCAlertView appearance] setNormalButtonFont:[UIFont systemFontOfSize:17]];
+		[[SDCAlertView appearance] setButtonTextColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1]];
+		[[SDCAlertView appearance] setTextFieldTextColor:[UIColor blackColor]];
+		[[SDCAlertView appearance] setTitleLabelTextColor:[UIColor blackColor]];
+		[[SDCAlertView appearance] setMessageLabelTextColor:[UIColor blackColor]];
+	}
+	else {
+		[[SDCAlertView appearance] setTitleLabelFont:[UIFont boldSystemFontOfSize:22]];
+		[[SDCAlertView appearance] setMessageLabelFont:[UIFont italicSystemFontOfSize:14]];
+		[[SDCAlertView appearance] setNormalButtonFont:[UIFont boldSystemFontOfSize:12]];
+		[[SDCAlertView appearance] setSuggestedButtonFont:[UIFont italicSystemFontOfSize:12]];
+		[[SDCAlertView appearance] setTextFieldFont:[UIFont italicSystemFontOfSize:12]];
+		[[SDCAlertView appearance] setButtonTextColor:[UIColor grayColor]];
+		[[SDCAlertView appearance] setTextFieldTextColor:[UIColor purpleColor]];
+		[[SDCAlertView appearance] setTitleLabelTextColor:[UIColor greenColor]];
+		[[SDCAlertView appearance] setMessageLabelTextColor:[UIColor yellowColor]];
+		
+	}
+}
+
 @end
