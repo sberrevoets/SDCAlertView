@@ -215,7 +215,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (NSInteger)addButtonWithTitle:(NSString *)buttonTitle {
 	[self.otherButtonTitles addObject:buttonTitle];
-	return [self.otherButtonTitles indexOfObject:buttonTitle];
+	return self.firstOtherButtonIndex + [self.otherButtonTitles indexOfObject:buttonTitle];
 }
 
 - (NSString *)buttonTitleAtIndex:(NSInteger)buttonIndex {
