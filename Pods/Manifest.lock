@@ -1,0 +1,16 @@
+PODS:
+  - OCMock (2.2.2)
+  - RBBAnimation (0.3.0)
+  - SDCAutoLayout (2.0)
+
+DEPENDENCIES:
+  - OCMock (~> 2.2)
+  - RBBAnimation (~> 0.3)
+  - SDCAutoLayout (~> 2.0)
+
+SPEC CHECKSUMS:
+  OCMock: ffba68873fd32cfd35d885bddad23bfa816da4a3
+  RBBAnimation: e7f31ed62f760f3caf120b5d943267bd9a8e1f64
+  SDCAutoLayout: fbb30550a36f244223ea40560549372eccd1c4c7
+
+COCOAPODS: 0.29.0
