@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+FOUNDATION_EXPORT CGFloat const SDCAlertViewWidth;
+
 typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
     SDCAlertViewStyleDefault = 0,
     SDCAlertViewStyleSecureTextInput,

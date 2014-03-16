@@ -11,8 +11,6 @@
 @class SDCAlertViewBackgroundView;
 @class SDCAlertViewContentView;
 
-FOUNDATION_EXPORT CGFloat const SDCAlertViewWidth;
-
 @interface SDCAlertView (Private)
 - (void)willBePresented;
 - (void)wasPresented;
