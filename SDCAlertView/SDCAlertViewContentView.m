@@ -9,6 +9,7 @@
 #import "SDCAlertViewContentView.h"
 
 #import "SDCAlertView_Private.h"
+#import "SDCIntrinsicallySizedView.h"
 #import "UIView+SDCAutoLayout.h"
 
 static UIEdgeInsets const SDCAlertViewContentPadding = {19, 15, 18.5, 15};
@@ -129,7 +130,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (void)initializeCustomContentView {
-	self.customContentView = [[UIView alloc] init];
+	self.customContentView = [[SDCIntrinsicallySizedView alloc] init];
 	[self.customContentView setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 

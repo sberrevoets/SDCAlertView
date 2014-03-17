@@ -99,12 +99,8 @@
 			[spinner startAnimating];
 			[alert.contentView addSubview:spinner];
 			
-			[spinner sdc_horizontallyCenterInSuperview];
+			[spinner sdc_centerInSuperview];
 			
-			[alert.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[spinner]|"
-																					  options:0
-																					  metrics:nil
-																						views:NSDictionaryOfVariableBindings(spinner)]];
 			[alert show];
 		} else if (indexPath.row == 2) {
 			SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:@"Cupertino, CA"
@@ -120,13 +116,8 @@
 			[alert.contentView addSubview:mapView];
 			
 			[mapView sdc_pinWidthToWidthOfView:alert.contentView];
-			[mapView sdc_horizontallyCenterInSuperview];
+			[mapView sdc_centerInSuperview];
 			[mapView sdc_pinHeight:120];
-			
-			[alert.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mapView]|"
-																					  options:0
-																					  metrics:nil
-																						views:NSDictionaryOfVariableBindings(mapView)]];
 			
 			[alert show];
 		}
