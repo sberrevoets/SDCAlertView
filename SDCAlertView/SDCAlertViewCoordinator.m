@@ -100,7 +100,7 @@
 	[self.alerts removeObject:alert];
 	SDCAlertView *nextAlert = [self.alerts lastObject];
 	
-	// UIAlertView doesn't send willPresentAlert: when it's taken off the queue, so we don't do that either:
+	// UIAlertView doesn't send willPresentAlert: to an alert that's being dequeued
 	// [nextAlert willBePresented];
 	[alert willBeDismissedWithButtonIndex:buttonIndex];
 	
