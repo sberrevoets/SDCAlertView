@@ -166,7 +166,9 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	[CATransaction begin];
 	[CATransaction setCompletionBlock:^{
 		self.presentingFirstAlert = NO;
-		completionHandler();
+		
+		if (completionHandler)
+			completionHandler();
 	}];
 	
 	[self applyPresentingAnimationsToAlert:alert];
