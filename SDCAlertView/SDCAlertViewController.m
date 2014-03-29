@@ -142,22 +142,20 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 
 - (void)replaceAlert:(SDCAlertView *)oldAlert
 		   withAlert:(SDCAlertView *)newAlert
-	 showDimmingView:(BOOL)showDimmingView
    hideOldCompletion:(void (^)(void))hideOldCompletionHandler
    showNewCompletion:(void (^)(void))showNewCompletionHandler {
-	if (!newAlert)
-		self.dismissingLastAlert = YES;
+	self.dismissingLastAlert = newAlert == nil;
 	
-	[self updateDimmingViewVisibility:showDimmingView];
+	[self updateDimmingViewVisibility:!self.isDismissingLastAlert];
 	
 	if (oldAlert)
-		[self dismissAlert:oldAlert keepDimmingView:showDimmingView completionHandler:hideOldCompletionHandler];
+		[self dismissAlert:oldAlert completionHandler:hideOldCompletionHandler];
 	
 	if (newAlert)
-		[self showAlert:newAlert withDimmingView:showDimmingView completion:showNewCompletionHandler];
+		[self showAlert:newAlert completion:showNewCompletionHandler];
 }
 
-- (void)showAlert:(SDCAlertView *)alert withDimmingView:(BOOL)showDimmingView completion:(void(^)(void))completionHandler {
+- (void)showAlert:(SDCAlertView *)alert completion:(void(^)(void))completionHandler {
 	[alert becomeFirstResponder];
 	
 	[self.alertContainerView addSubview:alert];
@@ -175,15 +173,12 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	[CATransaction commit];
 }
 
-- (void)dismissAlert:(SDCAlertView *)alert keepDimmingView:(BOOL)keepDimmingView completionHandler:(void(^)(void))completionHandler {
+- (void)dismissAlert:(SDCAlertView *)alert completionHandler:(void(^)(void))completionHandler {
 	[alert resignFirstResponder];
 	
 	[CATransaction begin];
 	[CATransaction setCompletionBlock:^{
 		[alert removeFromSuperview];
-		
-		if (!keepDimmingView)
-			[self.dimmingView removeFromSuperview];
 		
 		if (completionHandler)
 			completionHandler();

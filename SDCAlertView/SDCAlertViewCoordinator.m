@@ -80,7 +80,6 @@
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
 	[alertViewController replaceAlert:oldAlert
 							withAlert:newAlert
-					  showDimmingView:YES
 					hideOldCompletion:nil
 					showNewCompletion:^{
 						[newAlert wasPresented];
@@ -113,7 +112,6 @@
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
 	[alertViewController replaceAlert:alert
 							withAlert:nextAlert
-					  showDimmingView:(nextAlert != nil)
 					hideOldCompletion:^{
 						if (!nextAlert)
 							[self returnToUserWindow];
