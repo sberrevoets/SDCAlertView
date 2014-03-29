@@ -78,15 +78,16 @@
 	return YES;
 }
 
-- (BOOL)enqueueDismissingAnimationOfAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
+- (BOOL)enqueueDismissingAnimationOfAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
 	if (!self.presentingAlert && !self.dismissingAlert)
 		return NO;
 	
-	NSMethodSignature *methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(dismissAlert:withButtonIndex:)];
+	NSMethodSignature *methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(dismissAlert:withButtonIndex:animated:)];
 	NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-	[invocation setSelector:@selector(dismissAlert:withButtonIndex:)];
+	[invocation setSelector:@selector(dismissAlert:withButtonIndex:animated:)];
 	[invocation setArgument:&alert atIndex:2];
 	[invocation setArgument:&buttonIndex atIndex:3];
+	[invocation setArgument:&animated atIndex:4];
 	[invocation retainArguments];
 	
 	[self.transitionQueue addObject:invocation];
@@ -103,7 +104,10 @@
 
 #pragma mark - Presenting & Dismissing
 
-- (void)showAlert:(SDCAlertView *)newAlert replacingAlert:(SDCAlertView *)oldAlert completion:(void(^)())completionHandler {
+- (void)showAlert:(SDCAlertView *)newAlert
+   replacingAlert:(SDCAlertView *)oldAlert
+		 animated:(BOOL)animated
+	   completion:(void(^)())completionHandler {
 	if (!newAlert)
 		[self resaturateUI];
 	
@@ -113,6 +117,7 @@
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
 	[alertViewController replaceAlert:oldAlert
 							withAlert:newAlert
+							 animated:animated
 						   completion:^{
 							   self.presentingAlert = nil;
 							   self.visibleAlert = newAlert;
@@ -137,14 +142,14 @@
 		[self makeAlertWindowKeyWindow];
 	
 	[alert willBePresented];
-	[self showAlert:alert replacingAlert:self.visibleAlert completion:^{
+	[self showAlert:alert replacingAlert:self.visibleAlert animated:YES completion:^{
 		[alert wasPresented];
 	}];
 }
 
-- (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
+- (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
 	if ([self dismissAlertImmediately:alert withButtonIndex:buttonIndex] ||
-		[self enqueueDismissingAnimationOfAlert:alert withButtonIndex:buttonIndex])
+		[self enqueueDismissingAnimationOfAlert:alert withButtonIndex:buttonIndex animated:animated])
 		return;
 	
 	[self.alerts removeObject:alert];
@@ -152,7 +157,7 @@
 	[alert willBeDismissedWithButtonIndex:buttonIndex];
 	SDCAlertView *nextAlert = [self.alerts lastObject];
 	
-	[self showAlert:nextAlert replacingAlert:alert completion:^{
+	[self showAlert:nextAlert replacingAlert:alert animated:animated completion:^{
 		[alert wasDismissedWithButtonIndex:buttonIndex];
 		[nextAlert wasPresented];
 	}];

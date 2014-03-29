@@ -17,6 +17,6 @@
 + (instancetype)sharedCoordinator;
 
 - (void)presentAlert:(SDCAlertView *)alert;
-- (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex;
+- (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
 
 @end

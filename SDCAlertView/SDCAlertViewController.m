@@ -140,7 +140,10 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	}
 }
 
-- (void)replaceAlert:(SDCAlertView *)oldAlert withAlert:(SDCAlertView *)newAlert completion:(void (^)(void))completionHandler {
+- (void)replaceAlert:(SDCAlertView *)oldAlert
+		   withAlert:(SDCAlertView *)newAlert
+			animated:(BOOL)animated
+		  completion:(void (^)(void))completionHandler {
 	self.dismissingLastAlert = newAlert == nil;
 	[self updateDimmingViewVisibility:!self.isDismissingLastAlert];
 	
@@ -153,7 +156,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 			completionHandler();
 	}];
 	
-	if (oldAlert)	[self dismissAlert:oldAlert];
+	if (oldAlert)	[self dismissAlert:oldAlert animated:animated];
 	if (newAlert)	[self showAlert:newAlert];
 	
 	[CATransaction commit];
@@ -168,10 +171,11 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	[self applyPresentingAnimationsToAlert:alert];
 }
 
-- (void)dismissAlert:(SDCAlertView *)alert {
+- (void)dismissAlert:(SDCAlertView *)alert animated:(BOOL)animated {
 	[alert resignFirstResponder];
 	
-	[self applyDismissingAnimationsToAlert:alert];
+	if (animated)
+		[self applyDismissingAnimationsToAlert:alert];
 }
 
 #pragma mark - Dimming View

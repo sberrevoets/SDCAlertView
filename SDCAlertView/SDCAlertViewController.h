@@ -16,5 +16,6 @@
 
 - (void)replaceAlert:(SDCAlertView *)oldAlert
 		   withAlert:(SDCAlertView *)newAlert
+			animated:(BOOL)animated
 		  completion:(void(^)(void))completionHandler;
 @end
