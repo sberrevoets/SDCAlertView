@@ -61,6 +61,8 @@
 	return sharedCoordinator;
 }
 
+#pragma mark - Transition Queue
+
 - (BOOL)enqueuePresentingAnimationOfAlert:(SDCAlertView *)alert {
 	if (!self.presentingAlert && !self.dismissingAlert)
 		return NO;
@@ -92,23 +94,14 @@
 	return YES;
 }
 
-- (void)presentAlert:(SDCAlertView *)alert {
-	if ([self enqueuePresentingAnimationOfAlert:alert])
-		return;
+- (void)dequeueNextTransition {
+	NSInvocation *nextInvocation = [self.transitionQueue firstObject];
+	[self.transitionQueue removeObject:nextInvocation];
 	
-	[self.alerts addObject:alert];
-	
-	if (self.presentingAlert)
-		return;
-	
-	if (!self.visibleAlert)
-		[self makeAlertWindowKeyWindow];
-	
-	[alert willBePresented];
-	[self showAlert:alert replacingAlert:self.visibleAlert completion:^{
-		[alert wasPresented];
-	}];
+	[nextInvocation invokeWithTarget:self];
 }
+
+#pragma mark - Presenting & Dismissing
 
 - (void)showAlert:(SDCAlertView *)newAlert replacingAlert:(SDCAlertView *)oldAlert completion:(void(^)())completionHandler {
 	if (!newAlert)
@@ -134,11 +127,19 @@
 						   }];
 }
 
-- (void)dequeueNextTransition {
-	NSInvocation *nextInvocation = [self.transitionQueue firstObject];
-	[self.transitionQueue removeObject:nextInvocation];
+- (void)presentAlert:(SDCAlertView *)alert {
+	if ([self enqueuePresentingAnimationOfAlert:alert])
+		return;
 	
-	[nextInvocation invokeWithTarget:self];
+	[self.alerts addObject:alert];
+	
+	if (!self.visibleAlert)
+		[self makeAlertWindowKeyWindow];
+	
+	[alert willBePresented];
+	[self showAlert:alert replacingAlert:self.visibleAlert completion:^{
+		[alert wasPresented];
+	}];
 }
 
 - (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
@@ -167,6 +168,8 @@
 	
 	return YES;
 }
+
+#pragma mark - Window Switching
 
 - (void)resaturateUI {
 	self.userWindow.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
