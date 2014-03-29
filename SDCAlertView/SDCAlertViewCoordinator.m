@@ -70,62 +70,57 @@
 	[alert willBePresented];
 	[self showAlert:alert replacingAlert:self.visibleAlert completion:^{
 		[alert wasPresented];
-		[self showNextAlertIfNecessary];
+		[self processStackChanges];
 	}];
 }
 
 - (void)showAlert:(SDCAlertView *)newAlert replacingAlert:(SDCAlertView *)oldAlert completion:(void(^)())completionHandler {
+	if (!newAlert)
+		[self resaturateUI];
+	
 	self.presentingAlert = newAlert;
 	self.visibleAlert = nil;
 	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
 	[alertViewController replaceAlert:oldAlert
 							withAlert:newAlert
-					hideOldCompletion:nil
-					showNewCompletion:^{
-						self.presentingAlert = nil;
-						self.visibleAlert = newAlert;
-						
-						if (completionHandler)
-							completionHandler();
-					}];
+						   completion:^{
+							   self.presentingAlert = nil;
+							   self.visibleAlert = newAlert;
+							   
+							   if (!newAlert)
+								   [self returnToUserWindow];
+							   
+							   if (completionHandler)
+								   completionHandler();
+						   }];
 }
 
-- (void)showNextAlertIfNecessary {
+- (void)processStackChanges {
 	if (self.visibleAlert != [self.alerts lastObject]) {
-		[self showAlert:[self.alerts lastObject] replacingAlert:self.visibleAlert completion:^{
-			[self showNextAlertIfNecessary];
-		}];
+		if (![self.alerts containsObject:self.visibleAlert]) {
+			[self dismissAlert:self.visibleAlert withButtonIndex:0];
+		} else {
+			[self showAlert:[self.alerts lastObject] replacingAlert:self.visibleAlert completion:^{
+				[self processStackChanges];
+			}];
+		}
 	}
 }
 
 - (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
 	[self.alerts removeObject:alert];
+	
+	if (self.presentingAlert || self.dismissingAlert)
+		return;
+	
+	[alert willBeDismissedWithButtonIndex:buttonIndex];
 	SDCAlertView *nextAlert = [self.alerts lastObject];
 	
-	// UIAlertView doesn't send willPresentAlert: to an alert that's being dequeued
-	// [nextAlert willBePresented];
-	[alert willBeDismissedWithButtonIndex:buttonIndex];
-	
-	self.dismissingAlert = alert;
-	self.presentingAlert = nextAlert;
-	
-	if (!nextAlert)
-		[self resaturateUI];
-	
-	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
-	[alertViewController replaceAlert:alert
-							withAlert:nextAlert
-					hideOldCompletion:^{
-						if (!nextAlert)
-							[self returnToUserWindow];
-						
-						[alert wasDismissedWithButtonIndex:buttonIndex];
-						self.dismissingAlert = nil;
-					} showNewCompletion:^{
-						[nextAlert wasPresented];
-						self.presentingAlert = nil;
-					}];
+	[self showAlert:nextAlert replacingAlert:alert completion:^{
+		[alert wasDismissedWithButtonIndex:buttonIndex];
+		[nextAlert wasPresented];
+	}];
 }
 
 - (void)resaturateUI {

@@ -140,52 +140,38 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	}
 }
 
-- (void)replaceAlert:(SDCAlertView *)oldAlert
-		   withAlert:(SDCAlertView *)newAlert
-   hideOldCompletion:(void (^)(void))hideOldCompletionHandler
-   showNewCompletion:(void (^)(void))showNewCompletionHandler {
+- (void)replaceAlert:(SDCAlertView *)oldAlert withAlert:(SDCAlertView *)newAlert completion:(void (^)(void))completionHandler {
 	self.dismissingLastAlert = newAlert == nil;
-	
 	[self updateDimmingViewVisibility:!self.isDismissingLastAlert];
 	
-	if (oldAlert)
-		[self dismissAlert:oldAlert completionHandler:hideOldCompletionHandler];
+	[CATransaction begin];
+	[CATransaction setCompletionBlock:^{
+		self.presentingFirstAlert = newAlert == nil;
+		[oldAlert removeFromSuperview];
+		
+		if (completionHandler)
+			completionHandler();
+	}];
 	
-	if (newAlert)
-		[self showAlert:newAlert completion:showNewCompletionHandler];
+	if (oldAlert)	[self dismissAlert:oldAlert];
+	if (newAlert)	[self showAlert:newAlert];
+	
+	[CATransaction commit];
 }
 
-- (void)showAlert:(SDCAlertView *)alert completion:(void(^)(void))completionHandler {
+- (void)showAlert:(SDCAlertView *)alert {
 	[alert becomeFirstResponder];
 	
 	[self.alertContainerView addSubview:alert];
 	[alert setNeedsUpdateConstraints];
 	
-	[CATransaction begin];
-	[CATransaction setCompletionBlock:^{
-		self.presentingFirstAlert = NO;
-		
-		if (completionHandler)
-			completionHandler();
-	}];
-	
 	[self applyPresentingAnimationsToAlert:alert];
-	[CATransaction commit];
 }
 
-- (void)dismissAlert:(SDCAlertView *)alert completionHandler:(void(^)(void))completionHandler {
+- (void)dismissAlert:(SDCAlertView *)alert {
 	[alert resignFirstResponder];
 	
-	[CATransaction begin];
-	[CATransaction setCompletionBlock:^{
-		[alert removeFromSuperview];
-		
-		if (completionHandler)
-			completionHandler();
-	}];
-
 	[self applyDismissingAnimationsToAlert:alert];
-	[CATransaction commit];
 }
 
 #pragma mark - Dimming View
@@ -286,7 +272,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	[alert.layer addAnimation:opacityAnimation forKey:@"opacity"];
 
 	RBBSpringAnimation *transformAnimation = [self transformAnimationForDismissing];
-	alert.layer.transform = [transformAnimation.toValue CATransform3DValue];
 	[alert.layer addAnimation:transformAnimation forKey:@"transform"];
 }
 

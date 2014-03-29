@@ -16,7 +16,5 @@
 
 - (void)replaceAlert:(SDCAlertView *)oldAlert
 		   withAlert:(SDCAlertView *)newAlert
-   hideOldCompletion:(void (^)(void))hideOldCompletionHandler
-   showNewCompletion:(void (^)(void))showNewCompletionHandler;
-
+		  completion:(void(^)(void))completionHandler;
 @end
