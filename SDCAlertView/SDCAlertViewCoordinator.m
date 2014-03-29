@@ -59,40 +59,44 @@
 }
 
 - (void)presentAlert:(SDCAlertView *)alert {
-	SDCAlertView *oldAlert = [self.alerts lastObject];
 	[self.alerts addObject:alert];
 	
-	if (!oldAlert)
-		[self makeAlertWindowKeyWindow];
-	
-	// If we're already presenting an alert, don't show this one yet. The completion handler
-	// for the alert that is currently presenting will take care of presenting this one.
 	if (self.presentingAlert)
 		return;
 	
-	[self showAlert:alert replacingAlert:oldAlert];
+	if (!self.visibleAlert)
+		[self makeAlertWindowKeyWindow];
+	
+	[alert willBePresented];
+	[self showAlert:alert replacingAlert:self.visibleAlert completion:^{
+		[alert wasPresented];
+		[self showNextAlertIfNecessary];
+	}];
 }
 
-- (void)showAlert:(SDCAlertView *)newAlert replacingAlert:(SDCAlertView *)oldAlert {
-	[newAlert willBePresented];
-	
+- (void)showAlert:(SDCAlertView *)newAlert replacingAlert:(SDCAlertView *)oldAlert completion:(void(^)())completionHandler {
 	self.presentingAlert = newAlert;
+	self.visibleAlert = nil;
+	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
 	[alertViewController replaceAlert:oldAlert
 							withAlert:newAlert
 					hideOldCompletion:nil
 					showNewCompletion:^{
-						[newAlert wasPresented];
 						self.presentingAlert = nil;
 						self.visibleAlert = newAlert;
 						
-						[self showNextAlertIfNecessary];
+						if (completionHandler)
+							completionHandler();
 					}];
 }
 
 - (void)showNextAlertIfNecessary {
-	if (self.visibleAlert != [self.alerts lastObject])
-		[self showAlert:[self.alerts lastObject] replacingAlert:self.visibleAlert];
+	if (self.visibleAlert != [self.alerts lastObject]) {
+		[self showAlert:[self.alerts lastObject] replacingAlert:self.visibleAlert completion:^{
+			[self showNextAlertIfNecessary];
+		}];
+	}
 }
 
 - (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
