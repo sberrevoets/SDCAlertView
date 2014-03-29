@@ -18,6 +18,7 @@
 @property (nonatomic, weak) SDCAlertView *presentingAlert;
 @property (nonatomic, weak) SDCAlertView *dismissingAlert;
 @property (nonatomic, weak) SDCAlertView *visibleAlert;
+@property (nonatomic, strong) NSMutableArray *transitionQueue;
 @end
 
 @implementation SDCAlertViewCoordinator
@@ -42,8 +43,10 @@
 - (id)init {
 	self = [super init];
 	
-	if (self)
+	if (self) {
 		_userWindow = [[UIApplication sharedApplication] keyWindow];
+		_transitionQueue = [NSMutableArray array];
+	}
 	
 	return self;
 }
@@ -58,7 +61,41 @@
 	return sharedCoordinator;
 }
 
+- (BOOL)enqueuePresentingAnimationOfAlert:(SDCAlertView *)alert {
+	if (!self.presentingAlert && !self.dismissingAlert)
+		return NO;
+
+	NSMethodSignature *methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(presentAlert:)];
+	NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+	[invocation setSelector:@selector(presentAlert:)];
+	[invocation setArgument:&alert atIndex:2];
+	[invocation retainArguments];
+	
+	[self.transitionQueue addObject:invocation];
+	
+	return YES;
+}
+
+- (BOOL)enqueueDismissingAnimationOfAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
+	if (!self.presentingAlert && !self.dismissingAlert)
+		return NO;
+	
+	NSMethodSignature *methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(dismissAlert:withButtonIndex:)];
+	NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+	[invocation setSelector:@selector(dismissAlert:withButtonIndex:)];
+	[invocation setArgument:&alert atIndex:2];
+	[invocation setArgument:&buttonIndex atIndex:3];
+	[invocation retainArguments];
+	
+	[self.transitionQueue addObject:invocation];
+	
+	return YES;
+}
+
 - (void)presentAlert:(SDCAlertView *)alert {
+	if ([self enqueuePresentingAnimationOfAlert:alert])
+		return;
+	
 	[self.alerts addObject:alert];
 	
 	if (self.presentingAlert)
@@ -70,7 +107,6 @@
 	[alert willBePresented];
 	[self showAlert:alert replacingAlert:self.visibleAlert completion:^{
 		[alert wasPresented];
-		[self processStackChanges];
 	}];
 }
 
@@ -93,26 +129,24 @@
 							   
 							   if (completionHandler)
 								   completionHandler();
+							   
+							   [self dequeueNextTransition];
 						   }];
 }
 
-- (void)processStackChanges {
-	if (self.visibleAlert != [self.alerts lastObject]) {
-		if (![self.alerts containsObject:self.visibleAlert]) {
-			[self dismissAlert:self.visibleAlert withButtonIndex:0];
-		} else {
-			[self showAlert:[self.alerts lastObject] replacingAlert:self.visibleAlert completion:^{
-				[self processStackChanges];
-			}];
-		}
-	}
+- (void)dequeueNextTransition {
+	NSInvocation *nextInvocation = [self.transitionQueue firstObject];
+	[self.transitionQueue removeObject:nextInvocation];
+	
+	[nextInvocation invokeWithTarget:self];
 }
 
 - (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
-	[self.alerts removeObject:alert];
-	
-	if (self.presentingAlert || self.dismissingAlert)
+	if ([self dismissAlertImmediately:alert withButtonIndex:buttonIndex] ||
+		[self enqueueDismissingAnimationOfAlert:alert withButtonIndex:buttonIndex])
 		return;
+	
+	[self.alerts removeObject:alert];
 	
 	[alert willBeDismissedWithButtonIndex:buttonIndex];
 	SDCAlertView *nextAlert = [self.alerts lastObject];
@@ -121,6 +155,17 @@
 		[alert wasDismissedWithButtonIndex:buttonIndex];
 		[nextAlert wasPresented];
 	}];
+}
+
+- (BOOL)dismissAlertImmediately:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
+	if (self.visibleAlert == alert || self.presentingAlert == alert)
+		return NO;
+	
+	[self.alerts removeObject:alert];
+	[alert willBeDismissedWithButtonIndex:buttonIndex];
+	[alert wasDismissedWithButtonIndex:buttonIndex];
+	
+	return YES;
 }
 
 - (void)resaturateUI {
