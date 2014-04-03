@@ -142,53 +142,40 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 
 - (void)replaceAlert:(SDCAlertView *)oldAlert
 		   withAlert:(SDCAlertView *)newAlert
-	 showDimmingView:(BOOL)showDimmingView
-   hideOldCompletion:(void (^)(void))hideOldCompletionHandler
-   showNewCompletion:(void (^)(void))showNewCompletionHandler {
-	if (!newAlert)
-		self.dismissingLastAlert = YES;
+			animated:(BOOL)animated
+		  completion:(void (^)(void))completionHandler {
+	self.dismissingLastAlert = newAlert == nil;
+	[self updateDimmingViewVisibility:!self.isDismissingLastAlert];
 	
-	[self updateDimmingViewVisibility:showDimmingView];
+	[CATransaction begin];
+	[CATransaction setCompletionBlock:^{
+		self.presentingFirstAlert = newAlert == nil;
+		[oldAlert removeFromSuperview];
+		
+		if (completionHandler)
+			completionHandler();
+	}];
 	
-	if (oldAlert)
-		[self dismissAlert:oldAlert keepDimmingView:showDimmingView completionHandler:hideOldCompletionHandler];
+	if (oldAlert)	[self dismissAlert:oldAlert animated:animated];
+	if (newAlert)	[self showAlert:newAlert];
 	
-	if (newAlert)
-		[self showAlert:newAlert withDimmingView:showDimmingView completion:showNewCompletionHandler];
+	[CATransaction commit];
 }
 
-- (void)showAlert:(SDCAlertView *)alert withDimmingView:(BOOL)showDimmingView completion:(void(^)(void))completionHandler {
+- (void)showAlert:(SDCAlertView *)alert {
 	[alert becomeFirstResponder];
 	
 	[self.alertContainerView addSubview:alert];
 	[alert setNeedsUpdateConstraints];
 	
-	[CATransaction begin];
-	[CATransaction setCompletionBlock:^{
-		self.presentingFirstAlert = NO;
-		completionHandler();
-	}];
-	
 	[self applyPresentingAnimationsToAlert:alert];
-	[CATransaction commit];
 }
 
-- (void)dismissAlert:(SDCAlertView *)alert keepDimmingView:(BOOL)keepDimmingView completionHandler:(void(^)(void))completionHandler {
+- (void)dismissAlert:(SDCAlertView *)alert animated:(BOOL)animated {
 	[alert resignFirstResponder];
 	
-	[CATransaction begin];
-	[CATransaction setCompletionBlock:^{
-		[alert removeFromSuperview];
-		
-		if (!keepDimmingView)
-			[self.dimmingView removeFromSuperview];
-		
-		if (completionHandler)
-			completionHandler();
-	}];
-
-	[self applyDismissingAnimationsToAlert:alert];
-	[CATransaction commit];
+	if (animated)
+		[self applyDismissingAnimationsToAlert:alert];
 }
 
 #pragma mark - Dimming View
@@ -289,7 +276,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	[alert.layer addAnimation:opacityAnimation forKey:@"opacity"];
 
 	RBBSpringAnimation *transformAnimation = [self transformAnimationForDismissing];
-	alert.layer.transform = [transformAnimation.toValue CATransform3DValue];
 	[alert.layer addAnimation:transformAnimation forKey:@"transform"];
 }
 

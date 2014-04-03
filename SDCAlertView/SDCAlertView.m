@@ -154,7 +154,7 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 #pragma mark - Dismissing
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
-	[[SDCAlertViewCoordinator sharedCoordinator] dismissAlert:self withButtonIndex:buttonIndex];
+	[[SDCAlertViewCoordinator sharedCoordinator] dismissAlert:self withButtonIndex:buttonIndex animated:animated];
 }
 
 - (void)willBeDismissedWithButtonIndex:(NSInteger)buttonIndex {

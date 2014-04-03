@@ -18,6 +18,7 @@
 @property (nonatomic, weak) SDCAlertView *presentingAlert;
 @property (nonatomic, weak) SDCAlertView *dismissingAlert;
 @property (nonatomic, weak) SDCAlertView *visibleAlert;
+@property (nonatomic, strong) NSMutableArray *transitionQueue;
 @end
 
 @implementation SDCAlertViewCoordinator
@@ -42,8 +43,10 @@
 - (id)init {
 	self = [super init];
 	
-	if (self)
+	if (self) {
 		_userWindow = [[UIApplication sharedApplication] keyWindow];
+		_transitionQueue = [NSMutableArray array];
+	}
 	
 	return self;
 }
@@ -58,73 +61,120 @@
 	return sharedCoordinator;
 }
 
-- (void)presentAlert:(SDCAlertView *)alert {
-	SDCAlertView *oldAlert = [self.alerts lastObject];
-	[self.alerts addObject:alert];
+#pragma mark - Transition Queue
+
+- (BOOL)enqueuePresentingAnimationOfAlert:(SDCAlertView *)alert {
+	if (!self.presentingAlert && !self.dismissingAlert)
+		return NO;
+
+	NSMethodSignature *methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(presentAlert:)];
+	NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+	[invocation setSelector:@selector(presentAlert:)];
+	[invocation setArgument:&alert atIndex:2];
+	[invocation retainArguments];
 	
-	if (!oldAlert)
-		[self makeAlertWindowKeyWindow];
+	[self.transitionQueue addObject:invocation];
 	
-	// If we're already presenting an alert, don't show this one yet. The completion handler
-	// for the alert that is currently presenting will take care of presenting this one.
-	if (self.presentingAlert)
-		return;
-	
-	[self showAlert:alert replacingAlert:oldAlert];
+	return YES;
 }
 
-- (void)showAlert:(SDCAlertView *)newAlert replacingAlert:(SDCAlertView *)oldAlert {
-	[newAlert willBePresented];
+- (BOOL)enqueueDismissingAnimationOfAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
+	if (!self.presentingAlert && !self.dismissingAlert)
+		return NO;
+	
+	NSMethodSignature *methodSignature = [[self class] instanceMethodSignatureForSelector:@selector(dismissAlert:withButtonIndex:animated:)];
+	NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+	[invocation setSelector:@selector(dismissAlert:withButtonIndex:animated:)];
+	[invocation setArgument:&alert atIndex:2];
+	[invocation setArgument:&buttonIndex atIndex:3];
+	[invocation setArgument:&animated atIndex:4];
+	[invocation retainArguments];
+	
+	[self.transitionQueue addObject:invocation];
+	
+	return YES;
+}
+
+- (void)dequeueNextTransition {
+	NSInvocation *nextInvocation = [self.transitionQueue firstObject];
+	[self.transitionQueue removeObject:nextInvocation];
+	
+	[nextInvocation invokeWithTarget:self];
+}
+
+#pragma mark - Presenting & Dismissing
+
+- (void)showAlert:(SDCAlertView *)newAlert
+   replacingAlert:(SDCAlertView *)oldAlert
+		 animated:(BOOL)animated
+	   completion:(void(^)())completionHandler {
+	if (!newAlert)
+		[self resaturateUI];
 	
 	self.presentingAlert = newAlert;
+	self.visibleAlert = nil;
+	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
 	[alertViewController replaceAlert:oldAlert
 							withAlert:newAlert
-					  showDimmingView:YES
-					hideOldCompletion:nil
-					showNewCompletion:^{
-						[newAlert wasPresented];
-						self.presentingAlert = nil;
-						self.visibleAlert = newAlert;
-						
-						[self showNextAlertIfNecessary];
-					}];
+							 animated:animated
+						   completion:^{
+							   self.presentingAlert = nil;
+							   self.visibleAlert = newAlert;
+							   
+							   if (!newAlert)
+								   [self returnToUserWindow];
+							   
+							   if (completionHandler)
+								   completionHandler();
+							   
+							   [self dequeueNextTransition];
+						   }];
 }
 
-- (void)showNextAlertIfNecessary {
-	if (self.visibleAlert != [self.alerts lastObject])
-		[self showAlert:[self.alerts lastObject] replacingAlert:self.visibleAlert];
+- (void)presentAlert:(SDCAlertView *)alert {
+	if ([self enqueuePresentingAnimationOfAlert:alert])
+		return;
+	
+	[self.alerts addObject:alert];
+	
+	if (!self.visibleAlert)
+		[self makeAlertWindowKeyWindow];
+	
+	[alert willBePresented];
+	[self showAlert:alert replacingAlert:self.visibleAlert animated:YES completion:^{
+		[alert wasPresented];
+	}];
 }
 
-- (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
+- (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
+	if ([self dismissAlertImmediately:alert withButtonIndex:buttonIndex] ||
+		[self enqueueDismissingAnimationOfAlert:alert withButtonIndex:buttonIndex animated:animated])
+		return;
+	
 	[self.alerts removeObject:alert];
+	
+	[alert willBeDismissedWithButtonIndex:buttonIndex];
 	SDCAlertView *nextAlert = [self.alerts lastObject];
 	
-	// UIAlertView doesn't send willPresentAlert: when it's taken off the queue, so we don't do that either:
-	// [nextAlert willBePresented];
-	[alert willBeDismissedWithButtonIndex:buttonIndex];
-	
-	self.dismissingAlert = alert;
-	self.presentingAlert = nextAlert;
-	
-	if (!nextAlert)
-		[self resaturateUI];
-	
-	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
-	[alertViewController replaceAlert:alert
-							withAlert:nextAlert
-					  showDimmingView:(nextAlert != nil)
-					hideOldCompletion:^{
-						if (!nextAlert)
-							[self returnToUserWindow];
-						
-						[alert wasDismissedWithButtonIndex:buttonIndex];
-						self.dismissingAlert = nil;
-					} showNewCompletion:^{
-						[nextAlert wasPresented];
-						self.presentingAlert = nil;
-					}];
+	[self showAlert:nextAlert replacingAlert:alert animated:animated completion:^{
+		[alert wasDismissedWithButtonIndex:buttonIndex];
+		[nextAlert wasPresented];
+	}];
 }
+
+- (BOOL)dismissAlertImmediately:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex {
+	if (self.visibleAlert == alert || self.presentingAlert == alert)
+		return NO;
+	
+	[self.alerts removeObject:alert];
+	[alert willBeDismissedWithButtonIndex:buttonIndex];
+	[alert wasDismissedWithButtonIndex:buttonIndex];
+	
+	return YES;
+}
+
+#pragma mark - Window Switching
 
 - (void)resaturateUI {
 	self.userWindow.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;

@@ -25,15 +25,15 @@ What won't or can't be duplicated:
 
 - Special interaction with the system. The system does not consider instances of `SDCAlertView` actual alerts, which means that, for example, the `alertViewCancel:` method from `SDCAlertViewDelegate` will never be called.
 
-- Text field placeholders in different languages. Login and Password are entered as localized strings, but they aren't actually translated.
+- Text field placeholders in different languages. "Login" and "Password" are entered as localized strings, but they aren't actually translated.
 
 - Some behavior is purposely not ported from `UIAlertView`. These cases are discussed in SDCAlertView.h.
 
 Installation
 ============
-The easiest way to install is, of course, by using Cocoapods. The name of the pod is `SDCAlertView`.
+The easiest way to install is, of course, by using CocoaPods. The name of the pod is `SDCAlertView`.
 
-If you're not using Cocoapods, you need at least:
+If you're not using CocoaPods, you need at least:
 
 - SDCAlertView.{h,m}
 - SDCAlertView_Private.h
@@ -42,13 +42,13 @@ If you're not using Cocoapods, you need at least:
 - SDCAlertViewContentView.{h,m}
 - SDCAlertViewBackgroundView.{h,m}
 
-The project also depends on [RBBAnimation](https://github.com/robb/RBBAnimation) and [SDCAutoLayout](https://github.com/Scott90/SDCAutoLayout). These dependencies are handled for you if you use Cocoapods.
+The project also depends on [RBBAnimation](https://github.com/robb/RBBAnimation) and [SDCAutoLayout](https://github.com/Scott90/SDCAutoLayout). These dependencies are automatically handled for you if you use CocoaPods.
 
 Usage
 =====
 `SDCAlertView` is for use in iOS 7 only. It will not work properly on iOS 6.1 or below. Using `SDCAlertView` is simple: just import SDCAlertView.h and use it as you would `UIAlertView`. In addition to that, `SDCAlertView` has some added functionality, including:
 
-- `contentView`. The `contentView` property can be used to add custom views to the alert. See SDCAlertView.h for details on how to use this. For sample uses, see [SDCViewController](SDCAlertView/SDCViewController.m). To use the `contentView` property, you need to use AutoLayout. [`SDCAutoLayout`](https://github.com/Scott90/SDCAutoLayout), automatically included with this project, is an `NSLayoutConstraint` that makes creating constraints a little easier.
+- `contentView`. The `contentView` property can be used to add custom views to the alert. See SDCAlertView.h for details on how to use this. For sample uses, see [SDCViewController](SDCAlertView/SDCViewController.m).
 
 - Block syntax. Some delegate methods have block alternatives as settable properties that you can use for simple implementations. There's also a convenient `showWithDismissHandler:` method to make handling a dismissal even easier.
 
