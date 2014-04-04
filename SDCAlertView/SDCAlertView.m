@@ -136,11 +136,6 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	[[SDCAlertViewCoordinator sharedCoordinator] presentAlert:self];
 }
 
-- (void)showWithDismissHandler:(void (^)(NSInteger))dismissHandler {
-	self.didDismissHandler = dismissHandler;
-	[self show];
-}
-
 - (void)willBePresented {
 	if ([self.delegate respondsToSelector:@selector(willPresentAlertView:)])
 		[self.delegate willPresentAlertView:self];
@@ -323,6 +318,52 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 - (void)positionSelf {
 	[self sdc_pinWidth:SDCAlertViewWidth];
 	[self sdc_centerInSuperview];
+}
+
+@end
+
+@implementation SDCAlertView (Convenience)
+
+- (void)showWithDismissHandler:(void (^)(NSInteger))dismissHandler {
+	self.didDismissHandler = dismissHandler;
+	[self show];
+}
+
++ (instancetype)alertWithTitle:(NSString *)title message:(NSString *)message {
+	return [self alertWithTitle:title message:message buttons:nil];
+}
+
++ (instancetype)alertWithTitle:(NSString *)title message:(NSString *)message buttons:(NSArray *)buttons {
+	return [self alertWithTitle:title message:message subview:nil buttons:buttons];
+}
+
++ (instancetype)alertWithSubview:(UIView *)subview {
+	return [self alertWithTitle:nil message:nil subview:subview];
+}
+
++ (instancetype)alertWithTitle:(NSString *)title subview:(UIView *)subview {
+	return [self alertWithTitle:title message:nil subview:subview];
+}
+
++ (instancetype)alertWithTitle:(NSString *)title message:(NSString *)message subview:(UIView *)subview {
+	return [self alertWithTitle:title message:message subview:subview buttons:nil];
+}
+
++ (instancetype)alertWithTitle:(NSString *)title message:(NSString *)message subview:(UIView *)subview buttons:(NSArray *)buttons {
+	SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:title
+													  message:message
+													 delegate:nil
+											cancelButtonTitle:[buttons firstObject]
+											otherButtonTitles:nil];
+	
+	for (int i = 1; i < [buttons count]; i++)
+		[alert addButtonWithTitle:buttons[i]];
+	
+	if (subview)
+		[alert.contentView addSubview:subview];
+	
+	[alert show];
+	return alert;		
 }
 
 @end

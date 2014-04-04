@@ -110,20 +110,21 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 			otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 /*
- *  Showing and dismissing an alert works largely the same as it does with UIAlertView. Animations
- *  will not be interrupted, so showing an alert while another alert is already animating will
- *  finish the first alert, then show the second. The behavior is a little bit different in edge
- *  cases, like when calling [alert1 dismissWithClickedButtonIndex:someButtonIndex]; [alert2 show];
- *  Take a look at https://github.com/Scott90/SDCAlertView/issues/25 for a discussion of the exact
- *  behavior.
+ *  Showing and dismissing an alert works largely the same as it does with UIAlertView. Animations will not be interrupted,
+ *  so showing an alert while another alert is already animating will finish the first alert, then show the second. The
+ *  behavior is a little bit different in edge cases, like when doing this:
+ *
+ *		SDCAlertView *alert1 = ...;
+ *		SDCAlertView*alert2 = ...;
+ *
+ *		[alert1 show];
+ *		[alert1 dismissWithClickedButtonIndex:0];
+ *		[alert2 show];
+ *
+ *  Take a look at https://github.com/Scott90/SDCAlertView/issues/25 for a discussion of the exact behavior.
  */
 
 - (void)show;
-
-/**
- *  Convenience method that sets the dismiss block while simultaneously showing the alert.
- */
-- (void)showWithDismissHandler:(void(^)(NSInteger buttonIndex))dismissHandler;
 
 - (NSInteger)addButtonWithTitle:(NSString *)title;
 - (NSString *)buttonTitleAtIndex:(NSInteger)index;
@@ -131,6 +132,32 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
 
 - (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex;
+
+@end
+
+@interface SDCAlertView (Convenience)
+
+/**
+ *  Set a dismiss handler and show the alert.
+ */
+- (void)showWithDismissHandler:(void(^)(NSInteger buttonIndex))dismissHandler;
+
+/*
+ *  The methods below are convenience methods to easily make an alert appear. All methods create an alert, show it with
+ *  the provided arguments, and return the alert that was shown. The delegate isn't set, but can be changed using the
+ *  delegate property.
+ *
+ *  Methods with a non-nil and non-empty buttons array will add the buttons in order, making the first button of the array
+ *  the cancel button. Methods with a non-nil subview argument will add that subview to the alert's contentView.
+ */
+ 
++ (instancetype)alertWithTitle:(NSString *)title message:(NSString *)message;
++ (instancetype)alertWithTitle:(NSString *)title message:(NSString *)message buttons:(NSArray *)buttons;
+
++ (instancetype)alertWithSubview:(UIView *)subview;
++ (instancetype)alertWithTitle:(NSString *)title subview:(UIView *)subview;
++ (instancetype)alertWithTitle:(NSString *)title message:(NSString *)message subview:(UIView *)subview;
++ (instancetype)alertWithTitle:(NSString *)title message:(NSString *)message subview:(UIView *)subview buttons:(NSArray *)buttons;
 
 @end
 
