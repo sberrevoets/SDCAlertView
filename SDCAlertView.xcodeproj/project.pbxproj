@@ -151,19 +151,7 @@
 		D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				D2FA54921894AFB4006FAB5E /* SDCAlertViewCoordinator.h */,
-				D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */,
-				D23205491898709600ADF458 /* SDCAlertView_Private.h */,
-				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
-				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
-				D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */,
-				D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */,
-				D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */,
-				D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */,
-				D294876A18D631B700E3D967 /* SDCIntrinsicallySizedView.h */,
-				D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */,
-				D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */,
-				D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */,
+				D2F8347218EF2C09000BB281 /* Source */,
 				D25B3CB617ECE7A6004B32A2 /* SDCAppDelegate.h */,
 				D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */,
 				D25B3CB917ECE7A6004B32A2 /* Main.storyboard */,
@@ -201,6 +189,26 @@
 				D25B3CCF17ECE7A6004B32A2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D2F8347218EF2C09000BB281 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D2FA54921894AFB4006FAB5E /* SDCAlertViewCoordinator.h */,
+				D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */,
+				D23205491898709600ADF458 /* SDCAlertView_Private.h */,
+				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
+				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
+				D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */,
+				D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */,
+				D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */,
+				D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */,
+				D294876A18D631B700E3D967 /* SDCIntrinsicallySizedView.h */,
+				D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */,
+				D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */,
+				D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
