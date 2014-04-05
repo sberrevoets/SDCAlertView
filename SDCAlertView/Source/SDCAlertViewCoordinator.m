@@ -112,6 +112,7 @@
 		[self resaturateUI];
 	
 	self.presentingAlert = newAlert;
+	self.dismissingAlert = oldAlert;
 	self.visibleAlert = nil;
 	
 	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
@@ -120,6 +121,7 @@
 							 animated:animated
 						   completion:^{
 							   self.presentingAlert = nil;
+							   self.dismissingAlert = nil;
 							   self.visibleAlert = newAlert;
 							   
 							   if (!newAlert)
