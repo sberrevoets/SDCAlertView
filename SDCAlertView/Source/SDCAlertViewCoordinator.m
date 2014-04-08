@@ -104,6 +104,18 @@
 
 #pragma mark - Presenting & Dismissing
 
+- (void)beginTransitioningFromAlert:(SDCAlertView *)oldAlert toAlert:(SDCAlertView *)newAlert {
+	self.visibleAlert = nil;
+	self.presentingAlert = newAlert;
+	self.dismissingAlert = oldAlert;
+}
+
+- (void)endTransitioning {
+	self.visibleAlert = self.presentingAlert;
+	self.presentingAlert = nil;
+	self.dismissingAlert = nil;
+}
+
 - (void)showAlert:(SDCAlertView *)newAlert
    replacingAlert:(SDCAlertView *)oldAlert
 		 animated:(BOOL)animated
@@ -111,27 +123,19 @@
 	if (!newAlert)
 		[self resaturateUI];
 	
-	self.presentingAlert = newAlert;
-	self.dismissingAlert = oldAlert;
-	self.visibleAlert = nil;
+	[self beginTransitioningFromAlert:oldAlert toAlert:newAlert];
 	
-	SDCAlertViewController *alertViewController = [SDCAlertViewController currentController];
-	[alertViewController replaceAlert:oldAlert
-							withAlert:newAlert
-							 animated:animated
-						   completion:^{
-							   self.presentingAlert = nil;
-							   self.dismissingAlert = nil;
-							   self.visibleAlert = newAlert;
-							   
-							   if (!newAlert)
-								   [self returnToUserWindow];
-							   
-							   if (completionHandler)
-								   completionHandler();
-							   
-							   [self dequeueNextTransition];
-						   }];
+	[[SDCAlertViewController currentController] replaceAlert:oldAlert withAlert:newAlert animated:animated completion:^{
+		[self endTransitioning];
+		
+		if (!newAlert)
+			[self returnToUserWindow];
+		
+		if (completionHandler)
+			completionHandler();
+		
+		[self dequeueNextTransition];
+	}];
 }
 
 - (void)presentAlert:(SDCAlertView *)alert {
