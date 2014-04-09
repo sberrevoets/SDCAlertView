@@ -65,9 +65,17 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	return self;
 }
 
-- (BOOL)prefersStatusBarHidden{
-    return CGRectGetHeight([[UIApplication sharedApplication] statusBarFrame]) == 0.0;
+#pragma mark - Status Bar
+
+- (BOOL)prefersStatusBarHidden {
+    return [[UIApplication sharedApplication] isStatusBarHidden];
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return [[UIApplication sharedApplication] statusBarStyle];
+}
+
+#pragma mark - View Hierarchy
 
 - (void)createViewHierarchy {
 	[self createDimmingView];
