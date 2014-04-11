@@ -8,7 +8,7 @@
 
 #import "SDCAlertViewContentView.h"
 
-#import "SDCAlertView_Private.h"
+#import "SDCAlertView.h"
 #import "SDCIntrinsicallySizedView.h"
 #import "UIView+SDCAutoLayout.h"
 

@@ -9,9 +9,7 @@
 #import "SDCAlertViewController.h"
 
 #import "RBBSpringAnimation.h"
-#import "SDCAlertView_Private.h"
-#import "SDCAlertViewContentView.h"
-#import "SDCAlertViewBackgroundView.h"
+#import "SDCAlertView.h"
 
 #import "UIView+SDCAutoLayout.h"
 

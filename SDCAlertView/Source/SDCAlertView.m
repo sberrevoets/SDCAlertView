@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Scotty Doesn't Code. All rights reserved.
 //
 
-#import "SDCAlertView_Private.h"
+#import "SDCAlertView.h"
 
 #import "SDCAlertViewController.h"
 #import "SDCAlertViewCoordinator.h"

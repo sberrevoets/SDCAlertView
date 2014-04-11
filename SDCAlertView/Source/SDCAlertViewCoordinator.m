@@ -8,7 +8,7 @@
 
 #import "SDCAlertViewCoordinator.h"
 
-#import "SDCAlertView_Private.h"
+#import "SDCAlertView.h"
 #import "SDCAlertViewController.h"
 
 @interface SDCAlertViewCoordinator ()
