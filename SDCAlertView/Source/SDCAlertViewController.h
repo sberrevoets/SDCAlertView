@@ -12,8 +12,6 @@
 
 @interface SDCAlertViewController : UIViewController
 
-+ (instancetype)currentController;
-
 - (void)replaceAlert:(SDCAlertView *)oldAlert
 		   withAlert:(SDCAlertView *)newAlert
 			animated:(BOOL)animated

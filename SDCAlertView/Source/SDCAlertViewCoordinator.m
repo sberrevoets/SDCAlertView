@@ -27,7 +27,7 @@
 	if (!_alertWindow) {
 		_alertWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 		_alertWindow.backgroundColor = [UIColor clearColor];
-		_alertWindow.rootViewController = [SDCAlertViewController currentController];
+		_alertWindow.rootViewController = [[SDCAlertViewController alloc] init];
 		_alertWindow.windowLevel = UIWindowLevelAlert;
 	}
 	
@@ -125,7 +125,8 @@
 	
 	[self beginTransitioningFromAlert:oldAlert toAlert:newAlert];
 	
-	[[SDCAlertViewController currentController] replaceAlert:oldAlert withAlert:newAlert animated:animated completion:^{
+	SDCAlertViewController *controller = (SDCAlertViewController *)self.alertWindow.rootViewController;
+	[controller replaceAlert:oldAlert withAlert:newAlert animated:animated completion:^{
 		[self endTransitioning];
 		
 		if (!newAlert)
@@ -193,6 +194,9 @@
 
 - (void)returnToUserWindow {
 	[self.userWindow makeKeyAndVisible];
+	
+	// Set the alert window to nil so that it gets removed from the screen. Otherwise, since its windowLevel is set to
+	// UIWindowLevelAlert, it will cover up the current window, causing it to appear unresponsive.
 	self.alertWindow = nil;
 }
 

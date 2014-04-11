@@ -41,15 +41,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 // UIViewController has a private instance variable named dimmingView. Divert from the convention...
 @synthesize dimmingView = dimmingView_;
 
-+ (instancetype)currentController {
-	UIViewController *currentController = [[UIWindow sdc_alertWindow] rootViewController];
-	
-	if ([currentController isKindOfClass:[SDCAlertViewController class]])
-		return (SDCAlertViewController *)currentController;
-	else
-		return [[self alloc] init];
-}
-
 - (instancetype)init {
 	self = [super init];
 	
@@ -289,25 +280,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-@end
-
-@implementation UIWindow(SDCAlertView)
-
-+ (UIWindow *)sdc_alertWindow {
-	NSArray *windows = [[UIApplication sharedApplication] windows];
-	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UIWindow *window, NSDictionary *bindings) {
-		return [window.rootViewController isKindOfClass:[SDCAlertViewController class]];
-	}];
-	
-	NSArray *alertWindows = [windows filteredArrayUsingPredicate:predicate];
-    
-#ifdef TESTING
-	NSAssert([alertWindows count] <= 1, @"At most one alert window should be active at any point");
-#endif
-	
-	return [alertWindows firstObject];
 }
 
 @end
