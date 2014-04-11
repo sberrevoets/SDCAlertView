@@ -301,6 +301,11 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 #pragma mark - Layout
 
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+	if (newSuperview)
+		[self setNeedsUpdateConstraints]; // Recalculate the alert's dimensions based on the alert's new superview
+}
+
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	self.alertContentView.maximumSize = CGSizeMake(SDCAlertViewWidth, CGRectGetHeight(self.superview.bounds) - SDCAlertViewPadding.top - SDCAlertViewPadding.bottom);

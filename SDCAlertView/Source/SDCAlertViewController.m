@@ -163,8 +163,6 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	[alert becomeFirstResponder];
 	
 	[self.alertContainerView addSubview:alert];
-	[alert setNeedsUpdateConstraints];
-	
 	[self applyPresentingAnimationsToAlert:alert];
 }
 
