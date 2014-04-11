@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Scotty Doesn't Code. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "SDCAlertView.h"
 
 /**
  *  The \c SDCAlertViewTransitioning protocol can be used to define custom ways of transitioning between alerts. This
@@ -21,7 +21,7 @@
  *  Most implementers will benefit from making this a private readwrite property that's set from \c presentAlert: and
  *  \c -dismissAlert:withButtonIndex:animated:.
  */
-@property (nonatomic, readonly) SDCAlertView *visibleAlert;
+@property (nonatomic, weak, readonly) SDCAlertView *visibleAlert;
 
 /**
  *  Present \c alert on the screen. In this method, add the alert as a subview to some other view and apply the animations
