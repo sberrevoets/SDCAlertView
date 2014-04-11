@@ -74,6 +74,7 @@
 		D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewBackgroundView.m; sourceTree = "<group>"; };
 		D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewContentView.h; sourceTree = "<group>"; };
 		D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewContentView.m; sourceTree = "<group>"; };
+		D268093118F845420001B7E9 /* SDCAlertViewTransitioning.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewTransitioning.h; sourceTree = "<group>"; };
 		D294876A18D631B700E3D967 /* SDCIntrinsicallySizedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCIntrinsicallySizedView.h; sourceTree = "<group>"; };
 		D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCIntrinsicallySizedView.m; sourceTree = "<group>"; };
 		D2A520171840176300837A1A /* SDCAlertView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SDCAlertView.podspec; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 				D2FA54921894AFB4006FAB5E /* SDCAlertViewCoordinator.h */,
 				D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */,
 				D23205491898709600ADF458 /* SDCAlertView_Private.h */,
+				D268093118F845420001B7E9 /* SDCAlertViewTransitioning.h */,
 				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
 				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
 				D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */,
