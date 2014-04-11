@@ -127,7 +127,7 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 #pragma mark - Visibility
 
 - (BOOL)isVisible {
-	return [[SDCAlertViewCoordinator sharedCoordinator] visibleAlert] == self;
+	return self.transitionCoordinator.visibleAlert == self;
 }
 
 #pragma mark - Presenting
@@ -141,7 +141,7 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	[self addSubview:self.alertBackgroundView];
 	[self addSubview:self.alertContentView];
 	
-	[[SDCAlertViewCoordinator sharedCoordinator] presentAlert:self];
+	[self.transitionCoordinator presentAlert:self];
 }
 
 - (void)willBePresented {
@@ -157,7 +157,7 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 #pragma mark - Dismissing
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
-	[[SDCAlertViewCoordinator sharedCoordinator] dismissAlert:self withButtonIndex:buttonIndex animated:animated];
+	[self.transitionCoordinator dismissAlert:self withButtonIndex:buttonIndex animated:animated];
 }
 
 - (void)willBeDismissedWithButtonIndex:(NSInteger)buttonIndex {
