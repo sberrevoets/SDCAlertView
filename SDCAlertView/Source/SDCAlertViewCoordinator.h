@@ -6,17 +6,12 @@
 //  Copyright (c) 2014 Scotty Doesn't Code. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "SDCAlertViewTransitioning.h"
 
 @class SDCAlertView;
 
-@interface SDCAlertViewCoordinator : NSObject
-
-@property (nonatomic, weak, readonly) SDCAlertView *visibleAlert;
+@interface SDCAlertViewCoordinator : NSObject <SDCAlertViewTransitioning>
 
 + (instancetype)sharedCoordinator;
-
-- (void)presentAlert:(SDCAlertView *)alert;
-- (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
 
 @end

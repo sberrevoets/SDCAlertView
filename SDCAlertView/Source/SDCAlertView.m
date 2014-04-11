@@ -24,6 +24,7 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 #pragma mark - SDCAlertView
 
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
+@property (nonatomic, strong) id <SDCAlertViewTransitioning> transitionCoordinator;
 @property (nonatomic, strong) SDCAlertViewBackgroundView *alertBackgroundView;
 @property (nonatomic, strong) SDCAlertViewContentView *alertContentView;
 @end
@@ -66,6 +67,13 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	}
 	
 	return _alertContentView;
+}
+
+- (id <SDCAlertViewTransitioning>)transitionCoordinator {
+	if (!_transitionCoordinator)
+		return [SDCAlertViewCoordinator sharedCoordinator];
+	else
+		return _transitionCoordinator;
 }
 
 #pragma mark - Initialization

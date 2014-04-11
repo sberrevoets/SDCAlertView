@@ -41,6 +41,13 @@
 - (void)dismissAlert:(SDCAlertView *)alert withButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
 @end
 
+
 @interface SDCAlertView (SDCAlertViewTransitioning)
 @property (nonatomic, strong) id <SDCAlertViewTransitioning> transitionCoordinator;
+
+- (void)willBePresented;
+- (void)wasPresented;
+
+- (void)willBeDismissedWithButtonIndex:(NSInteger)buttonIndex;
+- (void)wasDismissedWithButtonIndex:(NSInteger)buttonIndex;
 @end

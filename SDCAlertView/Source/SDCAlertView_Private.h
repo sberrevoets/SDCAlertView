@@ -8,17 +8,6 @@
 
 #import "SDCAlertView.h"
 
-@class SDCAlertViewBackgroundView;
-@class SDCAlertViewContentView;
-
-@interface SDCAlertView (Private)
-- (void)willBePresented;
-- (void)wasPresented;
-
-- (void)willBeDismissedWithButtonIndex:(NSInteger)buttonIndex;
-- (void)wasDismissedWithButtonIndex:(NSInteger)buttonIndex;
-@end
-
 @interface UIColor (SDCAlertViewColors)
 + (UIColor *)sdc_alertSeparatorColor;
 + (UIColor *)sdc_textFieldBackgroundViewColor;
