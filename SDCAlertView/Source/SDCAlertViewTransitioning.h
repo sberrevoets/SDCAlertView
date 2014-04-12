@@ -43,7 +43,16 @@
 
 
 @interface SDCAlertView (SDCAlertViewTransitioning)
+/**
+ *  The transition coordinator to use for presenting and dismissing alerts. Defaults to the SDCAlertViewCoordinator
+ *  singleton if not set to something else.
+ */
 @property (nonatomic, strong) id <SDCAlertViewTransitioning> transitionCoordinator;
+
+/*
+ *  The methods below are only to be called from the transitionCoordinator (see above) when a transition is about to happen
+ *  or has just finished. Don't call these methods from anywhere else.
+ */
 
 - (void)willBePresented;
 - (void)wasPresented;
