@@ -28,6 +28,7 @@
 		D294876C18D631B700E3D967 /* SDCIntrinsicallySizedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */; };
 		D2A520181840176300837A1A /* SDCAlertView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D2A520171840176300837A1A /* SDCAlertView.podspec */; };
 		D2BD0CC418FEB2C400520E33 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2BD0CC318FEB2C400520E33 /* iPad.storyboard */; };
+		D2BD0CC618FED65700520E33 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = D2BD0CC518FED65700520E33 /* CHANGELOG.md */; };
 		D2F8345918EF2893000BB281 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D2F8345718EF2887000BB281 /* Podfile */; };
 		D2F9D2BD18400CD300F85B10 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BC18400CD200F85B10 /* README.md */; };
 		D2F9D2BF18400DAF00F85B10 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BE18400DAF00F85B10 /* LICENSE */; };
@@ -79,6 +80,7 @@
 		D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCIntrinsicallySizedView.m; sourceTree = "<group>"; };
 		D2A520171840176300837A1A /* SDCAlertView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SDCAlertView.podspec; sourceTree = "<group>"; };
 		D2BD0CC318FEB2C400520E33 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
+		D2BD0CC518FED65700520E33 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		D2F8345718EF2887000BB281 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		D2F9D2BC18400CD200F85B10 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D2F9D2BE18400DAF00F85B10 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				D2F9D2BE18400DAF00F85B10 /* LICENSE */,
 				D2F9D2BC18400CD200F85B10 /* README.md */,
+				D2BD0CC518FED65700520E33 /* CHANGELOG.md */,
 				D2A520171840176300837A1A /* SDCAlertView.podspec */,
 				D2F8345718EF2887000BB281 /* Podfile */,
 				D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */,
@@ -302,6 +305,7 @@
 				D2BD0CC418FEB2C400520E33 /* iPad.storyboard in Resources */,
 				D25B3CBB17ECE7A6004B32A2 /* iPhone.storyboard in Resources */,
 				D2F8345918EF2893000BB281 /* Podfile in Resources */,
+				D2BD0CC618FED65700520E33 /* CHANGELOG.md in Resources */,
 				D2F9D2BF18400DAF00F85B10 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
