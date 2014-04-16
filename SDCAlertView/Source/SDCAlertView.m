@@ -43,7 +43,6 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	[appearance setTextFieldFont:[UIFont systemFontOfSize:13]];
 	[appearance setSuggestedButtonFont:[UIFont boldSystemFontOfSize:17]];
 	[appearance setNormalButtonFont:[UIFont systemFontOfSize:17]];
-	[appearance setButtonTextColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1]];
 	[appearance setTextFieldTextColor:[UIColor darkTextColor]];
 	[appearance setTitleLabelTextColor:[UIColor darkTextColor]];
 	[appearance setMessageLabelTextColor:[UIColor darkTextColor]];
