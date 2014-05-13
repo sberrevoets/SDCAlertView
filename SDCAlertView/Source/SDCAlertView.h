@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
  *  behavior is a little bit different in edge cases, like when doing this:
  *
  *		SDCAlertView *alert1 = ...;
- *		SDCAlertView*alert2 = ...;
+ *		SDCAlertView *alert2 = ...;
  *
  *		[alert1 show];
  *		[alert1 dismissWithClickedButtonIndex:0];
@@ -133,6 +133,10 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 
 - (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex;
 
+@end
+
+@interface SDCAlertView (SDCAlertViewSpecific)
+@property (nonatomic) BOOL alwaysShowsButtonsVertically;
 @end
 
 @interface SDCAlertView (Convenience)

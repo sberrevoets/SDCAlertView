@@ -30,6 +30,7 @@
 @property (nonatomic, copy) NSString *cancelButtonTitle;
 @property (nonatomic, readonly) NSInteger firstOtherButtonIndex;
 @property (nonatomic, getter = isFirstOtherButtonEnabled) BOOL firstOtherButtonEnabled;
+@property (nonatomic) BOOL alwaysShowsButtonsVertically;
 
 @property (nonatomic) CGSize maximumSize;
 

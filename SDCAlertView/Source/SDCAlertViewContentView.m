@@ -536,7 +536,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (BOOL)showsTableViewsSideBySide {
-	return self.numberOfButtons == 2;
+	return self.numberOfButtons == 2 && !self.alwaysShowsButtonsVertically;
 }
 
 - (void)positionButtons {

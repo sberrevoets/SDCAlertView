@@ -48,7 +48,7 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	[appearance setMessageLabelTextColor:[UIColor darkTextColor]];
 }
 
-#pragma mark - Getters
+#pragma mark - Getters/Setters
 
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
 	if (!_alertBackgroundView) {
@@ -69,10 +69,15 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 }
 
 - (id <SDCAlertViewTransitioning>)transitionCoordinator {
-	if (!_transitionCoordinator)
-		return [SDCAlertViewCoordinator sharedCoordinator];
-	else
-		return _transitionCoordinator;
+	return (_transitionCoordinator) ? _transitionCoordinator : [SDCAlertViewCoordinator sharedCoordinator];
+}
+
+- (BOOL)alwaysShowsButtonsVertically {
+	return self.alertContentView.alwaysShowsButtonsVertically;
+}
+
+- (void)setAlwaysShowsButtonsVertically:(BOOL)alwaysShowsButtonsVertically {
+	self.alertContentView.alwaysShowsButtonsVertically = alwaysShowsButtonsVertically;
 }
 
 #pragma mark - Initialization
