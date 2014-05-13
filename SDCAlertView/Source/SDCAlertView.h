@@ -136,6 +136,11 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @end
 
 @interface SDCAlertView (SDCAlertViewSpecific)
+
+/**
+ *  Set this property to \c YES to show the buttons of a two-button alert stacked on top of each other, as opposed to
+ *  horizontally next to each other. Defaults to \c NO.
+ */
 @property (nonatomic) BOOL alwaysShowsButtonsVertically;
 @end
 
