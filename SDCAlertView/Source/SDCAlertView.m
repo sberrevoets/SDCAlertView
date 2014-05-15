@@ -82,12 +82,27 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 #pragma mark - Initialization
 
+- (id)init {
+	self = [super init];
+	
+	if (self) {
+		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
+		
+		[self addParallaxEffect];
+				
+		self.layer.masksToBounds = YES;
+		self.layer.cornerRadius = SDCAlertViewCornerRadius;
+	}
+	
+	return self;
+}
+
 - (instancetype)initWithTitle:(NSString *)title
 					  message:(NSString *)message
 					 delegate:(id)delegate
 			cancelButtonTitle:(NSString *)cancelButtonTitle
 			otherButtonTitles:(NSString *)otherButtonTitles, ... {
-	self = [super init];
+	self = [self init];
 	
 	if (self) {
 		_delegate = delegate;
@@ -99,13 +114,6 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 		va_start(argumentList, otherButtonTitles);
 		for (NSString *buttonTitle = otherButtonTitles; buttonTitle != nil; buttonTitle = va_arg(argumentList, NSString *))
 			[self.alertContentView addButtonWithTitle:buttonTitle];
-		
-		[self addParallaxEffect];
-		
-		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
-		
-		self.layer.masksToBounds = YES;
-		self.layer.cornerRadius = SDCAlertViewCornerRadius;
 	}
 	
 	return self;
