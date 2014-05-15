@@ -177,6 +177,34 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	self.otherButtonsTableView = [self buttonTableView];
 }
 
+#pragma mark - Title & Message Labels
+
+- (NSString *)title {
+	return self.attributedTitle.string;
+}
+
+- (void)setTitle:(NSString *)title {
+	self.attributedTitle = [[NSAttributedString alloc] initWithString:title];
+}
+
+- (void)setAttributedTitle:(NSAttributedString *)attributedTitle {
+	_attributedTitle = attributedTitle;
+	self.titleLabel.attributedText = attributedTitle;
+}
+
+- (NSString *)message {
+	return self.attributedMessage.string;
+}
+
+- (void)setMessage:(NSString *)message {
+	self.attributedMessage = [[NSAttributedString alloc] initWithString:message];
+}
+
+- (void)setAttributedMessage:(NSAttributedString *)attributedMessage {
+	_attributedMessage = attributedMessage;
+	self.messageLabel.attributedText = attributedMessage;
+}
+
 #pragma mark - Buttons
 
 - (NSMutableArray *)otherButtonTitles {
@@ -315,17 +343,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	return [self isButtonAtIndexPathEnabled:indexPath inTableView:tableView];
 }
 
-#pragma mark - Content
-
-- (void)setTitle:(NSString *)title {
-	_title = title;
-	self.titleLabel.text = title;
-}
-
-- (void)setMessage:(NSString *)message {
-	_message = message;
-	self.messageLabel.text = message;
-}
+#pragma mark - Other Content
 
 - (void)updateContentForStyle:(SDCAlertViewStyle)style {
 	switch (style) {

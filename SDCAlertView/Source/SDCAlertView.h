@@ -144,6 +144,37 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @property (nonatomic) BOOL alwaysShowsButtonsVertically;
 @end
 
+@interface SDCAlertView (SDCAlertViewAttributedStrings)
+
+/*
+ *  If a string has a title with attributes, the equivalent UIAppearance properties for that attribute will not work
+ *  anymore. For example, the following code will result in a red title:
+ *
+ *		NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor redColor]};
+ *		alert.attributedTitle = [[NSAttributedString alloc] initWithTitle:@"Title" attributes:attributes];
+ *		alert.titleLabelTextColor = [UIColor greenColor];
+ *
+ *  This is an unfortunate side effect of UIAppearance, so it's recommended to use either attributed strings or their
+ *  equivalent UIAppearance properties, not both.
+ */
+
+
+/**
+ *  The attributed title for the alert. Both \c title and \c attributedTitle can be used to set the title of the alert,
+ *  the title will be set to whichever was called last. That means that setting \c title to \c nil after setting the
+ *  \c attributedTitle will result in no title showing.
+ */
+@property (nonatomic, copy) NSAttributedString *attributedTitle;
+
+/**
+ *  The attributed message for the alert. Both \c message and \c attributedMessage can be used to set the message of the
+ *  alert, but the message will be set to whichever was called last. That means that setting \c mesage to \c nil after
+ *  setting the \c attributedMessage will result in no message showing.
+ */
+@property (nonatomic, copy) NSAttributedString *attributedMessage;
+
+@end
+
 @interface SDCAlertView (Convenience)
 
 /**
@@ -157,7 +188,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
  *  delegate property.
  *
  *  Methods with a non-nil and non-empty buttons array will add the buttons in order, making the first button of the array
- *  the cancel button. Methods with a non-nil subview argument will add that subview to the alert's contentView.
+ *  the cancel button. Method calls with a non-nil subview argument will have the subview added to the alert's contentView.
  */
  
 + (instancetype)alertWithTitle:(NSString *)title message:(NSString *)message;

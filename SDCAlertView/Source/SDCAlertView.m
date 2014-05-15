@@ -48,7 +48,7 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	[appearance setMessageLabelTextColor:[UIColor darkTextColor]];
 }
 
-#pragma mark - Getters/Setters
+#pragma mark - Lazy Instantiation
 
 - (SDCAlertViewBackgroundView *)alertBackgroundView {
 	if (!_alertBackgroundView) {
@@ -70,14 +70,6 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 - (id <SDCAlertViewTransitioning>)transitionCoordinator {
 	return (_transitionCoordinator) ? _transitionCoordinator : [SDCAlertViewCoordinator sharedCoordinator];
-}
-
-- (BOOL)alwaysShowsButtonsVertically {
-	return self.alertContentView.alwaysShowsButtonsVertically;
-}
-
-- (void)setAlwaysShowsButtonsVertically:(BOOL)alwaysShowsButtonsVertically {
-	self.alertContentView.alwaysShowsButtonsVertically = alwaysShowsButtonsVertically;
 }
 
 #pragma mark - Initialization
@@ -204,12 +196,7 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	return YES;
 }
 
-#pragma mark - Content
-
-- (void)setAlertViewStyle:(SDCAlertViewStyle)alertViewStyle {
-	_alertViewStyle = alertViewStyle;
-	[self.alertContentView updateContentForStyle:alertViewStyle];
-}
+#pragma mark - Title & Message Labels
 
 - (NSString *)title {
 	return self.alertContentView.title;
@@ -219,12 +206,43 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	self.alertContentView.title = title;
 }
 
+- (NSAttributedString *)attributedTitle {
+	return self.alertContentView.attributedTitle;
+}
+
+- (void)setAttributedTitle:(NSAttributedString *)attributedTitle {
+	self.alertContentView.attributedTitle = attributedTitle;
+}
+
 - (NSString *)message {
 	return self.alertContentView.message;
 }
 
 - (void)setMessage:(NSString *)message {
 	self.alertContentView.message = message;
+}
+
+- (NSAttributedString *)attributedMessage {
+	return self.alertContentView.attributedMessage;
+}
+
+- (void)setAttributedMessage:(NSAttributedString *)attributedMessage {
+	self.alertContentView.attributedMessage = attributedMessage;
+}
+
+#pragma mark - Content
+
+- (void)setAlertViewStyle:(SDCAlertViewStyle)alertViewStyle {
+	_alertViewStyle = alertViewStyle;
+	[self.alertContentView updateContentForStyle:alertViewStyle];
+}
+
+- (BOOL)alwaysShowsButtonsVertically {
+	return self.alertContentView.alwaysShowsButtonsVertically;
+}
+
+- (void)setAlwaysShowsButtonsVertically:(BOOL)alwaysShowsButtonsVertically {
+	self.alertContentView.alwaysShowsButtonsVertically = alwaysShowsButtonsVertically;
 }
 
 - (UIView *)contentView {
@@ -395,12 +413,27 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 @implementation SDCAlertView (UIAppearance)
 
+- (BOOL)attributedString:(NSAttributedString *)string hasAttribute:(NSString *)attribute {
+	NSRange range = NSMakeRange(0, [string length]);
+	
+	__block BOOL hasAttribute = NO;
+	[string enumerateAttribute:attribute inRange:range options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
+		if (value) {
+			hasAttribute = YES;
+			*stop = YES;
+		}
+	}];
+	
+	return hasAttribute;
+}
+
 - (UIFont *)titleLabelFont {
 	return self.alertContentView.titleLabelFont;
 }
 
 - (void)setTitleLabelFont:(UIFont *)titleLabelFont {
-	self.alertContentView.titleLabelFont = titleLabelFont;
+	if (![self attributedString:self.attributedTitle hasAttribute:NSFontAttributeName])
+		self.alertContentView.titleLabelFont = titleLabelFont;
 }
 
 - (UIColor *)titleLabelTextColor {
@@ -408,7 +441,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 }
 
 - (void)setTitleLabelTextColor:(UIColor *)titleLabelTextColor {
-	self.alertContentView.titleLabelTextColor = titleLabelTextColor;
+	if (![self attributedString:self.attributedTitle hasAttribute:NSForegroundColorAttributeName])
+		self.alertContentView.titleLabelTextColor = titleLabelTextColor;
 }
 
 - (UIFont *)messageLabelFont {
@@ -416,7 +450,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 }
 
 - (void)setMessageLabelFont:(UIFont *)messageLabelFont {
-	self.alertContentView.messageLabelFont = messageLabelFont;
+	if (![self attributedString:self.attributedMessage hasAttribute:NSFontAttributeName])
+		self.alertContentView.messageLabelFont = messageLabelFont;
 }
 
 - (UIColor *)messageLabelTextColor {
@@ -424,7 +459,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 }
 
 - (void)setMessageLabelTextColor:(UIColor *)messageLabelTextColor {
-	self.alertContentView.messageLabelTextColor = messageLabelTextColor;
+	if (![self attributedString:self.attributedMessage hasAttribute:NSForegroundColorAttributeName])
+		self.alertContentView.messageLabelTextColor = messageLabelTextColor;
 }
 
 - (UIFont *)textFieldFont {
