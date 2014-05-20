@@ -184,7 +184,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (void)setTitle:(NSString *)title {
-	self.attributedTitle = [[NSAttributedString alloc] initWithString:title];
+	if (title)
+		self.attributedTitle = [[NSAttributedString alloc] initWithString:title];
+	else
+		self.attributedTitle = nil;
 }
 
 - (void)setAttributedTitle:(NSAttributedString *)attributedTitle {
@@ -197,7 +200,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (void)setMessage:(NSString *)message {
-	self.attributedMessage = [[NSAttributedString alloc] initWithString:message];
+	if (message)
+		self.attributedMessage = [[NSAttributedString alloc] initWithString:message];
+	else
+		self.attributedMessage = nil;
 }
 
 - (void)setAttributedMessage:(NSAttributedString *)attributedMessage {
