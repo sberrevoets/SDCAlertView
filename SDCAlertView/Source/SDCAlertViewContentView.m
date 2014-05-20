@@ -197,6 +197,9 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (void)setMessage:(NSString *)message {
+    if (!message) {
+        return;
+    }
 	self.attributedMessage = [[NSAttributedString alloc] initWithString:message];
 }
 
