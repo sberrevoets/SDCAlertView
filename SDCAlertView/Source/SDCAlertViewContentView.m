@@ -229,7 +229,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (void)setCancelButtonTitle:(NSString *)cancelButtonTitle {
 	_cancelButtonTitle = cancelButtonTitle;
-	if (self.cancelButtonIndex == SDCAlertViewUnspecifiedButtonIndex)
+	if (self.cancelButtonIndex == SDCAlertViewUnspecifiedButtonIndex && cancelButtonTitle)
 		self.cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
 }
 
