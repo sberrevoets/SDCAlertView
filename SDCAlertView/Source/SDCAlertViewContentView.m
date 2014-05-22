@@ -325,6 +325,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	cell.backgroundColor = [UIColor clearColor];
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    cell.textLabel.minimumScaleFactor = 0.5;
+    cell.textLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	cell.textLabel.enabled = [self isButtonAtIndexPathEnabled:indexPath inTableView:tableView];
 }
 
