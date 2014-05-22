@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="712-Rb-kZ9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="712-Rb-kZ9">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -104,29 +104,12 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1Rz-NE-8XX">
-                                        <rect key="frame" x="0.0" y="367" width="768" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Rz-NE-8XX" id="HNW-Op-FhC">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Two buttons, one with long text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xM-hX-OUh">
-                                                    <rect key="frame" x="16" y="11" width="561" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="SDCAlertView (custom)" id="9g1-xI-hYP">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="0Xy-EC-Uki" rowHeight="44" style="IBUITableViewCellStyleDefault" id="Vza-L1-C3j">
-                                        <rect key="frame" x="0.0" y="459" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="415" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vza-L1-C3j" id="3b9-lM-95N">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -143,7 +126,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="PwY-fU-DZM" rowHeight="44" style="IBUITableViewCellStyleDefault" id="1Yb-SG-N9C">
-                                        <rect key="frame" x="0.0" y="503" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="459" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Yb-SG-N9C" id="sHQ-oV-i6Z">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -160,7 +143,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="YAH-Ls-AaP" rowHeight="44" style="IBUITableViewCellStyleDefault" id="fW8-sm-rhs">
-                                        <rect key="frame" x="0.0" y="547" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="503" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fW8-sm-rhs" id="8CC-Tz-ZTU">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -187,7 +170,7 @@
                     <navigationItem key="navigationItem" id="aiB-N5-Tgn">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="XXE-0B-jzt">
-                            <rect key="frame" x="246" y="6" width="277" height="32"/>
+                            <rect key="frame" x="22" y="6" width="277" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Default Appearance"/>
