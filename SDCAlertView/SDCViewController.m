@@ -60,7 +60,14 @@
 			alert.alertViewStyle = SDCAlertViewStyleLoginAndPasswordInput;
 			
 			[alert show];
-		}
+		} else if (indexPath.row == 4) {
+            SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:@"Title"
+															  message:@"This is a message"
+															 delegate:nil
+													cancelButtonTitle:@"Cancel"
+													otherButtonTitles:@"Yes I really like you!", nil];
+			[alert show];
+        }
 	} else if (indexPath.section == 2) {
 		if (indexPath.row == 0) {
 			
