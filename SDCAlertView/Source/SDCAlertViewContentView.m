@@ -229,7 +229,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (void)setCancelButtonTitle:(NSString *)cancelButtonTitle {
 	_cancelButtonTitle = cancelButtonTitle;
-	if (self.cancelButtonIndex == SDCAlertViewUnspecifiedButtonIndex)
+	if (self.cancelButtonIndex == SDCAlertViewUnspecifiedButtonIndex && cancelButtonTitle)
 		self.cancelButtonIndex = SDCAlertViewDefaultFirstButtonIndex;
 }
 
@@ -258,16 +258,27 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 		return self.cancelButtonTitle;
 	else if (buttonIndex == SDCAlertViewDefaultFirstButtonIndex && !self.cancelButtonTitle)
 		return [self.otherButtonTitles firstObject];
-	
-	return self.otherButtonTitles[buttonIndex - 1];
+	else if (!self.cancelButtonTitle)
+		return self.otherButtonTitles[buttonIndex];
+	else
+		// Subtract one because otherButtonTitles are 0 indexed, but cancelButtonIndex already has buttonIndex 0
+		return self.otherButtonTitles[buttonIndex - 1];
 }
 
 - (NSInteger)suggestedButtonIndex {
 	// The suggested button is always the cancel button, except if there are two buttons, then it's the other button
-	if ([self showsTableViewsSideBySide])
-		return self.firstOtherButtonIndex;
-	else
-		return self.cancelButtonIndex;
+	// If there is no cancel button, the last other button is the suggested button
+	if ([self showsTableViewsSideBySide]) {
+		if (self.cancelButtonIndex == SDCAlertViewUnspecifiedButtonIndex)
+			return self.firstOtherButtonIndex + 1;
+		else
+			return self.firstOtherButtonIndex;
+	} else {
+		if (self.cancelButtonIndex == SDCAlertViewUnspecifiedButtonIndex)
+			return self.firstOtherButtonIndex + [self.otherButtonTitles count] - 1;
+		else
+			return self.cancelButtonIndex;
+	}
 }
 
 - (NSInteger)buttonIndexForButtonAtIndexPath:(NSIndexPath *)indexPath inTableView:(UITableView *)tableView {
