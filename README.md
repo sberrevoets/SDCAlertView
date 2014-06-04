@@ -24,6 +24,8 @@ The project also depends on [RBBAnimation](https://github.com/robb/RBBAnimation)
 ## Usage
 `SDCAlertView` is for use in iOS 7 only. It will not work properly on iOS 6.1 or below. Using `SDCAlertView` is very simple: just import SDCAlertView.h and use it as you would `UIAlertView`.
 
+### Basic
+
 Showing a basic `SDCAlertView` alert looks just like showing a basic `UIAlertView` alert:
 ```objc
 SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:@"Title"
@@ -39,6 +41,8 @@ Or you can use one of the convenience methods:
 [SDCAlertView alertWithTitle:@"Title" message:@"This is a message" buttons:@[@"OK"]];
 ```
 
+### Block syntax
+
 Block syntax saves you from having to use a delegate:
 ```objc
 SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:@"Title"
@@ -50,6 +54,8 @@ SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:@"Title"
 	NSLog(@"Tapped button: %@", @(buttonIndex));
 }];
 ```
+
+### `contentView`
 
 Of course, you're not using `SDCAlertView`'s full potential unless you are using the `contentView`:
 ```objc
@@ -69,6 +75,8 @@ spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
 [spinner sdc_verticallyCenterInSuperviewWithOffset:SDCAutoLayoutStandardSiblingDistance];
 [alert show];
 ```
+
+### Additional delegate methods
 
 You can also use the `alertView:shouldDismissWithButtonIndex:` and `alertView:shouldDeselectButtonAtIndex:` to prevent an alert from dismissing:
 ```objc
@@ -90,6 +98,8 @@ You can also use the `alertView:shouldDismissWithButtonIndex:` and `alertView:sh
 }
 ```
 This will deselect the cancel button when it's tapped, but it won't actually dismiss the alert. Useful for password-like alerts that you don't want dismissed until the right password is entered.
+
+### Styling and appearance
 
 `SDCAlertView` uses the `tintColor` for buttons and any subviews you add to the `contentView`. If you are looking for more customizations, you can use `UIAppearance` to style alerts (per instance or all at once):
 ```objc
