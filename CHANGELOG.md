@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 1.4
+
+**What's New:**
+ - Added the ability to position a two-button alert vertically as opposed to horizontally (#29)
+ - Added `attributedTitle` and `attributedMessage` properties (#30)
+
+**Bug Fixes:**
+ - Auto-layout doesn't complain anymore when using `[[SDCAlertView alloc] init]`
+ - Fixes a bug that would not show correct button titles in certain alert configurations (#32)
+ - Instead of clipping button text, it now reduces the size of text on buttons appropriately (#33)
+
 ## 1.3
 
 **What's New:**

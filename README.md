@@ -123,16 +123,16 @@ Unfortunately, there are a few things that can't or won't be duplicated:
 - `UITextField` placeholders in different languages. "Login" and "Password" are entered as localized strings, but they aren't actually translated.
 - Some behavior is purposely not ported from `UIAlertView`. These cases are discussed in SDCAlertView.h.
 
-## New in 1.3
+## New in 1.4
 
 **What's New:**
- - The `SDCAlertViewTransitioning` protocol allows users to customize alert transitions and behavior
- - `SDCAlertView` now supports `tintColor` for buttons and `contentView`
+ - Added the ability to position a two-button alert vertically as opposed to horizontally
+ - Added `attributedTitle` and `attributedMessage` properties
 
 **Bug Fixes:**
- - Fixes an issue where the status bar style would not be preserved if it was set to `UIStatusBarStyleLightContent` (#26 & #27)
- - Fixes a bug that causes the app to lock up due to a race condition (#28)
- - Adding subviews to `contentView` won't have any animation-related side effects anymore (see #25)
+ - Auto-layout doesn't complain anymore when using `[[SDCAlertView alloc] init]`
+ - Fixes a bug that would not show correct button titles in certain alert configurations
+ - Instead of clipping button text, it now reduces the size of text on buttons appropriately
 
 ## Support
 I'm pretty active on [Stack Overflow](http://stackoverflow.com/users/751268/scott-berrevoets), so please use that if you have any questions. You can also use [Twitter](http://twitter.com/ScottBerrevoets) to contact me directly.
