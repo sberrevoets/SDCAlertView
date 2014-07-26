@@ -580,7 +580,7 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 - (void)positionButtons {
 	NSArray *elements = [self alertViewElementsToDisplay];
 	
-	if ([elements containsObject:self.contentScrollView]) {
+	if ([elements containsObject:self.buttonTopSeparatorView]) {
 		[self.buttonTopSeparatorView sdc_horizontallyCenterInSuperview];
 		[self.buttonTopSeparatorView sdc_pinWidthToWidthOfView:self];
 		[self.buttonTopSeparatorView sdc_pinHeight:SDCAlertViewGetSeparatorThickness()];
