@@ -4,7 +4,7 @@
 
 You can think of `SDCAlertView` as `UIAlertView` on steroids. It has added functionality such as a `contentView` property and block syntax, while still keeping the `UIAlertView` look.
 
-![Animated GIF showing alert](http://scott90.github.io/SDCAlertView/ProgressViewAlert.gif)
+![Animated GIF showing alert](http://sberrevoets.github.io/SDCAlertView/ProgressViewAlert.gif)
 
 ## Installation
 The easiest way to install is, of course, by using CocoaPods. The name of the pod is `SDCAlertView`.
