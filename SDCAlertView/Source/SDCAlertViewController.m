@@ -104,9 +104,12 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	 *  the frame in the right orientation. This works in both portrait and landscape if the orientation
 	 *  stays the same, but not if the device is rotated when an alert is shown. So we directly check
 	 *  the orientation and use either the keyboard frame's width or height based on that. Nast, but it works.
+	 *  It looks like iOS8 has fixed this.
 	 */
-	
-	CGFloat keyboardHeight = UIInterfaceOrientationIsPortrait(orientation) ? CGRectGetHeight(keyboardFrame) : CGRectGetWidth(keyboardFrame);
+	CGFloat keyboardHeight = CGRectGetHeight(keyboardFrame);
+    	if(UIInterfaceOrientationIsLandscape(orientation) && floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+		keyboardHeight = CGRectGetWidth(keyboardFrame);
+	}
 	self.bottomSpacingConstraint.constant = -keyboardHeight;
 	
 	// No need to animate the resizing of the alert container when the first alert is presented
