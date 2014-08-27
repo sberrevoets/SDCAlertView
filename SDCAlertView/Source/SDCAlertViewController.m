@@ -13,6 +13,10 @@
 
 #import "UIView+SDCAutoLayout.h"
 
+#ifndef NSFoundationVersionNumber_iOS_7_1
+#define NSFoundationVersionNumber_iOS_7_1 1047.25
+#endif
+
 static CGFloat 			const SDCAlertViewShowingAnimationScale = 1.26;
 static CGFloat 			const SDCAlertViewDismissingAnimationScale = 0.84;
 static CFTimeInterval	const SDCAlertViewSpringAnimationDuration = 0.5058237314224243;
@@ -57,7 +61,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 #pragma mark - Status Bar
 
 - (BOOL)prefersStatusBarHidden {
-    return [[UIApplication sharedApplication] isStatusBarHidden];
+	return [[UIApplication sharedApplication] isStatusBarHidden];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -99,17 +103,20 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	CGRect keyboardFrame = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
 	
+	CGFloat keyboardHeight = CGRectGetHeight(keyboardFrame);
+	
 	/*
 	 *  Normally, the keyboard's frame would have to be converted using a convertRect: method to get
 	 *  the frame in the right orientation. This works in both portrait and landscape if the orientation
 	 *  stays the same, but not if the device is rotated when an alert is shown. So we directly check
-	 *  the orientation and use either the keyboard frame's width or height based on that. Nast, but it works.
-	 *  It looks like iOS8 has fixed this.
+	 *  the orientation and use either the keyboard frame's width or height based on that. Not great, but it works.
+	 *  This problem is fixed in iOS 8, so the hack is only in place for iOS 7.
 	 */
-	CGFloat keyboardHeight = CGRectGetHeight(keyboardFrame);
-    	if(UIInterfaceOrientationIsLandscape(orientation) && floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+	
+	if (UIInterfaceOrientationIsLandscape(orientation) && floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
 		keyboardHeight = CGRectGetWidth(keyboardFrame);
 	}
+	
 	self.bottomSpacingConstraint.constant = -keyboardHeight;
 	
 	// No need to animate the resizing of the alert container when the first alert is presented
@@ -149,7 +156,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	
 	[self showAlert:newAlert];
 	[oldAlert resignFirstResponder];
-		
+	
 	[CATransaction begin];
 	[CATransaction setCompletionBlock:^{
 		self.presentingFirstAlert = newAlert == nil;
@@ -268,7 +275,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	RBBSpringAnimation *opacityAnimation = [self opacityAnimationForDismissing];
 	alert.layer.opacity = 0;
 	[alert.layer addAnimation:opacityAnimation forKey:@"opacity"];
-
+	
 	RBBSpringAnimation *transformAnimation = [self transformAnimationForDismissing];
 	[alert.layer addAnimation:transformAnimation forKey:@"transform"];
 }
