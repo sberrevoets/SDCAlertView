@@ -17,7 +17,6 @@
 #import "SDCAlertTransition.h"
 
 @interface SDCViewController () <UITableViewDelegate, UIAlertViewDelegate, SDCAlertViewDelegate>
-@property (nonatomic, strong) id<UIViewControllerTransitioningDelegate>transitioningDelegate2;
 @end
 
 @implementation SDCViewController
@@ -31,20 +30,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0) {
-//		UIAlertController *a = [UIAlertController alertControllerWithTitle:@"Title" message:@"Message" preferredStyle:UIAlertControllerStyleAlert];
-//		[a addAction:[UIAlertAction actionWithTitle:@"Button" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-//			a;
-//			
-//		}]];
-//		
-//		[self presentViewController:a animated:YES completion:^{
-//			[self performSelector:@selector(presentNow) withObject:nil afterDelay:1];
-//		}];
-
-		self.transitioningDelegate2 = [[SDCAlertTransitioningDelegate alloc] init];
 		
 		SDCAlertController *ac = [SDCAlertController alertControllerWithTitle:@"Title" message:@"Message" preferredStyle:SDCAlertControllerStyleAlert];
-		ac.transitioningDelegate = self.transitioningDelegate2;
 		
 		[self presentViewController:ac animated:YES completion:nil];
 		

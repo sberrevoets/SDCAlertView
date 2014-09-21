@@ -13,6 +13,7 @@
 @interface SDCAlertController ()
 @property (nonatomic, strong) NSMutableArray *mutableActions;
 @property (nonatomic, strong) NSMutableArray *textFieldConfigurationHandlers;
+@property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> transitioningDelegate;
 @end
 
 @implementation SDCAlertController
@@ -37,6 +38,7 @@
 		_textFieldConfigurationHandlers = [NSMutableArray array];
 		
 		self.modalPresentationStyle = UIModalPresentationCustom;
+		self.transitioningDelegate = [[SDCAlertTransitioningDelegate alloc] init];
 	}
 	
 	return self;
