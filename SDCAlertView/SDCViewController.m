@@ -13,20 +13,40 @@
 #import "SDCAlertView.h"
 #import "UIView+SDCAutoLayout.h"
 
-@interface SDCViewController () <UITableViewDelegate, UIAlertViewDelegate, SDCAlertViewDelegate>
+#import "SDCAlertController.h"
+#import "SDCAlertTransition.h"
 
+@interface SDCViewController () <UITableViewDelegate, UIAlertViewDelegate, SDCAlertViewDelegate>
+@property (nonatomic, strong) id<UIViewControllerTransitioningDelegate>transitioningDelegate2;
 @end
 
 @implementation SDCViewController
 
+- (void)presentNow {
+	UIAlertController *b = [UIAlertController alertControllerWithTitle:@"Title 2" message:@"Message 2" preferredStyle:UIAlertControllerStyleAlert];
+	[b addAction:[UIAlertAction actionWithTitle:@"Button 2" style:UIAlertActionStyleDefault handler:nil]];
+	
+	[self presentViewController:b animated:YES completion:nil];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0) {
-		UIAlertView *a = [[UIAlertView alloc] initWithTitle:@"Title"
-									message:@"This is a message"
-								   delegate:self
-						  cancelButtonTitle:@"Cancel"
-						  otherButtonTitles:@"Button 1", @"Button 2", nil];
-		[a show];
+//		UIAlertController *a = [UIAlertController alertControllerWithTitle:@"Title" message:@"Message" preferredStyle:UIAlertControllerStyleAlert];
+//		[a addAction:[UIAlertAction actionWithTitle:@"Button" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+//			a;
+//			
+//		}]];
+//		
+//		[self presentViewController:a animated:YES completion:^{
+//			[self performSelector:@selector(presentNow) withObject:nil afterDelay:1];
+//		}];
+
+		self.transitioningDelegate2 = [[SDCAlertTransitioningDelegate alloc] init];
+		
+		SDCAlertController *ac = [SDCAlertController alertControllerWithTitle:@"Title" message:@"Message" preferredStyle:SDCAlertControllerStyleAlert];
+		ac.transitioningDelegate = self.transitioningDelegate2;
+		
+		[self presentViewController:ac animated:YES completion:nil];
 		
 		} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {

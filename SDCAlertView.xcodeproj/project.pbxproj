@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4B64D41583994B9C9C59A4E3 /* libPods-SDCAlertViewTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB28936541154BCF9C9B2F0C /* libPods-SDCAlertViewTests.a */; };
+		D259FC1219CEB02100BA6B36 /* SDCAlertPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D259FC1119CEB02100BA6B36 /* SDCAlertPresentationController.m */; };
+		D259FC1519CEB0EB00BA6B36 /* SDCAlertTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D259FC1419CEB0EB00BA6B36 /* SDCAlertTransition.m */; };
 		D25B3CA817ECE7A6004B32A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CA717ECE7A6004B32A2 /* Foundation.framework */; };
 		D25B3CAA17ECE7A6004B32A2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */; };
 		D25B3CAC17ECE7A6004B32A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CAB17ECE7A6004B32A2 /* UIKit.framework */; };
@@ -51,6 +53,10 @@
 /* Begin PBXFileReference section */
 		50B67E8F6417468B9958F089 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		CB28936541154BCF9C9B2F0C /* libPods-SDCAlertViewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDCAlertViewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D259FC1019CEB02100BA6B36 /* SDCAlertPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertPresentationController.h; sourceTree = "<group>"; };
+		D259FC1119CEB02100BA6B36 /* SDCAlertPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertPresentationController.m; sourceTree = "<group>"; };
+		D259FC1319CEB0EB00BA6B36 /* SDCAlertTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertTransition.h; sourceTree = "<group>"; };
+		D259FC1419CEB0EB00BA6B36 /* SDCAlertTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertTransition.m; sourceTree = "<group>"; };
 		D25B3CA417ECE7A6004B32A2 /* SDCAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDCAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B3CA717ECE7A6004B32A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -226,6 +232,10 @@
 		D26506EF19C61B8000BF34B9 /* 2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				D259FC1019CEB02100BA6B36 /* SDCAlertPresentationController.h */,
+				D259FC1119CEB02100BA6B36 /* SDCAlertPresentationController.m */,
+				D259FC1319CEB0EB00BA6B36 /* SDCAlertTransition.h */,
+				D259FC1419CEB0EB00BA6B36 /* SDCAlertTransition.m */,
 				D26506F019C67FC300BF34B9 /* SDCAlertController.h */,
 				D26506F119C67FC300BF34B9 /* SDCAlertController.m */,
 				D26506F319C6812600BF34B9 /* SDCAlertAction.m */,
@@ -415,6 +425,8 @@
 			files = (
 				D25B3CBE17ECE7A6004B32A2 /* SDCViewController.m in Sources */,
 				D25B3CB417ECE7A6004B32A2 /* main.m in Sources */,
+				D259FC1519CEB0EB00BA6B36 /* SDCAlertTransition.m in Sources */,
+				D259FC1219CEB02100BA6B36 /* SDCAlertPresentationController.m in Sources */,
 				D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */,
 				D26506F419C6812600BF34B9 /* SDCAlertAction.m in Sources */,
 				D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */,
