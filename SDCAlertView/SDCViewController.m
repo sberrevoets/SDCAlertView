@@ -25,15 +25,18 @@
 	UIAlertController *b = [UIAlertController alertControllerWithTitle:@"Title 2" message:@"Message 2" preferredStyle:UIAlertControllerStyleAlert];
 	[b addAction:[UIAlertAction actionWithTitle:@"Button 2" style:UIAlertActionStyleDefault handler:nil]];
 	
-	[self presentViewController:b animated:YES completion:nil];
+	[self presentViewController:b animated:YES completion:^{
+		b.title = @"";
+	}];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0) {
 		
 		SDCAlertController *ac = [SDCAlertController alertControllerWithTitle:@"Title" message:@"Message" preferredStyle:SDCAlertControllerStyleAlert];
-		
 		[self presentViewController:ac animated:YES completion:nil];
+		
+		//[self presentNow];
 		
 		} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {

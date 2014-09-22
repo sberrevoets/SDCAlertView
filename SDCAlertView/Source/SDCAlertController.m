@@ -9,6 +9,8 @@
 #import "SDCAlertController.h"
 
 #import "SDCAlertTransition.h"
+#import "SDCAlertViewNew.h"
+#import "UIView+SDCAutoLayout.h"
 
 @interface SDCAlertController ()
 @property (nonatomic, strong) NSMutableArray *mutableActions;
@@ -42,6 +44,19 @@
 	}
 	
 	return self;
+}
+
+#pragma mark - Alert View
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	
+	SDCAlertViewNew *alert = [[SDCAlertViewNew alloc] initWithTitle:self.title message:self.message];
+	[alert sdc_pinSize:CGSizeMake(270, 120)];
+	
+	[self.view addSubview:alert];
+	[alert sdc_centerInSuperview];
+	[alert layoutIfNeeded];
 }
 
 #pragma mark - Style
