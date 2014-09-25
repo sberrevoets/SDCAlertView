@@ -10,4 +10,14 @@
 
 @implementation SDCAlertControllerCollectionViewFlowLayout
 
+- (instancetype)init {
+	self = [super init];
+	
+	if (self) {
+		self.minimumInteritemSpacing = 0;
+	}
+	
+	return self;
+}
+
 @end

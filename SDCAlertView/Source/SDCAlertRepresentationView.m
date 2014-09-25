@@ -74,17 +74,13 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	SDCAlertAction *action = self.actions[indexPath.item];
 	cell.textLabel.text = action.title;
-	
 	return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
-				  layout:(UICollectionViewLayout *)collectionViewLayout
+layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return CGSizeMake(270, 44);
+	return CGSizeMake(CGRectGetWidth(self.bounds) / self.actions.count, CGRectGetHeight(collectionView.bounds));
 }
-
-
-
 
 @end

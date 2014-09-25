@@ -8,11 +8,14 @@
 
 #import "SDCAlertCollectionViewCell.h"
 
+#import "UIView+SDCAutoLayout.h"
+
 @implementation SDCAlertCollectionViewCell
 
 - (UILabel *)textLabel {
 	if (!_textLabel) {
 		_textLabel = [[UILabel alloc] init];
+		[_textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
 	
 	return _textLabel;
@@ -22,8 +25,8 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	[self.textLabel sizeToFit];
 	[self.contentView addSubview:self.textLabel];
+	[self.textLabel sdc_centerInSuperview];
 }
 
 @end
