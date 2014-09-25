@@ -15,4 +15,6 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *message;
 
+@property (nonatomic, copy) NSArray *actions;
+
 @end

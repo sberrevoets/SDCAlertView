@@ -8,6 +8,7 @@
 
 #import "SDCAlertRepresentationView.h"
 
+#import "SDCAlertController.h"
 #import "SDCAlertScrollView.h"
 #import "SDCAlertControllerCollectionViewFlowLayout.h"
 #import "SDCAlertCollectionViewCell.h"
@@ -64,14 +65,16 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 #pragma mark - UICollectionViewDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-	return 1;
+	return self.actions.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	SDCAlertCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:SDCAlertControllerCellReuseIdentifier
 																				 forIndexPath:indexPath];
 	
-	cell.textLabel.text = @"button title";
+	SDCAlertAction *action = self.actions[indexPath.item];
+	cell.textLabel.text = action.title;
+	
 	return cell;
 }
 

@@ -52,6 +52,7 @@
 	[super viewDidLoad];
 	
 	SDCAlertRepresentationView *alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
+	alert.actions = self.actions;
 	[alert sdc_pinSize:CGSizeMake(270, 120)];
 	
 	[self.view addSubview:alert];

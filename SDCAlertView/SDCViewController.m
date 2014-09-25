@@ -34,6 +34,7 @@
 	if (indexPath.section == 0) {
 		
 		SDCAlertController *ac = [SDCAlertController alertControllerWithTitle:@"Title" message:@"Message" preferredStyle:SDCAlertControllerStyleAlert];
+		[ac addAction:[SDCAlertAction actionWithTitle:@"Cancel" style:SDCAlertActionStyleDefault handler:nil]];
 		[self presentViewController:ac animated:YES completion:nil];
 		
 		//[self presentNow];
