@@ -9,7 +9,7 @@
 #import "SDCAlertController.h"
 
 #import "SDCAlertTransition.h"
-#import "SDCAlertViewNew.h"
+#import "SDCAlertRepresentationView.h"
 #import "UIView+SDCAutoLayout.h"
 
 @interface SDCAlertController ()
@@ -51,7 +51,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	SDCAlertViewNew *alert = [[SDCAlertViewNew alloc] initWithTitle:self.title message:self.message];
+	SDCAlertRepresentationView *alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
 	[alert sdc_pinSize:CGSizeMake(270, 120)];
 	
 	[self.view addSubview:alert];

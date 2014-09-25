@@ -24,9 +24,9 @@
 - (void)presentNow {
 	UIAlertController *b = [UIAlertController alertControllerWithTitle:@"Title 2" message:@"Message 2" preferredStyle:UIAlertControllerStyleAlert];
 	[b addAction:[UIAlertAction actionWithTitle:@"Button 2" style:UIAlertActionStyleDefault handler:nil]];
-	
+	[b addAction:[UIAlertAction actionWithTitle:@"Button 33??" style:UIAlertActionStyleCancel handler:nil]];
 	[self presentViewController:b animated:YES completion:^{
-		b.title = @"";
+		
 	}];
 }
 

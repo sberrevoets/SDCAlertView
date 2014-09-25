@@ -1,5 +1,5 @@
 //
-//  SDCAlertViewNew.h
+//  SDCAlertRepresentationView.h
 //  SDCAlertView
 //
 //  Created by Scott Berrevoets on 9/21/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SDCAlertViewNew : UIView
+@interface SDCAlertRepresentationView : UIView
 
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
 
