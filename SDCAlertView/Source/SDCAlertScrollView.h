@@ -12,6 +12,4 @@
 
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
 
-- (void)prepareForDisplay;
-
 @end

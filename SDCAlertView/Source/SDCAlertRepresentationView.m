@@ -46,20 +46,21 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	return self;
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-	if (!newSuperview) {
-		return;
-	}
-	
+- (void)layoutSubviews {
+	[super layoutSubviews];
+
 	[self addSubview:self.scrollView];
-	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
+	[self.scrollView setNeedsLayout];
+	[self.scrollView layoutIfNeeded];
+	
+	self.scrollView.backgroundColor = [UIColor redColor];
+	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];
+	[self.scrollView sdc_setMaximumHeight:76];
 	
 	[self addSubview:self.buttonCollectionView];
 	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
 	[self.buttonCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeRight];
 	[self.buttonCollectionView sdc_pinHeight:44];
-	
-	[self.scrollView prepareForDisplay];
 }
 
 #pragma mark - UICollectionViewDelegate

@@ -48,7 +48,7 @@ static CGFloat const SDCAlertScrollViewLabelSpacing = 4;
 	_titleLabel.text = title;
 	
 	if (requiresViewHierarchyUpdate && self.superview) {
-		[self updateViewHierarchy];
+		[self setNeedsLayout];
 	}
 }
 
@@ -59,15 +59,13 @@ static CGFloat const SDCAlertScrollViewLabelSpacing = 4;
 	_messageLabel.text = message;
 	
 	if (requiresViewHierarchyUpdate && self.superview) {
-		[self updateViewHierarchy];
+		[self setNeedsLayout];
 	}
 }
 
-- (void)prepareForDisplay {
-	[self updateViewHierarchy];
-}
-
-- (void)updateViewHierarchy {
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	
 	if (self.title.length > 0) {
 		[self addSubview:self.titleLabel];
 		[self.titleLabel sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop];
@@ -89,7 +87,20 @@ static CGFloat const SDCAlertScrollViewLabelSpacing = 4;
 	} else {
 		[self.messageLabel removeFromSuperview];
 	}
+	
+	[self invalidateIntrinsicContentSize];
 }
 
+- (CGSize)intrinsicContentSize {
+	CGFloat intrinsicHeight = 0;
+	
+	if (self.message.length > 0) {
+		intrinsicHeight = CGRectGetMaxY(self.messageLabel.frame) + self.contentInset.top + self.contentInset.bottom;
+	} else if (self.title.length > 0) {
+		intrinsicHeight = CGRectGetMaxY(self.titleLabel.frame) + self.contentInset.top + self.contentInset.bottom;
+	}
+	
+	return CGSizeMake(UIViewNoIntrinsicMetric, intrinsicHeight);
+}
 
 @end
