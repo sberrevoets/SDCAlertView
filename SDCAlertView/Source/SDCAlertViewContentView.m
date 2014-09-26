@@ -731,13 +731,13 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (void)setContentPadding:(UIEdgeInsets)contentPadding {
-    _contentPadding = contentPadding;
-    [self setNeedsUpdateConstraints];
+	_contentPadding = contentPadding;
+	[self setNeedsUpdateConstraints];
 }
 
 - (void)setLabelSpacing:(CGFloat)labelSpacing {
-    _labelSpacing = labelSpacing;
-    [self setNeedsUpdateConstraints];
+	_labelSpacing = labelSpacing;
+	[self setNeedsUpdateConstraints];
 }
 
 @end
