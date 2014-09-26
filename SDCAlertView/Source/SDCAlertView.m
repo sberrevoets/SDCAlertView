@@ -50,8 +50,8 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 	[appearance setTextFieldTextColor:[UIColor darkTextColor]];
 	[appearance setTitleLabelTextColor:[UIColor darkTextColor]];
 	[appearance setMessageLabelTextColor:[UIColor darkTextColor]];
-    [appearance setContentPadding:SDCAlertViewContentPadding];
-    [appearance setLabelSpacing:SDCAlertViewLabelSpacing];
+	[appearance setContentPadding:SDCAlertViewContentPadding];
+	[appearance setLabelSpacing:SDCAlertViewLabelSpacing];
 }
 
 #pragma mark - Lazy Instantiation
