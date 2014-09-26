@@ -506,19 +506,19 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 }
 
 - (UIEdgeInsets)contentPadding {
-    return self.alertContentView.contentPadding;
+	return self.alertContentView.contentPadding;
 }
 
 - (void)setContentPadding:(UIEdgeInsets)contentPadding {
-    self.alertContentView.contentPadding = contentPadding;
+	self.alertContentView.contentPadding = contentPadding;
 }
 
 - (CGFloat)labelSpacing {
-    return self.alertContentView.labelSpacing;
+	return self.alertContentView.labelSpacing;
 }
 
 - (void)setLabelSpacing:(CGFloat)labelSpacing {
-    self.alertContentView.labelSpacing = labelSpacing;
+	self.alertContentView.labelSpacing = labelSpacing;
 }
 
 @end
