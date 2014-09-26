@@ -21,6 +21,10 @@ static CGFloat const SDCAlertViewCornerRadius = 7;
 
 static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
+static UIEdgeInsets const SDCAlertViewContentPadding = {19, 15, 18.5, 15};
+static CGFloat const SDCAlertViewLabelSpacing = 4;
+
+
 #pragma mark - SDCAlertView
 
 @interface SDCAlertView () <SDCAlertViewContentViewDelegate>
@@ -46,6 +50,8 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	[appearance setTextFieldTextColor:[UIColor darkTextColor]];
 	[appearance setTitleLabelTextColor:[UIColor darkTextColor]];
 	[appearance setMessageLabelTextColor:[UIColor darkTextColor]];
+    [appearance setContentPadding:SDCAlertViewContentPadding];
+    [appearance setLabelSpacing:SDCAlertViewLabelSpacing];
 }
 
 #pragma mark - Lazy Instantiation
@@ -497,6 +503,22 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 - (void)setButtonTextColor:(UIColor *)buttonTextColor {
 	self.alertContentView.buttonTextColor = buttonTextColor;
+}
+
+- (UIEdgeInsets)contentPadding {
+    return self.alertContentView.contentPadding;
+}
+
+- (void)setContentPadding:(UIEdgeInsets)contentPadding {
+    self.alertContentView.contentPadding = contentPadding;
+}
+
+- (CGFloat)labelSpacing {
+    return self.alertContentView.labelSpacing;
+}
+
+- (void)setLabelSpacing:(CGFloat)labelSpacing {
+    self.alertContentView.labelSpacing = labelSpacing;
 }
 
 @end
