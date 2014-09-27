@@ -59,5 +59,7 @@
 @property (nonatomic, strong) UIFont *suggestedButtonFont;
 @property (nonatomic, strong) UIFont *normalButtonFont;
 @property (nonatomic, strong) UIColor *buttonTextColor;
+@property (nonatomic, assign) UIEdgeInsets contentPadding;
+@property (nonatomic, assign) CGFloat labelSpacing;
 
 @end

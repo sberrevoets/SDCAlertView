@@ -212,6 +212,8 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @property (nonatomic, strong) UIFont	*suggestedButtonFont	UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIFont	*normalButtonFont		UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIColor	*buttonTextColor		UI_APPEARANCE_SELECTOR;	// Will override tintColor
+@property (nonatomic, assign) UIEdgeInsets contentPadding UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) CGFloat labelSpacing UI_APPEARANCE_SELECTOR;
 
 @end
 
