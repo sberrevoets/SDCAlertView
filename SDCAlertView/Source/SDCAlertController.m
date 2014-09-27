@@ -51,13 +51,19 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+	UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+	[visualEffectView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[visualEffectView sdc_pinSize:CGSizeMake(270, 120)];
+	
 	SDCAlertRepresentationView *alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
 	alert.actions = self.actions;
-	[alert sdc_pinSize:CGSizeMake(270, 120)];
 	
-	[self.view addSubview:alert];
-	[alert sdc_centerInSuperview];
-	[alert layoutIfNeeded];
+	[visualEffectView.contentView addSubview:alert];
+	[alert sdc_alignEdgesWithSuperview:UIRectEdgeAll];
+	
+	[self.view addSubview:visualEffectView];
+	[visualEffectView sdc_centerInSuperview];
 }
 
 #pragma mark - Style

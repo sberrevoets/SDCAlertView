@@ -19,7 +19,6 @@
 static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControllerCellReuseIdentifier";
 
 @interface SDCAlertRepresentationView () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
-@property (nonatomic, strong) SDCAlertViewBackgroundView *backgroundView;
 @property (nonatomic, strong) SDCAlertScrollView *scrollView;
 @property (nonatomic, strong) UICollectionView *buttonCollectionView;
 @property (nonatomic, strong) SDCAlertControllerCollectionViewFlowLayout *collectionViewLayout;
@@ -42,10 +41,6 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 		_buttonCollectionView.dataSource = self;
 		_buttonCollectionView.backgroundColor = [UIColor clearColor];
 
-		_backgroundView = [[SDCAlertViewBackgroundView alloc] init];
-		[_backgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
-		[self addSubview:_backgroundView];
-		
 		self.layer.masksToBounds = YES;
 		self.layer.cornerRadius = 5;
 		
@@ -57,8 +52,6 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-
-	[self.backgroundView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
 	
 	[self addSubview:self.scrollView];
 	[self.scrollView setNeedsLayout];
