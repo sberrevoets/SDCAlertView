@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@interface SDCAlertControllerSeparatorView : UICollectionReusableView
+@end
+
+
 @interface SDCAlertCollectionViewCell : UICollectionViewCell
-
 @property (nonatomic, strong) UILabel *textLabel;
-
 @end

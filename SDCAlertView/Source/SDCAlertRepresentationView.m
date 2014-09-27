@@ -44,6 +44,8 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 		[_buttonCollectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
 		
 		[_buttonCollectionView registerClass:[SDCAlertCollectionViewCell class] forCellWithReuseIdentifier:SDCAlertControllerCellReuseIdentifier];
+		[_buttonCollectionView.collectionViewLayout registerClass:[SDCAlertControllerSeparatorView class] forDecorationViewOfKind:@"separator"];
+		
 		_buttonCollectionView.delegate = self;
 		_buttonCollectionView.dataSource = self;
 		_buttonCollectionView.backgroundColor = [UIColor clearColor];
