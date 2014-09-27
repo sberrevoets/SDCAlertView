@@ -36,9 +36,7 @@
 		[ac addAction:[SDCAlertAction actionWithTitle:@"Cancel" style:SDCAlertActionStyleDefault handler:nil]];
 		[ac addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleDefault handler:nil]];
 		[self presentViewController:ac animated:YES completion:nil];
-	
-	
-		//[self presentNow];
+//		[self presentNow];
 		
 		} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
