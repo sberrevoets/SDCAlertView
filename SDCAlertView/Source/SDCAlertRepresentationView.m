@@ -19,6 +19,7 @@
 static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControllerCellReuseIdentifier";
 
 @interface SDCAlertRepresentationView () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+@property (nonatomic, strong) UIVisualEffectView *visualEffectView;
 @property (nonatomic, strong) SDCAlertScrollView *scrollView;
 @property (nonatomic, strong) UICollectionView *buttonCollectionView;
 @property (nonatomic, strong) SDCAlertControllerCollectionViewFlowLayout *collectionViewLayout;
@@ -30,6 +31,12 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	self = [self init];
 	
 	if (self) {
+		UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+		_visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+		_visualEffectView.layer.masksToBounds = YES;
+		_visualEffectView.layer.cornerRadius = 5;
+		[_visualEffectView setTranslatesAutoresizingMaskIntoConstraints:NO];
+		
 		_scrollView = [[SDCAlertScrollView alloc] initWithTitle:title message:message];
 		
 		_collectionViewLayout = [[SDCAlertControllerCollectionViewFlowLayout alloc] init];
@@ -40,9 +47,6 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 		_buttonCollectionView.delegate = self;
 		_buttonCollectionView.dataSource = self;
 		_buttonCollectionView.backgroundColor = [UIColor clearColor];
-
-		self.layer.masksToBounds = YES;
-		self.layer.cornerRadius = 5;
 		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
@@ -53,17 +57,22 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	[self addSubview:self.scrollView];
+	[self.visualEffectView sdc_pinSize:CGSizeMake(270, 120)];
+	
+	[self.visualEffectView.contentView addSubview:self.scrollView];
 	[self.scrollView setNeedsLayout];
 	[self.scrollView layoutIfNeeded];
 	
 	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];
 	[self.scrollView sdc_setMaximumHeight:76];
 	
-	[self addSubview:self.buttonCollectionView];
+	[self.visualEffectView.contentView addSubview:self.buttonCollectionView];
 	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
 	[self.buttonCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeRight];
 	[self.buttonCollectionView sdc_pinHeight:44];
+	
+	[self addSubview:self.visualEffectView];
+	[self.visualEffectView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -78,6 +87,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	SDCAlertAction *action = self.actions[indexPath.item];
 	cell.textLabel.text = action.title;
+	cell.textLabel.textColor = self.tintColor;
 	return cell;
 }
 
