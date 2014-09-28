@@ -104,7 +104,11 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	SDCAlertAction *action = self.actions[indexPath.item];
 	cell.visualStyle = self.visualStyle;
+	cell.textLabel.font = [self.visualStyle fontForButtonRepresentingAction:action];
 	cell.textLabel.text = action.title;
+	cell.textLabel.textColor = [self.visualStyle textColorForButtonRepresentingAction:action];
+	cell.textLabel.enabled = action.isEnabled;
+	
 	cell.gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionButtonTapped:)];
 	
 	return cell;

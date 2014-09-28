@@ -8,6 +8,8 @@
 
 #import "SDCAlertControllerDefaultVisualStyle.h"
 
+#import "SDCAlertController.h"
+
 @implementation SDCAlertControllerDefaultVisualStyle
 
 - (CGFloat)width {
@@ -32,16 +34,28 @@
 	return view;
 }
 
-- (UIColor *)buttonTextColor {
-	return [[[UIView alloc] init] tintColor];
-}
-
 - (UIFont *)titleLabelFont {
 	return [UIFont boldSystemFontOfSize:17];
 }
 
 - (UIFont *)messageLabelFont {
 	return [UIFont systemFontOfSize:14];
+}
+
+- (UIColor *)textColorForButtonRepresentingAction:(SDCAlertAction *)action {
+	if (action.style == SDCAlertActionStyleDestructive) {
+		return [UIColor redColor];
+	} else {
+		return [[[UIView alloc] init] tintColor];
+	}
+}
+
+- (UIFont *)fontForButtonRepresentingAction:(SDCAlertAction *)action {
+	if (action.style == SDCAlertActionStyleCancel) {
+		return [UIFont boldSystemFontOfSize:17];
+	} else {
+		return [UIFont systemFontOfSize:17];
+	}
 }
 
 @end

@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Scotty Doesn't Code. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+
+@class SDCAlertAction;
 
 @protocol SDCAlertControllerVisualStyle <NSObject>
 
@@ -18,9 +20,11 @@
 
 
 @property (nonatomic, readonly) UIView *buttonHighlightBackgroundView;
-@property (nonatomic, readonly) UIColor *buttonTextColor;
 
 @property (nonatomic, readonly) UIFont *titleLabelFont;
 @property (nonatomic, readonly) UIFont *messageLabelFont;
+
+- (UIColor *)textColorForButtonRepresentingAction:(SDCAlertAction *)action;
+- (UIFont *)fontForButtonRepresentingAction:(SDCAlertAction *)action;
 
 @end

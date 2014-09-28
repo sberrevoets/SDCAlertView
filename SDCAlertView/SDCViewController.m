@@ -33,8 +33,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0) {
 		SDCAlertController *ac = [SDCAlertController alertControllerWithTitle:@"Title" message:@"Message" preferredStyle:SDCAlertControllerStyleAlert];
-		[ac addAction:[SDCAlertAction actionWithTitle:@"Cancel" style:SDCAlertActionStyleDefault handler:nil]];
-		[ac addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleDefault handler:^(SDCAlertAction *action) {
+		[ac addAction:[SDCAlertAction actionWithTitle:@"Cancel" style:SDCAlertActionStyleDestructive handler:nil]];
+		[ac addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleCancel handler:^(SDCAlertAction *action) {
 			NSLog(@"%@", action.title);
 		}]];
 		[self presentViewController:ac animated:YES completion:nil];

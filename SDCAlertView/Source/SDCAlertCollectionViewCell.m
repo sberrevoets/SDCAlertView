@@ -33,8 +33,6 @@
 	self.highlightedBackgroundView = visualStyle.buttonHighlightBackgroundView;
 	[self.highlightedBackgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	self.highlightedBackgroundView.hidden = !self.isHighlighted;
-	
-	self.textLabel.textColor = self.visualStyle.buttonTextColor;
 }
 
 - (void)setGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
