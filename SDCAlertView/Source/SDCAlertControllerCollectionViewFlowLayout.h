@@ -10,8 +10,9 @@
 
 #import "SDCAlertControllerVisualStyle.h"
 
+extern NSString *const SDCAlertControllerDecorationKindHorizontalSeparator;
+extern NSString *const SDCAlertControllerDecorationKindVerticalSeparator;
+
 @interface SDCAlertControllerCollectionViewFlowLayout : UICollectionViewFlowLayout
-
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
-
 @end

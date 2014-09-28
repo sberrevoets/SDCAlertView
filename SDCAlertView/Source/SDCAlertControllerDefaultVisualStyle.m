@@ -42,6 +42,14 @@
 	return view;
 }
 
+- (UIColor *)buttonSeparatorColor {
+	return [UIColor colorWithWhite:0.5 alpha:0.5];
+}
+
+- (CGFloat)buttonSeparatorThickness {
+	return 1 / [UIScreen mainScreen].scale;
+}
+
 - (UIFont *)titleLabelFont {
 	return [UIFont boldSystemFontOfSize:17];
 }

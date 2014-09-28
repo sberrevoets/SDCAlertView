@@ -61,14 +61,13 @@
 
 @implementation SDCAlertControllerSeparatorView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-	self = [super initWithFrame:frame];
+- (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
+	[super applyLayoutAttributes:layoutAttributes];
 	
-	if (self) {
-		self.backgroundColor = [UIColor grayColor];
+	// By keeping this very generic, this class doesn't have to know about the class name of the custom layout attributes
+	if ([layoutAttributes respondsToSelector:@selector(backgroundColor)]) {
+		self.backgroundColor = [layoutAttributes performSelector:@selector(backgroundColor)];
 	}
-	
-	return self;
 }
 
 @end

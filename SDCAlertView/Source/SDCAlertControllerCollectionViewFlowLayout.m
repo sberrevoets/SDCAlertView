@@ -8,7 +8,18 @@
 
 #import "SDCAlertControllerCollectionViewFlowLayout.h"
 
+NSString *const SDCAlertControllerDecorationKindHorizontalSeparator = @"SDCAlertControllerDecorationKindHorizontalSeparator";
+NSString *const SDCAlertControllerDecorationKindVerticalSeparator = @"SDCAlertControllerDecorationKindVerticalSeparator";
+
+@interface SDCAlertControllerCollectionViewLayoutAttributes : UICollectionViewLayoutAttributes
+@property (nonatomic, strong) UIColor *backgroundColor;
+@end
+
 @implementation SDCAlertControllerCollectionViewFlowLayout
+
++ (Class)layoutAttributesClass {
+	return [SDCAlertControllerCollectionViewLayoutAttributes class];
+}
 
 - (instancetype)init {
 	self = [super init];
@@ -25,25 +36,39 @@
 	NSMutableArray *attributes = [[super layoutAttributesForElementsInRect:rect] mutableCopy];
 	
 	[[attributes copy] enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *itemAttributes, NSUInteger idx, BOOL *stop) {
-		[attributes addObject:[self layoutAttributesForDecorationViewOfKind:@"separator" atIndexPath:itemAttributes.indexPath]];
+		NSIndexPath *indexPath = itemAttributes.indexPath;
+		
+		[attributes addObject:[self layoutAttributesForDecorationViewOfKind:SDCAlertControllerDecorationKindHorizontalSeparator atIndexPath:indexPath]];
+		
+		if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal && indexPath.item > 0) {
+			[attributes addObject:[self layoutAttributesForDecorationViewOfKind:SDCAlertControllerDecorationKindVerticalSeparator atIndexPath:indexPath]];
+		}
 	}];
 	
 	return attributes;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return [super layoutAttributesForItemAtIndexPath:indexPath];
-}
-
 - (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
-	UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:elementKind
-																											   withIndexPath:indexPath];
+	SDCAlertControllerCollectionViewLayoutAttributes *attributes = [SDCAlertControllerCollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:elementKind
+																																			   withIndexPath:indexPath];
 	
 	UICollectionViewLayoutAttributes *itemAttributes = [self layoutAttributesForItemAtIndexPath:indexPath];
-	attributes.frame = CGRectMake(CGRectGetMinX(itemAttributes.frame), CGRectGetMinY(itemAttributes.frame), CGRectGetWidth(itemAttributes.frame), 0.5);
 	attributes.zIndex = itemAttributes.zIndex + 1;
+	attributes.backgroundColor = self.visualStyle.buttonSeparatorColor;
+	
+	CGRect decorationFrame = itemAttributes.frame;
+	if (elementKind == SDCAlertControllerDecorationKindHorizontalSeparator) {
+		decorationFrame.size.height = self.visualStyle.buttonSeparatorThickness;
+	} else {
+		decorationFrame.size.width = self.visualStyle.buttonSeparatorThickness;
+	}
+	
+	attributes.frame = decorationFrame;
 	
 	return attributes;
 }
 
+@end
+
+@implementation SDCAlertControllerCollectionViewLayoutAttributes
 @end

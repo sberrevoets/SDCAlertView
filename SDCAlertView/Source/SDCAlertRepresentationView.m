@@ -40,11 +40,12 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 		_scrollView = [[SDCAlertScrollView alloc] initWithTitle:title message:message];
 		
 		_collectionViewLayout = [[SDCAlertControllerCollectionViewFlowLayout alloc] init];
+		[_collectionViewLayout registerClass:[SDCAlertControllerSeparatorView class] forDecorationViewOfKind:SDCAlertControllerDecorationKindHorizontalSeparator];
+		[_collectionViewLayout registerClass:[SDCAlertControllerSeparatorView class] forDecorationViewOfKind:SDCAlertControllerDecorationKindVerticalSeparator];
+		
 		_buttonCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionViewLayout];
 		[_buttonCollectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
-		
 		[_buttonCollectionView registerClass:[SDCAlertCollectionViewCell class] forCellWithReuseIdentifier:SDCAlertControllerCellReuseIdentifier];
-		[_buttonCollectionView.collectionViewLayout registerClass:[SDCAlertControllerSeparatorView class] forDecorationViewOfKind:@"separator"];
 		
 		_buttonCollectionView.delegate = self;
 		_buttonCollectionView.dataSource = self;
@@ -61,7 +62,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	UICollectionViewScrollDirection direction = UICollectionViewScrollDirectionHorizontal;
 	
-	if (buttonLayout == SDCAlertControllerButtonLayoutVertical || (buttonLayout == SDCAlertControllerButtonLayoutAutomatic && self.actions.count == 2)) {
+	if (buttonLayout == SDCAlertControllerButtonLayoutVertical || (buttonLayout == SDCAlertControllerButtonLayoutAutomatic && self.actions.count != 2)) {
 		direction = UICollectionViewScrollDirectionVertical;
 	}
 	
