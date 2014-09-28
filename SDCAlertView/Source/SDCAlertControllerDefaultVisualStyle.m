@@ -36,4 +36,12 @@
 	return [[[UIView alloc] init] tintColor];
 }
 
+- (UIFont *)titleLabelFont {
+	return [UIFont boldSystemFontOfSize:17];
+}
+
+- (UIFont *)messageLabelFont {
+	return [UIFont systemFontOfSize:14];
+}
+
 @end

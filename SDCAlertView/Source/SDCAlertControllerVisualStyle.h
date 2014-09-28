@@ -20,4 +20,7 @@
 @property (nonatomic, readonly) UIView *buttonHighlightBackgroundView;
 @property (nonatomic, readonly) UIColor *buttonTextColor;
 
+@property (nonatomic, readonly) UIFont *titleLabelFont;
+@property (nonatomic, readonly) UIFont *messageLabelFont;
+
 @end

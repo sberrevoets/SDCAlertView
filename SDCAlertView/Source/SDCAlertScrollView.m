@@ -63,6 +63,9 @@
 	self.contentInset = visualStyle.contentPadding;
 	self.scrollIndicatorInsets = visualStyle.contentPadding;
 	
+	self.titleLabel.font = visualStyle.titleLabelFont;
+	self.messageLabel.font = visualStyle.messageLabelFont;
+	
 	[self setNeedsLayout];
 }
 
