@@ -28,6 +28,8 @@
 - (void)presentationTransitionWillBegin {
 	[super presentationTransitionWillBegin];
 	
+	self.presentingViewController.view.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
+	
 	self.dimmingView.alpha = 0;
 	[[self containerView] addSubview:self.dimmingView];
 	
@@ -38,6 +40,8 @@
 
 - (void)dismissalTransitionWillBegin {
 	[super dismissalTransitionWillBegin];
+	
+	self.presentingViewController.view.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
 	
 	[self.presentedViewController.transitionCoordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
 		self.dimmingView.alpha = 0;
