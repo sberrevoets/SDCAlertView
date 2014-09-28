@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSMutableArray *mutableActions;
 @property (nonatomic, strong) NSMutableArray *textFieldConfigurationHandlers;
 @property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> transitioningDelegate;
+@property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 @end
 
 @implementation SDCAlertController
@@ -51,22 +52,23 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	
 	SDCAlertRepresentationView *alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
 	alert.actions = self.actions;
 	
 	[self.view addSubview:alert];
-	//[alert sdc_alignEdgesWithSuperview:UIRectEdgeAll];
 	[alert sdc_centerInSuperview];
 	
 	[self.view addSubview:alert];
-	//[visualEffectView sdc_centerInSuperview];
 }
 
 #pragma mark - Style
 
 - (SDCAlertControllerStyle)preferredStyle {
 	return SDCAlertControllerStyleAlert;
+}
+
+- (void)applyVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
+	_visualStyle = visualStyle;
 }
 
 #pragma mark - Alert Actions
@@ -88,7 +90,5 @@
 - (NSArray *)textFields {
 	return [NSArray array];
 }
-
-
 
 @end

@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerStyle) {
 
 @end
 
+@protocol SDCAlertControllerVisualStyle;
+
 @interface SDCAlertController : UIViewController
 
 + (instancetype)alertControllerWithTitle:(NSString *)title message:(NSString *)message preferredStyle:(SDCAlertControllerStyle)preferredStyle;
@@ -41,5 +43,7 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerStyle) {
 @property (nonatomic, copy) NSString *message;
 
 @property (nonatomic, readonly) SDCAlertControllerStyle preferredStyle;
+
+- (void)applyVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle;
 
 @end

@@ -10,6 +10,8 @@
 
 @interface SDCAlertScrollView : UIScrollView
 
+@property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
+
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
 
 @end

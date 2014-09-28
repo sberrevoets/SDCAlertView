@@ -59,6 +59,8 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
+	[self applyCurrentStyleToAlertElements];
+	
 	[self.visualEffectView sdc_pinSize:CGSizeMake(270, 120)];
 	
 	[self.visualEffectView.contentView addSubview:self.scrollView];
@@ -75,6 +77,11 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	[self addSubview:self.visualEffectView];
 	[self.visualEffectView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
+}
+
+- (void)applyCurrentStyleToAlertElements {
+	self.scrollView.visualStyle = self.visualStyle;
+	self.collectionViewLayout.visualStyle = self.visualStyle;
 }
 
 #pragma mark - UICollectionViewDelegate
