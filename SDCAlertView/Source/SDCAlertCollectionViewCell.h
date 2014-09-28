@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "SDCAlertControllerVisualStyle.h"
+
 @interface SDCAlertControllerSeparatorView : UICollectionReusableView
 @end
 
 
 @interface SDCAlertCollectionViewCell : UICollectionViewCell
+@property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 @property (nonatomic, strong) UILabel *textLabel;
 @end

@@ -61,7 +61,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	[self applyCurrentStyleToAlertElements];
 	
-	[self.visualEffectView sdc_pinSize:CGSizeMake(270, 120)];
+	[self.visualEffectView sdc_pinSize:CGSizeMake(self.visualStyle.width, 120)];
 	
 	[self.visualEffectView.contentView addSubview:self.scrollView];
 	[self.scrollView setNeedsLayout];
@@ -73,7 +73,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self.visualEffectView.contentView addSubview:self.buttonCollectionView];
 	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
 	[self.buttonCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeRight];
-	[self.buttonCollectionView sdc_pinHeight:44];
+	[self.buttonCollectionView sdc_pinHeight:self.visualStyle.buttonHeight];
 	
 	[self addSubview:self.visualEffectView];
 	[self.visualEffectView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
@@ -95,8 +95,9 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 																				 forIndexPath:indexPath];
 	
 	SDCAlertAction *action = self.actions[indexPath.item];
+	cell.visualStyle = self.visualStyle;
 	cell.textLabel.text = action.title;
-	cell.textLabel.textColor = self.tintColor;
+	
 	return cell;
 }
 

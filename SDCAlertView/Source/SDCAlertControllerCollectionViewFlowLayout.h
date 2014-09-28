@@ -8,6 +8,8 @@
 
 @import UIKit;
 
+#import "SDCAlertControllerVisualStyle.h"
+
 @interface SDCAlertControllerCollectionViewFlowLayout : UICollectionViewFlowLayout
 
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;

@@ -10,9 +10,6 @@
 #import "SDCAlertLabel.h"
 #import "UIView+SDCAutoLayout.h"
 
-static UIEdgeInsets const SDCAlertScrollViewInsets = {19, 15, 18.5, 15};
-static CGFloat const SDCAlertScrollViewLabelSpacing = 4;
-
 @interface SDCAlertScrollView ()
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) SDCAlertLabel *titleLabel;
@@ -31,9 +28,6 @@ static CGFloat const SDCAlertScrollViewLabelSpacing = 4;
 		
 		self.title = title;
 		self.message = message;
-		
-		self.contentInset = SDCAlertScrollViewInsets;
-		self.scrollIndicatorInsets = SDCAlertScrollViewInsets;
 		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
@@ -63,13 +57,22 @@ static CGFloat const SDCAlertScrollViewLabelSpacing = 4;
 	}
 }
 
+- (void)setVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
+	_visualStyle = visualStyle;
+	
+	self.contentInset = visualStyle.contentPadding;
+	self.scrollIndicatorInsets = visualStyle.contentPadding;
+	
+	[self setNeedsLayout];
+}
+
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
 	if (self.title.length > 0) {
 		[self addSubview:self.titleLabel];
 		[self.titleLabel sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop];
-		[self.titleLabel sdc_pinWidthToWidthOfView:self offset:-(SDCAlertScrollViewInsets.left + SDCAlertScrollViewInsets.right)];
+		[self.titleLabel sdc_pinWidthToWidthOfView:self offset:-(self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right)];
 	} else {
 		[self.titleLabel removeFromSuperview];
 	}
@@ -77,12 +80,12 @@ static CGFloat const SDCAlertScrollViewLabelSpacing = 4;
 	if (self.message.length > 0) {
 		[self addSubview:self.messageLabel];
 		[self.messageLabel sdc_alignEdgesWithSuperview:UIRectEdgeLeft];
-		[self.messageLabel sdc_pinWidthToWidthOfView:self offset:-(SDCAlertScrollViewInsets.left + SDCAlertScrollViewInsets.right)];
+		[self.messageLabel sdc_pinWidthToWidthOfView:self offset:-(self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right)];
 		
 		if (self.title.length > 0) {
-			[self.messageLabel sdc_pinVerticalSpacing:SDCAlertScrollViewLabelSpacing toView:self.titleLabel];
+			[self.messageLabel sdc_pinVerticalSpacing:self.visualStyle.labelSpacing toView:self.titleLabel];
 		} else {
-			[self.messageLabel sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeTop ofView:self inset:SDCAlertScrollViewLabelSpacing];
+			[self.messageLabel sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeTop ofView:self inset:self.visualStyle.labelSpacing];
 		}
 	} else {
 		[self.messageLabel removeFromSuperview];

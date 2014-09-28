@@ -10,4 +10,30 @@
 
 @implementation SDCAlertControllerDefaultVisualStyle
 
+- (CGFloat)width {
+	return 270;
+}
+
+- (CGFloat)buttonHeight {
+	return 44;
+}
+
+- (UIEdgeInsets)contentPadding {
+	return UIEdgeInsetsMake(19, 15, 18.5, 15);
+}
+
+- (CGFloat)labelSpacing {
+	return 4;
+}
+
+- (UIView *)buttonHighlightBackgroundView {
+	UIView *view = [[UIView alloc] init];
+	view.backgroundColor = [UIColor colorWithWhite:.80 alpha:.7];
+	return view;
+}
+
+- (UIColor *)buttonTextColor {
+	return [[[UIView alloc] init] tintColor];
+}
+
 @end

@@ -10,6 +10,8 @@
 
 #import "SDCAlertTransition.h"
 #import "SDCAlertRepresentationView.h"
+#import "SDCAlertControllerDefaultVisualStyle.h"
+
 #import "UIView+SDCAutoLayout.h"
 
 @interface SDCAlertController ()
@@ -40,6 +42,8 @@
 		_mutableActions = [NSMutableArray array];
 		_textFieldConfigurationHandlers = [NSMutableArray array];
 		
+		_visualStyle = [[SDCAlertControllerDefaultVisualStyle alloc] init];
+		
 		self.modalPresentationStyle = UIModalPresentationCustom;
 		self.transitioningDelegate = [[SDCAlertTransitioningDelegate alloc] init];
 	}
@@ -53,6 +57,7 @@
 	[super viewDidLoad];
 	
 	SDCAlertRepresentationView *alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
+	alert.visualStyle = self.visualStyle;
 	alert.actions = self.actions;
 	
 	[self.view addSubview:alert];

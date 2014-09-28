@@ -10,4 +10,14 @@
 
 @protocol SDCAlertControllerVisualStyle <NSObject>
 
+@property (nonatomic, readonly) CGFloat width;
+@property (nonatomic, readonly) CGFloat buttonHeight;
+
+@property (nonatomic, readonly) UIEdgeInsets contentPadding;
+@property (nonatomic, readonly) CGFloat labelSpacing;
+
+
+@property (nonatomic, readonly) UIView *buttonHighlightBackgroundView;
+@property (nonatomic, readonly) UIColor *buttonTextColor;
+
 @end

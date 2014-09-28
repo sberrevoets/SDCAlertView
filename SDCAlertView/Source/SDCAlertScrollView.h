@@ -8,6 +8,8 @@
 
 @import UIKit;
 
+#import "SDCAlertControllerVisualStyle.h"
+
 @interface SDCAlertScrollView : UIScrollView
 
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;

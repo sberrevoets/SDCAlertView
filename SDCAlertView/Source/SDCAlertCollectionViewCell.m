@@ -20,16 +20,21 @@
 	self = [super initWithFrame:frame];
 	
 	if (self) {
-		_highlightedBackgroundView = [[UIView alloc] init];
-		_highlightedBackgroundView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
-		_highlightedBackgroundView.hidden = YES;
-		[_highlightedBackgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
-		
 		_textLabel = [[UILabel alloc] init];
 		[_textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
 	
 	return self;
+}
+
+- (void)setVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
+	_visualStyle = visualStyle;
+	
+	self.highlightedBackgroundView = visualStyle.buttonHighlightBackgroundView;
+	[self.highlightedBackgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	self.highlightedBackgroundView.hidden = !self.isHighlighted;
+	
+	self.textLabel.textColor = self.visualStyle.buttonTextColor;
 }
 
 - (void)layoutSubviews {
