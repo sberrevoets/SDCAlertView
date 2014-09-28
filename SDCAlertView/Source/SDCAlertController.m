@@ -8,6 +8,7 @@
 
 #import "SDCAlertController.h"
 
+#import "SDCAlertTextFieldViewController.h"
 #import "SDCAlertTransition.h"
 #import "SDCAlertRepresentationView.h"
 #import "SDCAlertControllerDefaultVisualStyle.h"
@@ -20,7 +21,7 @@
 
 @interface SDCAlertController () <SDCAlertRepresentationViewDelegate>
 @property (nonatomic, strong) NSMutableArray *mutableActions;
-@property (nonatomic, strong) NSMutableArray *textFieldConfigurationHandlers;
+@property (nonatomic, strong) NSMutableArray *mutableTextFields;
 @property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> transitioningDelegate;
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 @property (nonatomic, strong) SDCAlertRepresentationView *alert;
@@ -45,7 +46,7 @@
 		_message = message;
 		
 		_mutableActions = [NSMutableArray array];
-		_textFieldConfigurationHandlers = [NSMutableArray array];
+		_mutableTextFields = [NSMutableArray array];
 		
 		_visualStyle = [[SDCAlertControllerDefaultVisualStyle alloc] init];
 		_buttonLayout = SDCAlertControllerButtonLayoutAutomatic;
@@ -62,16 +63,33 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	self.alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
-	self.alert.delegate = self;
-	self.alert.visualStyle = self.visualStyle;
-	self.alert.actions = self.actions;
-	self.alert.buttonLayout = self.buttonLayout;
+	self.alert = [self createAlertView];
 	
 	[self.view addSubview:self.alert];
 	[self.alert sdc_centerInSuperview];
+}
+
+- (void)showTextFieldsInAlertView:(SDCAlertRepresentationView *)alertView {
+	if (self.textFields.count > 0) {
+		SDCAlertTextFieldViewController *textFieldViewController = [[SDCAlertTextFieldViewController alloc] init];
+		textFieldViewController.textFields = self.textFields;
+		
+		[self addChildViewController:textFieldViewController];
+		[alertView showTextFieldViewController:textFieldViewController];
+		[textFieldViewController didMoveToParentViewController:self];
+	}
+}
+
+- (SDCAlertRepresentationView *)createAlertView {
+	SDCAlertRepresentationView *alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
+	alert.delegate = self;
+	alert.visualStyle = self.visualStyle;
+	alert.actions = self.actions;
+	alert.buttonLayout = self.buttonLayout;
 	
-	[self.view addSubview:self.alert];
+	[self showTextFieldsInAlertView:alert];
+	
+	return alert;
 }
 
 #pragma mark - Style
@@ -109,11 +127,16 @@
 #pragma mark - Alert Text Fields
 
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *))configurationHandler {
-	[self.textFieldConfigurationHandlers addObject:[configurationHandler copy]];
+	UITextField *textField = [[UITextField alloc] init];
+	[self.mutableTextFields addObject:textField];
+	
+	if (configurationHandler) {
+		configurationHandler(textField);
+	}
 }
 
 - (NSArray *)textFields {
-	return [NSArray array];
+	return [self.mutableTextFields copy];
 }
 
 @end

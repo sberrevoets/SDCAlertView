@@ -27,6 +27,9 @@
 	UIAlertController *b = [UIAlertController alertControllerWithTitle:@"Title 2" message:@"Message 2" preferredStyle:UIAlertControllerStyleAlert];
 	[b addAction:[UIAlertAction actionWithTitle:@"Button 2" style:UIAlertActionStyleDefault handler:nil]];
 	[b addAction:[UIAlertAction actionWithTitle:@"Button 33??" style:UIAlertActionStyleCancel handler:nil]];
+	
+	[b addTextFieldWithConfigurationHandler:nil];
+	
 	[self presentViewController:b animated:YES completion:nil];
 }
 
@@ -37,8 +40,7 @@
 		[ac addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleCancel handler:^(SDCAlertAction *action) {
 			NSLog(@"%@", action.title);
 		}]];
-		[ac addAction:[SDCAlertAction actionWithTitle:@"Third" style:SDCAlertActionStyleDefault handler:nil]];
-		[ac addAction:[SDCAlertAction actionWithTitle:@"Fourth" style:SDCAlertActionStyleDefault handler:nil]];
+		[ac addTextFieldWithConfigurationHandler:nil];
 		[self presentViewController:ac animated:YES completion:nil];
 //		[self presentNow];
 		

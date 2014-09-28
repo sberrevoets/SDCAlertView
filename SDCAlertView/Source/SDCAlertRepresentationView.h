@@ -12,6 +12,7 @@
 
 @class SDCAlertRepresentationView;
 @class SDCAlertAction;
+@class SDCAlertTextFieldViewController;
 
 @protocol SDCAlertRepresentationViewDelegate <NSObject>
 - (void)alertRepresentationView:(SDCAlertRepresentationView *)sender didPerformAction:(SDCAlertAction *)action;
@@ -32,5 +33,7 @@
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
+
+- (void)showTextFieldViewController:(SDCAlertTextFieldViewController *)viewController;
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "SDCAlertScrollView.h"
+
+#import "SDCAlertTextFieldViewController.h"
 #import "SDCAlertLabel.h"
+
 #import "UIView+SDCAutoLayout.h"
 
 @interface SDCAlertScrollView ()
@@ -64,6 +67,11 @@
 	self.messageLabel.font = visualStyle.messageLabelFont;
 	
 	[self setNeedsLayout];
+}
+
+- (void)setTextFieldViewController:(SDCAlertTextFieldViewController *)textFieldViewController {
+	[self addSubview:textFieldViewController.view];
+	[textFieldViewController.view sdc_alignEdgesWithSuperview:UIRectEdgeAll];
 }
 
 - (void)layoutSubviews {

@@ -69,6 +69,10 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	self.collectionViewLayout.scrollDirection = direction;
 }
 
+- (void)showTextFieldViewController:(SDCAlertTextFieldViewController *)viewController {
+	self.scrollView.textFieldViewController = viewController;
+}
+
 - (CGFloat)maximumHeightForScrollView {
 	CGFloat maximumHeight = CGRectGetHeight(self.superview.bounds) - self.visualStyle.margins.top - self.visualStyle.margins.bottom;
 	maximumHeight -= self.visualStyle.contentPadding.top - self.visualStyle.contentPadding.bottom;
