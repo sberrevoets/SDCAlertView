@@ -60,9 +60,6 @@
 - (void)setVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
 	_visualStyle = visualStyle;
 	
-	self.contentInset = visualStyle.contentPadding;
-	self.scrollIndicatorInsets = visualStyle.contentPadding;
-	
 	self.titleLabel.font = visualStyle.titleLabelFont;
 	self.messageLabel.font = visualStyle.messageLabelFont;
 	
@@ -101,9 +98,9 @@
 	CGFloat intrinsicHeight = 0;
 	
 	if (self.message.length > 0) {
-		intrinsicHeight = CGRectGetMaxY(self.messageLabel.frame) + self.contentInset.top + self.contentInset.bottom;
+		intrinsicHeight = CGRectGetMaxY(self.messageLabel.frame);
 	} else if (self.title.length > 0) {
-		intrinsicHeight = CGRectGetMaxY(self.titleLabel.frame) + self.contentInset.top + self.contentInset.bottom;
+		intrinsicHeight = CGRectGetMaxY(self.titleLabel.frame);
 	}
 	
 	return CGSizeMake(UIViewNoIntrinsicMetric, intrinsicHeight);

@@ -15,6 +15,7 @@
 @property (nonatomic, readonly) CGFloat width;
 @property (nonatomic, readonly) CGFloat buttonHeight;
 
+@property (nonatomic, readonly) UIEdgeInsets margins;
 @property (nonatomic, readonly) UIEdgeInsets contentPadding;
 @property (nonatomic, readonly) CGFloat labelSpacing;
 

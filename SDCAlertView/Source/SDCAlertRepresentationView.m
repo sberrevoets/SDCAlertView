@@ -56,23 +56,39 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	return self;
 }
 
+- (CGFloat)maximumHeightForScrollView {
+	CGFloat maximumHeight = CGRectGetHeight(self.superview.bounds) - self.visualStyle.margins.top - self.visualStyle.margins.bottom;
+	maximumHeight -= self.visualStyle.contentPadding.top - self.visualStyle.contentPadding.bottom;
+	
+	if (self.actions.count > 0) {
+		if (self.collectionViewLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+			maximumHeight -= self.visualStyle.buttonHeight;
+		} else {
+			maximumHeight -= self.visualStyle.buttonHeight * [self.buttonCollectionView numberOfItemsInSection:0];
+		}
+	}
+	
+	return maximumHeight;
+}
+
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
 	[self applyCurrentStyleToAlertElements];
 	
-	[self.visualEffectView sdc_pinSize:CGSizeMake(self.visualStyle.width, 120)];
+	[self.visualEffectView sdc_pinWidth:self.visualStyle.width];
 	
 	[self.visualEffectView.contentView addSubview:self.scrollView];
 	[self.scrollView setNeedsLayout];
 	[self.scrollView layoutIfNeeded];
 	
-	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];
-	[self.scrollView sdc_setMaximumHeight:76];
+	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight insets:self.visualStyle.contentPadding];
+	[self.scrollView sdc_setMaximumHeight:[self maximumHeightForScrollView]];
+	self.scrollView.contentSize = CGSizeMake(self.visualStyle.width - self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right, [self.scrollView intrinsicContentSize].height);
 	
 	[self.visualEffectView.contentView addSubview:self.buttonCollectionView];
-	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
-	[self.buttonCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeRight];
+	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView inset:self.visualStyle.contentPadding.top];
+	[self.buttonCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
 	[self.buttonCollectionView sdc_pinHeight:self.visualStyle.buttonHeight];
 	
 	[self addSubview:self.visualEffectView];

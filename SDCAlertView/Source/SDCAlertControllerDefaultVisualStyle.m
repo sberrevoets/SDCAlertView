@@ -20,6 +20,10 @@
 	return 44;
 }
 
+- (UIEdgeInsets)margins {
+	return UIEdgeInsetsMake(3, 0, 3, 0);
+}
+
 - (UIEdgeInsets)contentPadding {
 	return UIEdgeInsetsMake(19, 15, 18.5, 15);
 }

@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSMutableArray *textFieldConfigurationHandlers;
 @property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> transitioningDelegate;
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
+@property (nonatomic, strong) SDCAlertRepresentationView *alert;
 @end
 
 @implementation SDCAlertController
@@ -60,15 +61,15 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	SDCAlertRepresentationView *alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
-	alert.delegate = self;
-	alert.visualStyle = self.visualStyle;
-	alert.actions = self.actions;
+	self.alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
+	self.alert.delegate = self;
+	self.alert.visualStyle = self.visualStyle;
+	self.alert.actions = self.actions;
 	
-	[self.view addSubview:alert];
-	[alert sdc_centerInSuperview];
+	[self.view addSubview:self.alert];
+	[self.alert sdc_centerInSuperview];
 	
-	[self.view addSubview:alert];
+	[self.view addSubview:self.alert];
 }
 
 #pragma mark - Style
