@@ -17,4 +17,6 @@
 @interface SDCAlertCollectionViewCell : UICollectionViewCell
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 @property (nonatomic, strong) UILabel *textLabel;
+
+@property (nonatomic, strong) UIGestureRecognizer *gestureRecognizer;
 @end

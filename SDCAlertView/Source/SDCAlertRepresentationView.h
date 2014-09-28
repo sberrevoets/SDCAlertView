@@ -6,13 +6,20 @@
 //  Copyright (c) 2014 Scotty Doesn't Code. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+
+@class SDCAlertRepresentationView;
+@class SDCAlertAction;
+
+@protocol SDCAlertRepresentationViewDelegate <NSObject>
+- (void)alertRepresentationView:(SDCAlertRepresentationView *)sender didPerformAction:(SDCAlertAction *)action;
+@end
 
 @protocol SDCAlertControllerVisualStyle;
 
 @interface SDCAlertRepresentationView : UIView
 
-- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
+@property (nonatomic, weak) id <SDCAlertRepresentationViewDelegate> delegate;
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *message;
@@ -20,5 +27,7 @@
 @property (nonatomic, copy) NSArray *actions;
 
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
+
+- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
 
 @end

@@ -27,6 +27,7 @@
 	if (self) {
 		_title = title;
 		_style = style;
+		_enabled = YES;
 		_handler = handler;
 	}
 	

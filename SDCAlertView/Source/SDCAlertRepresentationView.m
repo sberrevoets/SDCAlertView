@@ -84,6 +84,14 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	self.collectionViewLayout.visualStyle = self.visualStyle;
 }
 
+- (void)actionButtonTapped:(UITapGestureRecognizer *)sender {
+	SDCAlertCollectionViewCell *cell = (SDCAlertCollectionViewCell *)sender.view;
+	NSIndexPath *indexPath = [self.buttonCollectionView indexPathForCell:cell];
+	SDCAlertAction *action = self.actions[indexPath.row];
+	
+	[self.delegate alertRepresentationView:self didPerformAction:action];
+}
+
 #pragma mark - UICollectionViewDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -97,6 +105,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	SDCAlertAction *action = self.actions[indexPath.item];
 	cell.visualStyle = self.visualStyle;
 	cell.textLabel.text = action.title;
+	cell.gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionButtonTapped:)];
 	
 	return cell;
 }

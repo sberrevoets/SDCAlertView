@@ -14,7 +14,11 @@
 
 #import "UIView+SDCAutoLayout.h"
 
-@interface SDCAlertController ()
+@interface SDCAlertAction (Private)
+@property (nonatomic, copy) void (^handler)(SDCAlertAction *);
+@end
+
+@interface SDCAlertController () <SDCAlertRepresentationViewDelegate>
 @property (nonatomic, strong) NSMutableArray *mutableActions;
 @property (nonatomic, strong) NSMutableArray *textFieldConfigurationHandlers;
 @property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> transitioningDelegate;
@@ -57,6 +61,7 @@
 	[super viewDidLoad];
 	
 	SDCAlertRepresentationView *alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
+	alert.delegate = self;
 	alert.visualStyle = self.visualStyle;
 	alert.actions = self.actions;
 	
@@ -84,6 +89,18 @@
 
 - (NSArray *)actions {
 	return [self.mutableActions copy];
+}
+
+- (void)alertRepresentationView:(SDCAlertRepresentationView *)sender didPerformAction:(SDCAlertAction *)action {
+	if (!action.isEnabled) {
+		return;
+	}
+	
+	[self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+		if (action.handler) {
+			action.handler(action);
+		}
+	}];
 }
 
 #pragma mark - Alert Text Fields

@@ -37,6 +37,13 @@
 	self.textLabel.textColor = self.visualStyle.buttonTextColor;
 }
 
+- (void)setGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
+	[self removeGestureRecognizer:_gestureRecognizer];
+	
+	_gestureRecognizer = gestureRecognizer;
+	[self addGestureRecognizer:gestureRecognizer];
+}
+
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
