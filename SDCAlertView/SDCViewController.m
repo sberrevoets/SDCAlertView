@@ -39,6 +39,7 @@
 			NSLog(@"%@", action.title);
 		}]];
 		[ac addAction:[SDCAlertAction actionWithTitle:@"Third" style:SDCAlertActionStyleDefault handler:nil]];
+		[ac addAction:[SDCAlertAction actionWithTitle:@"Fourth" style:SDCAlertActionStyleDefault handler:nil]];
 		[self presentViewController:ac animated:YES completion:nil];
 //		[self presentNow];
 		

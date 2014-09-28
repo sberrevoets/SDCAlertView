@@ -159,7 +159,8 @@ layout:(UICollectionViewLayout *)collectionViewLayout
 	if (self.collectionViewLayout.scrollDirection == UICollectionViewScrollDirectionVertical) {
 		return CGSizeMake(CGRectGetWidth(self.bounds), self.visualStyle.buttonHeight);
 	} else {
-		return CGSizeMake(CGRectGetWidth(self.bounds) / self.actions.count, self.visualStyle.buttonHeight);
+		CGFloat width = MAX(CGRectGetWidth(self.bounds) / self.actions.count, self.visualStyle.minimumButtonWidth);
+		return CGSizeMake(width, self.visualStyle.buttonHeight);
 	}
 }
 

@@ -20,6 +20,10 @@
 	return 44;
 }
 
+- (CGFloat)minimumButtonWidth {
+	return 90; // Fits exactly three buttons without scrolling
+}
+
 - (UIEdgeInsets)margins {
 	return UIEdgeInsetsMake(3, 0, 3, 0);
 }

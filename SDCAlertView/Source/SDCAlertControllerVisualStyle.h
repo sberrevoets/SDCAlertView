@@ -14,6 +14,7 @@
 
 @property (nonatomic, readonly) CGFloat width;
 @property (nonatomic, readonly) CGFloat buttonHeight;
+@property (nonatomic, readonly) CGFloat minimumButtonWidth; // For forced horizontal layout and 3+ buttons
 
 @property (nonatomic, readonly) UIEdgeInsets margins;
 @property (nonatomic, readonly) UIEdgeInsets contentPadding;
