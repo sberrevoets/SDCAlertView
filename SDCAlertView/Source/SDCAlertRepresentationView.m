@@ -56,6 +56,18 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	return self;
 }
 
+- (void)setButtonLayout:(SDCAlertControllerButtonLayout)buttonLayout {
+	_buttonLayout = buttonLayout;
+	
+	UICollectionViewScrollDirection direction = UICollectionViewScrollDirectionHorizontal;
+	
+	if (buttonLayout == SDCAlertControllerButtonLayoutVertical || (buttonLayout == SDCAlertControllerButtonLayoutAutomatic && self.actions.count == 2)) {
+		direction = UICollectionViewScrollDirectionVertical;
+	}
+	
+	self.collectionViewLayout.scrollDirection = direction;
+}
+
 - (CGFloat)maximumHeightForScrollView {
 	CGFloat maximumHeight = CGRectGetHeight(self.superview.bounds) - self.visualStyle.margins.top - self.visualStyle.margins.bottom;
 	maximumHeight -= self.visualStyle.contentPadding.top - self.visualStyle.contentPadding.bottom;
@@ -69,6 +81,17 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 	
 	return maximumHeight;
+}
+
+- (CGFloat)heightForButtonCollectionView {
+	CGFloat horizontalLayoutHeight = self.visualStyle.buttonHeight;
+	CGFloat verticalLayoutHeight = self.visualStyle.buttonHeight * [self.buttonCollectionView numberOfItemsInSection:0];
+	
+	switch (self.buttonLayout) {
+		case SDCAlertControllerButtonLayoutAutomatic:		return (self.actions.count == 2) ? horizontalLayoutHeight : verticalLayoutHeight;
+		case SDCAlertControllerButtonLayoutHorizontal:		return horizontalLayoutHeight;
+		case SDCAlertControllerButtonLayoutVertical:		return verticalLayoutHeight;
+	}
 }
 
 - (void)layoutSubviews {
@@ -89,7 +112,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self.visualEffectView.contentView addSubview:self.buttonCollectionView];
 	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView inset:self.visualStyle.contentPadding.top];
 	[self.buttonCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
-	[self.buttonCollectionView sdc_pinHeight:self.visualStyle.buttonHeight];
+	[self.buttonCollectionView sdc_pinHeight:[self heightForButtonCollectionView]];
 	
 	[self addSubview:self.visualEffectView];
 	[self.visualEffectView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
@@ -133,7 +156,11 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 - (CGSize)collectionView:(UICollectionView *)collectionView
 layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return CGSizeMake(CGRectGetWidth(self.bounds) / self.actions.count, CGRectGetHeight(collectionView.bounds));
+	if (self.collectionViewLayout.scrollDirection == UICollectionViewScrollDirectionVertical) {
+		return CGSizeMake(CGRectGetWidth(self.bounds), self.visualStyle.buttonHeight);
+	} else {
+		return CGSizeMake(CGRectGetWidth(self.bounds) / self.actions.count, self.visualStyle.buttonHeight);
+	}
 }
 
 @end

@@ -48,6 +48,7 @@
 		_textFieldConfigurationHandlers = [NSMutableArray array];
 		
 		_visualStyle = [[SDCAlertControllerDefaultVisualStyle alloc] init];
+		_buttonLayout = SDCAlertControllerButtonLayoutAutomatic;
 		
 		self.modalPresentationStyle = UIModalPresentationCustom;
 		self.transitioningDelegate = [[SDCAlertTransitioningDelegate alloc] init];
@@ -65,6 +66,7 @@
 	self.alert.delegate = self;
 	self.alert.visualStyle = self.visualStyle;
 	self.alert.actions = self.actions;
+	self.alert.buttonLayout = self.buttonLayout;
 	
 	[self.view addSubview:self.alert];
 	[self.alert sdc_centerInSuperview];

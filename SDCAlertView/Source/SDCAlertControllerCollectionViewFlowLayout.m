@@ -15,6 +15,7 @@
 	
 	if (self) {
 		self.minimumInteritemSpacing = 0;
+		self.minimumLineSpacing = 0;
 	}
 	
 	return self;
@@ -26,12 +27,6 @@
 	[[attributes copy] enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *itemAttributes, NSUInteger idx, BOOL *stop) {
 		[attributes addObject:[self layoutAttributesForDecorationViewOfKind:@"separator" atIndexPath:itemAttributes.indexPath]];
 	}];
-	
-	UICollectionViewLayoutAttributes *topSeparatorAttributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:@"separator"
-																														   withIndexPath:nil];
-	topSeparatorAttributes.frame = CGRectMake(CGRectGetMinX(rect), CGRectGetMinY(rect), CGRectGetWidth(rect), 0.5);
-	
-	[attributes addObject:topSeparatorAttributes];
 	
 	return attributes;
 }
@@ -45,7 +40,7 @@
 																											   withIndexPath:indexPath];
 	
 	UICollectionViewLayoutAttributes *itemAttributes = [self layoutAttributesForItemAtIndexPath:indexPath];
-	attributes.frame = CGRectMake(CGRectGetMaxX(itemAttributes.frame) - 0.5, CGRectGetMinY(itemAttributes.frame), 0.5, CGRectGetHeight(itemAttributes.frame));
+	attributes.frame = CGRectMake(CGRectGetMinX(itemAttributes.frame), CGRectGetMinY(itemAttributes.frame), CGRectGetWidth(itemAttributes.frame), 0.5);
 	attributes.zIndex = itemAttributes.zIndex + 1;
 	
 	return attributes;

@@ -8,6 +8,8 @@
 
 @import UIKit;
 
+#import "SDCAlertController.h" // SDCAlertControllerButtonLayout
+
 @class SDCAlertRepresentationView;
 @class SDCAlertAction;
 
@@ -25,6 +27,7 @@
 @property (nonatomic, copy) NSString *message;
 
 @property (nonatomic, copy) NSArray *actions;
+@property (nonatomic) SDCAlertControllerButtonLayout buttonLayout;
 
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 
