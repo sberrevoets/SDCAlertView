@@ -27,7 +27,10 @@
 	
 	if (self) {
 		_titleLabel = [[SDCAlertLabel alloc] init];
+		[self addSubview:_titleLabel];
+		
 		_messageLabel = [[SDCAlertLabel alloc] init];
+		[self addSubview:_messageLabel];
 		
 		self.title = title;
 		self.message = message;
@@ -39,25 +42,13 @@
 }
 
 - (void)setTitle:(NSString *)title {
-	BOOL requiresViewHierarchyUpdate = (_title && !title) || (!_title && title);
-	
 	_title = title;
 	_titleLabel.text = title;
-	
-	if (requiresViewHierarchyUpdate && self.superview) {
-		[self setNeedsLayout];
-	}
 }
 
 - (void)setMessage:(NSString *)message {
-	BOOL requiresViewHierarchyUpdate = (_message && !message) || (!_message && message);
-	
 	_message = message;
 	_messageLabel.text = message;
-	
-	if (requiresViewHierarchyUpdate && self.superview) {
-		[self setNeedsLayout];
-	}
 }
 
 - (void)setVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
@@ -70,46 +61,35 @@
 }
 
 - (void)setTextFieldViewController:(SDCAlertTextFieldViewController *)textFieldViewController {
+	_textFieldViewController = textFieldViewController;
+	
+	[textFieldViewController.view setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[self addSubview:textFieldViewController.view];
-	[textFieldViewController.view sdc_alignEdgesWithSuperview:UIRectEdgeAll];
 }
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	if (self.title.length > 0) {
-		[self addSubview:self.titleLabel];
-		[self.titleLabel sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop];
-		[self.titleLabel sdc_pinWidthToWidthOfView:self offset:-(self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right)];
-	} else {
-		[self.titleLabel removeFromSuperview];
-	}
+	[self.titleLabel sdc_alignEdgesWithSuperview:UIRectEdgeLeft insets:self.visualStyle.contentPadding];
+	[self.titleLabel sdc_pinWidthToWidthOfView:self offset:-(self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right)];
 	
-	if (self.message.length > 0) {
-		[self addSubview:self.messageLabel];
-		[self.messageLabel sdc_alignEdgesWithSuperview:UIRectEdgeLeft];
-		[self.messageLabel sdc_pinWidthToWidthOfView:self offset:-(self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right)];
-		
-		if (self.title.length > 0) {
-			[self.messageLabel sdc_pinVerticalSpacing:self.visualStyle.labelSpacing toView:self.titleLabel];
-		} else {
-			[self.messageLabel sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeTop ofView:self inset:self.visualStyle.labelSpacing];
-		}
-	} else {
-		[self.messageLabel removeFromSuperview];
+	[self.messageLabel sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.titleLabel];
+	
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeFirstBaseline relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:self.visualStyle.contentPadding.top]];
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self.messageLabel attribute:NSLayoutAttributeLastBaseline relatedBy:NSLayoutRelationEqual toItem:self.titleLabel attribute:NSLayoutAttributeFirstBaseline multiplier:1 constant:self.visualStyle.labelSpacing]];
+	
+	if (self.textFieldViewController) {
+		[self.textFieldViewController.view sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.titleLabel];
+		[self.textFieldViewController.view sdc_pinHeight:25 + self.visualStyle.contentPadding.bottom];
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.textFieldViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.messageLabel attribute:NSLayoutAttributeLastBaseline multiplier:1 constant:self.visualStyle.textFieldsTopSpacing]];
 	}
 	
 	[self invalidateIntrinsicContentSize];
 }
 
 - (CGSize)intrinsicContentSize {
-	CGFloat intrinsicHeight = 0;
-	
-	if (self.message.length > 0) {
-		intrinsicHeight = CGRectGetMaxY(self.messageLabel.frame);
-	} else if (self.title.length > 0) {
-		intrinsicHeight = CGRectGetMaxY(self.titleLabel.frame);
-	}
+	UIView *lastView = (self.textFieldViewController) ? self.textFieldViewController.view : self.messageLabel;
+	CGFloat intrinsicHeight = CGRectGetMaxY(lastView.frame);
 	
 	return CGSizeMake(UIViewNoIntrinsicMetric, intrinsicHeight);
 }

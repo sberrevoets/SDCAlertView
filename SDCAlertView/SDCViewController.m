@@ -24,13 +24,15 @@
 - (void)presentNow {
 
 	
-	UIAlertController *b = [UIAlertController alertControllerWithTitle:@"Title 2" message:@"Message 2" preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertController *b = [UIAlertController alertControllerWithTitle:@"G" message:@"Hello" preferredStyle:UIAlertControllerStyleAlert];
 	[b addAction:[UIAlertAction actionWithTitle:@"Button 2" style:UIAlertActionStyleDefault handler:nil]];
 	[b addAction:[UIAlertAction actionWithTitle:@"Button 33??" style:UIAlertActionStyleCancel handler:nil]];
 	
 	[b addTextFieldWithConfigurationHandler:nil];
 	
-	[self presentViewController:b animated:YES completion:nil];
+	[self presentViewController:b animated:YES completion:^{
+//		b.title = nil;
+	}];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

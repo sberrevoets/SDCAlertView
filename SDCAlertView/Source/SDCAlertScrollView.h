@@ -19,6 +19,4 @@
 
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
 
-- (void)addTextFields:(NSArray *)textFields;
-
 @end

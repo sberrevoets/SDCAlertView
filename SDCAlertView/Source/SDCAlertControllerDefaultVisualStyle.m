@@ -29,11 +29,15 @@
 }
 
 - (UIEdgeInsets)contentPadding {
-	return UIEdgeInsetsMake(19, 15, 18.5, 15);
+	return UIEdgeInsetsMake(36, 16, 12, 16);
 }
 
 - (CGFloat)labelSpacing {
-	return 4;
+	return 24;
+}
+
+- (CGFloat)textFieldsTopSpacing {
+	return 24;
 }
 
 - (UIView *)buttonHighlightBackgroundView {

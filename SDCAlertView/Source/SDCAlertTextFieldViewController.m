@@ -17,6 +17,12 @@ static NSString *const SDCAlertTextFieldCellIdentifier = @"SDCAlertTextFieldCell
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	[self.tableView registerClass:[SDCAlertTextFieldTableViewCell class] forCellReuseIdentifier:SDCAlertTextFieldCellIdentifier];
+	
+	UITextField *dummyTextField = [[UITextField alloc] init];
+	self.tableView.rowHeight = [dummyTextField intrinsicContentSize].height;
+	self.tableView.scrollEnabled = NO;
+	self.tableView.separatorColor = [UIColor clearColor];
+	self.tableView.backgroundColor = [UIColor clearColor];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

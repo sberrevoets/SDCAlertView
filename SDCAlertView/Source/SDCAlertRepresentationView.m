@@ -75,7 +75,6 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 
 - (CGFloat)maximumHeightForScrollView {
 	CGFloat maximumHeight = CGRectGetHeight(self.superview.bounds) - self.visualStyle.margins.top - self.visualStyle.margins.bottom;
-	maximumHeight -= self.visualStyle.contentPadding.top - self.visualStyle.contentPadding.bottom;
 	
 	if (self.actions.count > 0) {
 		if (self.collectionViewLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
@@ -110,12 +109,12 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self.scrollView setNeedsLayout];
 	[self.scrollView layoutIfNeeded];
 	
-	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight insets:self.visualStyle.contentPadding];
+	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];
 	[self.scrollView sdc_setMaximumHeight:[self maximumHeightForScrollView]];
-	self.scrollView.contentSize = CGSizeMake(self.visualStyle.width - self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right, [self.scrollView intrinsicContentSize].height);
+	self.scrollView.contentSize = CGSizeMake(self.visualStyle.width, [self.scrollView intrinsicContentSize].height);
 	
 	[self.visualEffectView.contentView addSubview:self.buttonCollectionView];
-	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView inset:self.visualStyle.contentPadding.top];
+	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
 	[self.buttonCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
 	[self.buttonCollectionView sdc_pinHeight:[self heightForButtonCollectionView]];
 	

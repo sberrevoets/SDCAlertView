@@ -19,6 +19,7 @@
 @property (nonatomic, readonly) UIEdgeInsets margins;
 @property (nonatomic, readonly) UIEdgeInsets contentPadding;
 @property (nonatomic, readonly) CGFloat labelSpacing;
+@property (nonatomic, readonly) CGFloat textFieldsTopSpacing;
 
 @property (nonatomic, readonly) UIView *buttonHighlightBackgroundView;
 @property (nonatomic, readonly) UIColor *buttonSeparatorColor;

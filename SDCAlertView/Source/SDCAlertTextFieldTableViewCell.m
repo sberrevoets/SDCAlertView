@@ -15,6 +15,9 @@
 - (void)setTextField:(UITextField *)textField {
 	_textField = textField;
 	
+	[textField setTranslatesAutoresizingMaskIntoConstraints:NO];
+	
+	[self.contentView addSubview:textField];
 	[textField sdc_alignEdgesWithSuperview:UIRectEdgeAll];
 }
 
