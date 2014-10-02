@@ -27,6 +27,7 @@
 
 @property (nonatomic, readonly) UIFont *titleLabelFont;
 @property (nonatomic, readonly) UIFont *messageLabelFont;
+@property (nonatomic, readonly) UIFont *textFieldFont;
 
 - (UIColor *)textColorForButtonRepresentingAction:(SDCAlertAction *)action;
 - (UIFont *)fontForButtonRepresentingAction:(SDCAlertAction *)action;

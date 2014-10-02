@@ -128,6 +128,7 @@
 
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *))configurationHandler {
 	UITextField *textField = [[UITextField alloc] init];
+	textField.font = self.visualStyle.textFieldFont;
 	[self.mutableTextFields addObject:textField];
 	
 	if (configurationHandler) {

@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSArray *textFields;
 
+- (CGFloat)requiredHeightForDisplayingAllTextFields;
+
 @end

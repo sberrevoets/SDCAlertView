@@ -18,10 +18,9 @@ static NSString *const SDCAlertTextFieldCellIdentifier = @"SDCAlertTextFieldCell
 	[super viewDidLoad];
 	[self.tableView registerClass:[SDCAlertTextFieldTableViewCell class] forCellReuseIdentifier:SDCAlertTextFieldCellIdentifier];
 	
-	UITextField *dummyTextField = [[UITextField alloc] init];
-	self.tableView.rowHeight = [dummyTextField intrinsicContentSize].height;
+	self.tableView.rowHeight = 25;
 	self.tableView.scrollEnabled = NO;
-	self.tableView.separatorColor = [UIColor clearColor];
+	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = [UIColor clearColor];
 }
 
@@ -32,9 +31,16 @@ static NSString *const SDCAlertTextFieldCellIdentifier = @"SDCAlertTextFieldCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	SDCAlertTextFieldTableViewCell *textFieldCell = [tableView dequeueReusableCellWithIdentifier:SDCAlertTextFieldCellIdentifier
 																					forIndexPath:indexPath];
-	
 	textFieldCell.textField = self.textFields[indexPath.row];
 	return textFieldCell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+	return NO;
+}
+
+- (CGFloat)requiredHeightForDisplayingAllTextFields {
+	return self.tableView.rowHeight * [self.tableView numberOfRowsInSection:0];
 }
 
 @end

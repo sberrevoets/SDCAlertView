@@ -33,7 +33,7 @@
 }
 
 - (CGFloat)labelSpacing {
-	return 24;
+	return 18;
 }
 
 - (CGFloat)textFieldsTopSpacing {
@@ -59,7 +59,11 @@
 }
 
 - (UIFont *)messageLabelFont {
-	return [UIFont systemFontOfSize:14];
+	return [UIFont systemFontOfSize:13];
+}
+
+- (UIFont *)textFieldFont {
+	return [UIFont systemFontOfSize:13];
 }
 
 - (UIColor *)textColorForButtonRepresentingAction:(SDCAlertAction *)action {

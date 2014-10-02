@@ -75,13 +75,36 @@
 	
 	[self.messageLabel sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.titleLabel];
 	
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeFirstBaseline relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:self.visualStyle.contentPadding.top]];
-	[self addConstraint:[NSLayoutConstraint constraintWithItem:self.messageLabel attribute:NSLayoutAttributeLastBaseline relatedBy:NSLayoutRelationEqual toItem:self.titleLabel attribute:NSLayoutAttributeFirstBaseline multiplier:1 constant:self.visualStyle.labelSpacing]];
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel
+													 attribute:NSLayoutAttributeFirstBaseline
+													 relatedBy:NSLayoutRelationEqual
+														toItem:self
+													 attribute:NSLayoutAttributeTop
+													multiplier:1
+													  constant:self.visualStyle.contentPadding.top]];
+	
+	[self addConstraint:[NSLayoutConstraint constraintWithItem:self.messageLabel
+													 attribute:NSLayoutAttributeFirstBaseline
+													 relatedBy:NSLayoutRelationEqual
+														toItem:self.titleLabel
+													 attribute:NSLayoutAttributeLastBaseline
+													multiplier:1
+													  constant:self.visualStyle.labelSpacing]];
 	
 	if (self.textFieldViewController) {
 		[self.textFieldViewController.view sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.titleLabel];
-		[self.textFieldViewController.view sdc_pinHeight:25 + self.visualStyle.contentPadding.bottom];
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.textFieldViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.messageLabel attribute:NSLayoutAttributeLastBaseline multiplier:1 constant:self.visualStyle.textFieldsTopSpacing]];
+		
+		// Could use self.textFieldViewController.tableView to calculate height, but it being a UITableViewController subclass is an implementation detail.
+		CGFloat height = [self.textFieldViewController requiredHeightForDisplayingAllTextFields] + self.visualStyle.contentPadding.bottom;
+		[self.textFieldViewController.view sdc_pinHeight:height];
+		
+		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.textFieldViewController.view
+														 attribute:NSLayoutAttributeTop
+														 relatedBy:NSLayoutRelationEqual
+															toItem:self.messageLabel
+														 attribute:NSLayoutAttributeLastBaseline
+														multiplier:1
+														  constant:self.visualStyle.textFieldsTopSpacing]];
 	}
 	
 	[self invalidateIntrinsicContentSize];

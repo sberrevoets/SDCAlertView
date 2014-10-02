@@ -24,11 +24,12 @@
 - (void)presentNow {
 
 	
-	UIAlertController *b = [UIAlertController alertControllerWithTitle:@"G" message:@"Hello" preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertController *b = [UIAlertController alertControllerWithTitle:@"Title" message:@"Message" preferredStyle:UIAlertControllerStyleAlert];
 	[b addAction:[UIAlertAction actionWithTitle:@"Button 2" style:UIAlertActionStyleDefault handler:nil]];
 	[b addAction:[UIAlertAction actionWithTitle:@"Button 33??" style:UIAlertActionStyleCancel handler:nil]];
 	
 	[b addTextFieldWithConfigurationHandler:nil];
+		[b addTextFieldWithConfigurationHandler:nil];
 	
 	[self presentViewController:b animated:YES completion:^{
 //		b.title = nil;
@@ -43,6 +44,8 @@
 			NSLog(@"%@", action.title);
 		}]];
 		[ac addTextFieldWithConfigurationHandler:nil];
+		[ac addTextFieldWithConfigurationHandler:nil];
+		
 		[self presentViewController:ac animated:YES completion:nil];
 //		[self presentNow];
 		
