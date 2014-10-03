@@ -9,7 +9,9 @@
 #import "SDCAlertTransition.h"
 
 #import "SDCAlertPresentationController.h"
-#import <RBBSpringAnimation.h>
+
+static CGFloat const SDCAlertAnimationControllerSpringDamping = 45.71;
+static CGFloat const SDCAlertAnimationControllerSpringVelocity = 0;
 
 @implementation SDCAlertTransitioningDelegate
 
@@ -58,82 +60,35 @@
 	animatingView.frame = [transitionContext finalFrameForViewController:animatingViewController];
 	
 	if (self.isPresentation) {
-		[self animatePresentingView:animatingView completion:^{
-			[transitionContext completeTransition:YES];
-		}];
+		animatingView.transform = CGAffineTransformMakeScale(1.26, 1.26);
+		animatingView.alpha = 0;
+		
+		[self animate:^{
+			animatingView.transform = CGAffineTransformMakeScale(1, 1);
+			animatingView.alpha = 1;
+		}	inContext:transitionContext
+	   withCompletion:^(BOOL finished) {
+		   [transitionContext completeTransition:finished];
+	   }];
+		
 	} else {
-		[self animateDismissingView:animatingView completion:^{
+		[self animate:^{
+			animatingView.alpha = 0;
+		} inContext:transitionContext withCompletion:^(BOOL finished) {
 			[fromViewController.view removeFromSuperview];
-			[transitionContext completeTransition:YES];
+			[transitionContext completeTransition:finished];
 		}];
 	}
 }
 
-- (void)animatePresentingView:(UIView *)view completion:(void (^)(void))completion {
-	RBBSpringAnimation *opacityAnimation = [self opacityAnimationFrom:@0 to:@1];
-	RBBSpringAnimation *transformAnimation = [self transformAnimationForPresenting];
-	
-	view.layer.opacity = 1;
-	view.layer.transform = [transformAnimation.toValue CATransform3DValue];
-	
-	CAAnimationGroup *group = [CAAnimationGroup animation];
-	group.animations = @[opacityAnimation, transformAnimation];
-	
-	[self applyAnimation:group toView:view withCompletion:completion];
-}
-
-- (void)animateDismissingView:(UIView *)view completion:(void(^)(void))completion {
-	RBBSpringAnimation *opacityAnimation = [self opacityAnimationFrom:@1 to:@0];
-	view.alpha = 0;
-	
-	[self applyAnimation:opacityAnimation toView:view withCompletion:completion];
-}
-
-- (void)applyAnimation:(CAAnimation *)animation toView:(UIView *)view withCompletion:(void (^)(void))completion {
-	[CATransaction begin];
-	[CATransaction setCompletionBlock:completion];
-	[view.layer addAnimation:animation forKey:@"presentation"];
-	[CATransaction commit];
-}
-
-#pragma mark - Animations
-
-- (RBBSpringAnimation *)springAnimationForKey:(NSString *)key {
-	RBBSpringAnimation *animation = [[RBBSpringAnimation alloc] init];
-	animation.additive = YES;
-	animation.keyPath = key;
-	
-	animation.duration = [self transitionDuration:nil];
-	animation.damping = 45.71;
-	animation.mass = 1;
-	animation.stiffness = 522.35;
-	animation.velocity = 0;
-	
-	return animation;
-}
-
-- (RBBSpringAnimation *)opacityAnimationFrom:(NSNumber *)from to:(NSNumber *)to {
-	RBBSpringAnimation *opacityAnimation = [self springAnimationForKey:@"opacity"];
-	opacityAnimation.fromValue = from;
-	opacityAnimation.toValue = to;
-	
-	return opacityAnimation;
-}
-
-#pragma mark Transform
-
-- (RBBSpringAnimation *)transformAnimationForPresenting {
-	CATransform3D transformFrom = CATransform3DMakeScale(1.26, 1.26, 1);
-	CATransform3D transformTo = CATransform3DMakeScale(1, 1, 1);
-	return [self transformAnimationFrom:transformFrom to:transformTo];
-}
-
-- (RBBSpringAnimation *)transformAnimationFrom:(CATransform3D)from to:(CATransform3D)to {
-	RBBSpringAnimation *transformAnimation = [self springAnimationForKey:@"transform"];
-	transformAnimation.fromValue = [NSValue valueWithCATransform3D:from];
-	transformAnimation.toValue = [NSValue valueWithCATransform3D:to];
-	
-	return transformAnimation;
+- (void)animate:(void(^)(void))animations inContext:(id<UIViewControllerContextTransitioning>)context withCompletion:(void(^)(BOOL finished))completion {
+	[UIView animateWithDuration:[self transitionDuration:context]
+						  delay:0
+		 usingSpringWithDamping:SDCAlertAnimationControllerSpringDamping
+		  initialSpringVelocity:SDCAlertAnimationControllerSpringVelocity
+						options:0
+					 animations:animations
+					 completion:completion];
 }
 
 @end
