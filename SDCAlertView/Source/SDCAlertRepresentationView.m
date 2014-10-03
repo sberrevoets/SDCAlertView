@@ -13,6 +13,7 @@
 #import "SDCAlertScrollView.h"
 #import "SDCAlertControllerCollectionViewFlowLayout.h"
 #import "SDCAlertCollectionViewCell.h"
+#import "SDCIntrinsicallySizedView.h"
 
 #import "UIView+SDCAutoLayout.h"
 
@@ -50,7 +51,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 		_buttonCollectionView.delegate = self;
 		_buttonCollectionView.dataSource = self;
 		_buttonCollectionView.backgroundColor = [UIColor clearColor];
-		
+				
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
 	
@@ -113,8 +114,18 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self.scrollView sdc_setMaximumHeight:[self maximumHeightForScrollView]];
 	self.scrollView.contentSize = CGSizeMake(self.visualStyle.width, [self.scrollView intrinsicContentSize].height);
 	
+	UIView *aligningView = self.scrollView;
+	
+	if (self.contentView.subviews.count > 0) {
+		aligningView = self.contentView;
+		
+		[self.visualEffectView.contentView addSubview:self.contentView];
+		[self.contentView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.scrollView];
+		[self.contentView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
+	}
+	
 	[self.visualEffectView.contentView addSubview:self.buttonCollectionView];
-	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
+	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView inset:0];
 	[self.buttonCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
 	[self.buttonCollectionView sdc_pinHeight:[self heightForButtonCollectionView]];
 	

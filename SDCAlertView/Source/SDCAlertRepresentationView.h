@@ -30,6 +30,8 @@
 @property (nonatomic, copy) NSArray *actions;
 @property (nonatomic) SDCAlertControllerButtonLayout buttonLayout;
 
+@property (nonatomic, strong) UIView *contentView;
+
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;

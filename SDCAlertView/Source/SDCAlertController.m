@@ -12,6 +12,7 @@
 #import "SDCAlertTransition.h"
 #import "SDCAlertRepresentationView.h"
 #import "SDCAlertControllerDefaultVisualStyle.h"
+#import "SDCIntrinsicallySizedView.h"
 
 #import "UIView+SDCAutoLayout.h"
 
@@ -48,6 +49,11 @@
 		_mutableActions = [NSMutableArray array];
 		_mutableTextFields = [NSMutableArray array];
 		
+		_alert = [[SDCAlertRepresentationView alloc] initWithTitle:title message:message];
+		_alert.delegate = self;
+		_alert.contentView = [[SDCIntrinsicallySizedView alloc] init];
+		[_alert.contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+		
 		_visualStyle = [[SDCAlertControllerDefaultVisualStyle alloc] init];
 		_buttonLayout = SDCAlertControllerButtonLayoutAutomatic;
 		
@@ -63,7 +69,11 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	self.alert = [self createAlertView];
+	self.alert.visualStyle = self.visualStyle;
+	self.alert.actions = self.actions;
+	self.alert.buttonLayout = self.buttonLayout;
+	
+	[self showTextFieldsInAlertView:self.alert];
 	
 	[self.view addSubview:self.alert];
 	[self.alert sdc_centerInSuperview];
@@ -80,16 +90,8 @@
 	}
 }
 
-- (SDCAlertRepresentationView *)createAlertView {
-	SDCAlertRepresentationView *alert = [[SDCAlertRepresentationView alloc] initWithTitle:self.title message:self.message];
-	alert.delegate = self;
-	alert.visualStyle = self.visualStyle;
-	alert.actions = self.actions;
-	alert.buttonLayout = self.buttonLayout;
-	
-	[self showTextFieldsInAlertView:alert];
-	
-	return alert;
+- (UIView *)contentView {
+	return self.alert.contentView;
 }
 
 #pragma mark - Style
