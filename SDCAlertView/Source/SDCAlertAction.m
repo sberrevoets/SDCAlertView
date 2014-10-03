@@ -17,18 +17,40 @@
 #pragma mark - Initialization
 
 + (instancetype)actionWithTitle:(NSString *)title style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *))handler {
-	SDCAlertAction *action = [[self alloc] initWithTitle:title style:style handler:handler];
-	return action;
+	return [[self alloc] initWithTitle:title style:style handler:handler];
 }
 
-- (instancetype)initWithTitle:(NSString *)title style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *))handler {
-	self = [self init];
++ (instancetype)actionWithAttributedTitle:(NSAttributedString *)attributedTitle style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *))handler {
+	return [[self alloc] initWithAttributedTitle:attributedTitle style:style handler:handler];
+}
+
+- (instancetype)initWithStyle:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *action))handler {
+	self = [super init];
 	
 	if (self) {
-		_title = title;
 		_style = style;
 		_enabled = YES;
 		_handler = handler;
+	}
+	
+	return self;
+}
+
+- (instancetype)initWithTitle:(NSString *)title style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *))handler {
+	self = [self initWithStyle:style handler:handler];
+	
+	if (self) {
+		_title = title;
+	}
+	
+	return self;
+}
+
+- (instancetype)initWithAttributedTitle:(NSAttributedString *)attributedTitle style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *handler))handler {
+	self = [self initWithStyle:style handler:handler];
+	
+	if (self) {
+		_attributedTitle = attributedTitle;
 	}
 	
 	return self;

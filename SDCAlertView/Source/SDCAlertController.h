@@ -27,8 +27,11 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerButtonLayout) {
 @interface SDCAlertAction : NSObject <NSCopying>
 
 + (instancetype)actionWithTitle:(NSString *)title style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *action))handler;
++ (instancetype)actionWithAttributedTitle:(NSAttributedString *)attributedTitle style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *action))handler;
 
 @property (nonatomic, readonly) NSString *title;
+@property (nonatomic, readonly) NSAttributedString *attributedTitle;
+
 @property (nonatomic, readonly) SDCAlertActionStyle style;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
 

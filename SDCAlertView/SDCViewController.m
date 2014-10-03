@@ -63,7 +63,9 @@
 																					views:NSDictionaryOfVariableBindings(progressView)]];
 
 		
-		[self presentViewController:ac animated:YES completion:nil];
+		[self presentViewController:ac animated:YES completion:^{
+			ac.title = @"New title";
+		}];
 //		[self presentNow];
 		
 		} else if (indexPath.section == 1) {
