@@ -38,6 +38,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0) {
+		self.view.window.layer.speed = 0.1;
 		SDCAlertController *ac = [SDCAlertController alertControllerWithTitle:@"Title" message:@"Message" preferredStyle:SDCAlertControllerStyleAlert];
 		[ac addAction:[SDCAlertAction actionWithTitle:@"Cancel" style:SDCAlertActionStyleDestructive handler:nil]];
 		[ac addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleCancel handler:^(SDCAlertAction *action) {
