@@ -58,6 +58,22 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	return self;
 }
 
+- (NSAttributedString *)title {
+	return self.scrollView.title;
+}
+
+- (void)setTitle:(NSAttributedString *)title {
+	self.scrollView.title = title;
+}
+
+- (NSAttributedString *)message {
+	return self.scrollView.message;
+}
+
+- (void)setMessage:(NSAttributedString *)message {
+	self.scrollView.message = message;
+}
+
 - (void)setButtonLayout:(SDCAlertControllerButtonLayout)buttonLayout {
 	_buttonLayout = buttonLayout;
 	

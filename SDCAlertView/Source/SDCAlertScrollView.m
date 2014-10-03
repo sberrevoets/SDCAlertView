@@ -14,9 +14,7 @@
 #import "UIView+SDCAutoLayout.h"
 
 @interface SDCAlertScrollView ()
-@property (nonatomic, strong) NSAttributedString *title;
 @property (nonatomic, strong) SDCAlertLabel *titleLabel;
-@property (nonatomic, strong) NSAttributedString *message;
 @property (nonatomic, strong) SDCAlertLabel *messageLabel;
 @end
 
@@ -27,13 +25,12 @@
 	
 	if (self) {
 		_titleLabel = [[SDCAlertLabel alloc] init];
+		_titleLabel.attributedText = title;
 		[self addSubview:_titleLabel];
 		
 		_messageLabel = [[SDCAlertLabel alloc] init];
+		_messageLabel.attributedText = message;
 		[self addSubview:_messageLabel];
-		
-		self.title = title;
-		self.message = message;
 		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
@@ -41,14 +38,20 @@
 	return self;
 }
 
+- (NSAttributedString *)title {
+	return self.messageLabel.attributedText;
+}
+
 - (void)setTitle:(NSAttributedString *)title {
-	_title = title;
-	_titleLabel.attributedText = title;
+	self.titleLabel.attributedText = title;
+}
+
+- (NSAttributedString *)message {
+	return self.messageLabel.attributedText;
 }
 
 - (void)setMessage:(NSAttributedString *)message {
-	_message = message;
-	_messageLabel.attributedText = message;
+	self.messageLabel.attributedText = message;
 }
 
 - (void)setVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {

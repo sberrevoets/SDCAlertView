@@ -89,6 +89,16 @@
 	return self;
 }
 
+- (void)setTitle:(NSString *)title {
+	[super setTitle:title];
+	self.alert.title = [[NSAttributedString alloc] initWithString:title];
+}
+
+- (void)setMessage:(NSString *)message {
+	_message = message;
+	self.alert.message = [[NSAttributedString alloc] initWithString:message];
+}
+
 #pragma mark - Alert View
 
 - (void)createAlert {

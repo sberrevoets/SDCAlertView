@@ -14,6 +14,9 @@
 
 @interface SDCAlertScrollView : UIScrollView
 
+@property (nonatomic, strong) NSAttributedString *title;
+@property (nonatomic, strong) NSAttributedString *message;
+
 @property (nonatomic, strong) SDCAlertTextFieldViewController *textFieldViewController;
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 
