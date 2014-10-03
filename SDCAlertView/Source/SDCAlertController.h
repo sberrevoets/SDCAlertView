@@ -39,6 +39,9 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerButtonLayout) {
 @interface SDCAlertController : UIViewController
 
 + (instancetype)alertControllerWithTitle:(NSString *)title message:(NSString *)message preferredStyle:(SDCAlertControllerStyle)preferredStyle;
++ (instancetype)alertControllerWithAttributedTitle:(NSAttributedString *)attributedTitle
+								 attributedMessage:(NSAttributedString *)attributedMessage
+									preferredStyle:(SDCAlertControllerStyle)preferredStyle;
 
 - (void)addAction:(SDCAlertAction *)action;
 @property (nonatomic, readonly) NSArray *actions;
@@ -48,7 +51,10 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerButtonLayout) {
 @property (nonatomic, readonly) NSArray *textFields;
 
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSAttributedString *attributedTitle;
+
 @property (nonatomic, copy) NSString *message;
+@property (nonatomic, copy) NSAttributedString *attributedMessage;
 
 @property (nonatomic, readonly) UIView *contentView;
 

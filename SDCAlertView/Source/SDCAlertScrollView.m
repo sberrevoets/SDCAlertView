@@ -14,15 +14,15 @@
 #import "UIView+SDCAutoLayout.h"
 
 @interface SDCAlertScrollView ()
-@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSAttributedString *title;
 @property (nonatomic, strong) SDCAlertLabel *titleLabel;
-@property (nonatomic, strong) NSString *message;
+@property (nonatomic, strong) NSAttributedString *message;
 @property (nonatomic, strong) SDCAlertLabel *messageLabel;
 @end
 
 @implementation SDCAlertScrollView
 
-- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message {
+- (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message {
 	self = [self init];
 	
 	if (self) {
@@ -41,14 +41,14 @@
 	return self;
 }
 
-- (void)setTitle:(NSString *)title {
+- (void)setTitle:(NSAttributedString *)title {
 	_title = title;
-	_titleLabel.text = title;
+	_titleLabel.attributedText = title;
 }
 
-- (void)setMessage:(NSString *)message {
+- (void)setMessage:(NSAttributedString *)message {
 	_message = message;
-	_messageLabel.text = message;
+	_messageLabel.attributedText = message;
 }
 
 - (void)setVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {

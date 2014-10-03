@@ -17,6 +17,6 @@
 @property (nonatomic, strong) SDCAlertTextFieldViewController *textFieldViewController;
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 
-- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
+- (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message;
 
 @end

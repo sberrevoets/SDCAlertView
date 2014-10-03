@@ -28,7 +28,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 
 @implementation SDCAlertRepresentationView
 
-- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message {
+- (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message {
 	self = [self init];
 	
 	if (self) {

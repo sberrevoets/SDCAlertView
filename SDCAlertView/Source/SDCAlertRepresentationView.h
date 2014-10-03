@@ -24,8 +24,8 @@
 
 @property (nonatomic, weak) id <SDCAlertRepresentationViewDelegate> delegate;
 
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *message;
+@property (nonatomic, copy) NSAttributedString *title;
+@property (nonatomic, copy) NSAttributedString *message;
 
 @property (nonatomic, copy) NSArray *actions;
 @property (nonatomic) SDCAlertControllerButtonLayout buttonLayout;
@@ -34,7 +34,7 @@
 
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 
-- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message;
+- (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message;
 
 - (void)showTextFieldViewController:(SDCAlertTextFieldViewController *)viewController;
 

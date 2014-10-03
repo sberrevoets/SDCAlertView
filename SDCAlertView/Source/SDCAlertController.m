@@ -30,29 +30,26 @@
 
 @implementation SDCAlertController
 
-#pragma mark - Creation
+#pragma mark - Initialization
 
 + (instancetype)alertControllerWithTitle:(NSString *)title message:(NSString *)message preferredStyle:(SDCAlertControllerStyle)preferredStyle {
-	SDCAlertController *alert = [[self alloc] initWithTitle:title message:message preferredStyle:preferredStyle];
-	return alert;
+	return [[self alloc] initWithTitle:title message:message style:preferredStyle];
 }
 
-- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message preferredStyle:(SDCAlertControllerStyle)preferredStyle {
-	self = [self init];
-	
-	NSAssert(preferredStyle == SDCAlertControllerStyleAlert, @"Only SDCAlertControllerStyleAlert is supported by %@", NSStringFromClass([self class]));
++ (instancetype)alertControllerWithAttributedTitle:(NSAttributedString *)attributedTitle
+								 attributedMessage:(NSAttributedString *)attributedMessage
+									preferredStyle:(SDCAlertControllerStyle)preferredStyle {
+	return [[self alloc] initWithAttributedTitle:attributedTitle attributedMessage:attributedMessage style:preferredStyle];
+}
+
+- (instancetype)initWithStyle:(SDCAlertControllerStyle)style {
+	self = [super init];
 	
 	if (self) {
-		self.title = title;
-		_message = message;
+		NSAssert(style == SDCAlertControllerStyleAlert, @"Only SDCAlertControllerStyleAlert is supported by %@", NSStringFromClass([self class]));
 		
 		_mutableActions = [NSMutableArray array];
 		_mutableTextFields = [NSMutableArray array];
-		
-		_alert = [[SDCAlertRepresentationView alloc] initWithTitle:title message:message];
-		_alert.delegate = self;
-		_alert.contentView = [[SDCIntrinsicallySizedView alloc] init];
-		[_alert.contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
 		
 		_visualStyle = [[SDCAlertControllerDefaultVisualStyle alloc] init];
 		_buttonLayout = SDCAlertControllerButtonLayoutAutomatic;
@@ -64,7 +61,45 @@
 	return self;
 }
 
+- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message style:(SDCAlertControllerStyle)style {
+	self = [self initWithStyle:style];
+	
+	if (self) {
+		self.title = title;
+		_message = message;
+		
+		[self createAlert];
+	}
+	
+	return self;
+}
+
+- (instancetype)initWithAttributedTitle:(NSAttributedString *)attributedTitle
+					  attributedMessage:(NSAttributedString *)attributedMessage
+						 style:(SDCAlertControllerStyle)style {
+	self = [self initWithStyle:style];
+	
+	if (self) {
+		_attributedTitle = attributedTitle;
+		_attributedMessage = attributedMessage;
+		
+		[self createAlert];
+	}
+	
+	return self;
+}
+
 #pragma mark - Alert View
+
+- (void)createAlert {
+	NSAttributedString *title = self.attributedTitle ? : [[NSAttributedString alloc] initWithString:self.title];
+	NSAttributedString *message = self.attributedMessage ? : [[NSAttributedString alloc] initWithString:self.message];
+	self.alert = [[SDCAlertRepresentationView alloc] initWithTitle:title message:message];
+	
+	self.alert.delegate = self;
+	self.alert.contentView = [[SDCIntrinsicallySizedView alloc] init];
+	[self.alert.contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
+}
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
