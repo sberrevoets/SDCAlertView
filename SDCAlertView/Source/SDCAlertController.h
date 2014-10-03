@@ -53,7 +53,8 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerButtonLayout) {
 @property (nonatomic, readonly) UIView *contentView;
 
 @property (nonatomic, readonly) SDCAlertControllerStyle preferredStyle;
-
 - (void)applyVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle;
+
+@property (nonatomic, copy) BOOL (^shouldDismissBlock)(SDCAlertAction *action);
 
 @end

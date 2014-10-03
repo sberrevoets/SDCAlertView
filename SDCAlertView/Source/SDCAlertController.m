@@ -115,7 +115,7 @@
 }
 
 - (void)alertRepresentationView:(SDCAlertRepresentationView *)sender didPerformAction:(SDCAlertAction *)action {
-	if (!action.isEnabled) {
+	if (!action.isEnabled || (self.shouldDismissBlock && !self.shouldDismissBlock(action))) {
 		return;
 	}
 	
