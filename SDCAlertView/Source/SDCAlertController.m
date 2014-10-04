@@ -214,3 +214,27 @@
 }
 
 @end
+
+@implementation SDCAlertController (Convenience)
+
++ (instancetype)showAlertControllerWithTitle:(NSString *)title message:(NSString *)message {
+	return [self showAlertControllerWithTitle:title message:message actionTitle:nil];
+}
+
++ (instancetype)showAlertControllerWithTitle:(NSString *)title message:(NSString *)message actionTitle:(NSString *)actionTitle {
+	return [self showAlertControllerWithTitle:title message:message actionTitle:actionTitle subview:nil];
+}
+
++ (instancetype)showAlertControllerWithTitle:(NSString *)title message:(NSString *)message actionTitle:(NSString *)actionTitle subview:(UIView *)subview {
+	SDCAlertController *controller = [SDCAlertController alertControllerWithTitle:title message:message preferredStyle:SDCAlertControllerStyleAlert];
+	[controller addAction:[SDCAlertAction actionWithTitle:actionTitle style:SDCAlertActionStyleCancel handler:nil]];
+	
+	if (subview) {
+		[controller.contentView addSubview:subview];
+	}
+	
+	[controller present];
+	return controller;
+}
+
+@end

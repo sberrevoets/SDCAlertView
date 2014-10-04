@@ -78,3 +78,11 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerButtonLayout) {
 - (void)dismissWithCompletion:(void(^)(void))completion;
 
 @end
+
+@interface SDCAlertController (Convenience)
+
++ (instancetype)showAlertControllerWithTitle:(NSString *)title message:(NSString *)message;
++ (instancetype)showAlertControllerWithTitle:(NSString *)title message:(NSString *)message actionTitle:(NSString *)actionTitle;
++ (instancetype)showAlertControllerWithTitle:(NSString *)title message:(NSString *)message actionTitle:(NSString *)actionTitle subview:(UIView *)subview;
+
+@end
