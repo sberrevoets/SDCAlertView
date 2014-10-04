@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
 
 # Source Info
   s.platform     =	:ios, '7.0'
-  s.source       =	{ :git => 'https://github.com/Scott90/SDCAlertView.git', :tag => "v#{s.version}" }
+  s.source       =	{ :git => 'https://github.com/sberrevoets/SDCAlertView.git', :tag => "v#{s.version}" }
   s.source_files =	'SDCAlertView/Source/*.{h,m}'
 
   s.requires_arc = true
