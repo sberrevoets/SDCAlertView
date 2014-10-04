@@ -15,6 +15,7 @@
 #import "SDCIntrinsicallySizedView.h"
 
 #import "UIView+SDCAutoLayout.h"
+#import "UIViewController+Current.h"
 
 @interface SDCAlertAction (Private)
 @property (nonatomic, copy) void (^handler)(SDCAlertAction *);
@@ -164,7 +165,7 @@
 		return;
 	}
 	
-	[self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+	[self dismissWithCompletion:^{
 		if (action.handler) {
 			action.handler(action);
 		}
@@ -185,6 +186,31 @@
 
 - (NSArray *)textFields {
 	return [self.mutableTextFields copy];
+}
+
+@end
+
+@implementation SDCAlertController (Presentation)
+
+- (void)present {
+	[self presentWithCompletion:nil];
+}
+
+- (void)presentWithCompletion:(void(^)(void))completion {
+	UIViewController *currentViewController = [UIViewController currentViewController];
+	[self presentFromViewController:currentViewController completionHandler:completion];
+}
+
+- (void)presentFromViewController:(UIViewController *)viewController completionHandler:(void (^)(void))completionHandler {
+	[viewController presentViewController:self animated:YES completion:completionHandler];
+}
+
+- (void)dismiss {
+	[self dismissWithCompletion:nil];
+}
+
+- (void)dismissWithCompletion:(void (^)(void))completion {
+	[self.presentingViewController dismissViewControllerAnimated:YES completion:completion];
 }
 
 @end

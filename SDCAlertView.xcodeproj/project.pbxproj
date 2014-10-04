@@ -38,6 +38,7 @@
 		D2A5E0D119D3D6A90034B709 /* SDCAlertCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A5E0D019D3D6A90034B709 /* SDCAlertCollectionViewCell.m */; };
 		D2A6A0DB19D1456A0022CF39 /* SDCAlertControllerCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A6A0DA19D1456A0022CF39 /* SDCAlertControllerCollectionViewFlowLayout.m */; };
 		D2A6F1C519D8A71F00FAF172 /* SDCAlertTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A6F1C419D8A71F00FAF172 /* SDCAlertTextFieldTableViewCell.m */; };
+		D2AE983119DFBDF50083AB0C /* UIViewController+Current.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AE983019DFBDF50083AB0C /* UIViewController+Current.m */; };
 		D2BD0CC418FEB2C400520E33 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2BD0CC318FEB2C400520E33 /* iPad.storyboard */; };
 		D2BD0CC618FED65700520E33 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = D2BD0CC518FED65700520E33 /* CHANGELOG.md */; };
 		D2D5A77019D8A64B00386078 /* SDCAlertTextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D5A76F19D8A64B00386078 /* SDCAlertTextFieldViewController.m */; };
@@ -113,6 +114,8 @@
 		D2A6A0DA19D1456A0022CF39 /* SDCAlertControllerCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertControllerCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		D2A6F1C319D8A71F00FAF172 /* SDCAlertTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertTextFieldTableViewCell.h; sourceTree = "<group>"; };
 		D2A6F1C419D8A71F00FAF172 /* SDCAlertTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		D2AE982F19DFBDF50083AB0C /* UIViewController+Current.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Current.h"; sourceTree = "<group>"; };
+		D2AE983019DFBDF50083AB0C /* UIViewController+Current.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Current.m"; sourceTree = "<group>"; };
 		D2BD0CC318FEB2C400520E33 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		D2BD0CC518FED65700520E33 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		D2D5A76E19D8A64B00386078 /* SDCAlertTextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertTextFieldViewController.h; sourceTree = "<group>"; };
@@ -257,6 +260,8 @@
 		D26506EF19C61B8000BF34B9 /* 2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				D2AE982F19DFBDF50083AB0C /* UIViewController+Current.h */,
+				D2AE983019DFBDF50083AB0C /* UIViewController+Current.m */,
 				D2D5A76E19D8A64B00386078 /* SDCAlertTextFieldViewController.h */,
 				D2D5A76F19D8A64B00386078 /* SDCAlertTextFieldViewController.m */,
 				D2A6F1C319D8A71F00FAF172 /* SDCAlertTextFieldTableViewCell.h */,
@@ -481,6 +486,7 @@
 				D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */,
 				D294876C18D631B700E3D967 /* SDCIntrinsicallySizedView.m in Sources */,
 				D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */,
+				D2AE983119DFBDF50083AB0C /* UIViewController+Current.m in Sources */,
 				D2FA54941894AFB5006FAB5E /* SDCAlertViewCoordinator.m in Sources */,
 				D2666A4619CFE0F900167157 /* SDCAlertLabel.m in Sources */,
 				D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */,

@@ -67,3 +67,14 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerButtonLayout) {
 @property (nonatomic, copy) BOOL (^shouldDismissBlock)(SDCAlertAction *action);
 
 @end
+
+@interface SDCAlertController (Transitioning)
+
+- (void)present;
+- (void)presentWithCompletion:(void(^)(void))completion;
+- (void)presentFromViewController:(UIViewController *)viewController completionHandler:(void(^)(void))completion;
+
+- (void)dismiss;
+- (void)dismissWithCompletion:(void(^)(void))completion;
+
+@end
