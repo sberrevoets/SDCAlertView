@@ -131,9 +131,11 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	self.scrollView.contentSize = CGSizeMake(self.visualStyle.width, [self.scrollView intrinsicContentSize].height);
 	
 	UIView *aligningView = self.scrollView;
+	CGFloat buttonTopSpacing = self.visualStyle.buttonTopSpacingWithoutContentView;
 	
 	if (self.contentView.subviews.count > 0) {
 		aligningView = self.contentView;
+		buttonTopSpacing = self.visualStyle.buttonTopSpacingWithContentView;
 		
 		[self.visualEffectView.contentView addSubview:self.contentView];
 		[self.contentView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.scrollView];
@@ -141,7 +143,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 	
 	[self.visualEffectView.contentView addSubview:self.buttonCollectionView];
-	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView inset:0];
+	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView inset:buttonTopSpacing];
 	[self.buttonCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
 	[self.buttonCollectionView sdc_pinHeight:[self heightForButtonCollectionView]];
 	

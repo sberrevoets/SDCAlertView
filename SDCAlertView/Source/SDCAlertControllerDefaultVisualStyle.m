@@ -24,6 +24,14 @@
 	return 90; // Fits exactly three buttons without scrolling
 }
 
+- (CGFloat)buttonTopSpacingWithContentView {
+	return 0;
+}
+
+- (CGFloat)buttonTopSpacingWithoutContentView {
+	return 20;
+}
+
 - (UIEdgeInsets)margins {
 	return UIEdgeInsetsMake(3, 0, 3, 0);
 }
