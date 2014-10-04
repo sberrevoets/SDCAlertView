@@ -8,9 +8,14 @@
 
 #import "SDCAlertCollectionViewCell.h"
 
+#import "SDCAlertController.h" // SDCAlertAction
+#import "SDCAlertControllerVisualStyle.h"
+
 #import "UIView+SDCAutoLayout.h"
 
 @interface SDCAlertCollectionViewCell ()
+@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, getter=isEnabled) BOOL enabled;
 @property (nonatomic, strong) UIView *highlightedBackgroundView;
 @end
 
@@ -27,19 +32,28 @@
 	return self;
 }
 
-- (void)setVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
-	_visualStyle = visualStyle;
-	
-	self.highlightedBackgroundView = visualStyle.buttonHighlightBackgroundView;
-	[self.highlightedBackgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
-	self.highlightedBackgroundView.hidden = !self.isHighlighted;
-}
-
 - (void)setGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
 	[self removeGestureRecognizer:_gestureRecognizer];
 	
 	_gestureRecognizer = gestureRecognizer;
 	[self addGestureRecognizer:gestureRecognizer];
+}
+
+- (void)updateWithAction:(SDCAlertAction *)action visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
+	if (action.attributedTitle) {
+		self.textLabel.attributedText = action.attributedTitle;
+	} else {
+		self.textLabel.text = action.title;
+	}
+	
+	self.enabled = action.isEnabled;
+	
+	self.textLabel.font = [visualStyle fontForButtonRepresentingAction:action];
+	self.textLabel.textColor = [visualStyle textColorForButtonRepresentingAction:action];
+	
+	self.highlightedBackgroundView = visualStyle.buttonHighlightBackgroundView;
+	[self.highlightedBackgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	self.highlightedBackgroundView.hidden = !self.isHighlighted;
 }
 
 - (void)layoutSubviews {

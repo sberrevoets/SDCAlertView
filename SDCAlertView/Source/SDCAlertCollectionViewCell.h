@@ -8,15 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SDCAlertControllerVisualStyle.h"
+@class SDCAlertAction;
+@protocol SDCAlertControllerVisualStyle;
 
 @interface SDCAlertControllerSeparatorView : UICollectionReusableView
 @end
 
 
 @interface SDCAlertCollectionViewCell : UICollectionViewCell
-@property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
-@property (nonatomic, strong) UILabel *textLabel;
 
 @property (nonatomic, strong) UIGestureRecognizer *gestureRecognizer;
+
+- (void)updateWithAction:(SDCAlertAction *)action visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle;
+
 @end
