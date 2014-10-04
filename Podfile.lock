@@ -1,13 +1,13 @@
 PODS:
   - RBBAnimation (0.3.0)
-  - SDCAutoLayout (2.0)
+  - SDCAutoLayout (2.0.1)
 
 DEPENDENCIES:
   - RBBAnimation (~> 0.3)
   - SDCAutoLayout (~> 2.0)
 
 SPEC CHECKSUMS:
-  RBBAnimation: e7f31ed62f760f3caf120b5d943267bd9a8e1f64
-  SDCAutoLayout: fbb30550a36f244223ea40560549372eccd1c4c7
+  RBBAnimation: 243d73be1a526f1b51d266b182e4aa0cfe9cbf64
+  SDCAutoLayout: 9998a215ce25c352bef27233240b997880015a7f
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.34.1

@@ -29,7 +29,6 @@
 		D2A520181840176300837A1A /* SDCAlertView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D2A520171840176300837A1A /* SDCAlertView.podspec */; };
 		D2BD0CC418FEB2C400520E33 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2BD0CC318FEB2C400520E33 /* iPad.storyboard */; };
 		D2BD0CC618FED65700520E33 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = D2BD0CC518FED65700520E33 /* CHANGELOG.md */; };
-		D2F8345918EF2893000BB281 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D2F8345718EF2887000BB281 /* Podfile */; };
 		D2F9D2BD18400CD300F85B10 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BC18400CD200F85B10 /* README.md */; };
 		D2F9D2BF18400DAF00F85B10 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BE18400DAF00F85B10 /* LICENSE */; };
 		D2FA54941894AFB5006FAB5E /* SDCAlertViewCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */; };
@@ -47,7 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		50B67E8F6417468B9958F089 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		02F3F1243FAEADC477B22764 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5E24AC6BD58612E217333B4A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CB28936541154BCF9C9B2F0C /* libPods-SDCAlertViewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDCAlertViewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B3CA417ECE7A6004B32A2 /* SDCAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDCAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B3CA717ECE7A6004B32A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -81,7 +81,6 @@
 		D2A520171840176300837A1A /* SDCAlertView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SDCAlertView.podspec; sourceTree = "<group>"; };
 		D2BD0CC318FEB2C400520E33 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		D2BD0CC518FED65700520E33 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
-		D2F8345718EF2887000BB281 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		D2F9D2BC18400CD200F85B10 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D2F9D2BE18400DAF00F85B10 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D2FA54921894AFB4006FAB5E /* SDCAlertViewCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewCoordinator.h; sourceTree = "<group>"; };
@@ -115,6 +114,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C236084F07D3D1B63C4B15BC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5E24AC6BD58612E217333B4A /* Pods.debug.xcconfig */,
+				02F3F1243FAEADC477B22764 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D25B3C9B17ECE7A6004B32A2 = {
 			isa = PBXGroup;
 			children = (
@@ -122,12 +130,11 @@
 				D2F9D2BC18400CD200F85B10 /* README.md */,
 				D2BD0CC518FED65700520E33 /* CHANGELOG.md */,
 				D2A520171840176300837A1A /* SDCAlertView.podspec */,
-				D2F8345718EF2887000BB281 /* Podfile */,
 				D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */,
 				D25B3CCC17ECE7A6004B32A2 /* SDCAlertViewTests */,
 				D25B3CA617ECE7A6004B32A2 /* Frameworks */,
 				D25B3CA517ECE7A6004B32A2 /* Products */,
-				50B67E8F6417468B9958F089 /* Pods.xcconfig */,
+				C236084F07D3D1B63C4B15BC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -304,7 +311,6 @@
 				D2A520181840176300837A1A /* SDCAlertView.podspec in Resources */,
 				D2BD0CC418FEB2C400520E33 /* iPad.storyboard in Resources */,
 				D25B3CBB17ECE7A6004B32A2 /* iPhone.storyboard in Resources */,
-				D2F8345918EF2893000BB281 /* Podfile in Resources */,
 				D2BD0CC618FED65700520E33 /* CHANGELOG.md in Resources */,
 				D2F9D2BF18400DAF00F85B10 /* LICENSE in Resources */,
 			);
@@ -363,7 +369,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		97FD800B4876441B947DF91A /* Check Pods Manifest.lock */ = {
@@ -517,7 +523,7 @@
 		};
 		D25B3CD717ECE7A6004B32A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50B67E8F6417468B9958F089 /* Pods.xcconfig */;
+			baseConfigurationReference = 5E24AC6BD58612E217333B4A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -533,7 +539,7 @@
 		};
 		D25B3CD817ECE7A6004B32A2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50B67E8F6417468B9958F089 /* Pods.xcconfig */;
+			baseConfigurationReference = 02F3F1243FAEADC477B22764 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
