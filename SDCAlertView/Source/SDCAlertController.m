@@ -28,6 +28,7 @@
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 @property (nonatomic, strong) SDCAlertControllerView *alert;
 @property (nonatomic) BOOL didAssignFirstResponder;
+@property (nonatomic, getter=isPresentingAlert) BOOL presentingAlert;
 @end
 
 @implementation SDCAlertController
@@ -92,6 +93,11 @@
 	
 	return self;
 }
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Alert View
 
 - (void)setTitle:(NSString *)title {
 	[super setTitle:title];
@@ -103,11 +109,6 @@
 	self.alert.message = [[NSAttributedString alloc] initWithString:message];
 }
 
-- (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - Alert View
 
 - (void)createAlert {
 	NSAttributedString *title = self.attributedTitle ? : [[NSAttributedString alloc] initWithString:self.title];
@@ -119,6 +120,22 @@
 	[self.alert.contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 
+- (void)showTextFieldsInAlertView:(SDCAlertControllerView *)alertView {
+	if (self.textFields.count > 0) {
+		SDCAlertTextFieldViewController *textFieldViewController = [[SDCAlertTextFieldViewController alloc] initWithTextFields:self.textFields
+																												   visualStyle:self.visualStyle];
+		[self addChildViewController:textFieldViewController];
+		[alertView showTextFieldViewController:textFieldViewController];
+		[textFieldViewController didMoveToParentViewController:self];
+	}
+}
+
+- (UIView *)contentView {
+	return self.alert.contentView;
+}
+
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
@@ -127,6 +144,8 @@
 	self.alert.actionLayout = self.actionLayout;
 	
 	[self showTextFieldsInAlertView:self.alert];
+	
+	self.presentingAlert = YES;
 	
 	[self.view addSubview:self.alert];
 	[self.alert sdc_centerInSuperview];
@@ -146,18 +165,9 @@
 	}
 }
 
-- (void)showTextFieldsInAlertView:(SDCAlertControllerView *)alertView {
-	if (self.textFields.count > 0) {
-		SDCAlertTextFieldViewController *textFieldViewController = [[SDCAlertTextFieldViewController alloc] initWithTextFields:self.textFields
-																												   visualStyle:self.visualStyle];
-		[self addChildViewController:textFieldViewController];
-		[alertView showTextFieldViewController:textFieldViewController];
-		[textFieldViewController didMoveToParentViewController:self];
-	}
-}
-
-- (UIView *)contentView {
-	return self.alert.contentView;
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	self.presentingAlert = NO;
 }
 
 #pragma mark - Style
@@ -213,12 +223,13 @@
 	NSValue *frameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
 	CGRect frame = [frameValue CGRectValue];
 	
-	NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-	UIViewAnimationOptions curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue] << 16;
+	// Apparently, we are in the middle of an animation block when this method is called, meaning there is no need to create one with the right duration
+	// and curve. Probably a bug on Apple's end, but it does work in our favor here.
+	self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetMinY(frame));
 	
-	[UIView animateWithDuration:duration delay:0 options:curve animations:^{
-		self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetMinY(frame));
-	} completion:nil];
+	if (!self.isPresentingAlert) {
+		[self.alert layoutIfNeeded];
+	}
 }
 
 @end
