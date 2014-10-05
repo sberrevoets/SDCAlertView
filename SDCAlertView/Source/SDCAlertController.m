@@ -215,7 +215,7 @@
 	UIViewAnimationOptions curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue] << 16;
 	
 	[UIView animateWithDuration:duration delay:0 options:curve animations:^{
-		self.view.frame = CGRectMake(0, 0, 320, CGRectGetMinY(frame));
+		self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetMinY(frame));
 	} completion:nil];
 }
 
