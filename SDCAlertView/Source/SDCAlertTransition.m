@@ -12,6 +12,7 @@
 
 static CGFloat const SDCAlertAnimationControllerSpringDamping = 45.71;
 static CGFloat const SDCAlertAnimationControllerSpringVelocity = 0;
+static CGFloat const SDCAlertAnimationControllerInitialScale = 1.26;
 
 @implementation SDCAlertTransitioningDelegate
 
@@ -60,7 +61,7 @@ static CGFloat const SDCAlertAnimationControllerSpringVelocity = 0;
 	animatingView.frame = [transitionContext finalFrameForViewController:animatingViewController];
 	
 	if (self.isPresentation) {
-		animatingView.transform = CGAffineTransformMakeScale(1.26, 1.26);
+		animatingView.transform = CGAffineTransformMakeScale(SDCAlertAnimationControllerInitialScale, SDCAlertAnimationControllerInitialScale);
 		animatingView.alpha = 0;
 		
 		[self animate:^{
