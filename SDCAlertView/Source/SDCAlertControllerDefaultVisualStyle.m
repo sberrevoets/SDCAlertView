@@ -12,6 +12,10 @@
 
 @implementation SDCAlertControllerDefaultVisualStyle
 
+- (CGFloat)cornerRadius {
+	return 7;
+}
+
 - (CGFloat)width {
 	return 270;
 }

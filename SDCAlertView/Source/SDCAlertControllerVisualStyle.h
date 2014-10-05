@@ -12,6 +12,8 @@
 
 @protocol SDCAlertControllerVisualStyle <NSObject>
 
+@property (nonatomic, readonly) CGFloat cornerRadius;
+
 @property (nonatomic, readonly) CGFloat width;
 @property (nonatomic, readonly) CGFloat actionViewHeight;
 @property (nonatomic, readonly) CGFloat actionViewTopSpacingWithContentView;

@@ -32,7 +32,7 @@
 		//[b addTextFieldWithConfigurationHandler:nil];
 	
 	[self presentViewController:b animated:YES completion:^{
-//		b.title = nil;
+		NSLog(@"%@", [b valueForKey:@"styleProvider"]);
 	}];
 }
 

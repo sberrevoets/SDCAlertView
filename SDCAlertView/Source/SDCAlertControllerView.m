@@ -35,8 +35,6 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	if (self) {
 		UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
 		_visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-		_visualEffectView.layer.masksToBounds = YES;
-		_visualEffectView.layer.cornerRadius = 5;
 		[_visualEffectView setTranslatesAutoresizingMaskIntoConstraints:NO];
 		
 		_scrollView = [[SDCAlertScrollView alloc] initWithTitle:title message:message];
@@ -85,6 +83,12 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 	
 	self.collectionViewLayout.scrollDirection = direction;
+}
+
+- (void)setVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
+	_visualStyle = visualStyle;
+	self.layer.masksToBounds = YES;
+	self.layer.cornerRadius = visualStyle.cornerRadius;
 }
 
 - (void)showTextFieldViewController:(SDCAlertTextFieldViewController *)viewController {
