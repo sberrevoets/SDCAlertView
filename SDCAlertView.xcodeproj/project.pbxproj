@@ -41,6 +41,7 @@
 		D2AE983119DFBDF50083AB0C /* UIViewController+Current.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AE983019DFBDF50083AB0C /* UIViewController+Current.m */; };
 		D2BD0CC418FEB2C400520E33 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2BD0CC318FEB2C400520E33 /* iPad.storyboard */; };
 		D2BD0CC618FED65700520E33 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = D2BD0CC518FED65700520E33 /* CHANGELOG.md */; };
+		D2CABE9519E1ECFE00CA1A89 /* UIView+Parallax.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CABE9419E1ECFE00CA1A89 /* UIView+Parallax.m */; };
 		D2D5A77019D8A64B00386078 /* SDCAlertTextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D5A76F19D8A64B00386078 /* SDCAlertTextFieldViewController.m */; };
 		D2F8345918EF2893000BB281 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D2F8345718EF2887000BB281 /* Podfile */; };
 		D2F9D2BD18400CD300F85B10 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BC18400CD200F85B10 /* README.md */; };
@@ -118,6 +119,8 @@
 		D2AE983019DFBDF50083AB0C /* UIViewController+Current.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Current.m"; sourceTree = "<group>"; };
 		D2BD0CC318FEB2C400520E33 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		D2BD0CC518FED65700520E33 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		D2CABE9319E1ECFE00CA1A89 /* UIView+Parallax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Parallax.h"; sourceTree = "<group>"; };
+		D2CABE9419E1ECFE00CA1A89 /* UIView+Parallax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Parallax.m"; sourceTree = "<group>"; };
 		D2D5A76E19D8A64B00386078 /* SDCAlertTextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertTextFieldViewController.h; sourceTree = "<group>"; };
 		D2D5A76F19D8A64B00386078 /* SDCAlertTextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertTextFieldViewController.m; sourceTree = "<group>"; };
 		D2F8345718EF2887000BB281 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
@@ -293,6 +296,8 @@
 		D2F8347218EF2C09000BB281 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D2CABE9319E1ECFE00CA1A89 /* UIView+Parallax.h */,
+				D2CABE9419E1ECFE00CA1A89 /* UIView+Parallax.m */,
 				D26506EE19C61B7500BF34B9 /* 1.0 */,
 				D26506EF19C61B8000BF34B9 /* 2.0 */,
 			);
@@ -477,6 +482,7 @@
 				D2D5A77019D8A64B00386078 /* SDCAlertTextFieldViewController.m in Sources */,
 				D259FC1519CEB0EB00BA6B36 /* SDCAlertTransition.m in Sources */,
 				D2988E0319D794C100140116 /* SDCAlertControllerDefaultVisualStyle.m in Sources */,
+				D2CABE9519E1ECFE00CA1A89 /* UIView+Parallax.m in Sources */,
 				D259FC1219CEB02100BA6B36 /* SDCAlertPresentationController.m in Sources */,
 				D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */,
 				D2666A4319CFDF6700167157 /* SDCAlertScrollView.m in Sources */,

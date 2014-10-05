@@ -13,6 +13,7 @@
 @protocol SDCAlertControllerVisualStyle <NSObject>
 
 @property (nonatomic, readonly) CGFloat cornerRadius;
+@property (nonatomic, readonly) UIOffset parallax;
 
 @property (nonatomic, readonly) CGFloat width;
 @property (nonatomic, readonly) CGFloat actionViewHeight;

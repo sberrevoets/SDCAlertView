@@ -16,6 +16,7 @@
 #import "SDCIntrinsicallySizedView.h"
 
 #import "UIView+SDCAutoLayout.h"
+#import "UIView+Parallax.h"
 
 static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControllerCellReuseIdentifier";
 
@@ -89,6 +90,8 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	_visualStyle = visualStyle;
 	self.layer.masksToBounds = YES;
 	self.layer.cornerRadius = visualStyle.cornerRadius;
+	
+	[self sdc_addParallax:self.visualStyle.parallax];
 }
 
 - (void)showTextFieldViewController:(SDCAlertTextFieldViewController *)viewController {

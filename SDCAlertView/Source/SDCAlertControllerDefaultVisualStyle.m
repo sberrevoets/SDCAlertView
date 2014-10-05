@@ -16,6 +16,10 @@
 	return 7;
 }
 
+- (UIOffset)parallax {
+	return UIOffsetMake(15.75, 15.75);
+}
+
 - (CGFloat)width {
 	return 270;
 }

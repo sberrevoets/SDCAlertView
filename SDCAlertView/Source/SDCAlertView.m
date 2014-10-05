@@ -14,6 +14,7 @@
 #import "SDCAlertViewContentView.h"
 
 #import "UIView+SDCAutoLayout.h"
+#import "UIView+Parallax.h"
 
 CGFloat const SDCAlertViewWidth = 270;
 static UIEdgeInsets const SDCAlertViewPadding = {3, 0, 3, 0};
@@ -88,7 +89,7 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	if (self) {
         [self setTranslatesAutoresizingMaskIntoConstraints:NO];
         
-        [self addParallaxEffect];
+        [self sdc_addParallax:SDCAlertViewParallaxSlideMagnitude];
         
         self.layer.masksToBounds = YES;
         self.layer.cornerRadius = SDCAlertViewCornerRadius;
@@ -105,23 +106,6 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 	}
 	
 	return self;
-}
-
-- (void)addParallaxEffect {
-	UIInterpolatingMotionEffect *horizontalParallax;
-	UIInterpolatingMotionEffect *verticalParallax;
-	
-	horizontalParallax = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-	horizontalParallax.minimumRelativeValue = @(-SDCAlertViewParallaxSlideMagnitude.horizontal);
-	horizontalParallax.maximumRelativeValue = @(SDCAlertViewParallaxSlideMagnitude.horizontal);
-	
-	verticalParallax = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
-	verticalParallax.minimumRelativeValue = @(-SDCAlertViewParallaxSlideMagnitude.vertical);
-	verticalParallax.maximumRelativeValue = @(SDCAlertViewParallaxSlideMagnitude.vertical);
-	
-	UIMotionEffectGroup *groupMotionEffect = [[UIMotionEffectGroup alloc] init];
-	groupMotionEffect.motionEffects = @[horizontalParallax, verticalParallax];
-	[self addMotionEffect:groupMotionEffect];
 }
 
 #pragma mark - Visibility
