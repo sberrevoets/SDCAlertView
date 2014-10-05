@@ -50,7 +50,7 @@
 
 		[ac presentWithCompletion:nil];
 //		[self presentNow];
-		
+
 		} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
 			SDCAlertView *a = [[SDCAlertView alloc] initWithTitle:@"Title"

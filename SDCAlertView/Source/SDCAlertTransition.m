@@ -12,7 +12,7 @@
 
 static CGFloat const SDCAlertAnimationControllerSpringDamping = 45.71;
 static CGFloat const SDCAlertAnimationControllerSpringVelocity = 0;
-static CGFloat const SDCAlertAnimationControllerInitialScale = 1.26;
+static CGFloat const SDCAlertAnimationControllerInitialScale = 1.2;
 
 @implementation SDCAlertTransitioningDelegate
 
