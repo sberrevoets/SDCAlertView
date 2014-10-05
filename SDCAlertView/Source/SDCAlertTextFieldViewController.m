@@ -8,20 +8,39 @@
 
 #import "SDCAlertTextFieldViewController.h"
 
+#import "SDCAlertControllerVisualStyle.h"
 #import "SDCAlertTextFieldTableViewCell.h"
 
 static NSString *const SDCAlertTextFieldCellIdentifier = @"SDCAlertTextFieldCellIdentifier";
 
+@interface SDCAlertTextFieldViewController ()
+@property (nonatomic, strong) NSArray *textFields;
+@property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
+@end
+
 @implementation SDCAlertTextFieldViewController
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
-	[self.tableView registerClass:[SDCAlertTextFieldTableViewCell class] forCellReuseIdentifier:SDCAlertTextFieldCellIdentifier];
+- (instancetype)initWithTextFields:(NSArray *)textFields visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
+	self = [self init];
 	
-	self.tableView.rowHeight = 25;
-	self.tableView.scrollEnabled = NO;
-	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-	self.tableView.backgroundColor = [UIColor clearColor];
+	if (self) {
+		_textFields = textFields;
+		_visualStyle = visualStyle;
+		
+		[self.tableView registerClass:[SDCAlertTextFieldTableViewCell class] forCellReuseIdentifier:SDCAlertTextFieldCellIdentifier];
+		
+		
+		self.tableView.scrollEnabled = NO;
+		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+		self.tableView.backgroundColor = [UIColor clearColor];
+		
+		self.tableView.estimatedRowHeight = visualStyle.estimatedTextFieldHeight;
+		
+		[self.tableView setNeedsLayout];
+		[self.tableView layoutIfNeeded];
+	}
+	
+	return self;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -31,6 +50,7 @@ static NSString *const SDCAlertTextFieldCellIdentifier = @"SDCAlertTextFieldCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	SDCAlertTextFieldTableViewCell *textFieldCell = [tableView dequeueReusableCellWithIdentifier:SDCAlertTextFieldCellIdentifier
 																					forIndexPath:indexPath];
+	textFieldCell.visualStyle = self.visualStyle;
 	textFieldCell.textField = self.textFields[indexPath.row];
 	return textFieldCell;
 }
@@ -40,7 +60,15 @@ static NSString *const SDCAlertTextFieldCellIdentifier = @"SDCAlertTextFieldCell
 }
 
 - (CGFloat)requiredHeightForDisplayingAllTextFields {
-	return self.tableView.rowHeight * [self.tableView numberOfRowsInSection:0];
+	CGFloat totalHeight = 0;
+	
+	for (NSUInteger i = 0; i < self.textFields.count; i++) {
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+		SDCAlertTextFieldTableViewCell *cell = (SDCAlertTextFieldTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+		totalHeight += cell.requiredHeight;
+	}
+	
+	return totalHeight;
 }
 
 @end

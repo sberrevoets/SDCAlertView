@@ -127,9 +127,8 @@
 
 - (void)showTextFieldsInAlertView:(SDCAlertControllerView *)alertView {
 	if (self.textFields.count > 0) {
-		SDCAlertTextFieldViewController *textFieldViewController = [[SDCAlertTextFieldViewController alloc] init];
-		textFieldViewController.textFields = self.textFields;
-		
+		SDCAlertTextFieldViewController *textFieldViewController = [[SDCAlertTextFieldViewController alloc] initWithTextFields:self.textFields
+																												   visualStyle:self.visualStyle];
 		[self addChildViewController:textFieldViewController];
 		[alertView showTextFieldViewController:textFieldViewController];
 		[textFieldViewController didMoveToParentViewController:self];

@@ -21,7 +21,12 @@
 @property (nonatomic, readonly) UIEdgeInsets margins;
 @property (nonatomic, readonly) UIEdgeInsets contentPadding;
 @property (nonatomic, readonly) CGFloat labelSpacing;
+
+@property (nonatomic, readonly) CGFloat estimatedTextFieldHeight;
 @property (nonatomic, readonly) CGFloat textFieldsTopSpacing;
+@property (nonatomic, readonly) CGFloat textFieldBorderWidth;
+@property (nonatomic, readonly) UIColor *textFieldBorderColor;
+@property (nonatomic, readonly) UIEdgeInsets textFieldMargins;
 
 @property (nonatomic, readonly) UIView *actionViewHighlightBackgroundView;
 @property (nonatomic, readonly) UIColor *actionViewSeparatorColor;

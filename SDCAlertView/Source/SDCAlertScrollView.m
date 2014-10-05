@@ -97,8 +97,7 @@
 	if (self.textFieldViewController) {
 		[self.textFieldViewController.view sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.titleLabel];
 		
-		// Could use self.textFieldViewController.tableView to calculate height, but it being a UITableViewController subclass is an implementation detail.
-		CGFloat height = [self.textFieldViewController requiredHeightForDisplayingAllTextFields] + self.visualStyle.contentPadding.bottom;
+		CGFloat height = self.textFieldViewController.requiredHeightForDisplayingAllTextFields + self.visualStyle.contentPadding.bottom;
 		[self.textFieldViewController.view sdc_pinHeight:height];
 		
 		[self addConstraint:[NSLayoutConstraint constraintWithItem:self.textFieldViewController.view

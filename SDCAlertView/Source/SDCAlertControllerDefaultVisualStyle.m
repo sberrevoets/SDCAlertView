@@ -44,8 +44,24 @@
 	return 18;
 }
 
+- (CGFloat)estimatedTextFieldHeight {
+	return 25;
+}
+
 - (CGFloat)textFieldsTopSpacing {
 	return 24;
+}
+
+- (CGFloat)textFieldBorderWidth {
+	return 1 / [UIScreen mainScreen].scale;
+}
+
+- (UIColor *)textFieldBorderColor {
+	return [UIColor colorWithRed:64.f/255 green:64.f/255 blue:64.f/255 alpha:1];
+}
+
+- (UIEdgeInsets)textFieldMargins {
+	return UIEdgeInsetsMake(4, 4, 4, 4);
 }
 
 - (UIView *)actionViewHighlightBackgroundView {

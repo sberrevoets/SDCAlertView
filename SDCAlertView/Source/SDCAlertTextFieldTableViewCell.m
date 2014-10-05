@@ -8,6 +8,8 @@
 
 #import "SDCAlertTextFieldTableViewCell.h"
 
+#import "SDCAlertControllerVisualStyle.h"
+
 #import "UIView+SDCAutoLayout.h"
 
 @implementation SDCAlertTextFieldTableViewCell
@@ -17,8 +19,9 @@
 	[textField setTranslatesAutoresizingMaskIntoConstraints:NO];
 	
 	UIView *borderView = [[UIView alloc] init];
+	borderView.backgroundColor = self.visualStyle.textFieldBorderColor;
 	[borderView setTranslatesAutoresizingMaskIntoConstraints:NO];
-	borderView.backgroundColor = [UIColor colorWithRed:64.f/255 green:64.f/255 blue:64.f/255 alpha:1];
+	[borderView sdc_pinHeight:self.requiredHeight];
 	
 	[self.contentView addSubview:borderView];
 	[borderView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
@@ -28,12 +31,18 @@
 	[textFieldView setTranslatesAutoresizingMaskIntoConstraints:NO];
 
 	[borderView addSubview:textFieldView];
-	[textFieldView sdc_alignEdgesWithSuperview:UIRectEdgeAll insets:UIEdgeInsetsMake(0.5, 0.5, -0.5, -0.5)];
+	
+	CGFloat borderWidth = self.visualStyle.textFieldBorderWidth;
+	[textFieldView sdc_alignEdgesWithSuperview:UIRectEdgeAll insets:UIEdgeInsetsMake(borderWidth, borderWidth, -borderWidth, -borderWidth)];
 	[textFieldView sdc_centerInSuperview];
 	
 	[textFieldView addSubview:textField];
 	[textField sdc_centerInSuperview];
-	[textField sdc_pinWidthToWidthOfView:textFieldView offset:-8];
+	[textField sdc_pinWidthToWidthOfView:textFieldView offset:-(self.visualStyle.textFieldMargins.left + self.visualStyle.textFieldMargins.right)];
+}
+
+- (CGFloat)requiredHeight {
+	return [self.textField intrinsicContentSize].height + self.visualStyle.textFieldMargins.top + self.visualStyle.textFieldMargins.bottom;
 }
 
 @end

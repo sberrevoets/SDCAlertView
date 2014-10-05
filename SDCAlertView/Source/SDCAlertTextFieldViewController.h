@@ -8,9 +8,11 @@
 
 @import UIKit;
 
+@protocol SDCAlertControllerVisualStyle;
+
 @interface SDCAlertTextFieldViewController : UITableViewController
 
-@property (nonatomic, strong) NSArray *textFields;
+- (instancetype)initWithTextFields:(NSArray *)textFields visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle;
 
 - (CGFloat)requiredHeightForDisplayingAllTextFields;
 

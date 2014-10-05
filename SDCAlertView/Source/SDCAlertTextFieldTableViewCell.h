@@ -8,8 +8,13 @@
 
 @import UIKit;
 
+@protocol SDCAlertControllerVisualStyle;
+
 @interface SDCAlertTextFieldTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle; // Apply a visual style before setting the text field
 @property (nonatomic, strong) UITextField *textField;
+
+@property (nonatomic, readonly) CGFloat requiredHeight;
 
 @end
