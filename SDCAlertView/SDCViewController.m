@@ -44,28 +44,10 @@
 			NSLog(@"%@", action.title);
 		}]];
 		
-	[ac addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-		textField.delegate = self;
-	}];
-//		[ac addTextFieldWithConfigurationHandler:nil];
-		
-		UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-		progressView.progress = 0;
-		
-		[NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(updateProgressView:) userInfo:progressView repeats:YES];
-		
-		[progressView setTranslatesAutoresizingMaskIntoConstraints:NO];
-		[ac.contentView addSubview:progressView];
-		
-		[progressView sdc_pinWidthToWidthOfView:ac.contentView offset:-20];
-		[progressView sdc_horizontallyCenterInSuperview];
-		[ac.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==20)-[progressView]-(==20)-|"
-																				  options:0
-																				  metrics:nil
-																					views:NSDictionaryOfVariableBindings(progressView)]];
+		[ac addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+			textField.delegate = self;
+		}];
 
-
-		//[SDCAlertController showAlertControllerWithTitle:@"Title" message:@"Message" actionTitle:@"OK"];
 		[ac presentWithCompletion:nil];
 //		[self presentNow];
 		

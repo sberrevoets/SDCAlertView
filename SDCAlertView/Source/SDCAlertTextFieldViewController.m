@@ -37,8 +37,6 @@ static NSString *const SDCAlertTextFieldCellIdentifier = @"SDCAlertTextFieldCell
 		
 		[self.tableView setNeedsLayout];
 		[self.tableView layoutIfNeeded];
-		
-		[textFields.firstObject becomeFirstResponder];
 	}
 	
 	return self;

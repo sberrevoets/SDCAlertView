@@ -129,6 +129,19 @@
 	
 	[self.view addSubview:self.alert];
 	[self.alert sdc_centerInSuperview];
+	
+	[self.alert createViewHierarchy];
+}
+
+- (void)viewDidLayoutSubviews {
+	[super viewDidLayoutSubviews];
+	
+	// Explanation of why the first responder is set here:
+	// http://stackoverflow.com/questions/1132784/iphone-have-the-keyboard-slide-into-view-from-the-right-like-when-editing-a-no
+	
+	if (![self.textFields.firstObject isFirstResponder]) {
+		[self.textFields.firstObject becomeFirstResponder];
+	}
 }
 
 - (void)showTextFieldsInAlertView:(SDCAlertControllerView *)alertView {

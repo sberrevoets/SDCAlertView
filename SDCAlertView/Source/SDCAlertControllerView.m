@@ -24,6 +24,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 @property (nonatomic, strong) SDCAlertScrollView *scrollView;
 @property (nonatomic, strong) UICollectionView *actionsCollectionView;
 @property (nonatomic, strong) SDCAlertControllerCollectionViewFlowLayout *collectionViewLayout;
+@property (nonatomic, strong) NSLayoutConstraint *maximumHeightConstraint;
 @end
 
 @implementation SDCAlertControllerView
@@ -91,7 +92,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 }
 
 - (CGFloat)maximumHeightForScrollView {
-	CGFloat maximumHeight = CGRectGetHeight(self.superview.bounds) - self.visualStyle.margins.top - self.visualStyle.margins.bottom;
+	CGFloat maximumHeight = CGRectGetHeight(self.superview.bounds) - self.visualStyle.margins.top - self.visualStyle.margins.bottom - [self actionViewTopSpacing];
 	
 	if (self.actions.count > 0) {
 		if (self.collectionViewLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
@@ -102,6 +103,14 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 	
 	return maximumHeight;
+}
+
+- (CGFloat)actionViewTopSpacing {
+	if (self.contentView.subviews.count > 0) {
+		return self.visualStyle.actionViewTopSpacingWithContentView;
+	} else {
+		return self.visualStyle.actionViewTopSpacingWithoutContentView;
+	}
 }
 
 - (CGFloat)collectionViewHeight {
@@ -115,9 +124,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 }
 
-- (void)layoutSubviews {
-	[super layoutSubviews];
-	
+- (void)createViewHierarchy {
 	[self applyCurrentStyleToAlertElements];
 	
 	[self.visualEffectView sdc_pinWidth:self.visualStyle.width];
@@ -127,15 +134,12 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self.scrollView layoutIfNeeded];
 	
 	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];
-	[self.scrollView sdc_setMaximumHeight:[self maximumHeightForScrollView]];
-	self.scrollView.contentSize = CGSizeMake(self.visualStyle.width, [self.scrollView intrinsicContentSize].height);
+	self.maximumHeightConstraint = [self.scrollView sdc_setMaximumHeight:[self maximumHeightForScrollView]];
 	
 	UIView *aligningView = self.scrollView;
-	CGFloat actionViewTopSpacing = self.visualStyle.actionViewTopSpacingWithoutContentView;
 	
 	if (self.contentView.subviews.count > 0) {
 		aligningView = self.contentView;
-		actionViewTopSpacing = self.visualStyle.actionViewTopSpacingWithContentView;
 		
 		[self.visualEffectView.contentView addSubview:self.contentView];
 		[self.contentView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.scrollView];
@@ -143,12 +147,18 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 	
 	[self.visualEffectView.contentView addSubview:self.actionsCollectionView];
-	[self.actionsCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView inset:actionViewTopSpacing];
+	[self.actionsCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView inset:[self actionViewTopSpacing]];
 	[self.actionsCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
 	[self.actionsCollectionView sdc_pinHeight:[self collectionViewHeight]];
 	
 	[self addSubview:self.visualEffectView];
 	[self.visualEffectView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
+}
+
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	self.maximumHeightConstraint.constant = [self maximumHeightForScrollView];
+	self.scrollView.contentSize = CGSizeMake(self.visualStyle.width, [self.scrollView intrinsicContentSize].height);
 }
 
 - (void)applyCurrentStyleToAlertElements {
@@ -181,7 +191,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
-layout:(UICollectionViewLayout *)collectionViewLayout
+				  layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	if (self.collectionViewLayout.scrollDirection == UICollectionViewScrollDirectionVertical) {
 		return CGSizeMake(CGRectGetWidth(self.bounds), self.visualStyle.actionViewHeight);

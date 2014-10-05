@@ -37,5 +37,5 @@
 - (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message;
 
 - (void)showTextFieldViewController:(SDCAlertTextFieldViewController *)viewController;
-
+- (void)createViewHierarchy;
 @end
