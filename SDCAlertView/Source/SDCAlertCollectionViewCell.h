@@ -18,6 +18,7 @@
 @interface SDCAlertCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIGestureRecognizer *gestureRecognizer;
+@property (nonatomic, getter=isEnabled) BOOL enabled;
 
 - (void)updateWithAction:(SDCAlertAction *)action visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle;
 

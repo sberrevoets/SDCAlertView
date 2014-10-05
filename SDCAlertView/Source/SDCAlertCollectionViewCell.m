@@ -15,7 +15,6 @@
 
 @interface SDCAlertCollectionViewCell ()
 @property (nonatomic, strong) UILabel *textLabel;
-@property (nonatomic, getter=isEnabled) BOOL enabled;
 @property (nonatomic, strong) UIView *highlightedBackgroundView;
 @end
 
@@ -36,7 +35,16 @@
 	[self removeGestureRecognizer:_gestureRecognizer];
 	
 	_gestureRecognizer = gestureRecognizer;
+	gestureRecognizer.enabled = self.isEnabled;
 	[self addGestureRecognizer:gestureRecognizer];
+}
+
+- (void)setEnabled:(BOOL)enabled {
+	_enabled = enabled;
+	
+	self.highlightedBackgroundView.hidden = YES; // Still hide when enabling
+	self.textLabel.enabled = enabled;
+	self.gestureRecognizer.enabled = enabled;
 }
 
 - (void)updateWithAction:(SDCAlertAction *)action visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
@@ -68,7 +76,10 @@
 
 - (void)setHighlighted:(BOOL)highlighted {
 	[super setHighlighted:highlighted];
-	self.highlightedBackgroundView.hidden = !highlighted;
+	
+	if (self.isEnabled) {
+		self.highlightedBackgroundView.hidden = !highlighted;
+	}
 }
 
 @end

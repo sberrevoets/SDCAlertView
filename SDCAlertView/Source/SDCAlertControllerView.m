@@ -91,7 +91,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	self.layer.masksToBounds = YES;
 	self.layer.cornerRadius = visualStyle.cornerRadius;
 	
-	[self sdc_addParallax:self.visualStyle.parallax];
+	[self sdc_addParallax:visualStyle.parallax];
 }
 
 - (void)showTextFieldViewController:(SDCAlertTextFieldViewController *)viewController {
@@ -131,7 +131,8 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 }
 
-- (void)createViewHierarchy {
+- (void)prepareForDisplay {
+	[self observeActions];
 	[self applyCurrentStyleToAlertElements];
 	
 	[self.visualEffectView sdc_pinWidth:self.visualStyle.width];
@@ -160,6 +161,28 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	[self addSubview:self.visualEffectView];
 	[self.visualEffectView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
+}
+
+- (void)observeActions {
+	[self.actions enumerateObjectsUsingBlock:^(SDCAlertAction *action, NSUInteger idx, BOOL *stop) {
+		[action addObserver:self forKeyPath:@"enabled" options:0 context:NULL];
+	}];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	if ([object isKindOfClass:[SDCAlertAction class]]) {
+		SDCAlertAction *action = object;
+		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.actions indexOfObject:action] inSection:0];
+		
+		SDCAlertCollectionViewCell *cell = (SDCAlertCollectionViewCell *)[self.actionsCollectionView cellForItemAtIndexPath:indexPath];
+		cell.enabled = action.isEnabled;
+	}
+}
+
+- (void)dealloc {
+	[self.actions enumerateObjectsUsingBlock:^(SDCAlertAction *action, NSUInteger idx, BOOL *stop) {
+		[action removeObserver:self forKeyPath:@"enabled"];
+	}];
 }
 
 - (void)layoutSubviews {

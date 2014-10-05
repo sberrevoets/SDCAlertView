@@ -150,7 +150,7 @@
 	[self.view addSubview:self.alert];
 	[self.alert sdc_centerInSuperview];
 	
-	[self.alert createViewHierarchy];
+	[self.alert prepareForDisplay];
 }
 
 - (void)viewDidLayoutSubviews {

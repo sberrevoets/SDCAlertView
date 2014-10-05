@@ -48,7 +48,11 @@
 			textField.delegate = self;
 		}];
 
-		[ac presentWithCompletion:nil];
+		[ac presentWithCompletion:^{
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [ac.actions.firstObject setEnabled:NO];
+			});
+		}];
 //		[self presentNow];
 
 		} else if (indexPath.section == 1) {
