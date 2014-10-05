@@ -14,6 +14,6 @@
 
 - (instancetype)initWithTextFields:(NSArray *)textFields visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle;
 
-- (CGFloat)requiredHeightForDisplayingAllTextFields;
+@property (nonatomic, readonly) CGFloat requiredHeightForDisplayingAllTextFields;
 
 @end

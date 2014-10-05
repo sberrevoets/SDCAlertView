@@ -38,7 +38,7 @@
 
 @property (nonatomic, weak) id <SDCAlertViewContentViewDelegate> delegate;
 
-- (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate;
+- (instancetype)initWithDelegate:(id <SDCAlertViewContentViewDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 - (void)updateContentForStyle:(SDCAlertViewStyle)style;
 - (void)prepareForShowing;

@@ -107,7 +107,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 					  message:(NSString *)message
 					 delegate:(id)delegate
 			cancelButtonTitle:(NSString *)cancelButtonTitle
-			otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
+			otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION NS_DESIGNATED_INITIALIZER;
 
 /*
  *  Showing and dismissing an alert works largely the same as it does with UIAlertView. Animations will not be interrupted,
