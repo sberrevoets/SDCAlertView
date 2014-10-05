@@ -32,14 +32,6 @@
 	return 90; // Fits exactly three actions without scrolling
 }
 
-- (CGFloat)actionViewTopSpacingWithContentView {
-	return 0;
-}
-
-- (CGFloat)actionViewTopSpacingWithoutContentView {
-	return 20;
-}
-
 - (UIEdgeInsets)margins {
 	return UIEdgeInsetsMake(3, 0, 3, 0);
 }

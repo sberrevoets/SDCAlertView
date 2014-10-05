@@ -99,7 +99,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 }
 
 - (CGFloat)maximumHeightForScrollView {
-	CGFloat maximumHeight = CGRectGetHeight(self.superview.bounds) - self.visualStyle.margins.top - self.visualStyle.margins.bottom - [self actionViewTopSpacing];
+	CGFloat maximumHeight = CGRectGetHeight(self.superview.bounds) - self.visualStyle.margins.top - self.visualStyle.margins.bottom;
 	
 	if (self.actions.count > 0) {
 		if (self.collectionViewLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
@@ -110,14 +110,6 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 	
 	return maximumHeight;
-}
-
-- (CGFloat)actionViewTopSpacing {
-	if (self.contentView.subviews.count > 0) {
-		return self.visualStyle.actionViewTopSpacingWithContentView;
-	} else {
-		return self.visualStyle.actionViewTopSpacingWithoutContentView;
-	}
 }
 
 - (CGFloat)collectionViewHeight {
@@ -155,7 +147,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 	
 	[self.visualEffectView.contentView addSubview:self.actionsCollectionView];
-	[self.actionsCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView inset:[self actionViewTopSpacing]];
+	[self.actionsCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView];
 	[self.actionsCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
 	[self.actionsCollectionView sdc_pinHeight:[self collectionViewHeight]];
 	

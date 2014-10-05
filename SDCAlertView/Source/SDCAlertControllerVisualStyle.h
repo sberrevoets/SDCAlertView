@@ -17,8 +17,6 @@
 
 @property (nonatomic, readonly) CGFloat width;
 @property (nonatomic, readonly) CGFloat actionViewHeight;
-@property (nonatomic, readonly) CGFloat actionViewTopSpacingWithContentView;
-@property (nonatomic, readonly) CGFloat actionViewTopSpacingWithoutContentView;
 @property (nonatomic, readonly) CGFloat minimumActionViewWidth; // For forced horizontal layout and 3+ buttons
 
 @property (nonatomic, readonly) UIEdgeInsets margins;
