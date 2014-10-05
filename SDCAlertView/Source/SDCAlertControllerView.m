@@ -1,12 +1,12 @@
 //
-//  SDCAlertRepresentationView.m
+//  SDCAlertControllerView.m
 //  SDCAlertView
 //
 //  Created by Scott Berrevoets on 9/21/14.
 //  Copyright (c) 2014 Scotty Doesn't Code. All rights reserved.
 //
 
-#import "SDCAlertRepresentationView.h"
+#import "SDCAlertControllerView.h"
 
 #import "SDCAlertController.h"
 #import "SDCAlertViewBackgroundView.h"
@@ -19,14 +19,14 @@
 
 static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControllerCellReuseIdentifier";
 
-@interface SDCAlertRepresentationView () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+@interface SDCAlertControllerView () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 @property (nonatomic, strong) UIVisualEffectView *visualEffectView;
 @property (nonatomic, strong) SDCAlertScrollView *scrollView;
 @property (nonatomic, strong) UICollectionView *buttonCollectionView;
 @property (nonatomic, strong) SDCAlertControllerCollectionViewFlowLayout *collectionViewLayout;
 @end
 
-@implementation SDCAlertRepresentationView
+@implementation SDCAlertControllerView
 
 - (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message {
 	self = [self init];
@@ -161,7 +161,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	NSIndexPath *indexPath = [self.buttonCollectionView indexPathForCell:cell];
 	SDCAlertAction *action = self.actions[indexPath.row];
 	
-	[self.delegate alertRepresentationView:self didPerformAction:action];
+	[self.delegate alertControllerView:self didPerformAction:action];
 }
 
 #pragma mark - UICollectionViewDelegate

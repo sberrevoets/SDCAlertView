@@ -1,5 +1,5 @@
 //
-//  SDCAlertRepresentationView.h
+//  SDCAlertControllerView.h
 //  SDCAlertView
 //
 //  Created by Scott Berrevoets on 9/21/14.
@@ -10,19 +10,19 @@
 
 #import "SDCAlertController.h" // SDCAlertControllerButtonLayout
 
-@class SDCAlertRepresentationView;
+@class SDCAlertControllerView;
 @class SDCAlertAction;
 @class SDCAlertTextFieldViewController;
 
-@protocol SDCAlertRepresentationViewDelegate <NSObject>
-- (void)alertRepresentationView:(SDCAlertRepresentationView *)sender didPerformAction:(SDCAlertAction *)action;
+@protocol SDCAlertControllerViewDelegate <NSObject>
+- (void)alertControllerView:(SDCAlertControllerView *)sender didPerformAction:(SDCAlertAction *)action;
 @end
 
 @protocol SDCAlertControllerVisualStyle;
 
-@interface SDCAlertRepresentationView : UIView
+@interface SDCAlertControllerView : UIView
 
-@property (nonatomic, weak) id <SDCAlertRepresentationViewDelegate> delegate;
+@property (nonatomic, weak) id <SDCAlertControllerViewDelegate> delegate;
 
 @property (nonatomic, copy) NSAttributedString *title;
 @property (nonatomic, copy) NSAttributedString *message;

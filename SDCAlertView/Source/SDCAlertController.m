@@ -10,7 +10,7 @@
 
 #import "SDCAlertTextFieldViewController.h"
 #import "SDCAlertTransition.h"
-#import "SDCAlertRepresentationView.h"
+#import "SDCAlertControllerView.h"
 #import "SDCAlertControllerDefaultVisualStyle.h"
 #import "SDCIntrinsicallySizedView.h"
 
@@ -21,12 +21,12 @@
 @property (nonatomic, copy) void (^handler)(SDCAlertAction *);
 @end
 
-@interface SDCAlertController () <SDCAlertRepresentationViewDelegate>
+@interface SDCAlertController () <SDCAlertControllerViewDelegate>
 @property (nonatomic, strong) NSMutableArray *mutableActions;
 @property (nonatomic, strong) NSMutableArray *mutableTextFields;
 @property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> transitioningDelegate;
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
-@property (nonatomic, strong) SDCAlertRepresentationView *alert;
+@property (nonatomic, strong) SDCAlertControllerView *alert;
 @end
 
 @implementation SDCAlertController
@@ -105,7 +105,7 @@
 - (void)createAlert {
 	NSAttributedString *title = self.attributedTitle ? : [[NSAttributedString alloc] initWithString:self.title];
 	NSAttributedString *message = self.attributedMessage ? : [[NSAttributedString alloc] initWithString:self.message];
-	self.alert = [[SDCAlertRepresentationView alloc] initWithTitle:title message:message];
+	self.alert = [[SDCAlertControllerView alloc] initWithTitle:title message:message];
 	
 	self.alert.delegate = self;
 	self.alert.contentView = [[SDCIntrinsicallySizedView alloc] init];
@@ -125,7 +125,7 @@
 	[self.alert sdc_centerInSuperview];
 }
 
-- (void)showTextFieldsInAlertView:(SDCAlertRepresentationView *)alertView {
+- (void)showTextFieldsInAlertView:(SDCAlertControllerView *)alertView {
 	if (self.textFields.count > 0) {
 		SDCAlertTextFieldViewController *textFieldViewController = [[SDCAlertTextFieldViewController alloc] init];
 		textFieldViewController.textFields = self.textFields;
@@ -160,7 +160,7 @@
 	return [self.mutableActions copy];
 }
 
-- (void)alertRepresentationView:(SDCAlertRepresentationView *)sender didPerformAction:(SDCAlertAction *)action {
+- (void)alertControllerView:(SDCAlertControllerView *)sender didPerformAction:(SDCAlertAction *)action {
 	if (!action.isEnabled || (self.shouldDismissBlock && !self.shouldDismissBlock(action))) {
 		return;
 	}
