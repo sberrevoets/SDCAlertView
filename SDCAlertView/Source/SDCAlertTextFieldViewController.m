@@ -29,7 +29,6 @@ static NSString *const SDCAlertTextFieldCellIdentifier = @"SDCAlertTextFieldCell
 		
 		[self.tableView registerClass:[SDCAlertTextFieldTableViewCell class] forCellReuseIdentifier:SDCAlertTextFieldCellIdentifier];
 		
-		
 		self.tableView.scrollEnabled = NO;
 		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 		self.tableView.backgroundColor = [UIColor clearColor];
@@ -38,6 +37,8 @@ static NSString *const SDCAlertTextFieldCellIdentifier = @"SDCAlertTextFieldCell
 		
 		[self.tableView setNeedsLayout];
 		[self.tableView layoutIfNeeded];
+		
+		[textFields.firstObject becomeFirstResponder];
 	}
 	
 	return self;

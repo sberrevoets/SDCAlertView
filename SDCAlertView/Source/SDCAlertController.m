@@ -57,6 +57,8 @@
 		
 		self.modalPresentationStyle = UIModalPresentationCustom;
 		self.transitioningDelegate = [[SDCAlertTransitioningDelegate alloc] init];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardUpdate:) name:UIKeyboardWillChangeFrameNotification object:nil];
 	}
 	
 	return self;
@@ -98,6 +100,10 @@
 - (void)setMessage:(NSString *)message {
 	_message = message;
 	self.alert.message = [[NSAttributedString alloc] initWithString:message];
+}
+
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Alert View
@@ -176,6 +182,7 @@
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *))configurationHandler {
 	UITextField *textField = [[UITextField alloc] init];
 	textField.font = self.visualStyle.textFieldFont;
+	textField.autocorrectionType = UITextAutocorrectionTypeNo;
 	[self.mutableTextFields addObject:textField];
 	
 	if (configurationHandler) {
@@ -185,6 +192,18 @@
 
 - (NSArray *)textFields {
 	return [self.mutableTextFields copy];
+}
+
+- (void)keyboardUpdate:(NSNotification *)notification {
+	NSValue *frameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
+	CGRect frame = [frameValue CGRectValue];
+	
+	NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+	UIViewAnimationOptions curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue] << 16;
+	
+	[UIView animateWithDuration:duration delay:0 options:curve animations:^{
+		self.view.frame = CGRectMake(0, 0, 320, CGRectGetMinY(frame));
+	} completion:nil];
 }
 
 @end

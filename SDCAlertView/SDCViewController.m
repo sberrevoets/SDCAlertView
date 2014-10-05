@@ -16,7 +16,7 @@
 #import "SDCAlertController.h"
 #import "SDCAlertTransition.h"
 
-@interface SDCViewController () <UITableViewDelegate, UIAlertViewDelegate, SDCAlertViewDelegate>
+@interface SDCViewController () <UITableViewDelegate, UIAlertViewDelegate, SDCAlertViewDelegate, UITextFieldDelegate>
 @end
 
 @implementation SDCViewController
@@ -29,7 +29,7 @@
 	[b addAction:[UIAlertAction actionWithTitle:@"Button 33??" style:UIAlertActionStyleCancel handler:nil]];
 	
 	[b addTextFieldWithConfigurationHandler:nil];
-		[b addTextFieldWithConfigurationHandler:nil];
+		//[b addTextFieldWithConfigurationHandler:nil];
 	
 	[self presentViewController:b animated:YES completion:^{
 //		b.title = nil;
@@ -44,7 +44,9 @@
 			NSLog(@"%@", action.title);
 		}]];
 		
-	[ac addTextFieldWithConfigurationHandler:nil];
+	[ac addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+		textField.delegate = self;
+	}];
 //		[ac addTextFieldWithConfigurationHandler:nil];
 		
 		UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
@@ -64,9 +66,8 @@
 
 
 		//[SDCAlertController showAlertControllerWithTitle:@"Title" message:@"Message" actionTitle:@"OK"];
-		[ac presentWithCompletion:^{
-		}];
-	//	[self presentNow];
+		[ac presentWithCompletion:nil];
+//		[self presentNow];
 		
 		} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
@@ -164,6 +165,11 @@
 	}
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[textField resignFirstResponder];
+	return YES;
 }
 
 - (void)updateProgressView:(NSTimer *)timer {
