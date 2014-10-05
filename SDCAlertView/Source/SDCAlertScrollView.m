@@ -112,6 +112,11 @@
 	[self invalidateIntrinsicContentSize];
 }
 
+- (void)invalidateIntrinsicContentSize {
+	[super invalidateIntrinsicContentSize];
+	self.contentSize = CGSizeMake(self.contentSize.width, [self intrinsicContentSize].height);
+}
+
 - (CGSize)intrinsicContentSize {
 	UIView *lastView = (self.textFieldViewController) ? self.textFieldViewController.view : self.messageLabel;
 	CGFloat intrinsicHeight = CGRectGetMaxY(lastView.frame);

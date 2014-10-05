@@ -158,7 +158,6 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	self.maximumHeightConstraint.constant = [self maximumHeightForScrollView];
-	self.scrollView.contentSize = CGSizeMake(self.visualStyle.width, [self.scrollView intrinsicContentSize].height);
 }
 
 - (void)applyCurrentStyleToAlertElements {
