@@ -54,13 +54,13 @@ NSString *const SDCAlertControllerDecorationKindVerticalSeparator = @"SDCAlertCo
 	
 	UICollectionViewLayoutAttributes *itemAttributes = [self layoutAttributesForItemAtIndexPath:indexPath];
 	attributes.zIndex = itemAttributes.zIndex + 1;
-	attributes.backgroundColor = self.visualStyle.buttonSeparatorColor;
+	attributes.backgroundColor = self.visualStyle.actionViewSeparatorColor;
 	
 	CGRect decorationFrame = itemAttributes.frame;
 	if (elementKind == SDCAlertControllerDecorationKindHorizontalSeparator) {
-		decorationFrame.size.height = self.visualStyle.buttonSeparatorThickness;
+		decorationFrame.size.height = self.visualStyle.actionViewSeparatorThickness;
 	} else {
-		decorationFrame.size.width = self.visualStyle.buttonSeparatorThickness;
+		decorationFrame.size.width = self.visualStyle.actionViewSeparatorThickness;
 	}
 	
 	attributes.frame = decorationFrame;

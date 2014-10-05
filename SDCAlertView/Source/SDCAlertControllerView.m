@@ -22,7 +22,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 @interface SDCAlertControllerView () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 @property (nonatomic, strong) UIVisualEffectView *visualEffectView;
 @property (nonatomic, strong) SDCAlertScrollView *scrollView;
-@property (nonatomic, strong) UICollectionView *buttonCollectionView;
+@property (nonatomic, strong) UICollectionView *actionsCollectionView;
 @property (nonatomic, strong) SDCAlertControllerCollectionViewFlowLayout *collectionViewLayout;
 @end
 
@@ -44,13 +44,13 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 		[_collectionViewLayout registerClass:[SDCAlertControllerSeparatorView class] forDecorationViewOfKind:SDCAlertControllerDecorationKindHorizontalSeparator];
 		[_collectionViewLayout registerClass:[SDCAlertControllerSeparatorView class] forDecorationViewOfKind:SDCAlertControllerDecorationKindVerticalSeparator];
 		
-		_buttonCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionViewLayout];
-		[_buttonCollectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
-		[_buttonCollectionView registerClass:[SDCAlertCollectionViewCell class] forCellWithReuseIdentifier:SDCAlertControllerCellReuseIdentifier];
+		_actionsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionViewLayout];
+		[_actionsCollectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+		[_actionsCollectionView registerClass:[SDCAlertCollectionViewCell class] forCellWithReuseIdentifier:SDCAlertControllerCellReuseIdentifier];
 		
-		_buttonCollectionView.delegate = self;
-		_buttonCollectionView.dataSource = self;
-		_buttonCollectionView.backgroundColor = [UIColor clearColor];
+		_actionsCollectionView.delegate = self;
+		_actionsCollectionView.dataSource = self;
+		_actionsCollectionView.backgroundColor = [UIColor clearColor];
 				
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
@@ -74,12 +74,12 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	self.scrollView.message = message;
 }
 
-- (void)setButtonLayout:(SDCAlertControllerButtonLayout)buttonLayout {
-	_buttonLayout = buttonLayout;
+- (void)setActionLayout:(SDCAlertControllerActionLayout)actionLayout {
+	_actionLayout = actionLayout;
 	
 	UICollectionViewScrollDirection direction = UICollectionViewScrollDirectionHorizontal;
 	
-	if (buttonLayout == SDCAlertControllerButtonLayoutVertical || (buttonLayout == SDCAlertControllerButtonLayoutAutomatic && self.actions.count != 2)) {
+	if (actionLayout == SDCAlertControllerActionLayoutVertical || (actionLayout == SDCAlertControllerActionLayoutAutomatic && self.actions.count != 2)) {
 		direction = UICollectionViewScrollDirectionVertical;
 	}
 	
@@ -95,23 +95,23 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	if (self.actions.count > 0) {
 		if (self.collectionViewLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
-			maximumHeight -= self.visualStyle.buttonHeight;
+			maximumHeight -= self.visualStyle.actionViewHeight;
 		} else {
-			maximumHeight -= self.visualStyle.buttonHeight * [self.buttonCollectionView numberOfItemsInSection:0];
+			maximumHeight -= self.visualStyle.actionViewHeight * [self.actionsCollectionView numberOfItemsInSection:0];
 		}
 	}
 	
 	return maximumHeight;
 }
 
-- (CGFloat)heightForButtonCollectionView {
-	CGFloat horizontalLayoutHeight = self.visualStyle.buttonHeight;
-	CGFloat verticalLayoutHeight = self.visualStyle.buttonHeight * [self.buttonCollectionView numberOfItemsInSection:0];
+- (CGFloat)collectionViewHeight {
+	CGFloat horizontalLayoutHeight = self.visualStyle.actionViewHeight;
+	CGFloat verticalLayoutHeight = self.visualStyle.actionViewHeight * [self.actionsCollectionView numberOfItemsInSection:0];
 	
-	switch (self.buttonLayout) {
-		case SDCAlertControllerButtonLayoutAutomatic:		return (self.actions.count == 2) ? horizontalLayoutHeight : verticalLayoutHeight;
-		case SDCAlertControllerButtonLayoutHorizontal:		return horizontalLayoutHeight;
-		case SDCAlertControllerButtonLayoutVertical:		return verticalLayoutHeight;
+	switch (self.actionLayout) {
+		case SDCAlertControllerActionLayoutAutomatic:		return (self.actions.count == 2) ? horizontalLayoutHeight : verticalLayoutHeight;
+		case SDCAlertControllerActionLayoutHorizontal:		return horizontalLayoutHeight;
+		case SDCAlertControllerActionLayoutVertical:		return verticalLayoutHeight;
 	}
 }
 
@@ -131,21 +131,21 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	self.scrollView.contentSize = CGSizeMake(self.visualStyle.width, [self.scrollView intrinsicContentSize].height);
 	
 	UIView *aligningView = self.scrollView;
-	CGFloat buttonTopSpacing = self.visualStyle.buttonTopSpacingWithoutContentView;
+	CGFloat actionViewTopSpacing = self.visualStyle.actionViewTopSpacingWithoutContentView;
 	
 	if (self.contentView.subviews.count > 0) {
 		aligningView = self.contentView;
-		buttonTopSpacing = self.visualStyle.buttonTopSpacingWithContentView;
+		actionViewTopSpacing = self.visualStyle.actionViewTopSpacingWithContentView;
 		
 		[self.visualEffectView.contentView addSubview:self.contentView];
 		[self.contentView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.scrollView];
 		[self.contentView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
 	}
 	
-	[self.visualEffectView.contentView addSubview:self.buttonCollectionView];
-	[self.buttonCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView inset:buttonTopSpacing];
-	[self.buttonCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
-	[self.buttonCollectionView sdc_pinHeight:[self heightForButtonCollectionView]];
+	[self.visualEffectView.contentView addSubview:self.actionsCollectionView];
+	[self.actionsCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView inset:actionViewTopSpacing];
+	[self.actionsCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
+	[self.actionsCollectionView sdc_pinHeight:[self collectionViewHeight]];
 	
 	[self addSubview:self.visualEffectView];
 	[self.visualEffectView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
@@ -156,9 +156,9 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	self.collectionViewLayout.visualStyle = self.visualStyle;
 }
 
-- (void)actionButtonTapped:(UITapGestureRecognizer *)sender {
+- (void)actionViewTapped:(UITapGestureRecognizer *)sender {
 	SDCAlertCollectionViewCell *cell = (SDCAlertCollectionViewCell *)sender.view;
-	NSIndexPath *indexPath = [self.buttonCollectionView indexPathForCell:cell];
+	NSIndexPath *indexPath = [self.actionsCollectionView indexPathForCell:cell];
 	SDCAlertAction *action = self.actions[indexPath.row];
 	
 	[self.delegate alertControllerView:self didPerformAction:action];
@@ -176,7 +176,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	SDCAlertAction *action = self.actions[indexPath.item];
 	[cell updateWithAction:action visualStyle:self.visualStyle];
-	cell.gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionButtonTapped:)];
+	cell.gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionViewTapped:)];
 	return cell;
 }
 
@@ -184,10 +184,10 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	if (self.collectionViewLayout.scrollDirection == UICollectionViewScrollDirectionVertical) {
-		return CGSizeMake(CGRectGetWidth(self.bounds), self.visualStyle.buttonHeight);
+		return CGSizeMake(CGRectGetWidth(self.bounds), self.visualStyle.actionViewHeight);
 	} else {
-		CGFloat width = MAX(CGRectGetWidth(self.bounds) / self.actions.count, self.visualStyle.minimumButtonWidth);
-		return CGSizeMake(width, self.visualStyle.buttonHeight);
+		CGFloat width = MAX(CGRectGetWidth(self.bounds) / self.actions.count, self.visualStyle.minimumActionViewWidth);
+		return CGSizeMake(width, self.visualStyle.actionViewHeight);
 	}
 }
 

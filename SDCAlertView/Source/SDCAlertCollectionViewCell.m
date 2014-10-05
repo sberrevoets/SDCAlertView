@@ -48,10 +48,10 @@
 	
 	self.enabled = action.isEnabled;
 	
-	self.textLabel.font = [visualStyle fontForButtonRepresentingAction:action];
-	self.textLabel.textColor = [visualStyle textColorForButtonRepresentingAction:action];
+	self.textLabel.font = [visualStyle fontForAction:action];
+	self.textLabel.textColor = [visualStyle textColorForAction:action];
 	
-	self.highlightedBackgroundView = visualStyle.buttonHighlightBackgroundView;
+	self.highlightedBackgroundView = visualStyle.actionViewHighlightBackgroundView;
 	[self.highlightedBackgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	self.highlightedBackgroundView.hidden = !self.isHighlighted;
 }

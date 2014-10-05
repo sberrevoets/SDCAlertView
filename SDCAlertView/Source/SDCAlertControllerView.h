@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-#import "SDCAlertController.h" // SDCAlertControllerButtonLayout
+#import "SDCAlertController.h" // SDCAlertControllerActionLayout
 
 @class SDCAlertControllerView;
 @class SDCAlertAction;
@@ -28,7 +28,7 @@
 @property (nonatomic, copy) NSAttributedString *message;
 
 @property (nonatomic, copy) NSArray *actions;
-@property (nonatomic) SDCAlertControllerButtonLayout buttonLayout;
+@property (nonatomic) SDCAlertControllerActionLayout actionLayout;
 
 @property (nonatomic, strong) UIView *contentView;
 

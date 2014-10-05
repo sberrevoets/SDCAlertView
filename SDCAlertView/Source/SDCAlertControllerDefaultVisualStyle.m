@@ -16,19 +16,19 @@
 	return 270;
 }
 
-- (CGFloat)buttonHeight {
+- (CGFloat)actionViewHeight {
 	return 44;
 }
 
-- (CGFloat)minimumButtonWidth {
-	return 90; // Fits exactly three buttons without scrolling
+- (CGFloat)minimumActionViewWidth {
+	return 90; // Fits exactly three actions without scrolling
 }
 
-- (CGFloat)buttonTopSpacingWithContentView {
+- (CGFloat)actionViewTopSpacingWithContentView {
 	return 0;
 }
 
-- (CGFloat)buttonTopSpacingWithoutContentView {
+- (CGFloat)actionViewTopSpacingWithoutContentView {
 	return 20;
 }
 
@@ -48,17 +48,17 @@
 	return 24;
 }
 
-- (UIView *)buttonHighlightBackgroundView {
+- (UIView *)actionViewHighlightBackgroundView {
 	UIView *view = [[UIView alloc] init];
 	view.backgroundColor = [UIColor colorWithWhite:.80 alpha:.7];
 	return view;
 }
 
-- (UIColor *)buttonSeparatorColor {
+- (UIColor *)actionViewSeparatorColor {
 	return [UIColor colorWithWhite:0.5 alpha:0.5];
 }
 
-- (CGFloat)buttonSeparatorThickness {
+- (CGFloat)actionViewSeparatorThickness {
 	return 1 / [UIScreen mainScreen].scale;
 }
 
@@ -74,7 +74,7 @@
 	return [UIFont systemFontOfSize:13];
 }
 
-- (UIColor *)textColorForButtonRepresentingAction:(SDCAlertAction *)action {
+- (UIColor *)textColorForAction:(SDCAlertAction *)action {
 	if (action.style == SDCAlertActionStyleDestructive) {
 		return [UIColor redColor];
 	} else {
@@ -82,7 +82,7 @@
 	}
 }
 
-- (UIFont *)fontForButtonRepresentingAction:(SDCAlertAction *)action {
+- (UIFont *)fontForAction:(SDCAlertAction *)action {
 	if (action.style == SDCAlertActionStyleCancel) {
 		return [UIFont boldSystemFontOfSize:17];
 	} else {

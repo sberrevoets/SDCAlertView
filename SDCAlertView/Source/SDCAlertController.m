@@ -53,7 +53,7 @@
 		_mutableTextFields = [NSMutableArray array];
 		
 		_visualStyle = [[SDCAlertControllerDefaultVisualStyle alloc] init];
-		_buttonLayout = SDCAlertControllerButtonLayoutAutomatic;
+		_actionLayout = SDCAlertControllerActionLayoutAutomatic;
 		
 		self.modalPresentationStyle = UIModalPresentationCustom;
 		self.transitioningDelegate = [[SDCAlertTransitioningDelegate alloc] init];
@@ -117,7 +117,7 @@
 	
 	self.alert.visualStyle = self.visualStyle;
 	self.alert.actions = self.actions;
-	self.alert.buttonLayout = self.buttonLayout;
+	self.alert.actionLayout = self.actionLayout;
 	
 	[self showTextFieldsInAlertView:self.alert];
 	

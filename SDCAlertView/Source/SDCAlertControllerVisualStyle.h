@@ -13,25 +13,25 @@
 @protocol SDCAlertControllerVisualStyle <NSObject>
 
 @property (nonatomic, readonly) CGFloat width;
-@property (nonatomic, readonly) CGFloat buttonHeight;
-@property (nonatomic, readonly) CGFloat buttonTopSpacingWithContentView;
-@property (nonatomic, readonly) CGFloat buttonTopSpacingWithoutContentView;
-@property (nonatomic, readonly) CGFloat minimumButtonWidth; // For forced horizontal layout and 3+ buttons
+@property (nonatomic, readonly) CGFloat actionViewHeight;
+@property (nonatomic, readonly) CGFloat actionViewTopSpacingWithContentView;
+@property (nonatomic, readonly) CGFloat actionViewTopSpacingWithoutContentView;
+@property (nonatomic, readonly) CGFloat minimumActionViewWidth; // For forced horizontal layout and 3+ buttons
 
 @property (nonatomic, readonly) UIEdgeInsets margins;
 @property (nonatomic, readonly) UIEdgeInsets contentPadding;
 @property (nonatomic, readonly) CGFloat labelSpacing;
 @property (nonatomic, readonly) CGFloat textFieldsTopSpacing;
 
-@property (nonatomic, readonly) UIView *buttonHighlightBackgroundView;
-@property (nonatomic, readonly) UIColor *buttonSeparatorColor;
-@property (nonatomic, readonly) CGFloat buttonSeparatorThickness;
+@property (nonatomic, readonly) UIView *actionViewHighlightBackgroundView;
+@property (nonatomic, readonly) UIColor *actionViewSeparatorColor;
+@property (nonatomic, readonly) CGFloat actionViewSeparatorThickness;
 
 @property (nonatomic, readonly) UIFont *titleLabelFont;
 @property (nonatomic, readonly) UIFont *messageLabelFont;
 @property (nonatomic, readonly) UIFont *textFieldFont;
 
-- (UIColor *)textColorForButtonRepresentingAction:(SDCAlertAction *)action;
-- (UIFont *)fontForButtonRepresentingAction:(SDCAlertAction *)action;
+- (UIColor *)textColorForAction:(SDCAlertAction *)action;
+- (UIFont *)fontForAction:(SDCAlertAction *)action;
 
 @end
