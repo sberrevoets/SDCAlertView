@@ -27,6 +27,7 @@
 @property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> transitioningDelegate;
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 @property (nonatomic, strong) SDCAlertControllerView *alert;
+@property (nonatomic) BOOL didAssignFirstResponder;
 @end
 
 @implementation SDCAlertController
@@ -139,8 +140,9 @@
 	// Explanation of why the first responder is set here:
 	// http://stackoverflow.com/questions/1132784/iphone-have-the-keyboard-slide-into-view-from-the-right-like-when-editing-a-no
 	
-	if (![self.textFields.firstObject isFirstResponder]) {
+	if (!self.didAssignFirstResponder) {
 		[self.textFields.firstObject becomeFirstResponder];
+		self.didAssignFirstResponder = YES;
 	}
 }
 
