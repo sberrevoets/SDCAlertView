@@ -10,7 +10,7 @@
 
 #import "SDCAlertController.h"
 #import "SDCAlertViewBackgroundView.h"
-#import "SDCAlertScrollView.h"
+#import "SDCAlertControllerScrollView.h"
 #import "SDCAlertControllerCollectionViewFlowLayout.h"
 #import "SDCAlertCollectionViewCell.h"
 #import "SDCIntrinsicallySizedView.h"
@@ -22,7 +22,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 
 @interface SDCAlertControllerView () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 @property (nonatomic, strong) UIVisualEffectView *visualEffectView;
-@property (nonatomic, strong) SDCAlertScrollView *scrollView;
+@property (nonatomic, strong) SDCAlertControllerScrollView *scrollView;
 @property (nonatomic, strong) UICollectionView *actionsCollectionView;
 @property (nonatomic, strong) SDCAlertControllerCollectionViewFlowLayout *collectionViewLayout;
 @property (nonatomic, strong) NSLayoutConstraint *maximumHeightConstraint;
@@ -38,7 +38,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 		_visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
 		[_visualEffectView setTranslatesAutoresizingMaskIntoConstraints:NO];
 		
-		_scrollView = [[SDCAlertScrollView alloc] initWithTitle:title message:message];
+		_scrollView = [[SDCAlertControllerScrollView alloc] initWithTitle:title message:message];
 		
 		_collectionViewLayout = [[SDCAlertControllerCollectionViewFlowLayout alloc] init];
 		[_collectionViewLayout registerClass:[SDCAlertControllerSeparatorView class] forDecorationViewOfKind:SDCAlertControllerDecorationKindHorizontalSeparator];
@@ -94,7 +94,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self sdc_addParallax:visualStyle.parallax];
 }
 
-- (void)showTextFieldViewController:(SDCAlertTextFieldViewController *)viewController {
+- (void)showTextFieldViewController:(SDCAlertControllerTextFieldViewController *)viewController {
 	self.scrollView.textFieldViewController = viewController;
 }
 

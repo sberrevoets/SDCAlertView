@@ -1,24 +1,24 @@
 //
-//  SDCAlertScrollView.m
+//  SDCAlertControllerScrollView.m
 //  SDCAlertView
 //
 //  Created by Scott Berrevoets on 9/21/14.
 //  Copyright (c) 2014 Scotty Doesn't Code. All rights reserved.
 //
 
-#import "SDCAlertScrollView.h"
+#import "SDCAlertControllerScrollView.h"
 
-#import "SDCAlertTextFieldViewController.h"
+#import "SDCAlertControllerTextFieldViewController.h"
 #import "SDCAlertLabel.h"
 
 #import "UIView+SDCAutoLayout.h"
 
-@interface SDCAlertScrollView ()
+@interface SDCAlertControllerScrollView ()
 @property (nonatomic, strong) SDCAlertLabel *titleLabel;
 @property (nonatomic, strong) SDCAlertLabel *messageLabel;
 @end
 
-@implementation SDCAlertScrollView
+@implementation SDCAlertControllerScrollView
 
 - (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message {
 	self = [self init];
@@ -63,7 +63,7 @@
 	[self setNeedsLayout];
 }
 
-- (void)setTextFieldViewController:(SDCAlertTextFieldViewController *)textFieldViewController {
+- (void)setTextFieldViewController:(SDCAlertControllerTextFieldViewController *)textFieldViewController {
 	_textFieldViewController = textFieldViewController;
 	
 	[textFieldViewController.view setTranslatesAutoresizingMaskIntoConstraints:NO];

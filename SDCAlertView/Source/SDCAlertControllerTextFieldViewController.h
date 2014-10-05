@@ -1,5 +1,5 @@
 //
-//  SDCAlertTextFieldViewController.h
+//  SDCAlertControllerTextFieldViewController.h
 //  SDCAlertView
 //
 //  Created by Scott Berrevoets on 9/28/14.
@@ -10,7 +10,7 @@
 
 @protocol SDCAlertControllerVisualStyle;
 
-@interface SDCAlertTextFieldViewController : UITableViewController
+@interface SDCAlertControllerTextFieldViewController : UITableViewController
 
 - (instancetype)initWithTextFields:(NSArray *)textFields visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle;
 

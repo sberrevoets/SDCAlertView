@@ -1,24 +1,24 @@
 //
-//  SDCAlertTextFieldViewController.m
+//  SDCAlertControllerTextFieldViewController.m
 //  SDCAlertView
 //
 //  Created by Scott Berrevoets on 9/28/14.
 //  Copyright (c) 2014 Scotty Doesn't Code. All rights reserved.
 //
 
-#import "SDCAlertTextFieldViewController.h"
+#import "SDCAlertControllerTextFieldViewController.h"
 
 #import "SDCAlertControllerVisualStyle.h"
 #import "SDCAlertTextFieldTableViewCell.h"
 
 static NSString *const SDCAlertTextFieldCellIdentifier = @"SDCAlertTextFieldCellIdentifier";
 
-@interface SDCAlertTextFieldViewController ()
+@interface SDCAlertControllerTextFieldViewController ()
 @property (nonatomic, strong) NSArray *textFields;
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 @end
 
-@implementation SDCAlertTextFieldViewController
+@implementation SDCAlertControllerTextFieldViewController
 
 - (instancetype)initWithTextFields:(NSArray *)textFields visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
 	self = [self init];

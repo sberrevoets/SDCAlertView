@@ -1,5 +1,5 @@
 //
-//  SDCAlertScrollView.h
+//  SDCAlertControllerScrollView.h
 //  SDCAlertView
 //
 //  Created by Scott Berrevoets on 9/21/14.
@@ -10,14 +10,14 @@
 
 #import "SDCAlertControllerVisualStyle.h"
 
-@class SDCAlertTextFieldViewController;
+@class SDCAlertControllerTextFieldViewController;
 
-@interface SDCAlertScrollView : UIScrollView
+@interface SDCAlertControllerScrollView : UIScrollView
 
 @property (nonatomic, strong) NSAttributedString *title;
 @property (nonatomic, strong) NSAttributedString *message;
 
-@property (nonatomic, strong) SDCAlertTextFieldViewController *textFieldViewController;
+@property (nonatomic, strong) SDCAlertControllerTextFieldViewController *textFieldViewController;
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 
 - (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message;

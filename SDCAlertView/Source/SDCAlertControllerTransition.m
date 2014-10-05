@@ -1,12 +1,12 @@
 //
-//  SDCAlertTransition.m
+//  SDCAlertControllerTransition.m
 //  SDCAlertView
 //
 //  Created by Scott Berrevoets on 9/21/14.
 //  Copyright (c) 2014 Scotty Doesn't Code. All rights reserved.
 //
 
-#import "SDCAlertTransition.h"
+#import "SDCAlertControllerTransition.h"
 
 #import "SDCAlertPresentationController.h"
 
@@ -14,7 +14,7 @@ static CGFloat const SDCAlertAnimationControllerSpringDamping = 45.71;
 static CGFloat const SDCAlertAnimationControllerSpringVelocity = 0;
 static CGFloat const SDCAlertAnimationControllerInitialScale = 1.2;
 
-@implementation SDCAlertTransitioningDelegate
+@implementation SDCAlertControllerTransitioningDelegate
 
 - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
 													  presentingViewController:(UIViewController *)presenting

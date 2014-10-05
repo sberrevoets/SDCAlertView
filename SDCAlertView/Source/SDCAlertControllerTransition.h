@@ -1,5 +1,5 @@
 //
-//  SDCAlertTransition.h
+//  SDCAlertControllerTransition.h
 //  SDCAlertView
 //
 //  Created by Scott Berrevoets on 9/21/14.
@@ -12,6 +12,6 @@
 @property (nonatomic, getter=isPresentation) BOOL presentation;
 @end
 
-@interface SDCAlertTransitioningDelegate : NSObject <UIViewControllerTransitioningDelegate>
+@interface SDCAlertControllerTransitioningDelegate : NSObject <UIViewControllerTransitioningDelegate>
 
 @end

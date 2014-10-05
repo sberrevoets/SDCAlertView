@@ -8,8 +8,8 @@
 
 #import "SDCAlertController.h"
 
-#import "SDCAlertTextFieldViewController.h"
-#import "SDCAlertTransition.h"
+#import "SDCAlertControllerTextFieldViewController.h"
+#import "SDCAlertControllerTransition.h"
 #import "SDCAlertControllerView.h"
 #import "SDCAlertControllerDefaultVisualStyle.h"
 #import "SDCIntrinsicallySizedView.h"
@@ -58,7 +58,7 @@
 		_actionLayout = SDCAlertControllerActionLayoutAutomatic;
 		
 		self.modalPresentationStyle = UIModalPresentationCustom;
-		self.transitioningDelegate = [[SDCAlertTransitioningDelegate alloc] init];
+		self.transitioningDelegate = [[SDCAlertControllerTransitioningDelegate alloc] init];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardUpdate:) name:UIKeyboardWillChangeFrameNotification object:nil];
 	}
@@ -122,7 +122,7 @@
 
 - (void)showTextFieldsInAlertView:(SDCAlertControllerView *)alertView {
 	if (self.textFields.count > 0) {
-		SDCAlertTextFieldViewController *textFieldViewController = [[SDCAlertTextFieldViewController alloc] initWithTextFields:self.textFields
+		SDCAlertControllerTextFieldViewController *textFieldViewController = [[SDCAlertControllerTextFieldViewController alloc] initWithTextFields:self.textFields
 																												   visualStyle:self.visualStyle];
 		[self addChildViewController:textFieldViewController];
 		[alertView showTextFieldViewController:textFieldViewController];

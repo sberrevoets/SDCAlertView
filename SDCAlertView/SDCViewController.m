@@ -14,7 +14,7 @@
 #import "UIView+SDCAutoLayout.h"
 
 #import "SDCAlertController.h"
-#import "SDCAlertTransition.h"
+#import "SDCAlertControllerTransition.h"
 
 @interface SDCViewController () <UITableViewDelegate, UIAlertViewDelegate, SDCAlertViewDelegate, UITextFieldDelegate>
 @end

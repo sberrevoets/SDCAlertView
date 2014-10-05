@@ -12,7 +12,7 @@
 
 @class SDCAlertControllerView;
 @class SDCAlertAction;
-@class SDCAlertTextFieldViewController;
+@class SDCAlertControllerTextFieldViewController;
 
 @protocol SDCAlertControllerViewDelegate <NSObject>
 - (void)alertControllerView:(SDCAlertControllerView *)sender didPerformAction:(SDCAlertAction *)action;
@@ -36,6 +36,6 @@
 
 - (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message;
 
-- (void)showTextFieldViewController:(SDCAlertTextFieldViewController *)viewController;
+- (void)showTextFieldViewController:(SDCAlertControllerTextFieldViewController *)viewController;
 - (void)prepareForDisplay;
 @end
