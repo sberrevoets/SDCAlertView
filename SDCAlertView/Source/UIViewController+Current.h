@@ -10,6 +10,6 @@
 
 @interface UIViewController (Current)
 
-+ (UIViewController *)currentViewController;
++ (UIViewController *)sdc_currentViewController;
 
 @end

@@ -241,7 +241,7 @@
 }
 
 - (void)presentWithCompletion:(void(^)(void))completion {
-	UIViewController *currentViewController = [UIViewController currentViewController];
+	UIViewController *currentViewController = [UIViewController sdc_currentViewController];
 	[self presentFromViewController:currentViewController completionHandler:completion];
 }
 

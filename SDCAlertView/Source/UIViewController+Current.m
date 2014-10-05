@@ -10,19 +10,19 @@
 
 @implementation UIViewController (Current)
 
-+ (UIViewController *)currentViewController {
++ (UIViewController *)sdc_currentViewController {
 	UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-	return [self topViewControllerForViewController:rootViewController];
+	return [self sdc_topViewControllerForViewController:rootViewController];
 }
 
-+ (UIViewController *)topViewControllerForViewController:(UIViewController *)rootViewController {
++ (UIViewController *)sdc_topViewControllerForViewController:(UIViewController *)rootViewController {
 	if ([rootViewController isKindOfClass:[UINavigationController class]]) {
 		UINavigationController *navigationController = (UINavigationController *)rootViewController;
-		return [self topViewControllerForViewController:navigationController.visibleViewController];
+		return [self sdc_topViewControllerForViewController:navigationController.visibleViewController];
 	}
 	
 	if (rootViewController.presentedViewController) {
-		return [self topViewControllerForViewController:rootViewController.presentedViewController];
+		return [self sdc_topViewControllerForViewController:rootViewController.presentedViewController];
 	}
 	
 	return rootViewController;
