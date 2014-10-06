@@ -15,7 +15,8 @@ typedef NS_ENUM(NSInteger, SDCAlertActionStyle) {
 };
 
 typedef NS_ENUM(NSInteger, SDCAlertControllerStyle) {
-	SDCAlertControllerStyleAlert = UIAlertControllerStyleAlert
+	SDCAlertControllerStyleAlert = UIAlertControllerStyleAlert,
+	SDCAlertControllerStyleLegacyAlert
 };
 
 typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
@@ -34,6 +35,7 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
 
 @property (nonatomic, readonly) SDCAlertActionStyle style;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
+@property (nonatomic, readonly) void (^handler)(SDCAlertAction *action);
 
 @end
 
@@ -62,21 +64,24 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
 @property (nonatomic, readonly) UIView *contentView;
 
 @property (nonatomic, readonly) SDCAlertControllerStyle preferredStyle;
-- (void)applyVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle;
+@property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 
 @property (nonatomic, copy) BOOL (^shouldDismissBlock)(SDCAlertAction *action);
 
 @end
 
-@interface SDCAlertController (Transitioning)
+@interface SDCAlertController (Presentation)
 
-- (void)present;
 - (void)presentWithCompletion:(void(^)(void))completion;
-- (void)presentFromViewController:(UIViewController *)viewController completionHandler:(void(^)(void))completion;
-
-- (void)dismiss;
 - (void)dismissWithCompletion:(void(^)(void))completion;
 
+@end
+
+@class SDCAlertView;
+
+@interface SDCAlertController (Legacy)
+@property (nonatomic, readonly) BOOL usesLegacyAlert;
+@property (nonatomic, readonly) SDCAlertView *legacyAlertView;
 @end
 
 @interface SDCAlertController (Convenience)

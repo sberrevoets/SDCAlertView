@@ -88,6 +88,9 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
  *  meansthat if the delegate is set, the block will NOT be executed.
  */
 
+/// Alternative property for \c didPresentAlertView:
+@property (nonatomic, copy) void (^didPresentHandler)();
+
 /// Alternative property for \c alertView:clickedButtonAtIndex:
 @property (nonatomic, copy) void (^clickedButtonHandler)(NSInteger buttonIndex);
 
@@ -213,6 +216,11 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @property (nonatomic, strong) UIFont	*normalButtonFont		UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIColor	*buttonTextColor		UI_APPEARANCE_SELECTOR;	// Will override tintColor
 
+@end
+
+@class SDCAlertController;
+@interface SDCAlertView (SDCAlertController)
++ (instancetype)alertViewWithAlertController:(SDCAlertController *)alertController;
 @end
 
 @interface UIColor (SDCAlertViewColors)

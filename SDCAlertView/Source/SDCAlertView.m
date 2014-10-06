@@ -13,6 +13,8 @@
 #import "SDCAlertViewBackgroundView.h"
 #import "SDCAlertViewContentView.h"
 
+#import "SDCAlertController.h"
+
 #import "UIView+SDCAutoLayout.h"
 #import "UIView+Parallax.h"
 
@@ -136,6 +138,10 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 - (void)wasPresented {
 	if ([self.delegate respondsToSelector:@selector(didPresentAlertView:)])
 		[self.delegate didPresentAlertView:self];
+	
+	if (self.didPresentHandler) {
+		self.didPresentHandler();
+	}
 }
 
 #pragma mark - Dismissing
@@ -481,6 +487,60 @@ static UIOffset const SDCAlertViewParallaxSlideMagnitude = {15.75, 15.75};
 
 - (void)setButtonTextColor:(UIColor *)buttonTextColor {
 	self.alertContentView.buttonTextColor = buttonTextColor;
+}
+
+@end
+
+@implementation SDCAlertView (SDCAlertController)
+
++ (instancetype)alertViewWithAlertController:(SDCAlertController *)alertController {
+	NSString *cancelButtonTitle = [alertController.actions.firstObject title];
+	SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:alertController.title
+													  message:alertController.message
+													 delegate:alertController
+											cancelButtonTitle:cancelButtonTitle
+											otherButtonTitles:nil];
+	[alertController.actions enumerateObjectsUsingBlock:^(SDCAlertView *action, NSUInteger idx, BOOL *stop) {
+		if (idx > 0) {
+			// Skip the first one, that's the cancel button and has already been added
+			[alert addButtonWithTitle:action.title];
+		}
+	}];
+	
+	if (alertController.attributedTitle) {
+		alert.attributedTitle = alertController.attributedTitle;
+	}
+	
+	if (alertController.attributedMessage) {
+		alert.attributedMessage = alertController.attributedMessage;
+	}
+	
+	alert.alertViewStyle = SDCAlertViewStyleDefault;
+	
+	if (alertController.textFields.count == 1) {
+		if ([alertController.textFields.firstObject isSecureTextEntry]) {
+			alert.alertViewStyle = SDCAlertViewStyleSecureTextInput;
+		} else {
+			alert.alertViewStyle = SDCAlertViewStylePlainTextInput;
+		}
+	} else if (alertController.textFields.count >= 2) {
+		alert.alertViewStyle = SDCAlertViewStyleLoginAndPasswordInput;
+	}
+	
+	[alertController.contentView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
+		[alert.contentView addSubview:subview];
+	}];
+	
+	alert.alwaysShowsButtonsVertically = (alertController.actionLayout == SDCAlertControllerActionLayoutVertical);
+	
+	alert.didDismissHandler = ^(NSInteger buttonIndex) {
+		SDCAlertAction *action = alertController.actions[buttonIndex];
+		if (action.handler) {
+			action.handler(action);
+		}
+	};
+	
+	return alert;
 }
 
 @end

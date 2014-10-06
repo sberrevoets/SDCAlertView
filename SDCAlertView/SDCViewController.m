@@ -39,7 +39,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0) {
 		SDCAlertController *ac = [SDCAlertController alertControllerWithTitle:@"Title" message:@"Message" preferredStyle:SDCAlertControllerStyleAlert];
-		[ac addAction:[SDCAlertAction actionWithTitle:@"Cancel" style:SDCAlertActionStyleDestructive handler:nil]];
+		[ac addAction:[SDCAlertAction actionWithTitle:@"Cancel" style:SDCAlertActionStyleDestructive handler:^(SDCAlertAction *action) {
+			NSLog(@"%@", action.title);
+		}]];
 		[ac addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleCancel handler:^(SDCAlertAction *action) {
 			NSLog(@"%@", action.title);
 		}]];
@@ -49,9 +51,7 @@
 		}];
 
 		[ac presentWithCompletion:^{
-			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    [ac.actions.firstObject setEnabled:NO];
-			});
+			NSLog(@"Presented");
 		}];
 //		[self presentNow];
 

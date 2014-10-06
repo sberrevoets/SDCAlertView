@@ -252,8 +252,6 @@
 				D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */,
 				D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */,
 				D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */,
-				D294876A18D631B700E3D967 /* SDCIntrinsicallySizedView.h */,
-				D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */,
 				D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */,
 				D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */,
 			);
@@ -298,6 +296,8 @@
 			children = (
 				D2CABE9319E1ECFE00CA1A89 /* UIView+Parallax.h */,
 				D2CABE9419E1ECFE00CA1A89 /* UIView+Parallax.m */,
+				D294876A18D631B700E3D967 /* SDCIntrinsicallySizedView.h */,
+				D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */,
 				D26506EE19C61B7500BF34B9 /* 1.0 */,
 				D26506EF19C61B8000BF34B9 /* 2.0 */,
 			);

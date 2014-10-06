@@ -13,20 +13,22 @@
 #import "SDCAlertControllerView.h"
 #import "SDCAlertControllerDefaultVisualStyle.h"
 #import "SDCIntrinsicallySizedView.h"
+#import "SDCAlertView.h"
 
 #import "UIView+SDCAutoLayout.h"
 #import "UIViewController+Current.h"
 
 @interface SDCAlertAction (Private)
-@property (nonatomic, copy) void (^handler)(SDCAlertAction *);
+@property (nonatomic, copy) void (^handler)(SDCAlertAction *action);
 @end
 
 @interface SDCAlertController () <SDCAlertControllerViewDelegate>
+@property (nonatomic) SDCAlertControllerStyle preferredStyle;
 @property (nonatomic, strong) NSMutableArray *mutableActions;
 @property (nonatomic, strong) NSMutableArray *mutableTextFields;
 @property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> transitioningDelegate;
-@property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 @property (nonatomic, strong) SDCAlertControllerView *alert;
+@property (nonatomic, strong) SDCAlertView *legacyAlertView;
 @property (nonatomic) BOOL didAssignFirstResponder;
 @property (nonatomic, getter=isPresentingAlert) BOOL presentingAlert;
 @end
@@ -49,18 +51,15 @@
 	self = [super init];
 	
 	if (self) {
-		NSAssert(style == SDCAlertControllerStyleAlert, @"Only SDCAlertControllerStyleAlert is supported by %@", NSStringFromClass([self class]));
-		
 		_mutableActions = [NSMutableArray array];
 		_mutableTextFields = [NSMutableArray array];
 		
+		_preferredStyle = style;
 		_visualStyle = [[SDCAlertControllerDefaultVisualStyle alloc] init];
 		_actionLayout = SDCAlertControllerActionLayoutAutomatic;
 		
 		self.modalPresentationStyle = UIModalPresentationCustom;
 		self.transitioningDelegate = [[SDCAlertControllerTransitioningDelegate alloc] init];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardUpdate:) name:UIKeyboardWillChangeFrameNotification object:nil];
 	}
 	
 	return self;
@@ -93,11 +92,25 @@
 	
 	return self;
 }
+
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Alert View
+
+- (SDCAlertView *)legacyAlertView {
+	if (!_legacyAlertView && self.usesLegacyAlert) {
+		_legacyAlertView = [SDCAlertView alertViewWithAlertController:self];
+	}
+	return _legacyAlertView;
+}
+
+- (BOOL)usesLegacyAlert {
+	return
+		self.preferredStyle == SDCAlertControllerStyleLegacyAlert ||
+		![NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)];
+}
 
 - (void)setTitle:(NSString *)title {
 	[super setTitle:title];
@@ -139,6 +152,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardUpdate:) name:UIKeyboardWillChangeFrameNotification object:nil];
+	
 	self.alert.visualStyle = self.visualStyle;
 	self.alert.actions = self.actions;
 	self.alert.actionLayout = self.actionLayout;
@@ -168,16 +183,6 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	self.presentingAlert = NO;
-}
-
-#pragma mark - Style
-
-- (SDCAlertControllerStyle)preferredStyle {
-	return SDCAlertControllerStyleAlert;
-}
-
-- (void)applyVisualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
-	_visualStyle = visualStyle;
 }
 
 #pragma mark - Alert Actions
@@ -236,21 +241,18 @@
 
 @implementation SDCAlertController (Presentation)
 
-- (void)present {
-	[self presentWithCompletion:nil];
-}
-
 - (void)presentWithCompletion:(void(^)(void))completion {
-	UIViewController *currentViewController = [UIViewController sdc_currentViewController];
-	[self presentFromViewController:currentViewController completionHandler:completion];
+	if (self.usesLegacyAlert) {
+		self.legacyAlertView.didPresentHandler = completion;
+		[self.legacyAlertView show];
+	} else {
+		UIViewController *currentViewController = [UIViewController sdc_currentViewController];
+		[self presentFromViewController:currentViewController completionHandler:completion];
+	}
 }
 
 - (void)presentFromViewController:(UIViewController *)viewController completionHandler:(void (^)(void))completionHandler {
 	[viewController presentViewController:self animated:YES completion:completionHandler];
-}
-
-- (void)dismiss {
-	[self dismissWithCompletion:nil];
 }
 
 - (void)dismissWithCompletion:(void (^)(void))completion {
@@ -277,7 +279,7 @@
 		[controller.contentView addSubview:subview];
 	}
 	
-	[controller present];
+	[controller presentWithCompletion:nil];
 	return controller;
 }
 
