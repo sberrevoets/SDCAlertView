@@ -9,6 +9,9 @@
 #import "SDCDemoViewController.h"
 
 #import "SDCAlertController.h"
+#import <UIView+SDCAutoLayout.h>
+
+@import MapKit;
 
 @interface SDCDemoViewController ()
 @property (nonatomic, weak) IBOutlet UISegmentedControl *alertStyleControl;
@@ -58,7 +61,70 @@
 	
 	alert.actionLayout = self.buttonLayoutControl.selectedSegmentIndex;
 	
+	if (self.selectedContentViewIndex > 0) {
+		[self addContentViewToAlert:alert];
+	}
+	
 	[alert presentWithCompletion:nil];
+}
+
+- (void)addContentViewToAlert:(SDCAlertController *)alert {
+	switch (self.selectedContentViewIndex) {
+		case 1: {
+			UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+			[spinner setTranslatesAutoresizingMaskIntoConstraints:NO];
+			[spinner startAnimating];
+			[alert.contentView addSubview:spinner];
+			
+			[spinner sdc_horizontallyCenterInSuperview];
+			[alert.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[spinner]-(==20)-|"
+																					  options:0
+																					  metrics:nil
+																						views:NSDictionaryOfVariableBindings(spinner)]];
+			
+			
+			break;
+		} case 2: {
+			UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+			progressView.progress = 0;
+			
+			[NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(updateProgressView:) userInfo:progressView repeats:YES];
+			
+			[progressView setTranslatesAutoresizingMaskIntoConstraints:NO];
+			[alert.contentView addSubview:progressView];
+			
+			[progressView sdc_pinWidthToWidthOfView:alert.contentView offset:-20];
+			[progressView sdc_horizontallyCenterInSuperview];
+			
+			[alert.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[progressView]-|"
+																					  options:0
+																					  metrics:nil
+																						views:NSDictionaryOfVariableBindings(progressView)]];
+			break;
+		} case 3: {
+			MKMapView *mapView = [[MKMapView alloc] init];
+			[mapView setTranslatesAutoresizingMaskIntoConstraints:NO];
+			
+			MKCoordinateRegion region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(37.3175, -122.041944), MKCoordinateSpanMake(.1, .1));
+			[mapView setRegion:region animated:YES];
+			[alert.contentView addSubview:mapView];
+			
+			[mapView sdc_pinWidthToWidthOfView:alert.contentView];
+			[mapView sdc_centerInSuperview];
+			[mapView sdc_pinHeight:120];
+
+			break;
+		}
+	}
+}
+
+- (void)updateProgressView:(NSTimer *)timer {
+	UIProgressView *progressView = [timer userInfo];
+	
+	if (progressView.progress < 1)
+		progressView.progress += .05;
+	else
+		[timer invalidate];
 }
 
 - (void)showSystemAlert {
