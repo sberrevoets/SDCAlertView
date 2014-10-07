@@ -14,7 +14,7 @@
 @property (nonatomic, weak) IBOutlet UISegmentedControl *alertStyleControl;
 @property (nonatomic, weak) IBOutlet UITextField *titleTextField;
 @property (nonatomic, weak) IBOutlet UITextField *messageTextField;
-@property (nonatomic, weak) IBOutlet UILabel *textFieldsLabel;
+@property (nonatomic, weak) IBOutlet UITextField *textFieldsTextField;
 @property (nonatomic) NSInteger selectedContentViewIndex;
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, weak) IBOutlet UITextField *buttonsTextField;
@@ -43,7 +43,7 @@
 																	 message:self.messageTextField.text
 															  preferredStyle:style];
 	
-	NSInteger textFields = self.textFieldsLabel.text.integerValue;
+	NSInteger textFields = self.textFieldsTextField.text.integerValue;
 	for (NSInteger i = 0; i < textFields; i++) {
 		[alert addTextFieldWithConfigurationHandler:nil];
 	}
@@ -87,11 +87,6 @@
 	
 	self.selectedContentViewIndex = indexPath.row;
 	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-}
-
-
-- (IBAction)textFieldStepperTapped:(UIStepper *)sender {
-	self.textFieldsLabel.text = [NSString stringWithFormat:@"%@", @(sender.value)];
 }
 
 @end

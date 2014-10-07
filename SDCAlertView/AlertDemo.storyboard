@@ -120,38 +120,37 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="GUV-SS-EIz">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="TQh-jm-7n7">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GUV-SS-EIz" id="zma-we-txS">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TQh-jm-7n7" id="oU8-Ly-GJr">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text Fields" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zP9-Co-PTg">
-                                                    <rect key="frame" x="15" y="12" width="77.5" height="19.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text Fields" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5E-YB-Uqt">
+                                                    <rect key="frame" x="15" y="12" width="78" height="19.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" wraps="YES" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="KHR-NG-bZA">
-                                                    <rect key="frame" x="496" y="7" width="94" height="29"/>
-                                                    <connections>
-                                                        <action selector="textFieldStepperTapped:" destination="tLw-K7-c37" eventType="valueChanged" id="97t-sq-BP5"/>
-                                                    </connections>
-                                                </stepper>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rI-M6-KCs">
-                                                    <rect key="frame" x="456" y="11.5" width="10" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Number of text fields" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DgJ-hu-hlY">
+                                                    <rect key="frame" x="101" y="0.0" width="489" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="KHR-NG-bZA" secondAttribute="centerY" id="1b5-FA-6M4"/>
-                                                <constraint firstAttribute="centerY" secondItem="zP9-Co-PTg" secondAttribute="centerY" id="bEy-hZ-qOj"/>
-                                                <constraint firstItem="KHR-NG-bZA" firstAttribute="leading" secondItem="8rI-M6-KCs" secondAttribute="trailing" constant="30" id="gMJ-YJ-P2c"/>
-                                                <constraint firstItem="zP9-Co-PTg" firstAttribute="leading" secondItem="zma-we-txS" secondAttribute="leading" constant="15" id="gZU-rN-mUM"/>
-                                                <constraint firstItem="8rI-M6-KCs" firstAttribute="centerY" secondItem="KHR-NG-bZA" secondAttribute="centerY" id="sLP-Aq-GAH"/>
-                                                <constraint firstItem="KHR-NG-bZA" firstAttribute="trailing" secondItem="zma-we-txS" secondAttribute="trailing" constant="-10" id="tCI-Lb-m0J"/>
+                                                <constraint firstAttribute="centerY" secondItem="O5E-YB-Uqt" secondAttribute="centerY" id="IsR-xB-Oig"/>
+                                                <constraint firstAttribute="bottom" secondItem="DgJ-hu-hlY" secondAttribute="bottom" id="RD8-Pf-MeO"/>
+                                                <constraint firstItem="DgJ-hu-hlY" firstAttribute="leading" secondItem="O5E-YB-Uqt" secondAttribute="trailing" constant="8" symbolic="YES" id="ZXV-4c-o3i"/>
+                                                <constraint firstItem="O5E-YB-Uqt" firstAttribute="baseline" secondItem="DgJ-hu-hlY" secondAttribute="baseline" id="djO-nU-hBO"/>
+                                                <constraint firstItem="O5E-YB-Uqt" firstAttribute="leading" secondItem="oU8-Ly-GJr" secondAttribute="leading" constant="15" id="fsQ-Rz-cZG"/>
+                                                <constraint firstItem="DgJ-hu-hlY" firstAttribute="top" secondItem="oU8-Ly-GJr" secondAttribute="top" id="hmO-Kw-GFv"/>
+                                                <constraint firstAttribute="trailing" secondItem="DgJ-hu-hlY" secondAttribute="trailing" constant="10" id="wn9-bD-W0m"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="djO-nU-hBO"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -299,7 +298,7 @@
                         <outlet property="buttonLayoutControl" destination="thP-gT-PeH" id="MSS-Eg-fQ1"/>
                         <outlet property="buttonsTextField" destination="3iG-Y6-lwI" id="TFX-Ee-MSn"/>
                         <outlet property="messageTextField" destination="l1a-ee-wQy" id="phf-sB-qyw"/>
-                        <outlet property="textFieldsLabel" destination="8rI-M6-KCs" id="zyR-dx-9ag"/>
+                        <outlet property="textFieldsTextField" destination="DgJ-hu-hlY" id="h6R-24-NtR"/>
                         <outlet property="titleTextField" destination="UwW-Fb-6NS" id="gAe-pg-Ifl"/>
                     </connections>
                 </tableViewController>
