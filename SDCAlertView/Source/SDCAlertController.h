@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
 
 @property (nonatomic, readonly) SDCAlertActionStyle style;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
-@property (nonatomic, readonly) void (^handler)(SDCAlertAction *action);
+@property (nonatomic, copy, readonly) void (^handler)(SDCAlertAction *action);
 
 @end
 
