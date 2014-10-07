@@ -87,6 +87,39 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PLn-xL-lRQ">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PLn-xL-lRQ" id="F0j-cl-l9B">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zwo-Hx-G5s">
+                                                    <rect key="frame" x="15" y="12" width="66" height="19.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Alert message" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l1a-ee-wQy">
+                                                    <rect key="frame" x="89" y="0.0" width="501" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="Zwo-Hx-G5s" secondAttribute="centerY" id="HdS-Sv-BlN"/>
+                                                <constraint firstAttribute="trailing" secondItem="l1a-ee-wQy" secondAttribute="trailing" constant="10" id="QK8-do-E8R"/>
+                                                <constraint firstItem="Zwo-Hx-G5s" firstAttribute="baseline" secondItem="l1a-ee-wQy" secondAttribute="baseline" id="bWY-ms-bBU"/>
+                                                <constraint firstItem="Zwo-Hx-G5s" firstAttribute="leading" secondItem="F0j-cl-l9B" secondAttribute="leading" constant="15" id="fNf-7B-L1r"/>
+                                                <constraint firstAttribute="bottom" secondItem="l1a-ee-wQy" secondAttribute="bottom" id="kw7-Ii-bED"/>
+                                                <constraint firstItem="l1a-ee-wQy" firstAttribute="leading" secondItem="Zwo-Hx-G5s" secondAttribute="trailing" constant="8" symbolic="YES" id="lfA-iM-JF6"/>
+                                                <constraint firstItem="l1a-ee-wQy" firstAttribute="top" secondItem="F0j-cl-l9B" secondAttribute="top" id="xMF-L7-oyz"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="bWY-ms-bBU"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="GUV-SS-EIz">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GUV-SS-EIz" id="zma-we-txS">
@@ -98,8 +131,11 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="KHR-NG-bZA">
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" wraps="YES" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="KHR-NG-bZA">
                                                     <rect key="frame" x="496" y="7" width="94" height="29"/>
+                                                    <connections>
+                                                        <action selector="textFieldStepperTapped:" destination="tLw-K7-c37" eventType="valueChanged" id="97t-sq-BP5"/>
+                                                    </connections>
                                                 </stepper>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rI-M6-KCs">
                                                     <rect key="frame" x="456" y="11.5" width="10" height="20.5"/>
@@ -252,9 +288,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="SDCAlertView" id="i5R-Fu-Gjy">
-                        <barButtonItem key="leftBarButtonItem" title="Style" id="M0j-mm-hSA"/>
-                        <barButtonItem key="rightBarButtonItem" title="Show" style="done" id="ogU-QR-YmP"/>
+                        <barButtonItem key="rightBarButtonItem" title="Show" style="done" id="ogU-QR-YmP">
+                            <connections>
+                                <action selector="showAlert:" destination="tLw-K7-c37" id="hYM-UB-2gy"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="alertStyleControl" destination="u5c-JD-gBZ" id="ze0-He-uYF"/>
+                        <outlet property="buttonLayoutControl" destination="thP-gT-PeH" id="MSS-Eg-fQ1"/>
+                        <outlet property="buttonsTextField" destination="3iG-Y6-lwI" id="TFX-Ee-MSn"/>
+                        <outlet property="messageTextField" destination="l1a-ee-wQy" id="phf-sB-qyw"/>
+                        <outlet property="textFieldsLabel" destination="8rI-M6-KCs" id="zyR-dx-9ag"/>
+                        <outlet property="titleTextField" destination="UwW-Fb-6NS" id="gAe-pg-Ifl"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eOq-2J-Zr4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -31,6 +31,7 @@
 		D2666A4019CFDE2800167157 /* SDCAlertControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2666A3F19CFDE2800167157 /* SDCAlertControllerView.m */; };
 		D2666A4319CFDF6700167157 /* SDCAlertControllerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2666A4219CFDF6700167157 /* SDCAlertControllerScrollView.m */; };
 		D2666A4619CFE0F900167157 /* SDCAlertLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2666A4519CFE0F900167157 /* SDCAlertLabel.m */; };
+		D268314919E3ABE2005FC8B0 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D268314819E3ABE2005FC8B0 /* Launch Screen.xib */; };
 		D28B5B5519E3863B00B76354 /* AlertDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D28B5B5419E3863B00B76354 /* AlertDemo.storyboard */; };
 		D294876C18D631B700E3D967 /* SDCIntrinsicallySizedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */; };
 		D2988E0319D794C100140116 /* SDCAlertControllerDefaultVisualStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = D2988E0219D794C100140116 /* SDCAlertControllerDefaultVisualStyle.m */; };
@@ -102,6 +103,7 @@
 		D2666A4419CFE0F900167157 /* SDCAlertLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertLabel.h; sourceTree = "<group>"; };
 		D2666A4519CFE0F900167157 /* SDCAlertLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertLabel.m; sourceTree = "<group>"; };
 		D268093118F845420001B7E9 /* SDCAlertViewTransitioning.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewTransitioning.h; sourceTree = "<group>"; };
+		D268314819E3ABE2005FC8B0 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		D28B5B5419E3863B00B76354 /* AlertDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AlertDemo.storyboard; sourceTree = "<group>"; };
 		D294876A18D631B700E3D967 /* SDCIntrinsicallySizedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCIntrinsicallySizedView.h; sourceTree = "<group>"; };
 		D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCIntrinsicallySizedView.m; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 		D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				D268314819E3ABE2005FC8B0 /* Launch Screen.xib */,
 				D2F8347218EF2C09000BB281 /* Source */,
 				D25B3CB617ECE7A6004B32A2 /* SDCAppDelegate.h */,
 				D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */,
@@ -389,6 +392,7 @@
 			files = (
 				D28B5B5519E3863B00B76354 /* AlertDemo.storyboard in Resources */,
 				D25B3CC017ECE7A6004B32A2 /* Images.xcassets in Resources */,
+				D268314919E3ABE2005FC8B0 /* Launch Screen.xib in Resources */,
 				D25B3CB217ECE7A6004B32A2 /* InfoPlist.strings in Resources */,
 				D2F9D2BD18400CD300F85B10 /* README.md in Resources */,
 				D2A520181840176300837A1A /* SDCAlertView.podspec in Resources */,
