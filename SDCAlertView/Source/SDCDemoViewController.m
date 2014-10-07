@@ -9,6 +9,7 @@
 #import "SDCDemoViewController.h"
 
 #import "SDCAlertController.h"
+#import "SDCAlertView.h"
 #import <UIView+SDCAutoLayout.h>
 
 @import MapKit;
@@ -61,23 +62,27 @@
 	
 	alert.actionLayout = self.buttonLayoutControl.selectedSegmentIndex;
 	
-	if (self.selectedContentViewIndex > 0) {
-		[self addContentViewToAlert:alert];
+	if (self.selectedContentViewIndex > 0 && alert.usesLegacyAlert) {
+		[self addContentToView:alert.legacyAlertView.contentView];
+		[alert presentWithCompletion:nil];
+	} else if (self.selectedContentViewIndex > 0) {
+		[self addContentToView:alert.contentView];
+		[alert presentWithCompletion:nil];
+	} else {
+		[alert presentWithCompletion:nil];
 	}
-	
-	[alert presentWithCompletion:nil];
 }
 
-- (void)addContentViewToAlert:(SDCAlertController *)alert {
+- (void)addContentToView:(UIView *)contentView {
 	switch (self.selectedContentViewIndex) {
 		case 1: {
 			UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 			[spinner setTranslatesAutoresizingMaskIntoConstraints:NO];
 			[spinner startAnimating];
-			[alert.contentView addSubview:spinner];
+			[contentView addSubview:spinner];
 			
 			[spinner sdc_horizontallyCenterInSuperview];
-			[alert.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[spinner]-(==20)-|"
+			[contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[spinner]-(==20)-|"
 																					  options:0
 																					  metrics:nil
 																						views:NSDictionaryOfVariableBindings(spinner)]];
@@ -91,12 +96,12 @@
 			[NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(updateProgressView:) userInfo:progressView repeats:YES];
 			
 			[progressView setTranslatesAutoresizingMaskIntoConstraints:NO];
-			[alert.contentView addSubview:progressView];
+			[contentView addSubview:progressView];
 			
-			[progressView sdc_pinWidthToWidthOfView:alert.contentView offset:-20];
+			[progressView sdc_pinWidthToWidthOfView:contentView offset:-20];
 			[progressView sdc_horizontallyCenterInSuperview];
 			
-			[alert.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[progressView]-|"
+			[contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[progressView]-|"
 																					  options:0
 																					  metrics:nil
 																						views:NSDictionaryOfVariableBindings(progressView)]];
@@ -107,9 +112,9 @@
 			
 			MKCoordinateRegion region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(37.3175, -122.041944), MKCoordinateSpanMake(.1, .1));
 			[mapView setRegion:region animated:YES];
-			[alert.contentView addSubview:mapView];
+			[contentView addSubview:mapView];
 			
-			[mapView sdc_pinWidthToWidthOfView:alert.contentView];
+			[mapView sdc_pinWidthToWidthOfView:contentView];
 			[mapView sdc_centerInSuperview];
 			[mapView sdc_pinHeight:120];
 
