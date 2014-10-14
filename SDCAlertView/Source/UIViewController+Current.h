@@ -10,6 +10,9 @@
 
 @interface UIViewController (Current)
 
+/**
+ *  Returns the currently visible view controller, taking into account navigation controllers and modally presented view controllers.
+ */
 + (UIViewController *)sdc_currentViewController;
 
 @end

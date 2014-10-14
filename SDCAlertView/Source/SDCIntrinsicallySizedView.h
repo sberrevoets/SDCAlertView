@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Scotty Doesn't Code. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SDCIntrinsicallySizedView : UIView
 
