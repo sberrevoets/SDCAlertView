@@ -732,6 +732,8 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 - (void)setContentPadding:(UIEdgeInsets)contentPadding {
 	_contentPadding = contentPadding;
+	self.titleLabel.preferredMaxLayoutWidth = SDCAlertViewWidth - self.contentPadding.left - self.contentPadding.right;
+	self.messageLabel.preferredMaxLayoutWidth = SDCAlertViewWidth - self.contentPadding.left - self.contentPadding.right;
 	[self setNeedsUpdateConstraints];
 }
 
