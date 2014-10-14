@@ -133,7 +133,24 @@
 }
 
 - (void)showSystemAlert {
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.titleTextField.text
+																   message:self.messageTextField.text
+															preferredStyle:UIAlertControllerStyleAlert];
 	
+	NSInteger textFields = self.textFieldsTextField.text.integerValue;
+	for (NSInteger i = 0; i < textFields; i++) {
+		[alert addTextFieldWithConfigurationHandler:nil];
+	}
+	
+	NSInteger buttons = self.buttonsTextField.text.integerValue;
+	for (NSInteger i = 0; i < buttons; i++) {
+		UIAlertAction *action = [UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Button %@", @(i)]
+															style:UIAlertActionStyleDefault
+													   handler:nil];
+		[alert addAction:action];
+	}
+	
+	[self presentViewController:alert animated:YES completion:nil];
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
