@@ -155,12 +155,7 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
  */
 
 /**
- *  After creating an alert controller, use this property to determine whether or not a legacy (1.0/iOS 7) alert will be used.
- */
-@property (nonatomic, readonly) BOOL usesLegacyAlert;
-
-/**
- *	If the alert controller will use a legacy alert, this will return the instance of that legacy alert. Otherwise, it will return \c nil.
+ *  Returns the SDCAlertView instance that will be presented IF it will be presented (based on preferred alert style or iOS version), otherwise \c nil.
  */
 @property (nonatomic, readonly) SDCAlertView *legacyAlertView;
 @end

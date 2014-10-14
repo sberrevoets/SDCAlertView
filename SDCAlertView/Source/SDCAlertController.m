@@ -100,7 +100,7 @@
 #pragma mark - Alert View
 
 - (SDCAlertView *)legacyAlertView {
-	if (!_legacyAlertView && self.usesLegacyAlert) {
+	if (!_legacyAlertView && [self usesLegacyAlert]) {
 		_legacyAlertView = [SDCAlertView alertViewWithAlertController:self];
 	}
 	return _legacyAlertView;
@@ -136,7 +136,7 @@
 - (void)showTextFieldsInAlertView:(SDCAlertControllerView *)alertView {
 	if (self.textFields.count > 0) {
 		SDCAlertControllerTextFieldViewController *textFieldViewController = [[SDCAlertControllerTextFieldViewController alloc] initWithTextFields:self.textFields
-																												   visualStyle:self.visualStyle];
+																																	   visualStyle:self.visualStyle];
 		[self addChildViewController:textFieldViewController];
 		[alertView showTextFieldViewController:textFieldViewController];
 		[textFieldViewController didMoveToParentViewController:self];

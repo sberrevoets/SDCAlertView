@@ -62,7 +62,7 @@
 	
 	alert.actionLayout = self.buttonLayoutControl.selectedSegmentIndex;
 	
-	if (self.selectedContentViewIndex > 0 && alert.usesLegacyAlert) {
+	if (self.selectedContentViewIndex > 0 && alert.legacyAlertView) {
 		[self addContentToView:alert.legacyAlertView.contentView];
 		[alert presentWithCompletion:nil];
 	} else if (self.selectedContentViewIndex > 0) {
