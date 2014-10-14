@@ -16,7 +16,6 @@
 		D25B3CB217ECE7A6004B32A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D25B3CB017ECE7A6004B32A2 /* InfoPlist.strings */; };
 		D25B3CB417ECE7A6004B32A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B3CB317ECE7A6004B32A2 /* main.m */; };
 		D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */; };
-		D25B3CBE17ECE7A6004B32A2 /* SDCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B3CBD17ECE7A6004B32A2 /* SDCViewController.m */; };
 		D25B3CC017ECE7A6004B32A2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25B3CBF17ECE7A6004B32A2 /* Images.xcassets */; };
 		D25B3CC717ECE7A6004B32A2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CC617ECE7A6004B32A2 /* XCTest.framework */; };
 		D25B3CC817ECE7A6004B32A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CA717ECE7A6004B32A2 /* Foundation.framework */; };
@@ -78,8 +77,6 @@
 		D25B3CB517ECE7A6004B32A2 /* SDCAlertView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SDCAlertView-Prefix.pch"; sourceTree = "<group>"; };
 		D25B3CB617ECE7A6004B32A2 /* SDCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCAppDelegate.h; sourceTree = "<group>"; };
 		D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDCAppDelegate.m; sourceTree = "<group>"; };
-		D25B3CBC17ECE7A6004B32A2 /* SDCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCViewController.h; sourceTree = "<group>"; };
-		D25B3CBD17ECE7A6004B32A2 /* SDCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDCViewController.m; sourceTree = "<group>"; };
 		D25B3CBF17ECE7A6004B32A2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D25B3CC517ECE7A6004B32A2 /* SDCAlertViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDCAlertViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B3CC617ECE7A6004B32A2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -209,8 +206,6 @@
 				D28B5B5419E3863B00B76354 /* AlertDemo.storyboard */,
 				D2CAD11519E38FE7005E1C33 /* SDCDemoViewController.h */,
 				D2CAD11619E38FE7005E1C33 /* SDCDemoViewController.m */,
-				D25B3CBC17ECE7A6004B32A2 /* SDCViewController.h */,
-				D25B3CBD17ECE7A6004B32A2 /* SDCViewController.m */,
 				D25B3CBF17ECE7A6004B32A2 /* Images.xcassets */,
 				D25B3CAE17ECE7A6004B32A2 /* Supporting Files */,
 			);
@@ -483,7 +478,6 @@
 				D2CAD11719E38FE7005E1C33 /* SDCDemoViewController.m in Sources */,
 				D2A5E0D119D3D6A90034B709 /* SDCAlertCollectionViewCell.m in Sources */,
 				D2A6F1C519D8A71F00FAF172 /* SDCAlertTextFieldTableViewCell.m in Sources */,
-				D25B3CBE17ECE7A6004B32A2 /* SDCViewController.m in Sources */,
 				D25B3CB417ECE7A6004B32A2 /* main.m in Sources */,
 				D2D5A77019D8A64B00386078 /* SDCAlertControllerTextFieldViewController.m in Sources */,
 				D259FC1519CEB0EB00BA6B36 /* SDCAlertControllerTransition.m in Sources */,
