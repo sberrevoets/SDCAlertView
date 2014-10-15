@@ -35,6 +35,7 @@
 @property (nonatomic, readonly) UIFont *textFieldFont;
 
 @property (nonatomic, readonly) CGFloat labelSpacing;
+@property (nonatomic, readonly) CGFloat messageLabelBottomSpacing;
 
 /*
  *  Action-related values
@@ -54,7 +55,6 @@
  */
 
 @property (nonatomic, readonly) CGFloat estimatedTextFieldHeight;
-@property (nonatomic, readonly) CGFloat textFieldsTopSpacing;
 @property (nonatomic, readonly) CGFloat textFieldBorderWidth;
 @property (nonatomic, readonly) UIColor *textFieldBorderColor;
 @property (nonatomic, readonly) UIEdgeInsets textFieldMargins;

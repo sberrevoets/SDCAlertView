@@ -48,7 +48,7 @@
 	return 25;
 }
 
-- (CGFloat)textFieldsTopSpacing {
+- (CGFloat)messageLabelBottomSpacing {
 	return 24;
 }
 

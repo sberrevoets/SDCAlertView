@@ -106,7 +106,7 @@
 															toItem:self.messageLabel
 														 attribute:NSLayoutAttributeLastBaseline
 														multiplier:1
-														  constant:self.visualStyle.textFieldsTopSpacing]];
+														  constant:self.visualStyle.messageLabelBottomSpacing]];
 	}
 	
 	[self invalidateIntrinsicContentSize];
@@ -118,8 +118,12 @@
 }
 
 - (CGSize)intrinsicContentSize {
-	UIView *lastView = (self.textFieldViewController) ? self.textFieldViewController.view : self.messageLabel;
-	CGFloat intrinsicHeight = CGRectGetMaxY(lastView.frame);
+	CGFloat intrinsicHeight = 0;
+	if (self.textFieldViewController) {
+		intrinsicHeight = CGRectGetMaxY(self.textFieldViewController.view.frame);
+	} else {
+		intrinsicHeight = CGRectGetMaxY(self.messageLabel.frame) + self.visualStyle.messageLabelBottomSpacing; // Not perfect, as padding it added from the bottom of the label, not its baseline
+	}
 	
 	return CGSizeMake(UIViewNoIntrinsicMetric, intrinsicHeight);
 }
