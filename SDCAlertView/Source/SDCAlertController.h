@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
  *		SDCAlertController *alert = [SDCAlertController alertWithTitle:@"Title" message:@"Message" preferredStyle:SDCAlertControllerStyleAlert];
  *		// ... configure alert with content view, text fields, buttons, etc ...
  *
- *		if (alert.usesLegacyAlert) {
+ *		if (alert.legacyAlertView) {
  *			// ... use alert.legacyAlertView to make iOS 7 modifications
  *		} else {
  *			// Keep using original alert
