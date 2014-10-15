@@ -47,6 +47,10 @@
 	self.gestureRecognizer.enabled = enabled;
 }
 
+- (void)tintColorDidChange {
+	self.textLabel.textColor = self.tintColor;
+}
+
 - (void)updateWithAction:(SDCAlertAction *)action visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
 	if (action.attributedTitle) {
 		self.textLabel.attributedText = action.attributedTitle;

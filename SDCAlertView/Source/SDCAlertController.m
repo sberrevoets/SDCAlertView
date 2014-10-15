@@ -149,8 +149,8 @@
 
 #pragma mark - Lifecycle
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardUpdate:) name:UIKeyboardWillChangeFrameNotification object:nil];
 	
