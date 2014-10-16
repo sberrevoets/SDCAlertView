@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Scotty Doesn't Code. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface SDCAlertViewBackgroundView : UIView
 

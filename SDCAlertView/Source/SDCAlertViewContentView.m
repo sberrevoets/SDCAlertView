@@ -160,6 +160,10 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	tableView.separatorColor = [UIColor clearColor];
 	tableView.scrollEnabled = NO;
 	tableView.rowHeight = SDCAlertViewButtonTableViewRowHeight;
+	
+	if ([tableView respondsToSelector:@selector(setLayoutMargins:)])
+		tableView.layoutMargins = UIEdgeInsetsZero;
+	
 	return tableView;
 }
 
@@ -329,9 +333,13 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+	cell.backgroundColor = [UIColor clearColor];
+	
+	if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+		cell.layoutMargins = UIEdgeInsetsZero;
+
 	cell.textLabel.font = (tableView == self.suggestedButtonTableView) ? self.suggestedButtonFont : self.normalButtonFont;
 	cell.textLabel.textColor = self.buttonTextColor ? self.buttonTextColor : self.tintColor;
-	cell.backgroundColor = [UIColor clearColor];
 	cell.textLabel.textAlignment = NSTextAlignmentCenter;
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
 	cell.textLabel.minimumScaleFactor = 0.5;

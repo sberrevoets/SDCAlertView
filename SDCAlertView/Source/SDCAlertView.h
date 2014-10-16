@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Scotty Doesn't Code. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 FOUNDATION_EXPORT CGFloat const SDCAlertViewWidth;
 
@@ -88,6 +88,9 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
  *  meansthat if the delegate is set, the block will NOT be executed.
  */
 
+/// Alternative property for \c didPresentAlertView:
+@property (nonatomic, copy) void (^didPresentHandler)();
+
 /// Alternative property for \c alertView:clickedButtonAtIndex:
 @property (nonatomic, copy) void (^clickedButtonHandler)(NSInteger buttonIndex);
 
@@ -107,7 +110,7 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 					  message:(NSString *)message
 					 delegate:(id)delegate
 			cancelButtonTitle:(NSString *)cancelButtonTitle
-			otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
+			otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION NS_DESIGNATED_INITIALIZER;
 
 /*
  *  Showing and dismissing an alert works largely the same as it does with UIAlertView. Animations will not be interrupted,
@@ -215,6 +218,11 @@ typedef NS_ENUM(NSInteger, SDCAlertViewStyle) {
 @property (nonatomic, assign) UIEdgeInsets contentPadding UI_APPEARANCE_SELECTOR;
 @property (nonatomic, assign) CGFloat labelSpacing UI_APPEARANCE_SELECTOR;
 
+@end
+
+@class SDCAlertController;
+@interface SDCAlertView (SDCAlertController)
++ (instancetype)alertViewWithAlertController:(SDCAlertController *)alertController;
 @end
 
 @interface UIColor (SDCAlertViewColors)
