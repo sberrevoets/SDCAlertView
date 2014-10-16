@@ -12,9 +12,7 @@
 
 @protocol SDCAlertControllerVisualStyle <NSObject>
 
-/*
- *  Alert-related values
- */
+#pragma mark - Alert
 
 @property (nonatomic, readonly) CGFloat width;
 @property (nonatomic, readonly) CGFloat cornerRadius;
@@ -26,20 +24,15 @@
 /// The alert's parallax magnitude in horizontal and vertical directions.
 @property (nonatomic, readonly) UIOffset parallax;
 
-/*
- *  Title and message label values
- */
+#pragma mark - Title & Message Labels
 
 @property (nonatomic, readonly) UIFont *titleLabelFont;
 @property (nonatomic, readonly) UIFont *messageLabelFont;
-@property (nonatomic, readonly) UIFont *textFieldFont;
 
 @property (nonatomic, readonly) CGFloat labelSpacing;
 @property (nonatomic, readonly) CGFloat messageLabelBottomSpacing;
 
-/*
- *  Action-related values
- */
+#pragma mark - Actions
 
 @property (nonatomic, readonly) CGFloat actionViewHeight;
 @property (nonatomic, readonly) CGFloat minimumActionViewWidth; // For forced horizontal layout and 3+ buttons
@@ -50,10 +43,9 @@
 - (UIColor *)textColorForAction:(SDCAlertAction *)action;
 - (UIFont *)fontForAction:(SDCAlertAction *)action;
 
-/*
- * Text field-related values
- */
+#pragma mark - Text Fields
 
+@property (nonatomic, readonly) UIFont *textFieldFont;
 @property (nonatomic, readonly) CGFloat estimatedTextFieldHeight;
 @property (nonatomic, readonly) CGFloat textFieldBorderWidth;
 @property (nonatomic, readonly) UIColor *textFieldBorderColor;

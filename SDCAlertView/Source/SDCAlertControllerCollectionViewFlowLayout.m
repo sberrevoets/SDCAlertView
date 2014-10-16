@@ -49,8 +49,9 @@ NSString *const SDCAlertControllerDecorationKindVerticalSeparator = @"SDCAlertCo
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
-	SDCAlertControllerCollectionViewLayoutAttributes *attributes = [SDCAlertControllerCollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:elementKind
-																																			   withIndexPath:indexPath];
+	SDCAlertControllerCollectionViewLayoutAttributes *attributes = [SDCAlertControllerCollectionViewLayoutAttributes
+																	layoutAttributesForDecorationViewOfKind:elementKind
+																	withIndexPath:indexPath];
 	
 	UICollectionViewLayoutAttributes *itemAttributes = [self layoutAttributesForItemAtIndexPath:indexPath];
 	attributes.zIndex = itemAttributes.zIndex + 1;

@@ -30,6 +30,8 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 
 @implementation SDCAlertControllerView
 
+#pragma mark - Lifecycle
+
 - (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message {
 	self = [self init];
 	
@@ -57,6 +59,14 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	return self;
 }
+
+- (void)dealloc {
+	[self.actions enumerateObjectsUsingBlock:^(SDCAlertAction *action, NSUInteger idx, BOOL *stop) {
+		[action removeObserver:self forKeyPath:@"enabled"];
+	}];
+}
+
+#pragma mark - Getters & Setters
 
 - (NSAttributedString *)title {
 	return self.scrollView.title;
@@ -94,9 +104,21 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self sdc_addParallax:visualStyle.parallax];
 }
 
+#pragma mark - Content
+
 - (void)showTextFieldViewController:(SDCAlertControllerTextFieldViewController *)viewController {
 	self.scrollView.textFieldViewController = viewController;
 }
+
+- (void)actionViewTapped:(UITapGestureRecognizer *)sender {
+	SDCAlertCollectionViewCell *cell = (SDCAlertCollectionViewCell *)sender.view;
+	NSIndexPath *indexPath = [self.actionsCollectionView indexPathForCell:cell];
+	SDCAlertAction *action = self.actions[indexPath.row];
+	
+	[self.delegate alertControllerView:self didPerformAction:action];
+}
+
+#pragma mark - User Interface
 
 - (CGFloat)maximumHeightForScrollView {
 	CGFloat maximumHeight = CGRectGetHeight(self.superview.bounds) - self.visualStyle.margins.top - self.visualStyle.margins.bottom;
@@ -110,17 +132,6 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 	
 	return maximumHeight;
-}
-
-- (CGFloat)collectionViewHeight {
-	CGFloat horizontalLayoutHeight = self.visualStyle.actionViewHeight;
-	CGFloat verticalLayoutHeight = self.visualStyle.actionViewHeight * [self.actionsCollectionView numberOfItemsInSection:0];
-	
-	switch (self.actionLayout) {
-		case SDCAlertControllerActionLayoutAutomatic:		return (self.actions.count == 2) ? horizontalLayoutHeight : verticalLayoutHeight;
-		case SDCAlertControllerActionLayoutHorizontal:		return horizontalLayoutHeight;
-		case SDCAlertControllerActionLayoutVertical:		return verticalLayoutHeight;
-	}
 }
 
 - (void)prepareForDisplay {
@@ -155,6 +166,18 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self.visualEffectView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
 }
 
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	self.maximumHeightConstraint.constant = [self maximumHeightForScrollView];
+}
+
+- (void)applyCurrentStyleToAlertElements {
+	self.scrollView.visualStyle = self.visualStyle;
+	self.collectionViewLayout.visualStyle = self.visualStyle;
+}
+
+#pragma mark - KVO
+
 - (void)observeActions {
 	[self.actions enumerateObjectsUsingBlock:^(SDCAlertAction *action, NSUInteger idx, BOOL *stop) {
 		[action addObserver:self forKeyPath:@"enabled" options:0 context:NULL];
@@ -171,31 +194,18 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	}
 }
 
-- (void)dealloc {
-	[self.actions enumerateObjectsUsingBlock:^(SDCAlertAction *action, NSUInteger idx, BOOL *stop) {
-		[action removeObserver:self forKeyPath:@"enabled"];
-	}];
-}
+#pragma mark - UICollectionView
 
-- (void)layoutSubviews {
-	[super layoutSubviews];
-	self.maximumHeightConstraint.constant = [self maximumHeightForScrollView];
-}
-
-- (void)applyCurrentStyleToAlertElements {
-	self.scrollView.visualStyle = self.visualStyle;
-	self.collectionViewLayout.visualStyle = self.visualStyle;
-}
-
-- (void)actionViewTapped:(UITapGestureRecognizer *)sender {
-	SDCAlertCollectionViewCell *cell = (SDCAlertCollectionViewCell *)sender.view;
-	NSIndexPath *indexPath = [self.actionsCollectionView indexPathForCell:cell];
-	SDCAlertAction *action = self.actions[indexPath.row];
+- (CGFloat)collectionViewHeight {
+	CGFloat horizontalLayoutHeight = self.visualStyle.actionViewHeight;
+	CGFloat verticalLayoutHeight = self.visualStyle.actionViewHeight * [self.actionsCollectionView numberOfItemsInSection:0];
 	
-	[self.delegate alertControllerView:self didPerformAction:action];
+	switch (self.actionLayout) {
+		case SDCAlertControllerActionLayoutAutomatic:		return (self.actions.count == 2) ? horizontalLayoutHeight : verticalLayoutHeight;
+		case SDCAlertControllerActionLayoutHorizontal:		return horizontalLayoutHeight;
+		case SDCAlertControllerActionLayoutVertical:		return verticalLayoutHeight;
+	}
 }
-
-#pragma mark - UICollectionViewDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 	return self.actions.count;

@@ -47,6 +47,16 @@
 	self.gestureRecognizer.enabled = enabled;
 }
 
+- (void)setHighlighted:(BOOL)highlighted {
+	[super setHighlighted:highlighted];
+	
+	if (self.isEnabled) {
+		self.highlightedBackgroundView.hidden = !highlighted;
+	}
+}
+
+#pragma mark - User Interface
+
 - (void)tintColorDidChange {
 	self.textLabel.textColor = self.tintColor;
 }
@@ -76,14 +86,6 @@
 	
 	[self.contentView addSubview:self.textLabel];
 	[self.textLabel sdc_centerInSuperview];
-}
-
-- (void)setHighlighted:(BOOL)highlighted {
-	[super setHighlighted:highlighted];
-	
-	if (self.isEnabled) {
-		self.highlightedBackgroundView.hidden = !highlighted;
-	}
 }
 
 @end
