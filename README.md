@@ -109,7 +109,7 @@ if (alert.legacyAlertView) {
 
 With the introduction of `SDCAlertController`, pretty much all behavior in alerts could be replicated. If you use the legacy `SDCAlertView`, you may run into some additional problems as described below:
 
-- Special interaction with the system. The system does not consider instances of `SDCAlertController` actual alerts, which means that won't experience the normal system interaction you'd expect from a normal alert. This also means that combining `SDCAlertView` with `SDCAlertController` is a **bad idea**.
+- Special interaction with the system. The system does not consider instances of `SDCAlertController` actual alerts, which means that won't experience the normal system interaction you'd expect from a normal alert. This also means that combining `UIAlertView` with `SDCAlertView` (or `SDCAlertController`) is a **bad idea**.
 - **`SDCAlertView` only:** `UITextField` placeholders in different languages. "Login" and "Password" are entered as localized strings, but they aren't actually translated.
 - **`SDCAlertView` only:** Some behavior is purposely not ported from `UIAlertView`. These cases are discussed in SDCAlertView.h.
 
