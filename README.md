@@ -4,6 +4,8 @@
 
 You can think of `SDCAlertView` as `UIAlertView` on steroids. It has added functionality such as a `contentView` property and block syntax, while still keeping the `UIAlertView` look.
 
+![SDCAlertController](http://sberrevoets.github.io/SDCAlertView/SDCAlertController.png)
+
 ## iOS 8 & `UIAlertController`
 In iOS 8, `UIAlertView` was deprecated in favor of `UIAlertController`. `SDCAlertView` was also updated to include `SDCAlertController`, whose API matches its `UI` counterpart.
 
@@ -28,8 +30,8 @@ The project also depends on [RBBAnimation](https://github.com/robb/RBBAnimation)
 Showing a basic `SDCAlertController` alert looks just like showing a basic `UIAlertController` alert:
 ```objc
 SDCAlertController *alert = [SDCAlertController alertControllerWithTitle:@"Title"
-																 message:@"This is a message"
-														  preferredStyle:SDCAlertControllerStyleAlert];
+message:@"This is a message"
+preferredStyle:SDCAlertControllerStyleAlert];
 [alert addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleDefault handler:nil]];
 [alert presentWithCompletion:nil];
 ```
@@ -44,8 +46,8 @@ Or you can use one of the convenience methods:
 Of course, you're not using `SDCAlertView`'s full potential unless you are using the `contentView`:
 ```objc
 SDCAlertController *alert = [SDCAlertController alertControllerWithTitle:@"Title"
-																 message:@"This is a message"
-														  preferredStyle:SDCAlertControllerStyleAlert];
+message:@"This is a message"
+preferredStyle:SDCAlertControllerStyleAlert];
 [alert addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleDefault handler:nil]];
 
 UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] init];
@@ -56,9 +58,9 @@ spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
 [alert.contentView addSubview:spinner];
 [spinner sdc_horizontallyCenterInSuperview];
 [alert.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[spinner]-|"
-																		  options:0
-																		 metrics:nil
-																		   views:NSDictionaryOfVariableBindings(spinner)]];
+options:0
+metrics:nil
+views:NSDictionaryOfVariableBindings(spinner)]];
 
 [alert presentWithCompletion:nil];
 ```
@@ -69,12 +71,12 @@ You can use the `shouldDismissBlock` to prevent an alert from being dismissed:
 
 ```objc
 SDCAlertController *alert = [SDCAlertController alertControllerWithTitle:@"Title"
-																 message:@"This is a message"
-														  preferredStyle:SDCAlertControllerStyleAlert];
+message:@"This is a message"
+preferredStyle:SDCAlertControllerStyleAlert];
 [alert addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleDefault handler:nil]];
 
 alert.shouldDismissBlock = ^ BOOL(SDCAlertAction *action) {
-	return NO;
+return NO;
 };
 
 [alert presentWithCompletion:nil];
@@ -95,9 +97,9 @@ SDCAlertController *alert = [SDCAlertController alertWithTitle:@"Title" message:
 // ... configure alert with content view, text fields, buttons, etc ...
 
 if (alert.legacyAlertView) {
-	// ... use alert.legacyAlertView to make iOS 7 modifications
+// ... use alert.legacyAlertView to make iOS 7 modifications
 } else {
-	// Keep using original alert
+// Keep using original alert
 }
 
 [alert presentWithCompletion:nil];
@@ -114,10 +116,10 @@ With the introduction of `SDCAlertController`, pretty much all behavior in alert
 ## New in 2.0
 
 **What's New:**
- - All new API that matches and extends `UIAlertController`
- - Ability to always show buttons horizontally or vertically
- - Backwards compatible with `SDCAlertView` (1.0)
- - More stylistic elements you can style (alert width, button separators, text fields, etc.)
+- All new API that matches and extends `UIAlertController`
+- Ability to always show buttons horizontally or vertically
+- Backwards compatible with `SDCAlertView` (1.0)
+- More stylistic elements you can style (alert width, button separators, text fields, etc.)
 
 ## Support
 I'm pretty active on [Stack Overflow](http://stackoverflow.com/users/751268/scott-berrevoets), so please use that if you have any questions. You can also use [Twitter](http://twitter.com/ScottBerrevoets) to contact me directly.
