@@ -1,5 +1,23 @@
 # CHANGELOG
 
+# 2.0
+
+**What's New:**
+- All new API that matches and extends `UIAlertController`
+- Ability to always show buttons horizontally or vertically
+- Backwards compatible with `SDCAlertView` (1.0)
+- More stylistic elements you can style (alert width, button separators, text fields, etc.)
+
+## 1.4.3
+
+**Bug Fixes:**
+- Fixes an issue that would not enforce `contentPadding` on the title and message labels properly (#58)
+
+## 1.4.2
+
+**What's New:**
+- Extra properties to specify padding and spacing in the alert (#55 - thanks @bcherry)
+
 ## 1.4.1
 
 **Bug Fixes:**
