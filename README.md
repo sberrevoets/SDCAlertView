@@ -30,8 +30,8 @@ The project also depends on [RBBAnimation](https://github.com/robb/RBBAnimation)
 Showing a basic `SDCAlertController` alert looks just like showing a basic `UIAlertController` alert:
 ```objc
 SDCAlertController *alert = [SDCAlertController alertControllerWithTitle:@"Title"
-message:@"This is a message"
-preferredStyle:SDCAlertControllerStyleAlert];
+																 message:@"This is a message"
+														  preferredStyle:SDCAlertControllerStyleAlert];
 [alert addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleDefault handler:nil]];
 [alert presentWithCompletion:nil];
 ```
@@ -46,8 +46,8 @@ Or you can use one of the convenience methods:
 Of course, you're not using `SDCAlertView`'s full potential unless you are using the `contentView`:
 ```objc
 SDCAlertController *alert = [SDCAlertController alertControllerWithTitle:@"Title"
-message:@"This is a message"
-preferredStyle:SDCAlertControllerStyleAlert];
+																 message:@"This is a message"
+														  preferredStyle:SDCAlertControllerStyleAlert];
 [alert addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleDefault handler:nil]];
 
 UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] init];
@@ -58,9 +58,9 @@ spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
 [alert.contentView addSubview:spinner];
 [spinner sdc_horizontallyCenterInSuperview];
 [alert.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[spinner]-|"
-options:0
-metrics:nil
-views:NSDictionaryOfVariableBindings(spinner)]];
+																		  options:0
+																		  metrics:nil
+																			views:NSDictionaryOfVariableBindings(spinner)]];
 
 [alert presentWithCompletion:nil];
 ```
@@ -71,12 +71,12 @@ You can use the `shouldDismissBlock` to prevent an alert from being dismissed:
 
 ```objc
 SDCAlertController *alert = [SDCAlertController alertControllerWithTitle:@"Title"
-message:@"This is a message"
-preferredStyle:SDCAlertControllerStyleAlert];
+																 message:@"This is a message"
+														  preferredStyle:SDCAlertControllerStyleAlert];
 [alert addAction:[SDCAlertAction actionWithTitle:@"OK" style:SDCAlertActionStyleDefault handler:nil]];
 
 alert.shouldDismissBlock = ^ BOOL(SDCAlertAction *action) {
-return NO;
+	return NO;
 };
 
 [alert presentWithCompletion:nil];
@@ -97,9 +97,9 @@ SDCAlertController *alert = [SDCAlertController alertWithTitle:@"Title" message:
 // ... configure alert with content view, text fields, buttons, etc ...
 
 if (alert.legacyAlertView) {
-// ... use alert.legacyAlertView to make iOS 7 modifications
+	// ... use alert.legacyAlertView to make iOS 7 modifications
 } else {
-// Keep using original alert
+	// Keep using original alert
 }
 
 [alert presentWithCompletion:nil];
