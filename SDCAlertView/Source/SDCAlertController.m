@@ -112,20 +112,24 @@
 		![NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)];
 }
 
+- (NSAttributedString *)attributedStringForString:(NSString *)string {
+	return string ? [[NSAttributedString alloc] initWithString:string] : nil;
+}
+
 - (void)setTitle:(NSString *)title {
 	[super setTitle:title];
-	self.alert.title = [[NSAttributedString alloc] initWithString:title];
+	self.alert.title = [self attributedStringForString:title];
 }
 
 - (void)setMessage:(NSString *)message {
 	_message = message;
-	self.alert.message = [[NSAttributedString alloc] initWithString:message];
+	self.alert.message = [self attributedStringForString:message];
 }
 
 
 - (void)createAlert {
-	NSAttributedString *title = self.attributedTitle ? : [[NSAttributedString alloc] initWithString:self.title];
-	NSAttributedString *message = self.attributedMessage ? : [[NSAttributedString alloc] initWithString:self.message];
+	NSAttributedString *title = self.attributedTitle ? : [self attributedStringForString:self.title];
+	NSAttributedString *message = self.attributedMessage ? : [self attributedStringForString:self.message];
 	self.alert = [[SDCAlertControllerView alloc] initWithTitle:title message:message];
 	
 	self.alert.delegate = self;
