@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 2.0.1
+
+**Bug Fixes:**
+- Raises an exception when presenting SDCAlertView 1.0 from a `UIAlertView` or `UIActionSheet` (#56 - thanks @nschum)
+- Prevents a crash when creating an alert with a `nil` title or message
+
 # 2.0
 
 **What's New:**
