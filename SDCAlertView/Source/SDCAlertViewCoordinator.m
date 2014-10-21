@@ -46,6 +46,7 @@
 	if (self) {
 		_userWindow = [[UIApplication sharedApplication] keyWindow];
 		_transitionQueue = [NSMutableArray array];
+        [self validateUserWindow];
 	}
 	
 	return self;
@@ -59,6 +60,15 @@
 	});
 	
 	return sharedCoordinator;
+}
+
+#pragma mark - Validation
+
+- (void)validateUserWindow {
+#ifdef DEBUG
+    NSAssert(![NSStringFromClass([_userWindow class]) isEqualToString:@"_UIAlertControllerShimPresenterWindow"],
+             @"Using SDCAlertView from an UIAlertView is unsupported and will result in a frozen screen");
+#endif
 }
 
 #pragma mark - Transition Queue
