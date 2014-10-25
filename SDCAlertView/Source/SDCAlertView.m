@@ -549,9 +549,7 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 		alert.alertViewStyle = SDCAlertViewStyleLoginAndPasswordInput;
 	}
 	
-	[alertController.contentView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
-		[alert.contentView addSubview:subview];
-	}];
+	alert.alertContentView.customContentView = alertController.contentView;
 	
 	alert.alwaysShowsButtonsVertically = (alertController.actionLayout == SDCAlertControllerActionLayoutVertical);
 	

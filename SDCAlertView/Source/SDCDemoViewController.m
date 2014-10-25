@@ -35,11 +35,17 @@
 }
 
 - (IBAction)showAlert:(UIBarButtonItem *)sender {
-	switch (self.alertStyleControl.selectedSegmentIndex) {
-		case 0:		[self showAlertWithStyle:SDCAlertControllerStyleAlert];	break;
-		case 1:		[self showAlertWithStyle:SDCAlertControllerStyleLegacyAlert]; break;
-		case 2:		[self showSystemAlert]; break;
-  	}
+	SDCAlertController *a = [SDCAlertController alertControllerWithTitle:NSLocalizedString(@"Emptying Deleted Items", nil)
+										 message:nil
+								  preferredStyle:SDCAlertControllerStyleAlert];
+	UIActivityIndicatorView *progressView = [[UIActivityIndicatorView alloc] init];
+	[progressView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[progressView startAnimating];
+	[a.contentView addSubview:progressView];
+	[progressView sdc_horizontallyCenterInSuperview];
+	[progressView sdc_verticallyCenterInSuperviewWithOffset:0];
+	
+	[a presentWithCompletion:nil];
 }
 
 - (void)showAlertWithStyle:(SDCAlertControllerStyle)style {
