@@ -260,7 +260,11 @@
 }
 
 - (void)dismissWithCompletion:(void (^)(void))completion {
-	[self.presentingViewController dismissViewControllerAnimated:YES completion:completion];
+	if ([self usesLegacyAlert]) {
+		[self.legacyAlertView dismissWithClickedButtonIndex:NSIntegerMax animated:YES];
+	} else {
+		[self.presentingViewController dismissViewControllerAnimated:YES completion:completion];
+	}
 }
 
 @end
