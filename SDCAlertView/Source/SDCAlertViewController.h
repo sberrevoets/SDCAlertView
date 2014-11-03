@@ -9,8 +9,11 @@
 @import UIKit;
 
 @class SDCAlertView;
+@class SDCAlertViewCoordinator;
 
 @interface SDCAlertViewController : UIViewController
+
+@property (nonatomic, weak) SDCAlertViewCoordinator *coordinator;
 
 - (void)replaceAlert:(SDCAlertView *)oldAlert
 		   withAlert:(SDCAlertView *)newAlert

@@ -14,4 +14,7 @@
 
 + (instancetype)sharedCoordinator;
 
+- (BOOL)shouldRotateAlerts;
+- (NSUInteger)supportedAlertInterfaceOrientations;
+
 @end

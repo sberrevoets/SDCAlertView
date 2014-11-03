@@ -27,8 +27,12 @@
 	if (!_alertWindow) {
 		_alertWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 		_alertWindow.backgroundColor = [UIColor clearColor];
-		_alertWindow.rootViewController = [[SDCAlertViewController alloc] init];
 		_alertWindow.windowLevel = UIWindowLevelAlert;
+		
+		SDCAlertViewController *alertViewController = [[SDCAlertViewController alloc] init];
+		alertViewController.coordinator = self;
+		
+		_alertWindow.rootViewController = alertViewController;
 	}
 	
 	return _alertWindow;
@@ -110,6 +114,16 @@
 	[self.transitionQueue removeObject:nextInvocation];
 	
 	[nextInvocation invokeWithTarget:self];
+}
+
+#pragma mark - Rotation
+
+- (BOOL)shouldRotateAlerts {
+	return [self.userWindow.rootViewController shouldAutorotate];
+}
+
+- (NSUInteger)supportedAlertInterfaceOrientations {
+	return [self.userWindow.rootViewController supportedInterfaceOrientations];
 }
 
 #pragma mark - Presenting & Dismissing
