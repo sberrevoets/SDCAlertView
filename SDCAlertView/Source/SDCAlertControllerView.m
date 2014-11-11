@@ -49,6 +49,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 		_actionsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionViewLayout];
 		[_actionsCollectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
 		[_actionsCollectionView registerClass:[SDCAlertCollectionViewCell class] forCellWithReuseIdentifier:SDCAlertControllerCellReuseIdentifier];
+		_actionsCollectionView.delaysContentTouches = NO;
 		
 		_actionsCollectionView.delegate = self;
 		_actionsCollectionView.dataSource = self;
