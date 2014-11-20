@@ -261,6 +261,12 @@
 
 - (void)dismissWithCompletion:(void (^)(void))completion {
 	if ([self usesLegacyAlert]) {
+		self.legacyAlertView.didDismissHandler = ^(NSInteger buttonIndex) {
+			if (completion) {
+				completion();
+			}
+		};
+		
 		[self.legacyAlertView dismissWithClickedButtonIndex:NSIntegerMax animated:YES];
 	} else {
 		[self.presentingViewController dismissViewControllerAnimated:YES completion:completion];
