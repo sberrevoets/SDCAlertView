@@ -22,4 +22,6 @@
 
 - (instancetype)initWithTitle:(NSAttributedString *)title message:(NSAttributedString *)message;
 
+- (void)finalizeElements;
+
 @end

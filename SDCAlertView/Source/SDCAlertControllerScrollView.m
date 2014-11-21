@@ -72,9 +72,7 @@
 
 #pragma mark - Layout
 
-- (void)layoutSubviews {
-	[super layoutSubviews];
-	
+- (void)finalizeElements {
 	[self.titleLabel sdc_alignEdgesWithSuperview:UIRectEdgeLeft insets:self.visualStyle.contentPadding];
 	[self.titleLabel sdc_pinWidthToWidthOfView:self offset:-(self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right)];
 	
@@ -111,6 +109,12 @@
 														  constant:self.visualStyle.messageLabelBottomSpacing]];
 	}
 	
+	[self setNeedsLayout];
+	[self layoutIfNeeded];
+}
+
+- (void)layoutSubviews {
+	[super layoutSubviews];
 	[self invalidateIntrinsicContentSize];
 }
 

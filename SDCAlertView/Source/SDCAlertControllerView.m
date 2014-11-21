@@ -139,17 +139,13 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self observeActions];
 	[self applyCurrentStyleToAlertElements];
 	
-	[self.visualEffectView sdc_pinWidth:self.visualStyle.width];
-	
 	[self.visualEffectView.contentView addSubview:self.scrollView];
-	[self.scrollView setNeedsLayout];
-	[self.scrollView layoutIfNeeded];
+	[self.scrollView finalizeElements];
 	
 	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];
 	self.maximumHeightConstraint = [self.scrollView sdc_setMaximumHeight:[self maximumHeightForScrollView]];
 	
 	UIView *aligningView = self.scrollView;
-	
 	if (self.contentView.subviews.count > 0) {
 		aligningView = self.contentView;
 		

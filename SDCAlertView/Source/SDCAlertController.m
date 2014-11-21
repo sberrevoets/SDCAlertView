@@ -167,6 +167,7 @@
 	self.presentingAlert = YES;
 	
 	[self.view addSubview:self.alert];
+	[self.alert sdc_pinWidth:self.visualStyle.width];
 	[self.alert sdc_centerInSuperview];
 	
 	[self.alert prepareForDisplay];
