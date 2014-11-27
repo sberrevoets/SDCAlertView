@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Scotty Doesn't Code. All rights reserved.
 //
 
-#import "SDCAlertController.h"
+@import UIKit;
 
 typedef NS_ENUM(NSInteger, SDCAlertActionStyle) {
 	SDCAlertActionStyleDefault = UIAlertActionStyleDefault,
