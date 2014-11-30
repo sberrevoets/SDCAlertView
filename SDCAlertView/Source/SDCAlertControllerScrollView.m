@@ -39,7 +39,7 @@
 }
 
 - (NSAttributedString *)title {
-	return self.messageLabel.attributedText;
+	return self.titleLabel.attributedText;
 }
 
 - (void)setTitle:(NSAttributedString *)title {
