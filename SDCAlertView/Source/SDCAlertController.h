@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
  *		SDCAlertController *alert = [SDCAlertController alertWithTitle:@"Title" message:@"Message" preferredStyle:SDCAlertControllerStyleAlert];
  *		// ... configure alert with content view, text fields, buttons, etc ...
  *
- *		if (alert.legacyAlertView) {
+ *		if (alert.usesLegacyAlert) {
  *			// ... use alert.legacyAlertView to make iOS 7 modifications
  *		} else {
  *			// Keep using original alert
@@ -153,6 +153,11 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
  *		
  *		[alert presentWithCompletion:nil];
  */
+
+/**
+ *  Returns whether this alert controller will use the iOS 7-style alert (SDCAlertView) when this alert is presented.
+ */
+@property (nonatomic, readonly) BOOL usesLegacyAlert;
 
 /**
  *  Returns the SDCAlertView instance that will be presented IF it will be presented (based on preferred alert style or iOS version), otherwise \c nil.

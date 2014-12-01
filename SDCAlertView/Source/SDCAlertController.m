@@ -100,7 +100,7 @@
 #pragma mark - Alert View
 
 - (SDCAlertView *)legacyAlertView {
-	if (!_legacyAlertView && [self usesLegacyAlert]) {
+	if (!_legacyAlertView && self.usesLegacyAlert) {
 		_legacyAlertView = [SDCAlertView alertViewWithAlertController:self];
 	}
 	return _legacyAlertView;
