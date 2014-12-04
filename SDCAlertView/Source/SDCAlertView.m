@@ -515,16 +515,27 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 
 @implementation SDCAlertView (SDCAlertController)
 
++ (SDCAlertAction *)cancelActionForAlertController:(SDCAlertController *)alertController {
+	__block SDCAlertAction *action;
+	[alertController.actions enumerateObjectsUsingBlock:^(SDCAlertAction *currentAction, NSUInteger idx, BOOL *stop) {
+		if (currentAction.style == SDCAlertActionStyleCancel) {
+			action = currentAction;
+			*stop = YES;
+		}
+	}];
+	
+	return action;
+}
+
 + (instancetype)alertViewWithAlertController:(SDCAlertController *)alertController {
-	NSString *cancelButtonTitle = [alertController.actions.firstObject title];
+	SDCAlertAction *cancelAction = [self cancelActionForAlertController:alertController];
 	SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:alertController.title
 													  message:alertController.message
 													 delegate:alertController
-											cancelButtonTitle:cancelButtonTitle
+											cancelButtonTitle:cancelAction.title
 											otherButtonTitles:nil];
-	[alertController.actions enumerateObjectsUsingBlock:^(SDCAlertView *action, NSUInteger idx, BOOL *stop) {
-		if (idx > 0) {
-			// Skip the first one, that's the cancel button and has already been added
+	[alertController.actions enumerateObjectsUsingBlock:^(SDCAlertAction *action, NSUInteger idx, BOOL *stop) {
+		if (action != cancelAction) {
 			[alert addButtonWithTitle:action.title];
 		}
 	}];
