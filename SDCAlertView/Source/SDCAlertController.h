@@ -32,6 +32,9 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
 + (instancetype)actionWithTitle:(NSString *)title style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *action))handler;
 + (instancetype)actionWithAttributedTitle:(NSAttributedString *)attributedTitle style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *action))handler;
 
+- (instancetype)initWithTitle:(NSString *)title style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *action))handler;
+- (instancetype)initWithAttributedTitle:(NSAttributedString *)attributedTitle style:(SDCAlertActionStyle)style handler:(void (^)(SDCAlertAction *action))handler;
+
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSAttributedString *attributedTitle;
 
@@ -50,7 +53,13 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
 								 attributedMessage:(NSAttributedString *)attributedMessage
 									preferredStyle:(SDCAlertControllerStyle)preferredStyle;
 
+- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message style:(SDCAlertControllerStyle)style;
+- (instancetype)initWithAttributedTitle:(NSAttributedString *)attributedTitle
+                      attributedMessage:(NSAttributedString *)attributedMessage
+                                  style:(SDCAlertControllerStyle)style;
+
 - (void)addAction:(SDCAlertAction *)action;
+
 @property (nonatomic, readonly) NSArray *actions;
 
 /**
@@ -150,7 +159,7 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
  *		} else {
  *			// Keep using original alert
  *		}
- *		
+ *
  *		[alert presentWithCompletion:nil];
  */
 
