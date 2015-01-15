@@ -664,7 +664,9 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 	}
 	
 	if ([elements containsObject:self.customContentView]) {
-		[verticalVFL appendString:@"-[customContentView]"];
+		if (! [verticalVFL hasSuffix:@"|"])
+			[verticalVFL appendString:@"-"];
+		[verticalVFL appendString:@"[customContentView]"];
 		hasContentOtherThanButtons = YES;
 	}
 	
