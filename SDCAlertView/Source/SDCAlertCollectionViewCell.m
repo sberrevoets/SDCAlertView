@@ -62,6 +62,9 @@
 }
 
 - (void)updateWithAction:(SDCAlertAction *)action visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
+	self.textLabel.font = [visualStyle fontForAction:action];
+	self.textLabel.textColor = [visualStyle textColorForAction:action];
+	
 	if (action.attributedTitle) {
 		self.textLabel.attributedText = action.attributedTitle;
 	} else {
@@ -69,9 +72,6 @@
 	}
 	
 	self.enabled = action.isEnabled;
-	
-	self.textLabel.font = [visualStyle fontForAction:action];
-	self.textLabel.textColor = [visualStyle textColorForAction:action];
 	
 	self.highlightedBackgroundView = visualStyle.actionViewHighlightBackgroundView;
 	[self.highlightedBackgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
