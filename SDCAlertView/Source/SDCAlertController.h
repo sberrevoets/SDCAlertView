@@ -163,6 +163,9 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
  *  Returns the SDCAlertView instance that will be presented IF it will be presented (based on preferred alert style or iOS version), otherwise \c nil.
  */
 @property (nonatomic, readonly) SDCAlertView *legacyAlertView;
+
+- (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex;
+
 @end
 
 @interface SDCAlertController (Convenience)

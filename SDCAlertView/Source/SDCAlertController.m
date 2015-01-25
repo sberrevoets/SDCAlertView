@@ -299,3 +299,16 @@
 }
 
 @end
+
+@implementation SDCAlertController (Legacy)
+
+- (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex {
+    
+    if (self.legacyAlertView) {
+        return [self.legacyAlertView textFieldAtIndex:textFieldIndex];
+    } else {
+        return [self.textFields objectAtIndex:textFieldIndex];
+    }
+}
+
+@end
