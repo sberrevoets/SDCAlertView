@@ -80,7 +80,7 @@
 
 - (instancetype)initWithAttributedTitle:(NSAttributedString *)attributedTitle
 					  attributedMessage:(NSAttributedString *)attributedMessage
-						 style:(SDCAlertControllerStyle)style {
+								  style:(SDCAlertControllerStyle)style {
 	self = [self initWithStyle:style];
 	
 	if (self) {
@@ -98,19 +98,6 @@
 }
 
 #pragma mark - Alert View
-
-- (SDCAlertView *)legacyAlertView {
-	if (!_legacyAlertView && self.usesLegacyAlert) {
-		_legacyAlertView = [SDCAlertView alertViewWithAlertController:self];
-	}
-	return _legacyAlertView;
-}
-
-- (BOOL)usesLegacyAlert {
-	return
-		self.preferredStyle == SDCAlertControllerStyleLegacyAlert ||
-		![NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)];
-}
 
 - (NSAttributedString *)attributedStringForString:(NSString *)string {
 	return string ? [[NSAttributedString alloc] initWithString:string] : nil;
@@ -296,6 +283,31 @@
 	
 	[controller presentWithCompletion:nil];
 	return controller;
+}
+
+@end
+
+@implementation SDCAlertController (Legacy)
+
+- (SDCAlertView *)legacyAlertView {
+	if (!_legacyAlertView && self.usesLegacyAlert) {
+		_legacyAlertView = [SDCAlertView alertViewWithAlertController:self];
+	}
+	return _legacyAlertView;
+}
+
+- (BOOL)usesLegacyAlert {
+	return
+	self.preferredStyle == SDCAlertControllerStyleLegacyAlert ||
+	![NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)];
+}
+
+- (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex {
+	if (self.legacyAlertView) {
+		return [self.legacyAlertView textFieldAtIndex:textFieldIndex];
+	} else {
+		return [self.textFields objectAtIndex:textFieldIndex];
+	}
 }
 
 @end

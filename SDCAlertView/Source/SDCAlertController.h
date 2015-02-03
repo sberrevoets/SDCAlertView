@@ -60,6 +60,10 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
 @property (nonatomic) SDCAlertControllerActionLayout actionLayout;
 
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *textField))configurationHandler;
+
+/**
+ *  Use this property only if the deployment target of your app is set to iOS 8 or above. If you support iOS 7, please see -textFieldAtIndex: below.
+ */
 @property (nonatomic, readonly) NSArray *textFields;
 
 @property (nonatomic, copy) NSString *title;
@@ -163,6 +167,12 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
  *  Returns the SDCAlertView instance that will be presented IF it will be presented (based on preferred alert style or iOS version), otherwise \c nil.
  */
 @property (nonatomic, readonly) SDCAlertView *legacyAlertView;
+
+/**
+ *  The backwards-compatible method to retrieve a text field. You may use the textFields property if the deployment target is iOS 8 or above.
+ */
+- (UITextField *)textFieldAtIndex:(NSInteger)textFieldIndex;
+
 @end
 
 @interface SDCAlertController (Convenience)
