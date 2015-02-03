@@ -1,5 +1,27 @@
 # CHANGELOG
 
+# 2.2.0
+
+**Bug Fixes:**
+- Fixes an incompatibility issue that would not correctly fetch text fields on iOS 7 (#67)
+
+# 2.1.1
+
+**Bug Fixes:**
+- Fixes an off-by-one error that breaks compatibility with iOS 7 (#70)
+
+# 2.1
+
+**What's New:**
+- The `usesLegacyAlert` property is now made public
+
+**Bug Fixes:**
+- Updates the import in SDCAlertController.h to not depend on any precompiled headers
+- Fixes several issues with the legacy alert (#62, #63, #64, #68)
+- Improves upon `UIAlertController` so that when an alert button is quickly tapped, it will highlight (`UIAlertController` does not do this)
+- Fixes Auto Layout warnings for multi-line labels (#60)
+- Returns the correct text when accessing `titleLabel.text`
+
 # 2.0.1
 
 **Bug Fixes:**
