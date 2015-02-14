@@ -188,6 +188,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	if (alert) {
 		[alert becomeFirstResponder];
 		[self.alertContainerView addSubview:alert];
+		[alert layoutIfNeeded]; // Layout the alert before any animations are applied
 	}
 }
 
