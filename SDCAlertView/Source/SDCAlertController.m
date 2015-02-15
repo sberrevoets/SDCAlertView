@@ -113,6 +113,12 @@
 	self.alert.message = [self attributedStringForString:message];
 }
 
+- (SDCAlertView *)legacyAlertView {
+	if (!_legacyAlertView && self.usesLegacyAlert) {
+		_legacyAlertView = [SDCAlertView alertViewWithAlertController:self];
+	}
+	return _legacyAlertView;
+}
 
 - (void)createAlert {
 	NSAttributedString *title = self.attributedTitle ? : [self attributedStringForString:self.title];
@@ -288,13 +294,6 @@
 @end
 
 @implementation SDCAlertController (Legacy)
-
-- (SDCAlertView *)legacyAlertView {
-	if (!_legacyAlertView && self.usesLegacyAlert) {
-		_legacyAlertView = [SDCAlertView alertViewWithAlertController:self];
-	}
-	return _legacyAlertView;
-}
 
 - (BOOL)usesLegacyAlert {
 	return
