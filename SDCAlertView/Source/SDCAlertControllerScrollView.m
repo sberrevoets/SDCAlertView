@@ -77,7 +77,12 @@
 	[self.titleLabel sdc_pinWidthToWidthOfView:self offset:-(self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right)];
 	
 	[self.messageLabel sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.titleLabel];
-	
+
+	CGFloat messageLabelSpacing = self.visualStyle.labelSpacing;
+	if (!self.titleLabel.text.length || !self.messageLabel.text.length) {
+		messageLabelSpacing = 0.f;
+	}
+
 	[self addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel
 													 attribute:NSLayoutAttributeFirstBaseline
 													 relatedBy:NSLayoutRelationEqual
@@ -92,7 +97,7 @@
 														toItem:self.titleLabel
 													 attribute:NSLayoutAttributeLastBaseline
 													multiplier:1
-													  constant:self.visualStyle.labelSpacing]];
+													  constant:messageLabelSpacing]];
 	
 	if (self.textFieldViewController) {
 		[self.textFieldViewController.view sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.titleLabel];
