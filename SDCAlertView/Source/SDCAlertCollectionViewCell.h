@@ -20,6 +20,6 @@
 @property (nonatomic, strong) UIGestureRecognizer *gestureRecognizer;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
 
-- (void)updateWithAction:(SDCAlertAction *)action visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle;
+- (void)updateWithAction:(SDCAlertAction *)action visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle lastAction:(BOOL)isLast;
 
 @end

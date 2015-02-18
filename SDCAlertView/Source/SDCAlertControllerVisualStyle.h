@@ -41,7 +41,7 @@
 @property (nonatomic, readonly) CGFloat actionViewSeparatorThickness;
 
 - (UIColor *)textColorForAction:(SDCAlertAction *)action;
-- (UIFont *)fontForAction:(SDCAlertAction *)action;
+- (UIFont *)fontForAction:(SDCAlertAction *)action lastAction:(BOOL)isLast;
 
 #pragma mark - Text Fields
 

@@ -61,8 +61,8 @@
 	self.textLabel.textColor = self.tintColor;
 }
 
-- (void)updateWithAction:(SDCAlertAction *)action visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle {
-	self.textLabel.font = [visualStyle fontForAction:action];
+- (void)updateWithAction:(SDCAlertAction *)action visualStyle:(id<SDCAlertControllerVisualStyle>)visualStyle lastAction:(BOOL)isLast {
+	self.textLabel.font = [visualStyle fontForAction:action lastAction:isLast];
 	self.textLabel.textColor = [visualStyle textColorForAction:action];
 	
 	if (action.attributedTitle) {
