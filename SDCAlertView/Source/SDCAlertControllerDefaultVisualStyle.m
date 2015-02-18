@@ -85,11 +85,11 @@
 	}
 }
 
-- (UIFont *)fontForAction:(SDCAlertAction *)action {
-	if (action.style == SDCAlertActionStyleCancel) {
-		return [UIFont systemFontOfSize:17];
-	} else {
+- (UIFont *)fontForAction:(SDCAlertAction *)action lastAction:(BOOL)isLast {
+	if (isLast && action.style == SDCAlertActionStyleDefault) {
 		return [UIFont boldSystemFontOfSize:17];
+	} else {
+		return [UIFont systemFontOfSize:17];
 	}
 }
 

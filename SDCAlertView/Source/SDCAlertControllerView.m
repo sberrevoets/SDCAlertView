@@ -213,7 +213,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 																				 forIndexPath:indexPath];
 	
 	SDCAlertAction *action = self.actions[indexPath.item];
-	[cell updateWithAction:action visualStyle:self.visualStyle];
+	[cell updateWithAction:action visualStyle:self.visualStyle lastAction:(indexPath.row == self.actions.count - 1)];
 	cell.gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionViewTapped:)];
 	return cell;
 }
