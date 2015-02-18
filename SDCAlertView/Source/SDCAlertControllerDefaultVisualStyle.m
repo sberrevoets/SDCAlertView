@@ -87,9 +87,9 @@
 
 - (UIFont *)fontForAction:(SDCAlertAction *)action {
 	if (action.style == SDCAlertActionStyleCancel) {
-		return [UIFont boldSystemFontOfSize:17];
-	} else {
 		return [UIFont systemFontOfSize:17];
+	} else {
+		return [UIFont boldSystemFontOfSize:17];
 	}
 }
 
