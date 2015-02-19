@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSAttributedString *title;
 @property (nonatomic, strong) NSAttributedString *message;
 
+@property (nonatomic, assign) BOOL shouldAllowRemovingSpacing;
+
 @property (nonatomic, strong) SDCAlertControllerTextFieldViewController *textFieldViewController;
 @property (nonatomic, strong) id<SDCAlertControllerVisualStyle> visualStyle;
 
