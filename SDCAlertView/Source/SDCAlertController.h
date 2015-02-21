@@ -8,10 +8,17 @@
 
 @import UIKit;
 
-typedef NS_ENUM(NSInteger, SDCAlertActionStyle) {
-	SDCAlertActionStyleDefault = UIAlertActionStyleDefault,
-	SDCAlertActionStyleCancel = UIAlertActionStyleCancel,
-	SDCAlertActionStyleDestructive = UIAlertActionStyleDestructive
+typedef NS_OPTIONS(NSInteger, SDCAlertActionStyle) {
+	SDCAlertActionStyleDefault = 1 << 0,
+	/// The recommended action style stands out more than the other buttons to indicate to the user this
+	/// action is the recommended option. The recommended and default styles are mutually exclusive--the cancel
+	/// style will have precedence over the default style if both are provided.
+	SDCAlertActionStyleRecommended = 1 << 1,
+	/// Give the action a visual appearance that cautions the user it will destroy (delete, remove, log out,
+    /// etc.) something. Can be used
+	SDCAlertActionStyleDestructive = 1 << 2,
+	/// The cancel style is included here for backwards compatibility and to match the API to UIAlertController
+	SDCAlertActionStyleCancel = SDCAlertActionStyleRecommended
 };
 
 typedef NS_ENUM(NSInteger, SDCAlertControllerStyle) {
