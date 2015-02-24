@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# 2.3.0
+
+**What's New:**
+- Improved semantics for alert action styles. See the discussion in #81 for more information.
+
+**Bug Fixes:**
+- Fixes an animation issue in `SDCAlertView` on iOS 7 (#79)
+- The warning introduced in 2.2 is removed
+
 # 2.2.0
 
 **Bug Fixes:**
