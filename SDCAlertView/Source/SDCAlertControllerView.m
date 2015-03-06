@@ -161,6 +161,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	
 	[self addSubview:self.visualEffectView];
 	[self.visualEffectView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
+	[self.scrollView invalidateIntrinsicContentSize];
 }
 
 - (void)layoutSubviews {
