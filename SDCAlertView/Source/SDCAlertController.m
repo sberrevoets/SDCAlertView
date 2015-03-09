@@ -108,9 +108,19 @@
 	self.alert.title = [self attributedStringForString:title];
 }
 
+- (void)setAttributedTitle:(NSAttributedString *)attributedTitle {
+	_attributedTitle = attributedTitle;
+	self.alert.title = attributedTitle;
+}
+
 - (void)setMessage:(NSString *)message {
 	_message = message;
 	self.alert.message = [self attributedStringForString:message];
+}
+
+- (void)setAttributedMessage:(NSAttributedString *)attributedMessage {
+	_attributedMessage = attributedMessage;
+	self.alert.message = attributedMessage;
 }
 
 - (SDCAlertView *)legacyAlertView {
