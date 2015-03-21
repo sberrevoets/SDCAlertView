@@ -115,6 +115,11 @@
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
+	[self invalidateIntrinsicContentSize];
+}
+
+- (void)invalidateIntrinsicContentSize {
+	[super invalidateIntrinsicContentSize];
 	self.contentSize = CGSizeMake(self.contentSize.width, [self intrinsicContentSize].height);
 }
 
