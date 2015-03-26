@@ -29,6 +29,9 @@
 @property (nonatomic, readonly) UIFont *titleLabelFont;
 @property (nonatomic, readonly) UIFont *messageLabelFont;
 
+@property (nonatomic, readonly) UIColor *titleLabelColor;
+@property (nonatomic, readonly) UIColor *messageLabelColor;
+
 @property (nonatomic, readonly) CGFloat labelSpacing;
 @property (nonatomic, readonly) CGFloat messageLabelBottomSpacing;
 

@@ -44,6 +44,14 @@
 	return [UIFont systemFontOfSize:13];
 }
 
+- (UIColor *)titleLabelColor {
+	return [UIColor blackColor];
+}
+
+- (UIColor *)messageLabelColor {
+	return [UIColor blackColor];
+}
+
 - (CGFloat)labelSpacing {
 	return 18;
 }
