@@ -569,6 +569,14 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 	
 	alert.alwaysShowsButtonsVertically = (alertController.actionLayout == SDCAlertControllerActionLayoutVertical);
 	
+	alert.shouldDismissHandler = ^BOOL(NSInteger buttonIndex) {
+		if (buttonIndex < alertController.actions.count) {
+			return alertController.shouldDismissBlock(alertController.actions[buttonIndex]);
+		}
+		
+		return YES;
+	};
+	
 	alert.didDismissHandler = ^(NSInteger buttonIndex) {
 		if (buttonIndex < alertController.actions.count) {
 			SDCAlertAction *action = alertController.actions[buttonIndex];
