@@ -73,8 +73,6 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
  */
 @property (nonatomic, readonly) NSArray *textFields;
 
-@property (nonatomic, copy) NSString *title;
-
 /**
  *  The attributed title for the alert. Both \c title and \c attributedTitle can be used to set the title of the alert,
  *  the title will be set to whichever was called last. That means that setting \c title to \c nil after setting the
@@ -161,7 +159,7 @@ typedef NS_ENUM(NSInteger, SDCAlertControllerActionLayout) {
  *		} else {
  *			// Keep using original alert
  *		}
- *		
+ *
  *		[alert presentWithCompletion:nil];
  */
 
