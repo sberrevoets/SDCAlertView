@@ -34,6 +34,7 @@
 @end
 
 @implementation SDCAlertController
+@dynamic title;
 
 #pragma mark - Initialization
 
@@ -49,32 +50,32 @@
 
 - (instancetype)initWithStyle:(SDCAlertControllerStyle)style {
 	self = [super init];
-	
+
 	if (self) {
 		_mutableActions = [NSMutableArray array];
 		_mutableTextFields = [NSMutableArray array];
-		
+
 		_preferredStyle = style;
 		_visualStyle = [[SDCAlertControllerDefaultVisualStyle alloc] init];
 		_actionLayout = SDCAlertControllerActionLayoutAutomatic;
-		
+
 		self.modalPresentationStyle = UIModalPresentationCustom;
 		self.transitioningDelegate = [[SDCAlertControllerTransitioningDelegate alloc] init];
 	}
-	
+
 	return self;
 }
 
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message style:(SDCAlertControllerStyle)style {
 	self = [self initWithStyle:style];
-	
+
 	if (self) {
 		self.title = title;
 		_message = message;
-		
+
 		[self createAlert];
 	}
-	
+
 	return self;
 }
 
@@ -82,14 +83,14 @@
 					  attributedMessage:(NSAttributedString *)attributedMessage
 								  style:(SDCAlertControllerStyle)style {
 	self = [self initWithStyle:style];
-	
+
 	if (self) {
 		_attributedTitle = attributedTitle;
 		_attributedMessage = attributedMessage;
-		
+
 		[self createAlert];
 	}
-	
+
 	return self;
 }
 
@@ -134,7 +135,7 @@
 	NSAttributedString *title = self.attributedTitle ? : [self attributedStringForString:self.title];
 	NSAttributedString *message = self.attributedMessage ? : [self attributedStringForString:self.message];
 	self.alert = [[SDCAlertControllerView alloc] initWithTitle:title message:message];
-	
+
 	self.alert.delegate = self;
 	self.alert.contentView = [[SDCIntrinsicallySizedView alloc] init];
 	[self.alert.contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -158,30 +159,30 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	
+
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardUpdate:) name:UIKeyboardWillChangeFrameNotification object:nil];
-	
+
 	self.alert.visualStyle = self.visualStyle;
 	self.alert.actions = self.actions;
 	self.alert.actionLayout = self.actionLayout;
-	
+
 	[self showTextFieldsInAlertView:self.alert];
-	
+
 	self.presentingAlert = YES;
-	
+
 	[self.view addSubview:self.alert];
 	[self.alert sdc_pinWidth:self.visualStyle.width];
 	[self.alert sdc_centerInSuperview];
-	
+
 	[self.alert prepareForDisplay];
 }
 
 - (void)viewDidLayoutSubviews {
 	[super viewDidLayoutSubviews];
-	
+
 	// Explanation of why the first responder is set here:
 	// http://stackoverflow.com/questions/1132784/iphone-have-the-keyboard-slide-into-view-from-the-right-like-when-editing-a-no
-	
+
 	if (!self.didAssignFirstResponder) {
 		[self.textFields.firstObject becomeFirstResponder];
 		self.didAssignFirstResponder = YES;
@@ -207,7 +208,7 @@
 	if (!action.isEnabled || (self.shouldDismissBlock && !self.shouldDismissBlock(action))) {
 		return;
 	}
-	
+
 	[self dismissWithCompletion:^{
 		if (action.handler) {
 			action.handler(action);
@@ -222,7 +223,7 @@
 	textField.font = self.visualStyle.textFieldFont;
 	textField.autocorrectionType = UITextAutocorrectionTypeNo;
 	[self.mutableTextFields addObject:textField];
-	
+
 	if (configurationHandler) {
 		configurationHandler(textField);
 	}
@@ -235,11 +236,11 @@
 - (void)keyboardUpdate:(NSNotification *)notification {
 	NSValue *frameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
 	CGRect frame = [frameValue CGRectValue];
-	
+
 	// Apparently, we are in the middle of an animation block when this method is called, meaning there is no need to create one with the right duration
 	// and curve. Probably a bug on Apple's end, but it does work in our favor here.
 	self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetMinY(frame));
-	
+
 	if (!self.isPresentingAlert) {
 		[self.alert layoutIfNeeded];
 	}
@@ -270,7 +271,7 @@
 				completion();
 			}
 		};
-		
+
 		[self.legacyAlertView dismissWithClickedButtonIndex:NSIntegerMax animated:YES];
 	} else {
 		[self.presentingViewController dismissViewControllerAnimated:YES completion:completion];
@@ -292,11 +293,11 @@
 + (instancetype)showAlertControllerWithTitle:(NSString *)title message:(NSString *)message actionTitle:(NSString *)actionTitle subview:(UIView *)subview {
 	SDCAlertController *controller = [SDCAlertController alertControllerWithTitle:title message:message preferredStyle:SDCAlertControllerStyleAlert];
 	[controller addAction:[SDCAlertAction actionWithTitle:actionTitle style:SDCAlertActionStyleCancel handler:nil]];
-	
+
 	if (subview) {
 		[controller.contentView addSubview:subview];
 	}
-	
+
 	[controller presentWithCompletion:nil];
 	return controller;
 }
