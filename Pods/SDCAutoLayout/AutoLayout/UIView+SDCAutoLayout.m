@@ -42,6 +42,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (NSArray *)sdc_alignEdgesWithSuperview:(UIRectEdge)edges insets:(UIEdgeInsets)insets {
+	NSAssert(self.superview != nil, @"View does not have a super view");
 	return [self sdc_alignEdges:edges withView:self.superview insets:insets];
 }
 
@@ -99,7 +100,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 #pragma mark - Center Alignment
 
 - (NSArray *)sdc_alignCentersWithView:(UIView *)view {
-	return [self sdc_alignCentersWithView:view];
+	return [self sdc_alignCentersWithView:view offset:UIOffsetZero];
 }
 
 - (NSArray *)sdc_alignCentersWithView:(UIView *)view offset:(UIOffset)offset {
@@ -148,6 +149,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (NSLayoutConstraint *)sdc_horizontallyCenterInSuperviewWithOffset:(CGFloat)offset {
+	NSAssert(self.superview != nil, @"View does not have a super view");
 	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1 constant:offset];
 	[self.superview addConstraint:constraint];
 	
@@ -159,6 +161,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (NSLayoutConstraint *)sdc_verticallyCenterInSuperviewWithOffset:(CGFloat)offset {
+	NSAssert(self.superview != nil, @"View does not have a super view");
 	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1 constant:offset];
 	
 	[self.superview addConstraint:constraint];
@@ -207,6 +210,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (NSLayoutConstraint *)sdc_setMaximumWidthToSuperviewWidthWithOffset:(CGFloat)offset {
+	NSAssert(self.superview != nil, @"View does not have a super view");
 	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeWidth multiplier:1 constant:offset];
 	[self.superview addConstraint:constraint];
 	
@@ -239,6 +243,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 }
 
 - (NSLayoutConstraint *)sdc_setMaximumHeightToSuperviewHeightWithOffset:(CGFloat)offset {
+	NSAssert(self.superview != nil, @"View does not have a super view");
 	NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.superview attribute:NSLayoutAttributeHeight multiplier:1 constant:offset];
 	[self.superview addConstraint:constraint];
 	
@@ -295,7 +300,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 	if (spacing >= 0) {
 		constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeRight multiplier:1 constant:spacing];
 	} else {
-		constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeLeft multiplier:1 constant:abs(spacing)];
+		constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeLeft multiplier:1 constant:fabs(spacing)];
 	}
 	
 	[commonAncestor addConstraint:constraint];
@@ -310,7 +315,7 @@ CGFloat const SDCAutoLayoutStandardParentChildDistance = 20;
 	if (spacing >= 0) {
 		constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeBottom multiplier:1 constant:spacing];
 	} else {
-		constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeTop multiplier:1 constant:abs(spacing)];
+		constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeTop multiplier:1 constant:fabs(spacing)];
 	}
 	
 	[commonAncestor addConstraint:constraint];

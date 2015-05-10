@@ -23,13 +23,23 @@
     self.mass = 1;
     self.stiffness = 100;
 
+    self.calculationMode = kCAAnimationDiscrete;
+
     return self;
 }
 
 #pragma mark - KVO
 
 + (NSSet *)keyPathsForValuesAffectingAnimationBlock {
-    return [NSSet setWithArray:@[ @"damping", @"mass", @"stiffness", @"velocity", @"from", @"to", @"allowsOverdamping" ]];
+    return [NSSet setWithArray:@[
+        @"damping",
+        @"mass",
+        @"stiffness",
+        @"velocity",
+        @"fromValue",
+        @"toValue",
+        @"allowsOverdamping"
+    ]];
 }
 
 #pragma mark - RBBSpringAnimation
