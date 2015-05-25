@@ -59,6 +59,7 @@
 	
 	self.titleLabel.font = visualStyle.titleLabelFont;
 	self.messageLabel.font = visualStyle.messageLabelFont;
+	self.messageLabel.textAlignment = visualStyle.messageTextAlignment;
 	
 	self.titleLabel.textColor = visualStyle.titleLabelColor;
 	self.messageLabel.textColor = visualStyle.messageLabelColor;

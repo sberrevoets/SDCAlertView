@@ -35,6 +35,8 @@
 @property (nonatomic, readonly) CGFloat labelSpacing;
 @property (nonatomic, readonly) CGFloat messageLabelBottomSpacing;
 
+@property (nonatomic, readonly) NSTextAlignment messageTextAlignment;
+
 #pragma mark - Actions
 
 @property (nonatomic, readonly) CGFloat actionViewHeight;
