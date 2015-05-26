@@ -140,6 +140,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self applyCurrentStyleToAlertElements];
 	
 	[self.visualEffectView.contentView addSubview:self.scrollView];
+    [self.scrollView setShouldAllowRemovingSpacing:self.contentView.subviews.count];
 	[self.scrollView finalizeElements];
 	
 	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];

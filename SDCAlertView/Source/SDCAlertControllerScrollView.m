@@ -81,7 +81,12 @@
 	[self.titleLabel sdc_pinWidthToWidthOfView:self offset:-(self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right)];
 	
 	[self.messageLabel sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.titleLabel];
-	
+
+	CGFloat messageLabelSpacing = self.visualStyle.labelSpacing;
+	if (!self.messageLabel.text.length && self.shouldAllowRemovingSpacing) {
+		messageLabelSpacing = 0.f;
+	}
+
 	[self addConstraint:[NSLayoutConstraint constraintWithItem:self.titleLabel
 													 attribute:NSLayoutAttributeFirstBaseline
 													 relatedBy:NSLayoutRelationEqual
@@ -96,7 +101,7 @@
 														toItem:self.titleLabel
 													 attribute:NSLayoutAttributeLastBaseline
 													multiplier:1
-													  constant:self.visualStyle.labelSpacing]];
+													  constant:messageLabelSpacing]];
 	
 	if (self.textFieldViewController) {
 		[self.textFieldViewController.view sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.titleLabel];
@@ -132,7 +137,11 @@
 	if (self.textFieldViewController) {
 		intrinsicHeight = CGRectGetMaxY(self.textFieldViewController.view.frame);
 	} else {
-		intrinsicHeight = CGRectGetMaxY(self.messageLabel.frame) + self.visualStyle.messageLabelBottomSpacing; // Not perfect, as padding it added from the bottom of the label, not its baseline
+        CGFloat spacing = self.visualStyle.messageLabelBottomSpacing;
+        if (!self.titleLabel.text.length && self.shouldAllowRemovingSpacing) {
+            spacing = 0.f;
+        }
+        intrinsicHeight = CGRectGetMaxY(self.messageLabel.frame) + spacing; // Not perfect, as padding it added from the bottom of the label, not its baseline
 	}
 	
 	return CGSizeMake(UIViewNoIntrinsicMetric, intrinsicHeight);
