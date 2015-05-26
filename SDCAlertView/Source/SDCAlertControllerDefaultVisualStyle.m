@@ -60,7 +60,7 @@
 	return 24;
 }
 
-- (NSTextAlignment) messageTextAlignment {
+- (NSTextAlignment)messageTextAlignment {
 	return NSTextAlignmentCenter;
 }
 
