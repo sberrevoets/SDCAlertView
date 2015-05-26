@@ -60,6 +60,10 @@
 	return 24;
 }
 
+- (NSTextAlignment)messageTextAlignment {
+	return NSTextAlignmentCenter;
+}
+
 #pragma mark - Actions
 
 - (CGFloat)actionViewHeight {
