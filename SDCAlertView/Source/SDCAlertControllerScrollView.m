@@ -124,6 +124,11 @@
 
 - (void)invalidateIntrinsicContentSize {
 	[super invalidateIntrinsicContentSize];
+
+	// -needsUpdateConstraints returns YES after -invalidateIntrinsicContentSize. On some versions of iOS 8,
+	// this leads to an infinite loop if we don't call -updateConstraintsIfNeeded.
+	[self updateConstraintsIfNeeded];
+
 	self.contentSize = CGSizeMake(self.contentSize.width, [self intrinsicContentSize].height);
 }
 
