@@ -528,7 +528,7 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 }
 
 + (instancetype)alertViewWithAlertController:(SDCAlertController *)alertController {
-	SDCAlertAction *cancelAction = [self cancelActionForAlertController:alertController];
+	SDCAlertAction *cancelAction = [self cancelActionForAlertController:alertController] ?: alertController.actions.firstObject;
 	NSString *cancelActionTitle = cancelAction.title ?: cancelAction.attributedTitle.string;
 	SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:alertController.title
 													  message:alertController.message
