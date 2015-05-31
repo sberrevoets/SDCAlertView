@@ -515,9 +515,9 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 
 @implementation SDCAlertView (SDCAlertController)
 
-+ (SDCAlertAction *)cancelActionForAlertController:(SDCAlertController *)alertController {
++ (SDCAlertAction *)cancelActionInArray:(NSArray *)actions {
 	__block SDCAlertAction *action;
-	[alertController.actions enumerateObjectsUsingBlock:^(SDCAlertAction *currentAction, NSUInteger idx, BOOL *stop) {
+	[actions enumerateObjectsUsingBlock:^(SDCAlertAction *currentAction, NSUInteger idx, BOOL *stop) {
 		if (currentAction.style == SDCAlertActionStyleCancel) {
 			action = currentAction;
 			*stop = YES;
@@ -528,7 +528,7 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 }
 
 + (instancetype)alertViewWithAlertController:(SDCAlertController *)alertController {
-	SDCAlertAction *cancelAction = [self cancelActionForAlertController:alertController] ?: alertController.actions.firstObject;
+	SDCAlertAction *cancelAction = [self cancelActionInArray:alertController.actions] ?: alertController.actions.firstObject;
 	NSString *cancelActionTitle = cancelAction.title ?: cancelAction.attributedTitle.string;
 	SDCAlertView *alert = [[SDCAlertView alloc] initWithTitle:alertController.title
 													  message:alertController.message
@@ -570,20 +570,22 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 	alert.alwaysShowsButtonsVertically = (alertController.actionLayout == SDCAlertControllerActionLayoutVertical);
 
 	__weak typeof(alert) weakAlert = alert;
+	NSArray *actions = [alertController.actions copy];
+	BOOL(^shouldDismissBlock)(SDCAlertAction *action) = [alertController.shouldDismissBlock copy];
 	alert.shouldDismissHandler = ^BOOL(NSInteger buttonIndex) {
-		if (buttonIndex < alertController.actions.count && alertController.shouldDismissBlock) {
+		if (buttonIndex < actions.count && shouldDismissBlock) {
 			typeof(alert) strongAlert = weakAlert;
-			SDCAlertAction *action = [strongAlert actionForButtonIndex:buttonIndex inAlertController:alertController];
-			return alertController.shouldDismissBlock(action);
+			SDCAlertAction *action = [strongAlert actionForButtonIndex:buttonIndex inArray:actions];
+			return shouldDismissBlock(action);
 		}
-		
+
 		return YES;
 	};
 
 	alert.didDismissHandler = ^(NSInteger buttonIndex) {
-		if (buttonIndex < alertController.actions.count) {
+		if (buttonIndex < actions.count) {
 			typeof(alert) strongAlert = weakAlert;
-			SDCAlertAction *action = [strongAlert actionForButtonIndex:buttonIndex inAlertController:alertController];
+			SDCAlertAction *action = [strongAlert actionForButtonIndex:buttonIndex inArray:actions];
 			
 			if (action.handler) {
 				action.handler(action);
@@ -594,14 +596,14 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 	return alert;
 }
 
-- (SDCAlertAction *)actionForButtonIndex:(NSInteger)buttonIndex inAlertController:(SDCAlertController *)alertController {
-	SDCAlertAction *cancelAction = [[self class] cancelActionForAlertController:alertController];
+- (SDCAlertAction *)actionForButtonIndex:(NSInteger)buttonIndex inArray:(NSArray *)actions {
+	SDCAlertAction *cancelAction = [[self class] cancelActionInArray:actions];
 	if (buttonIndex == self.cancelButtonIndex) {
 		return cancelAction;
 	} else {
-		NSMutableArray *actions = [alertController.actions mutableCopy];
-		[actions removeObject:cancelAction];
-		return actions[buttonIndex - 1];
+		NSMutableArray *mutableActions = [actions mutableCopy];
+		[mutableActions removeObject:cancelAction];
+		return mutableActions[buttonIndex - 1];
 	}
 }
 

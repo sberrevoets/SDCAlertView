@@ -265,7 +265,7 @@
 }
 
 - (void)dismissWithCompletion:(void (^)(void))completion {
-	if ([self usesLegacyAlert]) {
+	if (self.usesLegacyAlert) {
 		self.legacyAlertView.didDismissHandler = ^(NSInteger buttonIndex) {
 			if (completion) {
 				completion();
