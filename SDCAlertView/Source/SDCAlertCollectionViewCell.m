@@ -67,8 +67,10 @@
 	
 	if (action.attributedTitle) {
 		self.textLabel.attributedText = action.attributedTitle;
+		self.accessibilityLabel = [action.attributedTitle string];
 	} else {
 		self.textLabel.text = action.title;
+		self.accessibilityLabel = action.title;
 	}
 	
 	self.enabled = action.isEnabled;
