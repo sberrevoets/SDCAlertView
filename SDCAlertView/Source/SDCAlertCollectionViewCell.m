@@ -26,6 +26,7 @@
 	if (self) {
 		_textLabel = [[UILabel alloc] init];
 		[_textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+		self.isAccessibilityElement = YES;
 	}
 	
 	return self;
