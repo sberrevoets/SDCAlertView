@@ -26,6 +26,7 @@
 	if (self) {
 		_textLabel = [[UILabel alloc] init];
 		[_textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+		self.isAccessibilityElement = YES;
 	}
 	
 	return self;
@@ -67,8 +68,10 @@
 	
 	if (action.attributedTitle) {
 		self.textLabel.attributedText = action.attributedTitle;
+		self.accessibilityLabel = [action.attributedTitle string];
 	} else {
 		self.textLabel.text = action.title;
+		self.accessibilityLabel = action.title;
 	}
 	
 	self.enabled = action.isEnabled;
