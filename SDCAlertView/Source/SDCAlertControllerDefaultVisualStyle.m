@@ -34,6 +34,11 @@
 	return UIOffsetMake(15.75, 15.75);
 }
 
+-(BOOL)contentViewIsOnTop
+{
+	return NO;
+}
+
 #pragma mark - Title & Message Labels
 
 - (UIFont *)titleLabelFont {

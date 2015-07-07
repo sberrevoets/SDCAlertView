@@ -24,6 +24,7 @@
 /// The alert's parallax magnitude in horizontal and vertical directions.
 @property (nonatomic, readonly) UIOffset parallax;
 
+@property (nonatomic, readonly) BOOL contentViewIsOnTop;
 #pragma mark - Title & Message Labels
 
 @property (nonatomic, readonly) UIFont *titleLabelFont;
