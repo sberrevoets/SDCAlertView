@@ -54,7 +54,7 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 		_actionsCollectionView.delegate = self;
 		_actionsCollectionView.dataSource = self;
 		_actionsCollectionView.backgroundColor = [UIColor clearColor];
-				
+		
 		[self setTranslatesAutoresizingMaskIntoConstraints:NO];
 	}
 	
@@ -139,28 +139,58 @@ static NSString *const SDCAlertControllerCellReuseIdentifier = @"SDCAlertControl
 	[self observeActions];
 	[self applyCurrentStyleToAlertElements];
 	
-	[self.visualEffectView.contentView addSubview:self.scrollView];
-	[self.scrollView finalizeElements];
-	
-	[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];
-	self.maximumHeightConstraint = [self.scrollView sdc_setMaximumHeight:[self maximumHeightForScrollView]];
-	
-	UIView *aligningView = self.scrollView;
-	if (self.contentView.subviews.count > 0) {
-		aligningView = self.contentView;
+	if (!self.visualStyle.contentViewIsOnTop) {
+		[self.visualEffectView.contentView addSubview:self.scrollView];
+		[self.scrollView finalizeElements];
 		
-		[self.visualEffectView.contentView addSubview:self.contentView];
-		[self.contentView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.scrollView];
-		[self.contentView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
+		[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];
+		self.maximumHeightConstraint = [self.scrollView sdc_setMaximumHeight:[self maximumHeightForScrollView]];
+		
+		UIView *aligningView = self.scrollView;
+		if (self.contentView.subviews.count > 0) {
+			aligningView = self.contentView;
+			
+			[self.visualEffectView.contentView addSubview:self.contentView];
+			[self.contentView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.scrollView];
+			[self.contentView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
+		}
+		
+		[self.visualEffectView.contentView addSubview:self.actionsCollectionView];
+		[self.actionsCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView];
+		[self.actionsCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
+		[self.actionsCollectionView sdc_pinHeight:[self collectionViewHeight]];
 	}
-	
-	[self.visualEffectView.contentView addSubview:self.actionsCollectionView];
-	[self.actionsCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:aligningView];
-	[self.actionsCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
-	[self.actionsCollectionView sdc_pinHeight:[self collectionViewHeight]];
-	
+	else
+	{
+		
+		if (self.contentView.subviews.count > 0) {
+			
+			[self.visualEffectView.contentView addSubview:self.contentView];
+			[self.contentView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeTop|UIRectEdgeRight];
+		}
+		
+		[self.visualEffectView.contentView addSubview:self.scrollView];
+		[self.scrollView finalizeElements];
+		
+		if (self.contentView.subviews.count > 0) {
+			[self.scrollView sdc_alignEdges:UIRectEdgeLeft|UIRectEdgeRight withView:self.contentView];
+			[self.scrollView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.contentView];
+		}
+		else {
+			[self.scrollView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeRight|UIRectEdgeTop];
+		}
+		self.maximumHeightConstraint = [self.scrollView sdc_setMaximumHeight:[self maximumHeightForScrollView]];
+		
+		
+		[self.visualEffectView.contentView addSubview:self.actionsCollectionView];
+		[self.actionsCollectionView sdc_alignEdge:UIRectEdgeTop withEdge:UIRectEdgeBottom ofView:self.scrollView];
+		[self.actionsCollectionView sdc_alignEdgesWithSuperview:UIRectEdgeLeft|UIRectEdgeBottom|UIRectEdgeRight];
+		[self.actionsCollectionView sdc_pinHeight:[self collectionViewHeight]];
+		
+	}
 	[self addSubview:self.visualEffectView];
 	[self.visualEffectView sdc_alignEdgesWithSuperview:UIRectEdgeAll];
+	
 }
 
 - (void)layoutSubviews {
