@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertControllerView" customModule="SDCAlertControllerDemo">
             <connections>
+                <outlet property="actionsCollectionView" destination="Vaq-XS-EWy" id="ze4-2k-3WF"/>
                 <outlet property="messageLabel" destination="dAr-GB-dqD" id="4rE-dW-Zcc"/>
                 <outlet property="titleLabel" destination="mmE-mP-bdz" id="lA9-ec-Bh8"/>
             </connections>
@@ -22,7 +23,7 @@
                     </view>
                     <blurEffect style="extraLight"/>
                 </visualEffectView>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qV7-p7-GVT">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qV7-p7-GVT">
                     <rect key="frame" x="0.0" y="0.0" width="270" height="175"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmE-mP-bdz">
@@ -51,7 +52,29 @@
                             </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" delaysContentTouches="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Vaq-XS-EWy" customClass="ActionsCollectionView" customModule="SDCAlertControllerDemo" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="131" width="270" height="44"/>
+                            <color key="backgroundColor" red="0.62745100259780884" green="0.4117647111415863" blue="0.9843137264251709" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="y4P-hu-8Tf"/>
+                            </constraints>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ZaV-mI-Ymg">
+                                <size key="itemSize" width="135" height="44"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="rYE-FP-HuO"/>
+                                <outletCollection property="gestureRecognizers" destination="gm7-Se-5fZ" appends="YES" id="rkK-7Z-kK3"/>
+                            </connections>
+                        </collectionView>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Vaq-XS-EWy" secondAttribute="trailing" id="5q5-Xd-Wsh"/>
+                        <constraint firstItem="Vaq-XS-EWy" firstAttribute="leading" secondItem="qV7-p7-GVT" secondAttribute="leading" id="nJG-lZ-2iQ"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -68,5 +91,10 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
+        <tapGestureRecognizer id="gm7-Se-5fZ">
+            <connections>
+                <action selector="tapped:" destination="Vaq-XS-EWy" id="3Ty-Zs-vKb"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

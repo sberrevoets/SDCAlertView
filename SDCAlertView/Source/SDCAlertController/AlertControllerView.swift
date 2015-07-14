@@ -14,20 +14,25 @@ class AlertControllerView: UIView {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var messageLabel: UILabel!
 
+    @IBOutlet private var actionsCollectionView: ActionsCollectionView!
+    @IBOutlet private var textFieldsViewController: TextFieldsViewController!
+
     convenience init(title: NSAttributedString? = nil, message: NSAttributedString? = nil) {
         self.init(frame: CGRectZero)
         self.title = title
         self.message = message
 
-        loadAlertViewFromNIB()
+        loadAlertViewFromNib()
     }
 
     var title: NSAttributedString?
     var message: NSAttributedString?
+    var actions: [AlertAction] = []
 
-    private func loadAlertViewFromNIB() {
-        let className = "AlertControllerView"//NSStringFromClass(self.dynamicType)
-        let nib = NSBundle(forClass: self.dynamicType).loadNibNamed(className, owner: self, options: nil)
+    private func loadAlertViewFromNib() {
+        let nibName = NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
+        let nib = NSBundle(forClass: self.dynamicType).loadNibNamed(nibName, owner: self, options: nil)
+
         if let view = nib.first as? UIView {
             addSubview(view)
             view.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor).active = true
@@ -39,8 +44,12 @@ class AlertControllerView: UIView {
 
     func prepareLayout() {
         self.titleLabel.attributedText = self.title
-        self.titleLabel.hidden = self.title == nil
         self.messageLabel.attributedText = self.message
+        self.actionsCollectionView.actions = self.actions
+
+        self.titleLabel.hidden = self.title == nil
         self.messageLabel.hidden = self.message == nil
+        self.actionsCollectionView.hidden = self.actions.count == 0
+
     }
 }

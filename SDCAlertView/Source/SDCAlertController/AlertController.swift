@@ -78,6 +78,7 @@ public class AlertController: UIViewController {
         self.view.backgroundColor = UIColor.purpleColor()
 
         let alertView = createAlertView()
+        alertView.actions = self.actions
         alertView.prepareLayout()
     }
 

@@ -25,7 +25,7 @@ public class AlertAction {
         self.handler = handler
     }
 
-    private var handler: (AlertAction -> Void)?
+    var handler: (AlertAction -> Void)?
 
     private(set) public var title: String?
     private(set) public var style: AlertActionStyle = .Default
