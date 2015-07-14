@@ -31,18 +31,12 @@ public class AlertController: UIViewController {
 
     override public var title: String? {
         get { return self.attributedTitle?.string }
-        set {
-            let attributedTitle = title.map(NSAttributedString.init)
-            self.attributedTitle = attributedTitle
-        }
+        set { self.attributedTitle = newValue.map(NSAttributedString.init) }
     }
 
     public var message: String? {
         get { return self.attributedMessage?.string }
-        set {
-            let attributedMessage = title.map(NSAttributedString.init)
-            self.attributedMessage = attributedMessage
-        }
+        set { self.attributedMessage = newValue.map(NSAttributedString.init) }
     }
 
     public var attributedTitle: NSAttributedString? = nil {
@@ -76,4 +70,28 @@ public class AlertController: UIViewController {
     private func updateAlertView() {
 
     }
+
+    // MARK: - View Controller Lifecyle
+
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor.purpleColor()
+
+        let alertView = createAlertView()
+        alertView.prepareLayout()
+    }
+
+    private func createAlertView() -> AlertControllerView {
+        let alertView = AlertControllerView(title: self.attributedTitle, message: self.attributedMessage)
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(alertView)
+
+        alertView.centerXAnchor.constraintEqualToAnchor(self.view.centerXAnchor).active = true
+        alertView.centerYAnchor.constraintEqualToAnchor(self.view.centerYAnchor).active = true
+        alertView.widthAnchor.constraintEqualToConstant(270).active = true
+        alertView.heightAnchor.constraintEqualToConstant(135).active = true
+
+        return alertView
+    }
+
 }

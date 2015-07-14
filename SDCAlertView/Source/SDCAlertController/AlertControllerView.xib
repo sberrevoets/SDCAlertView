@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8152.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8124.4"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertControllerView" customModule="SDCAlertControllerDemo">
+            <connections>
+                <outlet property="messageLabel" destination="dAr-GB-dqD" id="4rE-dW-Zcc"/>
+                <outlet property="titleLabel" destination="mmE-mP-bdz" id="lA9-ec-Bh8"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="270" height="175"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHD-pA-qC4">
+                    <rect key="frame" x="0.0" y="0.0" width="270" height="175"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="zzY-KM-hvE">
+                        <rect key="frame" x="0.0" y="0.0" width="270" height="175"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="extraLight"/>
+                </visualEffectView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qV7-p7-GVT">
+                    <rect key="frame" x="0.0" y="0.0" width="270" height="175"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmE-mP-bdz">
+                            <rect key="frame" x="119" y="0.0" width="32" height="20"/>
+                            <attributedString key="attributedText">
+                                <fragment content="Title">
+                                    <attributes>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAr-GB-dqD">
+                            <rect key="frame" x="100.5" y="155" width="69" height="20"/>
+                            <attributedString key="attributedText">
+                                <fragment content="Message">
+                                    <attributes>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="jHD-pA-qC4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="AMn-KB-pZG"/>
+                <constraint firstAttribute="trailing" secondItem="qV7-p7-GVT" secondAttribute="trailing" id="N0V-1j-EkJ"/>
+                <constraint firstAttribute="bottom" secondItem="jHD-pA-qC4" secondAttribute="bottom" id="Pvw-Gn-BT2"/>
+                <constraint firstItem="qV7-p7-GVT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SxC-0i-o4q"/>
+                <constraint firstItem="qV7-p7-GVT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gLA-X4-8zF"/>
+                <constraint firstItem="jHD-pA-qC4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="t25-wI-Bru"/>
+                <constraint firstAttribute="trailing" secondItem="jHD-pA-qC4" secondAttribute="trailing" id="wjf-Mq-QC1"/>
+                <constraint firstAttribute="bottom" secondItem="qV7-p7-GVT" secondAttribute="bottom" id="yGB-UV-hYP"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>
