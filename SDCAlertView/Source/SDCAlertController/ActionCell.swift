@@ -22,9 +22,4 @@ class ActionCell: UICollectionViewCell {
     override var highlighted: Bool {
         didSet { self.highlightedBackgroundView.hidden = !self.highlighted }
     }
-
-    @IBAction private func cellTapped(sender: UITapGestureRecognizer) {
-        guard let action = self.action else { return }
-        action.handler?(action)
-    }
 }

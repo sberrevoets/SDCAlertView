@@ -17,30 +17,9 @@ class AlertControllerView: UIView {
     @IBOutlet private var actionsCollectionView: ActionsCollectionView!
     @IBOutlet private var textFieldsViewController: TextFieldsViewController!
 
-    convenience init(title: NSAttributedString? = nil, message: NSAttributedString? = nil) {
-        self.init(frame: CGRectZero)
-        self.title = title
-        self.message = message
-
-        loadAlertViewFromNib()
-    }
-
     var title: NSAttributedString?
     var message: NSAttributedString?
     var actions: [AlertAction] = []
-
-    private func loadAlertViewFromNib() {
-        let nibName = NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
-        let nib = NSBundle(forClass: self.dynamicType).loadNibNamed(nibName, owner: self, options: nil)
-
-        if let view = nib.first as? UIView {
-            addSubview(view)
-            view.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor).active = true
-            view.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor).active = true
-            view.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
-            view.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
-        }
-    }
 
     func prepareLayout() {
         self.titleLabel.attributedText = self.title

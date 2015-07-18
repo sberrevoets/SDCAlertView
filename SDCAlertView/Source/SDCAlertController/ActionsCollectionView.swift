@@ -17,10 +17,6 @@ class ActionsCollectionView: UICollectionView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.dataSource = self
-
-        let cellNibName = NSStringFromClass(ActionCell).componentsSeparatedByString(".").last!
-        let cellNib = UINib(nibName: cellNibName, bundle: NSBundle(forClass: self.dynamicType))
-        self.registerNib(cellNib, forCellWithReuseIdentifier: kActionCellIdentifier)
     }
 
     @IBAction private func tapped(sender: UITapGestureRecognizer) {

@@ -54,6 +54,8 @@ public class AlertController: UIViewController {
 
     private(set) public var preferredStyle: AlertStyle = .Alert
 
+    @IBOutlet private var alertView: AlertControllerView!
+
     public func addAction(action: AlertAction) {
         self.actions.append(action)
     }
@@ -75,24 +77,28 @@ public class AlertController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.purpleColor()
 
-        let alertView = createAlertView()
-        alertView.actions = self.actions
-        alertView.prepareLayout()
+        guard self.storyboard == nil else { return }
+        loadAlertView()
+        configureAlertView()
     }
 
-    private func createAlertView() -> AlertControllerView {
-        let alertView = AlertControllerView(title: self.attributedTitle, message: self.attributedMessage)
-        alertView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(alertView)
+    private func loadAlertView() {
+        let storyboardName = NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
+        let storyboard = UIStoryboard(name: storyboardName, bundle: NSBundle(forClass: self.dynamicType))
+        let viewController = storyboard.instantiateInitialViewController() as! AlertController
 
-        alertView.centerXAnchor.constraintEqualToAnchor(self.view.centerXAnchor).active = true
-        alertView.centerYAnchor.constraintEqualToAnchor(self.view.centerYAnchor).active = true
-        alertView.widthAnchor.constraintEqualToConstant(270).active = true
-        alertView.heightAnchor.constraintEqualToConstant(135).active = true
+        viewController.willMoveToParentViewController(self)
+        self.view.addSubview(viewController.view)
+        viewController.didMoveToParentViewController(self)
 
-        return alertView
+        self.alertView = viewController.alertView
     }
 
+    private func configureAlertView() {
+        self.alertView.title = self.attributedTitle
+        self.alertView.message = self.attributedMessage
+        self.alertView.actions = self.actions
+        self.alertView.prepareLayout()
+    }
 }
