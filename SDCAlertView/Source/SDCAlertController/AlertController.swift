@@ -90,6 +90,9 @@ public class AlertController: UIViewController {
         self.alertView.title = self.attributedTitle
         self.alertView.message = self.attributedMessage
         self.alertView.actions = self.actions
+
+        addTextFieldsIfNecessary()
+
         self.alertView.prepareLayout()
 
         self.view.addSubview(self.alertView)
@@ -97,5 +100,15 @@ public class AlertController: UIViewController {
         self.alertView.centerYAnchor.constraintEqualToAnchor(self.view.centerYAnchor).active = true
         self.alertView.widthAnchor.constraintEqualToConstant(270).active = true
         self.alertView.heightAnchor.constraintEqualToConstant(185).active = true
+    }
+
+    private func addTextFieldsIfNecessary() {
+        guard let textFields = self.textFields else { return }
+
+        let textFieldsViewController = TextFieldsViewController(textFields: textFields)
+        textFieldsViewController.willMoveToParentViewController(self)
+        addChildViewController(textFieldsViewController)
+        self.alertView.textFieldsViewController = textFieldsViewController
+        textFieldsViewController.didMoveToParentViewController(self)
     }
 }

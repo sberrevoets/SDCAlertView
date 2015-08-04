@@ -26,6 +26,7 @@ class AlertControllerView: UIView {
     var title: NSAttributedString?
     var message: NSAttributedString?
     var actions: [AlertAction] = []
+    var textFieldsViewController: TextFieldsViewController?
 
     func prepareLayout() {
         createBackground()
@@ -52,11 +53,15 @@ class AlertControllerView: UIView {
         let views = [
             self.titleLabel,
             self.messageLabel,
+            self.textFieldsViewController?.view,
             self.actionsCollectionView,
         ]
 
         self.actionsCollectionView.heightAnchor.constraintEqualToConstant(44).active = true
         self.actionsCollectionView.widthAnchor.constraintEqualToConstant(250).active = true
+        self.textFieldsViewController?.view.widthAnchor.constraintEqualToConstant(250).active = true
+        let textFieldsHeight = self.textFieldsViewController?.requiredHeight
+        textFieldsViewController?.view.heightAnchor.constraintEqualToConstant(textFieldsHeight!).active = true
 
         self.stackView = UIStackView(arrangedSubviews: views.flatMap { $0 })
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
