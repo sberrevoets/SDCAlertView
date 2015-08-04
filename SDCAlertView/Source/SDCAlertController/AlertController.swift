@@ -18,12 +18,16 @@ public class AlertController: UIViewController {
 
     public convenience init(title: NSAttributedString?, message: NSAttributedString?) {
         self.init()
+        self.modalPresentationStyle = .OverFullScreen
+
         self.attributedTitle = title
         self.attributedMessage = message
     }
 
     public convenience init(title: String?, message: String?, preferredStyle: AlertStyle = .Alert) {
         self.init()
+        self.modalPresentationStyle = .OverFullScreen
+
         self.title = title
         self.message = message
         self.preferredStyle = preferredStyle
@@ -54,7 +58,7 @@ public class AlertController: UIViewController {
 
     private(set) public var preferredStyle: AlertStyle = .Alert
 
-    @IBOutlet private var alertView: AlertControllerView!
+    private var alertView = AlertControllerView()
 
     public func addAction(action: AlertAction) {
         self.actions.append(action)
@@ -77,28 +81,21 @@ public class AlertController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
-        guard self.storyboard == nil else { return }
-        loadAlertView()
         configureAlertView()
     }
 
-    private func loadAlertView() {
-        let storyboardName = NSStringFromClass(self.dynamicType).componentsSeparatedByString(".").last!
-        let storyboard = UIStoryboard(name: storyboardName, bundle: NSBundle(forClass: self.dynamicType))
-        let viewController = storyboard.instantiateInitialViewController() as! AlertController
-
-        viewController.willMoveToParentViewController(self)
-        self.view.addSubview(viewController.view)
-        viewController.didMoveToParentViewController(self)
-
-        self.alertView = viewController.alertView
-    }
-
     private func configureAlertView() {
+        self.alertView.translatesAutoresizingMaskIntoConstraints = false
+
         self.alertView.title = self.attributedTitle
         self.alertView.message = self.attributedMessage
         self.alertView.actions = self.actions
         self.alertView.prepareLayout()
+
+        self.view.addSubview(self.alertView)
+        self.alertView.centerXAnchor.constraintEqualToAnchor(self.view.centerXAnchor).active = true
+        self.alertView.centerYAnchor.constraintEqualToAnchor(self.view.centerYAnchor).active = true
+        self.alertView.widthAnchor.constraintEqualToConstant(270).active = true
+        self.alertView.heightAnchor.constraintEqualToConstant(185).active = true
     }
 }

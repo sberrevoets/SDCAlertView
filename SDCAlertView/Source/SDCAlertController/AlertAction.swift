@@ -8,14 +8,12 @@
 
 import UIKit
 
-@objc
 public enum AlertActionStyle: Int {
     case Default
     case Cancel
     case Destructive
 }
 
-@objc
 public class AlertAction {
 
     public convenience init(title: String?, style: AlertActionStyle, handler: ((AlertAction) -> Void)? = nil) {

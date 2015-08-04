@@ -14,9 +14,20 @@ class ActionsCollectionView: UICollectionView {
 
     var actions: [AlertAction] = []
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    init() {
+        super.init(frame: .zeroRect, collectionViewLayout: UICollectionViewFlowLayout())
         self.dataSource = self
+        self.delegate = self
+        self.backgroundColor = .clearColor()
+        self.delaysContentTouches = false
+
+        let nibName = NSStringFromClass(ActionCell.self).componentsSeparatedByString(".").last!
+        let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))
+        self.registerNib(nib, forCellWithReuseIdentifier: kActionCellIdentifier)
+    }
+
+    convenience required init?(coder aDecoder: NSCoder) {
+        self.init()
     }
 
     @IBAction private func tapped(sender: UITapGestureRecognizer) {
@@ -39,5 +50,14 @@ extension ActionsCollectionView: UICollectionViewDataSource {
             forIndexPath: indexPath) as? ActionCell
         cell?.action = self.actions[indexPath.item]
         return cell!
+    }
+}
+
+extension ActionsCollectionView: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    {
+        return CGSize(width: self.bounds.width, height: 50)
     }
 }
