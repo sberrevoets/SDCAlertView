@@ -10,7 +10,7 @@ import UIKit
 
 public enum AlertActionStyle: Int {
     case Default
-    case Cancel
+    case Preferred
     case Destructive
 }
 
