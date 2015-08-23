@@ -14,12 +14,37 @@ class ActionsCollectionView: UICollectionView {
 
     var actions: [AlertAction] = []
 
+    var visualStyle: VisualStyle! {
+        didSet {
+            guard let layout = self.collectionViewLayout as? ActionsCollectionViewFlowLayout else { return }
+            layout.visualStyle = self.visualStyle
+        }
+    }
+
+    var displayHeight: CGFloat {
+        guard let layout = self.collectionViewLayout as? ActionsCollectionViewFlowLayout,
+            let visualStyle = self.visualStyle else {
+                return -1
+            }
+
+        if layout.scrollDirection == .Horizontal {
+            return visualStyle.actionViewSize.height
+        } else {
+            return visualStyle.actionViewSize.height * CGFloat(self.numberOfItemsInSection(0))
+        }
+    }
+
     init() {
-        super.init(frame: .zeroRect, collectionViewLayout: UICollectionViewFlowLayout())
+        super.init(frame: .zeroRect, collectionViewLayout: ActionsCollectionViewFlowLayout())
         self.dataSource = self
         self.delegate = self
-        self.backgroundColor = .clearColor()
+        self.backgroundColor = UIColor.clearColor()
         self.delaysContentTouches = false
+
+        self.collectionViewLayout.registerClass(ActionSeparatorView.self,
+            forDecorationViewOfKind: kHorizontalActionSeparator)
+        self.collectionViewLayout.registerClass(ActionSeparatorView.self,
+            forDecorationViewOfKind: kVerticalActionSeparator)
 
         let nibName = NSStringFromClass(ActionCell.self).componentsSeparatedByString(".").last!
         let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))
@@ -58,6 +83,15 @@ extension ActionsCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
-        return CGSize(width: self.bounds.width, height: 50)
+        let actionWidth = self.visualStyle.actionViewSize.width
+        let actionHeight = self.visualStyle.actionViewSize.height
+
+        let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
+        if layout.scrollDirection == .Horizontal {
+            let width = max(self.bounds.width / CGFloat(self.numberOfItemsInSection(0)), actionWidth)
+            return CGSize(width: width, height: actionHeight)
+        } else {
+            return CGSize(width: self.bounds.width, height: actionHeight)
+        }
     }
 }

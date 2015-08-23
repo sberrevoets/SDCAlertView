@@ -11,6 +11,9 @@ import UIKit
 @available(iOS 9, *)
 class AlertControllerView: UIView {
 
+    var visualStyle: VisualStyle = DefaultVisualStyle()
+    var actionLayout: ActionLayout = .Automatic
+
     private var scrollView = UIScrollView()
 
     private var stackView: UIStackView! {
@@ -51,8 +54,9 @@ class AlertControllerView: UIView {
         self.addSubview(self.scrollView)
         alignView(self.scrollView, toView: self)
 
-        createBackground()
-        createStackView()
+        self.actionsCollectionView.visualStyle = self.visualStyle
+        updateCollectionViewScrollDirection()
+
 
         self.titleLabel.attributedText = self.title
         self.messageLabel.attributedText = self.message
@@ -61,6 +65,9 @@ class AlertControllerView: UIView {
         self.titleLabel.hidden = self.title == nil
         self.messageLabel.hidden = self.message == nil
         self.actionsCollectionView.hidden = self.actions.count == 0
+
+        createBackground()
+        createStackView()
     }
 
     private func createBackground() {
@@ -72,21 +79,26 @@ class AlertControllerView: UIView {
     }
 
     private func createStackView() {
-        self.actionsCollectionView.heightAnchor.constraintEqualToConstant(44).active = true
-        self.actionsCollectionView.widthAnchor.constraintEqualToConstant(250).active = true
-        self.textFieldsViewController?.view.widthAnchor.constraintEqualToConstant(250).active = true
-        let textFieldsHeight = self.textFieldsViewController?.requiredHeight
-        textFieldsViewController?.view.heightAnchor.constraintEqualToConstant(textFieldsHeight!).active = true
-
         self.stackView = UIStackView(arrangedSubviews: self.elements)
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
 
         self.scrollView.addSubview(self.stackView)
+        createConstraints()
+    }
+
+    private func createConstraints() {
         alignView(self.stackView, toView: self.scrollView)
 
         let heightConstraint = self.scrollView.heightAnchor.constraintEqualToConstant(self.contentHeight)
         heightConstraint.priority = UILayoutPriorityDefaultHigh
         heightConstraint.active = true
+
+        let actionsHeight = self.actionsCollectionView.displayHeight
+        self.actionsCollectionView.heightAnchor.constraintEqualToConstant(actionsHeight).active = true
+        self.actionsCollectionView.widthAnchor.constraintEqualToAnchor(self.widthAnchor).active = true
+        self.textFieldsViewController?.view.widthAnchor.constraintEqualToConstant(250).active = true
+        let textFieldsHeight = self.textFieldsViewController?.requiredHeight
+        textFieldsViewController?.view.heightAnchor.constraintEqualToConstant(textFieldsHeight!).active = true
     }
 
     private func alignView(firstView: UIView, toView secondView: UIView) {
@@ -94,5 +106,16 @@ class AlertControllerView: UIView {
         firstView.trailingAnchor.constraintEqualToAnchor(secondView.trailingAnchor).active = true
         firstView.topAnchor.constraintEqualToAnchor(secondView.topAnchor).active = true
         firstView.bottomAnchor.constraintEqualToAnchor(secondView.bottomAnchor).active = true
+    }
+
+    private func updateCollectionViewScrollDirection() {
+        guard let layout = self.actionsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
+            else { return }
+
+        if self.actionLayout == .Horizontal || (self.actions.count == 2 && self.actionLayout == .Automatic) {
+            layout.scrollDirection = .Horizontal
+        } else {
+            layout.scrollDirection == .Vertical
+        }
     }
 }

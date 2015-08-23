@@ -8,18 +8,27 @@
 
 import UIKit
 
-class ActionCell: UICollectionViewCell {
+final class ActionCell: UICollectionViewCell {
 
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var highlightedBackgroundView: UIView!
 
     var action: AlertAction? {
-        didSet {
-            self.titleLabel.text = self.action?.title
-        }
+        didSet { self.titleLabel.text = self.action?.title }
     }
 
     override var highlighted: Bool {
         didSet { self.highlightedBackgroundView.hidden = !self.highlighted }
+    }
+}
+
+final class ActionSeparatorView: UICollectionReusableView {
+
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.applyLayoutAttributes(layoutAttributes)
+
+        if let attributes = layoutAttributes as? ActionsCollectionViewLayoutAttributes {
+            self.backgroundColor = attributes.backgroundColor
+        }
     }
 }

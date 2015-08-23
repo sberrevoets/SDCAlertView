@@ -13,6 +13,12 @@ public enum AlertStyle: Int {
     case Alert
 }
 
+public enum ActionLayout {
+    case Automatic
+    case Vertical
+    case Horizontal
+}
+
 @objc
 public class AlertController: UIViewController {
 
@@ -53,6 +59,10 @@ public class AlertController: UIViewController {
 
     private(set) public var actions = [AlertAction]()
     public var preferredAction: AlertAction?
+    public var actionLayout: ActionLayout {
+        get { return self.alertView.actionLayout }
+        set { self.alertView.actionLayout = newValue }
+    }
 
     private(set) public var textFields: [UITextField]?
 
@@ -75,6 +85,10 @@ public class AlertController: UIViewController {
 
     private func updateAlertView() {
 
+    }
+
+    public func setVisualStyle(visualStyle: VisualStyle) {
+        self.alertView.visualStyle = visualStyle
     }
 
     // MARK: - View Controller Lifecyle
