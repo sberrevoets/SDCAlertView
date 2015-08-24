@@ -12,11 +12,18 @@ private let kTextFieldCellIdentifier = "textFieldCell"
 
 class TextFieldsViewController: UITableViewController {
 
-    private let textFields: [UITextField]
-
     var requiredHeight: CGFloat {
         return self.tableView.rowHeight * CGFloat(self.tableView.numberOfRowsInSection(0))
     }
+
+    var visualStyle: VisualStyle? {
+        didSet {
+            guard let visualStyle = self.visualStyle else { return }
+            self.tableView.rowHeight = visualStyle.estimatedTextFieldHeight
+        }
+    }
+
+    private let textFields: [UITextField]
 
     init(textFields: [UITextField]) {
         self.textFields = textFields
@@ -26,8 +33,8 @@ class TextFieldsViewController: UITableViewController {
         let cellNib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))
         self.tableView.registerNib(cellNib, forCellReuseIdentifier: kTextFieldCellIdentifier)
         self.tableView.dataSource = self
-        self.tableView.rowHeight = 25
         self.tableView.separatorStyle = .None
+        self.tableView.scrollEnabled = false
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -48,6 +55,7 @@ extension TextFieldsViewController/*: UITableViewDataSource */ {
         let cell = tableView.dequeueReusableCellWithIdentifier(kTextFieldCellIdentifier,
             forIndexPath: indexPath) as? TextFieldCell
         cell?.textField = self.textFields[indexPath.row]
+        cell?.visualStyle = self.visualStyle
         return cell!
     }
 }

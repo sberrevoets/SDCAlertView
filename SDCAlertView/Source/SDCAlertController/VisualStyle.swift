@@ -28,8 +28,8 @@ public protocol VisualStyle {
     var actionViewSeparatorColor: UIColor { get }
     var actionViewSeparatorThickness: CGFloat { get }
 
-    func textColor(forAction action: AlertAction) -> UIColor
-    func font(forAction action: AlertAction) -> UIFont
+    func textColor(forAction action: AlertAction?) -> UIColor
+    func font(forAction action: AlertAction?) -> UIFont
 
     var textFieldFont: UIFont { get }
     var estimatedTextFieldHeight: CGFloat { get }
@@ -62,16 +62,16 @@ extension VisualStyle {
     public var actionViewSeparatorColor: UIColor { return UIColor(white: 0.5, alpha: 0.5) }
     public var actionViewSeparatorThickness: CGFloat { return 1 / UIScreen.mainScreen().scale }
 
-    public func textColor(forAction action: AlertAction) -> UIColor {
-        if action.style == .Destructive {
+    public func textColor(forAction action: AlertAction?) -> UIColor {
+        if action?.style == .Destructive {
             return UIColor.redColor()
         } else {
             return UIView().tintColor
         }
     }
 
-    public func font(forAction action: AlertAction) -> UIFont {
-        if action.style == .Preferred {
+    public func font(forAction action: AlertAction?) -> UIFont {
+        if action?.style == .Preferred {
             return UIFont.boldSystemFontOfSize(17)
         } else {
             return UIFont.systemFontOfSize(17)

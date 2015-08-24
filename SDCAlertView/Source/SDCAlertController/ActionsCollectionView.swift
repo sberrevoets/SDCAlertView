@@ -74,6 +74,7 @@ extension ActionsCollectionView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kActionCellIdentifier,
             forIndexPath: indexPath) as? ActionCell
         cell?.action = self.actions[indexPath.item]
+        cell?.visualStyle = self.visualStyle
         return cell!
     }
 }

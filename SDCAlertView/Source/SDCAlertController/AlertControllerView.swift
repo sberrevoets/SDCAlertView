@@ -11,9 +11,6 @@ import UIKit
 @available(iOS 9, *)
 class AlertControllerView: UIView {
 
-    var visualStyle: VisualStyle = DefaultVisualStyle()
-    var actionLayout: ActionLayout = .Automatic
-
     private var scrollView = UIScrollView()
 
     private var stackView: UIStackView! {
@@ -49,6 +46,10 @@ class AlertControllerView: UIView {
     var actions: [AlertAction] = []
     var textFieldsViewController: TextFieldsViewController?
 
+    var visualStyle: VisualStyle = DefaultVisualStyle()
+
+    var actionLayout: ActionLayout = .Automatic
+
     func prepareLayout() {
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.scrollView)
@@ -68,6 +69,7 @@ class AlertControllerView: UIView {
 
         createBackground()
         createStackView()
+        updateUI()
     }
 
     private func createBackground() {
@@ -96,9 +98,15 @@ class AlertControllerView: UIView {
         let actionsHeight = self.actionsCollectionView.displayHeight
         self.actionsCollectionView.heightAnchor.constraintEqualToConstant(actionsHeight).active = true
         self.actionsCollectionView.widthAnchor.constraintEqualToAnchor(self.widthAnchor).active = true
-        self.textFieldsViewController?.view.widthAnchor.constraintEqualToConstant(250).active = true
+
+        self.textFieldsViewController?.visualStyle = self.visualStyle
+        let textFieldsView = self.textFieldsViewController?.view
         let textFieldsHeight = self.textFieldsViewController?.requiredHeight
-        textFieldsViewController?.view.heightAnchor.constraintEqualToConstant(textFieldsHeight!).active = true
+        let textFieldMargins = self.visualStyle.textFieldMargins
+        let textFieldsWidthOffset = textFieldMargins.left + textFieldMargins.right
+        textFieldsView?.widthAnchor.constraintEqualToAnchor(self.widthAnchor, multiplier: 1,
+            constant: -textFieldsWidthOffset).active = true
+        textFieldsView?.heightAnchor.constraintEqualToConstant(textFieldsHeight!).active = true
     }
 
     private func alignView(firstView: UIView, toView secondView: UIView) {
@@ -117,5 +125,16 @@ class AlertControllerView: UIView {
         } else {
             layout.scrollDirection == .Vertical
         }
+    }
+
+    private func updateUI() {
+        self.widthAnchor.constraintEqualToConstant(self.visualStyle.width).active = true
+        self.heightAnchor.constraintEqualToConstant(self.contentHeight).active = true
+
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = self.visualStyle.cornerRadius
+        self.titleLabel.font = self.visualStyle.titleLabelFont
+        self.messageLabel.font = self.visualStyle.messageLabelFont
+        self.textFieldsViewController?.visualStyle = self.visualStyle
     }
 }

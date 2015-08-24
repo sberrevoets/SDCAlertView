@@ -112,8 +112,6 @@ public class AlertController: UIViewController {
         self.view.addSubview(self.alertView)
         self.alertView.centerXAnchor.constraintEqualToAnchor(self.view.centerXAnchor).active = true
         self.alertView.centerYAnchor.constraintEqualToAnchor(self.view.centerYAnchor).active = true
-        self.alertView.widthAnchor.constraintEqualToConstant(270).active = true
-        self.alertView.heightAnchor.constraintEqualToConstant(185).active = true
     }
 
     private func addTextFieldsIfNecessary() {

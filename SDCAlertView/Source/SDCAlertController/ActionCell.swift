@@ -17,6 +17,13 @@ final class ActionCell: UICollectionViewCell {
         didSet { self.titleLabel.text = self.action?.title }
     }
 
+    var visualStyle: VisualStyle? {
+        didSet {
+            self.titleLabel.font = self.visualStyle?.font(forAction: self.action)
+            self.titleLabel.textColor = self.visualStyle?.textColor(forAction: self.action)
+        }
+    }
+
     override var highlighted: Bool {
         didSet { self.highlightedBackgroundView.hidden = !self.highlighted }
     }
