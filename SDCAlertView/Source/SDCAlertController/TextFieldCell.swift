@@ -16,7 +16,9 @@ final class TextFieldCell: UITableViewCell {
     var textField: UITextField? {
         didSet {
             oldValue?.removeFromSuperview()
-            textField.map(addTextField)
+            if let textField = self.textField {
+                addTextField(textField)
+            }
         }
     }
 

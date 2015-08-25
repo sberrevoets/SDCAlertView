@@ -35,7 +35,7 @@ class ActionsCollectionView: UICollectionView {
     }
 
     init() {
-        super.init(frame: .zeroRect, collectionViewLayout: ActionsCollectionViewFlowLayout())
+        super.init(frame: .zero, collectionViewLayout: ActionsCollectionViewFlowLayout())
         self.dataSource = self
         self.delegate = self
         self.backgroundColor = UIColor.clearColor()
