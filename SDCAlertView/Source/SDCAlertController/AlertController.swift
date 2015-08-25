@@ -49,12 +49,14 @@ public class AlertController: UIViewController {
         set { self.attributedMessage = newValue.map(NSAttributedString.init) }
     }
 
-    public var attributedTitle: NSAttributedString? = nil {
-        didSet { updateAlertView() }
+    public var attributedTitle: NSAttributedString? {
+        get { return self.alertView.title }
+        set { self.alertView.title = newValue }
     }
 
-    public var attributedMessage: NSAttributedString? = nil {
-        didSet { updateAlertView() }
+    public var attributedMessage: NSAttributedString? {
+        get { return self.alertView.message }
+        set { self.alertView.message = newValue }
     }
 
     private(set) public var actions = [AlertAction]()
@@ -81,10 +83,6 @@ public class AlertController: UIViewController {
         if self.textFields?.append(textField) == nil {
             self.textFields = [textField]
         }
-    }
-
-    private func updateAlertView() {
-
     }
 
     public func setVisualStyle(visualStyle: VisualStyle) {
