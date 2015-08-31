@@ -34,6 +34,8 @@ class ActionsCollectionView: UICollectionView {
         }
     }
 
+    private var highlightedCell: UICollectionViewCell?
+
     init() {
         super.init(frame: .zero, collectionViewLayout: ActionsCollectionViewFlowLayout())
         self.dataSource = self
@@ -46,6 +48,8 @@ class ActionsCollectionView: UICollectionView {
         self.collectionViewLayout.registerClass(ActionSeparatorView.self,
             forDecorationViewOfKind: kVerticalActionSeparator)
 
+        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "highlightCurrentAction:"))
+
         let nibName = NSStringFromClass(ActionCell.self).componentsSeparatedByString(".").last!
         let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))
         self.registerNib(nib, forCellWithReuseIdentifier: kActionCellIdentifier)
@@ -55,10 +59,29 @@ class ActionsCollectionView: UICollectionView {
         self.init()
     }
 
-    @IBAction private func tapped(sender: UITapGestureRecognizer) {
-        guard let indexPath = indexPathForItemAtPoint(sender.locationInView(self)) else { return }
-        let action = self.actions[indexPath.item]
-        action.handler?(action)
+    @objc
+    private func highlightCurrentAction(sender: UIPanGestureRecognizer) {
+        if sender.state == .Cancelled || sender.state == .Failed || sender.state == .Ended {
+            self.highlightedCell?.highlighted = false
+            self.highlightedCell = nil
+        }
+
+        let touchPoint = sender.locationInView(self)
+        guard let indexPath = indexPathForItemAtPoint(touchPoint), cell = cellForItemAtIndexPath(indexPath)
+            where cell != self.highlightedCell else {
+                return
+            }
+
+        if sender.state == .Began || sender.state == .Changed {
+            self.highlightedCell?.highlighted = false
+            cell.highlighted = true
+            self.highlightedCell = cell
+        }
+
+        if sender.state == .Ended {
+            let action = self.actions[indexPath.item]
+            action.handler?(action)
+        }
     }
 }
 
