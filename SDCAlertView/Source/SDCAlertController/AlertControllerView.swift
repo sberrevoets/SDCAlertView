@@ -11,26 +11,17 @@ import UIKit
 @available(iOS 9, *)
 class AlertControllerView: UIView {
 
-    private var scrollView = UIScrollView()
+    private let scrollView = UIScrollView()
 
-    private var stackView: UIStackView! {
-        didSet {
-            self.stackView.axis = .Vertical
-            self.stackView.alignment = .Center
-            self.stackView.distribution = .EqualSpacing
-        }
-    }
-
-    private var titleLabel = UILabel()
-    private var messageLabel = UILabel()
-    private var actionsCollectionView = ActionsCollectionView()
+    private let titleLabel = UILabel()
+    private let messageLabel = UILabel()
+    private let actionsCollectionView = ActionsCollectionView()
 
     private var elements: [UIView] {
         return [
             self.titleLabel,
             self.messageLabel,
             self.textFieldsViewController?.view,
-            self.actionsCollectionView,
         ].flatMap { $0 }
     }
 
@@ -38,38 +29,48 @@ class AlertControllerView: UIView {
         guard let lastElement = self.elements.last else { return 0 }
 
         lastElement.layoutIfNeeded()
-        return CGRectGetMaxY(lastElement.frame)
+        return CGRectGetMaxY(lastElement.frame) + self.visualStyle.contentPadding.bottom
     }
 
-    var title: NSAttributedString?
-    var message: NSAttributedString?
+    var title: NSAttributedString? {
+        get { return self.titleLabel.attributedText }
+        set { self.titleLabel.attributedText = newValue }
+    }
+
+    var message: NSAttributedString? {
+        get { return self.messageLabel.attributedText }
+        set { self.messageLabel.attributedText = newValue }
+    }
+
     var actions: [AlertAction] = []
+    var actionLayout: ActionLayout = .Automatic
+
     var textFieldsViewController: TextFieldsViewController?
 
     var visualStyle: VisualStyle = DefaultVisualStyle()
 
-    var actionLayout: ActionLayout = .Automatic
-
     func prepareLayout() {
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.scrollView)
-        alignView(self.scrollView, toView: self)
 
+        self.actionsCollectionView.actions = self.actions
         self.actionsCollectionView.visualStyle = self.visualStyle
         updateCollectionViewScrollDirection()
 
-
-        self.titleLabel.attributedText = self.title
-        self.messageLabel.attributedText = self.message
-        self.actionsCollectionView.actions = self.actions
-
-        self.titleLabel.hidden = self.title == nil
-        self.messageLabel.hidden = self.message == nil
-        self.actionsCollectionView.hidden = self.actions.count == 0
-
         createBackground()
-        createStackView()
+        createUI()
+        createContentConstraints()
         updateUI()
+    }
+
+    private func createUI() {
+        for element in self.elements {
+            element.translatesAutoresizingMaskIntoConstraints = false
+            self.scrollView.addSubview(element)
+        }
+
+        self.actionsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(self.actionsCollectionView)
     }
 
     private func createBackground() {
@@ -77,43 +78,10 @@ class AlertControllerView: UIView {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
 
         self.insertSubview(backgroundView, belowSubview: self.scrollView)
-        alignView(backgroundView, toView: self)
-    }
-
-    private func createStackView() {
-        self.stackView = UIStackView(arrangedSubviews: self.elements)
-        self.stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        self.scrollView.addSubview(self.stackView)
-        createConstraints()
-    }
-
-    private func createConstraints() {
-        alignView(self.stackView, toView: self.scrollView)
-
-        let heightConstraint = self.scrollView.heightAnchor.constraintEqualToConstant(self.contentHeight)
-        heightConstraint.priority = UILayoutPriorityDefaultHigh
-        heightConstraint.active = true
-
-        let actionsHeight = self.actionsCollectionView.displayHeight
-        self.actionsCollectionView.heightAnchor.constraintEqualToConstant(actionsHeight).active = true
-        self.actionsCollectionView.widthAnchor.constraintEqualToAnchor(self.widthAnchor).active = true
-
-        self.textFieldsViewController?.visualStyle = self.visualStyle
-        let textFieldsView = self.textFieldsViewController?.view
-        let textFieldsHeight = self.textFieldsViewController?.requiredHeight
-        let textFieldMargins = self.visualStyle.textFieldMargins
-        let textFieldsWidthOffset = textFieldMargins.left + textFieldMargins.right
-        textFieldsView?.widthAnchor.constraintEqualToAnchor(self.widthAnchor, multiplier: 1,
-            constant: -textFieldsWidthOffset).active = true
-        textFieldsView?.heightAnchor.constraintEqualToConstant(textFieldsHeight!).active = true
-    }
-
-    private func alignView(firstView: UIView, toView secondView: UIView) {
-        firstView.leadingAnchor.constraintEqualToAnchor(secondView.leadingAnchor).active = true
-        firstView.trailingAnchor.constraintEqualToAnchor(secondView.trailingAnchor).active = true
-        firstView.topAnchor.constraintEqualToAnchor(secondView.topAnchor).active = true
-        firstView.bottomAnchor.constraintEqualToAnchor(secondView.bottomAnchor).active = true
+        backgroundView.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor).active = true
+        backgroundView.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor).active = true
+        backgroundView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+        backgroundView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
     }
 
     private func updateCollectionViewScrollDirection() {
@@ -129,12 +97,71 @@ class AlertControllerView: UIView {
 
     private func updateUI() {
         self.widthAnchor.constraintEqualToConstant(self.visualStyle.width).active = true
-        self.heightAnchor.constraintEqualToConstant(self.contentHeight).active = true
+        let totalHeight = self.contentHeight + self.actionsCollectionView.displayHeight
+        self.heightAnchor.constraintEqualToConstant(totalHeight).active = true
 
         self.layer.masksToBounds = true
         self.layer.cornerRadius = self.visualStyle.cornerRadius
         self.titleLabel.font = self.visualStyle.titleLabelFont
         self.messageLabel.font = self.visualStyle.messageLabelFont
         self.textFieldsViewController?.visualStyle = self.visualStyle
+    }
+
+    // MARK: Constraints
+
+    private func createContentConstraints() {
+        createTitleLabelConstraints()
+        createMessageLabelConstraints()
+        createTextFieldsConstraints()
+        createCollectionViewConstraints()
+        createScrollViewConstraints()
+    }
+
+    private func createTitleLabelConstraints() {
+        self.titleLabel.firstBaselineAnchor.constraintEqualToAnchor(self.topAnchor,
+            constant: self.visualStyle.contentPadding.top).active = true
+        self.titleLabel.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+    }
+
+    private func createMessageLabelConstraints() {
+        self.messageLabel.firstBaselineAnchor.constraintEqualToAnchor(self.titleLabel.lastBaselineAnchor,
+            constant: self.visualStyle.labelSpacing).active = true
+        self.messageLabel.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+    }
+
+    private func createTextFieldsConstraints() {
+        guard let textFieldsView = self.textFieldsViewController?.view else { return }
+
+        // The text fields view controller needs the visual style to calculate its height
+        self.textFieldsViewController?.visualStyle = self.visualStyle
+
+        let textFieldsHeight = self.textFieldsViewController?.requiredHeight
+        let textFieldMargins = self.visualStyle.textFieldMargins
+        let textFieldsWidthOffset = textFieldMargins.left + textFieldMargins.right
+        textFieldsView.topAnchor.constraintEqualToAnchor(self.messageLabel.lastBaselineAnchor,
+            constant: self.visualStyle.messageLabelBottomSpacing).active = true
+        textFieldsView.widthAnchor.constraintEqualToAnchor(self.widthAnchor, multiplier: 1,
+            constant: -textFieldsWidthOffset).active = true
+        textFieldsView.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+        textFieldsView.heightAnchor.constraintEqualToConstant(textFieldsHeight!).active = true
+    }
+
+    private func createCollectionViewConstraints() {
+        let actionsHeight = self.actionsCollectionView.displayHeight
+        self.actionsCollectionView.heightAnchor.constraintEqualToConstant(actionsHeight).active = true
+        self.actionsCollectionView.topAnchor.constraintEqualToAnchor(self.scrollView.bottomAnchor)
+            .active = true
+        self.actionsCollectionView.widthAnchor.constraintEqualToAnchor(self.widthAnchor).active = true
+        self.actionsCollectionView.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+    }
+
+    private func createScrollViewConstraints() {
+        self.scrollView.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor).active = true
+        self.scrollView.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor).active = true
+        self.scrollView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+
+        let heightConstraint = self.scrollView.heightAnchor.constraintEqualToConstant(self.contentHeight)
+        heightConstraint.priority = UILayoutPriorityDefaultHigh
+        heightConstraint.active = true
     }
 }

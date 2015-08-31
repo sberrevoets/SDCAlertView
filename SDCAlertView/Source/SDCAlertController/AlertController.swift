@@ -70,7 +70,7 @@ public class AlertController: UIViewController {
 
     private(set) public var preferredStyle: AlertStyle = .Alert
 
-    private var alertView = AlertControllerView()
+    private let alertView = AlertControllerView()
 
     public func addAction(action: AlertAction) {
         self.actions.append(action)
