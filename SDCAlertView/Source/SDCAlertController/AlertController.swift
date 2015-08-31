@@ -143,4 +143,26 @@ public class AlertController: UIViewController {
         self.alertView.textFieldsViewController = textFieldsViewController
         textFieldsViewController.didMoveToParentViewController(self)
     }
+
+    func present(animated animated: Bool = true, completion: (() -> Void)? = nil) {
+        completion?()
+    }
+}
+
+extension AlertController {
+
+    public class func showWithTitle(title: String? = nil, message: String? = nil, actionTitle: String? = nil,
+        customView: UIView? = nil) -> AlertController
+    {
+        let alertController = AlertController(title: title, message: message)
+        alertController.addAction(AlertAction(title: actionTitle, style: .Preferred))
+
+        if let customView = customView {
+            alertController.contentView.addSubview(customView)
+        }
+
+        alertController.present()
+        return alertController
+    }
+
 }
