@@ -34,6 +34,8 @@ class ActionsCollectionView: UICollectionView {
         }
     }
 
+    var actionTapped: ((AlertAction) -> Void)?
+
     private var highlightedCell: UICollectionViewCell?
 
     init() {
@@ -49,6 +51,7 @@ class ActionsCollectionView: UICollectionView {
             forDecorationViewOfKind: kVerticalActionSeparator)
 
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "highlightCurrentAction:"))
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "highlightCurrentAction:"))
 
         let nibName = NSStringFromClass(ActionCell.self).componentsSeparatedByString(".").last!
         let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))
@@ -60,7 +63,7 @@ class ActionsCollectionView: UICollectionView {
     }
 
     @objc
-    private func highlightCurrentAction(sender: UIPanGestureRecognizer) {
+    private func highlightCurrentAction(sender: UIGestureRecognizer) {
         if sender.state == .Cancelled || sender.state == .Failed || sender.state == .Ended {
             self.highlightedCell?.highlighted = false
             self.highlightedCell = nil
@@ -79,8 +82,7 @@ class ActionsCollectionView: UICollectionView {
         }
 
         if sender.state == .Ended {
-            let action = self.actions[indexPath.item]
-            action.handler?(action)
+            self.actionTapped?(self.actions[indexPath.item])
         }
     }
 }

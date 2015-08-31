@@ -68,6 +68,10 @@ class AlertControllerView: UIView {
         updateUI()
     }
 
+    func setActionTappedHandler(handler: (AlertAction) -> Void) {
+        self.actionsCollectionView.actionTapped = handler
+    }
+
     // MARK: - Private methods
 
     private func createUI() {

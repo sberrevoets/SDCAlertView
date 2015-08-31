@@ -16,7 +16,9 @@ public enum AlertActionStyle: Int {
 
 public class AlertAction {
 
-    public convenience init(title: String?, style: AlertActionStyle, handler: ((AlertAction) -> Void)? = nil) {
+    public convenience init(title: String?, style: AlertActionStyle,
+        handler: ((AlertAction) -> Void)? = nil)
+    {
         self.init()
         self.title = title
         self.style = style

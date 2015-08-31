@@ -59,6 +59,7 @@ public class AlertController: UIViewController {
 
     private let alertView = AlertControllerView()
     private let transitionDelegate = Transition()
+    private var shouldDismissHandler: ((AlertAction) -> Bool)?
 
     public convenience init(title: NSAttributedString?, message: NSAttributedString?) {
         self.init()
@@ -99,6 +100,10 @@ public class AlertController: UIViewController {
         self.alertView.visualStyle = visualStyle
     }
 
+    public func setShouldDismissHandler(handler: (AlertAction) -> Bool) {
+        self.shouldDismissHandler = handler
+    }
+
     // MARK: - View Controller Lifecyle
 
     public override func viewDidLoad() {
@@ -120,6 +125,13 @@ public class AlertController: UIViewController {
         self.view.addSubview(self.alertView)
         self.alertView.centerXAnchor.constraintEqualToAnchor(self.view.centerXAnchor).active = true
         self.alertView.centerYAnchor.constraintEqualToAnchor(self.view.centerYAnchor).active = true
+
+        self.alertView.setActionTappedHandler { action in
+            guard self.shouldDismissHandler?(action) != false else { return }
+            self.presentingViewController?.dismissViewControllerAnimated(true) {
+                action.handler?(action)
+            }
+        }
     }
 
     private func addTextFieldsIfNecessary() {
