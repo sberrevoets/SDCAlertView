@@ -22,23 +22,6 @@ public enum ActionLayout {
 @objc
 public class AlertController: UIViewController {
 
-    public convenience init(title: NSAttributedString?, message: NSAttributedString?) {
-        self.init()
-        self.modalPresentationStyle = .OverFullScreen
-
-        self.attributedTitle = title
-        self.attributedMessage = message
-    }
-
-    public convenience init(title: String?, message: String?, preferredStyle: AlertStyle = .Alert) {
-        self.init()
-        self.modalPresentationStyle = .OverFullScreen
-
-        self.title = title
-        self.message = message
-        self.preferredStyle = preferredStyle
-    }
-
     override public var title: String? {
         get { return self.attributedTitle?.string }
         set { self.attributedTitle = newValue.map(NSAttributedString.init) }
@@ -75,6 +58,29 @@ public class AlertController: UIViewController {
     private(set) public var preferredStyle: AlertStyle = .Alert
 
     private let alertView = AlertControllerView()
+    private let transitionDelegate = Transition()
+
+    public convenience init(title: NSAttributedString?, message: NSAttributedString?) {
+        self.init()
+        commonInit()
+
+        self.attributedTitle = title
+        self.attributedMessage = message
+    }
+
+    public convenience init(title: String?, message: String?, preferredStyle: AlertStyle = .Alert) {
+        self.init()
+        commonInit()
+
+        self.title = title
+        self.message = message
+        self.preferredStyle = preferredStyle
+    }
+
+    private func commonInit() {
+        self.modalPresentationStyle = .Custom
+        self.transitioningDelegate = self.transitionDelegate
+    }
 
     public func addAction(action: AlertAction) {
         self.actions.append(action)
