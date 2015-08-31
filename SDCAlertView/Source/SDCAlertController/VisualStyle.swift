@@ -21,7 +21,7 @@ public protocol VisualStyle {
     var messageLabelFont: UIFont { get }
 
     var labelSpacing: CGFloat { get }
-    var messageLabelBottomSpacing: CGFloat { get }
+    var verticalElementSpacing: CGFloat { get }
 
     var actionViewSize: CGSize { get }
     var actionViewHighlightBackgroundView: UIView { get }
@@ -51,7 +51,7 @@ extension VisualStyle {
     public var messageLabelFont: UIFont { return UIFont.systemFontOfSize(13) }
 
     public var labelSpacing: CGFloat { return 18 }
-    public var messageLabelBottomSpacing: CGFloat { return 24 }
+    public var verticalElementSpacing: CGFloat { return 24 }
 
     public var actionViewSize: CGSize { return CGSize(width: 90, height: 44) }
     public var actionViewHighlightBackgroundView: UIView {

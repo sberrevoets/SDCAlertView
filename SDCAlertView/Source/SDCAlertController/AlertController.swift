@@ -59,6 +59,10 @@ public class AlertController: UIViewController {
         set { self.alertView.message = newValue }
     }
 
+    public var contentView: UIView {
+        return self.alertView.contentView
+    }
+
     private(set) public var actions = [AlertAction]()
     public var preferredAction: AlertAction?
     public var actionLayout: ActionLayout {

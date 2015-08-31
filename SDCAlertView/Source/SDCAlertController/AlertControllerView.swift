@@ -11,27 +11,6 @@ import UIKit
 @available(iOS 9, *)
 class AlertControllerView: UIView {
 
-    private let scrollView = UIScrollView()
-
-    private let titleLabel = UILabel()
-    private let messageLabel = UILabel()
-    private let actionsCollectionView = ActionsCollectionView()
-
-    private var elements: [UIView] {
-        return [
-            self.titleLabel,
-            self.messageLabel,
-            self.textFieldsViewController?.view,
-        ].flatMap { $0 }
-    }
-
-    private var contentHeight: CGFloat {
-        guard let lastElement = self.elements.last else { return 0 }
-
-        lastElement.layoutIfNeeded()
-        return CGRectGetMaxY(lastElement.frame) + self.visualStyle.contentPadding.bottom
-    }
-
     var title: NSAttributedString? {
         get { return self.titleLabel.attributedText }
         set { self.titleLabel.attributedText = newValue }
@@ -47,7 +26,33 @@ class AlertControllerView: UIView {
 
     var textFieldsViewController: TextFieldsViewController?
 
+    var contentView = UIView()
+
     var visualStyle: VisualStyle = DefaultVisualStyle()
+
+    private let scrollView = UIScrollView()
+
+    private let titleLabel = UILabel()
+    private let messageLabel = UILabel()
+    private let actionsCollectionView = ActionsCollectionView()
+
+    private var elements: [UIView] {
+        let possibleElements: [UIView?] = [
+            self.titleLabel,
+            self.messageLabel,
+            self.textFieldsViewController?.view,
+            self.contentView.subviews.count > 0 ? self.contentView : nil,
+        ]
+
+        return possibleElements.flatMap { $0 }
+    }
+
+    private var contentHeight: CGFloat {
+        guard let lastElement = self.elements.last else { return 0 }
+
+        lastElement.layoutIfNeeded()
+        return CGRectGetMaxY(lastElement.frame) + self.visualStyle.contentPadding.bottom
+    }
 
     func prepareLayout() {
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +67,8 @@ class AlertControllerView: UIView {
         createContentConstraints()
         updateUI()
     }
+
+    // MARK: - Private methods
 
     private func createUI() {
         for element in self.elements {
@@ -107,12 +114,13 @@ class AlertControllerView: UIView {
         self.textFieldsViewController?.visualStyle = self.visualStyle
     }
 
-    // MARK: Constraints
+    // MARK: - Constraints
 
     private func createContentConstraints() {
         createTitleLabelConstraints()
         createMessageLabelConstraints()
         createTextFieldsConstraints()
+        createCustomContentViewConstraints()
         createCollectionViewConstraints()
         createScrollViewConstraints()
     }
@@ -139,11 +147,21 @@ class AlertControllerView: UIView {
         let textFieldMargins = self.visualStyle.textFieldMargins
         let textFieldsWidthOffset = textFieldMargins.left + textFieldMargins.right
         textFieldsView.topAnchor.constraintEqualToAnchor(self.messageLabel.lastBaselineAnchor,
-            constant: self.visualStyle.messageLabelBottomSpacing).active = true
+            constant: self.visualStyle.verticalElementSpacing).active = true
         textFieldsView.widthAnchor.constraintEqualToAnchor(self.widthAnchor, multiplier: 1,
             constant: -textFieldsWidthOffset).active = true
         textFieldsView.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
         textFieldsView.heightAnchor.constraintEqualToConstant(textFieldsHeight!).active = true
+    }
+
+    private func createCustomContentViewConstraints() {
+        let aligningView = self.textFieldsViewController?.view ?? self.messageLabel
+
+        let topSpacing = self.visualStyle.verticalElementSpacing
+        self.contentView.topAnchor.constraintEqualToAnchor(aligningView.bottomAnchor,
+            constant: topSpacing).active = true
+        self.contentView.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+        self.contentView.widthAnchor.constraintEqualToAnchor(self.widthAnchor).active = true
     }
 
     private func createCollectionViewConstraints() {
