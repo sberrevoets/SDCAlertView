@@ -66,6 +66,7 @@ class AlertControllerView: UIView {
         createUI()
         createContentConstraints()
         updateUI()
+        addParallax()
     }
 
     func setActionTappedHandler(handler: (AlertAction) -> Void) {
@@ -185,5 +186,22 @@ class AlertControllerView: UIView {
         let heightConstraint = self.scrollView.heightAnchor.constraintEqualToConstant(self.contentHeight)
         heightConstraint.priority = UILayoutPriorityDefaultHigh
         heightConstraint.active = true
+    }
+
+    private func addParallax() {
+        let parallax = self.visualStyle.parallax
+
+        let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .TiltAlongHorizontalAxis)
+        horizontal.minimumRelativeValue = NSNumber(float: Float(-parallax.horizontal))
+        horizontal.maximumRelativeValue = NSNumber(float: Float(parallax.horizontal))
+
+        let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .TiltAlongVerticalAxis)
+        vertical.minimumRelativeValue = NSNumber(float: Float(-parallax.vertical))
+        vertical.maximumRelativeValue = NSNumber(float: Float(parallax.vertical))
+
+        let group = UIMotionEffectGroup()
+        group.motionEffects = [horizontal, vertical]
+
+        self.addMotionEffect(group)
     }
 }
