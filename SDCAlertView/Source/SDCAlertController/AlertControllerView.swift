@@ -159,6 +159,8 @@ class AlertControllerView: UIView {
     }
 
     private func createCustomContentViewConstraints() {
+        if !self.elements.contains(self.contentView) { return }
+
         let aligningView = self.textFieldsViewController?.view ?? self.messageLabel
 
         let topSpacing = self.visualStyle.verticalElementSpacing
