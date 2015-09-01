@@ -148,15 +148,14 @@ class AlertControllerView: UIView {
         // The text fields view controller needs the visual style to calculate its height
         self.textFieldsViewController?.visualStyle = self.visualStyle
 
-        let textFieldsHeight = self.textFieldsViewController?.requiredHeight
-        let textFieldMargins = self.visualStyle.textFieldMargins
-        let textFieldsWidthOffset = textFieldMargins.left + textFieldMargins.right
+        let height = self.textFieldsViewController?.requiredHeight
+        let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
         textFieldsView.topAnchor.constraintEqualToAnchor(self.messageLabel.lastBaselineAnchor,
             constant: self.visualStyle.verticalElementSpacing).active = true
         textFieldsView.widthAnchor.constraintEqualToAnchor(self.widthAnchor, multiplier: 1,
-            constant: -textFieldsWidthOffset).active = true
+            constant: -widthOffset).active = true
         textFieldsView.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
-        textFieldsView.heightAnchor.constraintEqualToConstant(textFieldsHeight!).active = true
+        textFieldsView.heightAnchor.constraintEqualToConstant(height!).active = true
     }
 
     private func createCustomContentViewConstraints() {
