@@ -89,6 +89,7 @@ public class AlertController: UIViewController {
 
     public func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField) -> Void)? = nil) {
         let textField = UITextField()
+        textField.autocorrectionType = .No
         configurationHandler?(textField)
 
         if self.textFields?.append(textField) == nil {

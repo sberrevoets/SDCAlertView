@@ -29,9 +29,9 @@ final class TextFieldCell: UITableViewCell {
 
             guard let padding = self.visualStyle?.textFieldMargins else { return }
             self.paddingConstraints?.leading.constant = padding.left
-            self.paddingConstraints?.trailing.constant = padding.right
+            self.paddingConstraints?.trailing.constant = -padding.right
             self.paddingConstraints?.top.constant = padding.top
-            self.paddingConstraints?.bottom.constant = padding.bottom
+            self.paddingConstraints?.bottom.constant = -padding.bottom
         }
     }
 
@@ -48,10 +48,10 @@ final class TextFieldCell: UITableViewCell {
         let leading = textField.leadingAnchor.constraintEqualToAnchor(container.leadingAnchor,
             constant: padding.left)
         let trailing = textField.trailingAnchor.constraintEqualToAnchor(container.trailingAnchor,
-            constant: padding.right)
+            constant: -padding.right)
         let top = textField.topAnchor.constraintEqualToAnchor(container.topAnchor, constant: padding.top)
         let bottom = textField.bottomAnchor.constraintEqualToAnchor(container.bottomAnchor,
-            constant: padding.bottom)
+            constant: -padding.bottom)
 
         leading.active = true
         trailing.active = true
