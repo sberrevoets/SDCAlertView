@@ -54,6 +54,7 @@ public class AlertController: UIViewController {
     }
 
     private(set) public var textFields: [UITextField]?
+    public var automaticallyFocusFirstTextField = true
 
     private(set) public var preferredStyle: AlertStyle = .Alert
 
@@ -147,6 +148,11 @@ public class AlertController: UIViewController {
 
     func present(animated animated: Bool = true, completion: (() -> Void)? = nil) {
         completion?()
+    {
+        if self.automaticallyFocusFirstTextField {
+            self.textFields?.first?.becomeFirstResponder()
+        }
+
     }
 }
 
