@@ -55,6 +55,7 @@ public class AlertController: UIViewController {
 
     private(set) public var textFields: [UITextField]?
     public var automaticallyFocusFirstTextField = true
+    private var didAssignFirstResponder = false
 
     private(set) public var preferredStyle: AlertStyle = .Alert
 
@@ -110,7 +111,37 @@ public class AlertController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+        listenForKeyboardChanges()
         configureAlertView()
+    }
+
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        // Explanation of why the first responder is set here:
+        // http://stackoverflow.com/a/19580888/751268
+
+        if self.automaticallyFocusFirstTextField && !self.didAssignFirstResponder {
+            self.textFields?.first?.becomeFirstResponder()
+            self.didAssignFirstResponder = true
+        }
+    }
+
+    private func listenForKeyboardChanges() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardChange:",
+            name: UIKeyboardWillChangeFrameNotification, object: nil)
+    }
+
+    @objc
+    private func keyboardChange(notification: NSNotification) {
+        let newFrameValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
+        guard let newFrame = newFrameValue?.CGRectValue() else { return }
+
+        self.view.frame.size = CGSize(width: self.view.frame.width, height: newFrame.minY)
+
+        if !self.isBeingPresented() {
+            self.view.layoutIfNeeded()
+        }
     }
 
     private func configureAlertView() {
@@ -153,6 +184,10 @@ public class AlertController: UIViewController {
             self.textFields?.first?.becomeFirstResponder()
         }
 
+    }
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }
 
