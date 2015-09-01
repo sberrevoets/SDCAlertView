@@ -50,8 +50,9 @@ class ActionsCollectionView: UICollectionView {
         self.collectionViewLayout.registerClass(ActionSeparatorView.self,
             forDecorationViewOfKind: kVerticalActionSeparator)
 
-        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "highlightCurrentAction:"))
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "highlightCurrentAction:"))
+        let panGesture = UIPanGestureRecognizer(target: self, action: "highlightCurrentAction:")
+        panGesture.delegate = self
+        self.addGestureRecognizer(panGesture)
 
         let nibName = NSStringFromClass(ActionCell.self).componentsSeparatedByString(".").last!
         let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))
@@ -64,12 +65,16 @@ class ActionsCollectionView: UICollectionView {
 
     @objc
     private func highlightCurrentAction(sender: UIGestureRecognizer) {
-        if sender.state == .Cancelled || sender.state == .Failed || sender.state == .Ended {
+        let touchPoint = sender.locationInView(self)
+        let touchIsInCollectionView = CGRectContainsPoint(self.bounds, touchPoint)
+
+        let state = sender.state
+
+        if state == .Cancelled || state == .Failed || state == .Ended || !touchIsInCollectionView {
             self.highlightedCell?.highlighted = false
             self.highlightedCell = nil
         }
 
-        let touchPoint = sender.locationInView(self)
         guard let indexPath = indexPathForItemAtPoint(touchPoint), cell = cellForItemAtIndexPath(indexPath)
             where cell != self.highlightedCell else {
                 return
@@ -120,4 +125,22 @@ extension ActionsCollectionView: UICollectionViewDelegateFlowLayout {
             return CGSize(width: self.bounds.width, height: actionHeight)
         }
     }
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.actionTapped?(self.actions[indexPath.item])
+    }
+}
+
+extension ActionsCollectionView: UIGestureRecognizerDelegate {
+
+    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer != self.panGestureRecognizer {
+            let contentSize = self.contentSize
+            return self.bounds.width >= contentSize.width && self.bounds.height >= contentSize.height
+        }
+
+        return super.gestureRecognizerShouldBegin(gestureRecognizer)
+    }
+
+
 }
