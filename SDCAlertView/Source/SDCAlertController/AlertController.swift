@@ -149,7 +149,7 @@ public class AlertController: UIViewController {
     }
 }
 
-extension AlertController {
+public extension AlertController {
 
     public class func showWithTitle(title: String? = nil, message: String? = nil, actionTitle: String? = nil,
         customView: UIView? = nil) -> AlertController
@@ -164,5 +164,4 @@ extension AlertController {
         alertController.present()
         return alertController
     }
-
 }
