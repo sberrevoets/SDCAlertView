@@ -8,13 +8,15 @@
 
 import UIKit
 
+@objc
 public enum AlertActionStyle: Int {
     case Default
     case Preferred
     case Destructive
 }
 
-public class AlertAction {
+@objc(SDCAlertAction)
+public class AlertAction: NSObject {
 
     public convenience init(title: String?, style: AlertActionStyle,
         handler: ((AlertAction) -> Void)? = nil)

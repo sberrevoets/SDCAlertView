@@ -13,13 +13,14 @@ public enum AlertStyle: Int {
     case Alert
 }
 
-public enum ActionLayout {
+@objc
+public enum ActionLayout: Int {
     case Automatic
     case Vertical
     case Horizontal
 }
 
-@objc
+@objc(SDCAlertController)
 public class AlertController: UIViewController {
 
     override public var title: String? {
