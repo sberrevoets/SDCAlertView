@@ -177,13 +177,9 @@ public class AlertController: UIViewController {
         textFieldsViewController.didMoveToParentViewController(self)
     }
 
-    func present(animated animated: Bool = true, completion: (() -> Void)? = nil) {
-        completion?()
-    {
-        if self.automaticallyFocusFirstTextField {
-            self.textFields?.first?.becomeFirstResponder()
-        }
-
+    public func present(animated animated: Bool = true, completion: (() -> Void)? = nil) {
+        let topViewController = UIViewController.topViewController()
+        topViewController?.presentViewController(self, animated: animated, completion: completion)
     }
 
     deinit {
