@@ -30,7 +30,7 @@ public class AlertAction: NSObject {
     var handler: (AlertAction -> Void)?
 
     private(set) public var title: String?
-    private(set) public var style: AlertActionStyle = .Default
+    internal(set) public var style: AlertActionStyle = .Default
 
     public var enabled = true
 }

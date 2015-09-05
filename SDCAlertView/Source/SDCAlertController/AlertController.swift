@@ -48,7 +48,25 @@ public class AlertController: UIViewController {
     }
 
     private(set) public var actions = [AlertAction]()
-    public var preferredAction: AlertAction?
+
+    @available(iOS 9, *)
+    public var preferredAction: AlertAction? {
+        get {
+            let index = self.actions.indexOf { $0.style == .Preferred }
+            return index != nil ? self.actions[index!] : nil
+        }
+        set {
+            if let action = newValue {
+                action.style = .Preferred
+
+                if self.actions.indexOf({ $0 == newValue }) == nil {
+                    self.actions.append(action)
+                }
+            } else {
+                self.actions.forEach { $0.style = .Default }
+            }
+        }
+    }
     public var actionLayout: ActionLayout {
         get { return self.alertView.actionLayout }
         set { self.alertView.actionLayout = newValue }
