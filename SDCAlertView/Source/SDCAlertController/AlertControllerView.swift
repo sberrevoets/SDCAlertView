@@ -32,8 +32,8 @@ class AlertControllerView: UIView {
 
     private let scrollView = UIScrollView()
 
-    private let titleLabel = UILabel()
-    private let messageLabel = UILabel()
+    private let titleLabel = AlertLabel()
+    private let messageLabel = AlertLabel()
     private let actionsCollectionView = ActionsCollectionView()
 
     private var elements: [UIView] {
@@ -137,15 +137,21 @@ class AlertControllerView: UIView {
     private func createTitleLabelConstraints() {
         self.titleLabel.firstBaselineAnchor.constraintEqualToAnchor(self.topAnchor,
             constant: self.visualStyle.contentPadding.top).active = true
-        self.titleLabel.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+        self.titleLabel.leftAnchor.constraintEqualToAnchor(self.leftAnchor,
+            constant: self.visualStyle.contentPadding.left).active = true
+        self.titleLabel.rightAnchor.constraintEqualToAnchor(self.rightAnchor,
+            constant: -self.visualStyle.contentPadding.right).active = true
 
         pinBottomOfScrollViewToView(self.titleLabel, withPriority: UILayoutPriorityDefaultLow)
     }
 
     private func createMessageLabelConstraints() {
         self.messageLabel.firstBaselineAnchor.constraintEqualToAnchor(self.titleLabel.lastBaselineAnchor,
-            constant: self.visualStyle.labelSpacing).active = true
-        self.messageLabel.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
+            constant: self.visualStyle.verticalElementSpacing).active = true
+        self.messageLabel.leftAnchor.constraintEqualToAnchor(self.leftAnchor,
+            constant: self.visualStyle.contentPadding.left).active = true
+        self.messageLabel.rightAnchor.constraintEqualToAnchor(self.rightAnchor,
+            constant: -self.visualStyle.contentPadding.right).active = true
 
         pinBottomOfScrollViewToView(self.messageLabel, withPriority: UILayoutPriorityDefaultLow + 1)
     }

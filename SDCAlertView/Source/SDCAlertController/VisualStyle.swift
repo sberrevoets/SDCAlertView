@@ -20,7 +20,6 @@ public protocol VisualStyle {
     var titleLabelFont: UIFont { get }
     var messageLabelFont: UIFont { get }
 
-    var labelSpacing: CGFloat { get }
     var verticalElementSpacing: CGFloat { get }
 
     var actionViewSize: CGSize { get }
@@ -48,7 +47,6 @@ extension VisualStyle {
     public var titleLabelFont: UIFont { return UIFont.boldSystemFontOfSize(17) }
     public var messageLabelFont: UIFont { return UIFont.systemFontOfSize(13) }
 
-    public var labelSpacing: CGFloat { return 18 }
     public var verticalElementSpacing: CGFloat { return 24 }
 
     public var actionViewSize: CGSize { return CGSize(width: 90, height: 44) }
