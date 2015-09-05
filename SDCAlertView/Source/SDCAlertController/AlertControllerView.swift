@@ -50,8 +50,8 @@ class AlertControllerView: UIView {
     private var contentHeight: CGFloat {
         guard let lastElement = self.elements.last else { return 0 }
 
-        lastElement.layoutIfNeeded()
-        return CGRectGetMaxY(lastElement.frame) + self.visualStyle.contentPadding.bottom
+        self.layoutIfNeeded()
+        return lastElement.frame.maxY + self.visualStyle.contentPadding.bottom
     }
 
     func prepareLayout() {
@@ -108,6 +108,12 @@ class AlertControllerView: UIView {
     }
 
     private func updateUI() {
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = self.visualStyle.cornerRadius
+        self.titleLabel.font = self.visualStyle.titleLabelFont
+        self.messageLabel.font = self.visualStyle.messageLabelFont
+        self.textFieldsViewController?.visualStyle = self.visualStyle
+
         self.widthAnchor.constraintEqualToConstant(self.visualStyle.width).active = true
         self.heightAnchor.constraintLessThanOrEqualToAnchor(self.superview!.heightAnchor,
             constant: -(self.visualStyle.margins.top + self.visualStyle.margins.bottom)).active = true
@@ -115,12 +121,6 @@ class AlertControllerView: UIView {
         let heightConstraint = self.heightAnchor.constraintEqualToConstant(totalHeight)
         heightConstraint.priority = UILayoutPriorityDefaultHigh
         heightConstraint.active = true
-
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = self.visualStyle.cornerRadius
-        self.titleLabel.font = self.visualStyle.titleLabelFont
-        self.messageLabel.font = self.visualStyle.messageLabelFont
-        self.textFieldsViewController?.visualStyle = self.visualStyle
     }
 
     // MARK: - Constraints
