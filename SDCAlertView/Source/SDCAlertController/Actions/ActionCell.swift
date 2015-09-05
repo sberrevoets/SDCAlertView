@@ -13,19 +13,14 @@ final class ActionCell: UICollectionViewCell {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var highlightedBackgroundView: UIView!
 
-    var action: AlertAction? {
-        didSet { self.titleLabel.text = self.action?.title }
-    }
-
-    var visualStyle: VisualStyle? {
-        didSet {
-            self.titleLabel.font = self.visualStyle?.font(forAction: self.action)
-            self.titleLabel.textColor = self.visualStyle?.textColor(forAction: self.action)
-        }
-    }
-
     override var highlighted: Bool {
         didSet { self.highlightedBackgroundView.hidden = !self.highlighted }
+    }
+
+    func setAction(action: AlertAction, withVisualStyle visualStyle: VisualStyle) {
+        self.titleLabel.font = visualStyle.font(forAction: action)
+        self.titleLabel.textColor = visualStyle.textColor(forAction: action)
+        self.titleLabel.attributedText = action.attributedTitle
     }
 }
 

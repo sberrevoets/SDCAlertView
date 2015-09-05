@@ -27,9 +27,24 @@ public class AlertAction: NSObject {
         self.handler = handler
     }
 
+    public convenience init(attributedTitle: NSAttributedString?, style: AlertActionStyle,
+        handler: ((AlertAction) -> Void)? = nil)
+    {
+        self.init()
+        self.attributedTitle = attributedTitle
+        self.style = style
+        self.handler = handler
+    }
+
     var handler: (AlertAction -> Void)?
 
-    private(set) public var title: String?
+    private(set) public var title: String? {
+        get { return self.attributedTitle?.string }
+        set { self.attributedTitle = newValue.map(NSAttributedString.init) }
+    }
+
+    private(set) public var attributedTitle: NSAttributedString?
+
     internal(set) public var style: AlertActionStyle = .Default
 
     public var enabled = true
