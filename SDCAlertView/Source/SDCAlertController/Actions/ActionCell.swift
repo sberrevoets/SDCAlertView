@@ -10,14 +10,20 @@ import UIKit
 
 final class ActionCell: UICollectionViewCell {
 
-    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private(set) var titleLabel: UILabel!
     @IBOutlet private var highlightedBackgroundView: UIView!
+
+    var enabled = true {
+        didSet { self.titleLabel.enabled = self.enabled }
+    }
 
     override var highlighted: Bool {
         didSet { self.highlightedBackgroundView.hidden = !self.highlighted }
     }
 
     func setAction(action: AlertAction, withVisualStyle visualStyle: VisualStyle) {
+        action.actionView = self
+
         self.titleLabel.font = visualStyle.font(forAction: action)
         self.titleLabel.textColor = visualStyle.textColor(forAction: action)
         self.titleLabel.attributedText = action.attributedTitle

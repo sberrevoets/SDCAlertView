@@ -47,5 +47,9 @@ public class AlertAction: NSObject {
 
     internal(set) public var style: AlertActionStyle = .Default
 
-    public var enabled = true
+    public var enabled = true {
+        didSet { self.actionView?.enabled = self.enabled }
+    }
+
+    var actionView: ActionCell?
 }

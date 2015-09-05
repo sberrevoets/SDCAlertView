@@ -76,7 +76,7 @@ class ActionsCollectionView: UICollectionView {
         }
 
         guard let indexPath = indexPathForItemAtPoint(touchPoint), cell = cellForItemAtIndexPath(indexPath)
-            where cell != self.highlightedCell else {
+            where cell != self.highlightedCell && self.actions[indexPath.item].enabled else {
                 return
             }
 
@@ -123,6 +123,13 @@ extension ActionsCollectionView: UICollectionViewDelegateFlowLayout {
         } else {
             return CGSize(width: self.bounds.width, height: actionHeight)
         }
+    }
+
+    func collectionView(collectionView: UICollectionView,
+        shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        let actionCell = self.actions[indexPath.item]
+        return actionCell.enabled
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
