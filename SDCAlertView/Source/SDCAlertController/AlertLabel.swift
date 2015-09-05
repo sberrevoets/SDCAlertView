@@ -8,7 +8,8 @@
 
 import UIKit
 
-class AlertLabel: UILabel {
+@objc(SDCAlertLabel)
+public class AlertLabel: UILabel {
 
     init() {
         super.init(frame: .zero)
@@ -16,11 +17,11 @@ class AlertLabel: UILabel {
         self.numberOfLines = 0
     }
 
-    convenience required init?(coder aDecoder: NSCoder) {
+    public convenience required init?(coder aDecoder: NSCoder) {
         self.init()
     }
 
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         self.preferredMaxLayoutWidth = self.bounds.width
         super.layoutSubviews()
     }
