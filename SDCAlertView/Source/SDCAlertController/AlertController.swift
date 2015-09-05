@@ -172,11 +172,11 @@ public class AlertController: UIViewController {
 
         addTextFieldsIfNecessary()
 
-        self.alertView.prepareLayout()
-
         self.view.addSubview(self.alertView)
         self.alertView.centerXAnchor.constraintEqualToAnchor(self.view.centerXAnchor).active = true
         self.alertView.centerYAnchor.constraintEqualToAnchor(self.view.centerYAnchor).active = true
+
+        self.alertView.prepareLayout()
 
         self.alertView.setActionTappedHandler { action in
             guard self.shouldDismissHandler?(action) != false else { return }
