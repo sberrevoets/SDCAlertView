@@ -19,7 +19,7 @@ class TextFieldsViewController: UITableViewController {
     var visualStyle: VisualStyle? {
         didSet {
             guard let visualStyle = self.visualStyle else { return }
-            self.tableView.rowHeight = visualStyle.estimatedTextFieldHeight
+            self.tableView.rowHeight = visualStyle.textFieldHeight
         }
     }
 

@@ -24,7 +24,6 @@ public protocol VisualStyle {
     var verticalElementSpacing: CGFloat { get }
 
     var actionViewSize: CGSize { get }
-    var actionViewHighlightBackgroundView: UIView { get }
     var actionViewSeparatorColor: UIColor { get }
     var actionViewSeparatorThickness: CGFloat { get }
 
@@ -32,8 +31,7 @@ public protocol VisualStyle {
     func font(forAction action: AlertAction?) -> UIFont
 
     var textFieldFont: UIFont { get }
-    var estimatedTextFieldHeight: CGFloat { get }
-    var textFieldBorderWidth: CGFloat { get }
+    var textFieldHeight: CGFloat { get }
     var textFieldBorderColor: UIColor { get }
     var textFieldMargins: UIEdgeInsets { get }
 }
@@ -54,11 +52,6 @@ extension VisualStyle {
     public var verticalElementSpacing: CGFloat { return 24 }
 
     public var actionViewSize: CGSize { return CGSize(width: 90, height: 44) }
-    public var actionViewHighlightBackgroundView: UIView {
-        let view = UIView()
-        view.backgroundColor = UIColor(white: 0.8, alpha: 0.7)
-        return view
-    }
     public var actionViewSeparatorColor: UIColor { return UIColor(white: 0.5, alpha: 0.5) }
     public var actionViewSeparatorThickness: CGFloat { return 1 / UIScreen.mainScreen().scale }
 
@@ -79,8 +72,7 @@ extension VisualStyle {
     }
 
     public var textFieldFont: UIFont { return UIFont.systemFontOfSize(13) }
-    public var estimatedTextFieldHeight: CGFloat { return 25 }
-    public var textFieldBorderWidth: CGFloat { return 1 / UIScreen.mainScreen().scale }
+    public var textFieldHeight: CGFloat { return 25 }
     public var textFieldBorderColor: UIColor {
         return UIColor(red: 64/255, green: 64/255, blue: 64/255, alpha: 1)
     }
