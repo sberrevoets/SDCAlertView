@@ -28,6 +28,11 @@ final class ActionCell: UICollectionViewCell {
         self.titleLabel.textColor = visualStyle.textColor(forAction: action)
         self.titleLabel.attributedText = action.attributedTitle
     }
+
+    override func tintColorDidChange() {
+        super.tintColorDidChange()
+        self.titleLabel.textColor = self.tintColor
+    }
 }
 
 final class ActionSeparatorView: UICollectionReusableView {

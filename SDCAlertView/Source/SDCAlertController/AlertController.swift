@@ -8,11 +8,13 @@
 
 import UIKit
 
+@available(iOS 8, *)
 @objc
 public enum AlertStyle: Int {
     case Alert
 }
 
+@available(iOS 8, *)
 @objc
 public enum ActionLayout: Int {
     case Automatic
@@ -20,6 +22,7 @@ public enum ActionLayout: Int {
     case Horizontal
 }
 
+@available(iOS 8, *)
 @objc(SDCAlertController)
 public class AlertController: UIViewController {
 

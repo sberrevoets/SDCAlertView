@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 8, *)
 @objc
 public enum AlertActionStyle: Int {
     case Default
@@ -15,6 +16,7 @@ public enum AlertActionStyle: Int {
     case Destructive
 }
 
+@available(iOS 8, *)
 @objc(SDCAlertAction)
 public class AlertAction: NSObject {
 
