@@ -76,7 +76,7 @@ static CGFloat			const SDCAlertViewSpringAnimationVelocity = 0;
 	return [self.coordinator shouldRotateAlerts];
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
 	return [self.coordinator supportedAlertInterfaceOrientations];
 }
 

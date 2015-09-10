@@ -92,7 +92,7 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 					 delegate:(id)delegate
 			cancelButtonTitle:(NSString *)cancelButtonTitle
 			otherButtonTitles:(NSString *)otherButtonTitles, ... {
-	self = [super init];
+	self = [super initWithFrame:CGRectZero];
 	
 	if (self) {
         [self setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -113,6 +113,16 @@ static CGFloat const SDCAlertViewLabelSpacing = 4;
 			[self.alertContentView addButtonWithTitle:buttonTitle];
 	}
 	
+	return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+	self = [self init];
+	return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+	self = [self init];
 	return self;
 }
 
