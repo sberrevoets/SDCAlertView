@@ -55,8 +55,18 @@ static NSInteger const SDCAlertViewDefaultFirstButtonIndex = 0;
 
 #pragma mark - Initialization
 
+- (instancetype)initWithFrame:(CGRect)frame {
+	self = [self initWithDelegate:nil];
+	return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+	self = [self initWithDelegate:nil];
+	return self;
+}
+
 - (instancetype)initWithDelegate:(id<SDCAlertViewContentViewDelegate>)delegate {
-	self = [super init];
+	self = [super initWithFrame:CGRectZero];
 	
 	if (self) {
 		_delegate = delegate;
