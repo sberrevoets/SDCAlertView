@@ -120,8 +120,8 @@
 		D2BD0CC518FED65700520E33 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		D2CABE9319E1ECFE00CA1A89 /* UIView+Parallax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Parallax.h"; sourceTree = "<group>"; };
 		D2CABE9419E1ECFE00CA1A89 /* UIView+Parallax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Parallax.m"; sourceTree = "<group>"; };
-		D2CAD11519E38FE7005E1C33 /* SDCDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDCDemoViewController.h; path = Source/SDCDemoViewController.h; sourceTree = "<group>"; };
-		D2CAD11619E38FE7005E1C33 /* SDCDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDCDemoViewController.m; path = Source/SDCDemoViewController.m; sourceTree = "<group>"; };
+		D2CAD11519E38FE7005E1C33 /* SDCDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCDemoViewController.h; sourceTree = "<group>"; };
+		D2CAD11619E38FE7005E1C33 /* SDCDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCDemoViewController.m; sourceTree = "<group>"; };
 		D2D5A76E19D8A64B00386078 /* SDCAlertControllerTextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertControllerTextFieldViewController.h; sourceTree = "<group>"; };
 		D2D5A76F19D8A64B00386078 /* SDCAlertControllerTextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertControllerTextFieldViewController.m; sourceTree = "<group>"; };
 		D2F8345718EF2887000BB281 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
