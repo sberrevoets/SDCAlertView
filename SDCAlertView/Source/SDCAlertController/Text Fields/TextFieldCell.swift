@@ -43,21 +43,11 @@ final class TextFieldCell: UITableViewCell {
         container.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
 
-        let padding = self.visualStyle?.textFieldMargins ?? UIEdgeInsetsZero
+        let insets = self.visualStyle?.textFieldMargins ?? UIEdgeInsetsZero
+        let constraints = textField.sdc_alignEdgesWithSuperview(.All, insets: insets) as! [NSLayoutConstraint]
 
-        let leading = textField.leadingAnchor.constraintEqualToAnchor(container.leadingAnchor,
-            constant: padding.left)
-        let trailing = textField.trailingAnchor.constraintEqualToAnchor(container.trailingAnchor,
-            constant: -padding.right)
-        let top = textField.topAnchor.constraintEqualToAnchor(container.topAnchor, constant: padding.top)
-        let bottom = textField.bottomAnchor.constraintEqualToAnchor(container.bottomAnchor,
-            constant: -padding.bottom)
-
-        leading.active = true
-        trailing.active = true
-        top.active = true
-        bottom.active = true
-
-        self.paddingConstraints = (leading: leading, trailing: trailing, top: top, bottom: bottom)
+        // Assumes array order to be: top, right, bottom, left (compatible with SDCAutoLayout 2.0)
+        self.paddingConstraints = (leading: constraints[3], trailing: constraints[1], top: constraints[0],
+            bottom: constraints[2])
     }
 }

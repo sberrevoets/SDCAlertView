@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 9, *)
 class AlertControllerView: UIView {
 
     var title: NSAttributedString? {
@@ -90,10 +89,7 @@ class AlertControllerView: UIView {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
 
         self.insertSubview(backgroundView, belowSubview: self.scrollView)
-        backgroundView.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor).active = true
-        backgroundView.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor).active = true
-        backgroundView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
-        backgroundView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+        backgroundView.sdc_alignEdges(.All, withView: self)
     }
 
     private func updateCollectionViewScrollDirection() {
@@ -114,13 +110,15 @@ class AlertControllerView: UIView {
         self.messageLabel.font = self.visualStyle.messageLabelFont
         self.textFieldsViewController?.visualStyle = self.visualStyle
 
-        self.widthAnchor.constraintEqualToConstant(self.visualStyle.width).active = true
-        self.heightAnchor.constraintLessThanOrEqualToAnchor(self.superview!.heightAnchor,
-            constant: -(self.visualStyle.margins.top + self.visualStyle.margins.bottom)).active = true
+        self.sdc_pinWidth(self.visualStyle.width)
+        let maximumHeightOffset = -(self.visualStyle.margins.top + self.visualStyle.margins.bottom)
+        self.sdc_setMaximumHeightToSuperviewHeightWithOffset(maximumHeightOffset)
+
         let totalHeight = self.contentHeight + self.actionsCollectionView.displayHeight
-        let heightConstraint = self.heightAnchor.constraintEqualToConstant(totalHeight)
+        let heightConstraint = NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: totalHeight)
         heightConstraint.priority = UILayoutPriorityDefaultHigh
-        heightConstraint.active = true
+        addConstraint(heightConstraint)
     }
 
     // MARK: - Constraints
@@ -135,23 +133,18 @@ class AlertControllerView: UIView {
     }
 
     private func createTitleLabelConstraints() {
-        self.titleLabel.firstBaselineAnchor.constraintEqualToAnchor(self.topAnchor,
-            constant: self.visualStyle.contentPadding.top).active = true
-        self.titleLabel.leftAnchor.constraintEqualToAnchor(self.leftAnchor,
-            constant: self.visualStyle.contentPadding.left).active = true
-        self.titleLabel.rightAnchor.constraintEqualToAnchor(self.rightAnchor,
-            constant: -self.visualStyle.contentPadding.right).active = true
+        addConstraint(NSLayoutConstraint(item: self.titleLabel, attribute: .FirstBaseline, relatedBy: .Equal,
+            toItem: self, attribute: .Top, multiplier: 1, constant: self.visualStyle.contentPadding.top))
+        self.titleLabel.sdc_alignEdges([.Left, .Right], withView: self)
 
         pinBottomOfScrollViewToView(self.titleLabel, withPriority: UILayoutPriorityDefaultLow)
     }
 
     private func createMessageLabelConstraints() {
-        self.messageLabel.firstBaselineAnchor.constraintEqualToAnchor(self.titleLabel.lastBaselineAnchor,
-            constant: self.visualStyle.verticalElementSpacing).active = true
-        self.messageLabel.leftAnchor.constraintEqualToAnchor(self.leftAnchor,
-            constant: self.visualStyle.contentPadding.left).active = true
-        self.messageLabel.rightAnchor.constraintEqualToAnchor(self.rightAnchor,
-            constant: -self.visualStyle.contentPadding.right).active = true
+        addConstraint(NSLayoutConstraint(item: self.messageLabel, attribute: .FirstBaseline,
+            relatedBy: .Equal, toItem: self.titleLabel, attribute: .Baseline , multiplier: 1,
+            constant: self.visualStyle.verticalElementSpacing))
+        self.messageLabel.sdc_alignEdges([.Left, .Right], withView: self)
 
         pinBottomOfScrollViewToView(self.messageLabel, withPriority: UILayoutPriorityDefaultLow + 1)
     }
@@ -164,12 +157,14 @@ class AlertControllerView: UIView {
 
         let height = self.textFieldsViewController?.requiredHeight
         let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
-        textFieldsView.topAnchor.constraintEqualToAnchor(self.messageLabel.lastBaselineAnchor,
-            constant: self.visualStyle.verticalElementSpacing).active = true
-        textFieldsView.widthAnchor.constraintEqualToAnchor(self.widthAnchor, multiplier: 1,
-            constant: -widthOffset).active = true
-        textFieldsView.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
-        textFieldsView.heightAnchor.constraintEqualToConstant(height!).active = true
+
+        addConstraint(NSLayoutConstraint(item: textFieldsView, attribute: .Top, relatedBy: .Equal,
+            toItem: self.messageLabel, attribute: .Baseline, multiplier: 1,
+            constant: self.visualStyle.verticalElementSpacing))
+
+        textFieldsView.sdc_pinWidthToWidthOfView(self, offset: -widthOffset)
+        textFieldsView.sdc_alignHorizontalCenterWithView(self)
+        textFieldsView.sdc_pinHeight(height!)
 
         pinBottomOfScrollViewToView(textFieldsView, withPriority: UILayoutPriorityDefaultLow + 2)
     }
@@ -180,35 +175,32 @@ class AlertControllerView: UIView {
         let aligningView = self.textFieldsViewController?.view ?? self.messageLabel
 
         let topSpacing = self.visualStyle.verticalElementSpacing
-        self.contentView.topAnchor.constraintEqualToAnchor(aligningView.bottomAnchor,
-            constant: topSpacing).active = true
-        self.contentView.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
-        self.contentView.widthAnchor.constraintEqualToAnchor(self.widthAnchor).active = true
+        self.contentView.sdc_alignEdge(.Top, withEdge: .Bottom, ofView: aligningView, inset: topSpacing)
+        self.contentView.sdc_alignHorizontalCenterWithView(self)
+        self.contentView.sdc_pinWidthToWidthOfView(self)
 
         pinBottomOfScrollViewToView(self.contentView, withPriority: UILayoutPriorityDefaultLow + 3)
     }
 
     private func createCollectionViewConstraints() {
         let actionsHeight = self.actionsCollectionView.displayHeight
-        self.actionsCollectionView.heightAnchor.constraintEqualToConstant(actionsHeight).active = true
-        self.actionsCollectionView.widthAnchor.constraintEqualToAnchor(self.widthAnchor).active = true
-        self.actionsCollectionView.topAnchor.constraintEqualToAnchor(self.scrollView.bottomAnchor)
-            .active = true
-        self.actionsCollectionView.centerXAnchor.constraintEqualToAnchor(self.centerXAnchor).active = true
-        self.actionsCollectionView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+        self.actionsCollectionView.sdc_pinHeight(actionsHeight)
+        self.actionsCollectionView.sdc_pinWidthToWidthOfView(self)
+        self.actionsCollectionView.sdc_alignEdge(.Top, withEdge: .Bottom, ofView: self.scrollView)
+        self.actionsCollectionView.sdc_alignHorizontalCenterWithView(self)
+        self.actionsCollectionView.sdc_alignEdges(.Bottom, withView: self)
     }
 
     private func createScrollViewConstraints() {
-        self.scrollView.leadingAnchor.constraintEqualToAnchor(self.leadingAnchor).active = true
-        self.scrollView.trailingAnchor.constraintEqualToAnchor(self.trailingAnchor).active = true
-        self.scrollView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+        self.scrollView.sdc_alignEdges([.Left, .Right, .Top], withView: self)
     }
 
     private func pinBottomOfScrollViewToView(view: UIView, withPriority priority: UILayoutPriority) {
-        let bottomAnchor = view.bottomAnchor.constraintEqualToAnchor(self.scrollView.bottomAnchor,
+        let bottomAnchor = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal,
+            toItem: self.scrollView, attribute: .Bottom, multiplier: 1,
             constant: -self.visualStyle.contentPadding.bottom)
         bottomAnchor.priority = priority
-        bottomAnchor.active = true
+        addConstraint(bottomAnchor)
     }
 
     private func addParallax() {
