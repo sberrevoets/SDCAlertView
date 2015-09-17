@@ -42,9 +42,11 @@ class ActionsCollectionView: UICollectionView {
         self.collectionViewLayout.registerClass(ActionSeparatorView.self,
             forDecorationViewOfKind: kVerticalActionSeparator)
 
-        let panGesture = UIPanGestureRecognizer(target: self, action: "highlightCurrentAction:")
-        panGesture.delegate = self
-        self.addGestureRecognizer(panGesture)
+        if #available(iOS 9, *) {
+            let panGesture = UIPanGestureRecognizer(target: self, action: "highlightCurrentAction:")
+            panGesture.delegate = self
+            self.addGestureRecognizer(panGesture)
+        }
 
         let nibName = NSStringFromClass(ActionCell.self).componentsSeparatedByString(".").last!
         let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))

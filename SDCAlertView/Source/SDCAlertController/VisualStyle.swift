@@ -30,7 +30,14 @@ public protocol VisualStyle {
 extension VisualStyle {
 
     public var width: CGFloat { return 270 }
-    public var cornerRadius: CGFloat { return 13 }
+    public var cornerRadius: CGFloat {
+        if #available(iOS 9, *) {
+            return 13
+        } else {
+            return 7
+        }
+    }
+
     public var contentPadding: UIEdgeInsets { return UIEdgeInsets(top: 36, left: 16, bottom: 12, right: 16) }
 
     public var margins: UIEdgeInsets { return UIEdgeInsets(top: 3, left: 0, bottom: 3, right: 0) }
