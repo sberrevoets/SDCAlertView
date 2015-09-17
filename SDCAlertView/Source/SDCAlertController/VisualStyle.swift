@@ -1,11 +1,3 @@
-//
-//  VisualStyle.swift
-//  SDCAlertController
-//
-//  Created by Scott Berrevoets on 8/22/15.
-//  Copyright © 2015 Scott Berrevoets. All rights reserved.
-//
-
 import UIKit
 
 public protocol VisualStyle {

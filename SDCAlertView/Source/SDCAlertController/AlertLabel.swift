@@ -1,11 +1,3 @@
-//
-//  AlertLabel.swift
-//  SDCAlertController
-//
-//  Created by Scott Berrevoets on 9/4/15.
-//  Copyright © 2015 Scott Berrevoets. All rights reserved.
-//
-
 import UIKit
 
 @objc(SDCAlertLabel)

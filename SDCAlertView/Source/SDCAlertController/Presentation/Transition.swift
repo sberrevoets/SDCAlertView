@@ -1,11 +1,3 @@
-//
-//  Transition.swift
-//  SDCAlertController
-//
-//  Created by Scott Berrevoets on 8/30/15.
-//  Copyright © 2015 Scott Berrevoets. All rights reserved.
-//
-
 import UIKit
 
 class Transition: NSObject, UIViewControllerTransitioningDelegate {
