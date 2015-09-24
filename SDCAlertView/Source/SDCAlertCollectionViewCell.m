@@ -26,6 +26,11 @@
 	if (self) {
 		_textLabel = [[UILabel alloc] init];
 		[_textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+		_textLabel.adjustsFontSizeToFitWidth = YES;
+		_textLabel.minimumScaleFactor = 0.5;
+		_textLabel.textAlignment = NSTextAlignmentCenter;
+		_textLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+		_textLabel.numberOfLines = 2;
 		self.isAccessibilityElement = YES;
 	}
 	
@@ -89,6 +94,7 @@
 	
 	[self.contentView addSubview:self.textLabel];
 	[self.textLabel sdc_centerInSuperview];
+	[self.textLabel sdc_pinWidthToWidthOfView:self.contentView];
 }
 
 @end
