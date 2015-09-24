@@ -29,6 +29,7 @@
 		_textLabel.adjustsFontSizeToFitWidth = YES;
 		_textLabel.minimumScaleFactor = 0.5;
 		_textLabel.textAlignment = NSTextAlignmentCenter;
+		_textLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 		self.isAccessibilityElement = YES;
 	}
 	
