@@ -30,6 +30,7 @@
 		_textLabel.minimumScaleFactor = 0.5;
 		_textLabel.textAlignment = NSTextAlignmentCenter;
 		_textLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+		_textLabel.numberOfLines = 2;
 		self.isAccessibilityElement = YES;
 	}
 	
