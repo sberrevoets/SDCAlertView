@@ -7,124 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B64D41583994B9C9C59A4E3 = {
-			isa = PBXBuildFile;
-			fileRef = CB28936541154BCF9C9B2F0C;
-		};
-		D25B3CA817ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CA717ECE7A6004B32A2;
-		};
-		D25B3CAA17ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CA917ECE7A6004B32A2;
-		};
-		D25B3CAC17ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CAB17ECE7A6004B32A2;
-		};
-		D25B3CB217ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CB017ECE7A6004B32A2;
-		};
-		D25B3CB417ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CB317ECE7A6004B32A2;
-		};
-		D25B3CB817ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CB717ECE7A6004B32A2;
-		};
-		D25B3CC017ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CBF17ECE7A6004B32A2;
-		};
-		D25B3CC717ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CC617ECE7A6004B32A2;
-		};
-		D25B3CC817ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CA717ECE7A6004B32A2;
-		};
-		D25B3CC917ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CAB17ECE7A6004B32A2;
-		};
-		D25B3CD117ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CCF17ECE7A6004B32A2;
-		};
-		D25B3CDE17ECF1C5004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CDD17ECF1C5004B32A2;
-		};
-		D263F1101829D1860001E4E0 = {
-			isa = PBXBuildFile;
-			fileRef = D263F10F1829D1860001E4E0;
-		};
-		D263F1131829D2BD0001E4E0 = {
-			isa = PBXBuildFile;
-			fileRef = D263F1121829D2BD0001E4E0;
-		};
-		D263F1161829D31E0001E4E0 = {
-			isa = PBXBuildFile;
-			fileRef = D263F1151829D31E0001E4E0;
-		};
-		D268314919E3ABE2005FC8B0 = {
-			isa = PBXBuildFile;
-			fileRef = D268314819E3ABE2005FC8B0;
-		};
-		D28B5B5519E3863B00B76354 = {
-			isa = PBXBuildFile;
-			fileRef = D28B5B5419E3863B00B76354;
-		};
-		D294876C18D631B700E3D967 = {
-			isa = PBXBuildFile;
-			fileRef = D294876B18D631B700E3D967;
-		};
-		D2A520181840176300837A1A = {
-			isa = PBXBuildFile;
-			fileRef = D2A520171840176300837A1A;
-		};
-		D2BD0CC618FED65700520E33 = {
-			isa = PBXBuildFile;
-			fileRef = D2BD0CC518FED65700520E33;
-		};
-		D2CABE9519E1ECFE00CA1A89 = {
-			isa = PBXBuildFile;
-			fileRef = D2CABE9419E1ECFE00CA1A89;
-		};
-		D2CAD11719E38FE7005E1C33 = {
-			isa = PBXBuildFile;
-			fileRef = D2CAD11619E38FE7005E1C33;
-		};
-		D2F8345918EF2893000BB281 = {
-			isa = PBXBuildFile;
-			fileRef = D2F8345718EF2887000BB281;
-		};
-		D2F9D2BD18400CD300F85B10 = {
-			isa = PBXBuildFile;
-			fileRef = D2F9D2BC18400CD200F85B10;
-		};
-		D2F9D2BF18400DAF00F85B10 = {
-			isa = PBXBuildFile;
-			fileRef = D2F9D2BE18400DAF00F85B10;
-		};
-		D2FA54941894AFB5006FAB5E = {
-			isa = PBXBuildFile;
-			fileRef = D2FA54931894AFB5006FAB5E;
-		};
-		D70D28F12B224BE7919DADF7 = {
-			isa = PBXBuildFile;
-			fileRef = E8D8593FE42641CBBCB47F79;
-		};
+		4B64D41583994B9C9C59A4E3 /* libPods-SDCAlertViewTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB28936541154BCF9C9B2F0C /* libPods-SDCAlertViewTests.a */; };
+		D25B3CA817ECE7A6004B32A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CA717ECE7A6004B32A2 /* Foundation.framework */; };
+		D25B3CAA17ECE7A6004B32A2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */; };
+		D25B3CAC17ECE7A6004B32A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CAB17ECE7A6004B32A2 /* UIKit.framework */; };
+		D25B3CB217ECE7A6004B32A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D25B3CB017ECE7A6004B32A2 /* InfoPlist.strings */; };
+		D25B3CB417ECE7A6004B32A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B3CB317ECE7A6004B32A2 /* main.m */; };
+		D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */; };
+		D25B3CC017ECE7A6004B32A2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25B3CBF17ECE7A6004B32A2 /* Images.xcassets */; };
+		D25B3CC717ECE7A6004B32A2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CC617ECE7A6004B32A2 /* XCTest.framework */; };
+		D25B3CC817ECE7A6004B32A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CA717ECE7A6004B32A2 /* Foundation.framework */; };
+		D25B3CC917ECE7A6004B32A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B3CAB17ECE7A6004B32A2 /* UIKit.framework */; };
+		D25B3CD117ECE7A6004B32A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D25B3CCF17ECE7A6004B32A2 /* InfoPlist.strings */; };
+		D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */; };
+		D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */; };
+		D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */; };
+		D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */; };
+		D268314919E3ABE2005FC8B0 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D268314819E3ABE2005FC8B0 /* Launch Screen.xib */; };
+		D28B5B5519E3863B00B76354 /* AlertDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D28B5B5419E3863B00B76354 /* AlertDemo.storyboard */; };
+		D294876C18D631B700E3D967 /* SDCIntrinsicallySizedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */; };
+		D2A520181840176300837A1A /* SDCAlertView.podspec in Resources */ = {isa = PBXBuildFile; fileRef = D2A520171840176300837A1A /* SDCAlertView.podspec */; };
+		D2BD0CC618FED65700520E33 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = D2BD0CC518FED65700520E33 /* CHANGELOG.md */; };
+		D2C30A821BC120C900984652 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A701BC120C900984652 /* ActionCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A831BC120C900984652 /* ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C30A711BC120C900984652 /* ActionCell.xib */; settings = {ASSET_TAGS = (); }; };
+		D2C30A841BC120C900984652 /* ActionsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A721BC120C900984652 /* ActionsCollectionView.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A851BC120C900984652 /* ActionsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A731BC120C900984652 /* ActionsCollectionViewFlowLayout.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A861BC120C900984652 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A741BC120C900984652 /* AlertAction.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A871BC120C900984652 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A751BC120C900984652 /* AlertController.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A881BC120C900984652 /* AlertControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A761BC120C900984652 /* AlertControllerView.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A891BC120C900984652 /* AlertLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A771BC120C900984652 /* AlertLabel.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A8A1BC120C900984652 /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A791BC120C900984652 /* AnimationController.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A8B1BC120C900984652 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7A1BC120C900984652 /* PresentationController.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A8C1BC120C900984652 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7B1BC120C900984652 /* Transition.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A8D1BC120C900984652 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A8E1BC120C900984652 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7E1BC120C900984652 /* TextFieldCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A8F1BC120C900984652 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C30A7F1BC120C900984652 /* TextFieldCell.xib */; settings = {ASSET_TAGS = (); }; };
+		D2C30A901BC120C900984652 /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A801BC120C900984652 /* TextFieldsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D2C30A911BC120C900984652 /* VisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A811BC120C900984652 /* VisualStyle.swift */; settings = {ASSET_TAGS = (); }; };
+		D2CABE9519E1ECFE00CA1A89 /* UIView+Parallax.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CABE9419E1ECFE00CA1A89 /* UIView+Parallax.m */; };
+		D2CAD11719E38FE7005E1C33 /* SDCDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CAD11619E38FE7005E1C33 /* SDCDemoViewController.m */; };
+		D2F8345918EF2893000BB281 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D2F8345718EF2887000BB281 /* Podfile */; };
+		D2F9D2BD18400CD300F85B10 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BC18400CD200F85B10 /* README.md */; };
+		D2F9D2BF18400DAF00F85B10 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D2F9D2BE18400DAF00F85B10 /* LICENSE */; };
+		D2FA54941894AFB5006FAB5E /* SDCAlertViewCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */; };
+		D70D28F12B224BE7919DADF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D8593FE42641CBBCB47F79 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D25B3CCA17ECE7A6004B32A2 = {
+		D25B3CCA17ECE7A6004B32A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D25B3C9C17ECE7A6004B32A2;
+			containerPortal = D25B3C9C17ECE7A6004B32A2 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D25B3CA317ECE7A6004B32A2;
 			remoteInfo = SDCAlertView;
@@ -132,342 +64,98 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02F3F1243FAEADC477B22764 = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = text.xcconfig;
-			name = Pods.release.xcconfig;
-			path = "Pods/Target Support Files/Pods/Pods.release.xcconfig";
-			sourceTree = "<group>";
-		};
-		5E24AC6BD58612E217333B4A = {
-			isa = PBXFileReference;
-			includeInIndex = 1;
-			lastKnownFileType = text.xcconfig;
-			name = Pods.debug.xcconfig;
-			path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig";
-			sourceTree = "<group>";
-		};
-		CB28936541154BCF9C9B2F0C = {
-			isa = PBXFileReference;
-			explicitFileType = archive.ar;
-			includeInIndex = 0;
-			path = "libPods-SDCAlertViewTests.a";
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D25B3CA417ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			explicitFileType = wrapper.application;
-			includeInIndex = 0;
-			path = SDCAlertView.app;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D25B3CA717ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = Foundation.framework;
-			path = System/Library/Frameworks/Foundation.framework;
-			sourceTree = SDKROOT;
-		};
-		D25B3CA917ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = CoreGraphics.framework;
-			path = System/Library/Frameworks/CoreGraphics.framework;
-			sourceTree = SDKROOT;
-		};
-		D25B3CAB17ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = UIKit.framework;
-			path = System/Library/Frameworks/UIKit.framework;
-			sourceTree = SDKROOT;
-		};
-		D25B3CAF17ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
-			path = "SDCAlertView-Info.plist";
-			sourceTree = "<group>";
-		};
-		D25B3CB117ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.strings;
-			name = en;
-			path = en.lproj/InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D25B3CB317ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = main.m;
-			sourceTree = "<group>";
-		};
-		D25B3CB517ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = "SDCAlertView-Prefix.pch";
-			sourceTree = "<group>";
-		};
-		D25B3CB617ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = SDCAppDelegate.h;
-			sourceTree = "<group>";
-		};
-		D25B3CB717ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = SDCAppDelegate.m;
-			sourceTree = "<group>";
-		};
-		D25B3CBF17ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = folder.assetcatalog;
-			path = Images.xcassets;
-			sourceTree = "<group>";
-		};
-		D25B3CC517ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			explicitFileType = wrapper.cfbundle;
-			includeInIndex = 0;
-			path = SDCAlertViewTests.xctest;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D25B3CC617ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = XCTest.framework;
-			path = Library/Frameworks/XCTest.framework;
-			sourceTree = DEVELOPER_DIR;
-		};
-		D25B3CCE17ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
-			path = "SDCAlertViewTests-Info.plist";
-			sourceTree = "<group>";
-		};
-		D25B3CD017ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.strings;
-			name = en;
-			path = en.lproj/InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D25B3CDC17ECF1C5004B32A2 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			lineEnding = 0;
-			path = SDCAlertView.h;
-			sourceTree = "<group>";
-			xcLanguageSpecificationIdentifier = xcode.lang.objcpp;
-		};
-		D25B3CDD17ECF1C5004B32A2 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			lineEnding = 0;
-			path = SDCAlertView.m;
-			sourceTree = "<group>";
-			xcLanguageSpecificationIdentifier = xcode.lang.objc;
-		};
-		D263F10E1829D1860001E4E0 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			path = SDCAlertViewController.h;
-			sourceTree = "<group>";
-		};
-		D263F10F1829D1860001E4E0 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			path = SDCAlertViewController.m;
-			sourceTree = "<group>";
-		};
-		D263F1111829D2BD0001E4E0 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			path = SDCAlertViewBackgroundView.h;
-			sourceTree = "<group>";
-		};
-		D263F1121829D2BD0001E4E0 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			path = SDCAlertViewBackgroundView.m;
-			sourceTree = "<group>";
-		};
-		D263F1141829D31E0001E4E0 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			path = SDCAlertViewContentView.h;
-			sourceTree = "<group>";
-		};
-		D263F1151829D31E0001E4E0 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			path = SDCAlertViewContentView.m;
-			sourceTree = "<group>";
-		};
-		D268093118F845420001B7E9 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = SDCAlertViewTransitioning.h;
-			sourceTree = "<group>";
-		};
-		D268314819E3ABE2005FC8B0 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = file.xib;
-			path = "Launch Screen.xib";
-			sourceTree = "<group>";
-		};
-		D28B5B5419E3863B00B76354 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = file.storyboard;
-			path = AlertDemo.storyboard;
-			sourceTree = "<group>";
-		};
-		D294876A18D631B700E3D967 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			name = SDCIntrinsicallySizedView.h;
-			path = SDCIntrinsicallySizedView.h;
-			sourceTree = "<group>";
-		};
-		D294876B18D631B700E3D967 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			name = SDCIntrinsicallySizedView.m;
-			path = SDCIntrinsicallySizedView.m;
-			sourceTree = "<group>";
-		};
-		D2A520171840176300837A1A = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = text;
-			path = SDCAlertView.podspec;
-			sourceTree = "<group>";
-		};
-		D2BD0CC518FED65700520E33 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = text;
-			path = CHANGELOG.md;
-			sourceTree = "<group>";
-		};
-		D2CABE9319E1ECFE00CA1A89 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			name = "UIView+Parallax.h";
-			path = "UIView+Parallax.h";
-			sourceTree = "<group>";
-		};
-		D2CABE9419E1ECFE00CA1A89 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			name = "UIView+Parallax.m";
-			path = "UIView+Parallax.m";
-			sourceTree = "<group>";
-		};
-		D2CAD11519E38FE7005E1C33 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			path = SDCDemoViewController.h;
-			sourceTree = "<group>";
-		};
-		D2CAD11619E38FE7005E1C33 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			path = SDCDemoViewController.m;
-			sourceTree = "<group>";
-		};
-		D2F8345718EF2887000BB281 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = text;
-			path = Podfile;
-			sourceTree = "<group>";
-		};
-		D2F9D2BC18400CD200F85B10 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = text;
-			path = README.md;
-			sourceTree = "<group>";
-		};
-		D2F9D2BE18400DAF00F85B10 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = text;
-			path = LICENSE;
-			sourceTree = "<group>";
-		};
-		D2FA54921894AFB4006FAB5E = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			path = SDCAlertViewCoordinator.h;
-			sourceTree = "<group>";
-		};
-		D2FA54931894AFB5006FAB5E = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			path = SDCAlertViewCoordinator.m;
-			sourceTree = "<group>";
-		};
-		E8D8593FE42641CBBCB47F79 = {
-			isa = PBXFileReference;
-			explicitFileType = archive.ar;
-			includeInIndex = 0;
-			path = libPods.a;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
+		02F3F1243FAEADC477B22764 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5E24AC6BD58612E217333B4A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CB28936541154BCF9C9B2F0C /* libPods-SDCAlertViewTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SDCAlertViewTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D25B3CA417ECE7A6004B32A2 /* SDCAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDCAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D25B3CA717ECE7A6004B32A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D25B3CAB17ECE7A6004B32A2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D25B3CAF17ECE7A6004B32A2 /* SDCAlertView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SDCAlertView-Info.plist"; sourceTree = "<group>"; };
+		D25B3CB117ECE7A6004B32A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D25B3CB317ECE7A6004B32A2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D25B3CB517ECE7A6004B32A2 /* SDCAlertView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SDCAlertView-Prefix.pch"; sourceTree = "<group>"; };
+		D25B3CB617ECE7A6004B32A2 /* SDCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCAppDelegate.h; sourceTree = "<group>"; };
+		D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDCAppDelegate.m; sourceTree = "<group>"; };
+		D25B3CBF17ECE7A6004B32A2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D25B3CC517ECE7A6004B32A2 /* SDCAlertViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDCAlertViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D25B3CC617ECE7A6004B32A2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D25B3CCE17ECE7A6004B32A2 /* SDCAlertViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SDCAlertViewTests-Info.plist"; sourceTree = "<group>"; };
+		D25B3CD017ECE7A6004B32A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SDCAlertView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SDCAlertView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewController.h; sourceTree = "<group>"; };
+		D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewController.m; sourceTree = "<group>"; };
+		D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewBackgroundView.h; sourceTree = "<group>"; };
+		D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewBackgroundView.m; sourceTree = "<group>"; };
+		D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewContentView.h; sourceTree = "<group>"; };
+		D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewContentView.m; sourceTree = "<group>"; };
+		D268093118F845420001B7E9 /* SDCAlertViewTransitioning.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewTransitioning.h; sourceTree = "<group>"; };
+		D268314819E3ABE2005FC8B0 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		D28B5B5419E3863B00B76354 /* AlertDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AlertDemo.storyboard; sourceTree = "<group>"; };
+		D294876A18D631B700E3D967 /* SDCIntrinsicallySizedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCIntrinsicallySizedView.h; sourceTree = "<group>"; };
+		D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCIntrinsicallySizedView.m; sourceTree = "<group>"; };
+		D2A520171840176300837A1A /* SDCAlertView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SDCAlertView.podspec; sourceTree = "<group>"; };
+		D2BD0CC518FED65700520E33 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		D2C30A701BC120C900984652 /* ActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
+		D2C30A711BC120C900984652 /* ActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionCell.xib; sourceTree = "<group>"; };
+		D2C30A721BC120C900984652 /* ActionsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsCollectionView.swift; sourceTree = "<group>"; };
+		D2C30A731BC120C900984652 /* ActionsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		D2C30A741BC120C900984652 /* AlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
+		D2C30A751BC120C900984652 /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		D2C30A761BC120C900984652 /* AlertControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControllerView.swift; sourceTree = "<group>"; };
+		D2C30A771BC120C900984652 /* AlertLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertLabel.swift; sourceTree = "<group>"; };
+		D2C30A791BC120C900984652 /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
+		D2C30A7A1BC120C900984652 /* PresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		D2C30A7B1BC120C900984652 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
+		D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		D2C30A7E1BC120C900984652 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		D2C30A7F1BC120C900984652 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
+		D2C30A801BC120C900984652 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
+		D2C30A811BC120C900984652 /* VisualStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualStyle.swift; sourceTree = "<group>"; };
+		D2CABE9319E1ECFE00CA1A89 /* UIView+Parallax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Parallax.h"; sourceTree = "<group>"; };
+		D2CABE9419E1ECFE00CA1A89 /* UIView+Parallax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Parallax.m"; sourceTree = "<group>"; };
+		D2CAD11519E38FE7005E1C33 /* SDCDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCDemoViewController.h; sourceTree = "<group>"; };
+		D2CAD11619E38FE7005E1C33 /* SDCDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCDemoViewController.m; sourceTree = "<group>"; };
+		D2F8345718EF2887000BB281 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		D2F9D2BC18400CD200F85B10 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		D2F9D2BE18400DAF00F85B10 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D2FA54921894AFB4006FAB5E /* SDCAlertViewCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCAlertViewCoordinator.h; sourceTree = "<group>"; };
+		D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCAlertViewCoordinator.m; sourceTree = "<group>"; };
+		E8D8593FE42641CBBCB47F79 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D25B3CA117ECE7A6004B32A2 = {
+		D25B3CA117ECE7A6004B32A2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25B3CAA17ECE7A6004B32A2,
-				D25B3CAC17ECE7A6004B32A2,
-				D25B3CA817ECE7A6004B32A2,
-				D70D28F12B224BE7919DADF7,
+				D25B3CAA17ECE7A6004B32A2 /* CoreGraphics.framework in Frameworks */,
+				D25B3CAC17ECE7A6004B32A2 /* UIKit.framework in Frameworks */,
+				D25B3CA817ECE7A6004B32A2 /* Foundation.framework in Frameworks */,
+				D70D28F12B224BE7919DADF7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D25B3CC217ECE7A6004B32A2 = {
+		D25B3CC217ECE7A6004B32A2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25B3CC717ECE7A6004B32A2,
-				D25B3CC917ECE7A6004B32A2,
-				D25B3CC817ECE7A6004B32A2,
-				4B64D41583994B9C9C59A4E3,
+				D25B3CC717ECE7A6004B32A2 /* XCTest.framework in Frameworks */,
+				D25B3CC917ECE7A6004B32A2 /* UIKit.framework in Frameworks */,
+				D25B3CC817ECE7A6004B32A2 /* Foundation.framework in Frameworks */,
+				4B64D41583994B9C9C59A4E3 /* libPods-SDCAlertViewTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C236084F07D3D1B63C4B15BC = {
+		C236084F07D3D1B63C4B15BC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5E24AC6BD58612E217333B4A,
-				02F3F1243FAEADC477B22764,
+				5E24AC6BD58612E217333B4A /* Pods.debug.xcconfig */,
+				02F3F1243FAEADC477B22764 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -475,111 +163,160 @@
 		D25B3C9B17ECE7A6004B32A2 = {
 			isa = PBXGroup;
 			children = (
-				D25B3CA617ECE7A6004B32A2,
-				C236084F07D3D1B63C4B15BC,
-				D25B3CA517ECE7A6004B32A2,
-				D25B3CAD17ECE7A6004B32A2,
-				D25B3CCC17ECE7A6004B32A2,
-				D2BD0CC518FED65700520E33,
-				D2F9D2BE18400DAF00F85B10,
-				D2F9D2BC18400CD200F85B10,
-				D2A520171840176300837A1A,
+				D25B3CA617ECE7A6004B32A2 /* Frameworks */,
+				C236084F07D3D1B63C4B15BC /* Pods */,
+				D25B3CA517ECE7A6004B32A2 /* Products */,
+				D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */,
+				D25B3CCC17ECE7A6004B32A2 /* SDCAlertViewTests */,
+				D2BD0CC518FED65700520E33 /* CHANGELOG.md */,
+				D2F9D2BE18400DAF00F85B10 /* LICENSE */,
+				D2F9D2BC18400CD200F85B10 /* README.md */,
+				D2A520171840176300837A1A /* SDCAlertView.podspec */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 1;
 		};
-		D25B3CA517ECE7A6004B32A2 = {
+		D25B3CA517ECE7A6004B32A2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D25B3CA417ECE7A6004B32A2,
-				D25B3CC517ECE7A6004B32A2,
+				D25B3CA417ECE7A6004B32A2 /* SDCAlertView.app */,
+				D25B3CC517ECE7A6004B32A2 /* SDCAlertViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D25B3CA617ECE7A6004B32A2 = {
+		D25B3CA617ECE7A6004B32A2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D25B3CA717ECE7A6004B32A2,
-				D25B3CA917ECE7A6004B32A2,
-				D25B3CAB17ECE7A6004B32A2,
-				D25B3CC617ECE7A6004B32A2,
-				E8D8593FE42641CBBCB47F79,
-				CB28936541154BCF9C9B2F0C,
+				D25B3CA717ECE7A6004B32A2 /* Foundation.framework */,
+				D25B3CA917ECE7A6004B32A2 /* CoreGraphics.framework */,
+				D25B3CAB17ECE7A6004B32A2 /* UIKit.framework */,
+				D25B3CC617ECE7A6004B32A2 /* XCTest.framework */,
+				E8D8593FE42641CBBCB47F79 /* libPods.a */,
+				CB28936541154BCF9C9B2F0C /* libPods-SDCAlertViewTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D25B3CAD17ECE7A6004B32A2 = {
+		D25B3CAD17ECE7A6004B32A2 /* SDCAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				D2F8347218EF2C09000BB281,
-				D25B3CAE17ECE7A6004B32A2,
-				D28B5B5419E3863B00B76354,
-				D25B3CBF17ECE7A6004B32A2,
-				D268314819E3ABE2005FC8B0,
-				D25B3CB617ECE7A6004B32A2,
-				D25B3CB717ECE7A6004B32A2,
-				D2CAD11519E38FE7005E1C33,
-				D2CAD11619E38FE7005E1C33,
+				D2F8347218EF2C09000BB281 /* Source */,
+				D2C30A6E1BC120C900984652 /* SDCAlertController */,
+				D25B3CAE17ECE7A6004B32A2 /* Supporting Files */,
+				D28B5B5419E3863B00B76354 /* AlertDemo.storyboard */,
+				D25B3CBF17ECE7A6004B32A2 /* Images.xcassets */,
+				D268314819E3ABE2005FC8B0 /* Launch Screen.xib */,
+				D25B3CB617ECE7A6004B32A2 /* SDCAppDelegate.h */,
+				D25B3CB717ECE7A6004B32A2 /* SDCAppDelegate.m */,
+				D2CAD11519E38FE7005E1C33 /* SDCDemoViewController.h */,
+				D2CAD11619E38FE7005E1C33 /* SDCDemoViewController.m */,
 			);
 			path = SDCAlertView;
 			sourceTree = "<group>";
 		};
-		D25B3CAE17ECE7A6004B32A2 = {
+		D25B3CAE17ECE7A6004B32A2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D25B3CB017ECE7A6004B32A2,
-				D25B3CAF17ECE7A6004B32A2,
-				D25B3CB517ECE7A6004B32A2,
-				D25B3CB317ECE7A6004B32A2,
+				D25B3CB017ECE7A6004B32A2 /* InfoPlist.strings */,
+				D25B3CAF17ECE7A6004B32A2 /* SDCAlertView-Info.plist */,
+				D25B3CB517ECE7A6004B32A2 /* SDCAlertView-Prefix.pch */,
+				D25B3CB317ECE7A6004B32A2 /* main.m */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D25B3CCC17ECE7A6004B32A2 = {
+		D25B3CCC17ECE7A6004B32A2 /* SDCAlertViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				D25B3CCD17ECE7A6004B32A2,
+				D25B3CCD17ECE7A6004B32A2 /* Supporting Files */,
 			);
 			path = SDCAlertViewTests;
 			sourceTree = "<group>";
 		};
-		D25B3CCD17ECE7A6004B32A2 = {
+		D25B3CCD17ECE7A6004B32A2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D25B3CCF17ECE7A6004B32A2,
-				D25B3CCE17ECE7A6004B32A2,
+				D25B3CCF17ECE7A6004B32A2 /* InfoPlist.strings */,
+				D25B3CCE17ECE7A6004B32A2 /* SDCAlertViewTests-Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D26506EE19C61B7500BF34B9 = {
+		D26506EE19C61B7500BF34B9 /* SDCAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				D25B3CDC17ECF1C5004B32A2,
-				D25B3CDD17ECF1C5004B32A2,
-				D263F1111829D2BD0001E4E0,
-				D263F1121829D2BD0001E4E0,
-				D263F1141829D31E0001E4E0,
-				D263F1151829D31E0001E4E0,
-				D263F10E1829D1860001E4E0,
-				D263F10F1829D1860001E4E0,
-				D2FA54921894AFB4006FAB5E,
-				D2FA54931894AFB5006FAB5E,
-				D268093118F845420001B7E9,
-				D294876A18D631B700E3D967,
-				D294876B18D631B700E3D967,
-				D2CABE9319E1ECFE00CA1A89,
-				D2CABE9419E1ECFE00CA1A89,
+				D25B3CDC17ECF1C5004B32A2 /* SDCAlertView.h */,
+				D25B3CDD17ECF1C5004B32A2 /* SDCAlertView.m */,
+				D263F1111829D2BD0001E4E0 /* SDCAlertViewBackgroundView.h */,
+				D263F1121829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m */,
+				D263F1141829D31E0001E4E0 /* SDCAlertViewContentView.h */,
+				D263F1151829D31E0001E4E0 /* SDCAlertViewContentView.m */,
+				D263F10E1829D1860001E4E0 /* SDCAlertViewController.h */,
+				D263F10F1829D1860001E4E0 /* SDCAlertViewController.m */,
+				D2FA54921894AFB4006FAB5E /* SDCAlertViewCoordinator.h */,
+				D2FA54931894AFB5006FAB5E /* SDCAlertViewCoordinator.m */,
+				D268093118F845420001B7E9 /* SDCAlertViewTransitioning.h */,
+				D294876A18D631B700E3D967 /* SDCIntrinsicallySizedView.h */,
+				D294876B18D631B700E3D967 /* SDCIntrinsicallySizedView.m */,
+				D2CABE9319E1ECFE00CA1A89 /* UIView+Parallax.h */,
+				D2CABE9419E1ECFE00CA1A89 /* UIView+Parallax.m */,
 			);
 			path = SDCAlertView;
 			sourceTree = "<group>";
 		};
-		D2F8347218EF2C09000BB281 = {
+		D2C30A6E1BC120C900984652 /* SDCAlertController */ = {
 			isa = PBXGroup;
 			children = (
-				D26506EE19C61B7500BF34B9,
+				D2C30A6F1BC120C900984652 /* Actions */,
+				D2C30A751BC120C900984652 /* AlertController.swift */,
+				D2C30A761BC120C900984652 /* AlertControllerView.swift */,
+				D2C30A771BC120C900984652 /* AlertLabel.swift */,
+				D2C30A781BC120C900984652 /* Presentation */,
+				D2C30A7D1BC120C900984652 /* Text Fields */,
+				D2C30A811BC120C900984652 /* VisualStyle.swift */,
+			);
+			name = SDCAlertController;
+			path = Source/SDCAlertController;
+			sourceTree = "<group>";
+		};
+		D2C30A6F1BC120C900984652 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				D2C30A701BC120C900984652 /* ActionCell.swift */,
+				D2C30A711BC120C900984652 /* ActionCell.xib */,
+				D2C30A721BC120C900984652 /* ActionsCollectionView.swift */,
+				D2C30A731BC120C900984652 /* ActionsCollectionViewFlowLayout.swift */,
+				D2C30A741BC120C900984652 /* AlertAction.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		D2C30A781BC120C900984652 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				D2C30A791BC120C900984652 /* AnimationController.swift */,
+				D2C30A7A1BC120C900984652 /* PresentationController.swift */,
+				D2C30A7B1BC120C900984652 /* Transition.swift */,
+				D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		D2C30A7D1BC120C900984652 /* Text Fields */ = {
+			isa = PBXGroup;
+			children = (
+				D2C30A7E1BC120C900984652 /* TextFieldCell.swift */,
+				D2C30A7F1BC120C900984652 /* TextFieldCell.xib */,
+				D2C30A801BC120C900984652 /* TextFieldsViewController.swift */,
+			);
+			path = "Text Fields";
+			sourceTree = "<group>";
+		};
+		D2F8347218EF2C09000BB281 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D26506EE19C61B7500BF34B9 /* SDCAlertView */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -587,15 +324,15 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D25B3CA317ECE7A6004B32A2 = {
+		D25B3CA317ECE7A6004B32A2 /* SDCAlertView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D25B3CD617ECE7A6004B32A2;
+			buildConfigurationList = D25B3CD617ECE7A6004B32A2 /* Build configuration list for PBXNativeTarget "SDCAlertView" */;
 			buildPhases = (
-				23A12E549D434E09BDB6E98D,
-				D25B3CA017ECE7A6004B32A2,
-				D25B3CA117ECE7A6004B32A2,
-				D25B3CA217ECE7A6004B32A2,
-				858BC639C445465CBB8B2137,
+				23A12E549D434E09BDB6E98D /* Check Pods Manifest.lock */,
+				D25B3CA017ECE7A6004B32A2 /* Sources */,
+				D25B3CA117ECE7A6004B32A2 /* Frameworks */,
+				D25B3CA217ECE7A6004B32A2 /* Resources */,
+				858BC639C445465CBB8B2137 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -603,33 +340,33 @@
 			);
 			name = SDCAlertView;
 			productName = SDCAlertView;
-			productReference = D25B3CA417ECE7A6004B32A2;
+			productReference = D25B3CA417ECE7A6004B32A2 /* SDCAlertView.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D25B3CC417ECE7A6004B32A2 = {
+		D25B3CC417ECE7A6004B32A2 /* SDCAlertViewTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D25B3CD917ECE7A6004B32A2;
+			buildConfigurationList = D25B3CD917ECE7A6004B32A2 /* Build configuration list for PBXNativeTarget "SDCAlertViewTests" */;
 			buildPhases = (
-				97FD800B4876441B947DF91A,
-				D25B3CC117ECE7A6004B32A2,
-				D25B3CC217ECE7A6004B32A2,
-				D25B3CC317ECE7A6004B32A2,
-				307CA72D39414819B8D70FE4,
+				97FD800B4876441B947DF91A /* Check Pods Manifest.lock */,
+				D25B3CC117ECE7A6004B32A2 /* Sources */,
+				D25B3CC217ECE7A6004B32A2 /* Frameworks */,
+				D25B3CC317ECE7A6004B32A2 /* Resources */,
+				307CA72D39414819B8D70FE4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D25B3CCB17ECE7A6004B32A2,
+				D25B3CCB17ECE7A6004B32A2 /* PBXTargetDependency */,
 			);
 			name = SDCAlertViewTests;
 			productName = SDCAlertViewTests;
-			productReference = D25B3CC517ECE7A6004B32A2;
+			productReference = D25B3CC517ECE7A6004B32A2 /* SDCAlertViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D25B3C9C17ECE7A6004B32A2 = {
+		D25B3C9C17ECE7A6004B32A2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SDC;
@@ -641,7 +378,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D25B3C9F17ECE7A6004B32A2;
+			buildConfigurationList = D25B3C9F17ECE7A6004B32A2 /* Build configuration list for PBXProject "SDCAlertView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -650,47 +387,47 @@
 				Base,
 			);
 			mainGroup = D25B3C9B17ECE7A6004B32A2;
-			productRefGroup = D25B3CA517ECE7A6004B32A2;
+			productRefGroup = D25B3CA517ECE7A6004B32A2 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-			);
 			projectRoot = "";
 			targets = (
-				D25B3CA317ECE7A6004B32A2,
-				D25B3CC417ECE7A6004B32A2,
+				D25B3CA317ECE7A6004B32A2 /* SDCAlertView */,
+				D25B3CC417ECE7A6004B32A2 /* SDCAlertViewTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D25B3CA217ECE7A6004B32A2 = {
+		D25B3CA217ECE7A6004B32A2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D28B5B5519E3863B00B76354,
-				D25B3CC017ECE7A6004B32A2,
-				D268314919E3ABE2005FC8B0,
-				D25B3CB217ECE7A6004B32A2,
-				D2F9D2BD18400CD300F85B10,
-				D2A520181840176300837A1A,
-				D2F8345918EF2893000BB281,
-				D2BD0CC618FED65700520E33,
-				D2F9D2BF18400DAF00F85B10,
+				D28B5B5519E3863B00B76354 /* AlertDemo.storyboard in Resources */,
+				D25B3CC017ECE7A6004B32A2 /* Images.xcassets in Resources */,
+				D268314919E3ABE2005FC8B0 /* Launch Screen.xib in Resources */,
+				D25B3CB217ECE7A6004B32A2 /* InfoPlist.strings in Resources */,
+				D2F9D2BD18400CD300F85B10 /* README.md in Resources */,
+				D2A520181840176300837A1A /* SDCAlertView.podspec in Resources */,
+				D2F8345918EF2893000BB281 /* Podfile in Resources */,
+				D2C30A8F1BC120C900984652 /* TextFieldCell.xib in Resources */,
+				D2C30A831BC120C900984652 /* ActionCell.xib in Resources */,
+				D2BD0CC618FED65700520E33 /* CHANGELOG.md in Resources */,
+				D2F9D2BF18400DAF00F85B10 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D25B3CC317ECE7A6004B32A2 = {
+		D25B3CC317ECE7A6004B32A2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25B3CD117ECE7A6004B32A2,
+				D25B3CD117ECE7A6004B32A2 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		23A12E549D434E09BDB6E98D = {
+		23A12E549D434E09BDB6E98D /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -705,7 +442,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		307CA72D39414819B8D70FE4 = {
+		307CA72D39414819B8D70FE4 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -720,7 +457,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Pods-SDCAlertViewTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		858BC639C445465CBB8B2137 = {
+		858BC639C445465CBB8B2137 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -735,7 +472,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		97FD800B4876441B947DF91A = {
+		97FD800B4876441B947DF91A /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -753,24 +490,38 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D25B3CA017ECE7A6004B32A2 = {
+		D25B3CA017ECE7A6004B32A2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2CAD11719E38FE7005E1C33,
-				D25B3CB417ECE7A6004B32A2,
-				D2CABE9519E1ECFE00CA1A89,
-				D25B3CDE17ECF1C5004B32A2,
-				D263F1131829D2BD0001E4E0,
-				D294876C18D631B700E3D967,
-				D263F1101829D1860001E4E0,
-				D2FA54941894AFB5006FAB5E,
-				D25B3CB817ECE7A6004B32A2,
-				D263F1161829D31E0001E4E0,
+				D2CAD11719E38FE7005E1C33 /* SDCDemoViewController.m in Sources */,
+				D2C30A911BC120C900984652 /* VisualStyle.swift in Sources */,
+				D2C30A871BC120C900984652 /* AlertController.swift in Sources */,
+				D25B3CB417ECE7A6004B32A2 /* main.m in Sources */,
+				D2C30A891BC120C900984652 /* AlertLabel.swift in Sources */,
+				D2C30A8B1BC120C900984652 /* PresentationController.swift in Sources */,
+				D2CABE9519E1ECFE00CA1A89 /* UIView+Parallax.m in Sources */,
+				D25B3CDE17ECF1C5004B32A2 /* SDCAlertView.m in Sources */,
+				D2C30A8A1BC120C900984652 /* AnimationController.swift in Sources */,
+				D263F1131829D2BD0001E4E0 /* SDCAlertViewBackgroundView.m in Sources */,
+				D2C30A901BC120C900984652 /* TextFieldsViewController.swift in Sources */,
+				D2C30A821BC120C900984652 /* ActionCell.swift in Sources */,
+				D2C30A8C1BC120C900984652 /* Transition.swift in Sources */,
+				D2C30A861BC120C900984652 /* AlertAction.swift in Sources */,
+				D2C30A851BC120C900984652 /* ActionsCollectionViewFlowLayout.swift in Sources */,
+				D2C30A8E1BC120C900984652 /* TextFieldCell.swift in Sources */,
+				D2C30A841BC120C900984652 /* ActionsCollectionView.swift in Sources */,
+				D294876C18D631B700E3D967 /* SDCIntrinsicallySizedView.m in Sources */,
+				D2C30A881BC120C900984652 /* AlertControllerView.swift in Sources */,
+				D263F1101829D1860001E4E0 /* SDCAlertViewController.m in Sources */,
+				D2FA54941894AFB5006FAB5E /* SDCAlertViewCoordinator.m in Sources */,
+				D2C30A8D1BC120C900984652 /* UIViewController+Extension.swift in Sources */,
+				D25B3CB817ECE7A6004B32A2 /* SDCAppDelegate.m in Sources */,
+				D263F1161829D31E0001E4E0 /* SDCAlertViewContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D25B3CC117ECE7A6004B32A2 = {
+		D25B3CC117ECE7A6004B32A2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -780,27 +531,27 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D25B3CCB17ECE7A6004B32A2 = {
+		D25B3CCB17ECE7A6004B32A2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D25B3CA317ECE7A6004B32A2;
-			targetProxy = D25B3CCA17ECE7A6004B32A2;
+			target = D25B3CA317ECE7A6004B32A2 /* SDCAlertView */;
+			targetProxy = D25B3CCA17ECE7A6004B32A2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D25B3CB017ECE7A6004B32A2 = {
+		D25B3CB017ECE7A6004B32A2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D25B3CB117ECE7A6004B32A2,
+				D25B3CB117ECE7A6004B32A2 /* en */,
 			);
 			name = InfoPlist.strings;
 			path = .;
 			sourceTree = "<group>";
 		};
-		D25B3CCF17ECE7A6004B32A2 = {
+		D25B3CCF17ECE7A6004B32A2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D25B3CD017ECE7A6004B32A2,
+				D25B3CD017ECE7A6004B32A2 /* en */,
 			);
 			name = InfoPlist.strings;
 			path = .;
@@ -809,7 +560,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		D25B3CD417ECE7A6004B32A2 = {
+		D25B3CD417ECE7A6004B32A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -847,7 +598,7 @@
 			};
 			name = Debug;
 		};
-		D25B3CD517ECE7A6004B32A2 = {
+		D25B3CD517ECE7A6004B32A2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -879,9 +630,9 @@
 			};
 			name = Release;
 		};
-		D25B3CD717ECE7A6004B32A2 = {
+		D25B3CD717ECE7A6004B32A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E24AC6BD58612E217333B4A;
+			baseConfigurationReference = 5E24AC6BD58612E217333B4A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -895,9 +646,9 @@
 			};
 			name = Debug;
 		};
-		D25B3CD817ECE7A6004B32A2 = {
+		D25B3CD817ECE7A6004B32A2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02F3F1243FAEADC477B22764;
+			baseConfigurationReference = 02F3F1243FAEADC477B22764 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -911,7 +662,7 @@
 			};
 			name = Release;
 		};
-		D25B3CDA17ECE7A6004B32A2 = {
+		D25B3CDA17ECE7A6004B32A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SDCAlertView.app/SDCAlertView";
@@ -933,7 +684,7 @@
 			};
 			name = Debug;
 		};
-		D25B3CDB17ECE7A6004B32A2 = {
+		D25B3CDB17ECE7A6004B32A2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SDCAlertView.app/SDCAlertView";
@@ -958,34 +709,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D25B3C9F17ECE7A6004B32A2 = {
+		D25B3C9F17ECE7A6004B32A2 /* Build configuration list for PBXProject "SDCAlertView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D25B3CD417ECE7A6004B32A2,
-				D25B3CD517ECE7A6004B32A2,
+				D25B3CD417ECE7A6004B32A2 /* Debug */,
+				D25B3CD517ECE7A6004B32A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D25B3CD617ECE7A6004B32A2 = {
+		D25B3CD617ECE7A6004B32A2 /* Build configuration list for PBXNativeTarget "SDCAlertView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D25B3CD717ECE7A6004B32A2,
-				D25B3CD817ECE7A6004B32A2,
+				D25B3CD717ECE7A6004B32A2 /* Debug */,
+				D25B3CD817ECE7A6004B32A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D25B3CD917ECE7A6004B32A2 = {
+		D25B3CD917ECE7A6004B32A2 /* Build configuration list for PBXNativeTarget "SDCAlertViewTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D25B3CDA17ECE7A6004B32A2,
-				D25B3CDB17ECE7A6004B32A2,
+				D25B3CDA17ECE7A6004B32A2 /* Debug */,
+				D25B3CDB17ECE7A6004B32A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D25B3C9C17ECE7A6004B32A2;
+	rootObject = D25B3C9C17ECE7A6004B32A2 /* Project object */;
 }
