@@ -2,28 +2,71 @@ import UIKit
 
 public protocol VisualStyle {
 
+    /// The width of the alert
     var width: CGFloat { get }
+
+    /// The corner radius of the alert
     var cornerRadius: CGFloat { get }
+
+    /// The miinimum distance between alert elements and the alert itself
     var contentPadding: UIEdgeInsets { get }
 
+    /// The minimum distance between the alert and its superview
     var margins: UIEdgeInsets { get }
+
+    /// The parallax magnitude
     var parallax: UIOffset { get }
 
+    /// The font used for the title label
     var titleLabelFont: UIFont { get }
+
+    /// The font used for the message label
     var messageLabelFont: UIFont { get }
 
+    /// The vertical spacing between elements
     var verticalElementSpacing: CGFloat { get }
 
+    /// The size of an action. The specified width is treated as a minimum width. The actual width is
+    /// automatically determined.
     var actionViewSize: CGSize { get }
+
+    /// The color of the separators between actions
     var actionViewSeparatorColor: UIColor { get }
+
+    /// The thickness of the separators between actions
     var actionViewSeparatorThickness: CGFloat { get }
 
+    /**
+    The text color for a given action.
+
+    - parameter action: The action that determines the text color
+
+    - returns: The text color
+    */
     func textColor(forAction action: AlertAction?) -> UIColor
+
+    /**
+    The font for a given action
+
+    - parameter action: The action that determines the font
+
+    - returns: The font
+    */
     func font(forAction action: AlertAction?) -> UIFont
 
+    /// The font used in text fields
     var textFieldFont: UIFont { get }
+
+    /// The height of a text field if added using the standard method call. Won't affect text fields added
+    /// directly to the alert's content view.
     var textFieldHeight: CGFloat { get }
+
+    /// The border color of a text field if added using the standard method call. Won't affect text fields
+    /// added directly to the alert's content view.
     var textFieldBorderColor: UIColor { get }
+
+    /// The inset of the text within the text field if added using the standard method call. Won't affect text
+    /// fields added directly to the alert's content view.
     var textFieldMargins: UIEdgeInsets { get }
 }
 
