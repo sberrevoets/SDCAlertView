@@ -7,682 +7,161 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D25B3CA817ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CA717ECE7A6004B32A2;
-		};
-		D25B3CAA17ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CA917ECE7A6004B32A2;
-		};
-		D25B3CAC17ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CAB17ECE7A6004B32A2;
-		};
-		D25B3CB217ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CB017ECE7A6004B32A2;
-		};
-		D25B3CB417ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CB317ECE7A6004B32A2;
-		};
-		D25B3CB817ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CB717ECE7A6004B32A2;
-		};
-		D25B3CC017ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CBF17ECE7A6004B32A2;
-		};
-		D25B3CC717ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CC617ECE7A6004B32A2;
-		};
-		D25B3CC817ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CA717ECE7A6004B32A2;
-		};
-		D25B3CC917ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CAB17ECE7A6004B32A2;
-		};
-		D25B3CD117ECE7A6004B32A2 = {
-			isa = PBXBuildFile;
-			fileRef = D25B3CCF17ECE7A6004B32A2;
-		};
-		D268314919E3ABE2005FC8B0 = {
-			isa = PBXBuildFile;
-			fileRef = D268314819E3ABE2005FC8B0;
-		};
-		D28B5B5519E3863B00B76354 = {
-			isa = PBXBuildFile;
-			fileRef = D28B5B5419E3863B00B76354;
-		};
-		D2A520181840176300837A1A = {
-			isa = PBXBuildFile;
-			fileRef = D2A520171840176300837A1A;
-		};
-		D2BD0CC618FED65700520E33 = {
-			isa = PBXBuildFile;
-			fileRef = D2BD0CC518FED65700520E33;
-		};
-		D2C30A821BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A701BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A831BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A711BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A841BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A721BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A851BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A731BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A861BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A741BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A871BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A751BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A881BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A761BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A891BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A771BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A8A1BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A791BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A8B1BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A7A1BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A8C1BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A7B1BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A8D1BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A7C1BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A8E1BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A7E1BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A8F1BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A7F1BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A901BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A801BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30A911BC120C900984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A811BC120C900984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2C30AA81BC19F9300984652 = {
-			isa = PBXBuildFile;
-			fileRef = D2C30AA71BC19F9300984652;
-			settings = {
-				ASSET_TAGS = (
-				);
-			};
-		};
-		D2F9D2BD18400CD300F85B10 = {
-			isa = PBXBuildFile;
-			fileRef = D2F9D2BC18400CD200F85B10;
-		};
-		D2F9D2BF18400DAF00F85B10 = {
-			isa = PBXBuildFile;
-			fileRef = D2F9D2BE18400DAF00F85B10;
-		};
+		D2515EC41BC1A7D500ED606F /* SDCAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = D2515EC31BC1A7D500ED606F /* SDCAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D2515ECB1BC1A83800ED606F /* UIView+SDCAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C30AA71BC19F9300984652 /* UIView+SDCAutoLayout.m */; settings = {ASSET_TAGS = (); }; };
+		D2515ECD1BC1A84D00ED606F /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A701BC120C900984652 /* ActionCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515ECE1BC1A84D00ED606F /* ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C30A711BC120C900984652 /* ActionCell.xib */; settings = {ASSET_TAGS = (); }; };
+		D2515ECF1BC1A84D00ED606F /* ActionsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A721BC120C900984652 /* ActionsCollectionView.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515ED01BC1A84D00ED606F /* ActionsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A731BC120C900984652 /* ActionsCollectionViewFlowLayout.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515ED11BC1A84D00ED606F /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A741BC120C900984652 /* AlertAction.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515ED21BC1A85200ED606F /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A791BC120C900984652 /* AnimationController.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515ED31BC1A85200ED606F /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7A1BC120C900984652 /* PresentationController.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515ED41BC1A85200ED606F /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7B1BC120C900984652 /* Transition.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515ED51BC1A85200ED606F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515ED61BC1A85800ED606F /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7E1BC120C900984652 /* TextFieldCell.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515ED71BC1A85800ED606F /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C30A7F1BC120C900984652 /* TextFieldCell.xib */; settings = {ASSET_TAGS = (); }; };
+		D2515ED81BC1A85800ED606F /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A801BC120C900984652 /* TextFieldsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515ED91BC1A85800ED606F /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A751BC120C900984652 /* AlertController.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515EDA1BC1A85800ED606F /* AlertControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A761BC120C900984652 /* AlertControllerView.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515EDB1BC1A85800ED606F /* AlertLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A771BC120C900984652 /* AlertLabel.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515EDC1BC1A85800ED606F /* VisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A811BC120C900984652 /* VisualStyle.swift */; settings = {ASSET_TAGS = (); }; };
+		D2515EDE1BC1A94A00ED606F /* UIView+SDCAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = D2C30AA61BC19F9300984652 /* UIView+SDCAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D25B3CCA17ECE7A6004B32A2 = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D25B3C9C17ECE7A6004B32A2;
-			proxyType = 1;
-			remoteGlobalIDString = D25B3CA317ECE7A6004B32A2;
-			remoteInfo = SDCAlertView;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		D25B3CA417ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			explicitFileType = wrapper.application;
-			includeInIndex = 0;
-			path = SDCAlertView.app;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D25B3CA717ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = Foundation.framework;
-			path = System/Library/Frameworks/Foundation.framework;
-			sourceTree = SDKROOT;
-		};
-		D25B3CA917ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = CoreGraphics.framework;
-			path = System/Library/Frameworks/CoreGraphics.framework;
-			sourceTree = SDKROOT;
-		};
-		D25B3CAB17ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = UIKit.framework;
-			path = System/Library/Frameworks/UIKit.framework;
-			sourceTree = SDKROOT;
-		};
-		D25B3CAF17ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
-			path = "SDCAlertView-Info.plist";
-			sourceTree = "<group>";
-		};
-		D25B3CB117ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.strings;
-			name = en;
-			path = en.lproj/InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D25B3CB317ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = main.m;
-			sourceTree = "<group>";
-		};
-		D25B3CB517ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = "SDCAlertView-Prefix.pch";
-			sourceTree = "<group>";
-		};
-		D25B3CB617ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = SDCAppDelegate.h;
-			sourceTree = "<group>";
-		};
-		D25B3CB717ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.objc;
-			path = SDCAppDelegate.m;
-			sourceTree = "<group>";
-		};
-		D25B3CBF17ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = folder.assetcatalog;
-			path = Images.xcassets;
-			sourceTree = "<group>";
-		};
-		D25B3CC517ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			explicitFileType = wrapper.cfbundle;
-			includeInIndex = 0;
-			path = SDCAlertViewTests.xctest;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D25B3CC617ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = XCTest.framework;
-			path = Library/Frameworks/XCTest.framework;
-			sourceTree = DEVELOPER_DIR;
-		};
-		D25B3CCE17ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
-			path = "SDCAlertViewTests-Info.plist";
-			sourceTree = "<group>";
-		};
-		D25B3CD017ECE7A6004B32A2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.strings;
-			name = en;
-			path = en.lproj/InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D268314819E3ABE2005FC8B0 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = file.xib;
-			path = "Launch Screen.xib";
-			sourceTree = "<group>";
-		};
-		D28B5B5419E3863B00B76354 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = file.storyboard;
-			path = AlertDemo.storyboard;
-			sourceTree = "<group>";
-		};
-		D2A520171840176300837A1A = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = text;
-			path = SDCAlertView.podspec;
-			sourceTree = "<group>";
-		};
-		D2BD0CC518FED65700520E33 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = text;
-			path = CHANGELOG.md;
-			sourceTree = "<group>";
-		};
-		D2C30A701BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = ActionCell.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A711BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = file.xib;
-			path = ActionCell.xib;
-			sourceTree = "<group>";
-		};
-		D2C30A721BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = ActionsCollectionView.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A731BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = ActionsCollectionViewFlowLayout.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A741BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = AlertAction.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A751BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			name = AlertController.swift;
-			path = AlertController.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A761BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			name = AlertControllerView.swift;
-			path = AlertControllerView.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A771BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			name = AlertLabel.swift;
-			path = AlertLabel.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A791BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = AnimationController.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A7A1BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = PresentationController.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A7B1BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = Transition.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A7C1BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = "UIViewController+Extension.swift";
-			sourceTree = "<group>";
-		};
-		D2C30A7E1BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = TextFieldCell.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A7F1BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = file.xib;
-			path = TextFieldCell.xib;
-			sourceTree = "<group>";
-		};
-		D2C30A801BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = TextFieldsViewController.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A811BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			name = VisualStyle.swift;
-			path = VisualStyle.swift;
-			sourceTree = "<group>";
-		};
-		D2C30AA61BC19F9300984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			path = "UIView+SDCAutoLayout.h";
-			sourceTree = "<group>";
-		};
-		D2C30AA71BC19F9300984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			path = "UIView+SDCAutoLayout.m";
-			sourceTree = "<group>";
-		};
-		D2C30AAC1BC1A0C100984652 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = "SDCAlertView-Bridging-Header.h";
-			path = "SDCAlertView-Bridging-Header.h";
-			sourceTree = "<group>";
-		};
-		D2CAD11519E38FE7005E1C33 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			path = SDCDemoViewController.h;
-			sourceTree = "<group>";
-		};
-		D2CAD11619E38FE7005E1C33 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			path = SDCDemoViewController.m;
-			sourceTree = "<group>";
-		};
-		D2F9D2BC18400CD200F85B10 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = text;
-			path = README.md;
-			sourceTree = "<group>";
-		};
-		D2F9D2BE18400DAF00F85B10 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = text;
-			path = LICENSE;
-			sourceTree = "<group>";
-		};
+		D2515EC11BC1A7D500ED606F /* SDCAlertView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SDCAlertView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2515EC31BC1A7D500ED606F /* SDCAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCAlertView.h; sourceTree = "<group>"; };
+		D2515EC51BC1A7D500ED606F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2C30A701BC120C900984652 /* ActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
+		D2C30A711BC120C900984652 /* ActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionCell.xib; sourceTree = "<group>"; };
+		D2C30A721BC120C900984652 /* ActionsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsCollectionView.swift; sourceTree = "<group>"; };
+		D2C30A731BC120C900984652 /* ActionsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		D2C30A741BC120C900984652 /* AlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
+		D2C30A751BC120C900984652 /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		D2C30A761BC120C900984652 /* AlertControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControllerView.swift; sourceTree = "<group>"; };
+		D2C30A771BC120C900984652 /* AlertLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertLabel.swift; sourceTree = "<group>"; };
+		D2C30A791BC120C900984652 /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
+		D2C30A7A1BC120C900984652 /* PresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		D2C30A7B1BC120C900984652 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
+		D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		D2C30A7E1BC120C900984652 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		D2C30A7F1BC120C900984652 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
+		D2C30A801BC120C900984652 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
+		D2C30A811BC120C900984652 /* VisualStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualStyle.swift; sourceTree = "<group>"; };
+		D2C30AA61BC19F9300984652 /* UIView+SDCAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDCAutoLayout.h"; sourceTree = "<group>"; };
+		D2C30AA71BC19F9300984652 /* UIView+SDCAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDCAutoLayout.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D25B3CA117ECE7A6004B32A2 = {
+		D2515EBD1BC1A7D500ED606F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25B3CAA17ECE7A6004B32A2,
-				D25B3CAC17ECE7A6004B32A2,
-				D25B3CA817ECE7A6004B32A2,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D25B3CC217ECE7A6004B32A2 = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D25B3CC717ECE7A6004B32A2,
-				D25B3CC917ECE7A6004B32A2,
-				D25B3CC817ECE7A6004B32A2,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D25B3C9B17ECE7A6004B32A2 = {
+		D2515EC91BC1A80200ED606F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D25B3CA617ECE7A6004B32A2,
-				D25B3CA517ECE7A6004B32A2,
-				D25B3CAD17ECE7A6004B32A2,
-				D25B3CCC17ECE7A6004B32A2,
-				D2BD0CC518FED65700520E33,
-				D2F9D2BE18400DAF00F85B10,
-				D2F9D2BC18400CD200F85B10,
-				D2A520171840176300837A1A,
-			);
-			sourceTree = "<group>";
-			usesTabs = 1;
-		};
-		D25B3CA517ECE7A6004B32A2 = {
-			isa = PBXGroup;
-			children = (
-				D25B3CA417ECE7A6004B32A2,
-				D25B3CC517ECE7A6004B32A2,
+				D2515EC11BC1A7D500ED606F /* SDCAlertView.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D25B3CA617ECE7A6004B32A2 = {
+		D2515ECA1BC1A81100ED606F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D25B3CA717ECE7A6004B32A2,
-				D25B3CA917ECE7A6004B32A2,
-				D25B3CAB17ECE7A6004B32A2,
-				D25B3CC617ECE7A6004B32A2,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D25B3CAD17ECE7A6004B32A2 = {
-			isa = PBXGroup;
-			children = (
-				D2F8347218EF2C09000BB281,
-				D25B3CAE17ECE7A6004B32A2,
-				D28B5B5419E3863B00B76354,
-				D25B3CBF17ECE7A6004B32A2,
-				D268314819E3ABE2005FC8B0,
-				D25B3CB617ECE7A6004B32A2,
-				D25B3CB717ECE7A6004B32A2,
-				D2CAD11519E38FE7005E1C33,
-				D2CAD11619E38FE7005E1C33,
-			);
-			path = SDCAlertView;
-			sourceTree = "<group>";
-		};
-		D25B3CAE17ECE7A6004B32A2 = {
-			isa = PBXGroup;
-			children = (
-				D25B3CB017ECE7A6004B32A2,
-				D25B3CAF17ECE7A6004B32A2,
-				D25B3CB517ECE7A6004B32A2,
-				D25B3CB317ECE7A6004B32A2,
+				D2515EC51BC1A7D500ED606F /* Info.plist */,
+				D2515EC31BC1A7D500ED606F /* SDCAlertView.h */,
+				D2C30AA61BC19F9300984652 /* UIView+SDCAutoLayout.h */,
+				D2C30AA71BC19F9300984652 /* UIView+SDCAutoLayout.m */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D25B3CCC17ECE7A6004B32A2 = {
+		D25B3C9B17ECE7A6004B32A2 = {
 			isa = PBXGroup;
 			children = (
-				D25B3CCD17ECE7A6004B32A2,
+				D2515EC91BC1A80200ED606F /* Products */,
+				D2F8347218EF2C09000BB281 /* Source */,
 			);
-			path = SDCAlertViewTests;
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
-		D25B3CCD17ECE7A6004B32A2 = {
+		D2C30A6F1BC120C900984652 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				D25B3CCF17ECE7A6004B32A2,
-				D25B3CCE17ECE7A6004B32A2,
+				D2C30A701BC120C900984652 /* ActionCell.swift */,
+				D2C30A711BC120C900984652 /* ActionCell.xib */,
+				D2C30A721BC120C900984652 /* ActionsCollectionView.swift */,
+				D2C30A731BC120C900984652 /* ActionsCollectionViewFlowLayout.swift */,
+				D2C30A741BC120C900984652 /* AlertAction.swift */,
 			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D2C30A6F1BC120C900984652 = {
-			isa = PBXGroup;
-			children = (
-				D2C30A701BC120C900984652,
-				D2C30A711BC120C900984652,
-				D2C30A721BC120C900984652,
-				D2C30A731BC120C900984652,
-				D2C30A741BC120C900984652,
-			);
-			name = Actions;
 			path = Actions;
 			sourceTree = "<group>";
 		};
-		D2C30A781BC120C900984652 = {
+		D2C30A781BC120C900984652 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				D2C30A791BC120C900984652,
-				D2C30A7A1BC120C900984652,
-				D2C30A7B1BC120C900984652,
-				D2C30A7C1BC120C900984652,
+				D2C30A791BC120C900984652 /* AnimationController.swift */,
+				D2C30A7A1BC120C900984652 /* PresentationController.swift */,
+				D2C30A7B1BC120C900984652 /* Transition.swift */,
+				D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */,
 			);
-			name = Presentation;
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		D2C30A7D1BC120C900984652 = {
+		D2C30A7D1BC120C900984652 /* Text Fields */ = {
 			isa = PBXGroup;
 			children = (
-				D2C30A7E1BC120C900984652,
-				D2C30A7F1BC120C900984652,
-				D2C30A801BC120C900984652,
+				D2C30A7E1BC120C900984652 /* TextFieldCell.swift */,
+				D2C30A7F1BC120C900984652 /* TextFieldCell.xib */,
+				D2C30A801BC120C900984652 /* TextFieldsViewController.swift */,
 			);
-			name = "Text Fields";
 			path = "Text Fields";
 			sourceTree = "<group>";
 		};
-		D2F8347218EF2C09000BB281 = {
+		D2F8347218EF2C09000BB281 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D2C30A6F1BC120C900984652,
-				D2C30A781BC120C900984652,
-				D2C30A7D1BC120C900984652,
-				D2C30A751BC120C900984652,
-				D2C30A761BC120C900984652,
-				D2C30A771BC120C900984652,
-				D2C30AAC1BC1A0C100984652,
-				D2C30AA61BC19F9300984652,
-				D2C30AA71BC19F9300984652,
-				D2C30A811BC120C900984652,
+				D2C30A6F1BC120C900984652 /* Actions */,
+				D2C30A781BC120C900984652 /* Presentation */,
+				D2515ECA1BC1A81100ED606F /* Supporting Files */,
+				D2C30A7D1BC120C900984652 /* Text Fields */,
+				D2C30A751BC120C900984652 /* AlertController.swift */,
+				D2C30A761BC120C900984652 /* AlertControllerView.swift */,
+				D2C30A771BC120C900984652 /* AlertLabel.swift */,
+				D2C30A811BC120C900984652 /* VisualStyle.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		D2515EBE1BC1A7D500ED606F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2515EC41BC1A7D500ED606F /* SDCAlertView.h in Headers */,
+				D2515EDE1BC1A94A00ED606F /* UIView+SDCAutoLayout.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		D25B3CA317ECE7A6004B32A2 = {
+		D2515EC01BC1A7D500ED606F /* SDCAlertView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D25B3CD617ECE7A6004B32A2;
+			buildConfigurationList = D2515EC61BC1A7D500ED606F /* Build configuration list for PBXNativeTarget "SDCAlertView" */;
 			buildPhases = (
-				D25B3CA017ECE7A6004B32A2,
-				D25B3CA117ECE7A6004B32A2,
-				D25B3CA217ECE7A6004B32A2,
+				D2515EBC1BC1A7D500ED606F /* Sources */,
+				D2515EBD1BC1A7D500ED606F /* Frameworks */,
+				D2515EBE1BC1A7D500ED606F /* Headers */,
+				D2515EBF1BC1A7D500ED606F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -690,33 +169,13 @@
 			);
 			name = SDCAlertView;
 			productName = SDCAlertView;
-			productReference = D25B3CA417ECE7A6004B32A2;
-			productType = "com.apple.product-type.application";
-		};
-		D25B3CC417ECE7A6004B32A2 = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D25B3CD917ECE7A6004B32A2;
-			buildPhases = (
-				97FD800B4876441B947DF91A,
-				D25B3CC117ECE7A6004B32A2,
-				D25B3CC217ECE7A6004B32A2,
-				D25B3CC317ECE7A6004B32A2,
-				307CA72D39414819B8D70FE4,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D25B3CCB17ECE7A6004B32A2,
-			);
-			name = SDCAlertViewTests;
-			productName = SDCAlertViewTests;
-			productReference = D25B3CC517ECE7A6004B32A2;
-			productType = "com.apple.product-type.bundle.unit-test";
+			productReference = D2515EC11BC1A7D500ED606F /* SDCAlertView.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D25B3C9C17ECE7A6004B32A2 = {
+		D25B3C9C17ECE7A6004B32A2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SDC;
@@ -724,12 +183,12 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Scotty Doesn't Code";
 				TargetAttributes = {
-					D25B3CC417ECE7A6004B32A2 = {
-						TestTargetID = D25B3CA317ECE7A6004B32A2;
+					D2515EC01BC1A7D500ED606F = {
+						CreatedOnToolsVersion = 7.0.1;
 					};
 				};
 			};
-			buildConfigurationList = D25B3C9F17ECE7A6004B32A2;
+			buildConfigurationList = D25B3C9F17ECE7A6004B32A2 /* Build configuration list for PBXProject "SDCAlertView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -738,144 +197,111 @@
 				Base,
 			);
 			mainGroup = D25B3C9B17ECE7A6004B32A2;
-			productRefGroup = D25B3CA517ECE7A6004B32A2;
+			productRefGroup = D25B3C9B17ECE7A6004B32A2;
 			projectDirPath = "";
-			projectReferences = (
-			);
 			projectRoot = "";
 			targets = (
-				D25B3CA317ECE7A6004B32A2,
-				D25B3CC417ECE7A6004B32A2,
+				D2515EC01BC1A7D500ED606F /* SDCAlertView */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D25B3CA217ECE7A6004B32A2 = {
+		D2515EBF1BC1A7D500ED606F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D28B5B5519E3863B00B76354,
-				D25B3CC017ECE7A6004B32A2,
-				D268314919E3ABE2005FC8B0,
-				D25B3CB217ECE7A6004B32A2,
-				D2F9D2BD18400CD300F85B10,
-				D2A520181840176300837A1A,
-				D2C30A8F1BC120C900984652,
-				D2C30A831BC120C900984652,
-				D2BD0CC618FED65700520E33,
-				D2F9D2BF18400DAF00F85B10,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D25B3CC317ECE7A6004B32A2 = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D25B3CD117ECE7A6004B32A2,
+				D2515ECE1BC1A84D00ED606F /* ActionCell.xib in Resources */,
+				D2515ED71BC1A85800ED606F /* TextFieldCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		307CA72D39414819B8D70FE4 = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-SDCAlertViewTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		97FD800B4876441B947DF91A = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		D25B3CA017ECE7A6004B32A2 = {
+		D2515EBC1BC1A7D500ED606F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C30A911BC120C900984652,
-				D2C30A871BC120C900984652,
-				D2C30AA81BC19F9300984652,
-				D25B3CB417ECE7A6004B32A2,
-				D2C30A891BC120C900984652,
-				D2C30A8B1BC120C900984652,
-				D2C30A8A1BC120C900984652,
-				D2C30A901BC120C900984652,
-				D2C30A821BC120C900984652,
-				D2C30A8C1BC120C900984652,
-				D2C30A861BC120C900984652,
-				D2C30A851BC120C900984652,
-				D2C30A8E1BC120C900984652,
-				D2C30A841BC120C900984652,
-				D2C30A881BC120C900984652,
-				D2C30A8D1BC120C900984652,
-				D25B3CB817ECE7A6004B32A2,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D25B3CC117ECE7A6004B32A2 = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				D2515ED51BC1A85200ED606F /* UIViewController+Extension.swift in Sources */,
+				D2515ED21BC1A85200ED606F /* AnimationController.swift in Sources */,
+				D2515ED81BC1A85800ED606F /* TextFieldsViewController.swift in Sources */,
+				D2515ED11BC1A84D00ED606F /* AlertAction.swift in Sources */,
+				D2515ED91BC1A85800ED606F /* AlertController.swift in Sources */,
+				D2515ED31BC1A85200ED606F /* PresentationController.swift in Sources */,
+				D2515EDA1BC1A85800ED606F /* AlertControllerView.swift in Sources */,
+				D2515ECF1BC1A84D00ED606F /* ActionsCollectionView.swift in Sources */,
+				D2515ECB1BC1A83800ED606F /* UIView+SDCAutoLayout.m in Sources */,
+				D2515ED01BC1A84D00ED606F /* ActionsCollectionViewFlowLayout.swift in Sources */,
+				D2515EDC1BC1A85800ED606F /* VisualStyle.swift in Sources */,
+				D2515ED41BC1A85200ED606F /* Transition.swift in Sources */,
+				D2515EDB1BC1A85800ED606F /* AlertLabel.swift in Sources */,
+				D2515ECD1BC1A84D00ED606F /* ActionCell.swift in Sources */,
+				D2515ED61BC1A85800ED606F /* TextFieldCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		D25B3CCB17ECE7A6004B32A2 = {
-			isa = PBXTargetDependency;
-			target = D25B3CA317ECE7A6004B32A2;
-			targetProxy = D25B3CCA17ECE7A6004B32A2;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		D25B3CB017ECE7A6004B32A2 = {
-			isa = PBXVariantGroup;
-			children = (
-				D25B3CB117ECE7A6004B32A2,
-			);
-			name = InfoPlist.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-		D25B3CCF17ECE7A6004B32A2 = {
-			isa = PBXVariantGroup;
-			children = (
-				D25B3CD017ECE7A6004B32A2,
-			);
-			name = InfoPlist.strings;
-			path = .;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		D25B3CD417ECE7A6004B32A2 = {
+		D2515EC71BC1A7D500ED606F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Supporting Files/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ScottyDoesntCode.SDCAlertView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D2515EC81BC1A7D500ED606F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Supporting Files/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ScottyDoesntCode.SDCAlertView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D25B3CD417ECE7A6004B32A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -913,7 +339,7 @@
 			};
 			name = Debug;
 		};
-		D25B3CD517ECE7A6004B32A2 = {
+		D25B3CD517ECE7A6004B32A2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -945,113 +371,28 @@
 			};
 			name = Release;
 		};
-		D25B3CD717ECE7A6004B32A2 = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SDCAlertView/Supporting Files/SDCAlertView-Prefix.pch";
-				INFOPLIST_FILE = "SDCAlertView/Supporting Files/SDCAlertView-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SDCAlertView/Source/SDCAlertController/SDCAlertView-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		D25B3CD817ECE7A6004B32A2 = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SDCAlertView/Supporting Files/SDCAlertView-Prefix.pch";
-				INFOPLIST_FILE = "SDCAlertView/Supporting Files/SDCAlertView-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SDCAlertView/Source/SDCAlertController/SDCAlertView-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		D25B3CDA17ECE7A6004B32A2 = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SDCAlertView.app/SDCAlertView";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SDCAlertView/Supporting Files/SDCAlertView-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"TESTING=1",
-				);
-				INFOPLIST_FILE = "SDCAlertViewTests/Supporting Files/SDCAlertViewTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		D25B3CDB17ECE7A6004B32A2 = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SDCAlertView.app/SDCAlertView";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SDCAlertView/Supporting Files/SDCAlertView-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"TESTING=1",
-				);
-				INFOPLIST_FILE = "SDCAlertViewTests/Supporting Files/SDCAlertViewTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D25B3C9F17ECE7A6004B32A2 = {
+		D2515EC61BC1A7D500ED606F /* Build configuration list for PBXNativeTarget "SDCAlertView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D25B3CD417ECE7A6004B32A2,
-				D25B3CD517ECE7A6004B32A2,
+				D2515EC71BC1A7D500ED606F /* Debug */,
+				D2515EC81BC1A7D500ED606F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D25B3CD617ECE7A6004B32A2 = {
+		D25B3C9F17ECE7A6004B32A2 /* Build configuration list for PBXProject "SDCAlertView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D25B3CD717ECE7A6004B32A2,
-				D25B3CD817ECE7A6004B32A2,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D25B3CD917ECE7A6004B32A2 = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D25B3CDA17ECE7A6004B32A2,
-				D25B3CDB17ECE7A6004B32A2,
+				D25B3CD417ECE7A6004B32A2 /* Debug */,
+				D25B3CD517ECE7A6004B32A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D25B3C9C17ECE7A6004B32A2;
+	rootObject = D25B3C9C17ECE7A6004B32A2 /* Project object */;
 }

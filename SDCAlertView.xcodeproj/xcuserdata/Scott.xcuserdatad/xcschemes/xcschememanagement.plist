@@ -7,11 +7,16 @@
 		<key>SDCAlertView.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>D2515EC01BC1A7D500ED606F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D25B3CA317ECE7A6004B32A2</key>
 		<dict>
 			<key>primary</key>
