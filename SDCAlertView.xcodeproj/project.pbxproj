@@ -89,7 +89,7 @@
 				D2F8347218EF2C09000BB281 /* Source */,
 			);
 			sourceTree = "<group>";
-			usesTabs = 1;
+			usesTabs = 0;
 		};
 		D2C30A6F1BC120C900984652 /* Actions */ = {
 			isa = PBXGroup;
