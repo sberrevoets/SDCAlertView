@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8152.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8124.4"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="rPa-AA-vz8" customClass="TextFieldCell" customModule="SDCAlertControllerDemo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="25"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rPa-AA-vz8" id="XIq-ci-puw">
+                <rect key="frame" x="0.0" y="0.0" width="250" height="24.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sye-PS-2iy" userLabel="Border View">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="24.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cib-N3-2nA" userLabel="Text Field Container">
+                                <rect key="frame" x="0.0" y="0.0" width="249.5" height="23.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="cib-N3-2nA" firstAttribute="top" secondItem="sye-PS-2iy" secondAttribute="top" constant="0.5" id="KZ7-Uc-1SQ"/>
+                            <constraint firstAttribute="bottom" secondItem="cib-N3-2nA" secondAttribute="bottom" constant="0.5" id="TVz-ca-PQp"/>
+                            <constraint firstItem="cib-N3-2nA" firstAttribute="leading" secondItem="sye-PS-2iy" secondAttribute="leading" constant="0.5" id="ae8-6P-Uwp"/>
+                            <constraint firstAttribute="trailing" secondItem="cib-N3-2nA" secondAttribute="trailing" constant="0.5" id="cXs-h2-Ngm"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="sye-PS-2iy" firstAttribute="leading" secondItem="XIq-ci-puw" secondAttribute="leading" id="Dj5-p6-5jZ"/>
+                    <constraint firstItem="sye-PS-2iy" firstAttribute="top" secondItem="XIq-ci-puw" secondAttribute="top" id="Mre-QO-7iN"/>
+                    <constraint firstAttribute="trailing" secondItem="sye-PS-2iy" secondAttribute="trailing" id="mQd-2S-cxe"/>
+                    <constraint firstAttribute="bottom" secondItem="sye-PS-2iy" secondAttribute="bottom" id="zE5-Fu-eX6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="borderView" destination="sye-PS-2iy" id="nSP-pz-Mm6"/>
+                <outlet property="textFieldContainer" destination="cib-N3-2nA" id="bTi-K7-tSF"/>
+            </connections>
+            <point key="canvasLocation" x="433" y="344"/>
+        </tableViewCell>
+    </objects>
+</document>
