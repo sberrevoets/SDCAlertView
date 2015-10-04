@@ -19,6 +19,9 @@ final class ActionCell: UICollectionViewCell {
         self.titleLabel.font = visualStyle.font(forAction: action)
         self.titleLabel.textColor = visualStyle.textColor(forAction: action)
         self.titleLabel.attributedText = action.attributedTitle
+
+        self.titleLabel.accessibilityLabel = action.attributedTitle?.string
+        self.isAccessibilityElement = true
     }
 
     override func tintColorDidChange() {
