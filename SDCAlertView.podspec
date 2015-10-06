@@ -1,19 +1,15 @@
 Pod::Spec.new do |s|
-  s.name         =	'SDCAlertView'
-  s.version      =	'2.5.4'
-  s.license      =	{ :type => 'MIT', :file => 'LICENSE' }
-  s.authors      =	{ 'Scott Berrevoets' => 's.berrevoets@me.com' }
-  s.summary      =	'SDCAlertView is a UIAlertView clone with added functionality including a contentView property'
-  s.homepage	 =	'https://github.com/sberrevoets/SDCAlertView'
+  s.name             = "SDCAlertView"
+  s.version          = "3.0"
+  s.summary          = "The little alert that could"
+  s.homepage         = "https://github.com/sberrevoets/SDCAlertView"
+  s.license          = { :type => "MIT" }
+  s.authors          = { "Scott Berrevoets" => "s.berrevoets@me.com" }
+  s.source           = { :git => "https://github.com/sberrevoets/SDCAlertView.git", :tag => s.version }
+  s.social_media_url = "https://twitter.com/ScottBerrevoets"
 
-# Source Info
-  s.platform     =	:ios, '7.0'
-  s.source       =	{ :git => 'https://github.com/sberrevoets/SDCAlertView.git', :tag => "v#{s.version}" }
-  s.source_files =	'SDCAlertView/Source/*.{h,m}'
+  s.source_files     = "Source/**/*.{swift,xib}", "Source/Supporting Files/UIView+SDCAutoLayout.{h,m}"
 
+  s.ios.deployment_target = 8.0
   s.requires_arc = true
-  
-# Pod Dependencies
-  s.dependency 'SDCAutoLayout', '~> 2.0'
-  s.dependency 'RBBAnimation', '~> 0.3'
 end
