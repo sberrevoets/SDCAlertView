@@ -141,7 +141,9 @@ public class AlertController: UIViewController {
     }
 
     /**
-    Adds the provided action to the alert.
+    Adds the provided action to the alert. Unlike the `UIAlertController` API, this method adds and shows
+    buttons in the order they were added. This gives you the flexibility to place buttons of any style in any
+    position.
 
     - parameter action: The action to add
     */
