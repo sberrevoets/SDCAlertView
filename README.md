@@ -1,6 +1,7 @@
 # SDCAlertView
 
 ![CI Status](https://travis-ci.org/sberrevoets/SDCAlertView.svg?branch=master)
+![CocoaPods](https://img.shields.io/cocoapods/v/SDCAlertView.svg)
 
 `SDCAlertView` started out as an alert that looked identical to `UIAlertView`, but had support for a custom content view. With the introduction of `UIAlertController` in iOS 8, the project was updated to the more modern API that `UIAlertController` brought.
 
