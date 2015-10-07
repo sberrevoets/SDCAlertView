@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:SDCAlertView.xcodeproj">
+      location = "container:SDCAlertView.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "group:Example.xcodeproj">
    </FileRef>
 </Workspace>
