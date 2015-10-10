@@ -91,7 +91,7 @@ class AlertControllerView: UIView {
         if self.actionLayout == .Horizontal || (self.actions.count == 2 && self.actionLayout == .Automatic) {
             layout.scrollDirection = .Horizontal
         } else {
-            layout.scrollDirection == .Vertical
+            layout.scrollDirection = .Vertical
         }
     }
 
