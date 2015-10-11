@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### 3.0.1
+**Bug Fixes:**
+- Fixes an issue that would sometimes use the wrong scroll direction for actions
+- Fixes the pod spec so it refers to the correct tag, not a branch
+- Removes some unused (overridden) methods in the Objective-C bridging header
+
 ## 3.0
 
 **What's New:**
