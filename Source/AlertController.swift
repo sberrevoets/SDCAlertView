@@ -102,7 +102,7 @@ public class AlertController: UIViewController {
 
     private let alertView = AlertControllerView()
     private let transitionDelegate = Transition()
-    private var shouldDismissHandler: ((AlertAction) -> Bool)?
+    private var shouldDismissHandler: (AlertAction -> Bool)?
 
     /**
     Create an alert with an stylized title and message. If no styles are necessary, consider using
