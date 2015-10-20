@@ -8,7 +8,7 @@ public protocol VisualStyle {
     /// The corner radius of the alert
     var cornerRadius: CGFloat { get }
 
-    /// The miinimum distance between alert elements and the alert itself
+    /// The minimum distance between alert elements and the alert itself
     var contentPadding: UIEdgeInsets { get }
 
     /// The minimum distance between the alert and its superview
