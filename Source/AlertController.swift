@@ -90,6 +90,7 @@ public class AlertController: UIViewController {
         set { self.alertView.actionLayout = newValue }
     }
 
+    /// The text fields that are added to the alert.
     private(set) public var textFields: [UITextField]?
 
     /// Controls whether to automatically make the first text field, if available, the first responder.
