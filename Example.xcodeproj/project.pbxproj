@@ -21,6 +21,13 @@
 			remoteGlobalIDString = D2515EC11BC1A7D500ED606F;
 			remoteInfo = SDCAlertView;
 		};
+		D27DD5F11BD5FBB000BB80FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2515EB31BC1A77100ED606F /* SDCAlertView.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2515EC01BC1A7D500ED606F;
+			remoteInfo = SDCAlertView;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +102,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D27DD5F21BD5FBB000BB80FD /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -172,6 +180,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D27DD5F21BD5FBB000BB80FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SDCAlertView;
+			targetProxy = D27DD5F11BD5FBB000BB80FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D2515E761BC1A47F00ED606F /* Main.storyboard */ = {
