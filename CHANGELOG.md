@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### 3.0.2
+**Bug Fixes:**
+- Fixes a major issue that would simply not display an alert
+- The example project now formally depends on the SDCAlertView target
+- Added a missing docstring
+
 ### 3.0.1
 **Bug Fixes:**
 - Fixes an issue that would sometimes use the wrong scroll direction for actions
