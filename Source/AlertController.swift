@@ -63,7 +63,7 @@ public class AlertController: UIViewController {
     private(set) public var actions = [AlertAction]()
 
     /// The alert's preferred action, if one is set. Setting this value to an action that wasn't already added
-    /// to the array will add it and override its style to `.Preferred`. Setting this value to `nil` will
+    /// to the array will add it and override its style to `.Preferrded`. Setting this value to `nil` will
     /// remove the preferred style from all actions.
     @available(iOS 9, *)
     public var preferredAction: AlertAction? {
@@ -188,14 +188,12 @@ public class AlertController: UIViewController {
 
     // MARK: - View Controller Lifecyle
 
-    @nonobjc
     public override func viewDidLoad() {
         super.viewDidLoad()
         listenForKeyboardChanges()
         configureAlertView()
     }
 
-    @nonobjc
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
