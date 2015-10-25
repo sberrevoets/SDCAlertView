@@ -104,6 +104,8 @@ public class AlertController: UIViewController {
     private let transitionDelegate = Transition()
     private var shouldDismissHandler: (AlertAction -> Bool)?
 
+    // MARK: - Initialization
+
     /**
     Create an alert with an stylized title and message. If no styles are necessary, consider using
     `init(title:message:preferredStyle:)`
@@ -140,6 +142,8 @@ public class AlertController: UIViewController {
         self.modalPresentationStyle = .Custom
         self.transitioningDelegate = self.transitionDelegate
     }
+
+    // MARK: - Public
 
     /**
     Adds the provided action to the alert. Unlike the `UIAlertController` API, this method adds and shows
@@ -187,7 +191,28 @@ public class AlertController: UIViewController {
         self.shouldDismissHandler = handler
     }
 
-    // MARK: - View Controller Lifecyle
+    /**
+    Presents the alert.
+
+    - parameter animated:   Whether to present the alert in an animated fashion
+    - parameter completion: An optional closure that's called when the presentation finishes
+    */
+    public func present(animated animated: Bool = true, completion: (() -> Void)? = nil) {
+        let topViewController = UIViewController.topViewController()
+        topViewController?.presentViewController(self, animated: animated, completion: completion)
+    }
+
+    /**
+     Dismisses the alert.
+
+     - parameter animated:   Whether to dismiss the alert in an animated fashion
+     - parameter completion: An optional closure that's called when the presentation finishes
+     */
+    public func dismiss(animated animated: Bool = true, completion: (() -> Void)? = nil) {
+        self.presentingViewController?.dismissViewControllerAnimated(animated, completion: completion)
+    }
+
+    // MARK: - Override
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -206,6 +231,12 @@ public class AlertController: UIViewController {
             self.didAssignFirstResponder = true
         }
     }
+
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return self.presentingViewController?.preferredStatusBarStyle() ?? .Default
+    }
+
+    // MARK: - Private
 
     private func listenForKeyboardChanges() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardChange:",
@@ -254,27 +285,6 @@ public class AlertController: UIViewController {
         addChildViewController(textFieldsViewController)
         self.alertView.textFieldsViewController = textFieldsViewController
         textFieldsViewController.didMoveToParentViewController(self)
-    }
-
-    /**
-    Presents the alert.
-
-    - parameter animated:   Whether to present the alert in an animated fashion
-    - parameter completion: An optional closure that's called when the presentation finishes
-    */
-    public func present(animated animated: Bool = true, completion: (() -> Void)? = nil) {
-        let topViewController = UIViewController.topViewController()
-        topViewController?.presentViewController(self, animated: animated, completion: completion)
-    }
-
-    /**
-    Dismisses the alert.
-
-    - parameter animated:   Whether to dismiss the alert in an animated fashion
-    - parameter completion: An optional closure that's called when the presentation finishes
-    */
-    public func dismiss(animated animated: Bool = true, completion: (() -> Void)? = nil) {
-        self.presentingViewController?.dismissViewControllerAnimated(animated, completion: completion)
     }
 
     deinit {
