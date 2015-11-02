@@ -20,11 +20,6 @@ class DemoViewController: UITableViewController {
         }
     }
 
-
-    @IBAction private func presentCustomAlert() {
-        // This method can be used as a playground. Will be called from the Custom button.
-    }
-
     private func presentSDCAlertController() {
         let title = self.titleTextField.content
         let message = self.messageTextField.content
