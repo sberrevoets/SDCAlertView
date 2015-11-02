@@ -11,6 +11,10 @@
 		D2515E751BC1A47F00ED606F /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2515E741BC1A47F00ED606F /* DemoViewController.swift */; };
 		D2515E781BC1A47F00ED606F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2515E761BC1A47F00ED606F /* Main.storyboard */; };
 		D2515E7D1BC1A47F00ED606F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2515E7B1BC1A47F00ED606F /* LaunchScreen.storyboard */; };
+		D2C0AFD01BE7236A00F31D0F /* SDCAlertView_UI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0AFCF1BE7236A00F31D0F /* SDCAlertView_UI_Tests.swift */; };
+		D2C0AFD81BE7243800F31D0F /* TestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0AFD71BE7243800F31D0F /* TestsViewController.swift */; };
+		D2C0AFD91BE725C900F31D0F /* SDCAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2515EE31BC1AA7700ED606F /* SDCAlertView.framework */; };
+		D2C0AFDA1BE725C900F31D0F /* SDCAlertView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2515EE31BC1AA7700ED606F /* SDCAlertView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -21,14 +25,28 @@
 			remoteGlobalIDString = D2515EC11BC1A7D500ED606F;
 			remoteInfo = SDCAlertView;
 		};
-		D27DD5F11BD5FBB000BB80FD /* PBXContainerItemProxy */ = {
+		D2C0AFD21BE7236A00F31D0F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D2515EB31BC1A77100ED606F /* SDCAlertView.xcodeproj */;
+			containerPortal = D2515E671BC1A47E00ED606F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2515EC01BC1A7D500ED606F;
-			remoteInfo = SDCAlertView;
+			remoteGlobalIDString = D2515E6E1BC1A47F00ED606F;
+			remoteInfo = Example;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D2C0AFDD1BE725C900F31D0F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D2C0AFDA1BE725C900F31D0F /* SDCAlertView.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D2515E6F1BC1A47F00ED606F /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,10 +56,22 @@
 		D2515E7C1BC1A47F00ED606F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2515E7E1BC1A47F00ED606F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2515EB31BC1A77100ED606F /* SDCAlertView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SDCAlertView.xcodeproj; sourceTree = "<group>"; };
+		D2C0AFCD1BE7236A00F31D0F /* SDCAlertView UI Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SDCAlertView UI Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2C0AFCF1BE7236A00F31D0F /* SDCAlertView_UI_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDCAlertView_UI_Tests.swift; sourceTree = "<group>"; };
+		D2C0AFD11BE7236A00F31D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2C0AFD71BE7243800F31D0F /* TestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D2515E6C1BC1A47F00ED606F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2C0AFD91BE725C900F31D0F /* SDCAlertView.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2C0AFCA1BE7236A00F31D0F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -56,6 +86,7 @@
 			children = (
 				D2515EB31BC1A77100ED606F /* SDCAlertView.xcodeproj */,
 				D2515E711BC1A47F00ED606F /* Example */,
+				D2C0AFCE1BE7236A00F31D0F /* SDCAlertView UI Tests */,
 				D2515E701BC1A47F00ED606F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				D2515E6F1BC1A47F00ED606F /* Example.app */,
+				D2C0AFCD1BE7236A00F31D0F /* SDCAlertView UI Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +105,7 @@
 			children = (
 				D2515E721BC1A47F00ED606F /* AppDelegate.swift */,
 				D2515E741BC1A47F00ED606F /* DemoViewController.swift */,
+				D2C0AFD71BE7243800F31D0F /* TestsViewController.swift */,
 				D2515E761BC1A47F00ED606F /* Main.storyboard */,
 				D2515E7B1BC1A47F00ED606F /* LaunchScreen.storyboard */,
 				D2515E7E1BC1A47F00ED606F /* Info.plist */,
@@ -88,6 +121,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D2C0AFCE1BE7236A00F31D0F /* SDCAlertView UI Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D2C0AFCF1BE7236A00F31D0F /* SDCAlertView_UI_Tests.swift */,
+				D2C0AFD11BE7236A00F31D0F /* Info.plist */,
+			);
+			path = "SDCAlertView UI Tests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -98,16 +140,34 @@
 				D2515E6B1BC1A47F00ED606F /* Sources */,
 				D2515E6C1BC1A47F00ED606F /* Frameworks */,
 				D2515E6D1BC1A47F00ED606F /* Resources */,
+				D2C0AFDD1BE725C900F31D0F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D27DD5F21BD5FBB000BB80FD /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
 			productReference = D2515E6F1BC1A47F00ED606F /* Example.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D2C0AFCC1BE7236A00F31D0F /* SDCAlertView UI Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2C0AFD61BE7236A00F31D0F /* Build configuration list for PBXNativeTarget "SDCAlertView UI Tests" */;
+			buildPhases = (
+				D2C0AFC91BE7236A00F31D0F /* Sources */,
+				D2C0AFCA1BE7236A00F31D0F /* Frameworks */,
+				D2C0AFCB1BE7236A00F31D0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D2C0AFD31BE7236A00F31D0F /* PBXTargetDependency */,
+			);
+			name = "SDCAlertView UI Tests";
+			productName = "SDCAlertView UI Tests";
+			productReference = D2C0AFCD1BE7236A00F31D0F /* SDCAlertView UI Tests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -115,11 +175,16 @@
 		D2515E671BC1A47E00ED606F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Scott Berrevoets";
 				TargetAttributes = {
 					D2515E6E1BC1A47F00ED606F = {
 						CreatedOnToolsVersion = 7.0.1;
+					};
+					D2C0AFCC1BE7236A00F31D0F = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = D2515E6E1BC1A47F00ED606F;
 					};
 				};
 			};
@@ -143,6 +208,7 @@
 			projectRoot = "";
 			targets = (
 				D2515E6E1BC1A47F00ED606F /* Example */,
+				D2C0AFCC1BE7236A00F31D0F /* SDCAlertView UI Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -167,6 +233,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D2C0AFCB1BE7236A00F31D0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -174,18 +247,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2C0AFD81BE7243800F31D0F /* TestsViewController.swift in Sources */,
 				D2515E751BC1A47F00ED606F /* DemoViewController.swift in Sources */,
 				D2515E731BC1A47F00ED606F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2C0AFC91BE7236A00F31D0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2C0AFD01BE7236A00F31D0F /* SDCAlertView_UI_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D27DD5F21BD5FBB000BB80FD /* PBXTargetDependency */ = {
+		D2C0AFD31BE7236A00F31D0F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SDCAlertView;
-			targetProxy = D27DD5F11BD5FBB000BB80FD /* PBXContainerItemProxy */;
+			target = D2515E6E1BC1A47F00ED606F /* Example */;
+			targetProxy = D2C0AFD21BE7236A00F31D0F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -294,6 +376,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ScottyDoesntCode.Example;
@@ -305,10 +388,37 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ScottyDoesntCode.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D2C0AFD41BE7236A00F31D0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "SDCAlertView UI Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ScottyDoesntCode.SDCAlertView-UI-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Example;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		D2C0AFD51BE7236A00F31D0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "SDCAlertView UI Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ScottyDoesntCode.SDCAlertView-UI-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Example;
+				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
@@ -332,6 +442,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D2C0AFD61BE7236A00F31D0F /* Build configuration list for PBXNativeTarget "SDCAlertView UI Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2C0AFD41BE7236A00F31D0F /* Debug */,
+				D2C0AFD51BE7236A00F31D0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
