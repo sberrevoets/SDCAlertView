@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 3.0.3
+**Bug Fixes:**
+- Resolves an issue that would never use the white status bar color if it was specified
+
 ### 3.0.2
 **Bug Fixes:**
 - Fixes a major issue that would simply not display an alert
