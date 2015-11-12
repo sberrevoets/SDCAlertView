@@ -21,10 +21,10 @@
 - [x] Alert appearance customization
 - [x] Usable from Swift and Objective-C
 - [x] Understandable button placement
+- [x] UI tests
 - [ ] Carthage support
 - [ ] Easy queueing of alerts
 - [ ] Custom alert behavior
-- [ ] UI tests
 
 # Requirements
 
