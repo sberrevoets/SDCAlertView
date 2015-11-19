@@ -20,8 +20,14 @@ public protocol VisualStyle {
     /// The font used for the title label
     var titleLabelFont: UIFont { get }
 
+    /// The color used for the title label
+    var titleLabelColor: UIColor { get }
+
     /// The font used for the message label
     var messageLabelFont: UIFont { get }
+
+    /// The color used for the message label
+    var messageLabelColor: UIColor { get }
 
     /// The vertical spacing between elements
     var verticalElementSpacing: CGFloat { get }
@@ -87,7 +93,10 @@ extension VisualStyle {
     public var parallax: UIOffset { return UIOffset(horizontal: 15.75, vertical: 15.75) }
 
     public var titleLabelFont: UIFont { return UIFont.boldSystemFontOfSize(17) }
+    public var titleLabelColor: UIColor { return UIColor.blackColor() }
+
     public var messageLabelFont: UIFont { return UIFont.systemFontOfSize(13) }
+    public var messageLabelColor: UIColor { return UIColor.blackColor() }
 
     public var verticalElementSpacing: CGFloat { return 24 }
 

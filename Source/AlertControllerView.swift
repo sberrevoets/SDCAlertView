@@ -99,7 +99,9 @@ class AlertControllerView: UIView {
         self.layer.masksToBounds = true
         self.layer.cornerRadius = self.visualStyle.cornerRadius
         self.titleLabel.font = self.visualStyle.titleLabelFont
+        self.titleLabel.textColor = self.visualStyle.titleLabelColor
         self.messageLabel.font = self.visualStyle.messageLabelFont
+        self.messageLabel.textColor = self.visualStyle.messageLabelColor
         self.textFieldsViewController?.visualStyle = self.visualStyle
 
         self.sdc_pinWidth(self.visualStyle.width)
