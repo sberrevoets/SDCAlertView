@@ -17,6 +17,9 @@ public protocol VisualStyle {
     /// The parallax magnitude
     var parallax: UIOffset { get }
 
+    /// The background color of the alert, if nil a blur effect view will be added
+    var backgroundColor: UIColor? { get }
+
     /// The font used for the title label
     var titleLabelFont: UIFont { get }
 
@@ -91,6 +94,8 @@ extension VisualStyle {
 
     public var margins: UIEdgeInsets { return UIEdgeInsets(top: 3, left: 0, bottom: 3, right: 0) }
     public var parallax: UIOffset { return UIOffset(horizontal: 15.75, vertical: 15.75) }
+
+    public var backgroundColor: UIColor? { return nil }
 
     public var titleLabelFont: UIFont { return UIFont.boldSystemFontOfSize(17) }
     public var titleLabelColor: UIColor { return UIColor.blackColor() }
