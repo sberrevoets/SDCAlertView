@@ -129,18 +129,24 @@ class AlertControllerView: UIView {
     }
 
     private func createTitleLabelConstraints() {
+        let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
+
         addConstraint(NSLayoutConstraint(item: self.titleLabel, attribute: .FirstBaseline, relatedBy: .Equal,
             toItem: self, attribute: .Top, multiplier: 1, constant: self.visualStyle.contentPadding.top))
-        self.titleLabel.sdc_alignEdges([.Left, .Right], withView: self)
+        self.titleLabel.sdc_pinWidthToWidthOfView(self, offset: -widthOffset)
+        self.titleLabel.sdc_alignHorizontalCenterWithView(self)
 
         pinBottomOfScrollViewToView(self.titleLabel, withPriority: UILayoutPriorityDefaultLow)
     }
 
     private func createMessageLabelConstraints() {
+        let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
+
         addConstraint(NSLayoutConstraint(item: self.messageLabel, attribute: .FirstBaseline,
             relatedBy: .Equal, toItem: self.titleLabel, attribute: .Baseline , multiplier: 1,
             constant: self.visualStyle.verticalElementSpacing))
-        self.messageLabel.sdc_alignEdges([.Left, .Right], withView: self)
+        self.messageLabel.sdc_pinWidthToWidthOfView(self, offset: -widthOffset)
+        self.messageLabel.sdc_alignHorizontalCenterWithView(self)
 
         pinBottomOfScrollViewToView(self.messageLabel, withPriority: UILayoutPriorityDefaultLow + 1)
     }
@@ -169,11 +175,13 @@ class AlertControllerView: UIView {
         if !self.elements.contains(self.contentView) { return }
 
         let aligningView = self.textFieldsViewController?.view ?? self.messageLabel
+        let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
 
         let topSpacing = self.visualStyle.verticalElementSpacing
         self.contentView.sdc_alignEdge(.Top, withEdge: .Bottom, ofView: aligningView, inset: topSpacing)
         self.contentView.sdc_alignHorizontalCenterWithView(self)
-        self.contentView.sdc_pinWidthToWidthOfView(self)
+        self.contentView.sdc_pinWidthToWidthOfView(self, offset: -widthOffset)
+        self.contentView.sdc_alignHorizontalCenterWithView(self)
 
         pinBottomOfScrollViewToView(self.contentView, withPriority: UILayoutPriorityDefaultLow + 3)
     }
