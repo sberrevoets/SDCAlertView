@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 3.0.4
+**Bug Fixes:**
+- Fixes a crash on iOS 8 when adding text fields to the alert
+
 ### 3.0.3
 **Bug Fixes:**
 - Resolves an issue that would never use the white status bar color if it was specified
