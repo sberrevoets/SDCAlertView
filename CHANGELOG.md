@@ -1,5 +1,12 @@
 # CHANGELOG
 
+### 3.1
+**What's New:**
+- Adds an option to give the alert a different background color
+
+**Bug Fixes:**
+- Fixes a bug that would not apply appropriate padding to the labels
+
 ### 3.0.4
 **Bug Fixes:**
 - Fixes a crash on iOS 8 when adding text fields to the alert

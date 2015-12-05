@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "SDCAlertView"
-  s.version          = "3.0.4"
+  s.version          = "3.1"
   s.summary          = "The little alert that could"
   s.homepage         = "https://github.com/sberrevoets/SDCAlertView"
   s.license          = { :type => "MIT" }
