@@ -67,6 +67,6 @@ public class AlertAction: NSObject {
     }
 
     var actionView: ActionCell? {
-        didSet { actionView?.enabled = self.enabled }
+        didSet { self.actionView?.enabled = self.enabled }
     }
 }
