@@ -269,9 +269,9 @@ public class AlertController: UIViewController {
 
         self.alertView.prepareLayout()
 
-        self.alertView.setActionTappedHandler { action in
-            guard self.shouldDismissHandler?(action) != false else { return }
-            self.presentingViewController?.dismissViewControllerAnimated(true) {
+        self.alertView.setActionTappedHandler { [weak self] action in
+            guard self?.shouldDismissHandler?(action) != false else { return }
+            self?.presentingViewController?.dismissViewControllerAnimated(true) {
                 action.handler?(action)
             }
         }
