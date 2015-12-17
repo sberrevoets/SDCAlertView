@@ -1,5 +1,10 @@
 # CHANGELOG
 
+### 3.1.1
+**Bug Fixes:**
+- Fixes a retain cycle
+- Resolves an issue that would not correctly disable actions when needed
+
 ### 3.1
 **What's New:**
 - Adds an option to give the alert a different background color
