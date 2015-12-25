@@ -205,6 +205,7 @@ public class AlertController: UIViewController {
     - parameter animated:   Whether to present the alert in an animated fashion
     - parameter completion: An optional closure that's called when the presentation finishes
     */
+    @objc(presentAnimated:completion:)
     public func present(animated animated: Bool = true, completion: (() -> Void)? = nil) {
         let topViewController = UIViewController.topViewController()
         topViewController?.presentViewController(self, animated: animated, completion: completion)
@@ -216,6 +217,7 @@ public class AlertController: UIViewController {
      - parameter animated:   Whether to dismiss the alert in an animated fashion
      - parameter completion: An optional closure that's called when the presentation finishes
      */
+    @objc(dismissAnimated:completion:)
     public func dismiss(animated animated: Bool = true, completion: (() -> Void)? = nil) {
         self.presentingViewController?.dismissViewControllerAnimated(animated, completion: completion)
     }
