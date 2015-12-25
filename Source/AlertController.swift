@@ -1,18 +1,22 @@
 import UIKit
 
 /**
-The style of the alert. The only available style is "Alert" and the only reason this enum exists is to provide
-as much parity with UIAlertController as possible.
+The alert controller's style.
 
-- Alert: Display the alert in the traditional alert style
+- ActionSheet: An action sheet style alert that slides in from the bottom and presents the user with a list
+               of possible actions to perform. Only available on iOS 9, and does not show as expected on
+               iPad.
+- Alert:       The standard alert style that asks the user for information or confirmation.
 */
 @objc
-public enum AlertStyle: Int {
+public enum AlertControllerStyle: Int {
+    case ActionSheet
     case Alert
 }
 
 /**
-The layout of the alert's actions
+The layout of the alert's actions. Only applies to the Alert style alerts, not ActionSheet (see
+`AlertControllerStyle`).
 
 - Automatic:  If the alert has 2 actions, display them horizontally. Otherwise, display them vertically.
 - Vertical:   Display the actions vertically
@@ -60,10 +64,12 @@ public class AlertController: UIViewController {
     }
 
     /// The alert's actions (buttons).
-    private(set) public var actions = [AlertAction]()
+    private(set) public var actions = [AlertAction]() {
+        didSet { self.alertView.actions = self.actions }
+    }
 
     /// The alert's preferred action, if one is set. Setting this value to an action that wasn't already added
-    /// to the array will add it and override its style to `.Preferrded`. Setting this value to `nil` will
+    /// to the array will add it and override its style to `.Preferred`. Setting this value to `nil` will
     /// remove the preferred style from all actions.
     @available(iOS 9, *)
     public var preferredAction: AlertAction? {
@@ -85,24 +91,35 @@ public class AlertController: UIViewController {
     }
 
     /// The layout of the actions in the alert.
-    public var actionLayout: ActionLayout {
-        get { return self.alertView.actionLayout }
-        set { self.alertView.actionLayout = newValue }
+    public var actionLayout: ActionLayout? {
+        get { return (self.alertView as? AlertView)?.actionLayout }
+        set {
+            if let newValue = newValue {
+                (self.alertView as? AlertView)?.actionLayout = newValue
+            }
+        }
     }
 
-    /// The text fields that are added to the alert.
+    /// The text fields that are added to the alert. Does nothing when used with an action sheet.
     private(set) public var textFields: [UITextField]?
 
-    /// Controls whether to automatically make the first text field, if available, the first responder.
-    public var automaticallyFocusFirstTextField = true
-    private var didAssignFirstResponder = false
+    /// The alert's custom behaviors. See `AlertBehaviors` for possible options.
+    public lazy var behaviors: AlertBehaviors? =
+        AlertBehaviors.defaultBehaviorsForAlertWithStyle(self.preferredStyle)
+
+    /// A closure that, when set, returns whether the alert or action sheet should dismiss after the user taps
+    /// on an action.
+    public var shouldDismissHandler: (AlertAction? -> Bool)?
+
+    /// The visual style that applies to the alert or action sheet.
+    public lazy var visualStyle: VisualStyle = DefaultVisualStyle(alertStyle: self.preferredStyle)
 
     /// The alert's presentation style.
-    private(set) public var preferredStyle: AlertStyle = .Alert
+    private(set) public var preferredStyle: AlertControllerStyle = .Alert
 
-    private let alertView = AlertControllerView()
-    private let transitionDelegate = Transition()
-    private var shouldDismissHandler: (AlertAction -> Bool)?
+    @IBOutlet private var alertView: AlertControllerView! = AlertView()
+    private lazy var transitionDelegate: Transition = Transition(alertStyle: self.preferredStyle)
+    private var didAssignFirstResponder = false
 
     // MARK: - Initialization
 
@@ -110,15 +127,20 @@ public class AlertController: UIViewController {
     Create an alert with an stylized title and message. If no styles are necessary, consider using
     `init(title:message:preferredStyle:)`
 
-    - parameter title:   An optional stylized title
-    - parameter message: An optional stylized message
+    - parameter title:          An optional stylized title
+    - parameter message:        An optional stylized message
+    - parameter preferredStyle: The preferred presentation style of the alert. Default is Alert.
     */
-    public convenience init(title: NSAttributedString?, message: NSAttributedString?) {
+    public convenience init(attributedTitle: NSAttributedString?, attributedMessage: NSAttributedString?,
+        preferredStyle: AlertControllerStyle = .Alert)
+    {
         self.init()
+        self.preferredStyle = preferredStyle
         commonInit()
 
-        self.attributedTitle = title
-        self.attributedMessage = message
+        self.attributedTitle = attributedTitle
+        self.attributedMessage = attributedMessage
+
     }
 
     /**
@@ -127,20 +149,25 @@ public class AlertController: UIViewController {
 
     - parameter title:          An optional title
     - parameter message:        An optional message
-    - parameter preferredStyle: The preferred presentation style of the alert
+    - parameter preferredStyle: The preferred presentation style of the alert. Default is Alert.
     */
-    public convenience init(title: String?, message: String?, preferredStyle: AlertStyle = .Alert) {
+    public convenience init(title: String?, message: String?, preferredStyle: AlertControllerStyle = .Alert) {
         self.init()
+        self.preferredStyle = preferredStyle
         commonInit()
 
         self.title = title
         self.message = message
-        self.preferredStyle = preferredStyle
     }
 
     private func commonInit() {
         self.modalPresentationStyle = .Custom
         self.transitioningDelegate = self.transitionDelegate
+
+        if self.preferredStyle == .ActionSheet {
+            let nibName = NSStringFromClass(ActionSheetView).componentsSeparatedByString(".").last!
+            NSBundle(forClass: self.dynamicType).loadNibNamed(nibName, owner: self, options: nil)
+        }
     }
 
     // MARK: - Public
@@ -160,7 +187,7 @@ public class AlertController: UIViewController {
     Adds a text field to the alert.
 
     - parameter configurationHandler: An optional closure that can be used to configure the text field, which
-    is provided as a parameter to the closure
+                                      is provided as a parameter to the closure
     */
     public func addTextFieldWithConfigurationHandler(configurationHandler: (UITextField -> Void)? = nil) {
         let textField = UITextField()
@@ -170,25 +197,6 @@ public class AlertController: UIViewController {
         if self.textFields?.append(textField) == nil {
             self.textFields = [textField]
         }
-    }
-
-    /**
-    Set the visual style for the alert.
-
-    - parameter visualStyle: The new visual style
-    */
-    public func setVisualStyle(visualStyle: VisualStyle) {
-        self.alertView.visualStyle = visualStyle
-    }
-
-    /**
-    Set the closure that should determine whether an action can dismiss the alert.
-
-    - parameter handler: The handler that provides an `AlertAction` to identify which action wants to dismiss
-    the alert
-    */
-    public func setShouldDismissHandler(handler: AlertAction -> Bool) {
-        self.shouldDismissHandler = handler
     }
 
     /**
@@ -226,7 +234,7 @@ public class AlertController: UIViewController {
         // Explanation of why the first responder is set here:
         // http://stackoverflow.com/a/19580888/751268
 
-        if self.automaticallyFocusFirstTextField && !self.didAssignFirstResponder {
+        if self.behaviors?.contains(.AutomaticallyFocusTextField) == true && !self.didAssignFirstResponder {
             self.textFields?.first?.becomeFirstResponder()
             self.didAssignFirstResponder = true
         }
@@ -257,64 +265,88 @@ public class AlertController: UIViewController {
 
     private func configureAlertView() {
         self.alertView.translatesAutoresizingMaskIntoConstraints = false
-
-        self.alertView.title = self.attributedTitle
-        self.alertView.message = self.attributedMessage
-        self.alertView.actions = self.actions
+        self.alertView.visualStyle = self.visualStyle
 
         addTextFieldsIfNecessary()
+        addChromeTapHandlerIfNecessary()
+        addParallaxIfNecessary()
+        enableDragTapIfNecessary()
 
         self.view.addSubview(self.alertView)
-        self.alertView.sdc_centerInSuperview()
+        createViewConstraints()
 
         self.alertView.prepareLayout()
-
-        self.alertView.setActionTappedHandler { [weak self] action in
+        self.alertView.actionTappedHandler = { [weak self] action in
             guard self?.shouldDismissHandler?(action) != false else { return }
-            self?.presentingViewController?.dismissViewControllerAnimated(true) {
+            self?.dismiss(animated: true) {
                 action.handler?(action)
             }
         }
     }
 
+    private func createViewConstraints() {
+        let margins = self.visualStyle.margins
+
+        switch self.preferredStyle {
+            case .ActionSheet:
+                let bounds = self.presentingViewController?.view.bounds ?? self.view.bounds
+                let width = min(bounds.width, bounds.height) - margins.left - margins.right
+                self.alertView.sdc_pinWidth(width * self.visualStyle.width)
+                self.alertView.sdc_horizontallyCenterInSuperview()
+                self.alertView.sdc_alignEdgesWithSuperview([.Bottom], insets: margins)
+                self.alertView.sdc_setMaximumHeightToSuperviewHeightWithOffset(-margins.top)
+
+            case .Alert:
+                self.alertView.sdc_pinWidth(self.visualStyle.width)
+                self.alertView.sdc_centerInSuperview()
+                let maximumHeightOffset = -(margins.top + margins.bottom)
+                self.alertView.sdc_setMaximumHeightToSuperviewHeightWithOffset(maximumHeightOffset)
+                self.alertView.setContentCompressionResistancePriority(500, forAxis: .Vertical)
+        }
+    }
+
     private func addTextFieldsIfNecessary() {
-        guard let textFields = self.textFields else { return }
+        guard let textFields = self.textFields, alert = self.alertView as? AlertView else {
+            return
+        }
 
         let textFieldsViewController = TextFieldsViewController(textFields: textFields)
         textFieldsViewController.willMoveToParentViewController(self)
         addChildViewController(textFieldsViewController)
-        self.alertView.textFieldsViewController = textFieldsViewController
+        alert.textFieldsViewController = textFieldsViewController
         textFieldsViewController.didMoveToParentViewController(self)
+    }
+
+    private func addChromeTapHandlerIfNecessary() {
+        if self.behaviors?.contains(.DismissOnOutsideTap) != true {
+            return
+        }
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: "chromeTapped:")
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc
+    private func chromeTapped(sender: UITapGestureRecognizer) {
+        if !self.alertView.frame.contains(sender.locationInView(self.view)) {
+            self.dismiss()
+        }
+    }
+
+    private func addParallaxIfNecessary() {
+        if self.behaviors?.contains(.Parallax) == true {
+            (self.alertView as? AlertView)?.addParallax()
+        }
+    }
+
+    private func enableDragTapIfNecessary() {
+        if self.behaviors?.contains(.DragTap) == true {
+            self.alertView.enableDragTapBehavior()
+        }
     }
 
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-}
-
-public extension AlertController {
-
-    /**
-    Convenience method to quickly display a basic alert
-
-    - parameter title:       An optional title for the alert
-    - parameter message:     An optional message for the alert
-    - parameter actionTitle: An optional action for the alert
-    - parameter customView:  An optional view that will be displayed in the alert's `contentView`
-
-    - returns: The alert that was presented
-    */
-    public class func showWithTitle(title: String? = nil, message: String? = nil, actionTitle: String? = nil,
-        customView: UIView? = nil) -> AlertController
-    {
-        let alertController = AlertController(title: title, message: message)
-        alertController.addAction(AlertAction(title: actionTitle, style: .Preferred))
-
-        if let customView = customView {
-            alertController.contentView.addSubview(customView)
-        }
-
-        alertController.present()
-        return alertController
     }
 }

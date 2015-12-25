@@ -2,7 +2,8 @@ import UIKit
 
 public protocol VisualStyle {
 
-    /// The width of the alert
+    /// The width of the alert. A value of 1 or below is interpreted as a percentage of the width of the view
+    /// controller that presents the alert.
     var width: CGFloat { get }
 
     /// The corner radius of the alert
@@ -17,7 +18,8 @@ public protocol VisualStyle {
     /// The parallax magnitude
     var parallax: UIOffset { get }
 
-    /// The background color of the alert, if nil a blur effect view will be added
+    /// The background color of the alert. The standard blur effect will be added if nil. (Not supported on
+    /// action sheets).
     var backgroundColor: UIColor? { get }
 
     /// The vertical spacing between elements
@@ -26,6 +28,9 @@ public protocol VisualStyle {
     /// The size of an action. The specified width is treated as a minimum width. The actual width is
     /// automatically determined.
     var actionViewSize: CGSize { get }
+
+    /// The color of an action when the user is tapping it
+    var actionHighlightColor: UIColor { get }
 
     /// The color of the separators between actions
     var actionViewSeparatorColor: UIColor { get }
@@ -69,25 +74,15 @@ public protocol VisualStyle {
 
 extension VisualStyle {
 
-    public var width: CGFloat { return 270 }
-    public var cornerRadius: CGFloat {
-        if #available(iOS 9, *) {
-            return 13
-        } else {
-            return 7
-        }
-    }
-
     public var contentPadding: UIEdgeInsets { return UIEdgeInsets(top: 36, left: 16, bottom: 12, right: 16) }
 
-    public var margins: UIEdgeInsets { return UIEdgeInsets(top: 3, left: 0, bottom: 3, right: 0) }
     public var parallax: UIOffset { return UIOffset(horizontal: 15.75, vertical: 15.75) }
 
     public var backgroundColor: UIColor? { return nil }
 
     public var verticalElementSpacing: CGFloat { return 24 }
 
-    public var actionViewSize: CGSize { return CGSize(width: 90, height: 44) }
+    public var actionHighlightColor: UIColor { return UIColor(white: 0.8, alpha: 0.7) }
     public var actionViewSeparatorColor: UIColor { return UIColor(white: 0.5, alpha: 0.5) }
     public var actionViewSeparatorThickness: CGFloat { return 1 / UIScreen.mainScreen().scale }
 
@@ -99,14 +94,6 @@ extension VisualStyle {
         }
     }
 
-    public func font(forAction action: AlertAction?) -> UIFont {
-        if action?.style == .Preferred {
-            return UIFont.boldSystemFontOfSize(17)
-        } else {
-            return UIFont.systemFontOfSize(17)
-        }
-    }
-
     public var textFieldFont: UIFont { return UIFont.systemFontOfSize(13) }
     public var textFieldHeight: CGFloat { return 25 }
     public var textFieldBorderColor: UIColor {
@@ -115,4 +102,58 @@ extension VisualStyle {
     public var textFieldMargins: UIEdgeInsets { return UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4) }
 }
 
-public class DefaultVisualStyle: VisualStyle { }
+public class DefaultVisualStyle: VisualStyle {
+
+    private let alertStyle: AlertControllerStyle
+    init(alertStyle: AlertControllerStyle) { self.alertStyle = alertStyle }
+
+    public var width: CGFloat { return self.alertStyle == .Alert ? 270 : 1 }
+
+    public var cornerRadius: CGFloat {
+        if #available(iOS 9, *) {
+            return 13
+        } else {
+            return self.alertStyle == .Alert ? 7 : 4
+        }
+    }
+
+    public var margins: UIEdgeInsets {
+        if self.alertStyle == .Alert {
+            if #available(iOS 9, *) {
+                return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+            } else {
+                return UIEdgeInsetsZero
+            }
+        } else {
+            if #available(iOS 9, *) {
+                return UIEdgeInsets(top: 30, left: 10, bottom: -10, right: 10)
+            } else {
+                return UIEdgeInsets(top: 10, left: 10, bottom: -8, right: 10)
+            }
+        }
+    }
+
+    public var actionViewSize: CGSize {
+        if #available(iOS 9, *) {
+            return self.alertStyle == .Alert ? CGSize(width: 90, height: 44) : CGSize(width: 90, height: 57)
+        } else {
+            return CGSize(width: 90, height: 44)
+        }
+    }
+
+    public func font(forAction action: AlertAction?) -> UIFont {
+        switch (self.alertStyle, action?.style) {
+            case (.Alert, let style) where style == .Preferred:
+                return UIFont.boldSystemFontOfSize(17)
+
+            case (.Alert, _):
+                return UIFont.systemFontOfSize(17)
+
+            case (.ActionSheet, let style) where style == .Preferred:
+                return UIFont.boldSystemFontOfSize(20)
+
+            case (.ActionSheet, _):
+                return UIFont.systemFontOfSize(20)
+        }
+    }
+}

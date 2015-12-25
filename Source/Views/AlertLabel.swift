@@ -7,10 +7,11 @@ class AlertLabel: UILabel {
         super.init(frame: .zero)
         self.textAlignment = .Center
         self.numberOfLines = 0
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    convenience required init?(coder aDecoder: NSCoder) {
-        self.init()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
     override func layoutSubviews() {

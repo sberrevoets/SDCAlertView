@@ -1,10 +1,10 @@
 import UIKit
 import SDCAlertView
 
-
-class DemoViewController: UITableViewController {
+final class DemoViewController: UITableViewController {
 
     @IBOutlet private var typeControl: UISegmentedControl!
+    @IBOutlet private var styleControl: UISegmentedControl!
     @IBOutlet private var titleTextField: UITextField!
     @IBOutlet private var messageTextField: UITextField!
     @IBOutlet private var textFieldCountTextField: UITextField!
@@ -23,7 +23,8 @@ class DemoViewController: UITableViewController {
     private func presentSDCAlertController() {
         let title = self.titleTextField.content
         let message = self.messageTextField.content
-        let alert = AlertController(title: title, message: message)
+        let style = AlertControllerStyle(rawValue: self.styleControl.selectedSegmentIndex)!
+        let alert = AlertController(title: title, message: message, preferredStyle: style)
 
         let textFields = Int(self.textFieldCountTextField.content ?? "0")!
         for _ in 0..<textFields {
@@ -45,10 +46,13 @@ class DemoViewController: UITableViewController {
 
         alert.actionLayout = ActionLayout(rawValue: self.buttonLayoutControl.selectedSegmentIndex)!
 
-        addContentToAlert(alert)
+        if #available(iOS 9, *) {
+            addContentToAlert(alert)
+        }
         alert.present()
     }
 
+    @available(iOS 9, *)
     private func addContentToAlert(alert: AlertController) {
         switch self.contentControl.selectedSegmentIndex {
             case 1:
@@ -72,7 +76,7 @@ class DemoViewController: UITableViewController {
 
                 alert.message = "Disable switch to prevent alert dismissal"
 
-                alert.setShouldDismissHandler { [unowned switchControl] _ in
+                alert.shouldDismissHandler = { [unowned switchControl] _ in
                     return switchControl.on
                 }
             case 3:
@@ -105,7 +109,8 @@ class DemoViewController: UITableViewController {
     private func presentUIAlertController() {
         let title = self.titleTextField.content
         let message = self.messageTextField.content
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let style = UIAlertControllerStyle(rawValue: self.styleControl.selectedSegmentIndex)!
+        let alert = UIAlertController(title: title, message: message, preferredStyle: style)
 
         let textFields = Int(self.textFieldCountTextField.content ?? "0")!
         for _ in 0..<textFields {

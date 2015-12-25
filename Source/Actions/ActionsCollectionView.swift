@@ -34,7 +34,7 @@ class ActionsCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: ActionsCollectionViewFlowLayout())
         self.dataSource = self
         self.delegate = self
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = .clearColor()
         self.delaysContentTouches = false
 
         self.collectionViewLayout.registerClass(ActionSeparatorView.self,
@@ -42,13 +42,7 @@ class ActionsCollectionView: UICollectionView {
         self.collectionViewLayout.registerClass(ActionSeparatorView.self,
             forDecorationViewOfKind: kVerticalActionSeparator)
 
-        if #available(iOS 9, *) {
-            let panGesture = UIPanGestureRecognizer(target: self, action: "highlightCurrentAction:")
-            panGesture.delegate = self
-            self.addGestureRecognizer(panGesture)
-        }
-
-        let nibName = NSStringFromClass(ActionCell.self).componentsSeparatedByString(".").last!
+        let nibName = NSStringFromClass(ActionCell).componentsSeparatedByString(".").last!
         let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))
         self.registerNib(nib, forCellWithReuseIdentifier: kActionCellIdentifier)
     }
@@ -58,7 +52,7 @@ class ActionsCollectionView: UICollectionView {
     }
 
     @objc
-    private func highlightCurrentAction(sender: UIGestureRecognizer) {
+    func highlightAction(forPanGesture sender: UIGestureRecognizer) {
         let touchPoint = sender.locationInView(self)
         let touchIsInCollectionView = CGRectContainsPoint(self.bounds, touchPoint)
 
@@ -129,18 +123,4 @@ extension ActionsCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.actionTapped?(self.actions[indexPath.item])
     }
-}
-
-extension ActionsCollectionView: UIGestureRecognizerDelegate {
-
-    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer != self.panGestureRecognizer {
-            let contentSize = self.contentSize
-            return self.bounds.width >= contentSize.width && self.bounds.height >= contentSize.height
-        }
-
-        return super.gestureRecognizerShouldBegin(gestureRecognizer)
-    }
-
-
 }

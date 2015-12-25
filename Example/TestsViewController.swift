@@ -1,12 +1,13 @@
 import SDCAlertView
 
+@available(iOS 9, *)
 class TestsViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         switch indexPath.row {
             case 0:
-                AlertController.showWithTitle("Title", message: "Message", actionTitle: "OK", customView: nil)
+                AlertController.alertWithTitle("Title", message: "Message", actionTitle: "OK")
 
             case 1, 3:
                 let alert = AlertController(title: "Title", message: "Message")
@@ -18,7 +19,7 @@ class TestsViewController: UITableViewController {
                 let alert = AlertController(title: "Title", message: "Message")
                 alert.addAction(AlertAction(title: "OK", style: .Default))
                 alert.addAction(AlertAction(title: "Cancel", style: .Preferred))
-                alert.setShouldDismissHandler { $0.title == "Cancel" }
+                alert.shouldDismissHandler = { $0?.title == "Cancel" }
                 alert.present()
 
             case 4:
