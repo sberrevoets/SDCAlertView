@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 4.0
+**What's New:**
+- Adds support for presenting action sheets
+- Implements alert behaviors such as parallax and "tap outside to dismiss"
+- Action highlight colors can be changed with custom visual styles
+
+**Changes:**
+This version introduces other changes that are not compatible with previous
+versions of `SDCAlertView`.
+- The `automaticallyFocusFirstTextField` property is now implemented as an alert behavior
+- In Objective-C, the presentation and dismissal methods are now named `presentAnimated:completion:` and `dismissAnimated:completion:` to follow Objective-C nomenclature more closely
+- The title and message label fonts are removed from `VisualStyle`. To change the labels' fonts, please use `attributedTitle` and `attributedMessage` with `NSFontAttributeName` instead.
+- `setShouldDismissHandler()` and `setVisualStyle()` are now properties named `shouldDismissHandler` and `visualStyle` respectively. Their functionality is unchanged.
+- The convenience method `showWithTitle(_:message:actionTitle:customView:)` has been renamed to `alertWithTitle(_:message:actionTitle:customView:)` to provide more consistency with the action sheet's counterpart
+
 ### 3.1.1
 **Bug Fixes:**
 - Fixes a retain cycle
