@@ -101,8 +101,15 @@ class SDCAlertView_UI_Tests: XCTestCase {
         XCTAssertEqual(firstButton.frame.minY, thirdButton.frame.minY)
     }
 
-    func testAlertWithSpinnerContent() {
+    func testAlertWithTextField() {
         showAlertAtIndex(7)
+
+        let textField = XCUIApplication().textFields["Sample text"]
+        XCTAssertGreaterThan(textField.frame.height, 0)
+    }
+
+    func testAlertWithSpinnerContent() {
+        showAlertAtIndex(8)
         XCTAssertTrue(XCUIApplication().activityIndicators["In progress"].exists)
     }
 }
