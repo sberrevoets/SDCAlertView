@@ -45,6 +45,12 @@ class AlertControllerView: UIView {
         return lastElement.frame.maxY + self.visualStyle.contentPadding.bottom
     }
 
+    convenience init() {
+        self.init(frame: .zero)
+        self.titleLabel.font = UIFont.boldSystemFontOfSize(17)
+        self.messageLabel.font = UIFont.systemFontOfSize(13)
+    }
+
     func prepareLayout() {
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.scrollView)
@@ -102,8 +108,6 @@ class AlertControllerView: UIView {
     private func updateUI() {
         self.layer.masksToBounds = true
         self.layer.cornerRadius = self.visualStyle.cornerRadius
-        self.titleLabel.font = self.visualStyle.titleLabelFont
-        self.messageLabel.font = self.visualStyle.messageLabelFont
         self.textFieldsViewController?.visualStyle = self.visualStyle
 
         self.sdc_pinWidth(self.visualStyle.width)
