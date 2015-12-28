@@ -9,7 +9,7 @@ final class TextFieldCell: UITableViewCell {
         didSet {
             oldValue?.removeFromSuperview()
             if let textField = self.textField {
-                addTextField(textField)
+                self.addTextField(textField)
             }
         }
     }

@@ -8,13 +8,13 @@ extension UIViewController {
         if let navigationController = viewController as? UINavigationController
             where !navigationController.viewControllers.isEmpty
         {
-            return topViewController(navigationController.viewControllers.last)
+            return self.topViewController(navigationController.viewControllers.last)
         } else if let tabBarController = viewController as? UITabBarController,
             selectedController = tabBarController.selectedViewController
         {
-            return topViewController(selectedController)
+            return self.topViewController(selectedController)
         } else if let presentedController = viewController?.presentedViewController {
-            return topViewController(presentedController)
+            return self.topViewController(presentedController)
         }
 
         return viewController

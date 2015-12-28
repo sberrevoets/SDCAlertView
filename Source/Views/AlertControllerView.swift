@@ -42,7 +42,7 @@ extension AlertControllerViewRepresentable where Self: UIView {
         }
 
         if behaviors.contains(.Parallax) {
-            addParallax()
+            self.addParallax()
         }
     }
 

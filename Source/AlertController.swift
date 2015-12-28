@@ -136,7 +136,7 @@ public class AlertController: UIViewController {
     {
         self.init()
         self.preferredStyle = preferredStyle
-        commonInit()
+        self.commonInit()
 
         self.attributedTitle = attributedTitle
         self.attributedMessage = attributedMessage
@@ -154,7 +154,7 @@ public class AlertController: UIViewController {
     public convenience init(title: String?, message: String?, preferredStyle: AlertControllerStyle = .Alert) {
         self.init()
         self.preferredStyle = preferredStyle
-        commonInit()
+        self.commonInit()
 
         self.title = title
         self.message = message
@@ -226,8 +226,8 @@ public class AlertController: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        listenForKeyboardChanges()
-        configureAlertView()
+        self.listenForKeyboardChanges()
+        self.configureAlertView()
     }
 
     public override func viewDidLayoutSubviews() {
@@ -272,11 +272,11 @@ public class AlertController: UIViewController {
             self.alertView.addBehaviors(behaviors)
         }
 
-        addTextFieldsIfNecessary()
-        addChromeTapHandlerIfNecessary()
+        self.addTextFieldsIfNecessary()
+        self.addChromeTapHandlerIfNecessary()
 
         self.view.addSubview(self.alertView)
-        createViewConstraints()
+        self.createViewConstraints()
 
         self.alertView.prepareLayout()
         self.alertView.actionTappedHandler = { [weak self] action in
@@ -315,7 +315,7 @@ public class AlertController: UIViewController {
 
         let textFieldsViewController = TextFieldsViewController(textFields: textFields)
         textFieldsViewController.willMoveToParentViewController(self)
-        addChildViewController(textFieldsViewController)
+        self.addChildViewController(textFieldsViewController)
         alert.textFieldsViewController = textFieldsViewController
         textFieldsViewController.didMoveToParentViewController(self)
     }

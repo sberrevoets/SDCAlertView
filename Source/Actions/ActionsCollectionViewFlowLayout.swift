@@ -27,17 +27,17 @@ final class ActionsCollectionViewFlowLayout: UICollectionViewFlowLayout {
         var mutableAttributes = attributes
 
         for attribute in attributes {
-            if let horizontalAttributes = layoutAttributesForDecorationViewOfKind(kHorizontalActionSeparator,
+            if let horizontal = self.layoutAttributesForDecorationViewOfKind(kHorizontalActionSeparator,
                 atIndexPath: attribute.indexPath)
             {
-                mutableAttributes.append(horizontalAttributes)
+                mutableAttributes.append(horizontal)
             }
 
             if self.scrollDirection == .Horizontal && attribute.indexPath.item > 0,
-                let verticalAttributes = layoutAttributesForDecorationViewOfKind(kVerticalActionSeparator,
+                let vertical = layoutAttributesForDecorationViewOfKind(kVerticalActionSeparator,
                 atIndexPath: attribute.indexPath)
             {
-                mutableAttributes.append(verticalAttributes)
+                mutableAttributes.append(vertical)
             }
         }
 
@@ -49,7 +49,7 @@ final class ActionsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     {
         let attributes = ActionsCollectionViewLayoutAttributes(forDecorationViewOfKind: elementKind,
             withIndexPath: indexPath)
-        guard let itemAttributes = layoutAttributesForItemAtIndexPath(indexPath) else { return nil }
+        guard let itemAttributes = self.layoutAttributesForItemAtIndexPath(indexPath) else { return nil }
 
         attributes.zIndex = itemAttributes.zIndex + 1
         attributes.backgroundColor = self.visualStyle?.actionViewSeparatorColor

@@ -63,10 +63,12 @@ class ActionsCollectionView: UICollectionView {
             self.highlightedCell = nil
         }
 
-        guard let indexPath = indexPathForItemAtPoint(touchPoint), cell = cellForItemAtIndexPath(indexPath)
-            where cell != self.highlightedCell && self.actions[indexPath.item].enabled else {
-                return
-            }
+        guard let indexPath = self.indexPathForItemAtPoint(touchPoint),
+                  cell = self.cellForItemAtIndexPath(indexPath)
+              where cell != self.highlightedCell && self.actions[indexPath.item].enabled else
+        {
+            return
+        }
 
         if sender.state == .Began || sender.state == .Changed {
             self.highlightedCell?.highlighted = false
