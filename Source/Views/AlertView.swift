@@ -36,6 +36,12 @@ class AlertView: AlertControllerView {
         return lastElement.frame.maxY + self.visualStyle.contentPadding.bottom
     }
 
+    convenience init() {
+        self.init(frame: .zero)
+        self.titleLabel.font = UIFont.boldSystemFontOfSize(17)
+        self.messageLabel.font = UIFont.systemFontOfSize(13)
+    }
+
     override func prepareLayout() {
         super.prepareLayout()
 
