@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 4.0.1
+**Bug Fixes:**
+- Fixes incorrect fonts for text in alerts
+
 ## 4.0
 **What's New:**
 - Adds support for presenting action sheets
