@@ -268,11 +268,12 @@ public class AlertController: UIViewController {
     private func configureAlertView() {
         self.alertView.translatesAutoresizingMaskIntoConstraints = false
         self.alertView.visualStyle = self.visualStyle
+        if let behaviors = self.behaviors {
+            self.alertView.addBehaviors(behaviors)
+        }
 
         addTextFieldsIfNecessary()
         addChromeTapHandlerIfNecessary()
-        addParallaxIfNecessary()
-        enableDragTapIfNecessary()
 
         self.view.addSubview(self.alertView)
         createViewConstraints()
@@ -333,18 +334,6 @@ public class AlertController: UIViewController {
     private func chromeTapped(sender: UITapGestureRecognizer) {
         if !self.alertView.frame.contains(sender.locationInView(self.view)) {
             self.dismiss()
-        }
-    }
-
-    private func addParallaxIfNecessary() {
-        if self.behaviors?.contains(.Parallax) == true {
-            (self.alertView as? AlertView)?.addParallax()
-        }
-    }
-
-    private func enableDragTapIfNecessary() {
-        if self.behaviors?.contains(.DragTap) == true {
-            self.alertView.enableDragTapBehavior()
         }
     }
 

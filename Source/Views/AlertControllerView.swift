@@ -17,7 +17,7 @@ protocol AlertControllerViewRepresentable {
     var messageLabel: AlertLabel! { get }
     var actionsCollectionView: ActionsCollectionView! { get }
 
-    func enableDragTapBehavior()
+    func addBehaviors(behaviors: AlertBehaviors)
     func prepareLayout()
 }
 
@@ -35,9 +35,32 @@ extension AlertControllerViewRepresentable where Self: UIView {
 
     var topView: UIView { return self }
 
-    func enableDragTapBehavior() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: "highlightActionForPanGesture:")
-        self.addGestureRecognizer(panGesture)
+    func addBehaviors(behaviors: AlertBehaviors) {
+        if behaviors.contains(.DragTap) {
+            let panGesture = UIPanGestureRecognizer(target: self, action: "highlightActionForPanGesture:")
+            self.addGestureRecognizer(panGesture)
+        }
+
+        if behaviors.contains(.Parallax) {
+            addParallax()
+        }
+    }
+
+    private func addParallax() {
+        let parallax = self.visualStyle.parallax
+
+        let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .TiltAlongHorizontalAxis)
+        horizontal.minimumRelativeValue = NSNumber(float: Float(-parallax.horizontal))
+        horizontal.maximumRelativeValue = NSNumber(float: Float(parallax.horizontal))
+
+        let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .TiltAlongVerticalAxis)
+        vertical.minimumRelativeValue = NSNumber(float: Float(-parallax.vertical))
+        vertical.maximumRelativeValue = NSNumber(float: Float(parallax.vertical))
+
+        let group = UIMotionEffectGroup()
+        group.motionEffects = [horizontal, vertical]
+
+        self.addMotionEffect(group)
     }
 }
 
