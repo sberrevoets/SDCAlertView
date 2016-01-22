@@ -92,7 +92,7 @@ class AlertView: AlertControllerView {
     }
 
     private func updateUI() {
-        self.layer.masksToBounds = true
+        self.layer.masksToBounds = false
         self.layer.cornerRadius = self.visualStyle.cornerRadius
         self.textFieldsViewController?.visualStyle = self.visualStyle
     }
