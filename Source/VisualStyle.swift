@@ -56,6 +56,8 @@ public protocol VisualStyle {
     */
     func font(forAction action: AlertAction?) -> UIFont
 
+    func backgroundColor(forAction action: AlertAction?) -> UIColor?
+
     /// The font used in text fields
     var textFieldFont: UIFont { get }
 
@@ -155,5 +157,9 @@ public class DefaultVisualStyle: VisualStyle {
             case (.ActionSheet, _):
                 return UIFont.systemFontOfSize(20)
         }
+    }
+
+    public func backgroundColor(forAction action: AlertAction?) -> UIColor? {
+        return nil
     }
 }
