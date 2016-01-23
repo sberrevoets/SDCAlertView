@@ -21,6 +21,7 @@ final class ActionCell: UICollectionViewCell {
         self.titleLabel.attributedText = action.attributedTitle
 
         self.highlightedBackgroundView.backgroundColor = visualStyle.actionHighlightColor
+        self.contentView.backgroundColor = visualStyle.backgroundColor(forAction: action)
 
         self.titleLabel.accessibilityLabel = action.attributedTitle?.string
         self.isAccessibilityElement = true
