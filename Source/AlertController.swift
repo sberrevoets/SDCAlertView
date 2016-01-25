@@ -131,10 +131,10 @@ public class AlertController: UIViewController {
     - parameter message:        An optional stylized message
     - parameter preferredStyle: The preferred presentation style of the alert. Default is Alert.
     */
-    public convenience init(attributedTitle: NSAttributedString?, attributedMessage: NSAttributedString?,
+    public init(attributedTitle: NSAttributedString?, attributedMessage: NSAttributedString?,
         preferredStyle: AlertControllerStyle = .Alert)
     {
-        self.init()
+        super.init(nibName: nil, bundle: nil)
         self.preferredStyle = preferredStyle
         self.commonInit()
 
@@ -152,12 +152,14 @@ public class AlertController: UIViewController {
     - parameter preferredStyle: The preferred presentation style of the alert. Default is Alert.
     */
     public convenience init(title: String?, message: String?, preferredStyle: AlertControllerStyle = .Alert) {
-        self.init()
-        self.preferredStyle = preferredStyle
-        self.commonInit()
+        self.init(attributedTitle: nil, attributedMessage: nil, preferredStyle: preferredStyle)
 
         self.title = title
         self.message = message
+    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
     private func commonInit() {
