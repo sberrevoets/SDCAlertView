@@ -33,7 +33,7 @@ class AlertView: AlertControllerView {
     private var contentHeight: CGFloat {
         if (self.contentView.subviews.count > 0) {
             self.contentView.layoutIfNeeded()
-            return contentView.frame.height + self.visualStyle.contentPadding.bottom
+            return contentView.frame.height
         } else {
             guard let lastElement = self.elements.last else { return 0 }
 
