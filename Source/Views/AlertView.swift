@@ -86,7 +86,7 @@ class AlertView: AlertControllerView {
         }
 
         self.contentView.removeFromSuperview()
-        addSubview(self.contentView)
+        self.addSubview(self.contentView)
         
         self.actionsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         self.primaryView.addSubview(self.actionsCollectionView)
@@ -122,14 +122,14 @@ class AlertView: AlertControllerView {
         createTextFieldsConstraints()
         createCustomContentViewConstraints()
         createCollectionViewConstraints()
-        createScrollViewConstraints()
         createPrimaryViewConstraints()
+        createScrollViewConstraints()
     }
 
     private func createTitleLabelConstraints() {
-        addConstraint(NSLayoutConstraint(item: self.titleLabel, attribute: .FirstBaseline, relatedBy: .Equal,
-            toItem: self.primaryView, attribute: .Top, multiplier: 1, constant: self.visualStyle.contentPadding.top))
         let contentPadding = self.visualStyle.contentPadding
+        self.addConstraint(NSLayoutConstraint(item: self.titleLabel, attribute: .FirstBaseline,
+            relatedBy: .Equal, toItem: self.primaryView, attribute: .Top, multiplier: 1, constant: contentPadding.top))
         let insets = UIEdgeInsets(top: 0, left: contentPadding.left, bottom: 0, right: -contentPadding.right)
         self.titleLabel.sdc_alignEdges([.Left, .Right], withView: self.primaryView, insets: insets)
 
@@ -187,6 +187,7 @@ class AlertView: AlertControllerView {
         heightConstraint.priority = UILayoutPriorityDefaultHigh
         self.actionsCollectionView.addConstraint(heightConstraint)
         self.actionsCollectionView.sdc_pinWidthToWidthOfView(self.primaryView)
+        self.actionsCollectionView.sdc_alignEdge(.Top, withEdge: .Bottom, ofView: self.scrollView)
         self.actionsCollectionView.sdc_alignHorizontalCenterWithView(self.primaryView)
         self.actionsCollectionView.sdc_alignEdges(.Bottom, withView: self.primaryView)
     }
@@ -198,9 +199,8 @@ class AlertView: AlertControllerView {
         self.scrollView.sdc_alignEdges([.Left, .Right], withView: self.primaryView)
         self.scrollView.layoutIfNeeded()
         self.scrollView.sdc_pinHeight(self.scrollView.contentSize.height)
-        self.scrollView.sdc_alignEdge(.Bottom, withEdge: .Top, ofView: self.actionsCollectionView)
     }
-
+    
     private func createPrimaryViewConstraints() {
         self.primaryView.sdc_alignEdges([.Left, .Right, .Top], withView: self)
         self.primaryView.sdc_pinWidthToWidthOfView(self)
