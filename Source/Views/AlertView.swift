@@ -186,7 +186,12 @@ class AlertView: AlertControllerView {
     private func createScrollViewConstraints() {
         self.scrollView.sdc_alignEdges([.Left, .Right, .Top], withView: self)
         self.scrollView.layoutIfNeeded()
-        self.scrollView.sdc_pinHeight(self.scrollView.contentSize.height)
+
+        let scrollViewHeight = self.scrollView.contentSize.height
+        let constraint = NSLayoutConstraint(item: self.scrollView, attribute: .Height, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: scrollViewHeight)
+        constraint.priority = UILayoutPriorityDefaultHigh
+        self.scrollView.addConstraint(constraint)
     }
 
     private func pinBottomOfScrollViewToView(view: UIView, withPriority priority: UILayoutPriority) {
