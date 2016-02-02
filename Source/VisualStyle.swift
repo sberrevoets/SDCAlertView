@@ -29,10 +29,22 @@ public protocol VisualStyle {
     /// automatically determined.
     var actionViewSize: CGSize { get }
 
-    /// The color of an action
+    /**
+    The color of an action
+     
+     - parameter action: The action to determine its color
+     
+     - returns: The action color
+    */
     func actionColor(forAction action: AlertAction?) -> UIColor
 
-    /// The color of an action when the user is tapping it
+    /**
+    The color of an action when the user is tapping it
+    
+     - parameter action: The action to determine its highlighted color
+    
+    - returns: The action higlighted color
+    */
     func actionHighlightColor(forAction action: AlertAction?) -> UIColor
 
     /// The color of the separators between actions
