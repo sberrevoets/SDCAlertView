@@ -29,8 +29,11 @@ public protocol VisualStyle {
     /// automatically determined.
     var actionViewSize: CGSize { get }
 
+    /// The color of an action
+    func actionColor(forAction action: AlertAction?) -> UIColor
+
     /// The color of an action when the user is tapping it
-    var actionHighlightColor: UIColor { get }
+    func actionHighlightColor(forAction action: AlertAction?) -> UIColor
 
     /// The color of the separators between actions
     var actionViewSeparatorColor: UIColor { get }
@@ -82,7 +85,9 @@ extension VisualStyle {
 
     public var verticalElementSpacing: CGFloat { return 24 }
 
-    public var actionHighlightColor: UIColor { return UIColor(white: 0.8, alpha: 0.7) }
+    public func actionColor(forAction action: AlertAction?) -> UIColor { return .clearColor() }
+    public func actionHighlightColor(forAction action: AlertAction?) -> UIColor { return UIColor(white: 0.8, alpha: 0.7) }
+
     public var actionViewSeparatorColor: UIColor { return UIColor(white: 0.5, alpha: 0.5) }
     public var actionViewSeparatorThickness: CGFloat { return 1 / UIScreen.mainScreen().scale }
 
