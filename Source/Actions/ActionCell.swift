@@ -5,7 +5,7 @@ final class ActionCell: UICollectionViewCell {
     @IBOutlet private(set) var titleLabel: UILabel!
     @IBOutlet private var highlightedBackgroundView: UIView!
 
-    private var titleLabelColorFromVisualStyle:UIColor?
+    private var textColor:UIColor?
     
     var enabled = true {
         didSet { self.titleLabel.enabled = self.enabled }
@@ -20,8 +20,8 @@ final class ActionCell: UICollectionViewCell {
 
         self.titleLabel.font = visualStyle.font(forAction: action)
         
-        titleLabelColorFromVisualStyle = visualStyle.textColor(forAction: action)
-        self.titleLabel.textColor = titleLabelColorFromVisualStyle ?? self.tintColor
+        self.textColor = visualStyle.textColor(forAction: action)
+        self.titleLabel.textColor = self.textColor ?? self.tintColor
         
         self.titleLabel.attributedText = action.attributedTitle
 
@@ -33,7 +33,7 @@ final class ActionCell: UICollectionViewCell {
 
     override func tintColorDidChange() {
         super.tintColorDidChange()
-        self.titleLabel.textColor = titleLabelColorFromVisualStyle ?? self.tintColor
+        self.titleLabel.textColor = textColor ?? self.tintColor
     }
 }
 

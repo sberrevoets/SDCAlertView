@@ -87,10 +87,7 @@ extension VisualStyle {
     public var actionViewSeparatorThickness: CGFloat { return 1 / UIScreen.mainScreen().scale }
 
     public func textColor(forAction action: AlertAction?) -> UIColor? {
-        if action?.style == .Destructive {
-            return UIColor.redColor()
-        }
-        return nil
+        return action?.style == .Destructive ? UIColor.redColor() : nil
     }
 
     public var textFieldFont: UIFont { return UIFont.systemFontOfSize(13) }
