@@ -98,7 +98,8 @@ extension VisualStyle {
     public var textFieldMargins: UIEdgeInsets { return UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4) }
 }
 
-public class DefaultVisualStyle: VisualStyle {
+@objc(SDCDefaultVisualStyle)
+public class DefaultVisualStyle: NSObject, VisualStyle {
 
     private let alertStyle: AlertControllerStyle
     init(alertStyle: AlertControllerStyle) { self.alertStyle = alertStyle }

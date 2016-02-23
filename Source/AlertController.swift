@@ -108,7 +108,7 @@ public class AlertController: UIViewController {
     public var shouldDismissHandler: (AlertAction? -> Bool)?
 
     /// The visual style that applies to the alert or action sheet.
-    public lazy var visualStyle: VisualStyle = DefaultVisualStyle(alertStyle: self.preferredStyle)
+    public lazy var visualStyle: DefaultVisualStyle = DefaultVisualStyle(alertStyle: self.preferredStyle)
 
     /// The alert's presentation style.
     private(set) public var preferredStyle: AlertControllerStyle = .Alert
