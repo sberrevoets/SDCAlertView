@@ -22,7 +22,7 @@ final class ActionCell: UICollectionViewCell {
 
         self.highlightedBackgroundView.backgroundColor = visualStyle.actionHighlightColor
 
-        self.titleLabel.accessibilityLabel = action.attributedTitle?.string
+        self.accessibilityLabel = action.attributedTitle?.string
         self.isAccessibilityElement = true
     }
 
