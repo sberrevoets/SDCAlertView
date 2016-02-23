@@ -91,13 +91,9 @@ public class AlertController: UIViewController {
     }
 
     /// The layout of the actions in the alert.
-    public var actionLayout: ActionLayout? {
-        get { return (self.alertView as? AlertView)?.actionLayout }
-        set {
-            if let newValue = newValue {
-                (self.alertView as? AlertView)?.actionLayout = newValue
-            }
-        }
+    public var actionLayout: ActionLayout {
+        get { return (self.alertView as? AlertView)?.actionLayout ?? .Automatic }
+        set { (self.alertView as? AlertView)?.actionLayout = newValue }
     }
 
     /// The text fields that are added to the alert. Does nothing when used with an action sheet.
