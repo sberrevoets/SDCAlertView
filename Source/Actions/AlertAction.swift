@@ -7,7 +7,7 @@ The action's style
 - Preferred:   The action will take a style that indicates it's the preferred option
 - Destructive: The action will convey that this action will do something destructive
 */
-@objc
+@objc(SDCAlertActionStyle)
 public enum AlertActionStyle: Int {
     case Default
     case Preferred

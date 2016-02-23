@@ -37,7 +37,8 @@ extension AlertControllerViewRepresentable where Self: UIView {
 
     func addBehaviors(behaviors: AlertBehaviors) {
         if behaviors.contains(.DragTap) {
-            let panGesture = UIPanGestureRecognizer(target: self, action: "highlightActionForPanGesture:")
+            let panGesture = UIPanGestureRecognizer(target: self,
+                action: #selector(AlertControllerView.highlightActionForPanGesture(_:)))
             self.addGestureRecognizer(panGesture)
         }
 
