@@ -28,7 +28,7 @@
 
 # Requirements
 
- - Xcode 7 or higher
+ - Xcode 7.3 or higher
  - iOS 8 or higher
 
 If you want to use the library on iOS 7, please use version 2.5.4 (the latest 2.x release). SDCAlertView is not available on iOS 6.1 or below.
@@ -43,7 +43,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-  pod 'SDCAlertView', '~> 4.0'
+  pod 'SDCAlertView', '~> 5.0'
 end
 ```
 
@@ -53,7 +53,7 @@ Then run `pod install`.
 To install with Carthage, add the following line to your `Cartfile`:
 
 ```ruby
-"sberrevoets/SDCAlertView" ~> 4.0
+"sberrevoets/SDCAlertView" ~> 5.0
 ```
 
 Run `carthage update` and drag `SDCAlertView.framework` in the `Build` folder into your project.
