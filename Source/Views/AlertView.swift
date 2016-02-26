@@ -62,11 +62,12 @@ class AlertView: AlertControllerView {
         if let color = self.visualStyle.backgroundColor {
             self.backgroundColor = color
         } else {
-            let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
-            backgroundView.translatesAutoresizingMaskIntoConstraints = false
-
-            self.insertSubview(backgroundView, belowSubview: self.scrollView)
-            backgroundView.sdc_alignEdges(.All, withView: self)
+            self.backgroundColor = UIColor.whiteColor()
+//            let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+//            backgroundView.translatesAutoresizingMaskIntoConstraints = false
+//
+//            self.insertSubview(backgroundView, belowSubview: self.scrollView)
+//            backgroundView.sdc_alignEdges(.All, withView: self)
         }
     }
 
