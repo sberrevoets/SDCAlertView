@@ -43,7 +43,7 @@ public protocol VisualStyle {
 
     - parameter action: The action that determines the text color
 
-    - returns: The text color
+    - returns: The text color. nil value will use the alert's tintColor.
     */
     func textColor(forAction action: AlertAction?) -> UIColor?
 
