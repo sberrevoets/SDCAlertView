@@ -5,7 +5,7 @@ final class ActionCell: UICollectionViewCell {
     @IBOutlet private(set) var titleLabel: UILabel!
     @IBOutlet private var highlightedBackgroundView: UIView!
 
-    private var textColor:UIColor?
+    private var textColor: UIColor?
     
     var enabled = true {
         didSet { self.titleLabel.enabled = self.enabled }
