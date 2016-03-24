@@ -43,9 +43,9 @@ public protocol VisualStyle {
 
     - parameter action: The action that determines the text color
 
-    - returns: The text color
+    - returns: The text color. nil value will use the alert's tintColor.
     */
-    func textColor(forAction action: AlertAction?) -> UIColor
+    func textColor(forAction action: AlertAction?) -> UIColor?
 
     /**
     The font for a given action
@@ -86,12 +86,8 @@ extension VisualStyle {
     public var actionViewSeparatorColor: UIColor { return UIColor(white: 0.5, alpha: 0.5) }
     public var actionViewSeparatorThickness: CGFloat { return 1 / UIScreen.mainScreen().scale }
 
-    public func textColor(forAction action: AlertAction?) -> UIColor {
-        if action?.style == .Destructive {
-            return UIColor.redColor()
-        } else {
-            return UIView().tintColor
-        }
+    public func textColor(forAction action: AlertAction?) -> UIColor? {
+        return action?.style == .Destructive ? UIColor.redColor() : nil
     }
 
     public var textFieldFont: UIFont { return UIFont.systemFontOfSize(13) }
