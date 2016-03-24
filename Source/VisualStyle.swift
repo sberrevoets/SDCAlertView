@@ -102,7 +102,7 @@ extension VisualStyle {
 public class DefaultVisualStyle: NSObject, VisualStyle {
 
     private let alertStyle: AlertControllerStyle
-    init(alertStyle: AlertControllerStyle) { self.alertStyle = alertStyle }
+    public init(alertStyle: AlertControllerStyle) { self.alertStyle = alertStyle }
 
     public var width: CGFloat { return self.alertStyle == .Alert ? 270 : 1 }
 
