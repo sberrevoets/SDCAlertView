@@ -72,39 +72,15 @@ public protocol VisualStyle {
     var textFieldMargins: UIEdgeInsets { get }
 }
 
-extension VisualStyle {
-
-    public var contentPadding: UIEdgeInsets { return UIEdgeInsets(top: 36, left: 16, bottom: 12, right: 16) }
-
-    public var parallax: UIOffset { return UIOffset(horizontal: 15.75, vertical: 15.75) }
-
-    public var backgroundColor: UIColor? { return nil }
-
-    public var verticalElementSpacing: CGFloat { return 24 }
-
-    public var actionHighlightColor: UIColor { return UIColor(white: 0.8, alpha: 0.7) }
-    public var actionViewSeparatorColor: UIColor { return UIColor(white: 0.5, alpha: 0.5) }
-    public var actionViewSeparatorThickness: CGFloat { return 1 / UIScreen.mainScreen().scale }
-
-    public func textColor(forAction action: AlertAction?) -> UIColor? {
-        return action?.style == .Destructive ? UIColor.redColor() : nil
-    }
-
-    public var textFieldFont: UIFont { return UIFont.systemFontOfSize(13) }
-    public var textFieldHeight: CGFloat { return 25 }
-    public var textFieldBorderColor: UIColor {
-        return UIColor(red: 64/255, green: 64/255, blue: 64/255, alpha: 1)
-    }
-    public var textFieldMargins: UIEdgeInsets { return UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4) }
-}
-
 @objc(SDCDefaultVisualStyle)
 public class DefaultVisualStyle: NSObject, VisualStyle {
 
     private let alertStyle: AlertControllerStyle
     public init(alertStyle: AlertControllerStyle) { self.alertStyle = alertStyle }
 
-    public var width: CGFloat { return self.alertStyle == .Alert ? 270 : 1 }
+    public var width: CGFloat {
+        return self.alertStyle == .Alert ? 270 : 1
+    }
 
     public var cornerRadius: CGFloat {
         if #available(iOS 9, *) {
@@ -112,6 +88,10 @@ public class DefaultVisualStyle: NSObject, VisualStyle {
         } else {
             return self.alertStyle == .Alert ? 7 : 4
         }
+    }
+
+    public var contentPadding: UIEdgeInsets {
+        return UIEdgeInsets(top: 36, left: 16, bottom: 12, right: 16)
     }
 
     public var margins: UIEdgeInsets {
@@ -130,12 +110,40 @@ public class DefaultVisualStyle: NSObject, VisualStyle {
         }
     }
 
+    public var parallax: UIOffset {
+        return UIOffset(horizontal: 15.75, vertical: 15.75)
+    }
+
+    public var backgroundColor: UIColor? {
+        return nil
+    }
+
+    public var verticalElementSpacing: CGFloat {
+        return 24
+    }
+
     public var actionViewSize: CGSize {
         if #available(iOS 9, *) {
             return self.alertStyle == .Alert ? CGSize(width: 90, height: 44) : CGSize(width: 90, height: 57)
         } else {
             return CGSize(width: 90, height: 44)
         }
+    }
+
+    public var actionHighlightColor: UIColor {
+        return UIColor(white: 0.8, alpha: 0.7)
+    }
+
+    public var actionViewSeparatorColor: UIColor {
+        return UIColor(white: 0.5, alpha: 0.5)
+    }
+
+    public var actionViewSeparatorThickness: CGFloat {
+        return 1 / UIScreen.mainScreen().scale
+    }
+
+    public func textColor(forAction action: AlertAction?) -> UIColor? {
+        return action?.style == .Destructive ? UIColor.redColor() : nil
     }
 
     public func font(forAction action: AlertAction?) -> UIFont {
@@ -153,4 +161,21 @@ public class DefaultVisualStyle: NSObject, VisualStyle {
                 return UIFont.systemFontOfSize(20)
         }
     }
+
+    public var textFieldFont: UIFont {
+        return UIFont.systemFontOfSize(13)
+    }
+
+    public var textFieldHeight: CGFloat {
+        return 25
+    }
+
+    public var textFieldBorderColor: UIColor {
+        return UIColor(red: 64/255, green: 64/255, blue: 64/255, alpha: 1)
+    }
+
+    public var textFieldMargins: UIEdgeInsets {
+        return UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+    }
+
 }
