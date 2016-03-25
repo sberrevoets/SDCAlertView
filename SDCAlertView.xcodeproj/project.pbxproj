@@ -7,299 +7,63 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D23B53751BF473BC00AB5BBE = {
-			isa = PBXBuildFile;
-			fileRef = D23B53741BF473BC00AB5BBE;
-		};
-		D23B53771BF473CC00AB5BBE = {
-			isa = PBXBuildFile;
-			fileRef = D23B53761BF473CC00AB5BBE;
-		};
-		D2515EC41BC1A7D500ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2515EC31BC1A7D500ED606F;
-			settings = {
-				ATTRIBUTES = (
-					Public,
-				);
-			};
-		};
-		D2515ECB1BC1A83800ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30AA71BC19F9300984652;
-		};
-		D2515ECD1BC1A84D00ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A701BC120C900984652;
-		};
-		D2515ECE1BC1A84D00ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A711BC120C900984652;
-		};
-		D2515ECF1BC1A84D00ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A721BC120C900984652;
-		};
-		D2515ED01BC1A84D00ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A731BC120C900984652;
-		};
-		D2515ED11BC1A84D00ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A741BC120C900984652;
-		};
-		D2515ED21BC1A85200ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A791BC120C900984652;
-		};
-		D2515ED31BC1A85200ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A7A1BC120C900984652;
-		};
-		D2515ED41BC1A85200ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A7B1BC120C900984652;
-		};
-		D2515ED51BC1A85200ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A7C1BC120C900984652;
-		};
-		D2515ED61BC1A85800ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A7E1BC120C900984652;
-		};
-		D2515ED71BC1A85800ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A7F1BC120C900984652;
-		};
-		D2515ED81BC1A85800ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A801BC120C900984652;
-		};
-		D2515EDA1BC1A85800ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A761BC120C900984652;
-		};
-		D2515EDB1BC1A85800ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A771BC120C900984652;
-		};
-		D2515EDC1BC1A85800ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A811BC120C900984652;
-		};
-		D2515EDE1BC1A94A00ED606F = {
-			isa = PBXBuildFile;
-			fileRef = D2C30AA61BC19F9300984652;
-			settings = {
-				ATTRIBUTES = (
-					Public,
-				);
-			};
-		};
-		D253B1C81C2AC78D00C37E0F = {
-			isa = PBXBuildFile;
-			fileRef = D253B1C71C2AC78D00C37E0F;
-		};
-		D2A48B441C2E09CE009DD715 = {
-			isa = PBXBuildFile;
-			fileRef = D2A48B431C2E09CE009DD715;
-		};
-		D2DE585A1C08261E0041DFDE = {
-			isa = PBXBuildFile;
-			fileRef = D2DE58591C08261E0041DFDE;
-		};
-		D2DE585B1C082F460041DFDE = {
-			isa = PBXBuildFile;
-			fileRef = D2C30A751BC120C900984652;
-		};
+		D23B53751BF473BC00AB5BBE /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B53741BF473BC00AB5BBE /* AlertView.swift */; };
+		D23B53771BF473CC00AB5BBE /* ActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B53761BF473CC00AB5BBE /* ActionSheetView.swift */; };
+		D2515EC41BC1A7D500ED606F /* SDCAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = D2515EC31BC1A7D500ED606F /* SDCAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D2515ECB1BC1A83800ED606F /* UIView+SDCAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C30AA71BC19F9300984652 /* UIView+SDCAutoLayout.m */; };
+		D2515ECD1BC1A84D00ED606F /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A701BC120C900984652 /* ActionCell.swift */; };
+		D2515ECE1BC1A84D00ED606F /* ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C30A711BC120C900984652 /* ActionCell.xib */; };
+		D2515ECF1BC1A84D00ED606F /* ActionsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A721BC120C900984652 /* ActionsCollectionView.swift */; };
+		D2515ED01BC1A84D00ED606F /* ActionsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A731BC120C900984652 /* ActionsCollectionViewFlowLayout.swift */; };
+		D2515ED11BC1A84D00ED606F /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A741BC120C900984652 /* AlertAction.swift */; };
+		D2515ED21BC1A85200ED606F /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A791BC120C900984652 /* AnimationController.swift */; };
+		D2515ED31BC1A85200ED606F /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7A1BC120C900984652 /* PresentationController.swift */; };
+		D2515ED41BC1A85200ED606F /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7B1BC120C900984652 /* Transition.swift */; };
+		D2515ED51BC1A85200ED606F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */; };
+		D2515ED61BC1A85800ED606F /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7E1BC120C900984652 /* TextFieldCell.swift */; };
+		D2515ED71BC1A85800ED606F /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C30A7F1BC120C900984652 /* TextFieldCell.xib */; };
+		D2515ED81BC1A85800ED606F /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A801BC120C900984652 /* TextFieldsViewController.swift */; };
+		D2515EDA1BC1A85800ED606F /* AlertControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A761BC120C900984652 /* AlertControllerView.swift */; };
+		D2515EDB1BC1A85800ED606F /* AlertLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A771BC120C900984652 /* AlertLabel.swift */; };
+		D2515EDC1BC1A85800ED606F /* VisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A811BC120C900984652 /* VisualStyle.swift */; };
+		D2515EDE1BC1A94A00ED606F /* UIView+SDCAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = D2C30AA61BC19F9300984652 /* UIView+SDCAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D253B1C81C2AC78D00C37E0F /* AlertBehaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B1C71C2AC78D00C37E0F /* AlertBehaviors.swift */; };
+		D2A48B441C2E09CE009DD715 /* AlertController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A48B431C2E09CE009DD715 /* AlertController+Convenience.swift */; };
+		D2DE585A1C08261E0041DFDE /* ActionSheetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2DE58591C08261E0041DFDE /* ActionSheetView.xib */; };
+		D2DE585B1C082F460041DFDE /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A751BC120C900984652 /* AlertController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D23B53741BF473BC00AB5BBE = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = AlertView.swift;
-			sourceTree = "<group>";
-		};
-		D23B53761BF473CC00AB5BBE = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = ActionSheetView.swift;
-			sourceTree = "<group>";
-		};
-		D2515EC11BC1A7D500ED606F = {
-			isa = PBXFileReference;
-			explicitFileType = wrapper.framework;
-			includeInIndex = 0;
-			path = SDCAlertView.framework;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D2515EC31BC1A7D500ED606F = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			path = SDCAlertView.h;
-			sourceTree = "<group>";
-		};
-		D2515EC51BC1A7D500ED606F = {
-			isa = PBXFileReference;
-			lastKnownFileType = text.plist.xml;
-			path = Info.plist;
-			sourceTree = "<group>";
-		};
-		D253B1C71C2AC78D00C37E0F = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = AlertBehaviors.swift;
-			sourceTree = "<group>";
-		};
-		D2A48B431C2E09CE009DD715 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = "AlertController+Convenience.swift";
-			sourceTree = "<group>";
-		};
-		D2C30A701BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = ActionCell.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A711BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = file.xib;
-			path = ActionCell.xib;
-			sourceTree = "<group>";
-		};
-		D2C30A721BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = ActionsCollectionView.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A731BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = ActionsCollectionViewFlowLayout.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A741BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = AlertAction.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A751BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = AlertController.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A761BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = AlertControllerView.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A771BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = AlertLabel.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A791BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = AnimationController.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A7A1BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = PresentationController.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A7B1BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = Transition.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A7C1BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = "UIViewController+Extension.swift";
-			sourceTree = "<group>";
-		};
-		D2C30A7E1BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = TextFieldCell.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A7F1BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = file.xib;
-			path = TextFieldCell.xib;
-			sourceTree = "<group>";
-		};
-		D2C30A801BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = TextFieldsViewController.swift;
-			sourceTree = "<group>";
-		};
-		D2C30A811BC120C900984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.swift;
-			path = VisualStyle.swift;
-			sourceTree = "<group>";
-		};
-		D2C30AA61BC19F9300984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.h;
-			path = "UIView+SDCAutoLayout.h";
-			sourceTree = "<group>";
-		};
-		D2C30AA71BC19F9300984652 = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = sourcecode.c.objc;
-			path = "UIView+SDCAutoLayout.m";
-			sourceTree = "<group>";
-		};
-		D2DE58591C08261E0041DFDE = {
-			isa = PBXFileReference;
-			fileEncoding = 4;
-			lastKnownFileType = file.xib;
-			path = ActionSheetView.xib;
-			sourceTree = "<group>";
-		};
+		D23B53741BF473BC00AB5BBE /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		D23B53761BF473CC00AB5BBE /* ActionSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetView.swift; sourceTree = "<group>"; };
+		D2515EC11BC1A7D500ED606F /* SDCAlertView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SDCAlertView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2515EC31BC1A7D500ED606F /* SDCAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDCAlertView.h; sourceTree = "<group>"; };
+		D2515EC51BC1A7D500ED606F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D253B1C71C2AC78D00C37E0F /* AlertBehaviors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertBehaviors.swift; sourceTree = "<group>"; };
+		D2A48B431C2E09CE009DD715 /* AlertController+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlertController+Convenience.swift"; sourceTree = "<group>"; };
+		D2C30A701BC120C900984652 /* ActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
+		D2C30A711BC120C900984652 /* ActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionCell.xib; sourceTree = "<group>"; };
+		D2C30A721BC120C900984652 /* ActionsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsCollectionView.swift; sourceTree = "<group>"; };
+		D2C30A731BC120C900984652 /* ActionsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		D2C30A741BC120C900984652 /* AlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
+		D2C30A751BC120C900984652 /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		D2C30A761BC120C900984652 /* AlertControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControllerView.swift; sourceTree = "<group>"; };
+		D2C30A771BC120C900984652 /* AlertLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertLabel.swift; sourceTree = "<group>"; };
+		D2C30A791BC120C900984652 /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
+		D2C30A7A1BC120C900984652 /* PresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		D2C30A7B1BC120C900984652 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
+		D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		D2C30A7E1BC120C900984652 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		D2C30A7F1BC120C900984652 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
+		D2C30A801BC120C900984652 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
+		D2C30A811BC120C900984652 /* VisualStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualStyle.swift; sourceTree = "<group>"; };
+		D2C30AA61BC19F9300984652 /* UIView+SDCAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDCAutoLayout.h"; sourceTree = "<group>"; };
+		D2C30AA71BC19F9300984652 /* UIView+SDCAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDCAutoLayout.m"; sourceTree = "<group>"; };
+		D2DE58591C08261E0041DFDE /* ActionSheetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D2515EBD1BC1A7D500ED606F = {
+		D2515EBD1BC1A7D500ED606F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -309,33 +73,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D23B53781BF473DA00AB5BBE = {
+		D23B53781BF473DA00AB5BBE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D23B53761BF473CC00AB5BBE,
-				D2DE58591C08261E0041DFDE,
-				D2C30A761BC120C900984652,
-				D2C30A771BC120C900984652,
-				D23B53741BF473BC00AB5BBE,
+				D23B53761BF473CC00AB5BBE /* ActionSheetView.swift */,
+				D2DE58591C08261E0041DFDE /* ActionSheetView.xib */,
+				D2C30A761BC120C900984652 /* AlertControllerView.swift */,
+				D2C30A771BC120C900984652 /* AlertLabel.swift */,
+				D23B53741BF473BC00AB5BBE /* AlertView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		D2515EC91BC1A80200ED606F = {
+		D2515EC91BC1A80200ED606F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2515EC11BC1A7D500ED606F,
+				D2515EC11BC1A7D500ED606F /* SDCAlertView.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2515ECA1BC1A81100ED606F = {
+		D2515ECA1BC1A81100ED606F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D2515EC51BC1A7D500ED606F,
-				D2515EC31BC1A7D500ED606F,
-				D2C30AA61BC19F9300984652,
-				D2C30AA71BC19F9300984652,
+				D2515EC51BC1A7D500ED606F /* Info.plist */,
+				D2515EC31BC1A7D500ED606F /* SDCAlertView.h */,
+				D2C30AA61BC19F9300984652 /* UIView+SDCAutoLayout.h */,
+				D2C30AA71BC19F9300984652 /* UIView+SDCAutoLayout.m */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -343,57 +107,57 @@
 		D25B3C9B17ECE7A6004B32A2 = {
 			isa = PBXGroup;
 			children = (
-				D2515EC91BC1A80200ED606F,
-				D2F8347218EF2C09000BB281,
+				D2515EC91BC1A80200ED606F /* Products */,
+				D2F8347218EF2C09000BB281 /* Source */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
 		};
-		D2C30A6F1BC120C900984652 = {
+		D2C30A6F1BC120C900984652 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				D2C30A701BC120C900984652,
-				D2C30A711BC120C900984652,
-				D2C30A721BC120C900984652,
-				D2C30A731BC120C900984652,
-				D2C30A741BC120C900984652,
+				D2C30A701BC120C900984652 /* ActionCell.swift */,
+				D2C30A711BC120C900984652 /* ActionCell.xib */,
+				D2C30A721BC120C900984652 /* ActionsCollectionView.swift */,
+				D2C30A731BC120C900984652 /* ActionsCollectionViewFlowLayout.swift */,
+				D2C30A741BC120C900984652 /* AlertAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
 		};
-		D2C30A781BC120C900984652 = {
+		D2C30A781BC120C900984652 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				D2C30A791BC120C900984652,
-				D2C30A7A1BC120C900984652,
-				D2C30A7B1BC120C900984652,
-				D2C30A7C1BC120C900984652,
+				D2C30A791BC120C900984652 /* AnimationController.swift */,
+				D2C30A7A1BC120C900984652 /* PresentationController.swift */,
+				D2C30A7B1BC120C900984652 /* Transition.swift */,
+				D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		D2C30A7D1BC120C900984652 = {
+		D2C30A7D1BC120C900984652 /* Text Fields */ = {
 			isa = PBXGroup;
 			children = (
-				D2C30A7E1BC120C900984652,
-				D2C30A7F1BC120C900984652,
-				D2C30A801BC120C900984652,
+				D2C30A7E1BC120C900984652 /* TextFieldCell.swift */,
+				D2C30A7F1BC120C900984652 /* TextFieldCell.xib */,
+				D2C30A801BC120C900984652 /* TextFieldsViewController.swift */,
 			);
 			path = "Text Fields";
 			sourceTree = "<group>";
 		};
-		D2F8347218EF2C09000BB281 = {
+		D2F8347218EF2C09000BB281 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D2C30A6F1BC120C900984652,
-				D2C30A781BC120C900984652,
-				D2515ECA1BC1A81100ED606F,
-				D2C30A7D1BC120C900984652,
-				D23B53781BF473DA00AB5BBE,
-				D253B1C71C2AC78D00C37E0F,
-				D2A48B431C2E09CE009DD715,
-				D2C30A751BC120C900984652,
-				D2C30A811BC120C900984652,
+				D2C30A6F1BC120C900984652 /* Actions */,
+				D2C30A781BC120C900984652 /* Presentation */,
+				D2515ECA1BC1A81100ED606F /* Supporting Files */,
+				D2C30A7D1BC120C900984652 /* Text Fields */,
+				D23B53781BF473DA00AB5BBE /* Views */,
+				D253B1C71C2AC78D00C37E0F /* AlertBehaviors.swift */,
+				D2A48B431C2E09CE009DD715 /* AlertController+Convenience.swift */,
+				D2C30A751BC120C900984652 /* AlertController.swift */,
+				D2C30A811BC120C900984652 /* VisualStyle.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -401,26 +165,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D2515EBE1BC1A7D500ED606F = {
+		D2515EBE1BC1A7D500ED606F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2515EC41BC1A7D500ED606F,
-				D2515EDE1BC1A94A00ED606F,
+				D2515EC41BC1A7D500ED606F /* SDCAlertView.h in Headers */,
+				D2515EDE1BC1A94A00ED606F /* UIView+SDCAutoLayout.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2515EC01BC1A7D500ED606F = {
+		D2515EC01BC1A7D500ED606F /* SDCAlertView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2515EC61BC1A7D500ED606F;
+			buildConfigurationList = D2515EC61BC1A7D500ED606F /* Build configuration list for PBXNativeTarget "SDCAlertView" */;
 			buildPhases = (
-				D2515EBC1BC1A7D500ED606F,
-				D2515EBD1BC1A7D500ED606F,
-				D2515EBE1BC1A7D500ED606F,
-				D2515EBF1BC1A7D500ED606F,
+				D2515EBC1BC1A7D500ED606F /* Sources */,
+				D2515EBD1BC1A7D500ED606F /* Frameworks */,
+				D2515EBE1BC1A7D500ED606F /* Headers */,
+				D2515EBF1BC1A7D500ED606F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -428,13 +192,13 @@
 			);
 			name = SDCAlertView;
 			productName = SDCAlertView;
-			productReference = D2515EC11BC1A7D500ED606F;
+			productReference = D2515EC11BC1A7D500ED606F /* SDCAlertView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D25B3C9C17ECE7A6004B32A2 = {
+		D25B3C9C17ECE7A6004B32A2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SDC;
@@ -447,7 +211,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D25B3C9F17ECE7A6004B32A2;
+			buildConfigurationList = D25B3C9F17ECE7A6004B32A2 /* Build configuration list for PBXProject "SDCAlertView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -458,59 +222,57 @@
 			mainGroup = D25B3C9B17ECE7A6004B32A2;
 			productRefGroup = D25B3C9B17ECE7A6004B32A2;
 			projectDirPath = "";
-			projectReferences = (
-			);
 			projectRoot = "";
 			targets = (
-				D2515EC01BC1A7D500ED606F,
+				D2515EC01BC1A7D500ED606F /* SDCAlertView */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D2515EBF1BC1A7D500ED606F = {
+		D2515EBF1BC1A7D500ED606F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2515ECE1BC1A84D00ED606F,
-				D2DE585A1C08261E0041DFDE,
-				D2515ED71BC1A85800ED606F,
+				D2515ECE1BC1A84D00ED606F /* ActionCell.xib in Resources */,
+				D2DE585A1C08261E0041DFDE /* ActionSheetView.xib in Resources */,
+				D2515ED71BC1A85800ED606F /* TextFieldCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D2515EBC1BC1A7D500ED606F = {
+		D2515EBC1BC1A7D500ED606F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D253B1C81C2AC78D00C37E0F,
-				D2515ED51BC1A85200ED606F,
-				D2515ED21BC1A85200ED606F,
-				D2515ED81BC1A85800ED606F,
-				D2515ED11BC1A84D00ED606F,
-				D2515ED31BC1A85200ED606F,
-				D23B53771BF473CC00AB5BBE,
-				D2515EDA1BC1A85800ED606F,
-				D2515ECF1BC1A84D00ED606F,
-				D23B53751BF473BC00AB5BBE,
-				D2DE585B1C082F460041DFDE,
-				D2A48B441C2E09CE009DD715,
-				D2515ECB1BC1A83800ED606F,
-				D2515ED01BC1A84D00ED606F,
-				D2515EDC1BC1A85800ED606F,
-				D2515ED41BC1A85200ED606F,
-				D2515EDB1BC1A85800ED606F,
-				D2515ECD1BC1A84D00ED606F,
-				D2515ED61BC1A85800ED606F,
+				D253B1C81C2AC78D00C37E0F /* AlertBehaviors.swift in Sources */,
+				D2515ED51BC1A85200ED606F /* UIViewController+Extension.swift in Sources */,
+				D2515ED21BC1A85200ED606F /* AnimationController.swift in Sources */,
+				D2515ED81BC1A85800ED606F /* TextFieldsViewController.swift in Sources */,
+				D2515ED11BC1A84D00ED606F /* AlertAction.swift in Sources */,
+				D2515ED31BC1A85200ED606F /* PresentationController.swift in Sources */,
+				D23B53771BF473CC00AB5BBE /* ActionSheetView.swift in Sources */,
+				D2515EDA1BC1A85800ED606F /* AlertControllerView.swift in Sources */,
+				D2515ECF1BC1A84D00ED606F /* ActionsCollectionView.swift in Sources */,
+				D23B53751BF473BC00AB5BBE /* AlertView.swift in Sources */,
+				D2DE585B1C082F460041DFDE /* AlertController.swift in Sources */,
+				D2A48B441C2E09CE009DD715 /* AlertController+Convenience.swift in Sources */,
+				D2515ECB1BC1A83800ED606F /* UIView+SDCAutoLayout.m in Sources */,
+				D2515ED01BC1A84D00ED606F /* ActionsCollectionViewFlowLayout.swift in Sources */,
+				D2515EDC1BC1A85800ED606F /* VisualStyle.swift in Sources */,
+				D2515ED41BC1A85200ED606F /* Transition.swift in Sources */,
+				D2515EDB1BC1A85800ED606F /* AlertLabel.swift in Sources */,
+				D2515ECD1BC1A84D00ED606F /* ActionCell.swift in Sources */,
+				D2515ED61BC1A85800ED606F /* TextFieldCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		D2515EC71BC1A7D500ED606F = {
+		D2515EC71BC1A7D500ED606F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -539,7 +301,7 @@
 			};
 			name = Debug;
 		};
-		D2515EC81BC1A7D500ED606F = {
+		D2515EC81BC1A7D500ED606F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -567,7 +329,7 @@
 			};
 			name = Release;
 		};
-		D25B3CD417ECE7A6004B32A2 = {
+		D25B3CD417ECE7A6004B32A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -605,7 +367,7 @@
 			};
 			name = Debug;
 		};
-		D25B3CD517ECE7A6004B32A2 = {
+		D25B3CD517ECE7A6004B32A2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -640,25 +402,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D2515EC61BC1A7D500ED606F = {
+		D2515EC61BC1A7D500ED606F /* Build configuration list for PBXNativeTarget "SDCAlertView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2515EC71BC1A7D500ED606F,
-				D2515EC81BC1A7D500ED606F,
+				D2515EC71BC1A7D500ED606F /* Debug */,
+				D2515EC81BC1A7D500ED606F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D25B3C9F17ECE7A6004B32A2 = {
+		D25B3C9F17ECE7A6004B32A2 /* Build configuration list for PBXProject "SDCAlertView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D25B3CD417ECE7A6004B32A2,
-				D25B3CD517ECE7A6004B32A2,
+				D25B3CD417ECE7A6004B32A2 /* Debug */,
+				D25B3CD517ECE7A6004B32A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D25B3C9C17ECE7A6004B32A2;
+	rootObject = D25B3C9C17ECE7A6004B32A2 /* Project object */;
 }

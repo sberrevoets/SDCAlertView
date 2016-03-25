@@ -8,7 +8,7 @@ The alert controller's style.
                iPad.
 - Alert:       The standard alert style that asks the user for information or confirmation.
 */
-@objc
+@objc(SDCAlertControllerStyle)
 public enum AlertControllerStyle: Int {
     case ActionSheet
     case Alert
@@ -22,7 +22,7 @@ The layout of the alert's actions. Only applies to the Alert style alerts, not A
 - Vertical:   Display the actions vertically
 - Horizontal: Display the actions horizontally
 */
-@objc
+@objc(SDCActionLayout)
 public enum ActionLayout: Int {
     case Automatic
     case Vertical
@@ -91,13 +91,9 @@ public class AlertController: UIViewController {
     }
 
     /// The layout of the actions in the alert.
-    public var actionLayout: ActionLayout? {
-        get { return (self.alertView as? AlertView)?.actionLayout }
-        set {
-            if let newValue = newValue {
-                (self.alertView as? AlertView)?.actionLayout = newValue
-            }
-        }
+    public var actionLayout: ActionLayout {
+        get { return (self.alertView as? AlertView)?.actionLayout ?? .Automatic }
+        set { (self.alertView as? AlertView)?.actionLayout = newValue }
     }
 
     /// The text fields that are added to the alert. Does nothing when used with an action sheet.
@@ -112,7 +108,7 @@ public class AlertController: UIViewController {
     public var shouldDismissHandler: (AlertAction? -> Bool)?
 
     /// The visual style that applies to the alert or action sheet.
-    public lazy var visualStyle: VisualStyle = DefaultVisualStyle(alertStyle: self.preferredStyle)
+    public lazy var visualStyle: DefaultVisualStyle = DefaultVisualStyle(alertStyle: self.preferredStyle)
 
     /// The alert's presentation style.
     private(set) public var preferredStyle: AlertControllerStyle = .Alert
@@ -249,7 +245,7 @@ public class AlertController: UIViewController {
     // MARK: - Private
 
     private func listenForKeyboardChanges() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardChange:",
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardChange),
             name: UIKeyboardWillChangeFrameNotification, object: nil)
     }
 
@@ -325,7 +321,7 @@ public class AlertController: UIViewController {
             return
         }
 
-        let tapGesture = UITapGestureRecognizer(target: self, action: "chromeTapped:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(chromeTapped(_:)))
         tapGesture.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapGesture)
     }

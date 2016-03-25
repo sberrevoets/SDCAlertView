@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 5.0
+5.0 is a compatibility update so the project builds in Swift 2.2 and doesn't generate warnings. It also changes the Objective-C names of the public enums, which Swift now supports.
+
+**Bug Fixes:**
+- Prioritize `textColorForAction()` over the `tintColor` of an action
+- Properly exposes `visualStyle` as a property on `SDCAlertController` in Objective-C
+- Makes `actionLayout` a non-optional, allowing it to be exposed to Objective-C
+- Exposes a public init method in `DefaultVisualStyle` so subclassers don't have to implement this separately
+- Correctly shows buttons if an alert has scrollable content after rotation
+- Fixes incorrect accessibility labels on buttons
+
 ## 4.0.1
 **Bug Fixes:**
 - Fixes incorrect fonts for text in alerts

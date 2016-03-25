@@ -90,8 +90,8 @@ final class DemoViewController: UITableViewController {
                 bar.topAnchor.constraintEqualToAnchor(alert.contentView.topAnchor).active = true
                 bar.bottomAnchor.constraintEqualToAnchor(alert.contentView.bottomAnchor).active = true
 
-                NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "updateProgressBar:",
-                    userInfo: bar, repeats: true)
+                NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector:
+                    #selector(updateProgressBar), userInfo: bar, repeats: true)
             default: break
         }
     }
