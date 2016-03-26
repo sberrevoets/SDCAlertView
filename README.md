@@ -59,18 +59,7 @@ To install with Carthage, add the following line to your `Cartfile`:
 Run `carthage update` and drag `SDCAlertView.framework` in the `Build` folder into your project.
 
 ## Swift Package Manager
-To use the Swift Package Manager, add the following to your `Package.swift` file: 
-
-```swift
-import PackageDescription
-
-let package = Package(
-    name: "<your project name>"
-    dependencies: [
-        .Package(url: "https://github.com/sberrevoets/SDCAlertView/SDCAlertView.git", majorVersion: 4.0)
-    ])
-```
-
+SPM does not yet support iOS, but SDCAlertView will be available there once it does.
 # Alerts vs. Action Sheets
 
 Starting with version 4.0, `SDCAlertController` also supports the presentation of action sheets. Some things to keep in mind when using action sheets:
