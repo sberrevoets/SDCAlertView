@@ -12,6 +12,7 @@ public enum AlertActionStyle: Int {
     case Default
     case Preferred
     case Destructive
+    case Emphasize
 }
 
 @objc(SDCAlertAction)
