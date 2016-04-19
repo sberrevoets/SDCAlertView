@@ -104,7 +104,7 @@ public class AlertController: UIViewController {
         AlertBehaviors.defaultBehaviorsForAlertWithStyle(self.preferredStyle)
 
     /// A closure that, when set, returns whether the alert or action sheet should dismiss after the user taps
-    /// on an action.
+    /// on an action. If it returns false, the AlertAction handler will not be executed.
     public var shouldDismissHandler: (AlertAction? -> Bool)?
 
     /// The visual style that applies to the alert or action sheet.
