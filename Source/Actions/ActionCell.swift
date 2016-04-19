@@ -15,7 +15,7 @@ final class ActionCell: UICollectionViewCell {
         didSet { self.highlightedBackgroundView.hidden = !self.highlighted }
     }
 
-    func setAction(action: AlertAction, withVisualStyle visualStyle: VisualStyle) {
+    func setAction(action: AlertAction, withVisualStyle visualStyle: DefaultVisualStyle) {
         action.actionView = self
 
         self.titleLabel.font = visualStyle.font(forAction: action)

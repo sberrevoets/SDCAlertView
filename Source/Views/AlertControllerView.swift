@@ -9,7 +9,7 @@ protocol AlertControllerViewRepresentable {
     var actionTappedHandler: (AlertAction -> Void)? { get set }
 
     var contentView: UIView! { get }
-    var visualStyle: VisualStyle! { get set }
+    var visualStyle: DefaultVisualStyle! { get set }
 
     var topView: UIView { get }
 
@@ -82,7 +82,7 @@ class AlertControllerView: UIView, AlertControllerViewRepresentable {
     @IBOutlet var contentView: UIView! = UIView()
 
     var actions: [AlertAction] = []
-    var visualStyle: VisualStyle!
+    var visualStyle: DefaultVisualStyle!
     var actionTappedHandler: (AlertAction -> Void)?
 
     func prepareLayout() {
