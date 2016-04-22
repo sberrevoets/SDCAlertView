@@ -12,7 +12,7 @@ class AlertView: AlertControllerView {
         set { self.actionsCollectionView.actionTapped = newValue }
     }
 
-    override var visualStyle: DefaultVisualStyle! {
+    override var visualStyle: AlertVisualStyle! {
         didSet { self.textFieldsViewController?.visualStyle = self.visualStyle }
     }
 

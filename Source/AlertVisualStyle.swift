@@ -1,7 +1,7 @@
 import UIKit
 
-@objc(SDCDefaultVisualStyle)
-public class DefaultVisualStyle: NSObject {
+@objc(SDCAlertVisualStyle)
+public class AlertVisualStyle: NSObject {
 
     /// The width of the alert. A value of 1 or below is interpreted as a percentage of the width of the view
     /// controller that presents the alert.

@@ -22,7 +22,7 @@ final class ActionSheetView: AlertControllerView {
         didSet { self.actionsCollectionView.actionTapped = self.actionTappedHandler }
     }
 
-    override var visualStyle: DefaultVisualStyle! {
+    override var visualStyle: AlertVisualStyle! {
         didSet {
             let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
             self.titleWidthConstraint.constant -= widthOffset

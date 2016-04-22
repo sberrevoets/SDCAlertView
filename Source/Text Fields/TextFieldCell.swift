@@ -14,7 +14,7 @@ final class TextFieldCell: UITableViewCell {
         }
     }
 
-    var visualStyle: DefaultVisualStyle? {
+    var visualStyle: AlertVisualStyle? {
         didSet {
             self.textField?.font = self.visualStyle?.textFieldFont
             self.borderView.backgroundColor = self.visualStyle?.textFieldBorderColor
