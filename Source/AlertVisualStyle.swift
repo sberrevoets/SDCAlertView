@@ -78,32 +78,32 @@ public class AlertVisualStyle: NSObject {
     public init(alertStyle: AlertControllerStyle) {
         self.alertStyle = alertStyle
 
-        self.width = self.alertStyle == .Alert ? 270 : 1
+        switch alertStyle {
+            case .Alert:
+                self.width = 270
 
-        if #available(iOS 9, *) {
-            self.cornerRadius = 13
-        } else {
-            self.cornerRadius = self.alertStyle == .Alert ? 7 : 4
-        }
+                if #available(iOS 9, *) {
+                    self.cornerRadius = 13
+                    self.margins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+                    self.actionViewSize = CGSize(width: 90, height: 44)
+                } else {
+                    self.cornerRadius = 7
+                    self.margins = UIEdgeInsetsZero
+                    self.actionViewSize = CGSize(width: 90, height: 44)
+                }
 
-        if self.alertStyle == .Alert {
-            if #available(iOS 9, *) {
-                self.margins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-            } else {
-                self.margins = UIEdgeInsetsZero
-            }
-        } else {
-            if #available(iOS 9, *) {
-                self.margins = UIEdgeInsets(top: 30, left: 10, bottom: -10, right: 10)
-            } else {
-                self.margins = UIEdgeInsets(top: 10, left: 10, bottom: -8, right: 10)
-            }
-        }
+            case .ActionSheet:
+                self.width = 1
 
-        if #available(iOS 9, *) {
-            self.actionViewSize = self.alertStyle == .Alert ? CGSize(width: 90, height: 44) : CGSize(width: 90, height: 57)
-        } else {
-            self.actionViewSize = CGSize(width: 90, height: 44)
+                if #available(iOS 9, *) {
+                    self.cornerRadius = 13
+                    self.margins = UIEdgeInsets(top: 30, left: 10, bottom: -10, right: 10)
+                    self.actionViewSize = CGSize(width: 90, height: 57)
+                } else {
+                    self.cornerRadius = 4
+                    self.margins = UIEdgeInsets(top: 10, left: 10, bottom: -8, right: 10)
+                    self.actionViewSize = CGSize(width: 90, height: 44)
+                }
         }
     }
 
@@ -127,18 +127,17 @@ public class AlertVisualStyle: NSObject {
      */
     public func font(forAction action: AlertAction?) -> UIFont {
         switch (self.alertStyle, action?.style) {
-        case (.Alert, let style) where style == .Preferred:
-            return self.alertPreferredFont
+            case (.Alert, let style) where style == .Preferred:
+                return self.alertPreferredFont
 
-        case (.Alert, _):
-            return self.alertNormalFont
+            case (.Alert, _):
+                return self.alertNormalFont
 
-        case (.ActionSheet, let style) where style == .Preferred:
-            return self.actionSheetPreferredFont
+            case (.ActionSheet, let style) where style == .Preferred:
+                return self.actionSheetPreferredFont
 
-        case (.ActionSheet, _):
-            return self.actionSheetNormalFont
+            case (.ActionSheet, _):
+                return self.actionSheetNormalFont
         }
     }
-
 }
