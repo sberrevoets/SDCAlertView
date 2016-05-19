@@ -6,7 +6,7 @@ class ActionsCollectionView: UICollectionView {
 
     var actions: [AlertAction] = []
 
-    var visualStyle: VisualStyle! {
+    var visualStyle: AlertVisualStyle! {
         didSet {
             guard let layout = self.collectionViewLayout as? ActionsCollectionViewFlowLayout else { return }
             layout.visualStyle = self.visualStyle

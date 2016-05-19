@@ -25,7 +25,7 @@
 		D2515ED81BC1A85800ED606F /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A801BC120C900984652 /* TextFieldsViewController.swift */; };
 		D2515EDA1BC1A85800ED606F /* AlertControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A761BC120C900984652 /* AlertControllerView.swift */; };
 		D2515EDB1BC1A85800ED606F /* AlertLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A771BC120C900984652 /* AlertLabel.swift */; };
-		D2515EDC1BC1A85800ED606F /* VisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A811BC120C900984652 /* VisualStyle.swift */; };
+		D2515EDC1BC1A85800ED606F /* AlertVisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A811BC120C900984652 /* AlertVisualStyle.swift */; };
 		D2515EDE1BC1A94A00ED606F /* UIView+SDCAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = D2C30AA61BC19F9300984652 /* UIView+SDCAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D253B1C81C2AC78D00C37E0F /* AlertBehaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B1C71C2AC78D00C37E0F /* AlertBehaviors.swift */; };
 		D2A48B441C2E09CE009DD715 /* AlertController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A48B431C2E09CE009DD715 /* AlertController+Convenience.swift */; };
@@ -56,7 +56,7 @@
 		D2C30A7E1BC120C900984652 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		D2C30A7F1BC120C900984652 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		D2C30A801BC120C900984652 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
-		D2C30A811BC120C900984652 /* VisualStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualStyle.swift; sourceTree = "<group>"; };
+		D2C30A811BC120C900984652 /* AlertVisualStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertVisualStyle.swift; sourceTree = "<group>"; };
 		D2C30AA61BC19F9300984652 /* UIView+SDCAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDCAutoLayout.h"; sourceTree = "<group>"; };
 		D2C30AA71BC19F9300984652 /* UIView+SDCAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDCAutoLayout.m"; sourceTree = "<group>"; };
 		D2DE58591C08261E0041DFDE /* ActionSheetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetView.xib; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 				D253B1C71C2AC78D00C37E0F /* AlertBehaviors.swift */,
 				D2A48B431C2E09CE009DD715 /* AlertController+Convenience.swift */,
 				D2C30A751BC120C900984652 /* AlertController.swift */,
-				D2C30A811BC120C900984652 /* VisualStyle.swift */,
+				D2C30A811BC120C900984652 /* AlertVisualStyle.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -261,7 +261,7 @@
 				D2A48B441C2E09CE009DD715 /* AlertController+Convenience.swift in Sources */,
 				D2515ECB1BC1A83800ED606F /* UIView+SDCAutoLayout.m in Sources */,
 				D2515ED01BC1A84D00ED606F /* ActionsCollectionViewFlowLayout.swift in Sources */,
-				D2515EDC1BC1A85800ED606F /* VisualStyle.swift in Sources */,
+				D2515EDC1BC1A85800ED606F /* AlertVisualStyle.swift in Sources */,
 				D2515ED41BC1A85200ED606F /* Transition.swift in Sources */,
 				D2515EDB1BC1A85800ED606F /* AlertLabel.swift in Sources */,
 				D2515ECD1BC1A84D00ED606F /* ActionCell.swift in Sources */,

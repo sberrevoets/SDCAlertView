@@ -5,7 +5,7 @@ let kVerticalActionSeparator = "vertical"
 
 final class ActionsCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
-    var visualStyle: VisualStyle?
+    var visualStyle: AlertVisualStyle?
 
     override class func layoutAttributesClass() -> AnyClass {
         return ActionsCollectionViewLayoutAttributes.self

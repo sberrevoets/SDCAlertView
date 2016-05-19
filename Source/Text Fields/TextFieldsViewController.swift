@@ -8,7 +8,7 @@ final class TextFieldsViewController: UIViewController {
         return self.tableView.rowHeight * CGFloat(self.tableView.numberOfRowsInSection(0))
     }
 
-    var visualStyle: VisualStyle? {
+    var visualStyle: AlertVisualStyle? {
         didSet {
             guard let visualStyle = self.visualStyle else { return }
             self.tableView.rowHeight = visualStyle.textFieldHeight
