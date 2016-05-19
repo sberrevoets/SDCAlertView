@@ -29,6 +29,9 @@ public enum ActionLayout: Int {
     case Horizontal
 }
 
+@available(*, deprecated, renamed="AlertVisualStyle")
+public typealias DefaultVisualStyle = AlertVisualStyle
+
 @objc(SDCAlertController)
 public class AlertController: UIViewController {
 
