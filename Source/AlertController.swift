@@ -1,5 +1,6 @@
 import UIKit
 
+private var kDidAssignFirstResponderToken: dispatch_once_t = 0
 /**
 The alert controller's style.
 
@@ -118,7 +119,6 @@ public class AlertController: UIViewController {
 
     @IBOutlet private var alertView: AlertControllerView! = AlertView()
     private lazy var transitionDelegate: Transition = Transition(alertStyle: self.preferredStyle)
-    private var didAssignFirstResponder = false
 
     // MARK: - Initialization
 
@@ -235,9 +235,10 @@ public class AlertController: UIViewController {
         // Explanation of why the first responder is set here:
         // http://stackoverflow.com/a/19580888/751268
 
-        if self.behaviors?.contains(.AutomaticallyFocusTextField) == true && !self.didAssignFirstResponder {
-            self.textFields?.first?.becomeFirstResponder()
-            self.didAssignFirstResponder = true
+        if self.behaviors?.contains(.AutomaticallyFocusTextField) == true {
+            dispatch_once(&kDidAssignFirstResponderToken) {
+                self.textFields?.first?.becomeFirstResponder()
+            }
         }
     }
 
