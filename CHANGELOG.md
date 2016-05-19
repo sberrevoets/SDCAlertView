@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 5.1
+**Bug Fixes:**
+- Fixes the inability to override visual style properties in a subclass of `DefaultVisualStyle`. The `VisualStyle` protocol has been removed and the conforming class been renamed to `AlertVisualStyle`. The old class name is still available, but marked as deprecated and will be removed in the future.
+
+**What's New:**
+- Makes an `AlertAction`'s `handler` public.
+
 # 5.0
 5.0 is a compatibility update so the project builds in Swift 2.2 and doesn't generate warnings. It also changes the Objective-C names of the public enums, which Swift now supports.
 
