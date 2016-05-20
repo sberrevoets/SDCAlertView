@@ -28,6 +28,7 @@ final class ActionCell: UICollectionViewCell {
         self.highlightedBackgroundView.backgroundColor = visualStyle.actionHighlightColor
 
         self.accessibilityLabel = action.attributedTitle?.string
+        self.accessibilityTraits = UIAccessibilityTraitButton
         self.isAccessibilityElement = true
     }
 
