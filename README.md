@@ -53,7 +53,7 @@ Then run `pod install`.
 To install with Carthage, add the following line to your `Cartfile`:
 
 ```ruby
-"sberrevoets/SDCAlertView" ~> 5.1
+github "sberrevoets/SDCAlertView" ~> 5.1
 ```
 
 Run `carthage update` and drag `SDCAlertView.framework` in the `Build` folder into your project.
