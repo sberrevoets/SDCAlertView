@@ -83,13 +83,13 @@ private extension UIImage {
 
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
 
-        let context = UIGraphicsGetCurrentContext()
+        let context = UIGraphicsGetCurrentContext()!
         color.setFill()
         CGContextFillRect(context, rect)
 
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
-        return image;
+        return image
     }
 }

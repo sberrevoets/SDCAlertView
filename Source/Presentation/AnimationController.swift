@@ -25,7 +25,7 @@ class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
         }
 
         if self.isPresentation {
-            transitionContext.containerView()?.addSubview(toView)
+            transitionContext.containerView().addSubview(toView)
         }
 
         let animatingController = self.isPresentation ? toController : fromController
