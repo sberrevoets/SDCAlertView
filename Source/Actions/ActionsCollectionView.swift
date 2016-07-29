@@ -8,21 +8,25 @@ class ActionsCollectionView: UICollectionView {
 
     var visualStyle: AlertVisualStyle! {
         didSet {
-            guard let layout = self.collectionViewLayout as? ActionsCollectionViewFlowLayout else { return }
+            guard let layout = self.collectionViewLayout as? ActionsCollectionViewFlowLayout else {
+                return
+            }
+
             layout.visualStyle = self.visualStyle
         }
     }
 
     var displayHeight: CGFloat {
         guard let layout = self.collectionViewLayout as? ActionsCollectionViewFlowLayout,
-            let visualStyle = self.visualStyle else {
+            let visualStyle = self.visualStyle else
+        {
                 return -1
-            }
+        }
 
-        if layout.scrollDirection == .Horizontal {
+        if layout.scrollDirection == .horizontal {
             return visualStyle.actionViewSize.height
         } else {
-            return visualStyle.actionViewSize.height * CGFloat(self.numberOfItemsInSection(0))
+            return visualStyle.actionViewSize.height * CGFloat(self.numberOfItems(inSection: 0))
         }
     }
 
@@ -34,17 +38,17 @@ class ActionsCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: ActionsCollectionViewFlowLayout())
         self.dataSource = self
         self.delegate = self
-        self.backgroundColor = .clearColor()
+        self.backgroundColor = .clear
         self.delaysContentTouches = false
 
-        self.collectionViewLayout.registerClass(ActionSeparatorView.self,
+        self.collectionViewLayout.register(ActionSeparatorView.self,
             forDecorationViewOfKind: kHorizontalActionSeparator)
-        self.collectionViewLayout.registerClass(ActionSeparatorView.self,
+        self.collectionViewLayout.register(ActionSeparatorView.self,
             forDecorationViewOfKind: kVerticalActionSeparator)
 
-        let nibName = NSStringFromClass(ActionCell).componentsSeparatedByString(".").last!
-        let nib = UINib(nibName: nibName, bundle: NSBundle(forClass: self.dynamicType))
-        self.registerNib(nib, forCellWithReuseIdentifier: kActionCellIdentifier)
+        let nibName = String(describing: ActionCell.self)
+        let nib = UINib(nibName: nibName, bundle: Bundle(for: type(of: self)))
+        self.register(nib, forCellWithReuseIdentifier: kActionCellIdentifier)
     }
 
     convenience required init?(coder aDecoder: NSCoder) {
@@ -52,77 +56,79 @@ class ActionsCollectionView: UICollectionView {
     }
 
     @objc
-    func highlightAction(forPanGesture sender: UIGestureRecognizer) {
-        let touchPoint = sender.locationInView(self)
-        let touchIsInCollectionView = CGRectContainsPoint(self.bounds, touchPoint)
+    func highlightAction(for sender: UIGestureRecognizer) {
+        let touchPoint = sender.location(in: self)
+        let touchIsInCollectionView = self.bounds.contains(touchPoint)
 
         let state = sender.state
 
-        if state == .Cancelled || state == .Failed || state == .Ended || !touchIsInCollectionView {
-            self.highlightedCell?.highlighted = false
+        if state == .cancelled || state == .failed || state == .ended || !touchIsInCollectionView {
+            self.highlightedCell?.isHighlighted = false
             self.highlightedCell = nil
         }
 
-        guard let indexPath = self.indexPathForItemAtPoint(touchPoint),
-                  cell = self.cellForItemAtIndexPath(indexPath)
-              where cell != self.highlightedCell && self.actions[indexPath.item].enabled else
+        guard let indexPath = self.indexPathForItem(at: touchPoint),
+              let cell = self.cellForItem(at: indexPath as IndexPath),
+              cell != self.highlightedCell && self.actions[indexPath.item].isEnabled else
         {
             return
         }
 
-        if sender.state == .Began || sender.state == .Changed {
-            self.highlightedCell?.highlighted = false
-            cell.highlighted = true
+        if sender.state == .began || sender.state == .changed {
+            self.highlightedCell?.isHighlighted = false
+            cell.isHighlighted = true
             self.highlightedCell = cell
         }
 
-        if sender.state == .Ended {
-            self.actionTapped?(self.actions[indexPath.item])
+        if sender.state == .ended {
+            self.actionTapped?(self.actions[(indexPath as NSIndexPath).item])
         }
     }
 }
 
 extension ActionsCollectionView: UICollectionViewDataSource {
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.actions.count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath)
         -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kActionCellIdentifier,
-            forIndexPath: indexPath) as? ActionCell
-        cell?.setAction(self.actions[indexPath.item], withVisualStyle: self.visualStyle)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kActionCellIdentifier,
+            for: indexPath) as? ActionCell
+        let action = self.actions[(indexPath as NSIndexPath).item]
+        cell?.set(action, with: self.visualStyle)
         return cell!
     }
 }
 
 extension ActionsCollectionView: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         let actionWidth = self.visualStyle.actionViewSize.width
         let actionHeight = self.visualStyle.actionViewSize.height
 
         let layout = self.collectionViewLayout as! UICollectionViewFlowLayout
-        if layout.scrollDirection == .Horizontal {
-            let width = max(self.bounds.width / CGFloat(self.numberOfItemsInSection(0)), actionWidth)
+        if layout.scrollDirection == .horizontal {
+            let width = max(self.bounds.width / CGFloat(self.numberOfItems(inSection: 0)), actionWidth)
             return CGSize(width: width, height: actionHeight)
         } else {
             return CGSize(width: self.bounds.width, height: actionHeight)
         }
     }
 
-    func collectionView(collectionView: UICollectionView,
-        shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool
+    func collectionView(_ collectionView: UICollectionView,
+        shouldHighlightItemAt indexPath: IndexPath) -> Bool
     {
-        let actionCell = self.actions[indexPath.item]
-        return actionCell.enabled
+        let actionCell = self.actions[(indexPath as NSIndexPath).item]
+        return actionCell.isEnabled
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.actionTapped?(self.actions[indexPath.item])
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.actionTapped?(self.actions[(indexPath as NSIndexPath).item])
     }
 }

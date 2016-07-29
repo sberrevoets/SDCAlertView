@@ -6,7 +6,7 @@ protocol AlertControllerViewRepresentable {
     var message: NSAttributedString? { get set }
 
     var actions: [AlertAction] { get set }
-    var actionTappedHandler: (AlertAction -> Void)? { get set }
+    var actionTappedHandler: ((AlertAction) -> Void)? { get set }
 
     var contentView: UIView! { get }
     var visualStyle: AlertVisualStyle! { get set }
@@ -17,7 +17,7 @@ protocol AlertControllerViewRepresentable {
     var messageLabel: AlertLabel! { get }
     var actionsCollectionView: ActionsCollectionView! { get }
 
-    func addBehaviors(behaviors: AlertBehaviors)
+    func add(_ behaviors: AlertBehaviors)
     func prepareLayout()
 }
 
@@ -35,10 +35,10 @@ extension AlertControllerViewRepresentable where Self: UIView {
 
     var topView: UIView { return self }
 
-    func addBehaviors(behaviors: AlertBehaviors) {
+    func add(_ behaviors: AlertBehaviors) {
         if behaviors.contains(.DragTap) {
             let panGesture = UIPanGestureRecognizer(target: self,
-                action: #selector(AlertControllerView.highlightActionForPanGesture(_:)))
+                action: #selector(AlertControllerView.highlightAction(for:)))
             self.addGestureRecognizer(panGesture)
         }
 
@@ -50,13 +50,13 @@ extension AlertControllerViewRepresentable where Self: UIView {
     private func addParallax() {
         let parallax = self.visualStyle.parallax
 
-        let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .TiltAlongHorizontalAxis)
-        horizontal.minimumRelativeValue = NSNumber(float: Float(-parallax.horizontal))
-        horizontal.maximumRelativeValue = NSNumber(float: Float(parallax.horizontal))
+        let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        horizontal.minimumRelativeValue = NSNumber(value: Float(-parallax.horizontal))
+        horizontal.maximumRelativeValue = NSNumber(value: Float(parallax.horizontal))
 
-        let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .TiltAlongVerticalAxis)
-        vertical.minimumRelativeValue = NSNumber(float: Float(-parallax.vertical))
-        vertical.maximumRelativeValue = NSNumber(float: Float(parallax.vertical))
+        let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+        vertical.minimumRelativeValue = NSNumber(value: Float(-parallax.vertical))
+        vertical.maximumRelativeValue = NSNumber(value: Float(parallax.vertical))
 
         let group = UIMotionEffectGroup()
         group.motionEffects = [horizontal, vertical]
@@ -83,14 +83,14 @@ class AlertControllerView: UIView, AlertControllerViewRepresentable {
 
     var actions: [AlertAction] = []
     var visualStyle: AlertVisualStyle!
-    var actionTappedHandler: (AlertAction -> Void)?
+    var actionTappedHandler: ((AlertAction) -> Void)?
 
     func prepareLayout() {
         self.actionsCollectionView.actions = self.actions
         self.actionsCollectionView.visualStyle = self.visualStyle
     }
 
-    func highlightActionForPanGesture(sender: UIPanGestureRecognizer) {
-        self.actionsCollectionView.highlightAction(forPanGesture: sender)
+    func highlightAction(for sender: UIPanGestureRecognizer) {
+        self.actionsCollectionView.highlightAction(for: sender)
     }
 }

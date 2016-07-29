@@ -7,7 +7,7 @@ final class ActionsCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
     var visualStyle: AlertVisualStyle?
 
-    override class func layoutAttributesClass() -> AnyClass {
+    override static var layoutAttributesClass: AnyClass {
         return ActionsCollectionViewLayoutAttributes.self
     }
 
@@ -21,21 +21,23 @@ final class ActionsCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.init()
     }
 
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        guard let attributes = super.layoutAttributesForElementsInRect(rect) else { return nil }
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        guard let attributes = super.layoutAttributesForElements(in: rect) else {
+            return nil
+        }
 
         var mutableAttributes = attributes
 
         for attribute in attributes {
-            if let horizontal = self.layoutAttributesForDecorationViewOfKind(kHorizontalActionSeparator,
-                atIndexPath: attribute.indexPath)
+            if let horizontal = self.layoutAttributesForDecorationView(ofKind: kHorizontalActionSeparator,
+                at: attribute.indexPath)
             {
                 mutableAttributes.append(horizontal)
             }
 
-            if self.scrollDirection == .Horizontal && attribute.indexPath.item > 0,
-                let vertical = layoutAttributesForDecorationViewOfKind(kVerticalActionSeparator,
-                atIndexPath: attribute.indexPath)
+            if self.scrollDirection == .horizontal && attribute.indexPath.item > 0,
+                let vertical = layoutAttributesForDecorationView(ofKind: kVerticalActionSeparator,
+                at: attribute.indexPath)
             {
                 mutableAttributes.append(vertical)
             }
@@ -44,13 +46,15 @@ final class ActionsCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return mutableAttributes
     }
 
-    override func layoutAttributesForDecorationViewOfKind(elementKind: String,
-        atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes?
+    override func layoutAttributesForDecorationView(ofKind elementKind: String,
+        at indexPath: IndexPath) -> UICollectionViewLayoutAttributes?
     {
-        let attributes = ActionsCollectionViewLayoutAttributes(forDecorationViewOfKind: elementKind,
-            withIndexPath: indexPath)
-        guard let itemAttributes = self.layoutAttributesForItemAtIndexPath(indexPath) else { return nil }
+        guard let itemAttributes = self.layoutAttributesForItem(at: indexPath) else {
+            return nil
+        }
 
+        let attributes = ActionsCollectionViewLayoutAttributes(forDecorationViewOfKind: elementKind,
+                                                               with: indexPath)
         attributes.zIndex = itemAttributes.zIndex + 1
         attributes.backgroundColor = self.visualStyle?.actionViewSeparatorColor
 

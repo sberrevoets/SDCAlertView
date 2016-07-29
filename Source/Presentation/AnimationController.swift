@@ -6,46 +6,50 @@ private let kSpringVelocity: CGFloat = 0
 
 class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
 
-    var isPresentation = false
+    private var isPresentation = false
 
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    init(presentation: Bool) {
+        self.isPresentation = presentation
+    }
+
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.404
     }
 
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
             let fromController =
-                transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
+                transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
             let toController =
-                transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey),
+                transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
             let fromView = fromController.view,
-            let toView = toController.view
-        else {
+            let toView = toController.view else
+        {
             return
         }
 
         if self.isPresentation {
-            transitionContext.containerView().addSubview(toView)
+            transitionContext.containerView.addSubview(toView)
         }
 
         let animatingController = self.isPresentation ? toController : fromController
         let animatingView = animatingController.view
-        animatingView.frame = transitionContext.finalFrameForViewController(animatingController)
+        animatingView?.frame = transitionContext.finalFrame(for: animatingController)
 
         if self.isPresentation {
-            animatingView.transform = CGAffineTransformMakeScale(kInitialScale, kInitialScale)
-            animatingView.alpha = 0
+            animatingView?.transform = CGAffineTransform(scaleX: kInitialScale, y: kInitialScale)
+            animatingView?.alpha = 0
 
             animate({
-                    animatingView.transform = CGAffineTransformMakeScale(1, 1)
-                    animatingView.alpha = 1
+                    animatingView?.transform = CGAffineTransform(scaleX: 1, y: 1)
+                    animatingView?.alpha = 1
                 }, inContext: transitionContext, withCompletion: { finished in
                     transitionContext.completeTransition(finished)
                 })
 
         } else {
             animate({
-                    animatingView.alpha = 0
+                    animatingView?.alpha = 0
                 }, inContext: transitionContext, withCompletion: { finished in
                     fromView.removeFromSuperview()
                     transitionContext.completeTransition(finished)
@@ -54,10 +58,11 @@ class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
 
     }
 
-    private func animate(animations: (() -> Void), inContext context: UIViewControllerContextTransitioning,
-        withCompletion completion: (Bool) -> Void)
+    private func animate(_ animations: @escaping (() -> Void),
+                         inContext context: UIViewControllerContextTransitioning,
+                         withCompletion completion: @escaping (Bool) -> Void)
     {
-        UIView.animateWithDuration(self.transitionDuration(context), delay: 0,
+        UIView.animate(withDuration: self.transitionDuration(using: context), delay: 0,
             usingSpringWithDamping: kSpringDamping, initialSpringVelocity: kSpringVelocity, options: [],
             animations: animations, completion: completion)
     }

@@ -37,10 +37,10 @@ public class AlertVisualStyle: NSObject {
     public var actionViewSeparatorColor = UIColor(white: 0.5, alpha: 0.5)
 
     /// The thickness of the separators between actions
-    public var actionViewSeparatorThickness: CGFloat = 1 / UIScreen.mainScreen().scale
+    public var actionViewSeparatorThickness: CGFloat = 1 / UIScreen.main.scale
 
     /// The font used in text fields
-    public var textFieldFont = UIFont.systemFontOfSize(13)
+    public var textFieldFont = UIFont.systemFont(ofSize: 13)
 
     /// The height of a text field if added using the standard method call. Won't affect text fields added
     /// directly to the alert's content view.
@@ -58,19 +58,19 @@ public class AlertVisualStyle: NSObject {
     public var normalTextColor: UIColor?
 
     /// The color for a destructive action's text
-    public var destructiveTextColor = UIColor.redColor()
+    public var destructiveTextColor = UIColor.red
 
     /// The font for an alert's preferred action
-    public var alertPreferredFont = UIFont.boldSystemFontOfSize(17)
+    public var alertPreferredFont = UIFont.boldSystemFont(ofSize: 17)
 
     /// The font for an alert's other actions
-    public var alertNormalFont = UIFont.systemFontOfSize(17)
+    public var alertNormalFont = UIFont.systemFont(ofSize: 17)
 
     /// The font for an action sheet's preferred action
-    public var actionSheetPreferredFont = UIFont.boldSystemFontOfSize(20)
+    public var actionSheetPreferredFont = UIFont.boldSystemFont(ofSize: 20)
 
     /// The font for an action sheet's other actions
-    public var actionSheetNormalFont = UIFont.systemFontOfSize(20)
+    public var actionSheetNormalFont = UIFont.systemFont(ofSize: 20)
 
     /// The style of the alert.
     private let alertStyle: AlertControllerStyle
@@ -79,7 +79,7 @@ public class AlertVisualStyle: NSObject {
         self.alertStyle = alertStyle
 
         switch alertStyle {
-            case .Alert:
+            case .alert:
                 self.width = 270
 
                 if #available(iOS 9, *) {
@@ -88,11 +88,11 @@ public class AlertVisualStyle: NSObject {
                     self.actionViewSize = CGSize(width: 90, height: 44)
                 } else {
                     self.cornerRadius = 7
-                    self.margins = UIEdgeInsetsZero
+                    self.margins = UIEdgeInsets.zero
                     self.actionViewSize = CGSize(width: 90, height: 44)
                 }
 
-            case .ActionSheet:
+            case .actionSheet:
                 self.width = 1
 
                 if #available(iOS 9, *) {
@@ -107,36 +107,32 @@ public class AlertVisualStyle: NSObject {
         }
     }
 
-    /**
-     The text color for a given action.
-
-     - parameter action: The action that determines the text color
-
-     - returns: The text color. A nil value will use the alert's `tintColor`.
-     */
-    public func textColor(forAction action: AlertAction?) -> UIColor? {
-        return action?.style == .Destructive ? self.destructiveTextColor : self.normalTextColor
+    /// The text color for a given action.
+    ///
+    /// - parameter action: The action that determines the text color.
+    ///
+    /// - returns: The text color, or nil to use the alert's `tintColor`.
+    public func textColor(for action: AlertAction?) -> UIColor? {
+        return action?.style == .destructive ? self.destructiveTextColor : self.normalTextColor
     }
 
-    /**
-     The font for a given action
-
-     - parameter action: The action that determines the font
-
-     - returns: The font
-     */
-    public func font(forAction action: AlertAction?) -> UIFont {
+    /// The font for a given action.
+    ///
+    /// - parameter action: The action for which to return the font.
+    ///
+    /// - returns: The font.
+    public func font(for action: AlertAction?) -> UIFont {
         switch (self.alertStyle, action?.style) {
-            case (.Alert, let style) where style == .Preferred:
+            case (.alert, let style) where style == .preferred:
                 return self.alertPreferredFont
 
-            case (.Alert, _):
+            case (.alert, _):
                 return self.alertNormalFont
 
-            case (.ActionSheet, let style) where style == .Preferred:
+            case (.actionSheet, let style) where style == .preferred:
                 return self.actionSheetPreferredFont
 
-            case (.ActionSheet, _):
+            case (.actionSheet, _):
                 return self.actionSheetNormalFont
         }
     }

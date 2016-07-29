@@ -5,7 +5,7 @@ class AlertLabel: UILabel {
 
     init() {
         super.init(frame: .zero)
-        self.textAlignment = .Center
+        self.textAlignment = .center
         self.numberOfLines = 0
         self.translatesAutoresizingMaskIntoConstraints = false
     }

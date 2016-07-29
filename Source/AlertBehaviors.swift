@@ -1,7 +1,4 @@
-/**
- Defines behaviors that can be added to an alert or action sheet.
-*/
-public struct AlertBehaviors: OptionSetType {
+public struct AlertBehaviors: OptionSet {
 
     /// When applied, the user can dismiss the alert or action sheet by tapping outside of it. Enabled for
     /// action sheets by default.
@@ -19,18 +16,18 @@ public struct AlertBehaviors: OptionSetType {
     /// alert's content view.
     public static let AutomaticallyFocusTextField = AlertBehaviors(rawValue: 1 << 3)
 
-    static func defaultBehaviorsForAlertWithStyle(style: AlertControllerStyle) -> AlertBehaviors {
+    static func defaultBehaviorsForAlert(with style: AlertControllerStyle) -> AlertBehaviors {
         var behaviors: AlertBehaviors = []
 
         if #available(iOS 9, *) {
             behaviors.insert([.DragTap])
-        } else if style == .Alert {
+        } else if style == .alert {
             behaviors.insert([.Parallax])
         }
 
         switch style {
-            case .ActionSheet:  return behaviors.union(.DismissOnOutsideTap)
-            case .Alert:        return behaviors.union(.AutomaticallyFocusTextField)
+            case .actionSheet:  return behaviors.union(.DismissOnOutsideTap)
+            case .alert:        return behaviors.union(.AutomaticallyFocusTextField)
         }
     }
 

@@ -11,14 +11,14 @@ final class ActionSheetView: AlertControllerView {
 
     override var actions: [AlertAction] {
         didSet {
-            if let cancelActionIndex = self.actions.indexOf({ $0.style == .Preferred }) {
+            if let cancelActionIndex = self.actions.index(where: { $0.style == .preferred }) {
                 self.cancelAction = self.actions[cancelActionIndex]
-                self.actions.removeAtIndex(cancelActionIndex)
+                self.actions.remove(at: cancelActionIndex)
             }
         }
     }
 
-    override var actionTappedHandler: (AlertAction -> Void)? {
+    override var actionTappedHandler: ((AlertAction) -> Void)? {
         didSet { self.actionsCollectionView.actionTapped = self.actionTappedHandler }
     }
 
@@ -37,55 +37,58 @@ final class ActionSheetView: AlertControllerView {
         super.prepareLayout()
 
         self.collectionViewHeightConstraint.constant = self.actionsCollectionView.displayHeight
-        self.collectionViewHeightConstraint.active = true
+        self.collectionViewHeightConstraint.isActive = true
 
         self.primaryView.layer.cornerRadius = self.visualStyle.cornerRadius
         self.primaryView.layer.masksToBounds = true
         self.cancelActionView?.layer.cornerRadius = self.visualStyle.cornerRadius
         self.cancelActionView?.layer.masksToBounds = true
 
-        self.cancelLabel?.textColor = self.visualStyle.textColor(forAction: self.cancelAction) ?? self.tintColor
-        self.cancelLabel?.font = self.visualStyle.font(forAction: self.cancelAction)
-        let cancelButtonBackground = UIImage.imageWithColor(self.visualStyle.actionHighlightColor)
-        self.cancelButton?.setBackgroundImage(cancelButtonBackground, forState: .Highlighted)
+        self.cancelLabel?.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
+        self.cancelLabel?.font = self.visualStyle.font(for: self.cancelAction)
+        let cancelButtonBackground = UIImage.image(with: self.visualStyle.actionHighlightColor)
+        self.cancelButton?.setBackgroundImage(cancelButtonBackground, for: .highlighted)
         self.cancelHeightConstraint.constant = self.visualStyle.actionViewSize.height
 
         let showContentView = self.contentView.subviews.count > 0
-        self.contentView.hidden = !showContentView
-        self.contentViewConstraints.forEach { $0.active = showContentView }
+        self.contentView.isHidden = !showContentView
+        self.contentViewConstraints.forEach { $0.isActive = showContentView }
     }
 
-    override func highlightActionForPanGesture(sender: UIPanGestureRecognizer) {
-        super.highlightActionForPanGesture(sender)
-        let cancelIsSelected = self.cancelActionView?.frame.contains(sender.locationInView(self)) == true
-        self.cancelButton?.highlighted = cancelIsSelected
+    override func highlightAction(for sender: UIPanGestureRecognizer) {
+        super.highlightAction(for: sender)
+        let cancelIsSelected = self.cancelActionView?.frame.contains(sender.location(in: self)) == true
+        self.cancelButton?.isHighlighted = cancelIsSelected
 
-        if cancelIsSelected && sender.state == .Ended {
-            self.cancelButton?.sendActionsForControlEvents(.TouchUpInside)
+        if cancelIsSelected && sender.state == .ended {
+            self.cancelButton?.sendActions(for: .touchUpInside)
         }
     }
 
     override func tintColorDidChange() {
         super.tintColorDidChange()
-        self.cancelLabel?.textColor = self.visualStyle.textColor(forAction: self.cancelAction) ?? self.tintColor
+        self.cancelLabel?.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
     }
 
     @IBAction private func cancelTapped() {
-        guard let action = self.cancelAction else { return }
+        guard let action = self.cancelAction else {
+            return
+        }
+
         self.actionTappedHandler?(action)
     }
 }
 
 private extension UIImage {
 
-    class func imageWithColor(color: UIColor) -> UIImage {
+    class func image(with color: UIColor) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
 
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
 
         let context = UIGraphicsGetCurrentContext()!
         color.setFill()
-        CGContextFillRect(context, rect)
+        context.fill(rect)
 
         let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
