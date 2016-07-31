@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 5.1.1
+**Bug Fixes:**
+- Gives action buttons the button trait for Voice Over
+
 ## 5.1
 **Bug Fixes:**
 - Fixes the inability to override visual style properties in a subclass of `DefaultVisualStyle`. The `VisualStyle` protocol has been removed and the conforming class been renamed to `AlertVisualStyle`. The old class name is still available, but marked as deprecated and will be removed in the future.
