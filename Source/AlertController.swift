@@ -137,7 +137,7 @@ public class AlertController: UIViewController {
 
 
     /// The alert's queue switch
-    public var shouldQueueAlertController = true;
+    public var shouldQueueAlertController = false;
 
     /// The alert's queue
     private static var alertControllerQueue = [AlertControllerQueueInfo]();
