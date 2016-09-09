@@ -10,12 +10,7 @@ final class ActionSheetView: AlertControllerView {
     @IBOutlet private var titleWidthConstraint: NSLayoutConstraint!
 
     override var actions: [AlertAction] {
-        didSet {
-            if let cancelActionIndex = self.actions.index(where: { $0.style == .preferred }) {
-                self.cancelAction = self.actions[cancelActionIndex]
-                self.actions.remove(at: cancelActionIndex)
-            }
-        }
+        didSet { self.assignCancelAction() }
     }
 
     override var actionTappedHandler: ((AlertAction) -> Void)? {
@@ -76,6 +71,16 @@ final class ActionSheetView: AlertControllerView {
         }
 
         self.actionTappedHandler?(action)
+    }
+
+    private func assignCancelAction() {
+        if let cancelActionIndex = self.actions.index(where: { $0.style == .preferred }) {
+            self.cancelAction = self.actions[cancelActionIndex]
+            self.actions.remove(at: cancelActionIndex)
+        } else {
+            self.cancelAction = self.actions.first
+            self.actions.removeFirst()
+        }
     }
 }
 
