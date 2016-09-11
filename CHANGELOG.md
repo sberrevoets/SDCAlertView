@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 7.0
+This is a compatibility update for Swift 3.
+
+**Bug Fixes:**
+- Correctly calls the cancel button's handler in action sheets
+
 # 6.0
 This is a compatibility update for Swift 2.3.
 
