@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 6.0
+This is a compatibility update for Swift 2.3.
+
 ### 5.1.1
 **Bug Fixes:**
 - Gives action buttons the button trait for Voice Over
