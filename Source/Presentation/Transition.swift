@@ -9,7 +9,7 @@ class Transition: NSObject, UIViewControllerTransitioningDelegate {
     }
 
     func presentationControllerForPresentedViewController(presented: UIViewController,
-        presentingViewController presenting: UIViewController, sourceViewController source: UIViewController)
+        presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController)
         -> UIPresentationController?
     {
         return PresentationController(presentedViewController: presented,

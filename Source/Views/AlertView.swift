@@ -125,7 +125,7 @@ class AlertView: AlertControllerView {
 
     private func createMessageLabelConstraints() {
         self.addConstraint(NSLayoutConstraint(item: self.messageLabel, attribute: .FirstBaseline,
-            relatedBy: .Equal, toItem: self.titleLabel, attribute: .Baseline , multiplier: 1,
+            relatedBy: .Equal, toItem: self.titleLabel, attribute: .LastBaseline , multiplier: 1,
             constant: self.visualStyle.verticalElementSpacing))
         let contentPadding = self.visualStyle.contentPadding
         let insets = UIEdgeInsets(top: 0, left: contentPadding.left, bottom: 0, right: -contentPadding.right)
@@ -147,7 +147,7 @@ class AlertView: AlertControllerView {
         let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
 
         self.addConstraint(NSLayoutConstraint(item: textFieldsView, attribute: .Top, relatedBy: .Equal,
-            toItem: self.messageLabel, attribute: .Baseline, multiplier: 1,
+            toItem: self.messageLabel, attribute: .LastBaseline, multiplier: 1,
             constant: self.visualStyle.verticalElementSpacing))
 
         textFieldsView.sdc_pinWidthToWidthOfView(self, offset: -widthOffset)
