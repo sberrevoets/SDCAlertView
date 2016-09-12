@@ -33,6 +33,21 @@ public enum ActionLayout: Int {
 @available(*, deprecated, renamed="AlertVisualStyle")
 public typealias DefaultVisualStyle = AlertVisualStyle
 
+/**
+The info need for alert controller queue
+*/
+private struct AlertControllerQueueInfo {
+    private var alertController: AlertController
+    private var animated: Bool = false
+    private var completion: (() -> Void)? = nil
+
+    init(controller: AlertController, animated: Bool, completion: (() -> Void)?) {
+        self.alertController = controller
+        self.animated = animated
+        self.completion = completion
+    }
+}
+
 @objc(SDCAlertController)
 public class AlertController: UIViewController {
 
@@ -120,6 +135,13 @@ public class AlertController: UIViewController {
     @IBOutlet private var alertView: AlertControllerView! = AlertView()
     private lazy var transitionDelegate: Transition = Transition(alertStyle: self.preferredStyle)
 
+
+    /// The alert's queue switch
+    public var shouldQueueAlertController = false;
+
+    /// The alert's queue
+    private static var alertControllerQueue = [AlertControllerQueueInfo]();
+
     // MARK: - Initialization
 
     /**
@@ -206,8 +228,26 @@ public class AlertController: UIViewController {
     */
     @objc(presentAnimated:completion:)
     public func present(animated animated: Bool = true, completion: (() -> Void)? = nil) {
-        let topViewController = UIViewController.topViewController()
-        topViewController?.presentViewController(self, animated: animated, completion: completion)
+
+        if shouldQueueAlertController {
+            objc_sync_enter(AlertController.self)
+            let found = AlertController.alertControllerQueue.indexOf{$0.alertController == self}
+
+            ///  add into queue if not at queue
+            if found == nil {
+                AlertController.alertControllerQueue.append(AlertControllerQueueInfo(controller: self, animated: animated, completion: completion))
+            }
+
+            /// only self at head of queue can be present
+            if let vcInfo = AlertController.alertControllerQueue.first where vcInfo.alertController == self {
+                let topViewController = UIViewController.topViewControllerFilterSDCAlertController()
+                topViewController?.presentViewController(self, animated: animated, completion: completion)
+            }
+            objc_sync_exit(AlertController.self)
+        } else {
+            let topViewController = UIViewController.topViewController()
+            topViewController?.presentViewController(self, animated: animated, completion: completion)
+        }
     }
 
     /**
@@ -219,6 +259,19 @@ public class AlertController: UIViewController {
     @objc(dismissAnimated:completion:)
     public func dismiss(animated animated: Bool = true, completion: (() -> Void)? = nil) {
         self.presentingViewController?.dismissViewControllerAnimated(animated, completion: completion)
+
+        if shouldQueueAlertController {
+            objc_sync_enter(AlertController.self)
+            ///  pop current vc
+            if AlertController.alertControllerQueue.count >= 1 {
+                AlertController.alertControllerQueue.removeFirst()
+            }
+            /// show nextvc if exist
+            if let acInfo = AlertController.alertControllerQueue.first {
+                acInfo.alertController.present(animated: acInfo.animated, completion: acInfo.completion)
+            }
+            objc_sync_exit(AlertController.self)
+        }
     }
 
     // MARK: - Override
