@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 7.0.1
+**Bug Fixes:**
+- Avoids an infinite loop/crash when using an action sheet without explicit cancel buttons
+
 # 7.0
 This is a compatibility update for Swift 3.
 
