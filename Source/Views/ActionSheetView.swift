@@ -9,10 +9,6 @@ final class ActionSheetView: AlertControllerView {
     @IBOutlet private var cancelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private var titleWidthConstraint: NSLayoutConstraint!
 
-    override var actions: [AlertAction] {
-        didSet { self.assignCancelAction() }
-    }
-
     override var actionTappedHandler: ((AlertAction) -> Void)? {
         didSet { self.actionsCollectionView.actionTapped = self.actionTappedHandler }
     }
@@ -48,6 +44,8 @@ final class ActionSheetView: AlertControllerView {
         let showContentView = self.contentView.subviews.count > 0
         self.contentView.isHidden = !showContentView
         self.contentViewConstraints.forEach { $0.isActive = showContentView }
+
+        self.assignCancelAction()
     }
 
     override func highlightAction(for sender: UIPanGestureRecognizer) {
