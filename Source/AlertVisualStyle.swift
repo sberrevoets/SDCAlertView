@@ -112,7 +112,7 @@ open class AlertVisualStyle: NSObject {
     /// - parameter action: The action that determines the text color.
     ///
     /// - returns: The text color, or nil to use the alert's `tintColor`.
-    public func textColor(for action: AlertAction?) -> UIColor? {
+    open func textColor(for action: AlertAction?) -> UIColor? {
         return action?.style == .destructive ? self.destructiveTextColor : self.normalTextColor
     }
 
@@ -121,7 +121,7 @@ open class AlertVisualStyle: NSObject {
     /// - parameter action: The action for which to return the font.
     ///
     /// - returns: The font.
-    public func font(for action: AlertAction?) -> UIFont {
+    open func font(for action: AlertAction?) -> UIFont {
         switch (self.alertStyle, action?.style) {
             case (.alert, let style) where style == .preferred:
                 return self.alertPreferredFont
