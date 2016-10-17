@@ -76,20 +76,20 @@ SPM does not yet support iOS, but SDCAlertView will be available there once it d
 
 ```swift
 let alert = AlertController(title: "Title", message: "This is a message", preferredStyle: .Alert)
-alert.addAction(AlertAction(title: "Cancel", style: .Default))
-alert.addAction(AlertAction(title: "OK", style: .Preferred))
+alert.add(AlertAction(title: "Cancel", style: .default))
+alert.add(AlertAction(title: "OK", style: .preferred))
 alert.present()
 
 // or use the convenience methods:
 
-AlertController.alertWithTitle("Title", message: "This is a message", actionTitle: "OK")
-AlertController.sheetWithTitle("Action sheet title", "Action sheet message", actions: ["OK", "Cancel"])
+AlertController.alert(withTitle: "Title", message: "This is a message", actionTitle: "OK")
+AlertController.sheet(withTitle: "Action sheet title", "Action sheet message", actions: ["OK", "Cancel"])
 ```
 
 ## Custom Content Views
 
 ```swift
-let spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 spinner.translatesAutoresizingMaskIntoConstraints = false
 spinner.startAnimating()
 
@@ -107,8 +107,8 @@ alert.present()
 
 ```swift
 let alert = AlertController(title: "Title", message: "This is a message")
-alert.addAction(AlertAction(title: "Dismiss", style: .Preferred))
-alert.addAction(AlertAction(title: "Don't dismiss", style: .Default))
+alert.add(AlertAction(title: "Dismiss", style: .preferred))
+alert.add(AlertAction(title: "Don't dismiss", style: .default))
 alert.shouldDismissHandler = { $0.title == "Dismiss" }
 alert.present()
 ```
