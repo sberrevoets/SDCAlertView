@@ -26,6 +26,10 @@ class Transition: NSObject, UIViewControllerTransitioningDelegate {
         return AnimationController(presentation: true)
     }
 
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return self.alertStyle == .alert ? AnimationController(presentation: false) : nil
+    }
+    
     func animationController() -> UIViewControllerAnimatedTransitioning? {
         return self.alertStyle == .alert ? AnimationController(presentation: false) : nil
     }
