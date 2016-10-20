@@ -35,9 +35,9 @@ final class ActionSheetView: AlertControllerView {
         self.cancelActionView?.layer.cornerRadius = self.visualStyle.cornerRadius
         self.cancelActionView?.layer.masksToBounds = true
 
-        if let bgColor = self.visualStyle.backgroundColor {
-            self.primaryView.backgroundColor = bgColor
-            self.cancelActionView?.backgroundColor = bgColor
+        if let backgroundColor = self.visualStyle.backgroundColor {
+            self.primaryView.backgroundColor = backgroundColor
+            self.cancelActionView?.backgroundColor = backgroundColor
         }
 
         self.cancelLabel?.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
