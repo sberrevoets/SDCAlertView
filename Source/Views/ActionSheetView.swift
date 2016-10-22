@@ -35,6 +35,11 @@ final class ActionSheetView: AlertControllerView {
         self.cancelActionView?.layer.cornerRadius = self.visualStyle.cornerRadius
         self.cancelActionView?.layer.masksToBounds = true
 
+        if let backgroundColor = self.visualStyle.backgroundColor {
+            self.primaryView.backgroundColor = backgroundColor
+            self.cancelActionView?.backgroundColor = backgroundColor
+        }
+
         self.cancelLabel?.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
         self.cancelLabel?.font = self.visualStyle.font(for: self.cancelAction)
         let cancelButtonBackground = UIImage.image(with: self.visualStyle.actionHighlightColor)

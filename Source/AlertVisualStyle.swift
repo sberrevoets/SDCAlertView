@@ -19,8 +19,7 @@ open class AlertVisualStyle: NSObject {
     /// The parallax magnitude
     public var parallax = UIOffset(horizontal: 15.75, vertical: 15.75)
 
-    /// The background color of the alert. The standard blur effect will be added if nil. (Not supported on
-    /// action sheets).
+    /// The background color of the alert. The standard blur effect will be added if nil. 
     public var backgroundColor: UIColor?
 
     /// The vertical spacing between elements
