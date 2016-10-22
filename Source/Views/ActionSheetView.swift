@@ -25,6 +25,8 @@ final class ActionSheetView: AlertControllerView {
     }
 
     override func prepareLayout() {
+        self.assignCancelAction()
+
         super.prepareLayout()
 
         self.collectionViewHeightConstraint.constant = self.actionsCollectionView.displayHeight
@@ -49,8 +51,6 @@ final class ActionSheetView: AlertControllerView {
         let showContentView = self.contentView.subviews.count > 0
         self.contentView.isHidden = !showContentView
         self.contentViewConstraints.forEach { $0.isActive = showContentView }
-
-        self.assignCancelAction()
     }
 
     override func highlightAction(for sender: UIPanGestureRecognizer) {
