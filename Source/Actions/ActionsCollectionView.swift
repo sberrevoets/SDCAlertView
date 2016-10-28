@@ -78,6 +78,10 @@ class ActionsCollectionView: UICollectionView {
             self.highlightedCell?.isHighlighted = false
             cell.isHighlighted = true
             self.highlightedCell = cell
+
+            if #available(iOS 10, *) {
+                UISelectionFeedbackGenerator().selectionChanged()
+            }
         }
 
         if sender.state == .ended {
