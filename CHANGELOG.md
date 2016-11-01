@@ -1,5 +1,16 @@
 # CHANGELOG
 
+# 7.1
+**What's New:**
+- Makes `AlertVisualStyle` subclassable again
+- Adds support for custom background colors in action sheets
+- Adds Taptic feedback when dragging between buttons on iPhone 7
+
+**Bug Fixes:**
+- The dismissal animation looks like the system one again
+- Action sheets without an explicit cancel button won't show the inferred cancel button twice anymore
+- Button labels size and truncate as expected now, instead of being cut off
+
 # 7.0.1
 **Bug Fixes:**
 - Avoids an infinite loop/crash when using an action sheet without explicit cancel buttons
