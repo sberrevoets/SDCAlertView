@@ -35,10 +35,8 @@ class PresentationController: UIPresentationController {
     override func containerViewWillLayoutSubviews() {
         super.containerViewWillLayoutSubviews()
 
-        guard let containerView = self.containerView else {
-            return
+        if let containerView = self.containerView else {
+            self.dimmingView.frame = containerView.frame
         }
-
-        self.dimmingView.frame = containerView.frame
     }
 }
