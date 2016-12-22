@@ -34,7 +34,7 @@ final class ActionCell: UICollectionViewCell {
 
     override func tintColorDidChange() {
         super.tintColorDidChange()
-        self.titleLabel.textColor = textColor ?? self.tintColor
+        self.titleLabel.textColor = self.textColor ?? self.tintColor
     }
 }
 

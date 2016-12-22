@@ -42,8 +42,10 @@ final class ActionSheetView: AlertControllerView {
             self.cancelActionView?.backgroundColor = backgroundColor
         }
 
-        self.cancelLabel?.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
         self.cancelLabel?.font = self.visualStyle.font(for: self.cancelAction)
+        self.cancelLabel?.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
+        self.cancelLabel?.attributedText = self.cancelAction?.attributedTitle
+
         let cancelButtonBackground = UIImage.image(with: self.visualStyle.actionHighlightColor)
         self.cancelButton?.setBackgroundImage(cancelButtonBackground, for: .highlighted)
         self.cancelHeightConstraint.constant = self.visualStyle.actionViewSize.height
