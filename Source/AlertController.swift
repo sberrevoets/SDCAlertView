@@ -30,7 +30,9 @@ public enum ActionLayout: Int {
 @objc(SDCAlertController)
 public class AlertController: UIViewController {
 
-    private lazy var assignResponder: () -> Bool = { [unowned self] () in self.textFields?.first?.becomeFirstResponder() ?? false }
+    private lazy var assignResponder: () -> Bool = { [unowned self] () in
+        self.textFields?.first?.becomeFirstResponder() ?? false
+    }
 
     /// The alert's title. Directly uses `attributedTitle` without any attributes.
     override public var title: String? {
