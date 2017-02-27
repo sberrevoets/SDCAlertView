@@ -83,15 +83,12 @@ class AlertView: AlertControllerView {
     }
 
     private func updateCollectionViewScrollDirection() {
-        guard let layout = self.actionsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else
-        {
-            return
-        }
+        let layout = self.actionsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
 
         if self.actionLayout == .horizontal || (self.actions.count == 2 && self.actionLayout == .automatic) {
-            layout.scrollDirection = .horizontal
+            layout?.scrollDirection = .horizontal
         } else {
-            layout.scrollDirection = .vertical
+            layout?.scrollDirection = .vertical
         }
     }
 
