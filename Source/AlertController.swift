@@ -223,7 +223,7 @@ public class AlertController: UIViewController {
         // http://stackoverflow.com/a/19580888/751268
 
         if self.behaviors?.contains(.AutomaticallyFocusTextField) == true {
-            _ = self.assignResponder
+            _ = self.assignResponder()
         }
     }
 
