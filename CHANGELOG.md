@@ -1,6 +1,12 @@
 # CHANGELOG
 
-# 7.1
+### 7.1.1
+**Bug fixes**:
+- Fixes a retain cycle when adding text fields to the alert
+- Properly makes the first text field the first responder when presenting an
+  alert with text fields
+
+## 7.1
 **What's New:**
 - Makes `AlertVisualStyle` subclassable again
 - Adds support for custom background colors in action sheets
@@ -11,7 +17,7 @@
 - Action sheets without an explicit cancel button won't show the inferred cancel button twice anymore
 - Button labels size and truncate as expected now, instead of being cut off
 
-# 7.0.1
+### 7.0.1
 **Bug Fixes:**
 - Avoids an infinite loop/crash when using an action sheet without explicit cancel buttons
 
