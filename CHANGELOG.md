@@ -1,7 +1,12 @@
 # CHANGELOG
 
+### 7.1.2
+**Bug Fixes**:
+- Fixes a bug that could incorrectly set cancel button attributes on action
+  sheets
+
 ### 7.1.1
-**Bug fixes**:
+**Bug Fixes**:
 - Fixes a retain cycle when adding text fields to the alert
 - Properly makes the first text field the first responder when presenting an
   alert with text fields
