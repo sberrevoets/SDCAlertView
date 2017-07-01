@@ -121,7 +121,7 @@ class AlertView: AlertControllerView {
         let insets = UIEdgeInsets(top: 0, left: contentPadding.left, bottom: 0, right: -contentPadding.right)
         self.titleLabel.sdc_alignEdges([.left, .right], with: self, insets: insets)
 
-        self.pinBottomOfScrollView(to: self.titleLabel, withPriority: UILayoutPriorityDefaultLow)
+        self.pinBottomOfScrollView(to: self.titleLabel, withPriority: .defaultLow)
     }
 
     private func createMessageLabelConstraints() {
@@ -132,7 +132,7 @@ class AlertView: AlertControllerView {
         let insets = UIEdgeInsets(top: 0, left: contentPadding.left, bottom: 0, right: -contentPadding.right)
         self.messageLabel.sdc_alignEdges([.left, .right], with: self, insets: insets)
 
-        self.pinBottomOfScrollView(to: self.messageLabel, withPriority: UILayoutPriorityDefaultLow + 1)
+        self.pinBottomOfScrollView(to: self.messageLabel, withPriority: .defaultLow + 1.0)
     }
 
     private func createTextFieldsConstraints() {
@@ -155,7 +155,7 @@ class AlertView: AlertControllerView {
         textFieldsView.sdc_alignHorizontalCenter(with: self)
         textFieldsView.sdc_pinHeight(height)
 
-        self.pinBottomOfScrollView(to: textFieldsView, withPriority: UILayoutPriorityDefaultLow + 2)
+        self.pinBottomOfScrollView(to: textFieldsView, withPriority: .defaultLow + 2.0)
     }
 
     private func createCustomContentViewConstraints() {
@@ -169,14 +169,14 @@ class AlertView: AlertControllerView {
         self.contentView.sdc_alignHorizontalCenter(with: self)
         self.contentView.sdc_pinWidth(toWidthOf: self, offset: -widthOffset)
 
-        self.pinBottomOfScrollView(to: self.contentView, withPriority: UILayoutPriorityDefaultLow + 3)
+        self.pinBottomOfScrollView(to: self.contentView, withPriority: .defaultLow + 3.0)
     }
 
     private func createCollectionViewConstraints() {
         let height = self.actionsCollectionView.displayHeight
         let heightConstraint = NSLayoutConstraint(item: self.actionsCollectionView, attribute: .height,
             relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
-        heightConstraint.priority = UILayoutPriorityDefaultHigh
+        heightConstraint.priority = .defaultHigh
         self.actionsCollectionView.addConstraint(heightConstraint)
         self.actionsCollectionView.sdc_pinWidth(toWidthOf: self)
         self.actionsCollectionView.sdc_alignEdge(.top, with: .bottom, of: self.scrollView)
@@ -191,7 +191,7 @@ class AlertView: AlertControllerView {
         let scrollViewHeight = self.scrollView.contentSize.height
         let constraint = NSLayoutConstraint(item: self.scrollView, attribute: .height, relatedBy: .equal,
             toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: scrollViewHeight)
-        constraint.priority = UILayoutPriorityDefaultHigh
+        constraint.priority = .defaultHigh
         self.scrollView.addConstraint(constraint)
     }
 
@@ -201,5 +201,11 @@ class AlertView: AlertControllerView {
             constant: -self.visualStyle.contentPadding.bottom)
         bottomAnchor.priority = priority
         self.addConstraint(bottomAnchor)
+    }
+}
+
+private extension UILayoutPriority {
+    static func + (lhs: UILayoutPriority, rhs: Float) -> UILayoutPriority {
+        return UILayoutPriority(rawValue: lhs.rawValue + rhs)
     }
 }

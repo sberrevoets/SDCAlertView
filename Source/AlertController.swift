@@ -30,7 +30,7 @@ public enum ActionLayout: Int {
 @objc(SDCAlertController)
 public class AlertController: UIViewController {
 
-    private lazy var assignResponder: () -> Bool = { [weak self] _ in
+    private lazy var assignResponder: () -> Bool = { [weak self] in
         self?.textFields?.first?.becomeFirstResponder() ?? false
     }
 
@@ -301,7 +301,8 @@ public class AlertController: UIViewController {
                 self.alertView.sdc_centerInSuperview()
                 let maximumHeightOffset = -(margins.top + margins.bottom)
                 self.alertView.sdc_setMaximumHeightToSuperviewHeight(withOffset: maximumHeightOffset)
-                self.alertView.setContentCompressionResistancePriority(500, for: .vertical)
+                let priority = UILayoutPriority(rawValue: 500)
+                self.alertView.setContentCompressionResistancePriority(priority, for: .vertical)
         }
     }
 

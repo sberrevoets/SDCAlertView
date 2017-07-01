@@ -90,6 +90,7 @@ class AlertControllerView: UIView, AlertControllerViewRepresentable {
         self.actionsCollectionView.visualStyle = self.visualStyle
     }
 
+    @objc
     func highlightAction(for sender: UIPanGestureRecognizer) {
         self.actionsCollectionView.highlightAction(for: sender)
     }
