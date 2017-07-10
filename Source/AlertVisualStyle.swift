@@ -16,9 +16,6 @@ open class AlertVisualStyle: NSObject {
     /// The minimum distance between the alert and its superview
     public var margins: UIEdgeInsets
 
-    /// The parallax magnitude
-    public var parallax = UIOffset(horizontal: 15.75, vertical: 15.75)
-
     /// The background color of the alert. The standard blur effect will be added if nil. 
     public var backgroundColor: UIColor?
 
@@ -80,29 +77,15 @@ open class AlertVisualStyle: NSObject {
         switch alertStyle {
             case .alert:
                 self.width = 270
-
-                if #available(iOS 9, *) {
-                    self.cornerRadius = 13
-                    self.margins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-                    self.actionViewSize = CGSize(width: 90, height: 44)
-                } else {
-                    self.cornerRadius = 7
-                    self.margins = UIEdgeInsets.zero
-                    self.actionViewSize = CGSize(width: 90, height: 44)
-                }
+                self.cornerRadius = 13
+                self.margins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+                self.actionViewSize = CGSize(width: 90, height: 44)
 
             case .actionSheet:
                 self.width = 1
-
-                if #available(iOS 9, *) {
-                    self.cornerRadius = 13
-                    self.margins = UIEdgeInsets(top: 30, left: 10, bottom: -10, right: 10)
-                    self.actionViewSize = CGSize(width: 90, height: 57)
-                } else {
-                    self.cornerRadius = 4
-                    self.margins = UIEdgeInsets(top: 10, left: 10, bottom: -8, right: 10)
-                    self.actionViewSize = CGSize(width: 90, height: 44)
-                }
+                self.cornerRadius = 13
+                self.margins = UIEdgeInsets(top: 30, left: 10, bottom: -10, right: 10)
+                self.actionViewSize = CGSize(width: 90, height: 57)
         }
     }
 

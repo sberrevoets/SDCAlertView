@@ -1,6 +1,5 @@
 import SDCAlertView
 
-@available(iOS 9, *)
 class TestsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

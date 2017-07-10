@@ -40,7 +40,7 @@ class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
             animatingView?.transform = CGAffineTransform(scaleX: kInitialScale, y: kInitialScale)
             animatingView?.alpha = 0
 
-            animate({
+            self.animate({
                     animatingView?.transform = CGAffineTransform(scaleX: 1, y: 1)
                     animatingView?.alpha = 1
                 }, inContext: transitionContext, withCompletion: { finished in
@@ -48,7 +48,7 @@ class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
                 })
 
         } else {
-            animate({
+            self.animate({
                     animatingView?.alpha = 0
                 }, inContext: transitionContext, withCompletion: { finished in
                     fromView.removeFromSuperview()

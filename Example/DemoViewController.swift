@@ -45,14 +45,10 @@ final class DemoViewController: UITableViewController {
         }
 
         alert.actionLayout = ActionLayout(rawValue: self.buttonLayoutControl.selectedSegmentIndex)!
-
-        if #available(iOS 9, *) {
-            addContentToAlert(alert)
-        }
+        addContentToAlert(alert)
         alert.present()
     }
 
-    @available(iOS 9, *)
     private func addContentToAlert(_ alert: AlertController) {
         switch self.contentControl.selectedSegmentIndex {
             case 1:

@@ -1,5 +1,9 @@
-final class ActionSheetView: AlertControllerView {
+final class ActionSheetView: UIView, AlertControllerViewRepresentable {
 
+    @IBOutlet var titleLabel: AlertLabel!
+    @IBOutlet var messageLabel: AlertLabel!
+    @IBOutlet var actionsCollectionView: ActionsCollectionView!
+    @IBOutlet var contentView: UIView!
     @IBOutlet private var primaryView: UIView!
     @IBOutlet private var cancelActionView: UIView!
     @IBOutlet private var cancelLabel: UILabel!
@@ -9,11 +13,13 @@ final class ActionSheetView: AlertControllerView {
     @IBOutlet private var cancelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private var titleWidthConstraint: NSLayoutConstraint!
 
-    override var actionTappedHandler: ((AlertAction) -> Void)? {
+    var actions: [AlertAction] = []
+
+    var actionTappedHandler: ((AlertAction) -> Void)? {
         didSet { self.actionsCollectionView.actionTapped = self.actionTappedHandler }
     }
 
-    override var visualStyle: AlertVisualStyle! {
+    var visualStyle: AlertVisualStyle! {
         didSet {
             let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
             self.titleWidthConstraint.constant -= widthOffset
@@ -24,10 +30,11 @@ final class ActionSheetView: AlertControllerView {
         didSet { self.cancelLabel.attributedText = self.cancelAction?.attributedTitle }
     }
 
-    override func prepareLayout() {
+    func prepareLayout() {
         self.assignCancelAction()
 
-        super.prepareLayout()
+        self.actionsCollectionView.actions = self.actions
+        self.actionsCollectionView.visualStyle = self.visualStyle
 
         self.collectionViewHeightConstraint.constant = self.actionsCollectionView.displayHeight
         self.collectionViewHeightConstraint.isActive = true
@@ -59,8 +66,15 @@ final class ActionSheetView: AlertControllerView {
         self.contentViewConstraints.forEach { $0.isActive = showContentView }
     }
 
-    override func highlightAction(for sender: UIPanGestureRecognizer) {
-        super.highlightAction(for: sender)
+    func addDragTapBehavior() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.highlightAction(for:)))
+        self.addGestureRecognizer(panGesture)
+    }
+
+    @objc
+    private func highlightAction(for sender: UIPanGestureRecognizer) {
+        self.actionsCollectionView.highlightAction(for: sender)
+
         let cancelIsSelected = self.cancelActionView.frame.contains(sender.location(in: self))
         self.cancelButton.isHighlighted = cancelIsSelected
 
