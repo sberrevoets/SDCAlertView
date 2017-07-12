@@ -108,6 +108,9 @@ public class AlertController: UIViewController {
     /// A closure that, when set, returns whether the alert or action sheet should dismiss after the user taps
     /// on an action. If it returns false, the AlertAction handler will not be executed.
     public var shouldDismissHandler: ((AlertAction?) -> Bool)?
+    
+    /// A closure called when the alert is dismissed after an outside tap (when `DismissOnOutsideTap` behavior is enabled)
+    public var outsideTapHandler: (() -> Void)?
 
     /// The visual style that applies to the alert or action sheet.
     public lazy var visualStyle: AlertVisualStyle = AlertVisualStyle(alertStyle: self.preferredStyle)
@@ -323,7 +326,9 @@ public class AlertController: UIViewController {
     @objc
     private func chromeTapped(_ sender: UITapGestureRecognizer) {
         if !self.alertView.frame.contains(sender.location(in: self.view)) {
-            self.dismiss()
+            self.dismiss() {
+                self.outsideTapHandler?()
+            }
         }
     }
 
