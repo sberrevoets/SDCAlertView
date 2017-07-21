@@ -22,6 +22,12 @@ open class AlertVisualStyle: NSObject {
     /// The background color of the alert. The standard blur effect will be added if nil. 
     public var backgroundColor: UIColor?
 
+    /// The border color of the alert
+    public var borderColor: UIColor?
+
+    /// The width of the border
+    public var borderWidth: CGFloat?
+
     /// The vertical spacing between elements
     public var verticalElementSpacing: CGFloat = 24
 

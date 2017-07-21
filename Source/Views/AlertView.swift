@@ -53,6 +53,7 @@ class AlertView: AlertControllerView {
         self.updateCollectionViewScrollDirection()
 
         self.createBackground()
+        self.createBorders()
         self.createUI()
         self.createContentConstraints()
         self.updateUI()
@@ -69,6 +70,15 @@ class AlertView: AlertControllerView {
 
             self.insertSubview(backgroundView, belowSubview: self.scrollView)
             backgroundView.sdc_alignEdges(.all, with: self)
+        }
+    }
+
+    private func createBorders() {
+        if let borderColor = self.visualStyle.borderColor {
+            self.layer.borderColor = borderColor.cgColor
+        }
+        if let borderWidth = self.visualStyle.borderWidth {
+            self.layer.borderWidth = borderWidth
         }
     }
 
