@@ -234,6 +234,10 @@ public class AlertController: UIViewController {
         return self.presentingViewController?.preferredStatusBarStyle ?? .default
     }
 
+    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return self.presentingViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
+    }
+
     // MARK: - Private
 
     private func listenForKeyboardChanges() {
