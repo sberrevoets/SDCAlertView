@@ -1,9 +1,9 @@
 final class ActionSheetView: AlertControllerView {
 
     @IBOutlet private var primaryView: UIView!
-    @IBOutlet private weak var cancelActionView: UIView?
-    @IBOutlet private weak var cancelLabel: UILabel?
-    @IBOutlet private weak var cancelButton: UIButton?
+    @IBOutlet private var cancelActionView: UIView!
+    @IBOutlet private var cancelLabel: UILabel!
+    @IBOutlet private var cancelButton: UIButton!
     @IBOutlet private var contentViewConstraints: [NSLayoutConstraint]!
     @IBOutlet private var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private var cancelHeightConstraint: NSLayoutConstraint!
