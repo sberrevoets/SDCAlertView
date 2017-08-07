@@ -37,6 +37,10 @@ final class ActionSheetView: AlertControllerView {
         self.cancelActionView.layer.cornerRadius = self.visualStyle.cornerRadius
         self.cancelActionView.layer.masksToBounds = true
 
+        if let cancelAction = self.cancelAction {
+            self.cancelButton.setupAccessibility(using: cancelAction)
+        }
+
         if let backgroundColor = self.visualStyle.backgroundColor {
             self.primaryView.backgroundColor = backgroundColor
             self.cancelActionView.backgroundColor = backgroundColor
