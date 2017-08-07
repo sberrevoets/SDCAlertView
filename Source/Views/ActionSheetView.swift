@@ -21,7 +21,7 @@ final class ActionSheetView: AlertControllerView {
     }
 
     private var cancelAction: AlertAction? {
-        didSet { self.cancelLabel?.attributedText = self.cancelAction?.attributedTitle }
+        didSet { self.cancelLabel.attributedText = self.cancelAction?.attributedTitle }
     }
 
     override func prepareLayout() {
@@ -34,20 +34,20 @@ final class ActionSheetView: AlertControllerView {
 
         self.primaryView.layer.cornerRadius = self.visualStyle.cornerRadius
         self.primaryView.layer.masksToBounds = true
-        self.cancelActionView?.layer.cornerRadius = self.visualStyle.cornerRadius
-        self.cancelActionView?.layer.masksToBounds = true
+        self.cancelActionView.layer.cornerRadius = self.visualStyle.cornerRadius
+        self.cancelActionView.layer.masksToBounds = true
 
         if let backgroundColor = self.visualStyle.backgroundColor {
             self.primaryView.backgroundColor = backgroundColor
-            self.cancelActionView?.backgroundColor = backgroundColor
+            self.cancelActionView.backgroundColor = backgroundColor
         }
 
-        self.cancelLabel?.font = self.visualStyle.font(for: self.cancelAction)
-        self.cancelLabel?.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
-        self.cancelLabel?.attributedText = self.cancelAction?.attributedTitle
+        self.cancelLabel.font = self.visualStyle.font(for: self.cancelAction)
+        self.cancelLabel.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
+        self.cancelLabel.attributedText = self.cancelAction?.attributedTitle
 
         let cancelButtonBackground = UIImage.image(with: self.visualStyle.actionHighlightColor)
-        self.cancelButton?.setBackgroundImage(cancelButtonBackground, for: .highlighted)
+        self.cancelButton.setBackgroundImage(cancelButtonBackground, for: .highlighted)
         self.cancelHeightConstraint.constant = self.visualStyle.actionViewSize.height
 
         let showContentView = self.contentView.subviews.count > 0
@@ -57,17 +57,17 @@ final class ActionSheetView: AlertControllerView {
 
     override func highlightAction(for sender: UIPanGestureRecognizer) {
         super.highlightAction(for: sender)
-        let cancelIsSelected = self.cancelActionView?.frame.contains(sender.location(in: self)) == true
-        self.cancelButton?.isHighlighted = cancelIsSelected
+        let cancelIsSelected = self.cancelActionView.frame.contains(sender.location(in: self))
+        self.cancelButton.isHighlighted = cancelIsSelected
 
         if cancelIsSelected && sender.state == .ended {
-            self.cancelButton?.sendActions(for: .touchUpInside)
+            self.cancelButton.sendActions(for: .touchUpInside)
         }
     }
 
     override func tintColorDidChange() {
         super.tintColorDidChange()
-        self.cancelLabel?.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
+        self.cancelLabel.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
     }
 
     @IBAction private func cancelTapped() {
