@@ -64,6 +64,20 @@ class TestsViewController: UITableViewController {
                 spinner.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
                 spinner.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
                 alert.present()
+
+            case 9:
+                let alert = AlertController(title: "Title", message: "Message")
+                let action = AlertAction(title: "OK", style: .normal)
+                action.accessibilityIdentifier = "button"
+                alert.add(action)
+                alert.present()
+
+            case 10:
+                let alert = AlertController(title: "Title", message: "Message", preferredStyle: .actionSheet)
+                let action = AlertAction(title: "OK", style: .normal)
+                action.accessibilityIdentifier = "button"
+                alert.add(action)
+                alert.present()
             
             default: break
         }

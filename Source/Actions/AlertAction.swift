@@ -63,6 +63,9 @@ public class AlertAction: NSObject {
     /// The action's style.
     internal(set) public var style: AlertActionStyle = .normal
 
+    /// The action's button accessibility identifier
+    public var accessibilityIdentifier: String?
+
     /// Whether this action can be interacted with by the user.
     public var isEnabled = true {
         didSet { self.actionView?.isEnabled = self.isEnabled }
