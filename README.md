@@ -96,9 +96,9 @@ spinner.startAnimating()
 let alert = AlertController(title: "Title", message: "Please wait...")
 alert.contentView.addSubview(spinner)
 
-spinner.centerXAnchor.constraintEqualToAnchor(alert.contentView.centerXAnchor).active = true
-spinner.topAnchor.constraintEqualToAnchor(alert.contentView.topAnchor).active = true
-spinner.bottomAnchor.constraintEqualToAnchor(alert.contentView.bottomAnchor).active = true
+spinner.centerXAnchor.constraint(equalTo: alert.contentView.centerXAnchor).isActive = true
+spinner.topAnchor.constraint(equalTo: alert.contentView.topAnchor).isActive = true
+spinner.bottomAnchor.constraint(equalTo: alert.contentView.bottomAnchor).isActive = true
 
 alert.present()
 ```
