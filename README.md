@@ -76,7 +76,7 @@ SPM does not yet support iOS, but SDCAlertView will be available there once it d
 
 ```swift
 let alert = AlertController(title: "Title", message: "This is a message", preferredStyle: .alert)
-alert.add(AlertAction(title: "Cancel", style: .default))
+alert.add(AlertAction(title: "Cancel", style: .normal))
 alert.add(AlertAction(title: "OK", style: .preferred))
 alert.present()
 
@@ -108,7 +108,7 @@ alert.present()
 ```swift
 let alert = AlertController(title: "Title", message: "This is a message")
 alert.add(AlertAction(title: "Dismiss", style: .preferred))
-alert.add(AlertAction(title: "Don't dismiss", style: .default))
+alert.add(AlertAction(title: "Don't dismiss", style: .normal))
 alert.shouldDismissHandler = { $0.title == "Dismiss" }
 alert.present()
 ```
