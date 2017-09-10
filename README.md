@@ -1,9 +1,5 @@
 # SDCAlertView
 
-![CI Status](https://travis-ci.org/sberrevoets/SDCAlertView.svg?branch=master)
-![CocoaPods](https://img.shields.io/cocoapods/v/SDCAlertView.svg)
-![Carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)
-
 `SDCAlertView` started out as an alert that looked identical to `UIAlertView`, but had support for a custom content view. With the introduction of `UIAlertController` in iOS 8, the project was updated to the more modern API that `UIAlertController` brought.
 
 <div align="center">
@@ -28,22 +24,20 @@
 
 # Requirements
 
- - Swift 3
- - iOS 8 or higher
-
-If you want to use the library on iOS 7, please use version 2.5.4 (the latest 2.x release).
+ - Swift 4
+ - iOS 9 or higher
 
 # Installation
 
 ## CocoaPods
-To install SDCAlertView using CocoaPods, please integrate it in your existing Podfile, or create a new Podfile:
+To install SDCAlertView using CocoaPods, integrate it in your existing Podfile, or create a new Podfile:
 
 ```ruby
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 target 'MyApp' do
-  pod 'SDCAlertView', '~> 7.1'
+  pod 'SDCAlertView'
 end
 ```
 
@@ -53,7 +47,7 @@ Then run `pod install`.
 To install with Carthage, add the following line to your `Cartfile`:
 
 ```ruby
-github "sberrevoets/SDCAlertView" ~> 7.1
+github "sberrevoets/SDCAlertView"
 ```
 
 Run `carthage update` and drag `SDCAlertView.framework` in the `Build` folder into your project.
