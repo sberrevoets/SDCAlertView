@@ -30,8 +30,8 @@ public enum ActionLayout: Int {
 @objc(SDCAlertController)
 public class AlertController: UIViewController {
 
-    private lazy var assignResponder: () -> Bool = { [weak self] _ in
-        self?.textFields?.first?.becomeFirstResponder() ?? false
+    private lazy var assignResponder: () -> Bool = { () in
+        self.textFields?.first?.becomeFirstResponder() ?? false
     }
 
     /// The alert's title. Directly uses `attributedTitle` without any attributes.
@@ -301,7 +301,7 @@ public class AlertController: UIViewController {
                 self.alertView.sdc_centerInSuperview()
                 let maximumHeightOffset = -(margins.top + margins.bottom)
                 self.alertView.sdc_setMaximumHeightToSuperviewHeight(withOffset: maximumHeightOffset)
-                self.alertView.setContentCompressionResistancePriority(500, for: .vertical)
+                self.alertView.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 500), for: .vertical)
         }
     }
 
