@@ -226,7 +226,10 @@ public class AlertController: UIViewController {
         // http://stackoverflow.com/a/19580888/751268
 
         if self.behaviors?.contains(.AutomaticallyFocusTextField) == true {
+          // prevent to hold the keyboard when alert being dismissed
+          if !self.isBeingDismissed {
             _ = self.assignResponder()
+          }
         }
     }
 
