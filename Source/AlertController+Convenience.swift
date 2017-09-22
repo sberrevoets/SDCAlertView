@@ -1,5 +1,4 @@
 public extension AlertController {
-
     /// Convenience method to quickly display a basic alert.
     ///
     /// - parameter title:       An optional title for the alert.
@@ -8,6 +7,7 @@ public extension AlertController {
     /// - parameter customView:  An optional view that will be displayed in the alert's `contentView`.
     ///
     /// - returns: The alert that was presented.
+    @objc
     @discardableResult
     public class func alert(withTitle title: String? = nil, message: String? = nil,
                             actionTitle: String? = nil, customView: UIView? = nil) -> AlertController
@@ -30,6 +30,7 @@ public extension AlertController {
     /// - parameter actions: The titles of the actions in the action sheet.
     ///
     /// - returns: The action sheet that was presented.
+    @objc
     @discardableResult
     public class func sheet(withTitle title: String? = nil, message: String? = nil, actions: [String])
         -> AlertController
@@ -46,6 +47,7 @@ public extension AlertController {
     /// - parameter actions: The titles of the actions in the action sheet.
     ///
     /// - returns: The action sheet that was presented.
+    @objc
     public class func sheet(with view: UIView, actions: [String]) -> AlertController {
         let alertController = AlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actions.forEach { alertController.add(AlertAction(title: $0, style: .normal)) }

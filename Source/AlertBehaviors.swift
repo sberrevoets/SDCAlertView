@@ -1,5 +1,4 @@
 public struct AlertBehaviors: OptionSet {
-
     /// When applied, the user can dismiss the alert or action sheet by tapping outside of it. Enabled for
     /// action sheets by default.
     public static let dismissOnOutsideTap = AlertBehaviors(rawValue: 1)

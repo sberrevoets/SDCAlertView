@@ -37,18 +37,21 @@ public class AlertController: UIViewController {
     }
 
     /// The alert's message. Directly uses `attributedMessage` without any attributes.
+    @objc
     public var message: String? {
         get { return self.attributedMessage?.string }
         set { self.attributedMessage = newValue.map(NSAttributedString.init) }
     }
 
     /// A stylized title for the alert.
+    @objc
     public var attributedTitle: NSAttributedString? {
         get { return self.alert.title }
         set { self.alert.title = newValue }
     }
 
     /// A stylized message for the alert.
+    @objc
     public var attributedMessage: NSAttributedString? {
         get { return self.alert.message }
         set { self.alert.message = newValue }
@@ -57,11 +60,13 @@ public class AlertController: UIViewController {
     /// The alert's content view. This can be used to add custom views to your alert. The width of the content
     /// view is equal to the width of the alert, minus padding. The height must be defined manually since it
     /// depends on the size of the subviews.
+    @objc
     public var contentView: UIView {
         return self.alert.contentView
     }
 
     /// The alert's actions (buttons).
+    @objc
     private(set) public var actions = [AlertAction]() {
         didSet { self.alert.actions = self.actions }
     }
@@ -69,6 +74,7 @@ public class AlertController: UIViewController {
     /// The alert's preferred action, if one is set. Setting this value to an action that wasn't already added
     /// to the array will add it and override its style to `.preferred`. Setting this value to `nil` will
     /// remove the preferred style from all actions.
+    @objc
     public var preferredAction: AlertAction? {
         get {
             let index = self.actions.index { $0.style == .preferred }
@@ -88,12 +94,14 @@ public class AlertController: UIViewController {
     }
 
     /// The layout of the actions in the alert.
+    @objc
     public var actionLayout: ActionLayout {
         get { return (self.alert as? AlertView)?.actionLayout ?? .automatic }
         set { (self.alert as? AlertView)?.actionLayout = newValue }
     }
 
     /// The text fields that are added to the alert. Does nothing when used with an action sheet.
+    @objc
     private(set) public var textFields: [UITextField]?
 
     /// The alert's custom behaviors. See `AlertBehaviors` for possible options.
@@ -101,15 +109,20 @@ public class AlertController: UIViewController {
 
     /// A closure that, when set, returns whether the alert or action sheet should dismiss after the user taps
     /// on an action. If it returns false, the AlertAction handler will not be executed.
+    @objc
     public var shouldDismissHandler: ((AlertAction?) -> Bool)?
     
-    /// A closure called when the alert is dismissed after an outside tap (when `DismissOnOutsideTap` behavior is enabled)
+    /// A closure called when the alert is dismissed after an outside tap (when `dismissOnOutsideTap` behavior
+    /// is enabled)
+    @objc
     public var outsideTapHandler: (() -> Void)?
 
     /// The visual style that applies to the alert or action sheet.
+    @objc
     public lazy var visualStyle: AlertVisualStyle = AlertVisualStyle(alertStyle: self.preferredStyle)
 
     /// The alert's presentation style.
+    @objc
     private(set) public var preferredStyle: AlertControllerStyle = .alert
 
     private let alert: UIView & AlertControllerViewRepresentable
@@ -124,6 +137,7 @@ public class AlertController: UIViewController {
     /// - parameter attributedTitle:   An optional stylized title
     /// - parameter attributedMessage: An optional stylized message
     /// - parameter preferredStyle:    The preferred presentation style of the alert. Default is `alert`.
+    @objc
     public convenience init(attributedTitle: NSAttributedString?, attributedMessage: NSAttributedString?,
         preferredStyle: AlertControllerStyle = .alert)
     {
@@ -142,6 +156,7 @@ public class AlertController: UIViewController {
     /// - parameter title:          An optional title
     /// - parameter message:        An optional message
     /// - parameter preferredStyle: The preferred presentation style of the alert. Default is `alert`.
+    @objc
     public convenience init(title: String?, message: String?, preferredStyle: AlertControllerStyle = .alert) {
         self.init(preferredStyle: preferredStyle)
         self.preferredStyle = preferredStyle
@@ -190,6 +205,7 @@ public class AlertController: UIViewController {
     /// any position.
     ///
     /// - parameter action: The action to add.
+    @objc
     public func add(_ action: AlertAction) {
         self.actions.append(action)
     }
@@ -198,6 +214,7 @@ public class AlertController: UIViewController {
     ///
     /// - parameter configurationHandler: An optional closure that can be used to configure the text field,
     ///                                   which is provided as a parameter to the closure.
+    @objc
     public func addTextField(withHandler configurationHandler: ((UITextField) -> Void)? = nil) {
         let textField = UITextField()
         textField.autocorrectionType = .no
