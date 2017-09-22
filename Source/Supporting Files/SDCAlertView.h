@@ -7,5 +7,3 @@ FOUNDATION_EXPORT double SDCAlertViewVersionNumber;
 FOUNDATION_EXPORT const unsigned char SDCAlertViewVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <SDCAlertView/PublicHeader.h>
-
-#import "UIView+SDCAutoLayout.h"

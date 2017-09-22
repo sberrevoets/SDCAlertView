@@ -34,25 +34,21 @@ final class DemoViewController: UITableViewController {
         let buttons = Int(self.buttonCountTextField.content ?? "0")!
         for i in 0..<buttons {
             if i == 0 {
-                alert.add(AlertAction(title: "Cancel", style: .preferred))
+                alert.addAction(AlertAction(title: "Cancel", style: .preferred))
             } else if i == 1 {
-                alert.add(AlertAction(title: "OK", style: .normal))
+                alert.addAction(AlertAction(title: "OK", style: .normal))
             } else if i == 2 {
-                alert.add(AlertAction(title: "Delete", style: .destructive))
+                alert.addAction(AlertAction(title: "Delete", style: .destructive))
             } else {
-                alert.add(AlertAction(title: "Button \(i)", style: .normal))
+                alert.addAction(AlertAction(title: "Button \(i)", style: .normal))
             }
         }
 
         alert.actionLayout = ActionLayout(rawValue: self.buttonLayoutControl.selectedSegmentIndex)!
-
-        if #available(iOS 9, *) {
-            addContentToAlert(alert)
-        }
+        addContentToAlert(alert)
         alert.present()
     }
 
-    @available(iOS 9, *)
     private func addContentToAlert(_ alert: AlertController) {
         switch self.contentControl.selectedSegmentIndex {
             case 1:
