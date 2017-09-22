@@ -206,7 +206,7 @@ public class AlertController: UIViewController {
     ///
     /// - parameter action: The action to add.
     @objc
-    public func add(_ action: AlertAction) {
+    public func addAction(_ action: AlertAction) {
         self.actions.append(action)
     }
 

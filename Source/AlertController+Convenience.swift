@@ -13,7 +13,7 @@ public extension AlertController {
                             actionTitle: String? = nil, customView: UIView? = nil) -> AlertController
     {
         let alertController = AlertController(title: title, message: message)
-        alertController.add(AlertAction(title: actionTitle, style: .preferred))
+        alertController.addAction(AlertAction(title: actionTitle, style: .preferred))
 
         if let customView = customView {
             alertController.contentView.addSubview(customView)
@@ -36,7 +36,7 @@ public extension AlertController {
         -> AlertController
     {
         let alertController = AlertController(title: title, message: message, preferredStyle: .actionSheet)
-        actions.forEach { alertController.add(AlertAction(title: $0, style: .normal)) }
+        actions.forEach { alertController.addAction(AlertAction(title: $0, style: .normal)) }
         alertController.present()
         return alertController
     }
@@ -50,7 +50,7 @@ public extension AlertController {
     @objc
     public class func sheet(with view: UIView, actions: [String]) -> AlertController {
         let alertController = AlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actions.forEach { alertController.add(AlertAction(title: $0, style: .normal)) }
+        actions.forEach { alertController.addAction(AlertAction(title: $0, style: .normal)) }
         alertController.contentView.addSubview(view)
         alertController.present()
         return alertController
