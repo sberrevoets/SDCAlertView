@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 8.0.1
+**Bug Fixes:**
+- Fixes a layout issue when creating an alert with a custom content view
+
 ## 8.0
 
 This release brings Swift 4 and iOS 11 compatibility. It also increases the
