@@ -199,7 +199,7 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
             self.contentView.topAnchor.constraint(equalTo: aligningView.bottomAnchor,
                                                   constant: self.visualStyle.verticalElementSpacing),
             self.contentView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            self.contentView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: -widthOffset),
+            self.contentView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -widthOffset),
         ])
 
         self.pinBottomOfScrollView(to: self.contentView, withPriority: .defaultLow + 3.0)
