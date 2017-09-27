@@ -21,8 +21,8 @@ final class DemoViewController: UITableViewController {
     }
 
     private func presentSDCAlertController() {
-        let title = self.titleTextField.content
-        let message = self.messageTextField.content
+        let title = self.titleTextField.text
+        let message = self.messageTextField.text
         let style = AlertControllerStyle(rawValue: self.styleControl.selectedSegmentIndex)!
         let alert = AlertController(title: title, message: message, preferredStyle: style)
 
