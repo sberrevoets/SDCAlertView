@@ -46,7 +46,7 @@ final class DemoViewController: UITableViewController {
 
         alert.actionLayout = ActionLayout(rawValue: self.buttonLayoutControl.selectedSegmentIndex)!
         addContentToAlert(alert)
-        alert.present()
+        alert.sdc_present()
     }
 
     private func addContentToAlert(_ alert: AlertController) {

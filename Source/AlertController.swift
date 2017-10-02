@@ -223,16 +223,6 @@ public class AlertController: UIViewController {
         self.textFields = currentTextFields + [textField]
     }
 
-    /// Presents the alert.
-    ///
-    /// - parameter animated:   Whether to present the alert animated.
-    /// - parameter completion: An optional closure that's called when the presentation finishes.
-    @objc(presentAnimated:completion:)
-    public func present(animated: Bool = true, completion: (() -> Void)? = nil) {
-        let topViewController = UIViewController.topViewController()
-        topViewController?.present(self, animated: animated, completion: completion)
-    }
-
     /// Dismisses the alert.
     ///
     /// - parameter animated:   Whether to dismiss the alert animated.

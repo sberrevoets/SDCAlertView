@@ -19,7 +19,6 @@ public extension AlertController {
             alertController.contentView.addSubview(customView)
         }
 
-        alertController.present()
         return alertController
     }
 
@@ -37,7 +36,6 @@ public extension AlertController {
     {
         let alertController = AlertController(title: title, message: message, preferredStyle: .actionSheet)
         actions.forEach { alertController.addAction(AlertAction(title: $0, style: .normal)) }
-        alertController.present()
         return alertController
     }
 
@@ -52,7 +50,6 @@ public extension AlertController {
         let alertController = AlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actions.forEach { alertController.addAction(AlertAction(title: $0, style: .normal)) }
         alertController.contentView.addSubview(view)
-        alertController.present()
         return alertController
     }
 }
