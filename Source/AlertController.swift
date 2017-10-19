@@ -165,6 +165,27 @@ public class AlertController: UIViewController {
         self.title = title
         self.message = message
     }
+    
+    /// Creates an alert with a custom view above the buttons. The view will be autosized according to the layout of its contents (ie. treat your custom view like an auto sizing table view cell when you build it).
+    ///
+    /// - parameter customView:          The view to display above the buttons
+    /// - parameter preferredStyle: The preferred presentation style of the alert. Default is `alert`.
+    @objc
+    public convenience init(customView: UIView, preferredStyle: AlertControllerStyle = .alert) {
+        self.init(preferredStyle: preferredStyle)
+        self.preferredStyle = preferredStyle
+        self.commonInit()
+        
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(customView)
+        
+        NSLayoutConstraint.activate([
+            customView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            customView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            customView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            customView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+        ])
+    }
 
     private init(preferredStyle: AlertControllerStyle) {
         switch preferredStyle {
