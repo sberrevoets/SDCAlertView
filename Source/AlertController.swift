@@ -353,7 +353,7 @@ public class AlertController: UIViewController {
     }
 
     private func addChromeTapHandlerIfNecessary() {
-        if self.behaviors.contains(.dismissOnOutsideTap) {
+        guard self.behaviors.contains(.dismissOnOutsideTap) else {
             return
         }
 
