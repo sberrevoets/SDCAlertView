@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0BA53BDB1F31D23D003854F3 /* UIView+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA53BDA1F31D23D003854F3 /* UIView+Accessibility.swift */; };
+		A8C1D0661F827E2B004692DB /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C1D0651F827E2B004692DB /* UIViewController+Extension.m */; };
+		A8C1D0681F827E3B004692DB /* UIViewController+Extension.h in Headers */ = {isa = PBXBuildFile; fileRef = A8C1D0671F827E36004692DB /* UIViewController+Extension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D23B53751BF473BC00AB5BBE /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B53741BF473BC00AB5BBE /* AlertView.swift */; };
 		D23B53771BF473CC00AB5BBE /* ActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B53761BF473CC00AB5BBE /* ActionSheetView.swift */; };
 		D2515EC41BC1A7D500ED606F /* SDCAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = D2515EC31BC1A7D500ED606F /* SDCAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -19,7 +21,6 @@
 		D2515ED21BC1A85200ED606F /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A791BC120C900984652 /* AnimationController.swift */; };
 		D2515ED31BC1A85200ED606F /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7A1BC120C900984652 /* PresentationController.swift */; };
 		D2515ED41BC1A85200ED606F /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7B1BC120C900984652 /* Transition.swift */; };
-		D2515ED51BC1A85200ED606F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */; };
 		D2515ED61BC1A85800ED606F /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A7E1BC120C900984652 /* TextFieldCell.swift */; };
 		D2515ED71BC1A85800ED606F /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C30A7F1BC120C900984652 /* TextFieldCell.xib */; };
 		D2515ED81BC1A85800ED606F /* TextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A801BC120C900984652 /* TextFieldsViewController.swift */; };
@@ -34,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		0BA53BDA1F31D23D003854F3 /* UIView+Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Accessibility.swift"; sourceTree = "<group>"; };
+		A8C1D0651F827E2B004692DB /* UIViewController+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extension.m"; sourceTree = "<group>"; };
+		A8C1D0671F827E36004692DB /* UIViewController+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extension.h"; sourceTree = "<group>"; };
 		D23B53741BF473BC00AB5BBE /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		D23B53761BF473CC00AB5BBE /* ActionSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetView.swift; sourceTree = "<group>"; };
 		D2515EC11BC1A7D500ED606F /* SDCAlertView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SDCAlertView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,7 +55,6 @@
 		D2C30A791BC120C900984652 /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 		D2C30A7A1BC120C900984652 /* PresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		D2C30A7B1BC120C900984652 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
-		D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		D2C30A7E1BC120C900984652 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		D2C30A7F1BC120C900984652 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		D2C30A801BC120C900984652 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
@@ -128,7 +130,8 @@
 				D2C30A791BC120C900984652 /* AnimationController.swift */,
 				D2C30A7A1BC120C900984652 /* PresentationController.swift */,
 				D2C30A7B1BC120C900984652 /* Transition.swift */,
-				D2C30A7C1BC120C900984652 /* UIViewController+Extension.swift */,
+				A8C1D0671F827E36004692DB /* UIViewController+Extension.h */,
+				A8C1D0651F827E2B004692DB /* UIViewController+Extension.m */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2515EC41BC1A7D500ED606F /* SDCAlertView.h in Headers */,
+				A8C1D0681F827E3B004692DB /* UIViewController+Extension.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +208,7 @@
 				TargetAttributes = {
 					D2515EC01BC1A7D500ED606F = {
 						CreatedOnToolsVersion = 7.0.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -246,9 +250,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D253B1C81C2AC78D00C37E0F /* AlertBehaviors.swift in Sources */,
-				D2515ED51BC1A85200ED606F /* UIViewController+Extension.swift in Sources */,
 				D2515ED21BC1A85200ED606F /* AnimationController.swift in Sources */,
 				D2515ED81BC1A85800ED606F /* TextFieldsViewController.swift in Sources */,
+				A8C1D0661F827E2B004692DB /* UIViewController+Extension.m in Sources */,
 				D2515ED11BC1A84D00ED606F /* AlertAction.swift in Sources */,
 				D2515ED31BC1A85200ED606F /* PresentationController.swift in Sources */,
 				D23B53771BF473CC00AB5BBE /* ActionSheetView.swift in Sources */,
@@ -273,6 +277,8 @@
 		D2515EC71BC1A7D500ED606F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -304,6 +310,8 @@
 		D2515EC81BC1A7D500ED606F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
