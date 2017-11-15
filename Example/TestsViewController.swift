@@ -79,7 +79,7 @@ class TestsViewController: UITableViewController {
                 alert.present()
             
             case 11:
-                let titleFont = UIFont.preferredFont(forTextStyle: .title1)
+                let titleFont = UIFont.preferredFont(forTextStyle: .headline)
                 let alertTitle = NSMutableAttributedString(string: "Red Attributed Title", attributes: [ NSFontAttributeName: titleFont, NSForegroundColorAttributeName: UIColor.red ])
                 
                 let messageFont = UIFont.preferredFont(forTextStyle: .subheadline)
