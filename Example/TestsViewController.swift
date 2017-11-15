@@ -78,6 +78,19 @@ class TestsViewController: UITableViewController {
                 alert.addAction(action)
                 alert.present()
             
+            case 11:
+                let titleFont = UIFont.preferredFont(forTextStyle: .title1)
+                let alertTitle = NSMutableAttributedString(string: "Red Attributed Title", attributes: [ NSFontAttributeName: titleFont, NSForegroundColorAttributeName: UIColor.red ])
+                
+                let messageFont = UIFont.preferredFont(forTextStyle: .subheadline)
+                let alertMessage = NSMutableAttributedString(string: "Try adjusting the dynamic type in the Settings App to the largest accessibility size and test again.  Note: Dynamic type doesn't work on the iOS 9 simulator, fixed in iOS 10+.  Shouldn't see any overlap of text.", attributes: [ NSFontAttributeName: messageFont ])
+                
+                let alert = AlertController(attributedTitle: alertTitle, attributedMessage: alertMessage, preferredStyle: .alert)
+                let action = AlertAction(title: "OK", style: .normal)
+                action.accessibilityIdentifier = "button"
+                alert.addAction(action)
+                alert.present()
+            
             default: break
         }
     }

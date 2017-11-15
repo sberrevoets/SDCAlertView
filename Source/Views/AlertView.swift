@@ -158,8 +158,8 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
             self.messageLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: contentPadding.left),
             self.messageLabel.rightAnchor.constraint(equalTo: self.rightAnchor,
                                         constant: -contentPadding.right),
-            self.messageLabel.firstBaselineAnchor.constraint(equalTo: self.titleLabel.lastBaselineAnchor,
-                                                            constant: self.visualStyle.verticalElementSpacing)
+            self.messageLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor,
+                                                   constant: 0)
         ])
 
         self.pinBottomOfScrollView(to: self.messageLabel, withPriority: .defaultLow + 1.0)
@@ -177,7 +177,7 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
         let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
 
         NSLayoutConstraint.activate([
-            textFieldsView.topAnchor.constraint(equalTo: self.messageLabel.lastBaselineAnchor,
+            textFieldsView.topAnchor.constraint(equalTo: self.messageLabel.bottomAnchor,
                                                 constant: self.visualStyle.verticalElementSpacing),
             textFieldsView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -widthOffset),
             textFieldsView.centerXAnchor.constraint(equalTo: self.centerXAnchor),

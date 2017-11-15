@@ -23,9 +23,10 @@ open class AlertVisualStyle: NSObject {
     @objc
     public var backgroundColor: UIColor?
 
-    /// The vertical spacing between elements
+    /// The vertical spacing between the message text and any textfield or customview and the spacing between them
+    /// Note: The vertical spacing between the title and the message text is handled automatically by normal font metrics
     @objc
-    public var verticalElementSpacing: CGFloat = 24
+    public var verticalElementSpacing: CGFloat = 8
 
     /// The size of an action. The specified width is treated as a minimum width. The actual width is
     /// automatically determined.
