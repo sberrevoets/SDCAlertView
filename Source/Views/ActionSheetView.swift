@@ -12,7 +12,8 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     @IBOutlet private var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private var cancelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private var titleWidthConstraint: NSLayoutConstraint!
-
+    @IBOutlet private var headerContainerViewHeightConstraint: NSLayoutConstraint!
+  
     var actions: [AlertAction] = []
 
     var actionTappedHandler: ((AlertAction) -> Void)? {
@@ -64,6 +65,10 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         let showContentView = self.contentView.subviews.count > 0
         self.contentView.isHidden = !showContentView
         self.contentViewConstraints.forEach { $0.isActive = showContentView }
+      
+        if (title?.string.isEmpty ?? true) && (message?.string.isEmpty ?? true) {
+            headerContainerViewHeightConstraint.isActive = true
+        }
     }
 
     func addDragTapBehavior() {
