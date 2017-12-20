@@ -58,8 +58,17 @@ final class DemoViewController: UITableViewController {
                 spinner.startAnimating()
                 contentView.addSubview(spinner)
                 spinner.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-                spinner.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-                spinner.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+                spinner.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+            
+                let label = UILabel()
+                label.translatesAutoresizingMaskIntoConstraints = false
+                contentView.addSubview(label)
+                label.text = "Loading..."
+                label.textAlignment = .center
+                spinner.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -8).isActive = true
+                label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+                label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 10).isActive = true
+                label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
             case 2:
                 let contentView = alert.contentView
                 let switchControl = UISwitch()
@@ -67,8 +76,8 @@ final class DemoViewController: UITableViewController {
                 switchControl.translatesAutoresizingMaskIntoConstraints = false
                 contentView.addSubview(switchControl)
                 switchControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-                switchControl.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-                switchControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+                switchControl.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+                switchControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
 
                 alert.message = "Disable switch to prevent alert dismissal"
 
@@ -83,9 +92,11 @@ final class DemoViewController: UITableViewController {
                     constant: 20).isActive = true
                 bar.trailingAnchor.constraint(equalTo: alert.contentView.trailingAnchor,
                     constant: -20).isActive = true
-                bar.topAnchor.constraint(equalTo: alert.contentView.topAnchor).isActive = true
-                bar.bottomAnchor.constraint(equalTo: alert.contentView.bottomAnchor).isActive = true
-
+                bar.topAnchor.constraint(equalTo: alert.contentView.topAnchor,
+                                         constant: 20).isActive = true
+                bar.bottomAnchor.constraint(equalTo: alert.contentView.bottomAnchor,
+                                            constant: -20).isActive = true
+                bar.heightAnchor.constraint(equalToConstant: 20).isActive = true
                 Timer.scheduledTimer(timeInterval: 0.01, target: self, selector:
                     #selector(updateProgressBar), userInfo: bar, repeats: true)
             default: break

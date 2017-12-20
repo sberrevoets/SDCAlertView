@@ -29,7 +29,8 @@ public enum ActionLayout: Int {
 public class AlertController: UIViewController {
 
     private var verticalCenter: NSLayoutConstraint?
-
+    private var actionSheetBottomConstraint: NSLayoutConstraint?
+    
     /// The alert's title. Directly uses `attributedTitle` without any attributes.
     override public var title: String? {
         get { return self.attributedTitle?.string }
@@ -165,6 +166,27 @@ public class AlertController: UIViewController {
         self.title = title
         self.message = message
     }
+    
+    /// Creates an alert with a custom view above the buttons. The view will be autosized according to the layout of its contents (ie. treat your custom view like an auto sizing table view cell when you build it).
+    ///
+    /// - parameter customView:          The view to display above the buttons
+    /// - parameter preferredStyle: The preferred presentation style of the alert. Default is `alert`.
+    @objc
+    public convenience init(customView: UIView, preferredStyle: AlertControllerStyle = .alert) {
+        self.init(preferredStyle: preferredStyle)
+        self.preferredStyle = preferredStyle
+        self.commonInit()
+        
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(customView)
+        
+        NSLayoutConstraint.activate([
+            customView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            customView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            customView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            customView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+        ])
+    }
 
     private init(preferredStyle: AlertControllerStyle) {
         switch preferredStyle {
@@ -267,15 +289,28 @@ public class AlertController: UIViewController {
 
     @objc
     private func keyboardChange(_ notification: Notification) {
-        let newFrameValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
-        guard let newFrame = newFrameValue?.cgRectValue else {
-            return
+        
+        guard let userInfo = notification.userInfo,
+            let beginRect = userInfo[UIKeyboardFrameBeginUserInfoKey] as? CGRect,
+            let targetRect = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double ?? 0.0
+        let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt ?? 0
+        let options: UIViewKeyframeAnimationOptions = curve == 0 ? [] : UIViewKeyframeAnimationOptions(rawValue: curve)
+        let deltaY = beginRect.origin.y - targetRect.origin.y
+        
+        switch self.preferredStyle {
+        case .actionSheet:
+            self.actionSheetBottomConstraint?.constant += -deltaY
+        case .alert:
+            self.verticalCenter?.constant = -deltaY / 2
         }
 
-        self.verticalCenter?.constant = -newFrame.height / 2
-        self.alert.layoutIfNeeded()
-    }
-
+        UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: options, animations: {
+            self.view.layoutIfNeeded()
+        })
+}
+    
     public override func becomeFirstResponder() -> Bool {
         if self.behaviors.contains(.automaticallyFocusTextField) {
             return self.textFields?.first?.becomeFirstResponder() ?? super.becomeFirstResponder()
@@ -311,32 +346,33 @@ public class AlertController: UIViewController {
         let margins = self.visualStyle.margins
 
         switch self.preferredStyle {
-            case .actionSheet:
-                let bounds = self.presentingViewController?.view.bounds ?? self.view.bounds
-                let width = min(bounds.width, bounds.height) - margins.left - margins.right
-                NSLayoutConstraint.activate([
-                    self.alert.widthAnchor.constraint(equalToConstant: width * self.visualStyle.width),
-                    self.alert.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                    self.alert.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
-                                                           constant: margins.bottom),
-                    self.alert.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor,
-                                                           constant: -margins.top)
+        case .actionSheet:
+            let bounds = self.presentingViewController?.view.bounds ?? self.view.bounds
+            let width = min(bounds.width, bounds.height) - margins.left - margins.right
+            
+            self.actionSheetBottomConstraint = self.alert.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: margins.bottom)
+            NSLayoutConstraint.activate([
+                self.alert.widthAnchor.constraint(equalToConstant: width * self.visualStyle.width),
+                self.alert.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                self.actionSheetBottomConstraint!,
+                self.alert.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor,
+                                                   constant: -margins.top)
                 ])
-
-            case .alert:
-                self.alert.widthAnchor.constraint(equalToConstant: self.visualStyle.width).isActive = true
-                self.verticalCenter = self.alert.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-                let maximumHeightOffset = -(margins.top + margins.bottom)
-
-                NSLayoutConstraint.activate([
-                    self.verticalCenter!,
-                    self.alert.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                    self.alert.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor,
-                                                       multiplier: 1, constant: maximumHeightOffset),
+            
+        case .alert:
+            self.alert.widthAnchor.constraint(equalToConstant: self.visualStyle.width).isActive = true
+            self.verticalCenter = self.alert.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+            let maximumHeightOffset = -(margins.top + margins.bottom)
+            
+            NSLayoutConstraint.activate([
+                self.verticalCenter!,
+                self.alert.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                self.alert.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor,
+                                                   multiplier: 1, constant: maximumHeightOffset),
                 ])
-
-                let priority = UILayoutPriority(rawValue: 500)
-                self.alert.setContentCompressionResistancePriority(priority, for: .vertical)
+            
+            let priority = UILayoutPriority(rawValue: 500)
+            self.alert.setContentCompressionResistancePriority(priority, for: .vertical)
         }
     }
 
