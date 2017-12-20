@@ -1,14 +1,13 @@
 final class ActionSheetView: UIView, AlertControllerViewRepresentable {
-
     @IBOutlet var titleLabel: AlertLabel!
     @IBOutlet var messageLabel: AlertLabel!
     @IBOutlet var actionsCollectionView: ActionsCollectionView!
     @IBOutlet var contentView: UIView!
     @IBOutlet private var primaryView: UIView!
+    @IBOutlet private var labelsContainer: UIView!
     @IBOutlet private var cancelActionView: UIView!
     @IBOutlet private var cancelLabel: UILabel!
     @IBOutlet private var cancelButton: UIButton!
-    @IBOutlet private var contentViewConstraints: [NSLayoutConstraint]!
     @IBOutlet private var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private var cancelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private var titleWidthConstraint: NSLayoutConstraint!
@@ -61,9 +60,9 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         self.cancelButton.setBackgroundImage(cancelButtonBackground, for: .highlighted)
         self.cancelHeightConstraint.constant = self.visualStyle.actionViewSize.height
 
-        let showContentView = self.contentView.subviews.count > 0
-        self.contentView.isHidden = !showContentView
-        self.contentViewConstraints.forEach { $0.isActive = showContentView }
+        let noTextProvided = self.title?.string.isEmpty != false && self.message?.string.isEmpty != false
+        let contentViewProvided = self.contentView.subviews.count > 0
+        self.labelsContainer.isHidden = noTextProvided || contentViewProvided
     }
 
     func addDragTapBehavior() {
