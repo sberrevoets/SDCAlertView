@@ -317,21 +317,21 @@ public class AlertController: UIViewController {
                 NSLayoutConstraint.activate([
                     self.alert.widthAnchor.constraint(equalToConstant: width * self.visualStyle.width),
                     self.alert.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                    self.alert.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
+                    self.alert.bottomAnchor.constraint(equalTo: self.bottomAnchor,
                                                            constant: margins.bottom),
-                    self.alert.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor,
+                    self.alert.heightAnchor.constraint(lessThanOrEqualTo: self.heightAnchor,
                                                            constant: -margins.top)
                 ])
 
             case .alert:
                 self.alert.widthAnchor.constraint(equalToConstant: self.visualStyle.width).isActive = true
-                self.verticalCenter = self.alert.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+                self.verticalCenter = self.alert.centerYAnchor.constraint(equalTo: self.centerYAnchor)
                 let maximumHeightOffset = -(margins.top + margins.bottom)
 
                 NSLayoutConstraint.activate([
                     self.verticalCenter!,
                     self.alert.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                    self.alert.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor,
+                    self.alert.heightAnchor.constraint(lessThanOrEqualTo: self.heightAnchor,
                                                        multiplier: 1, constant: maximumHeightOffset),
                 ])
 
@@ -368,6 +368,32 @@ public class AlertController: UIViewController {
             self.dismiss() {
                 self.outsideTapHandler?()
             }
+        }
+    }
+}
+
+private extension AlertController {
+    var bottomAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11, *) {
+            return self.view.safeAreaLayoutGuide.bottomAnchor
+        } else {
+            return self.view.bottomAnchor
+        }
+    }
+
+    var centerYAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11, *) {
+            return self.view.safeAreaLayoutGuide.centerYAnchor
+        } else {
+            return self.view.centerYAnchor
+        }
+    }
+
+    var heightAnchor: NSLayoutDimension {
+        if #available(iOS 11, *) {
+            return self.view.safeAreaLayoutGuide.heightAnchor
+        } else {
+            return self.view.heightAnchor
         }
     }
 }
