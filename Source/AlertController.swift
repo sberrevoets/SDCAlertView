@@ -317,11 +317,17 @@ public class AlertController: UIViewController {
                 NSLayoutConstraint.activate([
                     self.alert.widthAnchor.constraint(equalToConstant: width * self.visualStyle.width),
                     self.alert.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                    self.alert.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
-                                                           constant: margins.bottom),
                     self.alert.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor,
                                                            constant: -margins.top)
                 ])
+                //iphone X fixes
+                if #available(iOS 11.0, *) {
+                  self.alert.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,
+                                                     constant: margins.bottom).isActive = true
+                } else {
+                  self.alert.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
+                                                     constant: margins.bottom).isActive = true
+                }
 
             case .alert:
                 self.alert.widthAnchor.constraint(equalToConstant: self.visualStyle.width).isActive = true
