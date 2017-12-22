@@ -77,6 +77,10 @@ public class AlertController: UIViewController {
     @objc
     public var preferredAction: AlertAction? {
         get {
+            if self.preferredStyle == .actionSheet {
+                return nil
+            }
+
             let index = self.actions.index { $0.style == .preferred }
             return index != nil ? self.actions[index!] : nil
         }
