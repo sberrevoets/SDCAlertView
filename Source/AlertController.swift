@@ -191,11 +191,12 @@ public class AlertController: UIViewController {
     private func commonInit() {
         self.modalPresentationStyle = .custom
         self.transitioningDelegate = self.transitionDelegate
-    }
 
-    public override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.textFields?.first?.resignFirstResponder()
+        if self.preferredStyle == .alert {
+            let command = UIKeyCommand(input: "\r", modifierFlags: [],
+                                       action: #selector(self.handleHardwareReturnKey))
+            self.addKeyCommand(command)
+        }
     }
 
     // MARK: - Public
@@ -250,6 +251,11 @@ public class AlertController: UIViewController {
         self.configureAlertView()
     }
 
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.textFields?.first?.resignFirstResponder()
+    }
+
     public override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.presentingViewController?.preferredStatusBarStyle ?? .default
     }
@@ -259,6 +265,13 @@ public class AlertController: UIViewController {
     }
 
     // MARK: - Private
+
+    @objc
+    private func handleHardwareReturnKey() {
+        if let preferredAction = self.preferredAction {
+            self.alert.actionTappedHandler?(preferredAction)
+        }
+    }
 
     private func listenForKeyboardChanges() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardChange),
