@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 8.0.2
+**Bug Fixes:**
+- Fixes the inverted `dismissOnOutsideTap` behavior for alert views
+- Hides action sheet labels when no title or subtitle are provided
+- Fixes action sheet layout issues on iPhone X
+- Invokes the `preferredAction` when the return key is hit on a hardware
+  keyboard
+- Return no `preferredAction` when the style of the alert is an action sheet
+
 ### 8.0.1
 **Bug Fixes:**
 - Fixes a layout issue when creating an alert with a custom content view
