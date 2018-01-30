@@ -28,7 +28,7 @@ final class TextFieldsViewController: UIViewController {
 
     override func loadView() {
         let nibName = String(describing: TextFieldCell.self)
-        let cellNib = UINib(nibName: nibName, bundle: Bundle(for: type(of: self)))
+        let cellNib = UINib(nibName: nibName, bundle: Bundle.resourceBundle)
         self.tableView.register(cellNib, forCellReuseIdentifier: kTextFieldCellIdentifier)
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .none

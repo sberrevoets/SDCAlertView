@@ -177,7 +177,7 @@ public class AlertController: UIViewController {
 
         case .actionSheet:
             let nibName = String(describing: ActionSheetView.self)
-            let objects = Bundle(for: ActionSheetView.self).loadNibNamed(nibName, owner: nil, options: nil)
+            let objects = Bundle.resourceBundle.loadNibNamed(nibName, owner: nil, options: nil)
             if let actionSheet = objects?.first as? ActionSheetView {
                 self.alert = actionSheet
             } else {

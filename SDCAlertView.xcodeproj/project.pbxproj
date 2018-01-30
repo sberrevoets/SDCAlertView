@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0BA53BDB1F31D23D003854F3 /* UIView+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA53BDA1F31D23D003854F3 /* UIView+Accessibility.swift */; };
+		894DA5AB201C73B400603715 /* Bundle+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894DA5AA201C73B400603715 /* Bundle+Convenience.swift */; };
 		D23B53751BF473BC00AB5BBE /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B53741BF473BC00AB5BBE /* AlertView.swift */; };
 		D23B53771BF473CC00AB5BBE /* ActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B53761BF473CC00AB5BBE /* ActionSheetView.swift */; };
 		D2515EC41BC1A7D500ED606F /* SDCAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = D2515EC31BC1A7D500ED606F /* SDCAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		0BA53BDA1F31D23D003854F3 /* UIView+Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Accessibility.swift"; sourceTree = "<group>"; };
+		894DA5AA201C73B400603715 /* Bundle+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Convenience.swift"; sourceTree = "<group>"; };
 		D23B53741BF473BC00AB5BBE /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		D23B53761BF473CC00AB5BBE /* ActionSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetView.swift; sourceTree = "<group>"; };
 		D2515EC11BC1A7D500ED606F /* SDCAlertView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SDCAlertView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 				D2A48B431C2E09CE009DD715 /* AlertController+Convenience.swift */,
 				D2C30A751BC120C900984652 /* AlertController.swift */,
 				D2C30A811BC120C900984652 /* AlertVisualStyle.swift */,
+				894DA5AA201C73B400603715 /* Bundle+Convenience.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				D23B53771BF473CC00AB5BBE /* ActionSheetView.swift in Sources */,
 				D2515EDA1BC1A85800ED606F /* AlertControllerViewRepresentable.swift in Sources */,
 				D2515ECF1BC1A84D00ED606F /* ActionsCollectionView.swift in Sources */,
+				894DA5AB201C73B400603715 /* Bundle+Convenience.swift in Sources */,
 				D23B53751BF473BC00AB5BBE /* AlertView.swift in Sources */,
 				D2DE585B1C082F460041DFDE /* AlertController.swift in Sources */,
 				D2A48B441C2E09CE009DD715 /* AlertController+Convenience.swift in Sources */,
