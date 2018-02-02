@@ -63,6 +63,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         let noTextProvided = self.title?.string.isEmpty != false && self.message?.string.isEmpty != false
         let contentViewProvided = self.contentView.subviews.count > 0
         self.labelsContainer.isHidden = noTextProvided || contentViewProvided
+        self.contentView.isHidden = !contentViewProvided
     }
 
     func addDragTapBehavior() {
