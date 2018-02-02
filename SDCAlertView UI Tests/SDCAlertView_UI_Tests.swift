@@ -138,4 +138,11 @@ class SDCAlertView_UI_Tests: XCTestCase {
         XCTAssertTrue(buttonWithIdentifier("button").exists)
         self.tapButtonWithIdentifier("button")
     }
+
+    func testActionSheetWithCustomView() {
+        self.showAlertAtIndex(11)
+        XCTAssertTrue(XCUIApplication().activityIndicators["In progress"].exists)
+        XCTAssertTrue(buttonWithIdentifier("button").exists)
+        self.tapButtonWithIdentifier("cancel")
+    }
 }

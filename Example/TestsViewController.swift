@@ -78,6 +78,21 @@ class TestsViewController: UITableViewController {
                 alert.addAction(action)
                 alert.present()
             
+            case 11:
+                let alert = AlertController(title: "Title", message: "Message", preferredStyle: .actionSheet)
+                let contentView = alert.contentView
+                let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+                spinner.translatesAutoresizingMaskIntoConstraints = false
+                spinner.startAnimating()
+                contentView.addSubview(spinner)
+                spinner.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+                spinner.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+                spinner.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+                let action = AlertAction(title: "Cancel", style: .normal)
+                action.accessibilityIdentifier = "cancel"
+                alert.addAction(action)
+                alert.present()
+            
             default: break
         }
     }
