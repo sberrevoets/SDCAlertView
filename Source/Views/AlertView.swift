@@ -34,7 +34,11 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
             self.contentView.subviews.count > 0 ? self.contentView : nil,
         ]
 
-        return possibleElements.flatMap { $0 }
+        #if swift(>=4.1)
+            return possibleElements.compactMap { $0 }
+        #else
+            return possibleElements.flatMap { $0 }
+        #endif
     }
 
     private var contentHeight: CGFloat {
