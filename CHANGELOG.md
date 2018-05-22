@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 8.1
+This release brings Swift 4.1 compatibility.
+
+**Bug Fixes:**
+- Fixes build issues when using the new build system and CocoaPods
+- Fixes a missing `contentView` in action sheets
+
 ## 8.0.2
 **Bug Fixes:**
 - Fixes the inverted `dismissOnOutsideTap` behavior for alert views

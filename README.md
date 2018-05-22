@@ -24,7 +24,7 @@
 
 # Requirements
 
- - Swift 4
+ - Swift 4.1
  - iOS 9 or higher
 
 # Installation
