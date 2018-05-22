@@ -1,8 +1,7 @@
 import UIKit
 
 @objc(SDCAlertLabel)
-class AlertLabel: UILabel {
-
+final class AlertLabel: UILabel {
     init() {
         super.init(frame: .zero)
         self.textAlignment = .center
