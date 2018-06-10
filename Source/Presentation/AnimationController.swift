@@ -4,8 +4,7 @@ private let kInitialScale: CGFloat = 1.2
 private let kSpringDamping: CGFloat = 45.71
 private let kSpringVelocity: CGFloat = 0
 
-class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
-
+final class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     private var isPresentation = false
 
     init(presentation: Bool) {
@@ -55,7 +54,6 @@ class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
                     transitionContext.completeTransition(finished)
                 })
         }
-
     }
 
     private func animate(_ animations: @escaping (() -> Void),

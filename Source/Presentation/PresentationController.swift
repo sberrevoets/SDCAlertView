@@ -1,8 +1,9 @@
 import UIKit
 
-class PresentationController: UIPresentationController {
-
+final class PresentationController: UIPresentationController {
     private let dimmingView = UIView()
+
+    var presentationCompleted = false
 
     override init(presentedViewController: UIViewController,
                   presenting presentingViewController: UIViewController?)
@@ -21,6 +22,10 @@ class PresentationController: UIPresentationController {
 
         let coordinator = self.presentedViewController.transitionCoordinator
         coordinator?.animate(alongsideTransition: { _ in self.dimmingView.alpha = 1 }, completion: nil)
+    }
+
+    override func presentationTransitionDidEnd(_ completed: Bool) {
+        self.presentationCompleted = completed
     }
 
     override func dismissalTransitionWillBegin() {

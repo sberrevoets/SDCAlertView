@@ -1,7 +1,6 @@
 import UIKit
 
-class Transition: NSObject, UIViewControllerTransitioningDelegate {
-
+final class Transition: NSObject, UIViewControllerTransitioningDelegate {
     private let alertStyle: AlertControllerStyle
 
     init(alertStyle: AlertControllerStyle) {
@@ -19,14 +18,12 @@ class Transition: NSObject, UIViewControllerTransitioningDelegate {
         presenting: UIViewController, source: UIViewController)
         -> UIViewControllerAnimatedTransitioning?
     {
-        if self.alertStyle == .actionSheet {
-            return nil
-        }
-
-        return AnimationController(presentation: true)
+        return self.alertStyle == .alert ? AnimationController(presentation: true) : nil
     }
 
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController)
+        -> UIViewControllerAnimatedTransitioning?
+    {
         return self.alertStyle == .alert ? AnimationController(presentation: false) : nil
     }
 }

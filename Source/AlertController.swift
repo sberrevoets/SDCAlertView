@@ -27,7 +27,6 @@ public enum ActionLayout: Int {
 
 @objc(SDCAlertController)
 public class AlertController: UIViewController {
-
     private var verticalCenter: NSLayoutConstraint?
 
     /// The alert's title. Directly uses `attributedTitle` without any attributes.
@@ -284,13 +283,28 @@ public class AlertController: UIViewController {
 
     @objc
     private func keyboardChange(_ notification: Notification) {
+        let oldFrameValue = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue
         let newFrameValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
-        guard let newFrame = newFrameValue?.cgRectValue else {
+
+        guard let oldFrame = oldFrameValue?.cgRectValue, let newFrame = newFrameValue?.cgRectValue else {
             return
         }
 
-        self.verticalCenter?.constant = -newFrame.height / 2
-        self.alert.layoutIfNeeded()
+        let keyboardAppearing = oldFrame.origin.y > newFrame.origin.y
+        self.verticalCenter?.constant = keyboardAppearing ? -newFrame.height / 2 : 0
+
+        if let presentationController = self.presentationController as? PresentationController,
+            !presentationController.presentationCompleted
+        {
+            return
+        }
+
+        let curve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+        let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
+
+        UIView.animate(withDuration: duration?.doubleValue ?? 0, delay: 0,
+                       options: UIViewAnimationOptions(rawValue: curve?.uintValue ?? 0),
+                       animations: self.view.layoutIfNeeded, completion: nil)
     }
 
     public override func becomeFirstResponder() -> Bool {
