@@ -181,12 +181,12 @@
 				TargetAttributes = {
 					D2515E6E1BC1A47F00ED606F = {
 						CreatedOnToolsVersion = 7.0.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
 					};
 					D2C0AFCC1BE7236A00F31D0F = {
 						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
 						TestTargetID = D2515E6E1BC1A47F00ED606F;
 					};
@@ -390,7 +390,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -408,7 +408,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ScottyDoesntCode.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -422,7 +422,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ScottyDoesntCode.SDCAlertView-UI-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Example;
 				USES_XCTRUNNER = YES;
 			};
@@ -437,7 +437,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ScottyDoesntCode.SDCAlertView-UI-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Example;
 				USES_XCTRUNNER = YES;
 			};

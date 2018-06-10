@@ -38,7 +38,7 @@ final class TextFieldCell: UITableViewCell {
         container?.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
 
-        let insets = self.visualStyle?.textFieldMargins ?? UIEdgeInsets.zero
+        let insets = self.visualStyle?.textFieldMargins ?? UIEdgeInsets()
 
         let leading = textField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: insets.left)
         let trailing = textField.trailingAnchor.constraint(equalTo: self.trailingAnchor,

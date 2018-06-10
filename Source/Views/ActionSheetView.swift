@@ -55,7 +55,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         self.cancelButton.isHighlighted = cancelIsSelected
 
         if cancelIsSelected && sender.state == .ended {
-            self.cancelButton.sendActions(for: .touchUpInside)
+            self.cancelButton.sendActions(for: UIControl.Event.touchUpInside)
         }
     }
 
