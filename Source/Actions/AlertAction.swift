@@ -25,11 +25,12 @@ public class AlertAction: NSObject {
     - parameter handler: An optional closure that's called when the user taps on this action
     */
     @objc
-    public convenience init(title: String?, style: AlertActionStyle, handler: ((AlertAction) -> Void)? = nil)
+    public convenience init(title: String?, style: AlertActionStyle, ac: AlertController,  handler: ((AlertAction) -> Void)? = nil)
     {
         self.init()
         self.title = title
         self.style = style
+        self.alertController = ac
         self.handler = handler
     }
 
@@ -41,7 +42,7 @@ public class AlertAction: NSObject {
     - parameter handler:         An optional closure that is called when the user taps on this action
     */
     @objc
-    public convenience init(attributedTitle: NSAttributedString?, style: AlertActionStyle,
+    public convenience init(attributedTitle: NSAttributedString?, style: AlertActionStyle, ac: AlertController, 
         handler: ((AlertAction) -> Void)? = nil)
     {
         self.init()
@@ -82,4 +83,6 @@ public class AlertAction: NSObject {
     var actionView: ActionCell? {
         didSet { self.actionView?.isEnabled = self.isEnabled }
     }
+    
+    public var alertController: AlertController?
 }
