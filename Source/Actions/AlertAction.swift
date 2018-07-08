@@ -30,7 +30,7 @@ public class AlertAction: NSObject {
         self.init()
         self.title = title
         self.style = style
-        self.alertControlelr = ac
+        self.alertController = ac
         self.handler = handler
     }
 
@@ -84,5 +84,5 @@ public class AlertAction: NSObject {
         didSet { self.actionView?.isEnabled = self.isEnabled }
     }
     
-    public var alertControlelr: AlertController?
+    public var alertController: AlertController?
 }
