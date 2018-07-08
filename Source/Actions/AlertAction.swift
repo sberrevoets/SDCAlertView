@@ -25,7 +25,7 @@ public class AlertAction: NSObject {
     - parameter handler: An optional closure that's called when the user taps on this action
     */
     @objc
-    public convenience init(title: String?, style: AlertActionStyle, handler: ((AlertAction) -> Void)? = nil)
+    public convenience init(title: String?, style: AlertActionStyle, handler: ((AlertAction, AlertController?) -> Void)? = nil)
     {
         self.init()
         self.title = title
@@ -42,7 +42,7 @@ public class AlertAction: NSObject {
     */
     @objc
     public convenience init(attributedTitle: NSAttributedString?, style: AlertActionStyle,
-        handler: ((AlertAction) -> Void)? = nil)
+        handler: ((AlertAction, AlertController?) -> Void)? = nil)
     {
         self.init()
         self.attributedTitle = attributedTitle
@@ -52,7 +52,7 @@ public class AlertAction: NSObject {
 
     /// A closure that gets executed when the user taps on this actions in the UI
     @objc
-    public var handler: ((AlertAction) -> Void)?
+    public var handler: ((AlertAction, AlertController?) -> Void)?
 
     /// The plain title for the action. Uses `attributedTitle` directly.
     @objc

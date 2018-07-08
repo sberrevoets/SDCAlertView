@@ -316,7 +316,7 @@ public class AlertController: UIViewController {
         self.alert.actionTappedHandler = { [weak self] action in
             if self?.shouldDismissHandler?(action) != false {
                 self?.dismiss(animated: true) {
-                    action.handler?(action)
+                    action.handler?(action, self)
                 }
             }
         }
