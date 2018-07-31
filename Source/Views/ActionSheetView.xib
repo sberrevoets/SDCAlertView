@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14278.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SDCAlertController"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ActionSheetView" customModule="SDCAlertView" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="323" height="238"/>
+            <rect key="frame" x="0.0" y="0.0" width="323" height="285"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZiE-E8-Ngj">
-                    <rect key="frame" x="0.0" y="0.0" width="323" height="173"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZiE-E8-Ngj">
+                    <rect key="frame" x="0.0" y="0.0" width="323" height="220"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rRJ-lI-jfT">
-                            <rect key="frame" x="0.0" y="0.0" width="323" height="173"/>
+                        <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rRJ-lI-jfT">
+                            <rect key="frame" x="0.0" y="0.0" width="323" height="220"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9E-h2-wQX">
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9E-h2-wQX">
                                     <rect key="frame" x="0.0" y="0.0" width="323" height="83"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7t-ji-MaB" customClass="SDCAlertLabel">
@@ -41,12 +40,12 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="P7t-ji-MaB" secondAttribute="trailing" id="24O-Do-gkV"/>
-                                        <constraint firstItem="vfZ-Nd-gE5" firstAttribute="firstBaseline" secondItem="P7t-ji-MaB" secondAttribute="baseline" constant="28" id="60T-Bt-Lq7"/>
+                                        <constraint firstAttribute="bottom" secondItem="vfZ-Nd-gE5" secondAttribute="bottom" constant="24.5" id="4u5-Zl-cwK"/>
                                         <constraint firstItem="vfZ-Nd-gE5" firstAttribute="trailing" secondItem="P7t-ji-MaB" secondAttribute="trailing" id="DHm-R0-TYw"/>
+                                        <constraint firstItem="P7t-ji-MaB" firstAttribute="top" secondItem="x9E-h2-wQX" secondAttribute="top" constant="14.5" id="KtB-2y-O1L"/>
                                         <constraint firstItem="P7t-ji-MaB" firstAttribute="leading" secondItem="x9E-h2-wQX" secondAttribute="leading" id="L7Y-aO-smS"/>
                                         <constraint firstItem="vfZ-Nd-gE5" firstAttribute="leading" secondItem="P7t-ji-MaB" secondAttribute="leading" id="Pr5-E6-C23"/>
-                                        <constraint firstItem="P7t-ji-MaB" firstAttribute="baseline" secondItem="x9E-h2-wQX" secondAttribute="top" constant="27" id="UwD-Mt-w31"/>
-                                        <constraint firstAttribute="bottom" secondItem="vfZ-Nd-gE5" secondAttribute="firstBaseline" constant="28" id="xZ1-1K-g5X"/>
+                                        <constraint firstItem="vfZ-Nd-gE5" firstAttribute="top" secondItem="P7t-ji-MaB" secondAttribute="bottom" constant="12" id="rdQ-mU-PyC"/>
                                     </constraints>
                                 </view>
                                 <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="olF-R0-P3x">
@@ -57,7 +56,7 @@
                                     </constraints>
                                 </view>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="j3f-QM-C8G" customClass="ActionsCollectionView" customModule="SDCAlertView" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="83" width="323" height="90"/>
+                                    <rect key="frame" x="0.0" y="83" width="323" height="137"/>
                                     <constraints>
                                         <constraint firstAttribute="height" priority="750" constant="114" id="BSo-6l-mGc"/>
                                     </constraints>
@@ -85,7 +84,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q3g-KU-XeF">
-                    <rect key="frame" x="0.0" y="181" width="323" height="57"/>
+                    <rect key="frame" x="0.0" y="228" width="323" height="57"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eU-tu-ceL">
                             <rect key="frame" x="0.0" y="0.0" width="323" height="57"/>
@@ -98,7 +97,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUT-3J-nYJ">
-                            <rect key="frame" x="135" y="18" width="53" height="20.5"/>
+                            <rect key="frame" x="135" y="18.5" width="53" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -141,7 +140,7 @@
                 <outlet property="titleLabel" destination="P7t-ji-MaB" id="vEg-AY-t6r"/>
                 <outlet property="titleWidthConstraint" destination="ztX-pP-6Qk" id="rYc-xd-jtd"/>
             </connections>
-            <point key="canvasLocation" x="321" y="503"/>
+            <point key="canvasLocation" x="320.5" y="526.5"/>
         </view>
     </objects>
 </document>
