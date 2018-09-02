@@ -66,6 +66,7 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
         self.updateCollectionViewScrollDirection()
 
         self.createBackground()
+        self.createBorders()
         self.createUI()
         self.createContentConstraints()
         self.updateUI()
@@ -91,6 +92,15 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
             backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
             backgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
             backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        }
+    }
+
+    private func createBorders() {
+        if let borderColor = self.visualStyle.borderColor {
+            self.layer.borderColor = borderColor.cgColor
+        }
+        if let borderWidth = self.visualStyle.borderWidth {
+            self.layer.borderWidth = borderWidth
         }
     }
 

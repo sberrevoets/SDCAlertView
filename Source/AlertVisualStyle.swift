@@ -25,6 +25,12 @@ open class AlertVisualStyle: NSObject {
     @objc
     public var backgroundColor: UIColor?
 
+    /// The border color of the alert
+    public var borderColor: UIColor?
+
+    /// The width of the border
+    public var borderWidth: CGFloat?
+
     /// The vertical spacing between elements
     @objc
     public var verticalElementSpacing: CGFloat = 24
