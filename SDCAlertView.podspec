@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "SDCAlertView"
-  s.version          = "8.1"
+  s.version          = "8.1.1"
   s.summary          = "The little alert that could"
   s.homepage         = "https://github.com/sberrevoets/SDCAlertView"
   s.license          = { :type => "MIT" }
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   s.source_files     = "Source/**/*.{swift}"
   s.resource_bundles = { 'SDCAlertView' => ['Source/**/*.{xib}'] }
-  
+
   s.ios.deployment_target = 9.0
   s.requires_arc = true
 end
