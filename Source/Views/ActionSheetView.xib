@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,6 +44,7 @@
                                         <constraint firstItem="vfZ-Nd-gE5" firstAttribute="firstBaseline" secondItem="P7t-ji-MaB" secondAttribute="baseline" constant="28" id="60T-Bt-Lq7"/>
                                         <constraint firstItem="vfZ-Nd-gE5" firstAttribute="trailing" secondItem="P7t-ji-MaB" secondAttribute="trailing" id="DHm-R0-TYw"/>
                                         <constraint firstItem="P7t-ji-MaB" firstAttribute="leading" secondItem="x9E-h2-wQX" secondAttribute="leading" id="L7Y-aO-smS"/>
+                                        <constraint firstAttribute="bottom" secondItem="P7t-ji-MaB" secondAttribute="baseline" priority="999" constant="17" id="NMs-rK-MdZ"/>
                                         <constraint firstItem="vfZ-Nd-gE5" firstAttribute="leading" secondItem="P7t-ji-MaB" secondAttribute="leading" id="Pr5-E6-C23"/>
                                         <constraint firstItem="P7t-ji-MaB" firstAttribute="baseline" secondItem="x9E-h2-wQX" secondAttribute="top" constant="27" id="UwD-Mt-w31"/>
                                         <constraint firstAttribute="bottom" secondItem="vfZ-Nd-gE5" secondAttribute="firstBaseline" constant="28" id="xZ1-1K-g5X"/>
