@@ -9,8 +9,8 @@ public extension AlertController {
     /// - returns: The alert that was presented.
     @objc
     @discardableResult
-    public class func alert(withTitle title: String? = nil, message: String? = nil,
-                            actionTitle: String? = nil, customView: UIView? = nil) -> AlertController
+    public static func alert(withTitle title: String? = nil, message: String? = nil,
+                             actionTitle: String? = nil, customView: UIView? = nil) -> AlertController
     {
         let alertController = AlertController(title: title, message: message)
         alertController.addAction(AlertAction(title: actionTitle, style: .preferred))
@@ -32,7 +32,7 @@ public extension AlertController {
     /// - returns: The action sheet that was presented.
     @objc
     @discardableResult
-    public class func sheet(withTitle title: String? = nil, message: String? = nil, actions: [String])
+    public static func sheet(withTitle title: String? = nil, message: String? = nil, actions: [String])
         -> AlertController
     {
         let alertController = AlertController(title: title, message: message, preferredStyle: .actionSheet)
@@ -48,7 +48,7 @@ public extension AlertController {
     ///
     /// - returns: The action sheet that was presented.
     @objc
-    public class func sheet(with view: UIView, actions: [String]) -> AlertController {
+    public static func sheet(with view: UIView, actions: [String]) -> AlertController {
         let alertController = AlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actions.forEach { alertController.addAction(AlertAction(title: $0, style: .normal)) }
         alertController.contentView.addSubview(view)

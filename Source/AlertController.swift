@@ -26,8 +26,7 @@ public enum ActionLayout: Int {
 }
 
 @objc(SDCAlertController)
-public class AlertController: UIViewController {
-
+public final class AlertController: UIViewController {
     private var verticalCenter: NSLayoutConstraint?
 
     /// The alert's title. Directly uses `attributedTitle` without any attributes.
@@ -151,7 +150,6 @@ public class AlertController: UIViewController {
 
         self.attributedTitle = attributedTitle
         self.attributedMessage = attributedMessage
-
     }
 
     /// Creates an alert with a plain title and message. To add styles to the title or message, use
@@ -188,8 +186,9 @@ public class AlertController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable, message: "Please use one of the provided AlertController initializers")
     public required init?(coder aDecoder: NSCoder) {
-        preconditionFailure("Please use one of the provided AlertController initializers")
+        fatalError()
     }
 
     private func commonInit() {
@@ -278,7 +277,7 @@ public class AlertController: UIViewController {
     }
 
     private func listenForKeyboardChanges() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardChange),
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardChange),
                                                name: .UIKeyboardWillChangeFrame, object: nil)
     }
 

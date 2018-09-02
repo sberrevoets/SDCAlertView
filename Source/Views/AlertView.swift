@@ -1,5 +1,4 @@
 final class AlertView: UIView, AlertControllerViewRepresentable {
-
     var titleLabel: AlertLabel! = AlertLabel()
     var messageLabel: AlertLabel! = AlertLabel()
     var actionsCollectionView: ActionsCollectionView! = ActionsCollectionView()
@@ -72,8 +71,7 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
     }
 
     func addDragTapBehavior() {
-        let panGesture = UIPanGestureRecognizer(target: self,
-                                                action: #selector(self.highlightAction(for:)))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.highlightAction(for:)))
         self.addGestureRecognizer(panGesture)
     }
 
@@ -82,16 +80,17 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
     private func createBackground() {
         if let color = self.visualStyle.backgroundColor {
             self.backgroundColor = color
-        } else {
-            let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
-            backgroundView.translatesAutoresizingMaskIntoConstraints = false
-
-            self.insertSubview(backgroundView, belowSubview: self.scrollView)
-            backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-            backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-            backgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-            backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            return
         }
+
+        let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+
+        self.insertSubview(backgroundView, belowSubview: self.scrollView)
+        backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
 
     private func createUI() {
@@ -233,7 +232,6 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
         let heightConstraint = self.scrollView.heightAnchor.constraint(equalToConstant: height)
         heightConstraint.priority = .defaultHigh
         heightConstraint.isActive = true
-
     }
 
     private func pinBottomOfScrollView(to view: UIView, withPriority priority: UILayoutPriority) {
