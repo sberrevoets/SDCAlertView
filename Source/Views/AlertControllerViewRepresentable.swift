@@ -1,7 +1,6 @@
 import UIKit
 
 protocol AlertControllerViewRepresentable: class {
-
     var title: NSAttributedString? { get set }
     var message: NSAttributedString? { get set }
 
@@ -24,7 +23,6 @@ protocol AlertControllerViewRepresentable: class {
 }
 
 extension AlertControllerViewRepresentable where Self: UIView {
-
     var title: NSAttributedString? {
         get { return self.titleLabel.attributedText }
         set { self.titleLabel.attributedText = newValue }

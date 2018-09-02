@@ -126,8 +126,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
 }
 
 private extension UIImage {
-
-    class func image(with color: UIColor) -> UIImage? {
+    static func image(with color: UIColor) -> UIImage? {
         defer { UIGraphicsEndImageContext() }
 
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
@@ -137,6 +136,7 @@ private extension UIImage {
         guard let context = UIGraphicsGetCurrentContext() else {
             return nil
         }
+
         color.setFill()
         context.fill(rect)
         return UIGraphicsGetImageFromCurrentImageContext()
