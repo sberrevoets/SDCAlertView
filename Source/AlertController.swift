@@ -243,6 +243,10 @@ public final class AlertController: UIViewController {
     /// - parameter completion: An optional closure that's called when the dismissal finishes.
     @objc(dismissViewControllerAnimated:completion:)
     public override func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
+        guard presentedViewController == nil else {
+            super.dismiss(animated: animated, completion: completion)
+            return
+        }
         self.presentingViewController?.dismiss(animated: animated, completion: completion)
     }
 
