@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 9.0.1
+**Bug Fixes:**
+- Fixes incorrect margins for new iPhones
+
 ## 9.0
 This release brings Swift 4.2 compatibility.
 
