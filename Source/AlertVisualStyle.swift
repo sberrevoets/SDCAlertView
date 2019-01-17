@@ -87,6 +87,13 @@ open class AlertVisualStyle: NSObject {
     @objc
     public var actionSheetNormalFont = UIFont.systemFont(ofSize: 20)
 
+    private var cellLabelAlignment: NSTextAlignment?
+    
+    @objc
+    public func setCellLabelAlignment(alignment: NSTextAlignment) {
+        cellLabelAlignment = alignment
+    }
+    
     /// The style of the alert.
     private let alertStyle: AlertControllerStyle
 
@@ -147,5 +154,21 @@ open class AlertVisualStyle: NSObject {
             case (.actionSheet, _):
                 return self.actionSheetNormalFont
         }
+    }
+    
+    /// The text alignment for a given action.
+    ///
+    /// - parameter action: The action for which to return the font.
+    ///
+    /// - returns: The text alignment.
+    @objc
+    open func textAlignment(for action: AlertAction) -> NSTextAlignment {
+        if let alignment = cellLabelAlignment {
+            return alignment
+        }
+        if action.imageView != nil || action.accessoryView != nil {
+            return .left
+        }
+        return .center
     }
 }

@@ -63,6 +63,12 @@ public class AlertAction: NSObject {
     var actionView: ActionCell? {
         didSet { self.actionView?.isEnabled = self.isEnabled }
     }
+    
+    // left-aligned image view. If set, the title label will be left-aligned instead of centered.
+    @objc public var imageView: UIImageView?
+    
+    // right-aligned accessory view. If set, the title label will be left-aligned instead of centered.
+    @objc public var accessoryView: UIView?
 }
 
 extension AlertAction {
