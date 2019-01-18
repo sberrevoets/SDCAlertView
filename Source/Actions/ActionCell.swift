@@ -27,6 +27,15 @@ final class ActionCell: UICollectionViewCell {
 
         self.highlightedBackgroundView.backgroundColor = visualStyle.actionHighlightColor
 
+        switch action.style {
+        case .normal:
+            self.contentView.backgroundColor = visualStyle.normalBackgroundColor ?? nil
+        case .preferred:
+            self.contentView.backgroundColor = visualStyle.preferredBackgroundColor ?? nil
+        case .destructive:
+            self.contentView.backgroundColor = visualStyle.destructiveBackgroundColor ?? nil
+        }
+
         self.setupAccessibility(using: action)
     }
 

@@ -51,8 +51,6 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
 
     convenience init() {
         self.init(frame: .zero)
-        self.titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        self.messageLabel.font = UIFont.systemFont(ofSize: 13)
     }
 
     func prepareLayout() {
@@ -117,6 +115,15 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
         self.layer.masksToBounds = true
         self.layer.cornerRadius = self.visualStyle.cornerRadius
         self.textFieldsViewController?.visualStyle = self.visualStyle
+
+        self.layer.borderColor = self.visualStyle.borderColor?.cgColor
+        self.layer.borderWidth = self.visualStyle.borderThickness
+
+        self.titleLabel.textColor = self.visualStyle.titleColor
+        self.messageLabel.textColor = self.visualStyle.messageColor
+
+        self.titleLabel.font = self.visualStyle.titleFont
+        self.messageLabel.font = self.visualStyle.messageFont
     }
 
     override var intrinsicContentSize: CGSize {

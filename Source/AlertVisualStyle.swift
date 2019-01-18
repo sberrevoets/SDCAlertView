@@ -44,6 +44,14 @@ open class AlertVisualStyle: NSObject {
     @objc
     public var actionViewSeparatorThickness: CGFloat = 1 / UIScreen.main.scale
 
+    /// The thickness of the separators between actions
+    @objc
+    public var borderThickness: CGFloat = 0
+
+    /// The thickness of the separators between actions
+    @objc
+    public var borderColor: UIColor?
+
     /// The font used in text fields
     @objc
     public var textFieldFont = UIFont.systemFont(ofSize: 13)
@@ -71,6 +79,18 @@ open class AlertVisualStyle: NSObject {
     @objc
     public var destructiveTextColor = UIColor.red
 
+    /// The color for a nondestructive action's text
+    @objc
+    public var normalBackgroundColor: UIColor?
+
+    /// The color for a nondestructive action's text
+    @objc
+    public var preferredBackgroundColor: UIColor?
+
+    /// The color for a nondestructive action's text
+    @objc
+    public var destructiveBackgroundColor: UIColor?
+
     /// The font for an alert's preferred action
     @objc
     public var alertPreferredFont = UIFont.boldSystemFont(ofSize: 17)
@@ -86,6 +106,18 @@ open class AlertVisualStyle: NSObject {
     /// The font for an action sheet's other actions
     @objc
     public var actionSheetNormalFont = UIFont.systemFont(ofSize: 20)
+
+    @objc
+    public var titleColor = UIColor.black
+
+    @objc
+    public var messageColor = UIColor.black
+
+    @objc
+    public var titleFont = UIFont.boldSystemFont(ofSize: 17)
+
+    @objc
+    public var messageFont = UIFont.systemFont(ofSize: 13)
 
     /// The style of the alert.
     private let alertStyle: AlertControllerStyle

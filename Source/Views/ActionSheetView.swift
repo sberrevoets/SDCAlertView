@@ -40,6 +40,17 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
             self.primaryView.backgroundColor = backgroundColor
             self.cancelActionView.backgroundColor = backgroundColor
         }
+
+        self.primaryView.layer.borderColor = self.visualStyle.borderColor?.cgColor
+        self.primaryView.layer.borderWidth = self.visualStyle.borderThickness
+        self.cancelActionView.layer.borderColor = self.visualStyle.borderColor?.cgColor
+        self.cancelActionView.layer.borderWidth = self.visualStyle.borderThickness
+
+        self.titleLabel.textColor = self.visualStyle.titleColor
+        self.messageLabel.textColor = self.visualStyle.messageColor
+
+        self.titleLabel.font = self.visualStyle.titleFont
+        self.messageLabel.font = self.visualStyle.messageFont
     }
 
     func addDragTapBehavior() {

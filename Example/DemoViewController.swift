@@ -1,6 +1,32 @@
 import UIKit
 import SDCAlertView
 
+class ScruffAlertVisualStyle: AlertVisualStyle {
+    override init(alertStyle: AlertControllerStyle) {
+        super.init(alertStyle: alertStyle)
+
+        self.backgroundColor = UIColor(red: 16.0/255, green: 16.0/255, blue: 16.0/255, alpha: 1)
+
+        self.cornerRadius = 6
+        self.normalTextColor = .white
+        self.destructiveTextColor = .white
+        self.actionViewSeparatorColor = .white
+        self.alertNormalFont = UIFont.systemFont(ofSize: 14, weight: .regular)
+        self.alertPreferredFont = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        if alertStyle == .alert {
+            self.width = 300
+            self.actionViewSize = CGSize(width: 45.0, height: 45.0)
+        }
+        self.borderColor = UIColor(white: 1, alpha: 0.5)
+        self.actionViewSeparatorColor = UIColor(red: 151.0/255, green: 151.0/255, blue: 151.0/255, alpha: 1)
+        self.borderThickness = self.actionViewSeparatorThickness
+        self.titleColor = .white
+        self.messageColor = .white
+        self.titleFont = UIFont.boldSystemFont(ofSize: 18)
+        self.messageFont = UIFont.systemFont(ofSize: 14)
+    }
+}
+
 final class DemoViewController: UITableViewController {
 
     @IBOutlet private var typeControl: UISegmentedControl!
@@ -24,7 +50,11 @@ final class DemoViewController: UITableViewController {
         let title = self.titleTextField.content
         let message = self.messageTextField.content
         let style = AlertControllerStyle(rawValue: self.styleControl.selectedSegmentIndex)!
+
+        let visualStyle = ScruffAlertVisualStyle(alertStyle: style)
+
         let alert = AlertController(title: title, message: message, preferredStyle: style)
+        alert.visualStyle = visualStyle
 
         let textFields = Int(self.textFieldCountTextField.content ?? "0")!
         for _ in 0..<textFields {
