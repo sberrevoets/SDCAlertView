@@ -53,7 +53,7 @@ final class DemoViewController: UITableViewController {
         switch self.contentControl.selectedSegmentIndex {
             case 1:
                 let contentView = alert.contentView
-                let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+                let spinner = UIActivityIndicatorView(style: .gray)
                 spinner.translatesAutoresizingMaskIntoConstraints = false
                 spinner.startAnimating()
                 contentView.addSubview(spinner)
@@ -105,7 +105,7 @@ final class DemoViewController: UITableViewController {
     private func presentUIAlertController() {
         let title = self.titleTextField.content
         let message = self.messageTextField.content
-        let style = UIAlertControllerStyle(rawValue: self.styleControl.selectedSegmentIndex)!
+        let style = UIAlertController.Style(rawValue: self.styleControl.selectedSegmentIndex)!
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
 
         let textFields = Int(self.textFieldCountTextField.content ?? "0")!

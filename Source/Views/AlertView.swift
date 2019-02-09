@@ -122,7 +122,7 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
 
     override var intrinsicContentSize: CGSize {
         let totalHeight = self.contentHeight + self.actionsCollectionView.displayHeight
-        return CGSize(width: UIViewNoIntrinsicMetric, height: totalHeight)
+        return CGSize(width: UIView.noIntrinsicMetric, height: totalHeight)
     }
 
     @objc
