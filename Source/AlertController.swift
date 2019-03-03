@@ -76,14 +76,14 @@ public final class AlertController: UIViewController {
                 return nil
             }
 
-            let index = self.actions.index { $0.style == .preferred }
+            let index = self.actions.firstIndex { $0.style == .preferred }
             return index != nil ? self.actions[index!] : nil
         }
         set {
             if let action = newValue {
                 action.style = .preferred
 
-                if self.actions.index(where: { $0 == newValue }) == nil {
+                if self.actions.firstIndex(where: { $0 == newValue }) {
                     self.actions.append(action)
                 }
             } else {
