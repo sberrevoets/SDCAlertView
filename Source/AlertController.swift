@@ -83,7 +83,7 @@ public final class AlertController: UIViewController {
             if let action = newValue {
                 action.style = .preferred
 
-                if self.actions.firstIndex(where: { $0 == newValue }) {
+                if self.actions.firstIndex(where: { $0 == newValue }) == nil {
                     self.actions.append(action)
                 }
             } else {
