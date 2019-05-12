@@ -111,9 +111,9 @@ public final class AlertController: UIViewController {
     @objc
     public var shouldDismissHandler: ((AlertAction?) -> Bool)?
     
-    /// A closure called before the alert is dismissed
+    /// A closure called before the alert is dismissed but only if done by own method and not manually
     @objc
-    public var willBeDismissedHandler: (() -> Void)?
+    public var willDismissHandler: (() -> Void)?
 
     /// A closure called when the alert is dismissed after an outside tap (when `dismissOnOutsideTap` behavior
     /// is enabled)
@@ -243,7 +243,7 @@ public final class AlertController: UIViewController {
     /// - parameter completion: An optional closure that's called when the dismissal finishes.
     @objc(dismissViewControllerAnimated:completion:)
     public override func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
-        self.willBeDismissedHandler?()
+        self.willDismissHandler?()
         self.presentingViewController?.dismiss(animated: animated, completion: completion)
     }
 
