@@ -10,8 +10,7 @@ extension AlertController {
     @objc
     @discardableResult
     public static func alert(withTitle title: String? = nil, message: String? = nil,
-                             actionTitle: String? = nil, customView: UIView? = nil) -> AlertController
-    {
+                             actionTitle: String? = nil, customView: UIView? = nil) -> AlertController {
         let alertController = AlertController(title: title, message: message)
         alertController.addAction(AlertAction(title: actionTitle, style: .preferred))
 
@@ -33,8 +32,7 @@ extension AlertController {
     @objc
     @discardableResult
     public static func sheet(withTitle title: String? = nil, message: String? = nil, actions: [String])
-        -> AlertController
-    {
+        -> AlertController {
         let alertController = AlertController(title: title, message: message, preferredStyle: .actionSheet)
         actions.forEach { alertController.addAction(AlertAction(title: $0, style: .normal)) }
         alertController.present()

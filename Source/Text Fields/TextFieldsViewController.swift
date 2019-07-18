@@ -45,8 +45,7 @@ extension TextFieldsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
-        -> UITableViewCell
-    {
+        -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kTextFieldCellIdentifier,
             for: indexPath) as? TextFieldCell
         cell?.textField = self.textFields[(indexPath as NSIndexPath).row]

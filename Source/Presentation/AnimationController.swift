@@ -60,8 +60,7 @@ class AnimationController: NSObject, UIViewControllerAnimatedTransitioning {
 
     private func animate(_ animations: @escaping (() -> Void),
                          inContext context: UIViewControllerContextTransitioning,
-                         withCompletion completion: @escaping (Bool) -> Void)
-    {
+                         withCompletion completion: @escaping (Bool) -> Void) {
         UIView.animate(withDuration: self.transitionDuration(using: context), delay: 0,
             usingSpringWithDamping: kSpringDamping, initialSpringVelocity: kSpringVelocity, options: [],
             animations: animations, completion: completion)

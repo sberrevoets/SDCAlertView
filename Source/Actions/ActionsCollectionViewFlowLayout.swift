@@ -30,15 +30,13 @@ final class ActionsCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
         for attribute in attributes {
             if let horizontal = self.layoutAttributesForDecorationView(ofKind: kHorizontalActionSeparator,
-                at: attribute.indexPath)
-            {
+                at: attribute.indexPath) {
                 mutableAttributes.append(horizontal)
             }
 
             if self.scrollDirection == .horizontal && attribute.indexPath.item > 0,
                 let vertical = layoutAttributesForDecorationView(ofKind: kVerticalActionSeparator,
-                at: attribute.indexPath)
-            {
+                at: attribute.indexPath) {
                 mutableAttributes.append(vertical)
             }
         }
@@ -47,8 +45,7 @@ final class ActionsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
 
     override func layoutAttributesForDecorationView(ofKind elementKind: String,
-        at indexPath: IndexPath) -> UICollectionViewLayoutAttributes?
-    {
+                                                    at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         guard let itemAttributes = self.layoutAttributesForItem(at: indexPath) else {
             return nil
         }

@@ -5,8 +5,7 @@ class PresentationController: UIPresentationController {
     private let dimmingView = UIView()
 
     override init(presentedViewController: UIViewController,
-                  presenting presentingViewController: UIViewController?)
-    {
+                  presenting presentingViewController: UIViewController?) {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
         self.dimmingView.backgroundColor = UIColor(white: 0, alpha: 0.4)
     }

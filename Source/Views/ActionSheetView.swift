@@ -10,7 +10,6 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     @IBOutlet private var cancelButton: UIButton!
     @IBOutlet private var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private var cancelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private var titleWidthConstraint: NSLayoutConstraint!
 
     var actions: [AlertAction] = []
 
@@ -18,12 +17,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         didSet { self.actionsCollectionView.actionTapped = self.actionTappedHandler }
     }
 
-    var visualStyle: AlertVisualStyle! {
-        didSet {
-            let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
-            self.titleWidthConstraint.constant -= widthOffset
-        }
-    }
+    var visualStyle: AlertVisualStyle!
 
     private var cancelAction: AlertAction? {
         didSet { self.cancelLabel.attributedText = self.cancelAction?.attributedTitle }
@@ -120,7 +114,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         if self.message == nil {
             self.messageLabel.removeFromSuperview()
         }
-        self.labelsContainer.isHidden = noTextProvided || contentViewProvided
+        self.labelsContainer.isHidden = noTextProvided //|| contentViewProvided
         self.contentView.isHidden = !contentViewProvided
     }
 }

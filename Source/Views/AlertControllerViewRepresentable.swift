@@ -18,7 +18,6 @@ protocol AlertControllerViewRepresentable: class {
 
     func add(_ behaviors: AlertBehaviors)
     func addDragTapBehavior()
-    
     func prepareLayout()
 }
 

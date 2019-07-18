@@ -6,7 +6,6 @@ final class ActionCell: UICollectionViewCell {
     @IBOutlet private var highlightedBackgroundView: UIView!
 
     private var textColor: UIColor?
-    
     var isEnabled = true {
         didSet { self.titleLabel.isEnabled = self.isEnabled }
     }
@@ -19,10 +18,8 @@ final class ActionCell: UICollectionViewCell {
         action.actionView = self
 
         self.titleLabel.font = visualStyle.font(for: action)
-        
         self.textColor = visualStyle.textColor(for: action)
         self.titleLabel.textColor = self.textColor ?? self.tintColor
-        
         self.titleLabel.attributedText = action.attributedTitle
 
         self.highlightedBackgroundView.backgroundColor = visualStyle.actionHighlightColor

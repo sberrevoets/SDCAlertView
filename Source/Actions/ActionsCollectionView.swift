@@ -18,8 +18,7 @@ class ActionsCollectionView: UICollectionView {
 
     var displayHeight: CGFloat {
         guard let layout = self.collectionViewLayout as? ActionsCollectionViewFlowLayout,
-            let visualStyle = self.visualStyle else
-        {
+            let visualStyle = self.visualStyle else {
                 return -1
         }
 
@@ -70,8 +69,7 @@ class ActionsCollectionView: UICollectionView {
 
         guard let indexPath = self.indexPathForItem(at: touchPoint),
               let cell = self.cellForItem(at: indexPath as IndexPath),
-              cell != self.highlightedCell && self.actions[indexPath.item].isEnabled else
-        {
+              cell != self.highlightedCell && self.actions[indexPath.item].isEnabled else {
             return
         }
 
@@ -98,8 +96,7 @@ extension ActionsCollectionView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath)
-        -> UICollectionViewCell
-    {
+        -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kActionCellIdentifier,
             for: indexPath) as? ActionCell
         let action = self.actions[(indexPath as NSIndexPath).item]
@@ -112,8 +109,7 @@ extension ActionsCollectionView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let actionWidth = self.visualStyle.actionViewSize.width
         let actionHeight = self.visualStyle.actionViewSize.height
 
@@ -127,8 +123,7 @@ extension ActionsCollectionView: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView,
-        shouldHighlightItemAt indexPath: IndexPath) -> Bool
-    {
+                        shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         let actionCell = self.actions[(indexPath as NSIndexPath).item]
         return actionCell.isEnabled
     }

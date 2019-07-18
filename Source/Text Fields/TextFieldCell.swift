@@ -30,6 +30,7 @@ final class TextFieldCell: UITableViewCell {
         }
     }
 
+    // swiftlint:disable:next large_tuple 
     private var paddingConstraints: (leading: NSLayoutConstraint, trailing: NSLayoutConstraint,
         top: NSLayoutConstraint, bottom: NSLayoutConstraint)?
 
