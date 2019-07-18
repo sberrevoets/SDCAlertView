@@ -75,7 +75,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     // MARK: - Private
 
     private func assignCancelAction() {
-        if let cancelActionIndex = self.actions.index(where: { $0.style == .preferred }) {
+        if let cancelActionIndex = self.actions.firstIndex(where: { $0.style == .preferred }) {
             self.cancelAction = self.actions[cancelActionIndex]
             self.actions.remove(at: cancelActionIndex)
         } else {

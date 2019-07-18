@@ -1,4 +1,4 @@
-public extension AlertController {
+extension AlertController {
     /// Convenience method to quickly display a basic alert.
     ///
     /// - parameter title:       An optional title for the alert.
