@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SDCAlertController"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ActionSheetView" customModule="ChatQ" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ActionSheetView" customModule="SDCAlertView" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="329" height="384"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -64,7 +64,7 @@
                                         <constraint firstAttribute="trailing" secondItem="zfg-1f-Coy" secondAttribute="trailing" constant="20" id="zOO-eS-NtN"/>
                                     </constraints>
                                 </view>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="j3f-QM-C8G" customClass="ActionsCollectionView" customModule="ChatQ" customModuleProvider="target">
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="j3f-QM-C8G" customClass="ActionsCollectionView" customModule="SDCAlertView" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="205" width="329" height="114"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="114" id="BSo-6l-mGc"/>
@@ -144,6 +144,7 @@
                 <outlet property="contentView" destination="olF-R0-P3x" id="8H0-HO-E4y"/>
                 <outlet property="labelsContainer" destination="x9E-h2-wQX" id="xPv-Bo-jxK"/>
                 <outlet property="messageLabel" destination="vfZ-Nd-gE5" id="P6A-pk-tnY"/>
+                <outlet property="paddingView" destination="FZQ-lo-zHY" id="fdc-Xo-TJS"/>
                 <outlet property="primaryView" destination="ZiE-E8-Ngj" id="ADf-I4-R1v"/>
                 <outlet property="titleLabel" destination="P7t-ji-MaB" id="vEg-AY-t6r"/>
             </connections>

@@ -10,6 +10,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     @IBOutlet private var cancelButton: UIButton!
     @IBOutlet private var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private var cancelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private var paddingView: UIView!
 
     var actions: [AlertAction] = []
 
@@ -116,6 +117,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         }
         self.labelsContainer.isHidden = noTextProvided //|| contentViewProvided
         self.contentView.isHidden = !contentViewProvided
+        self.paddingView.isHidden = !contentViewProvided
     }
 }
 
