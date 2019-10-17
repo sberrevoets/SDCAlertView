@@ -4,6 +4,8 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     @IBOutlet var actionsCollectionView: ActionsCollectionView!
     @IBOutlet var contentView: UIView!
     @IBOutlet private var primaryView: UIView!
+    @IBOutlet private var primaryBlurView: UIVisualEffectView!
+    @IBOutlet private var primaryVibrancyView: UIVisualEffectView!
     @IBOutlet private var labelsContainer: UIView!
     @IBOutlet private var cancelActionView: UIView!
     @IBOutlet private var cancelLabel: UILabel!
@@ -39,6 +41,12 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         if let backgroundColor = self.visualStyle.backgroundColor {
             self.primaryView.backgroundColor = backgroundColor
             self.cancelActionView.backgroundColor = backgroundColor
+        }
+        
+        if #available(iOS 13.0, *) {
+            let blurEffect = UIBlurEffect(style: .systemMaterial)
+            self.primaryBlurView.effect = blurEffect
+            self.primaryVibrancyView.effect = UIVibrancyEffect(blurEffect: blurEffect, style: .secondaryLabel)
         }
     }
 
@@ -111,6 +119,10 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         let cancelButtonBackground = UIImage.image(with: self.visualStyle.actionHighlightColor)
         self.cancelButton.setBackgroundImage(cancelButtonBackground, for: .highlighted)
         self.cancelHeightConstraint.constant = self.visualStyle.actionViewSize.height
+
+        if let cancelBackgroundColor = self.visualStyle.actionViewCancelBackgroundColor {
+            self.cancelButton.backgroundColor = cancelBackgroundColor
+        }
     }
 
     private func setUpContentView() {
