@@ -81,7 +81,12 @@ class TestsViewController: UITableViewController {
             case 11:
                 let alert = AlertController(title: "Title", message: "Message", preferredStyle: .actionSheet)
                 let contentView = alert.contentView
-                let spinner = UIActivityIndicatorView(style: .gray)
+				let spinner: UIActivityIndicatorView
+				if #available(iOS 13.0, *) {
+					spinner = UIActivityIndicatorView(style: .medium)
+				} else {
+					spinner = UIActivityIndicatorView(style: .gray)
+				}
                 spinner.translatesAutoresizingMaskIntoConstraints = false
                 spinner.startAnimating()
                 contentView.addSubview(spinner)
@@ -97,7 +102,12 @@ class TestsViewController: UITableViewController {
                 let alert = AlertController(title: "Title", message: "Message", preferredStyle: .actionSheet)
                 let action = AlertAction(title: "Custom Action", style: .normal)
                 action.imageView = UIImageView(image: UIImage(named: "Breze.jpg"))
-                let spinner = UIActivityIndicatorView(style: .gray)
+				let spinner: UIActivityIndicatorView
+				if #available(iOS 13.0, *) {
+					spinner = UIActivityIndicatorView(style: .medium)
+				} else {
+					spinner = UIActivityIndicatorView(style: .gray)
+				}
                 spinner.translatesAutoresizingMaskIntoConstraints = false
                 spinner.startAnimating()
                 action.accessoryView = spinner
