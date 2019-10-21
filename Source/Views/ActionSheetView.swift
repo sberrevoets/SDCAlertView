@@ -6,7 +6,6 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     @IBOutlet private var primaryView: UIView!
     @IBOutlet private var primaryBlurView: UIVisualEffectView!
     @IBOutlet private var primaryVibrancyView: UIVisualEffectView!
-    @IBOutlet private var labelsContainer: UIView!
     @IBOutlet private var cancelActionView: UIView!
     @IBOutlet private var cancelLabel: UILabel!
     @IBOutlet private var cancelButton: UIButton!
@@ -132,7 +131,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         if self.message == nil {
             self.messageLabel.removeFromSuperview()
         }
-        self.labelsContainer.isHidden = noTextProvided || contentViewProvided
+        self.primaryVibrancyView.isHidden = noTextProvided || contentViewProvided
         self.contentView.isHidden = !contentViewProvided
     }
 }

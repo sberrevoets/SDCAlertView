@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,9 +27,8 @@
                                         <subviews>
                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhs-Nn-LBd">
                                                 <rect key="frame" x="0.0" y="0.0" width="323" height="83"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0sU-bC-WKy">
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0sU-bC-WKy">
                                                     <rect key="frame" x="0.0" y="0.0" width="323" height="83"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YK7-Zo-hCk" customClass="SDCAlertLabel">
                                                             <rect key="frame" x="0.0" y="14.5" width="323" height="16"/>
@@ -46,7 +45,7 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="YK7-Zo-hCk" firstAttribute="baseline" secondItem="0sU-bC-WKy" secondAttribute="top" constant="27" id="23i-9r-Blu"/>
-                                                        <constraint firstItem="YK7-Zo-hCk" firstAttribute="baseline" secondItem="0sU-bC-WKy" secondAttribute="bottom" priority="999" constant="17" id="2px-xB-S8v"/>
+                                                        <constraint firstAttribute="bottom" secondItem="YK7-Zo-hCk" secondAttribute="baseline" priority="999" constant="17" id="2px-xB-S8v"/>
                                                         <constraint firstAttribute="bottom" secondItem="PUv-Kq-2Qf" secondAttribute="firstBaseline" constant="28" id="K6W-eg-Auo"/>
                                                         <constraint firstItem="PUv-Kq-2Qf" firstAttribute="leading" secondItem="YK7-Zo-hCk" secondAttribute="leading" id="SLs-jb-6tx"/>
                                                         <constraint firstItem="PUv-Kq-2Qf" firstAttribute="firstBaseline" secondItem="YK7-Zo-hCk" secondAttribute="baseline" constant="28" id="e7i-CR-Xff"/>
@@ -55,6 +54,12 @@
                                                         <constraint firstItem="YK7-Zo-hCk" firstAttribute="leading" secondItem="0sU-bC-WKy" secondAttribute="leading" id="zcv-6d-47Y"/>
                                                     </constraints>
                                                 </view>
+                                                <constraints>
+                                                    <constraint firstItem="0sU-bC-WKy" firstAttribute="top" secondItem="jhs-Nn-LBd" secondAttribute="top" id="90r-9z-Rm7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="0sU-bC-WKy" secondAttribute="trailing" id="GRr-rA-Tgl"/>
+                                                    <constraint firstAttribute="bottom" secondItem="0sU-bC-WKy" secondAttribute="bottom" id="idr-zW-D1w"/>
+                                                    <constraint firstItem="0sU-bC-WKy" firstAttribute="leading" secondItem="jhs-Nn-LBd" secondAttribute="leading" id="if3-LH-ak9"/>
+                                                </constraints>
                                                 <vibrancyEffect style="secondaryLabel">
                                                     <blurEffect style="systemChromeMaterial"/>
                                                 </vibrancyEffect>
@@ -168,7 +173,6 @@
                 <outlet property="cancelLabel" destination="jUT-3J-nYJ" id="g8j-MU-fG2"/>
                 <outlet property="collectionViewHeightConstraint" destination="BSo-6l-mGc" id="5Xd-gO-WMB"/>
                 <outlet property="contentView" destination="olF-R0-P3x" id="8H0-HO-E4y"/>
-                <outlet property="labelsContainer" destination="0sU-bC-WKy" id="gsE-V7-Fle"/>
                 <outlet property="messageLabel" destination="PUv-Kq-2Qf" id="l8x-xY-454"/>
                 <outlet property="primaryBlurView" destination="xIW-bV-hTe" id="DKa-rF-SM6"/>
                 <outlet property="primaryVibrancyView" destination="jhs-Nn-LBd" id="FZo-Tq-fqq"/>
