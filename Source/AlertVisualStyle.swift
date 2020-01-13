@@ -56,7 +56,22 @@ open class AlertVisualStyle: NSObject {
     /// The border color of a text field if added using the standard method call. Won't affect text fields
     /// added directly to the alert's content view.
     @objc
-    public var textFieldBorderColor = UIColor(red: 64/255, green: 64/255, blue: 64/255, alpha: 1)
+    public var textFieldBorderColor: UIColor = {
+        if #available(iOS 13.0, *) {
+            return UIColor.separator
+        } else {
+            return UIColor(red: 64/255, green: 64/255, blue: 64/255, alpha: 1)
+        }
+    }()
+    
+    @objc
+    public var textFieldBackgroundColor: UIColor = {
+        if #available(iOS 13.0, *) {
+            return UIColor.systemBackground
+        } else {
+            return UIColor.white
+        }
+    }()
 
     /// The inset of the text within the text field if added using the standard method call. Won't affect text
     /// fields added directly to the alert's content view.
