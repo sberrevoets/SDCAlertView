@@ -18,11 +18,10 @@ final class TextFieldCell: UITableViewCell {
         didSet {
             self.textField?.font = self.visualStyle?.textFieldFont
             self.borderView.backgroundColor = self.visualStyle?.textFieldBorderColor
-
+            self.textFieldContainer.backgroundColor = self.visualStyle?.textFieldBackgroundColor
             guard let padding = self.visualStyle?.textFieldMargins else {
                 return
             }
-
             self.paddingConstraints?.leading.constant = padding.left
             self.paddingConstraints?.trailing.constant = -padding.right
             self.paddingConstraints?.top.constant = padding.top
