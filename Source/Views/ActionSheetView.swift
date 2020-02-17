@@ -6,6 +6,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     @IBOutlet private var primaryView: UIView!
     @IBOutlet private var labelsContainer: UIView!
     @IBOutlet private var cancelActionView: UIView!
+    @IBOutlet private var cancelHighlightView: UIView!
     @IBOutlet private var cancelLabel: UILabel!
     @IBOutlet private var cancelButton: UIButton!
     @IBOutlet private var collectionViewHeightConstraint: NSLayoutConstraint!
@@ -45,17 +46,21 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     func addDragTapBehavior() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.highlightAction(for:)))
         self.addGestureRecognizer(panGesture)
+
+        let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.highlightAction(for:)))
+        tapGesture.minimumPressDuration = 0
+        self.cancelActionView.addGestureRecognizer(tapGesture)
     }
 
     @objc
-    private func highlightAction(for sender: UIPanGestureRecognizer) {
+    private func highlightAction(for sender: UIGestureRecognizer) {
         self.actionsCollectionView.highlightAction(for: sender)
 
         let cancelIsSelected = self.cancelActionView.frame.contains(sender.location(in: self))
-        self.cancelButton.isHighlighted = cancelIsSelected
+        self.cancelHighlightView.isHidden = !cancelIsSelected
 
         if cancelIsSelected && sender.state == .ended {
-            self.cancelButton.sendActions(for: UIControl.Event.touchUpInside)
+            self.cancelButton.sendActions(for: .touchUpInside)
         }
     }
 
@@ -108,8 +113,6 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         self.cancelLabel.textColor = self.visualStyle.textColor(for: self.cancelAction) ?? self.tintColor
         self.cancelLabel.attributedText = self.cancelAction?.attributedTitle
 
-        let cancelButtonBackground = UIImage.image(with: self.visualStyle.actionHighlightColor)
-        self.cancelButton.setBackgroundImage(cancelButtonBackground, for: .highlighted)
         self.cancelHeightConstraint.constant = self.visualStyle.actionViewSize.height
     }
 

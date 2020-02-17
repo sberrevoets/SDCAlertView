@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -38,7 +35,6 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="P7t-ji-MaB" secondAttribute="trailing" id="24O-Do-gkV"/>
                                         <constraint firstItem="vfZ-Nd-gE5" firstAttribute="firstBaseline" secondItem="P7t-ji-MaB" secondAttribute="baseline" constant="28" id="60T-Bt-Lq7"/>
@@ -77,7 +73,7 @@
                             </constraints>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="rRJ-lI-jfT" secondAttribute="bottom" id="3Hw-Wh-2qG"/>
                         <constraint firstAttribute="trailing" secondItem="rRJ-lI-jfT" secondAttribute="trailing" id="MUr-6u-BxY"/>
@@ -88,28 +84,40 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q3g-KU-XeF">
                     <rect key="frame" x="0.0" y="181" width="323" height="57"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eU-tu-ceL">
+                        <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tk5-mo-l3U">
+                            <rect key="frame" x="0.0" y="0.0" width="323" height="57"/>
+                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ye5-xF-sUK">
+                                <rect key="frame" x="0.0" y="0.0" width="323" height="57"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <blurEffect style="regular"/>
+                        </visualEffectView>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eU-tu-ceL">
                             <rect key="frame" x="0.0" y="0.0" width="323" height="57"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="57" id="mQ8-Rl-K8R"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                             <connections>
                                 <action selector="cancelTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="DHu-uy-KMg"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUT-3J-nYJ">
-                            <rect key="frame" x="135" y="18" width="53" height="20.5"/>
+                            <rect key="frame" x="135" y="18.5" width="53" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="2eU-tu-ceL" firstAttribute="top" secondItem="Q3g-KU-XeF" secondAttribute="top" id="Gdi-Wo-FBZ"/>
+                        <constraint firstItem="tk5-mo-l3U" firstAttribute="trailing" secondItem="2eU-tu-ceL" secondAttribute="trailing" id="JNU-I9-n9E"/>
+                        <constraint firstItem="tk5-mo-l3U" firstAttribute="top" secondItem="2eU-tu-ceL" secondAttribute="top" id="Keb-Yl-PTl"/>
                         <constraint firstItem="jUT-3J-nYJ" firstAttribute="centerY" secondItem="Q3g-KU-XeF" secondAttribute="centerY" id="Kz5-gS-4Rn"/>
+                        <constraint firstItem="tk5-mo-l3U" firstAttribute="bottom" secondItem="2eU-tu-ceL" secondAttribute="bottom" id="NzQ-AI-K8L"/>
                         <constraint firstAttribute="bottom" secondItem="2eU-tu-ceL" secondAttribute="bottom" id="UgI-5p-E0L"/>
+                        <constraint firstItem="tk5-mo-l3U" firstAttribute="leading" secondItem="2eU-tu-ceL" secondAttribute="leading" id="ZNO-vR-UH9"/>
                         <constraint firstAttribute="trailing" secondItem="2eU-tu-ceL" secondAttribute="trailing" id="fad-ui-6Sd"/>
                         <constraint firstItem="jUT-3J-nYJ" firstAttribute="centerX" secondItem="Q3g-KU-XeF" secondAttribute="centerX" id="lYV-Py-CP4"/>
                         <constraint firstItem="2eU-tu-ceL" firstAttribute="leading" secondItem="Q3g-KU-XeF" secondAttribute="leading" id="mPI-75-Xwa"/>
@@ -133,6 +141,7 @@
                 <outlet property="cancelActionView" destination="Q3g-KU-XeF" id="bkk-gq-fwC"/>
                 <outlet property="cancelButton" destination="2eU-tu-ceL" id="YOy-l9-KSd"/>
                 <outlet property="cancelHeightConstraint" destination="mQ8-Rl-K8R" id="WrP-FV-gOK"/>
+                <outlet property="cancelHighlightView" destination="tk5-mo-l3U" id="qXA-A9-aLa"/>
                 <outlet property="cancelLabel" destination="jUT-3J-nYJ" id="g8j-MU-fG2"/>
                 <outlet property="collectionViewHeightConstraint" destination="BSo-6l-mGc" id="5Xd-gO-WMB"/>
                 <outlet property="contentView" destination="olF-R0-P3x" id="8H0-HO-E4y"/>
