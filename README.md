@@ -113,9 +113,6 @@ alert.present()
 
 If you are looking for more customizations, create a subclass of `AlertVisualStyle` and use `visualStyle` on the `AlertController` instance. You can also create an instance of `AlertVisualStyle` and overwrite the attributes you need (this is mainly intended to be used from Objective-C). Note that after an alert has been presented, changing any of these settings is ignored.
 
-# Support
-I'm pretty active on [Stack Overflow](http://stackoverflow.com/users/751268/scott-berrevoets), so please use that if you have any questions. If you are experiencing bugs, feel free to post an issue or submit a pull request.
-
 # License
 
 SDCAlertView is distributed under the MIT license.
