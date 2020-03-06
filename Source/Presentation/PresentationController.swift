@@ -1,21 +1,15 @@
 import UIKit
 
 class PresentationController: UIPresentationController {
-
+    
     private let dimmingView = UIView()
 
-    override init(presentedViewController: UIViewController,
-                  presenting presentingViewController: UIViewController?)
+    init(presentedViewController: UIViewController,
+         presenting presentingViewController: UIViewController?,
+         dimmingViewColor: UIColor)
     {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-
-        if #available(iOS 13.0, *) {
-            self.dimmingView.backgroundColor = UIColor { traitCollection in
-                return UIColor(white: 0, alpha: traitCollection.userInterfaceStyle == .dark ? 0.48 : 0.2)
-            }
-        } else {
-            self.dimmingView.backgroundColor = UIColor(white: 0, alpha: 0.2)
-        }
+        self.dimmingView.backgroundColor = dimmingViewColor
     }
 
     override func presentationTransitionWillBegin() {
