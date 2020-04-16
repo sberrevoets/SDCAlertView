@@ -23,6 +23,20 @@ open class AlertVisualStyle: NSObject {
     @objc
     public var backgroundColor: UIColor?
 
+    /// The background color of the action sheet Cancel button. The standard blur effect will be added if nil.
+    @objc
+    public var actionViewCancelBackgroundColor: UIColor? = {
+        if #available(iOS 13.0, *) {
+            return UIColor { (traitCollection) -> UIColor in
+                if traitCollection.userInterfaceStyle == .dark {
+                    return UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1)
+                }
+                return .white
+            }
+        }
+        return .white
+    }()
+
     /// The vertical spacing between elements
     @objc
     public var verticalElementSpacing: CGFloat = 24
@@ -34,7 +48,7 @@ open class AlertVisualStyle: NSObject {
 
     /// The color of an action when the user is tapping it
     @objc
-    public var actionHighlightColor = UIColor(white: 0.8, alpha: 0.7)
+    public var actionHighlightColor = UIColor(white: 0.5, alpha: 0.3)
 
     /// The color of the separators between actions
     @objc
@@ -102,6 +116,13 @@ open class AlertVisualStyle: NSObject {
     @objc
     public var actionSheetNormalFont = UIFont.systemFont(ofSize: 20)
 
+    private var cellLabelAlignment: NSTextAlignment?
+    
+    @objc
+    public func setCellLabelAlignment(alignment: NSTextAlignment) {
+        cellLabelAlignment = alignment
+    }
+    
     /// The style of the alert.
     private let alertStyle: AlertControllerStyle
 
@@ -162,5 +183,21 @@ open class AlertVisualStyle: NSObject {
             case (.actionSheet, _):
                 return self.actionSheetNormalFont
         }
+    }
+    
+    /// The text alignment for a given action.
+    ///
+    /// - parameter action: The action for which to return the font.
+    ///
+    /// - returns: The text alignment.
+    @objc
+    open func textAlignment(for action: AlertAction) -> NSTextAlignment {
+        if let alignment = cellLabelAlignment {
+            return alignment
+        }
+        if action.imageView != nil || action.accessoryView != nil {
+            return .left
+        }
+        return .center
     }
 }
