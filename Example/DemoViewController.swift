@@ -21,8 +21,8 @@ final class DemoViewController: UITableViewController {
     }
 
     private func presentSDCAlertController() {
-        let title = self.titleTextField.content
-        let message = self.messageTextField.content
+        let title = self.titleTextField.text
+        let message = self.messageTextField.text
         let style = AlertControllerStyle(rawValue: self.styleControl.selectedSegmentIndex)!
         let alert = AlertController(title: title, message: message, preferredStyle: style)
 
@@ -69,8 +69,6 @@ final class DemoViewController: UITableViewController {
                 switchControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
                 switchControl.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
                 switchControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-
-                alert.message = "Disable switch to prevent alert dismissal"
 
                 alert.shouldDismissHandler = { [unowned switchControl] _ in
                     return switchControl.isOn
