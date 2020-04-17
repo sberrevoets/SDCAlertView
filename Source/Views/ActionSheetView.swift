@@ -1,3 +1,5 @@
+import UIKit
+
 final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     @IBOutlet var titleLabel: AlertLabel!
     @IBOutlet var messageLabel: AlertLabel!
@@ -125,14 +127,23 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     }
 
     private func setUpContentView() {
-        let noTextProvided = self.title?.string.isEmpty != false && self.message?.string.isEmpty != false
+        let textProvided = self.title?.string.isEmpty == false || self.message?.string.isEmpty == false
         let contentViewProvided = self.contentView.subviews.count > 0
 
         if self.message == nil {
             self.messageLabel.removeFromSuperview()
         }
-        self.primaryVibrancyView.isHidden = noTextProvided || contentViewProvided
-        self.contentView.isHidden = !contentViewProvided
+        self.primaryVibrancyView.superview?.isHidden = !textProvided
+        self.contentView.superview?.isHidden = !contentViewProvided
+        if contentViewProvided, let contentSuperview = self.contentView.superview {
+            let topSpace = (textProvided ? -12 : 0) + self.visualStyle.verticalElementSpacing
+            NSLayoutConstraint.activate([
+                self.contentView.topAnchor.constraint(equalTo: contentSuperview.topAnchor,
+                                                      constant: topSpace),
+                contentSuperview.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,
+                                                         constant: self.visualStyle.contentPadding.bottom)
+            ])
+        }
     }
 }
 

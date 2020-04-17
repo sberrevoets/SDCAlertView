@@ -91,8 +91,8 @@ class TestsViewController: UITableViewController {
                 spinner.startAnimating()
                 contentView.addSubview(spinner)
                 spinner.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-                spinner.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-                spinner.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+                spinner.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+                spinner.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
                 let action = AlertAction(title: "Cancel", style: .normal)
                 action.accessibilityIdentifier = "cancel"
                 alert.addAction(action)

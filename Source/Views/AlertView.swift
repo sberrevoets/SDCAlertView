@@ -1,3 +1,5 @@
+import UIKit
+
 final class AlertView: UIView, AlertControllerViewRepresentable {
     var titleLabel: AlertLabel! = AlertLabel()
     var messageLabel: AlertLabel! = AlertLabel()
@@ -156,9 +158,6 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
             self.titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: insets.left),
             self.titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: insets.right),
         ])
-
-        self.pinBottomOfScrollView(to: self.messageLabel, withPriority: .defaultLow)
-
     }
 
     private func createMessageLabelConstraints() {
