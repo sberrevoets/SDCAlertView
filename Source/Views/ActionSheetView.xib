@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -60,9 +60,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="0sU-bC-WKy" secondAttribute="bottom" id="idr-zW-D1w"/>
                                                     <constraint firstItem="0sU-bC-WKy" firstAttribute="leading" secondItem="jhs-Nn-LBd" secondAttribute="leading" id="if3-LH-ak9"/>
                                                 </constraints>
-                                                <vibrancyEffect style="secondaryLabel">
-                                                    <blurEffect style="systemChromeMaterial"/>
-                                                </vibrancyEffect>
+                                                <blurEffect style="prominent"/>
                                             </visualEffectView>
                                             <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="olF-R0-P3x">
                                                 <rect key="frame" x="136.5" y="83" width="50" height="59"/>
@@ -98,7 +96,7 @@
                                     <constraint firstAttribute="trailing" secondItem="rRJ-lI-jfT" secondAttribute="trailing" id="jul-h1-Fhq"/>
                                 </constraints>
                             </view>
-                            <blurEffect style="systemChromeMaterial"/>
+                            <blurEffect style="prominent"/>
                         </visualEffectView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

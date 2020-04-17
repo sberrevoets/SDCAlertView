@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 11.0
+**What's New:**
+- Dark Mode support on iOS 13.
+
 ### 10.0
 This release brings Swift 5.0 compatibility.
 
