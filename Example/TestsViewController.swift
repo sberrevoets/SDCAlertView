@@ -77,16 +77,16 @@ class TestsViewController: UITableViewController {
                 action.accessibilityIdentifier = "button"
                 alert.addAction(action)
                 alert.present()
-            
+
             case 11:
                 let alert = AlertController(title: "Title", message: "Message", preferredStyle: .actionSheet)
                 let contentView = alert.contentView
-				let spinner: UIActivityIndicatorView
-				if #available(iOS 13.0, *) {
-					spinner = UIActivityIndicatorView(style: .medium)
-				} else {
-					spinner = UIActivityIndicatorView(style: .gray)
-				}
+                let spinner: UIActivityIndicatorView
+                if #available(iOS 13.0, *) {
+                    spinner = UIActivityIndicatorView(style: .medium)
+                } else {
+                    spinner = UIActivityIndicatorView(style: .gray)
+                }
                 spinner.translatesAutoresizingMaskIntoConstraints = false
                 spinner.startAnimating()
                 contentView.addSubview(spinner)
@@ -112,7 +112,7 @@ class TestsViewController: UITableViewController {
                 spinner.startAnimating()
                 action.accessoryView = spinner
                 alert.addAction(action)
-                
+
                 let action2 = AlertAction(title: "Custom Action 2", style: .normal)
                 let accessoryLabel = UILabel()
                 accessoryLabel.text = "✓"
