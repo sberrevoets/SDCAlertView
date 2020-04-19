@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AAA3CC80235874F3006C23B8 /* background.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AAA3CC7E235874F2006C23B8 /* background.jpeg */; };
+		AAF7737821EF98970025DAB3 /* Breze.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAF7737721EF98960025DAB3 /* Breze.jpg */; };
 		D2515E731BC1A47F00ED606F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2515E721BC1A47F00ED606F /* AppDelegate.swift */; };
 		D2515E751BC1A47F00ED606F /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2515E741BC1A47F00ED606F /* DemoViewController.swift */; };
 		D2515E781BC1A47F00ED606F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2515E761BC1A47F00ED606F /* Main.storyboard */; };
@@ -49,6 +51,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AAA3CC7E235874F2006C23B8 /* background.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpeg; sourceTree = "<group>"; };
+		AAF7737721EF98960025DAB3 /* Breze.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Breze.jpg; sourceTree = "<group>"; };
 		D2515E6F1BC1A47F00ED606F /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2515E721BC1A47F00ED606F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2515E741BC1A47F00ED606F /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 				D2515E761BC1A47F00ED606F /* Main.storyboard */,
 				D2515E7B1BC1A47F00ED606F /* LaunchScreen.storyboard */,
 				D2515E7E1BC1A47F00ED606F /* Info.plist */,
+				AAA3CC7E235874F2006C23B8 /* background.jpeg */,
+				AAF7737721EF98960025DAB3 /* Breze.jpg */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -197,6 +203,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -232,8 +239,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF7737821EF98970025DAB3 /* Breze.jpg in Resources */,
 				D2515E7D1BC1A47F00ED606F /* LaunchScreen.storyboard in Resources */,
 				D2515E781BC1A47F00ED606F /* Main.storyboard in Resources */,
+				AAA3CC80235874F3006C23B8 /* background.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
