@@ -41,7 +41,7 @@ open class AlertVisualStyle: NSObject {
 
     /// The vertical spacing between elements
     @objc
-    public var verticalElementSpacing: CGFloat = 24
+    public var verticalElementSpacing: CGFloat = 28
 
     /// The size of an action. The specified width is treated as a minimum width. The actual width is
     /// automatically determined.

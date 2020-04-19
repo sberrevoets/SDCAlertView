@@ -26,33 +26,33 @@
                                         <rect key="frame" x="0.0" y="0.0" width="323" height="173"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RHM-TE-3Od">
-                                                <rect key="frame" x="0.0" y="0.0" width="323" height="59"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="323" height="123"/>
                                                 <subviews>
-                                                    <visualEffectView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jhs-Nn-LBd">
-                                                        <rect key="frame" x="0.0" y="0.0" width="323" height="59"/>
+                                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhs-Nn-LBd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="323" height="123"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0sU-bC-WKy">
-                                                            <rect key="frame" x="0.0" y="0.0" width="323" height="59"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="323" height="123"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YK7-Zo-hCk" customClass="SDCAlertLabel">
                                                                     <rect key="frame" x="0.0" y="14.5" width="323" height="16"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUv-Kq-2Qf" customClass="SDCAlertLabel">
-                                                                    <rect key="frame" x="0.0" y="38.5" width="323" height="12.5"/>
+                                                                    <rect key="frame" x="0.0" y="42.5" width="323" height="56"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="YK7-Zo-hCk" firstAttribute="firstBaseline" secondItem="0sU-bC-WKy" secondAttribute="top" constant="27" id="23i-9r-Blu"/>
                                                                 <constraint firstAttribute="bottom" secondItem="YK7-Zo-hCk" secondAttribute="baseline" priority="250" constant="17" id="2px-xB-S8v"/>
-                                                                <constraint firstAttribute="bottom" secondItem="PUv-Kq-2Qf" secondAttribute="bottom" constant="8" id="RgH-PB-pri"/>
+                                                                <constraint firstAttribute="bottom" secondItem="PUv-Kq-2Qf" secondAttribute="baseline" constant="28" id="RgH-PB-pri"/>
                                                                 <constraint firstItem="PUv-Kq-2Qf" firstAttribute="leading" secondItem="YK7-Zo-hCk" secondAttribute="leading" id="SLs-jb-6tx"/>
-                                                                <constraint firstItem="PUv-Kq-2Qf" firstAttribute="firstBaseline" secondItem="YK7-Zo-hCk" secondAttribute="baseline" constant="24" id="e7i-CR-Xff"/>
+                                                                <constraint firstItem="PUv-Kq-2Qf" firstAttribute="firstBaseline" secondItem="YK7-Zo-hCk" secondAttribute="baseline" constant="28" id="e7i-CR-Xff"/>
                                                                 <constraint firstItem="PUv-Kq-2Qf" firstAttribute="trailing" secondItem="YK7-Zo-hCk" secondAttribute="trailing" id="jQG-vT-i3e"/>
                                                                 <constraint firstAttribute="trailing" secondItem="YK7-Zo-hCk" secondAttribute="trailing" id="ryy-uk-j7Q"/>
                                                                 <constraint firstItem="YK7-Zo-hCk" firstAttribute="leading" secondItem="0sU-bC-WKy" secondAttribute="leading" id="zcv-6d-47Y"/>
@@ -70,7 +70,7 @@
                                                 </constraints>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gLJ-z4-6lz">
-                                                <rect key="frame" x="0.0" y="59" width="323" height="75"/>
+                                                <rect key="frame" x="0.0" y="123" width="323" height="75"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="olF-R0-P3x">
                                                         <rect key="frame" x="0.0" y="8" width="323" height="59"/>
@@ -89,7 +89,7 @@
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="j3f-QM-C8G" customClass="ActionsCollectionView" customModule="SDCAlertView" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="59" width="323" height="114"/>
+                                                <rect key="frame" x="0.0" y="123" width="323" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="750" constant="114" id="BSo-6l-mGc"/>
                                                 </constraints>
