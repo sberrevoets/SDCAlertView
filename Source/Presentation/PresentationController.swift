@@ -8,10 +8,11 @@ class PresentationController: UIPresentationController {
                   presenting presentingViewController: UIViewController?)
     {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
+
         if #available(iOS 13.0, *) {
-            self.dimmingView.backgroundColor = UIColor(dynamicProvider: { (traitCollection) -> UIColor in
+            self.dimmingView.backgroundColor = UIColor { traitCollection in
                 return UIColor(white: 0, alpha: traitCollection.userInterfaceStyle == .dark ? 0.48 : 0.2)
-            })
+            }
         } else {
             self.dimmingView.backgroundColor = UIColor(white: 0, alpha: 0.2)
         }

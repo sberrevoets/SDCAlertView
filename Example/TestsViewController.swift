@@ -101,7 +101,7 @@ class TestsViewController: UITableViewController {
             case 12:
                 let alert = AlertController(title: "Title", message: "Message", preferredStyle: .actionSheet)
                 let action = AlertAction(title: "Custom Action", style: .normal)
-                action.imageView = UIImageView(image: UIImage(named: "Breze.jpg"))
+                action.imageView.image = UIImage(named: "Breze.jpg")
                 let spinner: UIActivityIndicatorView
                 if #available(iOS 13.0, *) {
                     spinner = UIActivityIndicatorView(style: .medium)

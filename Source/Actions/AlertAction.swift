@@ -64,11 +64,20 @@ public class AlertAction: NSObject {
         didSet { self.actionView?.isEnabled = self.isEnabled }
     }
     
-    // left-aligned image view. If set, the title label will be left-aligned instead of centered.
-    @objc public var imageView: UIImageView?
+    /// Left-aligned image view. If an image is provided, the title label will be left-aligned instead of
+    /// centered. If not other constraints are set, the size of the image is used to determine the size of
+    /// the image view, preserving the image's aspect ratio. Custom constraints are also valid, but the image
+    /// height can't be taller than the action it's shown in. This property only has an effect on action
+    /// sheets.
+    @objc
+    public private(set) var imageView = UIImageView()
     
-    // right-aligned accessory view. If set, the title label will be left-aligned instead of centered.
-    @objc public var accessoryView: UIView?
+    /// Right-aligned accessory view. If set, the title label will be left-aligned instead of centered. If no
+    /// other constraints are set, the view's intrinsic size is used to determine the size of the accessory
+    /// view, preserving its aspect ratio. If the view has no intrinsic size, it's up to the developer to
+    /// define a complete set of constraints. This property only has an effect on action sheets.
+    @objc
+    public var accessoryView: UIView?
 }
 
 extension AlertAction {

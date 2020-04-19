@@ -133,10 +133,12 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         if self.message == nil {
             self.messageLabel.removeFromSuperview()
         }
+
         self.primaryVibrancyView.superview?.isHidden = !textProvided
         self.contentView.superview?.isHidden = !contentViewProvided
         if contentViewProvided, let contentSuperview = self.contentView.superview {
-            let topSpace = (textProvided ? -12 : 0) + self.visualStyle.verticalElementSpacing
+            let verticalSpacing = self.visualStyle.verticalElementSpacing
+            let topSpace = (textProvided ? -0.5 * verticalSpacing : 0) + verticalSpacing
             NSLayoutConstraint.activate([
                 self.contentView.topAnchor.constraint(equalTo: contentSuperview.topAnchor,
                                                       constant: topSpace),
