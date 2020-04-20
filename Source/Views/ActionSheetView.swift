@@ -40,7 +40,6 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         self.setUpContentView()
 
         if let backgroundColor = self.visualStyle.backgroundColor {
-            self.labelsContainer.backgroundColor = backgroundColor
             self.primaryView.backgroundColor = backgroundColor
             self.cancelActionView.backgroundColor = backgroundColor
         }
