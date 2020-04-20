@@ -129,7 +129,8 @@ public final class AlertController: UIViewController {
     public let preferredStyle: AlertControllerStyle
 
     private let alert: UIView & AlertControllerViewRepresentable
-    private lazy var transitionDelegate: Transition = Transition(alertStyle: self.preferredStyle)
+    private lazy var transitionDelegate = Transition(alertStyle: self.preferredStyle,
+                                                     dimmingViewColor: self.visualStyle.dimmingColor)
 
     // MARK: - Initialization
 
