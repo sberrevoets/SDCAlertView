@@ -50,7 +50,7 @@ final class ActionCell: UICollectionViewCell {
         height.priority = .required
         height.isActive = true
 
-        let aspectRatio = view.intrinsicContentSize.width / view.intrinsicContentSize.height
+        let aspectRatio = view.intrinsicContentSize.height / view.intrinsicContentSize.width
         let ratioConstraint = view.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: aspectRatio)
 
         // Allow custom width constraints to override the aspect ratio preservation
