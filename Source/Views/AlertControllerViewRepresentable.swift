@@ -1,6 +1,6 @@
 import UIKit
 
-protocol AlertControllerViewRepresentable: class {
+protocol AlertControllerViewRepresentable: UIView {
     var title: NSAttributedString? { get set }
     var message: NSAttributedString? { get set }
 

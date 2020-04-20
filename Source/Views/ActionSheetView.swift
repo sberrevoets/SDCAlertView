@@ -1,10 +1,13 @@
+import UIKit
+
 final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     @IBOutlet var titleLabel: AlertLabel!
     @IBOutlet var messageLabel: AlertLabel!
     @IBOutlet var actionsCollectionView: ActionsCollectionView!
     @IBOutlet var contentView: UIView!
     @IBOutlet private var primaryView: UIView!
-    @IBOutlet private var labelsContainer: UIView!
+    @IBOutlet private var primaryBlurView: UIVisualEffectView!
+    @IBOutlet private var primaryVibrancyView: UIVisualEffectView!
     @IBOutlet private var cancelActionView: UIView!
     @IBOutlet private var cancelLabel: UILabel!
     @IBOutlet private var cancelButton: UIButton!
@@ -37,8 +40,15 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         self.setUpContentView()
 
         if let backgroundColor = self.visualStyle.backgroundColor {
+            self.labelsContainer.backgroundColor = backgroundColor
             self.primaryView.backgroundColor = backgroundColor
             self.cancelActionView.backgroundColor = backgroundColor
+        }
+        
+        if #available(iOS 13.0, *) {
+            let blurEffect = UIBlurEffect(style: .systemMaterial)
+            self.primaryBlurView.effect = blurEffect
+            self.primaryVibrancyView.effect = UIVibrancyEffect(blurEffect: blurEffect, style: .secondaryLabel)
         }
     }
 
@@ -55,7 +65,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         self.cancelButton.isHighlighted = cancelIsSelected
 
         if cancelIsSelected && sender.state == .ended {
-            self.cancelButton.sendActions(for: .touchUpInside)
+            self.cancelButton.sendActions(for: UIControl.Event.touchUpInside)
         }
     }
 
@@ -75,7 +85,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     // MARK: - Private
 
     private func assignCancelAction() {
-        if let cancelActionIndex = self.actions.index(where: { $0.style == .preferred }) {
+        if let cancelActionIndex = self.actions.firstIndex(where: { $0.style == .preferred }) {
             self.cancelAction = self.actions[cancelActionIndex]
             self.actions.remove(at: cancelActionIndex)
         } else {
@@ -111,17 +121,32 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         let cancelButtonBackground = UIImage.image(with: self.visualStyle.actionHighlightColor)
         self.cancelButton.setBackgroundImage(cancelButtonBackground, for: .highlighted)
         self.cancelHeightConstraint.constant = self.visualStyle.actionViewSize.height
+
+        if let cancelBackgroundColor = self.visualStyle.actionViewCancelBackgroundColor {
+            self.cancelButton.backgroundColor = cancelBackgroundColor
+        }
     }
 
     private func setUpContentView() {
-        let noTextProvided = self.title?.string.isEmpty != false && self.message?.string.isEmpty != false
+        let textProvided = self.title?.string.isEmpty == false || self.message?.string.isEmpty == false
         let contentViewProvided = self.contentView.subviews.count > 0
 
         if self.message == nil {
             self.messageLabel.removeFromSuperview()
         }
-        self.labelsContainer.isHidden = noTextProvided || contentViewProvided
-        self.contentView.isHidden = !contentViewProvided
+
+        self.primaryVibrancyView.superview?.isHidden = !textProvided
+        self.contentView.superview?.isHidden = !contentViewProvided
+        if contentViewProvided, let contentSuperview = self.contentView.superview {
+            let verticalSpacing = self.visualStyle.verticalElementSpacing
+            let topSpace = (textProvided ? -0.5 * verticalSpacing : 0) + verticalSpacing
+            NSLayoutConstraint.activate([
+                self.contentView.topAnchor.constraint(equalTo: contentSuperview.topAnchor,
+                                                      constant: topSpace),
+                contentSuperview.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor,
+                                                         constant: self.visualStyle.contentPadding.bottom)
+            ])
+        }
     }
 }
 

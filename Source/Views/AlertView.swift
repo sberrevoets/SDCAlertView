@@ -1,3 +1,5 @@
+import UIKit
+
 final class AlertView: UIView, AlertControllerViewRepresentable {
     var titleLabel: AlertLabel! = AlertLabel()
     var messageLabel: AlertLabel! = AlertLabel()
@@ -83,7 +85,13 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
             return
         }
 
-        let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+        var style: UIBlurEffect.Style
+        if #available(iOS 13.0, *) {
+            style = .systemMaterial
+        } else {
+            style = .extraLight
+        }
+        let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: style))
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
 
         self.insertSubview(backgroundView, belowSubview: self.scrollView)
@@ -121,7 +129,7 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
 
     override var intrinsicContentSize: CGSize {
         let totalHeight = self.contentHeight + self.actionsCollectionView.displayHeight
-        return CGSize(width: UIViewNoIntrinsicMetric, height: totalHeight)
+        return CGSize(width: UIView.noIntrinsicMetric, height: totalHeight)
     }
 
     @objc
@@ -150,9 +158,6 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
             self.titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: insets.left),
             self.titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: insets.right),
         ])
-
-        self.pinBottomOfScrollView(to: self.messageLabel, withPriority: .defaultLow)
-
     }
 
     private func createMessageLabelConstraints() {
