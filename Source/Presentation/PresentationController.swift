@@ -1,7 +1,7 @@
 import UIKit
 
 class PresentationController: UIPresentationController {
-    
+
     private let dimmingView = UIView()
 
     init(presentedViewController: UIViewController,

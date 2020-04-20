@@ -59,16 +59,6 @@ public final class AlertController: UIViewController {
     public var contentView: UIView {
         return self.alert.contentView
     }
-    
-    /// Color of dimming view. Dimmint view is background view that is displayed around the alert.
-    /// Default value is `UIColor(white: 0.0, alpha: 0.4)`.
-    @objc
-    public var dimmingViewColor = UIColor(white: 0.0, alpha: 0.4) {
-        didSet {
-            self.transitionDelegate = Transition(alertStyle: self.preferredStyle,
-                                                 dimmingViewColor: self.dimmingViewColor)
-        }
-    }
 
     /// The alert's actions (buttons).
     @objc
@@ -140,9 +130,7 @@ public final class AlertController: UIViewController {
 
     private let alert: UIView & AlertControllerViewRepresentable
     private lazy var transitionDelegate = Transition(alertStyle: self.preferredStyle,
-                                                     dimmingViewColor: self.dimmingViewColor)
-    
-    
+                                                     dimmingViewColor: self.visualStyle.dimmingColor)
 
     // MARK: - Initialization
 

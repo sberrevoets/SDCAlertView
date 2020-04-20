@@ -117,7 +117,19 @@ open class AlertVisualStyle: NSObject {
     /// The font for an action sheet's other actions
     @objc
     public var actionSheetNormalFont = UIFont.systemFont(ofSize: 20)
-    
+
+    /// The color that dims the surrounding background of the alert to make it stand out more.
+    @objc
+    public var dimmingColor: UIColor = {
+        if #available(iOS 13.0, *) {
+            return UIColor { traitCollection in
+                return UIColor(white: 0, alpha: traitCollection.userInterfaceStyle == .dark ? 0.48 : 0.2)
+            }
+        } else {
+            return UIColor(white: 0, alpha: 0.2)
+        }
+    }()
+
     /// The style of the alert.
     private let alertStyle: AlertControllerStyle
 
