@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0BA53BDB1F31D23D003854F3 /* UIView+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA53BDA1F31D23D003854F3 /* UIView+Accessibility.swift */; };
 		894DA5AB201C73B400603715 /* Bundle+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894DA5AA201C73B400603715 /* Bundle+Convenience.swift */; };
+		D2006374244C1B7600D49C8A /* ActionSheetPrimaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2006373244C1B7600D49C8A /* ActionSheetPrimaryView.swift */; };
+		D2006376244C224C00D49C8A /* NSLayoutConstraint+Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2006375244C224C00D49C8A /* NSLayoutConstraint+Priority.swift */; };
+		D2006378244C27A100D49C8A /* ActionSheetCancelActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2006377244C27A100D49C8A /* ActionSheetCancelActionView.swift */; };
 		D23B53751BF473BC00AB5BBE /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B53741BF473BC00AB5BBE /* AlertView.swift */; };
 		D23B53771BF473CC00AB5BBE /* ActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23B53761BF473CC00AB5BBE /* ActionSheetView.swift */; };
 		D2515EC41BC1A7D500ED606F /* SDCAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = D2515EC31BC1A7D500ED606F /* SDCAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,13 +33,15 @@
 		D253B1C81C2AC78D00C37E0F /* AlertBehaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B1C71C2AC78D00C37E0F /* AlertBehaviors.swift */; };
 		D2A48B441C2E09CE009DD715 /* AlertController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A48B431C2E09CE009DD715 /* AlertController+Convenience.swift */; };
 		D2AC7438213BA0CC003DF706 /* UIViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC7437213BA0CC003DF706 /* UIViewController+Layout.swift */; };
-		D2DE585A1C08261E0041DFDE /* ActionSheetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2DE58591C08261E0041DFDE /* ActionSheetView.xib */; };
 		D2DE585B1C082F460041DFDE /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C30A751BC120C900984652 /* AlertController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0BA53BDA1F31D23D003854F3 /* UIView+Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Accessibility.swift"; sourceTree = "<group>"; };
 		894DA5AA201C73B400603715 /* Bundle+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Convenience.swift"; sourceTree = "<group>"; };
+		D2006373244C1B7600D49C8A /* ActionSheetPrimaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetPrimaryView.swift; sourceTree = "<group>"; };
+		D2006375244C224C00D49C8A /* NSLayoutConstraint+Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Priority.swift"; sourceTree = "<group>"; };
+		D2006377244C27A100D49C8A /* ActionSheetCancelActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetCancelActionView.swift; sourceTree = "<group>"; };
 		D23B53741BF473BC00AB5BBE /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		D23B53761BF473CC00AB5BBE /* ActionSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetView.swift; sourceTree = "<group>"; };
 		D2515EC11BC1A7D500ED606F /* SDCAlertView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SDCAlertView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +66,6 @@
 		D2C30A7F1BC120C900984652 /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		D2C30A801BC120C900984652 /* TextFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldsViewController.swift; sourceTree = "<group>"; };
 		D2C30A811BC120C900984652 /* AlertVisualStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertVisualStyle.swift; sourceTree = "<group>"; };
-		D2DE58591C08261E0041DFDE /* ActionSheetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +82,13 @@
 		D23B53781BF473DA00AB5BBE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D2006377244C27A100D49C8A /* ActionSheetCancelActionView.swift */,
+				D2006373244C1B7600D49C8A /* ActionSheetPrimaryView.swift */,
 				D23B53761BF473CC00AB5BBE /* ActionSheetView.swift */,
-				D2DE58591C08261E0041DFDE /* ActionSheetView.xib */,
 				D2C30A761BC120C900984652 /* AlertControllerViewRepresentable.swift */,
 				D2C30A771BC120C900984652 /* AlertLabel.swift */,
 				D23B53741BF473BC00AB5BBE /* AlertView.swift */,
+				D2006375244C224C00D49C8A /* NSLayoutConstraint+Priority.swift */,
 				0BA53BDA1F31D23D003854F3 /* UIView+Accessibility.swift */,
 				D2AC7437213BA0CC003DF706 /* UIViewController+Layout.swift */,
 			);
@@ -240,7 +246,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2515ECE1BC1A84D00ED606F /* ActionCell.xib in Resources */,
-				D2DE585A1C08261E0041DFDE /* ActionSheetView.xib in Resources */,
 				D2515ED71BC1A85800ED606F /* TextFieldCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,13 +270,16 @@
 				D2AC7438213BA0CC003DF706 /* UIViewController+Layout.swift in Sources */,
 				D23B53751BF473BC00AB5BBE /* AlertView.swift in Sources */,
 				D2DE585B1C082F460041DFDE /* AlertController.swift in Sources */,
+				D2006374244C1B7600D49C8A /* ActionSheetPrimaryView.swift in Sources */,
 				D2A48B441C2E09CE009DD715 /* AlertController+Convenience.swift in Sources */,
 				D2515ED01BC1A84D00ED606F /* ActionsCollectionViewFlowLayout.swift in Sources */,
 				D2515EDC1BC1A85800ED606F /* AlertVisualStyle.swift in Sources */,
 				D2515ED41BC1A85200ED606F /* Transition.swift in Sources */,
+				D2006376244C224C00D49C8A /* NSLayoutConstraint+Priority.swift in Sources */,
 				D2515EDB1BC1A85800ED606F /* AlertLabel.swift in Sources */,
 				0BA53BDB1F31D23D003854F3 /* UIView+Accessibility.swift in Sources */,
 				D2515ECD1BC1A84D00ED606F /* ActionCell.swift in Sources */,
+				D2006378244C27A100D49C8A /* ActionSheetCancelActionView.swift in Sources */,
 				D2515ED61BC1A85800ED606F /* TextFieldCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

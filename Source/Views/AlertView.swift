@@ -1,12 +1,24 @@
 import UIKit
 
 final class AlertView: UIView, AlertControllerViewRepresentable {
-    var titleLabel: AlertLabel! = AlertLabel()
-    var messageLabel: AlertLabel! = AlertLabel()
-    var actionsCollectionView: ActionsCollectionView! = ActionsCollectionView()
-    var contentView: UIView! = UIView()
+    private let scrollView = UIScrollView()
+    private let titleLabel = AlertLabel()
+    private let  messageLabel = AlertLabel()
+    private let actionsCollectionView = ActionsCollectionView()
+
+    let contentView = UIView()
     var actions: [AlertAction] = []
     var actionLayout = ActionLayout.automatic
+
+    var title: NSAttributedString? {
+        get { return self.titleLabel.attributedText }
+        set { self.titleLabel.attributedText = newValue }
+    }
+
+    var message: NSAttributedString? {
+        get { return self.messageLabel.attributedText }
+        set { self.messageLabel.attributedText = newValue }
+    }
 
     var textFieldsViewController: TextFieldsViewController? {
         didSet { self.textFieldsViewController?.visualStyle = self.visualStyle }
@@ -21,11 +33,12 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
         set { self.actionsCollectionView.actionTapped = newValue }
     }
 
-    var topView: UIView {
-        return self.scrollView
-    }
+    var topView: UIView { self.scrollView }
 
-    private let scrollView = UIScrollView()
+    override var intrinsicContentSize: CGSize {
+        let totalHeight = self.contentHeight + self.actionsCollectionView.displayHeight
+        return CGSize(width: UIView.noIntrinsicMetric, height: totalHeight)
+    }
 
     private var elements: [UIView] {
         let possibleElements: [UIView?] = [
@@ -35,11 +48,7 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
             self.contentView.subviews.count > 0 ? self.contentView : nil,
         ]
 
-        #if swift(>=4.1)
-            return possibleElements.compactMap { $0 }
-        #else
-            return possibleElements.flatMap { $0 }
-        #endif
+        return possibleElements.compactMap { $0 }
     }
 
     private var contentHeight: CGFloat {
@@ -72,7 +81,11 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
         self.updateUI()
     }
 
-    func addDragTapBehavior() {
+    func add(_ behaviors: AlertBehaviors) {
+        if !behaviors.contains(.dragTap) {
+            return
+        }
+
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.highlightAction(for:)))
         self.addGestureRecognizer(panGesture)
     }
@@ -125,11 +138,6 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
         self.layer.masksToBounds = true
         self.layer.cornerRadius = self.visualStyle.cornerRadius
         self.textFieldsViewController?.visualStyle = self.visualStyle
-    }
-
-    override var intrinsicContentSize: CGSize {
-        let totalHeight = self.contentHeight + self.actionsCollectionView.displayHeight
-        return CGSize(width: UIView.noIntrinsicMetric, height: totalHeight)
     }
 
     @objc
@@ -200,7 +208,7 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
             return
         }
 
-        let aligningView = self.textFieldsViewController?.view ?? self.messageLabel!
+        let aligningView = self.textFieldsViewController?.view ?? self.messageLabel
         let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
 
         NSLayoutConstraint.activate([

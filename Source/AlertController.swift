@@ -174,13 +174,7 @@ public final class AlertController: UIViewController {
             self.alert = AlertView()
 
         case .actionSheet:
-            let nibName = String(describing: ActionSheetView.self)
-            let objects = Bundle.resourceBundle.loadNibNamed(nibName, owner: nil, options: nil)
-            if let actionSheet = objects?.first as? ActionSheetView {
-                self.alert = actionSheet
-            } else {
-                self.alert = AlertView()
-            }
+            self.alert = ActionSheetView()
         }
 
         self.preferredStyle = preferredStyle

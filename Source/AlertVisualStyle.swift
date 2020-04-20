@@ -130,6 +130,16 @@ open class AlertVisualStyle: NSObject {
         }
     }()
 
+    var blurEffect: UIBlurEffect {
+        if #available(iOS 13, *) {
+            return UIBlurEffect(style: .systemMaterial)
+        } else if #available(iOS 10, *) {
+            return UIBlurEffect(style: .prominent)
+        } else {
+            return UIBlurEffect(style: .extraLight)
+        }
+    }
+
     /// The style of the alert.
     private let alertStyle: AlertControllerStyle
 

@@ -2,7 +2,7 @@ import UIKit
 
 private let kActionCellIdentifier = "actionCell"
 
-class ActionsCollectionView: UICollectionView {
+final class ActionsCollectionView: UICollectionView {
 
     var actions: [AlertAction] = []
 
