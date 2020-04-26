@@ -1,5 +1,19 @@
 # CHANGELOG
 
+### 11.1
+**What's New:**
+- Action sheets can now receive an image view on the left and accessory view on the right of each action
+- The color of the chrome/dimming view can now be set on visual styles
+- The spacing between title/message labels has been updated to the ones
+  `UIAlertController` uses
+  
+
+**Bug Fixes:**
+- View controllers presented from alerts/action sheets aren't dismissed
+  anymore when using the alert's `dismiss()` method
+- The area around text fields is now the same background color as alerts when one is set
+- Dark mode appearances are more like the native `UIAlertController` ones
+
 ### 11.0
 **What's New:**
 - Dark Mode support on iOS 13.
