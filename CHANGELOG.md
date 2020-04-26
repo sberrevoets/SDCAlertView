@@ -1,6 +1,10 @@
 # CHANGELOG
 
-### 11.1
+### 11.1.1
+**What's New:**
+- Refactored the action sheet UI to code, eliminating the hard-to-understand XIB
+
+## 11.1
 **What's New:**
 - Action sheets can now receive an image view on the left and accessory view on the right of each action
 - The color of the chrome/dimming view can now be set on visual styles
@@ -14,11 +18,11 @@
 - The area around text fields is now the same background color as alerts when one is set
 - Dark mode appearances are more like the native `UIAlertController` ones
 
-### 11.0
+## 11.0
 **What's New:**
 - Dark Mode support on iOS 13.
 
-### 10.0
+## 10.0
 This release brings Swift 5.0 compatibility.
 
 ### 9.0.1
