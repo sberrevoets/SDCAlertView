@@ -98,8 +98,7 @@ open class AlertVisualStyle: NSObject {
     @objc
     public var normalTextColor: UIColor?
 
-    /// The color for a preferred action's text,
-    /// If `nil`, use `normalTextColor`
+The color for a preferred action's text. If `nil`, `normalTextColor` is used.
     @objc
     public var preferredTextColor: UIColor?
 
