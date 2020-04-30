@@ -94,9 +94,13 @@ open class AlertVisualStyle: NSObject {
     @objc
     public var textFieldMargins = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
 
-    /// The color for a nondestructive action's text
+    /// The color for a normal action's text
     @objc
     public var normalTextColor: UIColor?
+
+    /// The color for a preferred action's text. If `nil`, `normalTextColor` is used.
+    @objc
+    public var preferredTextColor: UIColor?
 
     /// The color for a destructive action's text
     @objc
@@ -177,7 +181,13 @@ open class AlertVisualStyle: NSObject {
     /// - returns: The text color, or nil to use the alert's `tintColor`.
     @objc
     open func textColor(for action: AlertAction?) -> UIColor? {
-        return action?.style == .destructive ? self.destructiveTextColor : self.normalTextColor
+        if action?.style == .destructive {
+            return self.destructiveTextColor
+        } else if action?.style == .preferred {
+            return self.preferredTextColor ?? self.normalTextColor
+        } else {
+            return self.normalTextColor
+        }
     }
 
     /// The font for a given action.
