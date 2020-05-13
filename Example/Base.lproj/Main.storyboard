@@ -276,6 +276,7 @@
                         <outlet property="buttonLayoutControl" destination="7Dr-4d-uWV" id="qhV-kQ-7BS"/>
                         <outlet property="contentControl" destination="UK9-El-Edv" id="w6L-CQ-XRv"/>
                         <outlet property="messageTextField" destination="lbO-L6-mPt" id="bZl-CK-t4b"/>
+                        <outlet property="showBarButton" destination="lz1-K7-S4y" id="ncs-n0-3cm"/>
                         <outlet property="styleControl" destination="tBw-je-hhR" id="Wwy-VI-kLD"/>
                         <outlet property="textFieldCountTextField" destination="jlM-za-7K1" id="Xkx-aK-Cin"/>
                         <outlet property="titleTextField" destination="P5A-kb-4UT" id="37L-oi-dhh"/>

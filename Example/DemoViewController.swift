@@ -11,6 +11,7 @@ final class DemoViewController: UITableViewController {
     @IBOutlet private var buttonCountTextField: UITextField!
     @IBOutlet private var buttonLayoutControl: UISegmentedControl!
     @IBOutlet private var contentControl: UISegmentedControl!
+    @IBOutlet private var showBarButton: UIBarButtonItem!
 
     @IBAction private func presentAlert() {
         if self.typeControl.selectedSegmentIndex == 0 {
@@ -105,6 +106,9 @@ final class DemoViewController: UITableViewController {
         let message = self.messageTextField.content
         let style = UIAlertController.Style(rawValue: self.styleControl.selectedSegmentIndex)!
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
+        if let popOver = alert.popoverPresentationController {
+            popOver.barButtonItem = self.showBarButton
+        }
 
         let textFields = Int(self.textFieldCountTextField.content ?? "0")!
         for _ in 0..<textFields {
