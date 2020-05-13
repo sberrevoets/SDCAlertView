@@ -2,11 +2,13 @@ import XCTest
 
 class SDCAlertView_UI_Tests: XCTestCase {
 
+    var app: XCUIApplication!
+
     override func setUp() {
         super.setUp()
         self.continueAfterFailure = false
 
-        let app = XCUIApplication()
+        app = XCUIApplication()
         app.launch()
         app.navigationBars["Example.DemoView"].buttons["Tests"].tap()
     }
@@ -14,34 +16,29 @@ class SDCAlertView_UI_Tests: XCTestCase {
     // MARK: - Helpers
 
     private func currentAlert() -> XCUIElement {
-        return XCUIApplication().children(matching: .window)
-                                .element(boundBy: 0)
-                                .children(matching: .other)
-                                .element(boundBy: 1)
-                                .children(matching: .other)
-                                .element(boundBy: 1)
+        let alert = app.otherElements["SDCAlertController"]
+        return alert
     }
 
-    private func buttonAtIndex(_ index: UInt) -> XCUIElement {
-        return XCUIApplication().collectionViews.children(matching: .cell).element(boundBy: index)
+    private func buttonAtIndex(_ index: Int) -> XCUIElement {
+        return app.collectionViews.children(matching: .cell).element(boundBy: index)
     }
 
     private func buttonWithIdentifier(_ identifier: String) -> XCUIElement {
-        let cell = XCUIApplication().collectionViews.cells.matching(identifier: identifier).element(boundBy: 0)
+        let cell = app.collectionViews.cells.matching(identifier: identifier).element(boundBy: 0)
         if !cell.exists {
-            return XCUIApplication().buttons.matching(identifier: identifier).element(boundBy: 0)
+            return app.buttons.matching(identifier: identifier).element(boundBy: 0)
         }
         return cell
     }
 
     @discardableResult
-    private func showAlertAtIndex(_ index: UInt) -> XCUIApplication {
-        let app = XCUIApplication()
+    private func showAlertAtIndex(_ index: Int) -> XCUIApplication {
         app.tables.children(matching: .cell).element(boundBy: index).tap()
         return app
     }
 
-    private func tapButtonAtIndex(_ index: UInt, expectDismissal: Bool = true) {
+    private func tapButtonAtIndex(_ index: Int, expectDismissal: Bool = true) {
         self.buttonAtIndex(index).tap()
         XCTAssertNotEqual(currentAlert().exists, expectDismissal)
     }
@@ -118,13 +115,13 @@ class SDCAlertView_UI_Tests: XCTestCase {
     func testAlertWithTextField() {
         self.showAlertAtIndex(7)
 
-        let textField = XCUIApplication().textFields["Sample text"]
+        let textField = app.textFields["Sample text"]
         XCTAssertGreaterThan(textField.frame.height, 0)
     }
 
     func testAlertWithSpinnerContent() {
         self.showAlertAtIndex(8)
-        XCTAssertTrue(XCUIApplication().activityIndicators["In progress"].exists)
+        XCTAssertTrue(app.activityIndicators["In progress"].exists)
     }
 
     func testAlertWithAcessibilityIdentifiers() {
@@ -141,8 +138,7 @@ class SDCAlertView_UI_Tests: XCTestCase {
 
     func testActionSheetWithCustomView() {
         self.showAlertAtIndex(11)
-        XCTAssertTrue(XCUIApplication().activityIndicators["In progress"].exists)
-        XCTAssertTrue(buttonWithIdentifier("button").exists)
+        XCTAssertTrue(app.activityIndicators["In progress"].exists)
         self.tapButtonWithIdentifier("cancel")
     }
 }

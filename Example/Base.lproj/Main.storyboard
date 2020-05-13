@@ -23,7 +23,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Apj-ap-Lvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="410" y="1014"/>
+            <point key="canvasLocation" x="253" y="1013"/>
         </scene>
         <!--Demo View Controller-->
         <scene sceneID="LEO-xf-owf">
@@ -262,7 +262,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Tests" id="lJL-hI-1ak">
                             <connections>
-                                <segue destination="dQ6-ks-IL6" kind="presentation" modalPresentationStyle="formSheet" id="iga-hY-fi8"/>
+                                <segue destination="dQ6-ks-IL6" kind="presentation" modalPresentationStyle="fullScreen" id="iga-hY-fi8"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Show" style="done" id="lz1-K7-S4y">
@@ -284,14 +284,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sL0-8z-jbI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1086" y="1014"/>
+            <point key="canvasLocation" x="1069" y="1012"/>
         </scene>
         <!--Tests-->
         <scene sceneID="pkq-5d-Arg">
             <objects>
                 <tableViewController id="7Fn-Rm-n90" customClass="TestsViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="A7J-qA-VO8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="680"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XZC-62-Ku1">
@@ -523,12 +523,18 @@ running Xcode 7's UI tests</string>
                             <outlet property="delegate" destination="7Fn-Rm-n90" id="bVj-rW-xfu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Tests" id="iRm-D6-rSI"/>
+                    <navigationItem key="navigationItem" title="Tests" id="iRm-D6-rSI">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="aNo-T7-NYX">
+                            <connections>
+                                <action selector="closeDialog:" destination="7Fn-Rm-n90" id="86p-Xc-U6Z"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="320" height="700"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cty-wg-8h8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2672" y="437"/>
+            <point key="canvasLocation" x="2996" y="435"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Die-Bf-mV3">
@@ -536,7 +542,7 @@ running Xcode 7's UI tests</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dQ6-ks-IL6" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FNh-FS-NNr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -546,7 +552,7 @@ running Xcode 7's UI tests</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s9x-IJ-Aa9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1834" y="438"/>
+            <point key="canvasLocation" x="2070" y="435"/>
         </scene>
     </scenes>
     <resources>

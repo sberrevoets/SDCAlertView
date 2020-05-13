@@ -2,6 +2,10 @@ import SDCAlertView
 
 class TestsViewController: UITableViewController {
 
+    @IBAction func closeDialog(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 

@@ -304,6 +304,7 @@ public final class AlertController: UIViewController {
     }
 
     private func configureAlertView() {
+
         self.alert.translatesAutoresizingMaskIntoConstraints = false
         self.alert.visualStyle = self.visualStyle
         self.alert.add(self.behaviors)
@@ -324,6 +325,9 @@ public final class AlertController: UIViewController {
         }
 
         self.alert.layoutIfNeeded()
+
+        self.view.accessibilityIdentifier = type(of: self).description()
+        self.alert.accessibilityIdentifier = type(of: self.alert).description()
     }
 
     private func createViewConstraints() {
