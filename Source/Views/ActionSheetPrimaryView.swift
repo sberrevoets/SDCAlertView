@@ -151,7 +151,7 @@ final class ActionSheetPrimaryView: UIView {
             contentView.leadingAnchor.constraint(equalTo: parent.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: parent.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: parent.topAnchor, constant: topSpace),
-            contentView.bottomAnchor.constraint(equalTo: parent.bottomAnchor, constant: bottomSpace),
+            contentView.bottomAnchor.constraint(equalTo: parent.bottomAnchor, constant: -bottomSpace),
         ])
     }
 
