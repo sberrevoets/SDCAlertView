@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 11.1.2
+**Bug Fixes:**
+- Fix incorrect padding for content views in action sheets
+
 ### 11.1.1
 **What's New:**
 - Refactored the action sheet UI to code, eliminating the hard-to-understand XIB
