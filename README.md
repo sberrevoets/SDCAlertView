@@ -53,7 +53,12 @@ github "sberrevoets/SDCAlertView"
 Run `carthage update` and drag `SDCAlertView.framework` in the `Build` folder into your project.
 
 ## Swift Package Manager
-SPM does not yet support iOS, but SDCAlertView will be available there once it does.
+
+To install with Swift Package Manager, add this package to your project’s ‘Swift Packages’ section. Or add the following line to your `Package.swift`:
+
+```swift
+ .package(url: "https://github.com/sberrevoets/SDCAlertView.git", from: "11.0.0")
+```
 
 # Alerts vs. Action Sheets
 
