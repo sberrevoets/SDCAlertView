@@ -1,3 +1,5 @@
+import UIKit
+
 extension AlertController {
     /// Convenience method to quickly display a basic alert.
     ///
