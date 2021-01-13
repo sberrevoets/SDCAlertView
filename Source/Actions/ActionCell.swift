@@ -1,5 +1,6 @@
 import UIKit
 
+@objc(SDCActionCell)
 final class ActionCell: UICollectionViewCell {
     @IBOutlet private(set) var stackView: UIStackView!
     @IBOutlet private(set) var titleLabel: UILabel!
