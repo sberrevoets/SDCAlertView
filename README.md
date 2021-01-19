@@ -2,11 +2,6 @@
 
 `SDCAlertView` started out as an alert that looked identical to `UIAlertView`, but had support for a custom content view. With the introduction of `UIAlertController` in iOS 8, the project was updated to the more modern API that `UIAlertController` brought.
 
-<div align="center">
-    <img src="http://sberrevoets.github.io/SDCAlertView/ActionSheet.gif">
-    <img src="http://sberrevoets.github.io/SDCAlertView/Alert.gif">
-</div>
-
 ## Features
 
 - [x] Most `UIAlertController` functionality
