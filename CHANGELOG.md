@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 12.0.1
+**What's New**:
+- Proper use of semantic versioning
+
 ## 12.0
 **What's New**:
 - Support for Swift Package Manager
