@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 12.0
+**What's New**:
+- Support for Swift Package Manager
+
 ### 11.1.2
 **Bug Fixes:**
 - Fix incorrect padding for content views in action sheets
