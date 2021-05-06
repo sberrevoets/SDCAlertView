@@ -13,7 +13,9 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         get { return self.primaryView.message }
         set { self.primaryView.message = newValue }
     }
-
+    
+    /// For now this property doesn't use in ActionSheetView
+    var contentViewStyle: ContentViewStyle = .standart
     var contentView = UIView()
     var topView: UIView { self }
     var actions: [AlertAction] = []

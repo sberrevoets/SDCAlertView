@@ -3,12 +3,13 @@ import UIKit
 final class AlertView: UIView, AlertControllerViewRepresentable {
     private let scrollView = UIScrollView()
     private let titleLabel = AlertLabel()
-    private let  messageLabel = AlertLabel()
+    private let messageLabel = AlertLabel()
     private let actionsCollectionView = ActionsCollectionView()
 
     let contentView = UIView()
     var actions: [AlertAction] = []
     var actionLayout = ActionLayout.automatic
+    var contentViewStyle: ContentViewStyle = .standart
 
     var title: NSAttributedString? {
         get { return self.titleLabel.attributedText }
@@ -93,18 +94,9 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
     // MARK: - Private methods
 
     private func createBackground() {
-        if let color = self.visualStyle.backgroundColor {
-            self.backgroundColor = color
-            return
-        }
-
-        var style: UIBlurEffect.Style
-        if #available(iOS 13.0, *) {
-            style = .systemMaterial
-        } else {
-            style = .extraLight
-        }
-        let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: style))
+        backgroundColor = visualStyle.backgroundColor
+        
+        let backgroundView = UIVisualEffectView(effect: visualStyle.blurEffect)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
 
         self.insertSubview(backgroundView, belowSubview: self.scrollView)
@@ -159,10 +151,17 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
     private func createTitleLabelConstraints() {
         let contentPadding = self.visualStyle.contentPadding
         let insets = UIEdgeInsets(top: 0, left: contentPadding.left, bottom: 0, right: -contentPadding.right)
+        
+        let titleLabelTopContsraint: NSLayoutConstraint
+        if contentViewStyle == .titleView && self.contentView.subviews.count > 0 {
+            titleLabelTopContsraint = self.titleLabel.topAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: contentPadding.top)
+        } else {
+            titleLabelTopContsraint = self.titleLabel.firstBaselineAnchor.constraint(equalTo: self.topAnchor,
+                                                           constant: contentPadding.top)
+        }
 
         NSLayoutConstraint.activate([
-            self.titleLabel.firstBaselineAnchor.constraint(equalTo: self.topAnchor,
-                                                           constant: contentPadding.top),
+            titleLabelTopContsraint,
             self.titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: insets.left),
             self.titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: insets.right),
         ])
@@ -207,7 +206,30 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
         if !self.elements.contains(self.contentView) {
             return
         }
+        
+        switch contentViewStyle {
+        case .standart:
+            createCustomContentViewConstraintsForStandartStyle()
+        case .titleView:
+            createCustomContentViewConstraintsForTitleViewStyle()
+        }
+    }
+    
+    private func createCustomContentViewConstraintsForTitleViewStyle() {
+        let aligningView = self.textFieldsViewController?.view ?? self.titleLabel
+        let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
+        
+        NSLayoutConstraint.activate([
+            self.contentView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.contentView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -widthOffset),
+            self.contentView.bottomAnchor.constraint(equalTo: aligningView.topAnchor,
+                                                     constant: -self.visualStyle.verticalElementSpacing),
+        ])
 
+        self.pinTopOfScrollView(to: self.contentView, withPriority: .defaultLow + 3.0)
+    }
+    
+    private func createCustomContentViewConstraintsForStandartStyle() {
         let aligningView = self.textFieldsViewController?.view ?? self.messageLabel
         let widthOffset = self.visualStyle.contentPadding.left + self.visualStyle.contentPadding.right
 
@@ -252,6 +274,13 @@ final class AlertView: UIView, AlertControllerViewRepresentable {
         bottom.constant = -self.visualStyle.contentPadding.bottom
         bottom.priority = priority
         bottom.isActive = true
+    }
+    
+    private func pinTopOfScrollView(to view: UIView, withPriority priority: UILayoutPriority) {
+        let top = view.topAnchor.constraint(equalTo: self.scrollView.topAnchor)
+        top.constant = self.visualStyle.contentPadding.top
+        top.priority = priority
+        top.isActive = true
     }
 }
 

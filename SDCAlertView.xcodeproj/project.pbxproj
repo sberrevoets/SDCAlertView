@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0BA53BDB1F31D23D003854F3 /* UIView+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA53BDA1F31D23D003854F3 /* UIView+Accessibility.swift */; };
+		7F89693C264489D100FDBEEB /* ContentViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89693B264489D100FDBEEB /* ContentViewStyle.swift */; };
 		894DA5AB201C73B400603715 /* Bundle+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894DA5AA201C73B400603715 /* Bundle+Convenience.swift */; };
 		D2006374244C1B7600D49C8A /* ActionSheetPrimaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2006373244C1B7600D49C8A /* ActionSheetPrimaryView.swift */; };
 		D2006376244C224C00D49C8A /* NSLayoutConstraint+Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2006375244C224C00D49C8A /* NSLayoutConstraint+Priority.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		0BA53BDA1F31D23D003854F3 /* UIView+Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Accessibility.swift"; sourceTree = "<group>"; };
+		7F89693B264489D100FDBEEB /* ContentViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewStyle.swift; sourceTree = "<group>"; };
 		894DA5AA201C73B400603715 /* Bundle+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Convenience.swift"; sourceTree = "<group>"; };
 		D2006373244C1B7600D49C8A /* ActionSheetPrimaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetPrimaryView.swift; sourceTree = "<group>"; };
 		D2006375244C224C00D49C8A /* NSLayoutConstraint+Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Priority.swift"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				D2A48B431C2E09CE009DD715 /* AlertController+Convenience.swift */,
 				D2C30A751BC120C900984652 /* AlertController.swift */,
 				D2C30A811BC120C900984652 /* AlertVisualStyle.swift */,
+				7F89693B264489D100FDBEEB /* ContentViewStyle.swift */,
 				894DA5AA201C73B400603715 /* Bundle+Convenience.swift */,
 			);
 			path = Source;
@@ -275,6 +278,7 @@
 				D2515ED01BC1A84D00ED606F /* ActionsCollectionViewFlowLayout.swift in Sources */,
 				D2515EDC1BC1A85800ED606F /* AlertVisualStyle.swift in Sources */,
 				D2515ED41BC1A85200ED606F /* Transition.swift in Sources */,
+				7F89693C264489D100FDBEEB /* ContentViewStyle.swift in Sources */,
 				D2006376244C224C00D49C8A /* NSLayoutConstraint+Priority.swift in Sources */,
 				D2515EDB1BC1A85800ED606F /* AlertLabel.swift in Sources */,
 				0BA53BDB1F31D23D003854F3 /* UIView+Accessibility.swift in Sources */,

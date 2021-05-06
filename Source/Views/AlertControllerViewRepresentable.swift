@@ -8,6 +8,7 @@ protocol AlertControllerViewRepresentable: UIView {
     var actionTappedHandler: ((AlertAction) -> Void)? { get set }
 
     var topView: UIView { get }
+    var contentViewStyle: ContentViewStyle { get set }
     var contentView: UIView { get }
     var visualStyle: AlertVisualStyle! { get set }
 

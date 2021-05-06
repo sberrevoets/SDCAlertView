@@ -59,6 +59,18 @@ public final class AlertController: UIViewController {
     public var contentView: UIView {
         return self.alert.contentView
     }
+    
+    /// The alert's content view style. For now uses only in AlertView preffered style
+    /// By default value set into .standard style. Content view added below title and message labels in view hierarchy.
+    /// In case when set .titleView, the content view will be added above title and message labels in view hierarchy.
+    public var contentViewStyle: ContentViewStyle {
+        get {
+            return self.alert.contentViewStyle
+        }
+        set {
+            self.alert.contentViewStyle = newValue
+        }
+    }
 
     /// The alert's actions (buttons).
     @objc
