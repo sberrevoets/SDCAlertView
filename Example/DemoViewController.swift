@@ -26,6 +26,15 @@ final class DemoViewController: UITableViewController {
         let style = AlertControllerStyle(rawValue: self.styleControl.selectedSegmentIndex)!
         let alert = AlertController(title: title, message: message, preferredStyle: style)
 
+        let visualStyle = AlertVisualStyle(alertStyle: style)
+        visualStyle.blurEffect = nil
+        if #available(iOS 13.0, *) {
+            visualStyle.backgroundColor = UIColor.red
+        } else {
+            // Fallback on earlier versions
+        }
+        alert.visualStyle = visualStyle
+        
         let textFields = Int(self.textFieldCountTextField.content ?? "0")!
         for _ in 0..<textFields {
             alert.addTextField()

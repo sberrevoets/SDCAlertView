@@ -23,7 +23,7 @@ class SDCAlertView_UI_Tests: XCTestCase {
     }
 
     private func buttonAtIndex(_ index: UInt) -> XCUIElement {
-        return XCUIApplication().collectionViews.children(matching: .cell).element(boundBy: index)
+        return XCUIApplication().collectionViews.children(matching: .cell).element(boundBy: Int(index))
     }
 
     private func buttonWithIdentifier(_ identifier: String) -> XCUIElement {
@@ -37,7 +37,7 @@ class SDCAlertView_UI_Tests: XCTestCase {
     @discardableResult
     private func showAlertAtIndex(_ index: UInt) -> XCUIApplication {
         let app = XCUIApplication()
-        app.tables.children(matching: .cell).element(boundBy: index).tap()
+        app.tables.children(matching: .cell).element(boundBy: Int(index)).tap()
         return app
     }
 
