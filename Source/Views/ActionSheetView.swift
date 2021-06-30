@@ -58,6 +58,7 @@ final class ActionSheetView: UIView, AlertControllerViewRepresentable {
         }
 
         let panGesture = UIPanGestureRecognizer()
+        panGesture.cancelsTouchesInView = false
         panGesture.addTarget(self.primaryView, action: #selector(self.primaryView.highlightAction(for:)))
         panGesture.addTarget(self.cancelView, action: #selector(self.cancelView.highlightAction(for:)))
         self.addGestureRecognizer(panGesture)
