@@ -1,5 +1,6 @@
 import UIKit
 
+@available(iOSApplicationExtension, unavailable)
 final class AlertView: UIView, AlertControllerViewRepresentable {
     private let scrollView = UIScrollView()
     private let titleLabel = AlertLabel()

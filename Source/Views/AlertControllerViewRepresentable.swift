@@ -1,5 +1,6 @@
 import UIKit
 
+@available(iOSApplicationExtension, unavailable)
 protocol AlertControllerViewRepresentable: UIView {
     var title: NSAttributedString? { get set }
     var message: NSAttributedString? { get set }

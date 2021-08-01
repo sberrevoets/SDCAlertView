@@ -2,6 +2,7 @@ import UIKit
 
 private let kTextFieldCellIdentifier = "textFieldCell"
 
+@available(iOSApplicationExtension, unavailable)
 final class TextFieldsViewController: UIViewController {
 
     var requiredHeight: CGFloat {
@@ -38,6 +39,7 @@ final class TextFieldsViewController: UIViewController {
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension TextFieldsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
