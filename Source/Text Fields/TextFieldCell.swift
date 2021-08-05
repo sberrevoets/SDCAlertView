@@ -1,6 +1,7 @@
 import UIKit
 
 @objc(SDCTextFieldCell)
+@available(iOSApplicationExtension, unavailable)
 final class TextFieldCell: UITableViewCell {
 
     @IBOutlet private var borderView: UIView!

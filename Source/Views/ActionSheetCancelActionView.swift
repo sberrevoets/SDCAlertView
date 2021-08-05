@@ -1,5 +1,6 @@
 import UIKit
 
+@available(iOSApplicationExtension, unavailable)
 final class ActionSheetCancelActionView: UIView {
     private let blurBackground = PassthroughEffectView()
     private let cancelButton = UIButton(type: .custom)

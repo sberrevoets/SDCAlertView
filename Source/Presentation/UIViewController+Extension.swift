@@ -1,5 +1,6 @@
 import UIKit
 
+@available(iOSApplicationExtension, unavailable)
 extension UIViewController {
 
     static func topViewController(_ viewController: UIViewController? = nil) -> UIViewController? {

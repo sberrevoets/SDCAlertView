@@ -1,5 +1,6 @@
 import UIKit
 
+@available(iOSApplicationExtension, unavailable)
 final class ActionSheetView: UIView, AlertControllerViewRepresentable {
     private let primaryView = ActionSheetPrimaryView()
     private let cancelView = ActionSheetCancelActionView()
