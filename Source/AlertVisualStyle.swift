@@ -1,6 +1,7 @@
 import UIKit
 
 @objc(SDCAlertVisualStyle)
+@available(iOSApplicationExtension, unavailable)
 open class AlertVisualStyle: NSObject {
     /// The width of the alert. A value of 1 or below is interpreted as a percentage of the width of the view
     /// controller that presents the alert.
@@ -153,7 +154,7 @@ open class AlertVisualStyle: NSObject {
 
         switch alertStyle {
             case .alert:
-                if #available(iOS 11, *), UIApplication.shared.keyWindow!.safeAreaInsets.bottom > 0 {
+                if #available(iOS 11, *), UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0 > 0 {
                     self.margins = .zero
                 } else {
                     self.margins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
@@ -163,7 +164,7 @@ open class AlertVisualStyle: NSObject {
                 self.actionViewSize = CGSize(width: 90, height: 44)
 
             case .actionSheet:
-                if #available(iOS 11, *), UIApplication.shared.keyWindow!.safeAreaInsets.bottom > 0 {
+                if #available(iOS 11, *), UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0 > 0 {
                     self.margins = UIEdgeInsets(top: 30, left: 10, bottom: 0, right: 10)
                 } else {
                     self.margins = UIEdgeInsets(top: 30, left: 10, bottom: -10, right: 10)

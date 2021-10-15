@@ -1,6 +1,7 @@
 import UIKit
 
 @objc(SDCAlertAction)
+@available(iOSApplicationExtension, unavailable)
 public class AlertAction: NSObject {
     /// Creates an action with a plain title.
     ///
@@ -80,6 +81,7 @@ public class AlertAction: NSObject {
     public var accessoryView: UIView?
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension AlertAction {
     /// The action's style
     @objc(SDCAlertActionStyle)

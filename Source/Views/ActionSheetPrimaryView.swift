@@ -1,5 +1,6 @@
 import UIKit
 
+@available(iOSApplicationExtension, unavailable)
 final class ActionSheetPrimaryView: UIView {
     private let titleLabel = AlertLabel()
     private let messageLabel = AlertLabel()

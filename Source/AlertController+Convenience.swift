@@ -1,5 +1,6 @@
 import UIKit
 
+@available(iOSApplicationExtension, unavailable)
 extension AlertController {
     /// Convenience method to quickly display a basic alert.
     ///

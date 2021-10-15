@@ -2,6 +2,7 @@ import UIKit
 
 private let kActionCellIdentifier = "actionCell"
 
+@available(iOSApplicationExtension, unavailable)
 final class ActionsCollectionView: UICollectionView {
 
     var actions: [AlertAction] = []
@@ -91,6 +92,7 @@ final class ActionsCollectionView: UICollectionView {
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension ActionsCollectionView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -108,6 +110,7 @@ extension ActionsCollectionView: UICollectionViewDataSource {
     }
 }
 
+@available(iOSApplicationExtension, unavailable)
 extension ActionsCollectionView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView,

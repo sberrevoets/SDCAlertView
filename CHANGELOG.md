@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 12.0.2
+**What's New**:
+- Fix occasional crash on iOS 15
+
 ## 12.0.1
 **What's New**:
 - Proper use of semantic versioning

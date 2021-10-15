@@ -22,6 +22,7 @@ public enum ActionLayout: Int {
 }
 
 @objc(SDCAlertController)
+@available(iOSApplicationExtension, unavailable)
 public final class AlertController: UIViewController {
     private var verticalCenter: NSLayoutConstraint?
 
