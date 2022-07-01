@@ -189,9 +189,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2515EC61BC1A7D500ED606F /* Build configuration list for PBXNativeTarget "SDCAlertView" */;
 			buildPhases = (
+				D2515EBE1BC1A7D500ED606F /* Headers */,
 				D2515EBC1BC1A7D500ED606F /* Sources */,
 				D2515EBD1BC1A7D500ED606F /* Frameworks */,
-				D2515EBE1BC1A7D500ED606F /* Headers */,
 				D2515EBF1BC1A7D500ED606F /* Resources */,
 			);
 			buildRules = (
