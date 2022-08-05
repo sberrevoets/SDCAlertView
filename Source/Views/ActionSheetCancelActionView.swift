@@ -46,7 +46,7 @@ final class ActionSheetCancelActionView: UIView {
         }
     }
 
-    private func addBlurBackground(effect: UIBlurEffect) {
+    private func addBlurBackground(effect: UIBlurEffect?) {
         self.blurBackground.effect = effect
         self.blurBackground.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.blurBackground)

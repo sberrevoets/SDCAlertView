@@ -64,7 +64,7 @@ final class ActionSheetPrimaryView: UIView {
         self.layer.masksToBounds = true
     }
 
-    private func buildBackgroundBlur(effect: UIVisualEffect) -> UIVisualEffectView {
+    private func buildBackgroundBlur(effect: UIVisualEffect?) -> UIVisualEffectView {
         let backgroundBlur = UIVisualEffectView(effect: effect)
         backgroundBlur.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(backgroundBlur)
@@ -72,11 +72,13 @@ final class ActionSheetPrimaryView: UIView {
         return backgroundBlur
     }
 
-    private func buildLabelVibrancy(effect: UIBlurEffect) -> UIVisualEffectView {
+    private func buildLabelVibrancy(effect: UIBlurEffect?) -> UIVisualEffectView {
         let vibrancy = UIVisualEffectView(effect: effect)
         vibrancy.translatesAutoresizingMaskIntoConstraints = false
         if #available(iOS 13, *) {
-            vibrancy.effect = UIVibrancyEffect(blurEffect: effect, style: .secondaryLabel)
+            if let effect = effect {
+                vibrancy.effect = UIVibrancyEffect(blurEffect: effect, style: .secondaryLabel)
+            }
         }
 
         return vibrancy
