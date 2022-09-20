@@ -122,6 +122,10 @@ open class AlertVisualStyle: NSObject {
     /// The font for an action sheet's other actions
     @objc
     public var actionSheetNormalFont = UIFont.systemFont(ofSize: 20)
+    
+    /// Enables blur effect for an action sheet's background
+    @objc
+    public var backgroundBlurEnabled: Bool = true
 
     /// The color that dims the surrounding background of the alert to make it stand out more.
     @objc
