@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 12.0.3
+**What's New**:
+- Fix issue where alert wouldn't animate back in place after dismissing the
+  keyboard
+
 ## 12.0.2
 **What's New**:
 - Fix occasional crash on iOS 15
