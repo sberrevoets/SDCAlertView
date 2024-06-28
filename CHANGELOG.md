@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 12.0.4
+**What's New**:
+- Avoid warning when compiling with Xcode 16
+
 ## 12.0.3
 **What's New**:
 - Fix issue where alert wouldn't animate back in place after dismissing the
