@@ -1,6 +1,6 @@
 import UIKit
 
-class Transition: NSObject, UIViewControllerTransitioningDelegate {
+class SDCTransition: NSObject, UIViewControllerTransitioningDelegate {
 
     private let alertStyle: AlertControllerStyle
     private let dimmingViewColor: UIColor
