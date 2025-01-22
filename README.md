@@ -52,7 +52,7 @@ Run `carthage update` and drag `SDCAlertView.framework` in the `Build` folder in
 To install with Swift Package Manager, add this package to your project’s 'Swift Packages' section. Or add the following line to your `Package.swift`:
 
 ```swift
- .package(url: "https://github.com/sberrevoets/SDCAlertView.git", from: "12.0.1")
+ .package(url: "https://github.com/sberrevoets/SDCAlertView.git", from: "12.0.5")
 ```
 
 # Alerts vs. Action Sheets

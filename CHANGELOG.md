@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 12.0.5
+**What's New**:
+- Fix build issue with Xcode 16.2
+
 ## 12.0.4
 **What's New**:
 - Avoid warning when compiling with Xcode 16
